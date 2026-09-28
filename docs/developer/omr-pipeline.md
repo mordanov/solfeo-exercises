@@ -6,12 +6,15 @@ Prerequisites:
 - Read `docs/PRODUCT_BRIEF.md`, `docs/PHASES.md`, and `docs/DECISIONS.md`.
 - Obtain the owner's local `examples/` directory.
 - Read the terms in `docs/developer/glossary.md`.
+- Install Python 3.12, uv, and Docker.
+- Start a Docker daemon with enough space for a Java build.
 
 ## Scope and current state
 
 The owner approves these criteria on 2026-09-28.
-The first task prepares the samples and criteria only.
-Audiveris has not run, and no recognition results exist.
+The sample preparation task and the Audiveris prototype run are complete.
+The report below contains actual results from all 10 original images.
+Owner verification and engine acceptance remain pending.
 The prototype does not implement product code or select a replacement engine.
 
 ## Sample set
@@ -124,6 +127,238 @@ The report also records reproducible commands and the runtime environment.
 No aggregate acceptance threshold applies.
 The recommendation considers all per-image results, structural errors, and limitations.
 The owner reviews the recommendation before confirming an engine decision in `docs/DECISIONS.md`.
+
+## Run the prototype
+
+**Caution:** The build downloads public dependencies.
+Recognition runs without network access and does not upload the samples.
+The Docker build context excludes samples, output, and local configuration.
+
+1. Prepare the sample copies with the procedure above.
+2. Open `prototypes/omr/` from the repository root.
+
+   ```sh
+   cd prototypes/omr
+   ```
+
+3. Create `.env` from `.env.example` if no local configuration exists.
+
+   ```sh
+   cp -n .env.example .env
+   ```
+
+4. Install the locked Python dependencies.
+
+   ```sh
+   uv sync --frozen
+   ```
+
+5. Build the pinned Audiveris source.
+
+   ```sh
+   docker build -t solfeo-omr:5.11.0 .
+   ```
+
+6. Run the prototype.
+
+   ```sh
+   uv run --frozen python omr.py
+   ```
+
+The runner creates a unique directory under `output/`.
+It selects images 1 through 10 and validates their presence before processing.
+It resolves the image tag to an immutable image ID for the whole run.
+Each container mounts 1 original image read-only and writes to its own output directory.
+The runner removes only its own containers, including after a timeout.
+
+Each image directory contains `run.json`, `console.log`, and any Audiveris output.
+Successful exports use `sample.mxl`, which contains MusicXML.
+`sample.omr` contains the Audiveris project, including diagnostic image data.
+These files remain local.
+
+The run directory also contains:
+
+- `image.json`: Docker image ID, architecture, labels, and configuration.
+- `settings.json`: effective settings.
+- `docker-version.txt`: Docker client and server versions.
+- `audiveris-version.txt`: Audiveris, Java, and OCR versions.
+- `summary.json`: processing outcomes for all images.
+
+The runner returns exit code `1` if any image fails or reaches its timeout.
+It continues with the remaining images after an engine failure.
+Docker setup errors stop the run with an explicit exception.
+An `exported` outcome means that a file exists, not that its notation is correct.
+The runner does not assign recognition percentages without manual event comparison.
+
+### Configuration
+
+All runtime settings use `Settings` from `pydantic-settings`.
+Paths below are relative to `prototypes/omr/` when following the commands above.
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `OMR_IMAGE` | `solfeo-omr:5.11.0` | Locally built Audiveris image. |
+| `OMR_SAMPLES_DIR` | `samples` | Directory containing the 10 selected images. |
+| `OMR_OUTPUT_DIR` | `output` | Parent directory for unique runs. |
+| `OMR_TIMEOUT_SECONDS` | `300` | Maximum processing time per image. |
+| `OMR_CPUS` | `2` | Container CPU limit. |
+| `OMR_MEMORY_MB` | `4096` | Container memory limit in Docker megabyte units. |
+| `OMR_JAVA_OPTIONS` | See `.env.example`. | Heap limit and headless Java options. |
+
+The default Java options limit the heap to 2 GiB and disable automatic display scaling.
+The `-Dsun.java2d.uiScale=1` option avoids GTK initialization during headless startup.
+Removing this option causes a missing GTK library error in this image.
+
+### Prototype checks
+
+1. Run the tests.
+
+   ```sh
+   uv run --frozen pytest -q
+   ```
+
+2. Check formatting and lint rules.
+
+   ```sh
+   uv run --frozen ruff format --check omr.py tests
+   uv run --frozen ruff check omr.py tests
+   ```
+
+3. Check strict typing.
+
+   ```sh
+   uv run --frozen mypy omr.py tests
+   ```
+
+The tests cover exact classification boundaries, invalid counts, missing exports, timeouts, cleanup, configuration, sample selection, and runtime metadata.
+They use synthetic data, not the owner's images.
+
+## Recognition report: 2026-09-28
+
+### Runtime and evidence
+
+The native ARM64 image builds Audiveris `5.11.0` from the official source.
+The source commit is `9e1e55cd2746037d059345881c53e6a6754bffbd`.
+The Dockerfile pins the Java base image by digest.
+Python dependency versions are in `prototypes/omr/uv.lock`.
+
+| Component | Recorded value |
+|---|---|
+| Docker client / server | `28.2.2` / `27.4.0` |
+| Container architecture | `linux/arm64` |
+| Kernel | `6.8.0-50-generic` |
+| Java | OpenJDK `25.0.4.1+1-LTS` |
+| OCR engine | Tesseract `5.5.2` |
+| Local image ID | `sha256:0d438974e4698d693ba08122082c4f65749a2b6532390d904c44ef1b7bcaffe3` |
+| Final run | `20260928T201957Z-84f49a71` |
+
+This locally built image has an image ID, not a published registry digest.
+Source and base-image pins do not freeze operating-system package repositories.
+The final run includes `os-packages.txt` as an additional local record.
+An exact binary replay requires retaining the recorded local image.
+
+Sources:
+
+- [Official release](https://github.com/Audiveris/audiveris/releases/tag/5.11.0).
+- [Pinned source](https://github.com/Audiveris/audiveris/tree/9e1e55cd2746037d059345881c53e6a6754bffbd).
+- [Upstream CLI documentation](https://github.com/Audiveris/audiveris/blob/5.11.0/docs/_pages/guides/advanced/cli.md).
+
+The final run uses unchanged original images and the default settings above.
+No image preprocessing or Audiveris recognition tuning applies.
+Enlarged copies assist manual review only; they are not recognition inputs.
+Image 11 remains outside this evaluation.
+
+The per-image processing times range from 1.279 s to 3.992 s, including container startup and cleanup.
+Their sum is 35.199 s; this excludes image building and initial version checks.
+The runner returns `1` because image 6 fails.
+This is an observed recognition failure, not a failing prototype test.
+
+### Per-image results
+
+Copilot compares the MusicXML against a manual transcription of the original images.
+Owner verification remains necessary.
+`N` means expected events; `S`, `O`, and `X` mean substitutions, omissions, and extra events.
+Percentages below use the approved event formula, not visual similarity.
+
+| Original image | Export | N | S | O | X | Recognition | Classification |
+|---|---|---:|---:|---:|---:|---:|---|
+| `ejercicio_1.jpeg` | Yes | 21 | 0 | 0 | 0 | 100 % | Fully recognized |
+| `ejercicio_2.jpeg` | Yes | 23 | 0 | 0 | 0 | 100 % | Fully recognized |
+| `ejercicio_3.jpeg` | Yes | 28 | 0 | 0 | 0 | 100 % | Fully recognized |
+| `ejercicio_4.jpeg` | Yes | 31 | 0 | 0 | 0 | 100 % | Fully recognized |
+| `ejercicio_5.jpeg` | Yes | 33 | 0 | 0 | 0 | 100 % | Fully recognized |
+| `ejercicio_6.jpeg` | No | 26 | — | — | — | Not evaluated | Failed |
+| `ejercicio_7.jpeg` | Yes | 50 | 17 | 10 | 0 | 46 % | Failed |
+| `ejercicio_8.jpeg` | Yes | 43 | 1 | 1 | 0 | 95.35 % | Fully recognized |
+| `ejercicio_9.jpeg` | Yes | 25 | 1 | 2 | 0 | 88 % | Fully recognized |
+| `ejercicio_10.jpeg` | Yes | 28 | 0 | 0 | 0 | 100 % | Fully recognized |
+
+The result is 8 fully recognized images, 0 partly recognized images, and 2 failed images.
+The `fully recognized` label does not imply error-free notation.
+Image 8 has an unrounded recognition percentage of `100 × 41 / 43`.
+Missing output for image 6 is not a measured 0 %.
+
+### Notation and structural errors
+
+| Images | Observed result |
+|---|---|
+| 1–5, 10 | No event errors found. Clefs, key signatures, time signatures, and 8 measure boundaries match. |
+| 6 | Staff detection fails at `GRID` with `No system found`. Audiveris exits with code `1`; no MusicXML exists. |
+| 7 | False octave-shifted treble clef and missing common-time signature. The first system contains incorrect pitches, durations, and omissions. |
+| 8 | The first note is B2 instead of C3. Measure 4 omits its final quarter rest, leaving 3 beats instead of 4. |
+| 9 | Measure 5 replaces 3 notes with one A2 half note. The expected events are E3 eighth, G3 quarter, and C4 eighth. |
+
+Image 7 has 8, 4, 8, 4, 2, 0, 0, and 1 event errors across its 8 measures.
+Its measures 1, 4, 5, and 8 have insufficient duration.
+The final half rest is missing.
+Image 9 also contains a `backup` element after the incorrect note in measure 5.
+
+The comparison counts an incorrect pitch and duration on the same event as 1 substitution.
+Matching later events prevents omissions from causing cascading substitutions.
+Per-measure minimum edit distances independently confirm the recorded total event errors.
+Clef-related pitch errors count as event errors; the report also identifies the incorrect clef.
+
+Slurs, spacing, layout, and rendering appearance do not contribute to this event percentage.
+The images do not establish quality for accidentals, complex notation, multiple voices, or other image sources.
+No browser rendering or product approval workflow exists in this prototype.
+
+### Local output locations
+
+All paths below are relative to `prototypes/omr/`.
+The run directory is `output/20260928T201957Z-84f49a71/`.
+
+| Evidence | Path under the run directory |
+|---|---|
+| MusicXML for image N, except 6 | `ejercicio_N/sample.mxl` |
+| Processing command, original checksum, exit code, and duration | `ejercicio_N/run.json` |
+| Diagnostics, including image 6 | `ejercicio_N/console.log` |
+| Audiveris project | `ejercicio_N/sample.omr` |
+| Per-image event comparisons, except 6 | `ejercicio_N/review.json` |
+| Combined reviewed results | `review-results.json` |
+
+The manual reference is `output/manual-reference.json`.
+The build log is `output/build.log`.
+These local artifacts contain the evidence; Git contains only the prototype and this aggregate report.
+The `classify` function in `omr.py` reproduces percentages from reviewed event counts.
+
+For example:
+
+```sh
+uv run --frozen python -c 'from omr import classify; print(classify(43, 1, 1, 0))'
+```
+
+The result is `Classification(label='fully', percentage=95.34883720930233)`.
+
+### Recommendation
+
+**Continue with Audiveris provisionally, subject to owner approval.**
+Do not replace the engine on this evidence alone.
+Six images have no detected event errors, and 2 more meet the agreed threshold despite errors.
+However, 2 images fail, and successful export does not establish correct notation.
+
+The manager review requirement and original-image fallback remain essential.
+The recommendation does not authorize automatic approval or a change to the existing product decisions.
+The owner must review images 6–9 and accept the report before confirming the engine decision.
 
 ## Manual checks
 

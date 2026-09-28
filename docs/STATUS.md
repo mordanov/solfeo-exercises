@@ -12,7 +12,7 @@ PHASE 0.5: Risk prototypes
 
 ## Plan for the current phase
 - [x] Prepare the OMR sample set and owner-approved evaluation criteria.
-- [ ] Run Audiveris in Docker and report recognition results.
+- [x] Run Audiveris in Docker and report recognition results.
 - [ ] Demonstrate protected `.m4a` delivery with X-Accel-Redirect and Range.
 - [ ] Plan the prototype deployment through the shared `web-folders` infrastructure.
 - [ ] Demonstrate Android PWA sharing over HTTPS.
@@ -24,42 +24,46 @@ PHASE 0.5: Risk prototypes
 - Local sample preparation uses images 1 through 10; image 11 remains outside the initial evaluation.
 - `docs/developer/omr-pipeline.md` defines sample handling, evaluation, and reporting.
 - `docs/DECISIONS.md` records the approved evaluation decisions, not an engine acceptance decision.
+- Docker access is restored before the OMR run.
+- `prototypes/omr/` contains the pinned Audiveris build, offline runner, settings, dependency lock, and 26 passing tests.
+- Ruff and strict mypy pass for the prototype.
+- Audiveris `5.11.0` runs natively on ARM64 against all 10 selected images.
+- The run exports MusicXML for 9 images; image 6 fails during staff detection.
+- The reviewed classification is 8 fully recognized, 0 partly recognized, and 2 failed images.
+- Images 8 and 9 meet the threshold but contain notation errors.
+- `docs/developer/omr-pipeline.md` contains reproduction commands, per-image results, limitations, and the recommendation.
 
 ## In progress
-- No prototype code exists yet.
-- Audiveris has not run; recognition quality remains unknown.
-- The owner approves the Audiveris implementation plan and starting the existing Colima runtime.
-- Runtime preparation stops because Docker remains unreachable after `colima start`.
-- Colima reports an ARM64 VM with 2 CPUs and 10 GiB of memory.
-- The official Audiveris release is `5.11.0`; its Linux installers target x86-64.
-- A pinned ARM64 source build remains a candidate, not a verified runtime.
+- Owner verification of the event comparisons and engine recommendation remains pending.
+- No files or PWA prototype work starts in this task.
 
 ## Next step
-- Restore Docker access or obtain explicit approval to restart Colima.
-- Confirm that `docker version` reports both client and server versions.
-- Select and verify a reproducible Audiveris build.
-- Add failing prototype tests before implementing the runner and scoring logic.
+- Review the OMR report and confirm or reject the provisional recommendation to continue with Audiveris.
+- Record the owner's engine decision in `docs/DECISIONS.md`.
+- Plan the protected-audio prototype as the next implementation task.
 
 ## Open questions for the owner
-- Authorize a Colima restart, or restore Docker without interrupting other workloads.
+- Accept or reject the provisional recommendation to continue with Audiveris.
 - Confirm the minimum prototype onboarding scope before changing the shared infrastructure.
 - Identify the Android device and browser versions when manual testing starts.
 
 ## Manual checks the owner must do
 - [ ] Confirm that images 1 through 10 represent the intended exercises.
 - [ ] Review the criteria in `docs/developer/omr-pipeline.md`.
-- [ ] Review actual recognition results and the engine recommendation after the OMR run.
+- [ ] Review the local MusicXML against the original images, especially images 7–9.
+- [ ] Review the image 6 failure and the manual event counts.
+- [ ] Confirm or reject the engine recommendation.
 - [ ] Test audio playback and seeking in macOS Safari and iOS/iPadOS Safari after the files prototype.
 - [ ] Install the PWA from Android Chrome after HTTPS deployment.
 - [ ] Share audio from WhatsApp and Telegram after the PWA prototype.
 
 ## Known issues
-- Docker cannot connect to the configured Colima socket.
-- `colima start` reports an existing running VM but does not restore Docker access.
-- A diagnostic SSH command fails because the VM cannot access the project working directory.
-- A follow-up diagnostic command receives a permission denial.
-- No VM restart or container change occurs; restarting requires separate approval because it can interrupt other workloads.
+- Image 6 produces no MusicXML; image 7 receives 46 % recognition.
+- Images 8 and 9 receive 95.35 % and 88 %, with important errors despite their `fully recognized` labels.
+- Local artifacts are under `prototypes/omr/output/20260928T201957Z-84f49a71/`.
+- The original-image transcription requires owner verification.
+- The tested Docker image is local, not published; operating-system package repositories remain unpinned.
 - Samples and generated MusicXML remain local; a fresh clone does not contain them.
 - HTTPS onboarding remains pending for `https://solfeo.miveralta.ru`.
 - The onboarding guide is `../web-projects/web-folders/documentation/onboarding.md`.
-- The prototypes have no execution results yet; PHASE 0.5 remains incomplete.
+- PHASE 0.5 remains incomplete until the remaining prototypes and owner review finish.
