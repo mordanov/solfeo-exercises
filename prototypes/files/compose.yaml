@@ -1,0 +1,45 @@
+name: solfeo-files-prototype
+
+services:
+  backend:
+    build: .
+    environment:
+      FILES_USERNAME: ${FILES_USERNAME:-prototype}
+      FILES_PASSWORD: ${FILES_PASSWORD:?Generate FILES_PASSWORD in .env}
+    networks: [prototype]
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=2)"
+      interval: 2s
+      timeout: 3s
+      retries: 15
+
+  nginx:
+    image: nginx:stable-alpine@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94
+    ports:
+      - "127.0.0.1:${FILES_PORT:-18085}:8080"
+    volumes:
+      - type: bind
+        source: ./nginx.conf
+        target: /etc/nginx/conf.d/default.conf
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ${FILES_MEDIA_DIR:-media}/sample.m4a
+        target: /media/sample.m4a
+        read_only: true
+        bind:
+          create_host_path: false
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks: [prototype, edge]
+
+networks:
+  prototype:
+    internal: true
+  edge:

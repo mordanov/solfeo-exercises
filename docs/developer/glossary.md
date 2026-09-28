@@ -18,3 +18,8 @@ Prerequisites:
 | substitution | One expected event with an incorrect pitch or duration in the recognized output. |
 | omission | One expected event missing from the recognized output. |
 | extra event | One recognized event absent from the original image. |
+| byte range | A requested portion of a file, identified by byte offsets. |
+| internal location | An nginx location that rejects direct client requests. |
+| X-Accel-Redirect | A response header that instructs nginx to serve an internal location. |
+| Basic authentication | HTTP authentication with a username and password; this prototype uses disposable local credentials. |
+| fast start | MP4 layout with playback metadata before the audio data. |

@@ -34,23 +34,32 @@ PHASE 0.5: Risk prototypes
 - `docs/developer/omr-pipeline.md` contains reproduction commands, per-image results, limitations, and the recommendation.
 - The owner confirms the engine recommendation on 2026-09-28.
 - Manager review and the original-image fallback remain mandatory.
+- The owner confirms completion of the OMR manual checks on 2026-09-28.
+- `prototypes/files/` contains the local protected-audio stand and its conversion helper.
+- FastAPI authorizes the request; nginx serves the `.m4a` through an internal location.
+- All 17 files unit tests and 13 live curl cases pass, with Ruff and strict mypy.
+- `docs/developer/protected-audio.md` contains measured Range results and the Safari checklist.
+- The files prototype containers and networks stop after verification; local media and evidence remain available.
 
 ## In progress
-- Detailed owner verification of the event comparisons remains unconfirmed.
-- No files or PWA prototype work starts in this task.
+- The files protocol checks are complete; Safari playback and seeking checks remain pending.
+- Basic authentication is a localhost-only prototype assumption, not a product authentication decision.
+- No PWA or shared-infrastructure work starts in this task.
 
 ## Next step
-- Plan the protected-audio prototype as the next implementation task.
+- Run the macOS Safari checklist in `docs/developer/protected-audio.md`.
+- Approve an accessible test setup before physical iOS/iPadOS checks.
+- Confirm the files recommendation after the manual checks.
 
 ## Open questions for the owner
 - Confirm the minimum prototype onboarding scope before changing the shared infrastructure.
 - Identify the Android device and browser versions when manual testing starts.
 
 ## Manual checks the owner must do
-- [ ] Confirm that images 1 through 10 represent the intended exercises.
-- [ ] Review the criteria in `docs/developer/omr-pipeline.md`.
-- [ ] Review the local MusicXML against the original images, especially images 7–9.
-- [ ] Review the image 6 failure and the manual event counts.
+- [x] Confirm that images 1 through 10 represent the intended exercises.
+- [x] Review the criteria in `docs/developer/omr-pipeline.md`.
+- [x] Review the local MusicXML against the original images, especially images 7–9.
+- [x] Review the image 6 failure and the manual event counts.
 - [x] Confirm the recommendation to continue with Audiveris.
 - [ ] Test audio playback and seeking in macOS Safari and iOS/iPadOS Safari after the files prototype.
 - [ ] Install the PWA from Android Chrome after HTTPS deployment.
@@ -60,7 +69,9 @@ PHASE 0.5: Risk prototypes
 - Image 6 produces no MusicXML; image 7 receives 46 % recognition.
 - Images 8 and 9 receive 95.35 % and 88 %, with important errors despite their `fully recognized` labels.
 - Local artifacts are under `prototypes/omr/output/20260928T201957Z-84f49a71/`.
-- The original-image transcription requires owner verification.
+- Files evidence is under `prototypes/files/output/curl-20260928T204244Z-ec7ed479/`.
+- The files stand binds to localhost; physical iOS/iPadOS access requires a separately approved setup.
+- Basic authentication uses disposable local credentials; product session authentication remains out of scope.
 - The tested Docker image is local, not published; operating-system package repositories remain unpinned.
 - Samples and generated MusicXML remain local; a fresh clone does not contain them.
 - HTTPS onboarding remains pending for `https://solfeo.miveralta.ru`.

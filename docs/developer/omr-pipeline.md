@@ -15,7 +15,7 @@ The owner approves these criteria on 2026-09-28.
 The sample preparation task and the Audiveris prototype run are complete.
 The report below contains actual results from all 10 original images.
 The owner confirms the recommendation to continue with Audiveris on 2026-09-28.
-Detailed owner verification of the event comparisons remains unconfirmed.
+The owner confirms completion of the OMR manual checks on 2026-09-28.
 The prototype does not implement product code or select a replacement engine.
 
 ## Sample set
@@ -277,7 +277,7 @@ This is an observed recognition failure, not a failing prototype test.
 ### Per-image results
 
 Copilot compares the MusicXML against a manual transcription of the original images.
-Owner verification remains necessary.
+The owner confirms completion of the manual checks on 2026-09-28.
 `N` means expected events; `S`, `O`, and `X` mean substitutions, omissions, and extra events.
 Percentages below use the approved event formula, not visual similarity.
 
@@ -360,9 +360,11 @@ However, 2 images fail, and successful export does not establish correct notatio
 The manager review requirement and original-image fallback remain essential.
 The recommendation does not authorize automatic approval or a change to the existing product decisions.
 `docs/DECISIONS.md` records the confirmed engine decision.
-This confirmation does not establish completion of the detailed manual checks.
+The owner also confirms completion of the detailed manual checks on 2026-09-28.
 
 ## Manual checks
+
+The owner confirms completion of these checks on 2026-09-28.
 
 - Confirm that the 10 images represent the intended exercises.
 - Confirm that each prototype copy matches its original image.

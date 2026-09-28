@@ -26,3 +26,5 @@ Format: date, decision, reason. Do not reverse a decision without asking the own
   Reason: 8 of 10 images meet the agreed recognition threshold; 2 fail.
   Manager review and the original-image fallback remain mandatory.
   This decision does not authorize automatic score approval or confirm completion of the detailed manual checks.
+- 2026-09-28: The owner confirms completion of the OMR manual checks.
+  The decision to continue with Audiveris remains unchanged.
