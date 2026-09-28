@@ -22,3 +22,7 @@ Format: date, decision, reason. Do not reverse a decision without asking the own
 - 2026-09-28: Fully recognized means at least 80 %; partly recognized means at least 50 % and below 80 %. Failed means below 50 % or no usable MusicXML.
   Reason: these boundaries remove overlap between the owner's recognition bands.
 - 2026-09-28: The owner reviews the engine recommendation without an aggregate acceptance threshold. Reason: per-image results and structural errors inform the decision.
+- 2026-09-28: The owner confirms the recommendation to continue with Audiveris.
+  Reason: 8 of 10 images meet the agreed recognition threshold; 2 fail.
+  Manager review and the original-image fallback remain mandatory.
+  This decision does not authorize automatic score approval or confirm completion of the detailed manual checks.

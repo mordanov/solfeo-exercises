@@ -23,7 +23,7 @@ PHASE 0.5: Risk prototypes
 - The owner approves 10 initial images, recognition criteria, and an owner-reviewed engine recommendation.
 - Local sample preparation uses images 1 through 10; image 11 remains outside the initial evaluation.
 - `docs/developer/omr-pipeline.md` defines sample handling, evaluation, and reporting.
-- `docs/DECISIONS.md` records the approved evaluation decisions, not an engine acceptance decision.
+- `docs/DECISIONS.md` records the approved evaluation criteria and the decision to continue with Audiveris.
 - Docker access is restored before the OMR run.
 - `prototypes/omr/` contains the pinned Audiveris build, offline runner, settings, dependency lock, and 26 passing tests.
 - Ruff and strict mypy pass for the prototype.
@@ -32,18 +32,17 @@ PHASE 0.5: Risk prototypes
 - The reviewed classification is 8 fully recognized, 0 partly recognized, and 2 failed images.
 - Images 8 and 9 meet the threshold but contain notation errors.
 - `docs/developer/omr-pipeline.md` contains reproduction commands, per-image results, limitations, and the recommendation.
+- The owner confirms the engine recommendation on 2026-09-28.
+- Manager review and the original-image fallback remain mandatory.
 
 ## In progress
-- Owner verification of the event comparisons and engine recommendation remains pending.
+- Detailed owner verification of the event comparisons remains unconfirmed.
 - No files or PWA prototype work starts in this task.
 
 ## Next step
-- Review the OMR report and confirm or reject the provisional recommendation to continue with Audiveris.
-- Record the owner's engine decision in `docs/DECISIONS.md`.
 - Plan the protected-audio prototype as the next implementation task.
 
 ## Open questions for the owner
-- Accept or reject the provisional recommendation to continue with Audiveris.
 - Confirm the minimum prototype onboarding scope before changing the shared infrastructure.
 - Identify the Android device and browser versions when manual testing starts.
 
@@ -52,7 +51,7 @@ PHASE 0.5: Risk prototypes
 - [ ] Review the criteria in `docs/developer/omr-pipeline.md`.
 - [ ] Review the local MusicXML against the original images, especially images 7–9.
 - [ ] Review the image 6 failure and the manual event counts.
-- [ ] Confirm or reject the engine recommendation.
+- [x] Confirm the recommendation to continue with Audiveris.
 - [ ] Test audio playback and seeking in macOS Safari and iOS/iPadOS Safari after the files prototype.
 - [ ] Install the PWA from Android Chrome after HTTPS deployment.
 - [ ] Share audio from WhatsApp and Telegram after the PWA prototype.

@@ -14,7 +14,8 @@ Prerequisites:
 The owner approves these criteria on 2026-09-28.
 The sample preparation task and the Audiveris prototype run are complete.
 The report below contains actual results from all 10 original images.
-Owner verification and engine acceptance remain pending.
+The owner confirms the recommendation to continue with Audiveris on 2026-09-28.
+Detailed owner verification of the event comparisons remains unconfirmed.
 The prototype does not implement product code or select a replacement engine.
 
 ## Sample set
@@ -349,20 +350,21 @@ uv run --frozen python -c 'from omr import classify; print(classify(43, 1, 1, 0)
 
 The result is `Classification(label='fully', percentage=95.34883720930233)`.
 
-### Recommendation
+### Confirmed engine decision
 
-**Continue with Audiveris provisionally, subject to owner approval.**
+**Continue with Audiveris. The owner confirms this recommendation on 2026-09-28.**
 Do not replace the engine on this evidence alone.
 Six images have no detected event errors, and 2 more meet the agreed threshold despite errors.
 However, 2 images fail, and successful export does not establish correct notation.
 
 The manager review requirement and original-image fallback remain essential.
 The recommendation does not authorize automatic approval or a change to the existing product decisions.
-The owner must review images 6–9 and accept the report before confirming the engine decision.
+`docs/DECISIONS.md` records the confirmed engine decision.
+This confirmation does not establish completion of the detailed manual checks.
 
 ## Manual checks
 
 - Confirm that the 10 images represent the intended exercises.
 - Confirm that each prototype copy matches its original image.
 - Review event counts and structural errors after the Audiveris run.
-- Review the recommendation before accepting or replacing Audiveris.
+- Review the local evidence for images 6–9.
