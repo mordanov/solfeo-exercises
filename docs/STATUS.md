@@ -28,12 +28,20 @@ PHASE 0.5: Risk prototypes
 ## In progress
 - No prototype code exists yet.
 - Audiveris has not run; recognition quality remains unknown.
+- The owner approves the Audiveris implementation plan and starting the existing Colima runtime.
+- Runtime preparation stops because Docker remains unreachable after `colima start`.
+- Colima reports an ARM64 VM with 2 CPUs and 10 GiB of memory.
+- The official Audiveris release is `5.11.0`; its Linux installers target x86-64.
+- A pinned ARM64 source build remains a candidate, not a verified runtime.
 
 ## Next step
-- Obtain approval for the Audiveris Docker implementation task.
-- Check Docker availability and select a reproducible Audiveris build before implementation.
+- Restore Docker access or obtain explicit approval to restart Colima.
+- Confirm that `docker version` reports both client and server versions.
+- Select and verify a reproducible Audiveris build.
+- Add failing prototype tests before implementing the runner and scoring logic.
 
 ## Open questions for the owner
+- Authorize a Colima restart, or restore Docker without interrupting other workloads.
 - Confirm the minimum prototype onboarding scope before changing the shared infrastructure.
 - Identify the Android device and browser versions when manual testing starts.
 
@@ -46,6 +54,11 @@ PHASE 0.5: Risk prototypes
 - [ ] Share audio from WhatsApp and Telegram after the PWA prototype.
 
 ## Known issues
+- Docker cannot connect to the configured Colima socket.
+- `colima start` reports an existing running VM but does not restore Docker access.
+- A diagnostic SSH command fails because the VM cannot access the project working directory.
+- A follow-up diagnostic command receives a permission denial.
+- No VM restart or container change occurs; restarting requires separate approval because it can interrupt other workloads.
 - Samples and generated MusicXML remain local; a fresh clone does not contain them.
 - HTTPS onboarding remains pending for `https://solfeo.miveralta.ru`.
 - The onboarding guide is `../web-projects/web-folders/documentation/onboarding.md`.
