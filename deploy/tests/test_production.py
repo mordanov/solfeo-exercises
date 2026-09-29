@@ -188,7 +188,7 @@ try:
         version = connection.scalar(
             text("SELECT version_num FROM migrations.alembic_version")
         )
-        assert version == "0003_exercises"
+        assert version == "0004_listening"
         privileges = connection.execute(text(
             "SELECT rolsuper, rolcreatedb, rolcreaterole "
             "FROM pg_roles WHERE rolname=current_user"
@@ -464,7 +464,13 @@ def test_authentication_through_real_nginx(stand: Stand) -> None:
         assert error.code == 403
     else:
         pytest.fail("Student accessed manager API")
-    for route in ("/login", "/settings", "/manager/users", "/student"):
+    for route in (
+        "/login",
+        "/settings",
+        "/manager/users",
+        "/manager/journal",
+        "/student",
+    ):
         with client.open(origin + route) as response:
             assert b'id="root"' in response.read()
     stand.run("restart", "backend")
@@ -474,6 +480,114 @@ def test_authentication_through_real_nginx(stand: Stand) -> None:
     assert restored["user"]["ui_language"] == "es"
     assert restored["user"]["note_naming"] == "solfege"
     request("/api/auth/logout", {}, csrf)
+
+
+def test_listening_journal_through_nginx_and_restart(stand: Stand) -> None:
+    import wave
+
+    audio = io.BytesIO()
+    with wave.open(audio, "wb") as wav:
+        wav.setnchannels(1)
+        wav.setsampwidth(2)
+        wav.setframerate(8000)
+        wav.writeframes(bytes(8000 * 2 * 10))
+    origin = "http://" + stand.run("port", "frontend", "8080").stdout.strip()
+    with httpx.Client(
+        base_url=origin, headers={"Origin": origin}, timeout=30
+    ) as client:
+
+        def login_as(username: str) -> str:
+            response = client.post(
+                "/api/auth/login",
+                json={"username": username, "password": stand.passwords[3]},
+            )
+            assert response.status_code == 200
+            return str(response.json()["csrf_token"])
+
+        csrf = login_as("release-check")
+        exercises = []
+        for title in ("Complete audio", "Interrupted audio"):
+            response = client.post(
+                "/api/exercises",
+                data={"title": title},
+                files={"audio": ("tone.wav", audio.getvalue(), "audio/wav")},
+                headers={"X-CSRF-Token": csrf},
+            )
+            assert response.status_code == 201
+            exercises.append(response.json())
+        created = client.post(
+            "/api/users",
+            json={
+                "username": "journal-student",
+                "password": stand.passwords[3],
+                "first_name": "Journal",
+                "last_name": "Student",
+                "role": "student",
+                "must_change_password": False,
+            },
+            headers={"X-CSRF-Token": csrf},
+        )
+        assert created.status_code == 201
+        student_id = created.json()["id"]
+        csrf = login_as("journal-student")
+        assert client.get("/api/journal").status_code == 403
+        for index, exercise in enumerate(exercises):
+            payload = {
+                "session_id": str(uuid.uuid4()),
+                "exercise_id": exercise["id"],
+                "audio_id": exercise["audio"]["id"],
+                "event": "start",
+                "position_seconds": 0,
+                "csrf_token": csrf,
+            }
+            assert client.post("/api/listening/events", json=payload).status_code == 200
+            payload.update(
+                event="heartbeat",
+                position_seconds=exercise["audio"]["duration_seconds"]
+                * (0.9 if index == 0 else 0.1),
+            )
+            assert client.post("/api/listening/events", json=payload).status_code == 200
+            if index == 0:
+                payload["event"] = "end"
+                assert (
+                    client.post("/api/listening/events", json=payload).status_code
+                    == 200
+                )
+        stand.run("restart", "backend")
+        stand.run("up", "-d", "--no-deps", "--wait", "backend")
+        assert client.get("/api/auth/me").status_code == 200
+        assert (
+            client.get("/api/listening/current").json()["exercise"]["id"]
+            == exercises[1]["id"]
+        )
+        csrf = login_as("release-check")
+        assert (
+            client.delete(
+                f"/api/exercises/{exercises[1]['id']}", headers={"X-CSRF-Token": csrf}
+            ).status_code
+            == 200
+        )
+        result = client.get(f"/api/journal?student_id={student_id}").json()
+        assert result["total"] == 2
+        complete = next(
+            row
+            for row in result["sessions"]
+            if row["exercise_id"] == exercises[0]["id"]
+        )
+        interrupted = next(
+            row
+            for row in result["sessions"]
+            if row["exercise_id"] == exercises[1]["id"]
+        )
+        assert complete["completed"] and complete["ended_at"]
+        assert not interrupted["completed"] and interrupted["ended_at"] is None
+        assert interrupted["exercise_deleted"]
+        assert (
+            client.get(f"/api/journal?student_id={student_id}&offset=1&limit=1").json()[
+                "total"
+            ]
+            == 2
+        )
 
 
 def test_nginx_login_limit_ignores_client_forwarded_for(
