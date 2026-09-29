@@ -23,3 +23,7 @@ Prerequisites:
 | X-Accel-Redirect | A response header that instructs nginx to serve an internal location. |
 | Basic authentication | HTTP authentication with a username and password; this prototype uses disposable local credentials. |
 | fast start | MP4 layout with playback metadata before the audio data. |
+| PWA | Progressive web app that supports installation through the browser. |
+| share target | A manifest entry that lets an installed PWA receive shared data. |
+| service worker | Browser code that handles requests within a defined scope. |
+| IndexedDB | Browser storage for structured data and files. |

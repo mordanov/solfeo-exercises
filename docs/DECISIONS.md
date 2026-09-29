@@ -28,3 +28,6 @@ Format: date, decision, reason. Do not reverse a decision without asking the own
   This decision does not authorize automatic score approval or confirm completion of the detailed manual checks.
 - 2026-09-28: The owner confirms completion of the OMR manual checks.
   The decision to continue with Audiveris remains unchanged.
+- 2026-09-29: The owner confirms completion of the protected-audio manual step.
+  X-Accel-Redirect and nginx byte-range delivery remain the planned file-serving mechanism.
+  Device versions and the manual test setup are not recorded.

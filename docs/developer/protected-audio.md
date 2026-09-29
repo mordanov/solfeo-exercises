@@ -270,7 +270,8 @@ Successful responses use `audio/mp4` and `Cache-Control: private, no-store`.
 Full responses advertise `Accept-Ranges: bytes`.
 nginx consumes `X-Accel-Redirect`; clients do not receive that header.
 All 17 unit tests and 13 curl integration cases pass.
-No Safari or Chrome playback result is claimed.
+The owner confirms completion of the manual step on 2026-09-29.
+The report contains no device versions or details of the owner's test setup.
 
 Evidence locations:
 
@@ -280,6 +281,9 @@ Evidence locations:
 - `output/compose-up.log`: build and startup output.
 
 ## Manual Safari checklist
+
+The owner confirms completion of the manual step on 2026-09-29.
+The instructions below remain available for repeat checks.
 
 **Caution:** Physical iOS/iPadOS devices cannot access this stand through their own `localhost`.
 A separate approved network or HTTPS setup is necessary for those devices.
@@ -315,7 +319,7 @@ When Safari sends a Range request, confirm a `206` response in Web Inspector.
 3. Record the device, operating-system version, Safari version, and result.
 
 Use the same playback steps in Chrome for the supported-browser comparison.
-Neither browser result is complete until the owner performs these checks.
+Record browser and device versions when repeating these checks.
 
 ## Stop the stand
 
@@ -330,7 +334,8 @@ No other Compose project belongs to this cleanup.
 
 ## Recommendation
 
-Continue with X-Accel-Redirect and nginx byte-range delivery, subject to the Safari manual checks.
+Continue with X-Accel-Redirect and nginx byte-range delivery.
+The owner confirms completion of the manual step on 2026-09-29.
 The curl evidence confirms protocol behavior, not device playback.
 Keep the product session-cookie design unchanged.
 PHASE 0.5 remains open until the remaining prototypes and owner decisions finish.

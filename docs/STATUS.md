@@ -5,7 +5,7 @@ This document records progress and remaining checks for the current phase.
 Prerequisites:
 - Read `docs/PHASES.md` and `docs/DECISIONS.md`.
 
-Last updated: 2026-09-28 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
+Last updated: 2026-09-29 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
 
 ## Current phase
 PHASE 0.5: Risk prototypes
@@ -13,8 +13,8 @@ PHASE 0.5: Risk prototypes
 ## Plan for the current phase
 - [x] Prepare the OMR sample set and owner-approved evaluation criteria.
 - [x] Run Audiveris in Docker and report recognition results.
-- [ ] Demonstrate protected `.m4a` delivery with X-Accel-Redirect and Range.
-- [ ] Plan the prototype deployment through the shared `web-folders` infrastructure.
+- [x] Demonstrate protected `.m4a` delivery with X-Accel-Redirect and Range.
+- [x] Prepare the prototype deployment plan for owner review.
 - [ ] Demonstrate Android PWA sharing over HTTPS.
 - [ ] Obtain owner approval of the report and record the final decisions.
 
@@ -40,19 +40,22 @@ PHASE 0.5: Risk prototypes
 - All 17 files unit tests and 13 live curl cases pass, with Ruff and strict mypy.
 - `docs/developer/protected-audio.md` contains measured Range results and the Safari checklist.
 - The files prototype containers and networks stop after verification; local media and evidence remain available.
+- The owner confirms completion of the protected-audio manual step on 2026-09-29.
+- `docs/developer/pwa-share.md` proposes the static HTTPS prototype and the shared-infrastructure changes.
 
 ## In progress
-- The files protocol checks are complete; Safari playback and seeking checks remain pending.
+- The files protocol checks and owner manual step are complete.
 - Basic authentication is a localhost-only prototype assumption, not a product authentication decision.
-- No PWA or shared-infrastructure work starts in this task.
+- The PWA deployment plan awaits approval; no PWA code or shared-infrastructure change exists yet.
 
 ## Next step
-- Run the macOS Safari checklist in `docs/developer/protected-audio.md`.
-- Approve an accessible test setup before physical iOS/iPadOS checks.
-- Confirm the files recommendation after the manual checks.
+- Approve the proposed static PWA scope in `docs/developer/pwa-share.md`.
+- Implement the local PWA with failing tests before changing shared infrastructure.
+- Confirm the registry owner and authorize shared-infrastructure changes before HTTPS deployment.
 
 ## Open questions for the owner
 - Confirm the minimum prototype onboarding scope before changing the shared infrastructure.
+- Confirm the image registry owner and publishing permissions.
 - Identify the Android device and browser versions when manual testing starts.
 
 ## Manual checks the owner must do
@@ -61,7 +64,7 @@ PHASE 0.5: Risk prototypes
 - [x] Review the local MusicXML against the original images, especially images 7–9.
 - [x] Review the image 6 failure and the manual event counts.
 - [x] Confirm the recommendation to continue with Audiveris.
-- [ ] Test audio playback and seeking in macOS Safari and iOS/iPadOS Safari after the files prototype.
+- [x] Complete the protected-audio manual step, as confirmed by the owner.
 - [ ] Install the PWA from Android Chrome after HTTPS deployment.
 - [ ] Share audio from WhatsApp and Telegram after the PWA prototype.
 
@@ -70,7 +73,7 @@ PHASE 0.5: Risk prototypes
 - Images 8 and 9 receive 95.35 % and 88 %, with important errors despite their `fully recognized` labels.
 - Local artifacts are under `prototypes/omr/output/20260928T201957Z-84f49a71/`.
 - Files evidence is under `prototypes/files/output/curl-20260928T204244Z-ec7ed479/`.
-- The files stand binds to localhost; physical iOS/iPadOS access requires a separately approved setup.
+- The owner reports completion of the files manual step; device versions and the test setup are not recorded.
 - Basic authentication uses disposable local credentials; product session authentication remains out of scope.
 - The tested Docker image is local, not published; operating-system package repositories remain unpinned.
 - Samples and generated MusicXML remain local; a fresh clone does not contain them.
