@@ -62,6 +62,8 @@ The owner authorizes the entire phase without intermediate confirmations on 2026
 - Tests: closed tab (no end event), deleted exercise in the journal, completed threshold at 90 %.
 - Docs: user (student listening, manager journal), developer (event model).
 Done when: a student listens to two exercises, closes the tab during the second, and the journal shows one completed and one incomplete session.
+Implementation status: deployed on 2026-09-29 with successful CI/CD and local/public HTTPS Chrome scenarios.
+Final owner acceptance remains open; the manual checklist includes Safari.
 
 ## PHASE 4: Telegram audio import
 - Plan secure linking between Telegram sender IDs and active manager accounts before implementation.

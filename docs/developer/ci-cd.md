@@ -207,10 +207,34 @@ The automation leaves 2 soft-deleted production exercises and preserves their fi
 It restores the emergency manager's settings and does not publish credentials.
 The owner confirms all PHASE 2 checks on 2026-09-29.
 
-## PHASE 3 verification
+## Deployed PHASE 3 release
 
 Local suites pass 87 backend tests, 72 frontend tests, and 35 container/release checks.
 Real Chrome verifies student selection, heartbeats, pause/resume, completion, actual tab closure, journal filters, and retained deleted exercises.
 The container scenario verifies normal student session persistence and saved progress after a backend restart.
 The publication workflow supplies `VITE_LISTENING_HEARTBEAT_MS=5000` to the frontend build.
-Release provenance and public HTTPS verification follow deployment.
+Source `e141b75c803ad56733731965056ef969f0e22c8a` completes PHASE 3 implementation on 2026-09-29.
+CI [`36621440972`](https://github.com/mordanov/solfeo-exercises/actions/runs/36621440972) succeeds.
+Publication and CD [`36621939822`](https://github.com/mordanov/solfeo-exercises/actions/runs/36621939822) succeed.
+Publication repeats all 35 container/release checks against the pulled immutable images.
+
+| Image | Active digest reference |
+|---|---|
+| Backend | `ghcr.io/mordanov/solfeo-backend@sha256:824396d04493d6435b7eb2c1dc8a660f7747355e88575bffdbea2cdfdd4dda79` |
+| Frontend | `ghcr.io/mordanov/solfeo-frontend@sha256:f49fc74d605ba8f9b7c127f8bd50fb352efbfb05c27cf40398ea7714fce19c4e` |
+
+The retained database advances to `0004_listening`.
+Independent VPS verification checks source labels, digest references, migration compatibility, private media mounts, journal retention, and registry cleanup.
+All 45 other containers retain their IDs and start times.
+No shared infrastructure change is necessary.
+
+Public HTTPS Chrome repeats the complete listening and journal scenario.
+The actual tab-close beacon arrives, and the journal retains one completed row and one incomplete row.
+The scenario leaves 2 soft-deleted synthetic exercises, 2 retained journal rows, and 2 inactive synthetic accounts.
+It does not change real accounts or exercises.
+Cleanup removes the isolated browser profile and disposable test database.
+The local development stand and public health endpoints remain healthy.
+
+Final owner acceptance remains open.
+Safari automation remains unavailable because Allow Remote Automation is disabled.
+The manual procedures appear in `docs/user/student.md` and `docs/user/manager.md`.

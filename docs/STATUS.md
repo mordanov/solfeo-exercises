@@ -8,8 +8,8 @@ Prerequisites:
 Last updated: 2026-09-29 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
 
 ## Current phase
-PHASE 3: Listening module and journal; implementation passes local automatic checks.
-Deployment and final owner acceptance remain open.
+PHASE 3: Listening module and journal are implemented and deployed.
+Automatic checks pass; final owner acceptance remains open.
 The owner confirms all PHASE 2 checks and authorizes the complete PHASE 3 without intermediate confirmations on 2026-09-29.
 The owner confirms all PHASE 1 manual checks on 2026-09-29.
 The owner authorizes the entire PHASE 2 without intermediate confirmations on 2026-09-29.
@@ -25,8 +25,8 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Add student playback, pause/resume, heartbeats, completion, and exit handling.
 - [x] Add manager journal filters, pagination, deleted-exercise labels, and translations.
 - [x] Complete local PostgreSQL, container, and actual Chrome tab-close scenarios.
-- [ ] Deploy and verify the exact release over public HTTPS.
-- [ ] Complete documentation and the final manual checklist.
+- [x] Deploy and verify the exact release over public HTTPS.
+- [x] Complete documentation and the final manual checklist.
 - [ ] Obtain owner acceptance after implementation.
 
 ## Completed PHASE 2 plan
@@ -73,11 +73,22 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Complete the remaining Telegram checklist, as confirmed by the owner.
 
 ## Done
+- PHASE 3 is active at `https://solfeo.miveralta.ru/student` and `/manager/journal`.
+- Source `e141b75c803ad56733731965056ef969f0e22c8a` passes CI run `36621440972` and publication/CD run `36621939822`.
+- The pulled immutable images pass all 35 container/release checks before deployment.
+- Public HTTPS Chrome verifies selection, pause/resume, completion, actual tab closure, journal filters, and retained deleted exercises.
+- The tab-close terminal beacon arrives; the journal shows one completed session and one incomplete session.
+- Independent VPS checks confirm exact image provenance, migration compatibility, private media, retained journal rows, and registry credential cleanup.
+- All 45 other VPS containers retain their exact IDs and start times.
+- The 2 synthetic production exercises remain soft-deleted; their 2 journal rows and media remain intact.
+- Both synthetic accounts are inactive; real accounts and exercises remain unchanged.
+- Cleanup removes isolated Chrome, its temporary profile, and the disposable test database.
+- The local development stand and both public health endpoints remain healthy.
 - PHASE 3 passes 87 backend tests, 72 frontend tests, and 35 container/release checks locally.
 - Real Chrome verifies random history, sequential persistence, pause/resume, heartbeats, completion, and actual tab closure.
 - The local journal retains the interrupted session after deletion and supports student/exercise filters.
 - Explicit quality checks pass Ruff, mypy strict, ESLint, Prettier, TypeScript, and frontend builds.
-- PHASE 2 is active at `https://solfeo.miveralta.ru/manager/exercises`.
+- PHASE 2 adds exercise management at `https://solfeo.miveralta.ru/manager/exercises`.
 - Publication/CD run `36609836972` succeeds for source `61ed497df1c2bc295363df1f59248f76f251c14c`.
 - The published immutable images pass all 34 container/release checks before deployment.
 - Public HTTPS Chrome repeats creation, a 3 MiB image upload, Opus conversion, playback, seeking, editing, reordering, reload, and deletion.
@@ -294,8 +305,8 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - The owner does not supply device versions or a per-message evidence record.
 
 ## Next step
-- Deploy PHASE 3 and repeat the listening/journal scenario over public HTTPS.
 - Complete final PHASE 3 owner acceptance with `docs/user/student.md` and `docs/user/manager.md`.
+- Repeat the listening and journal scenarios in Chrome and Safari.
 - Keep PHASE 4 out of this task.
 - Keep the active bot and superseded PWA deployment unchanged until an explicit deployment or cleanup task.
 
