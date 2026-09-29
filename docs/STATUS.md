@@ -8,7 +8,8 @@ Prerequisites:
 Last updated: 2026-09-29 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
 
 ## Current phase
-PHASE 2: Exercises and files; implementation and automated verification are in progress.
+PHASE 2: Exercises and files are implemented and deployed.
+Automated verification passes; final owner acceptance remains open.
 The owner confirms all PHASE 1 manual checks on 2026-09-29.
 The owner authorizes the entire PHASE 2 without intermediate confirmations on 2026-09-29.
 Manual checks follow the complete implementation.
@@ -22,8 +23,8 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Add bounded uploads, signature checks, original images, AAC conversion, and duration checks.
 - [x] Add protected file endpoints and nginx byte-range delivery.
 - [x] Add translated exercise forms, upload progress, previews, and drag-and-drop controls.
-- [ ] Complete browser scenarios, container verification, and deployment.
-- [ ] Complete documentation and the final manual checklist.
+- [x] Complete browser scenarios, container verification, and deployment.
+- [x] Complete documentation and the final manual checklist.
 - [ ] Obtain owner acceptance after the complete implementation.
 
 ## Completed PHASE 1 plan
@@ -61,9 +62,29 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Complete the remaining Telegram checklist, as confirmed by the owner.
 
 ## Done
-- PHASE 1 source `481c72b0cb137aa512798172f377e89e2aca42d8` is active at `https://solfeo.miveralta.ru/`.
+- PHASE 2 is active at `https://solfeo.miveralta.ru/manager/exercises`.
+- Publication/CD run `36609836972` succeeds for source `61ed497df1c2bc295363df1f59248f76f251c14c`.
+- The published immutable images pass all 34 container/release checks before deployment.
+- Public HTTPS Chrome repeats creation, a 3 MiB image upload, Opus conversion, playback, seeking, editing, reordering, reload, and deletion.
+- Independent HTTPS checks confirm authenticated byte ranges, anonymous denial, and rejection of direct internal-file URLs.
+- The 2 synthetic production exercises remain soft-deleted with their original images and converted audio.
+- Independent VPS verification confirms release provenance, `0003_exercises`, private volume ownership, read-only nginx access, and registry credential cleanup.
+- All 45 other VPS containers retain their exact IDs and start times, including PostgreSQL, shared nginx, and both prototypes.
+- Cleanup stops isolated Chrome, removes its temporary profile, and removes the disposable test database.
+- The local development stand remains healthy with its persistent database and media volumes.
+- PHASE 2 implementation uses migration `0003_exercises`, protected persistent media, and translated manager forms.
+- Source `61ed497df1c2bc295363df1f59248f76f251c14c` passes CI run `36609358064`.
+- The suites pass 77 backend tests, 57 frontend tests, and 34 container/release checks.
+- Real Chrome 154.0.8037.58 completes local uploads above 1 MiB, Opus conversion, playback, seeking, editing, reordering, and soft deletion.
+- Container tests verify original bytes, protected GET/HEAD, normal/suffix/invalid ranges, restart persistence, and denial after deletion.
+- Backend tests cover Opus, Ogg, MP3, WAV, AAC, M4A, PNG, JPEG, and WebP.
+- Additional checks cover malformed media, byte/pixel/duration limits, chunked requests, permission boundaries, and atomic replacement.
+- A replacement regression identifies a foreign-key ordering error; media inserts now complete before exercise updates.
+- The shared proxy change `fb55be7` delegates upload limits to the product proxy and permits conversion time.
+- Shared nginx validates and reloads without container recreation; its rebuilt image preserves the updated templates.
+- The preceding PHASE 1 release uses source `481c72b0cb137aa512798172f377e89e2aca42d8`.
 - CI run `36593904877` and publication/CD run `36594338338` succeed.
-- The current suites pass 62 backend tests, 46 frontend tests, and 33 deployment/release checks.
+- The PHASE 1 suites pass 62 backend tests, 46 frontend tests, and 33 deployment/release checks.
 - Real Chrome 154.0.8037.58 completes the manager/student workflow locally and over public HTTPS.
 - The scenarios cover user creation, obligatory password change, all 3 languages, saved naming, role denial, reset, revocation, activation, and logout.
 - The public browser check waits for user-list loading before editing; its first attempt identifies a test-harness timing issue.
@@ -258,7 +279,7 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - The owner does not supply device versions or a per-message evidence record.
 
 ## Next step
-- Complete PHASE 2 deployment and final owner acceptance.
+- Complete final PHASE 2 owner acceptance with `docs/user/manager.md`.
 - Check real image and Opus upload, playback, and seeking in Chrome and Safari.
 - Keep PHASE 3 out of this task.
 - Keep the active bot and superseded PWA deployment unchanged until an explicit deployment or cleanup task.
@@ -290,6 +311,14 @@ The owner confirms all PHASE 1 checks on 2026-09-29.
 Chrome automation covers these scenarios separately.
 Safari 26.6.2 refuses WebDriver sessions until Allow Remote Automation is enabled.
 The task does not change that system permission or claim automated Safari success.
+
+## Final PHASE 2 manual acceptance
+- [ ] Create an exercise with a real Opus file and image in Chrome and Safari.
+- [ ] Play and seek forward and backward after conversion.
+- [ ] Edit metadata and replace attachments.
+- [ ] Reorder exercises by dragging or buttons; confirm the order after reload.
+- [ ] Confirm soft deletion and explicit errors for invalid or missing files.
+- [ ] Confirm student denial at `/manager/exercises`.
 
 ## Manual checks the owner must do
 - [x] Confirm that images 1 through 10 represent the intended exercises.
@@ -333,6 +362,7 @@ The final PHASE 2 procedure is in `docs/user/manager.md`.
 - Anonymous language selection remains temporary; authenticated language and note naming now persist per user.
 - Product CD and public nginx integration are active; the owner confirms final VPS acceptance.
 - The PHASE 0 image cannot recognize `0002_auth`; rollback across that schema boundary requires a compatible forward fix.
+- PHASE 1 images cannot recognize `0003_exercises`; PHASE 2 recovery requires a compatible image.
 - Schema-incompatible rollback stops the product services and requires operator recovery; no automatic database downgrade occurs.
 - The current CLI credential cannot manage repository Actions secrets: the public-key API returns HTTP 403.
 - The deployment job confirms valid SSH configuration and removes its temporary registry credentials.

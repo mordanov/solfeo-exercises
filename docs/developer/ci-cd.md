@@ -162,7 +162,7 @@ CI [`36593904877`](https://github.com/mordanov/solfeo-exercises/actions/runs/365
 Publication and CD [`36594338338`](https://github.com/mordanov/solfeo-exercises/actions/runs/36594338338) succeed.
 The suites pass 62 backend, 46 frontend, and 33 deployment/release checks.
 
-| Image | Active digest reference |
+| Image | PHASE 1 digest reference |
 |---|---|
 | Backend | `ghcr.io/mordanov/solfeo-backend@sha256:b43d285569d9de5d74c9f0e7f8ba82ac44eb70f3e5b325e964aa75b148c35265` |
 | Frontend | `ghcr.io/mordanov/solfeo-frontend@sha256:499fea60aa30323fa6b55b387594e4a1223b0bb26331cb9da1a936d2b6d2bf47` |
@@ -176,4 +176,33 @@ Chrome completes the account scenarios locally and through public HTTPS.
 Those scenarios create users, change temporary passwords, persist preferences, enforce roles, reset passwords, revoke sessions, and verify activation and logout.
 The automation deactivates its 4 synthetic VPS accounts and does not publish their passwords.
 The operator retrieves emergency credentials only from private server configuration.
-Final Safari/owner acceptance remains separate because local Safari blocks remote automation.
+The owner confirms final PHASE 1 manual acceptance on 2026-09-29.
+Local Safari automation remains unavailable; owner acceptance does not claim automated Safari coverage.
+
+## Deployed PHASE 2 release
+
+Source `61ed497df1c2bc295363df1f59248f76f251c14c` completes PHASE 2 implementation on 2026-09-29.
+CI [`36609358064`](https://github.com/mordanov/solfeo-exercises/actions/runs/36609358064) succeeds.
+Publication and CD [`36609836972`](https://github.com/mordanov/solfeo-exercises/actions/runs/36609836972) succeed.
+The suites pass 77 backend tests, 57 frontend tests, and 34 container/release checks.
+Publication repeats the container checks against the pulled immutable images.
+
+| Image | Active digest reference |
+|---|---|
+| Backend | `ghcr.io/mordanov/solfeo-backend@sha256:211f886a15b94f988b473fa27c226bd3734976fcfa17ce5e1718c6658792e572` |
+| Frontend | `ghcr.io/mordanov/solfeo-frontend@sha256:b08a515620c3a6d025977922772432ffa4a723d720065d08a5872a61f3205b79` |
+
+The retained database advances to `0003_exercises`.
+The backend and frontend share `solfeo-production_media_data`; frontend access is read-only.
+Shared infrastructure commit `fb55be7` updates only the product route's upload forwarding and timeout.
+The shared nginx image includes this change; a validated graceful reload updates the running container.
+All 45 other containers retain their IDs and start times.
+Both prototypes remain healthy.
+
+Chrome completes the exercise workflow locally and through public HTTPS.
+The scenario uploads a synthetic image above 1 MiB and a real encoded Opus fixture.
+It verifies preview, AAC playback, seeking, metadata updates, reordering, persistence, soft deletion, and logout.
+Independent requests verify 206 byte ranges, anonymous denial, and internal-location protection.
+The automation leaves 2 soft-deleted production exercises and preserves their files.
+It restores the emergency manager's settings and does not publish credentials.
+Final owner acceptance remains open; Safari playback and seeking require the manual checklist.

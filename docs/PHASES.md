@@ -51,6 +51,8 @@ The owner authorizes the entire phase without intermediate confirmations on 2026
 - Manager UI: list, create, edit, delete, drag-and-drop reorder, upload with progress.
 - Docs: user (manage exercises), developer (storage, conversion, nginx config).
 Done when: manager uploads an .opus file and an image, and the audio plays and seeks in Chrome and Safari.
+Implementation status: deployed on 2026-09-29 with successful CI/CD, container checks, and public HTTPS Chrome scenarios.
+Final owner acceptance remains open, including real-file playback and seeking in Safari.
 
 ## PHASE 3: Listening module and journal
 - Student UI: sequential mode (pointer per student), random mode (no immediate repeat), image and audio player, next/previous.
