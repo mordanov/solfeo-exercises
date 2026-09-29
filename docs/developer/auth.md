@@ -3,7 +3,7 @@
 This document explains login sessions, account controls, and emergency manager recovery.
 
 Prerequisites:
-- Apply migration `0002_auth`.
+- Apply the current Alembic head, which includes `0002_auth`.
 - Read `env-variables.md` and `deploy.md`.
 - Keep production configuration and passwords private.
 

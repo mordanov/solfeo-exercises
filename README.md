@@ -9,7 +9,8 @@ Prerequisites:
 PHASE 0.5 is complete.
 PHASE 0 provides the deployed health page, PostgreSQL, and targeted CI/CD.
 PHASE 1 adds cookie authentication, manager user administration, persisted settings, and emergency recovery.
-Exercises and product Telegram import remain for later phases.
+PHASE 2 adds exercise management, protected original images, and converted AAC audio with seeking.
+Student listening and product Telegram import remain in their planned later phases.
 
 ## Start locally
 
@@ -27,7 +28,7 @@ Open `http://127.0.0.1:18080/`.
 The page checks the backend through nginx.
 Compose runs migrations before starting the backend.
 Keep the generated password private and unchanged when reusing the database volume.
-The shutdown command preserves that volume.
+The shutdown command preserves database and media volumes.
 
 ```sh
 docker compose --env-file .env -f deploy/compose.yaml down
@@ -59,6 +60,7 @@ The publication workflow calls targeted CD after verifying the release bundle.
 - [API](docs/developer/api.md)
 - [Authentication and emergency recovery](docs/developer/auth.md)
 - [Database and migrations](docs/developer/data-model.md)
+- [Uploads and protected storage](docs/developer/storage.md)
 - [Production configuration and deployment boundaries](docs/developer/deploy.md)
 - [CI and deployment scope](docs/developer/ci-cd.md)
 - [Manager checks](docs/user/manager.md)

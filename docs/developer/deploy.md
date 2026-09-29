@@ -126,8 +126,8 @@ The job reports `ROLLBACK_FAILED_MANUAL_RECOVERY_REQUIRED`.
 The operator must select a compatible forward fix or an explicitly reviewed database recovery.
 The script never automatically downgrades a schema or removes a volume.
 Future migrations must preserve compatibility or explicitly require a maintenance deployment.
-The PHASE 1 schema head is `0002_auth`; PHASE 0 images cannot pass its compatibility check.
-After that migration, recovery from a failed healthcheck requires a compatible PHASE 1 image.
+The PHASE 2 schema head is `0003_exercises`; earlier images cannot pass its compatibility check.
+After that migration, recovery from a failed healthcheck requires a compatible PHASE 2 image.
 
 A failed first deployment has no previous release.
 It leaves PostgreSQL and its volume intact and reports `FIRST_DEPLOY_FAILED_SERVICES_STOPPED`.
@@ -178,6 +178,13 @@ The shared Compose file preserves nginx's network attachment after recreation.
 Only the prototype location retains its GET/HEAD restriction; product requests reach the application.
 PHASE 1 uses the trusted header chain documented in `auth.md`.
 Keep the backend private when using `API_FORWARDED_ALLOW_IPS=*`.
+PHASE 2 adds the private `media_data` volume.
+The backend writes this volume; frontend nginx mounts it read-only.
+Keep this volume across releases and rollbacks.
+See `storage.md` for ownership, file delivery, and retention.
+The shared product route streams uploads to the private proxy without its default 1 MiB limit.
+Its 600-second timeout permits conversion; the private proxy enforces configured file and request limits.
+Keep the historical prototype route unchanged.
 
 This dedicated product project is an exception to shared database onboarding.
 Do not register its database or services under the shared stack's `compose_services`.

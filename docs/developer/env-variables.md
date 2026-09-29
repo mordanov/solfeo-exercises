@@ -31,6 +31,17 @@ Frontend build values are public; never put a secret in `VITE_*`.
 | `EMERGENCY_MANAGER_PASSWORD` | Empty | Recovery password; requires a username and configured password length |
 | `EMERGENCY_MANAGER_FIRST_NAME` | `Emergency` | Recovery account first name |
 | `EMERGENCY_MANAGER_LAST_NAME` | `Manager` | Recovery account last name |
+| `MEDIA_ROOT` | `/app/media` | Native storage directory; Compose fixes the shared mount to this path |
+| `IMAGE_MAX_BYTES` | `20971520` | Maximum original image bytes |
+| `AUDIO_MAX_BYTES` | `52428800` | Maximum input and converted audio bytes |
+| `UPLOAD_MAX_BYTES` | `74448896` | Maximum complete HTTP request, including multipart overhead |
+| `IMAGE_MAX_PIXELS` | `40000000` | Maximum width multiplied by height |
+| `AUDIO_MAX_SECONDS` | `1800` | Maximum accepted audio duration |
+| `MEDIA_TIMEOUT_SECONDS` | `120` | Deadline for each file, ffprobe, or ffmpeg process |
+| `AUDIO_BITRATE_KBPS` | `128` | AAC target bitrate, from 32 to 320 kbit/s |
+| `FFMPEG_BINARY` | `ffmpeg` | Conversion executable; arguments never use a shell |
+| `FFPROBE_BINARY` | `ffprobe` | Audio inspection executable |
+| `FILE_BINARY` | `file` | Signature-based MIME inspection executable |
 | `DATABASE_HOST` | `127.0.0.1` | PostgreSQL host for native execution |
 | `DATABASE_PORT` | `15432` | PostgreSQL port for native execution; integer from 1 to 65535 |
 | `DATABASE_NAME` | `solfeo` | Development database name |
@@ -48,6 +59,7 @@ Frontend build values are public; never put a secret in `VITE_*`.
 | `API_PROXY_TARGET` | `http://127.0.0.1:18081` | Native backend origin for the Vite proxy |
 | `VITE_DEFAULT_LANGUAGE` | `en` | Initial page language: en, ru, or es |
 | `VITE_HEALTH_TIMEOUT_MS` | `5000` | Shared health/account HTTP deadline in milliseconds; integer from 1 to 2147483647 |
+| `VITE_UPLOAD_TIMEOUT_MS` | `600000` | Multipart upload deadline, including conversion, in milliseconds |
 | `WEB_BIND_ADDRESS` | `127.0.0.1` | Local Compose host bind address |
 | `WEB_PORT` | `18080` | Local Compose host port |
 | `BACKEND_IMAGE` | Required for production | Tested backend image reference; use an immutable digest |
@@ -97,5 +109,9 @@ Both emergency credentials must be empty or configured together.
 Never copy the example's insecure-cookie and localhost-origin values into production without adjusting them.
 Keep `SESSION_COOKIE_SECURE=true` and HTTPS-only allowed origins on the VPS.
 See `auth.md` before changing trusted proxy settings or emergency credentials.
-Storage and product bot variables will accompany their implementation.
+Product bot variables will accompany PHASE 4.
+Keep `UPLOAD_MAX_BYTES` above the sum of both file limits plus multipart overhead.
+The product proxy waits `4 * MEDIA_TIMEOUT_SECONDS + 30` seconds for processing.
+The shared VPS proxy has a 600-second transport ceiling and delegates upload-size enforcement to the product proxy.
+Keep processing and browser deadlines consistent with that transport ceiling.
 The prototype environment files remain separate.

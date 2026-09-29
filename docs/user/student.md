@@ -42,7 +42,9 @@ A successful password change ends your other sessions.
 
 Students cannot list, create, edit, deactivate, or reset other users.
 Opening `/manager/users` does not grant manager access.
-Exercises, playback, and the journal arrive in later phases.
+Managers can prepare exercises in PHASE 2.
+The student listening interface and journal arrive in PHASE 3.
+Opening `/manager/exercises` does not grant exercise management rights.
 The separate Telegram prototype does not grant product import rights.
 
 1. Click **Sign out** on a shared device.

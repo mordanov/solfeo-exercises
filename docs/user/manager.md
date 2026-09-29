@@ -1,6 +1,6 @@
 # Manager guide
 
-This document explains sign-in, user administration, settings, and the final PHASE 1 checklist.
+This document explains accounts, settings, exercise management, and manual acceptance.
 
 Prerequisites:
 - Use Chrome or Safari.
@@ -73,7 +73,8 @@ Role changes also end the target user's existing sessions.
 
 The letters option uses C–D–E by default.
 The solfège option uses do–re–mi.
-Exercise rendering and playback belong to later phases.
+The Exercises page previews original images and converted audio.
+Score recognition and student listening belong to later phases.
 The Telegram prototype remains separate and does not create exercises.
 
 ## Final PHASE 1 manual checklist
@@ -98,3 +99,68 @@ Complete this checklist after the full implementation and automated deployment.
 
 The service-status panel checks backend liveness, not exercises or the Telegram bot.
 The historical `/prototype-share/` route remains available independently.
+
+## Manage exercises
+
+1. Open **Exercises**.
+   The page shows active exercises in their saved order.
+2. Click **Create exercise**.
+   The exercise form opens.
+3. Enter a title and description.
+4. Enter an optional category or level.
+5. Attach a PNG, JPEG, or WebP image, an audio file, or both.
+6. Click **Save exercise**.
+   The page shows upload progress, then processing.
+7. Wait until the form closes and the exercise appears.
+   The server confirms persistence before the interface refreshes the list.
+8. Click the audio play control.
+   Playback starts only after your action.
+9. Move the audio position control to check seeking.
+
+The default limits permit 20 MiB images and 50 MiB audio files.
+Audio must not exceed 1800 seconds by default.
+The operator can change these limits.
+The server checks actual file contents and converts audio to AAC.
+It preserves original image bytes.
+The upload percentage measures transfer, not conversion completion.
+Do not close the page during processing.
+After a network failure, refresh the list before retrying.
+
+1. Click **Edit exercise** beside an exercise.
+2. Change its metadata or select replacement files.
+3. Leave file fields empty to keep the current files.
+4. Select a removal checkbox only when another attachment remains.
+5. Click **Save exercise**.
+   The list shows the updated exercise and previews.
+
+1. Drag an exercise to another position.
+   The list refreshes after the server saves the order.
+2. Use **Up** and **Down** when dragging is unavailable.
+3. Reload the page.
+   The saved order remains.
+
+1. Click **Delete exercise**.
+   The page requests confirmation.
+2. Click **Confirm deletion**.
+   The exercise disappears from the active list.
+
+Deletion preserves the database record and files.
+The interface does not offer restoration in PHASE 2.
+The bot prototype remains independent and cannot create product exercises yet.
+
+## Final PHASE 2 manual checklist
+
+1. Open Exercises as a manager in Chrome and Safari.
+2. Create an exercise with a real `.opus` audio file and an image.
+3. Wait for transfer and conversion to finish.
+4. Play the audio and seek forward and backward.
+5. Confirm the image and description.
+6. Edit metadata without replacing files.
+7. Replace audio and confirm the new playback.
+8. Create another exercise and change their order.
+9. Reload the page and confirm persistence.
+10. Delete one exercise and confirm its removal.
+11. Try an unsupported file and a form without attachments.
+    The page shows errors without creating an exercise.
+12. Open `/manager/exercises` as a student.
+    The page refuses access.

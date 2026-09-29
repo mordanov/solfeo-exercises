@@ -17,8 +17,8 @@ The migration service completes before the backend starts.
 | `backend/app/main.py` | Application creation and HTTP error codes |
 | `backend/app/settings.py` | Backend configuration |
 | `backend/app/database.py` | Synchronous engine and database sessions |
-| `backend/app/models/` | Typed users, login sessions, and login limits |
-| `backend/app/services/` | Authentication, emergency recovery, settings, and user administration |
+| `backend/app/models/` | Typed accounts, sessions, login limits, exercises, and media |
+| `backend/app/services/` | Account operations, exercise transactions, media validation, and conversion |
 | `backend/migrations/` | Versioned Alembic migrations |
 | `backend/tests/` | Backend behavior tests |
 | `frontend/src/api/` | Typed HTTP client |
@@ -26,6 +26,7 @@ The migration service completes before the backend starts.
 | `frontend/src/features/auth/` | Session restoration, login, logout, password change, and route guards |
 | `frontend/src/features/users/` | Manager-only user administration |
 | `frontend/src/features/settings/` | Persisted language and note naming |
+| `frontend/src/features/exercises/` | Manager forms, upload progress, protected previews, and reordering |
 | `frontend/src/i18n/` | Translations and locale checks |
 | `deploy/` | Development and production Compose, database bootstrap, and nginx configuration |
 | `deploy/tests/` | Isolated production container checks |
@@ -39,7 +40,9 @@ Errors appear explicitly in the selected language.
 Health is public by design.
 Login is the only other public API operation.
 User administration is manager-only; all roles can change their own settings.
-The application exposes no exercise, upload, media, or product bot operation yet.
+Managers create, edit, delete, and reorder exercises.
+Authenticated members can read active exercises and their current attachments.
+The product bot and student listening interface remain in later phases.
 API documentation routes remain disabled.
 PHASE 1 implements authentication and emergency manager synchronization.
 Database operations use synchronous SQLAlchemy 2.0 and psycopg 3.
@@ -60,7 +63,10 @@ Register future model imports in `backend/app/models/__init__.py` so Alembic see
 Use migrations, not application startup, to create product tables.
 
 The backend and frontend Docker images use non-root users and read-only filesystems.
-The frontend uses temporary nginx files under `/tmp`.
+The frontend and backend use temporary files under `/tmp`.
+The backend writes media to the persistent `media_data` volume; frontend nginx mounts it read-only.
+Authenticated file routes return an internal nginx redirect, not file bytes.
+See `storage.md` for file limits, conversion, retention, and byte-range delivery.
 No product container shares a prototype volume or credentials.
 The worker directory will accompany worker implementation, not an empty placeholder.
 The PostgreSQL development container uses the official image initialization and a writable data volume.

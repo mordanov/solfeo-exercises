@@ -7,6 +7,7 @@ Prerequisites:
 - Install Node.js 22.12 or later within version 22, with npm 12.1.0.
 - Install Docker and Compose v2 for container checks.
 - Install `openssl` to generate a local database password.
+- Install ffmpeg, ffprobe, and `file` for native media tests.
 - Read `docs/developer/env-variables.md`.
 
 ## Prepare configuration
@@ -69,6 +70,8 @@ This procedure uses PostgreSQL in Docker and native Python and Node.js processes
 6. Press `Ctrl+C` in both terminals to stop the application processes.
 
 The backend reads the root `.env` through `Settings`.
+Set native `MEDIA_ROOT` to a writable private directory before testing uploads outside Docker.
+Use the container stand for protected playback; Vite does not process nginx internal redirects.
 Vite reads the same file but exposes only `VITE_*` values to browser code.
 Changing a frontend build value requires a new build or development server restart.
 
@@ -77,7 +80,7 @@ Changing a frontend build value requires a new build or development server resta
 The local stand publishes nginx and PostgreSQL on loopback addresses.
 The backend uses the private Compose network.
 PostgreSQL stores its data in the `solfeo-dev_postgres_data` volume.
-The stand has no media volume or Telegram credentials.
+The stand stores protected files in `solfeo-dev_media_data` and has no Telegram credentials.
 The backend starts only after PostgreSQL becomes healthy and the migration service exits successfully.
 It also requires successful emergency account synchronization.
 
@@ -102,7 +105,7 @@ It also requires successful emergency account synchronization.
    docker compose --env-file .env -f deploy/compose.yaml down
    ```
 
-The shutdown command preserves database data.
+The shutdown command preserves database and media data.
 Do not add `--volumes` when data must survive.
 Use `docker-compose` if the standalone v2 executable is installed.
 Do not run the container stand and Vite on the same host port simultaneously.

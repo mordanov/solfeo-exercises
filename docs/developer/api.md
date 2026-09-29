@@ -75,3 +75,40 @@ User-list pagination defaults to 50 rows and allows at most 100.
 The backend returns `Retry-After` when a PostgreSQL login budget expires in the future.
 The nginx burst limit also returns `RATE_LIMITED`, without a precise retry deadline.
 See `auth.md` for session storage, proxy trust, and recovery.
+
+## Exercises and files
+
+| Method and path | Permission | Input and result |
+|---|---|---|
+| `GET /api/exercises` | Member | `offset`, `limit`; returns ordered `exercises` and `total` |
+| `GET /api/exercises/{id}` | Member | Returns one active exercise |
+| `POST /api/exercises` | Manager, CSRF | Multipart form; creates an exercise with status 201 |
+| `PUT /api/exercises/{id}` | Manager, CSRF | Multipart form; replaces metadata and selected attachments |
+| `DELETE /api/exercises/{id}` | Manager, CSRF | Soft-deletes the exercise; returns `{"status":"ok"}` |
+| `PUT /api/exercises/order` | Manager, CSRF | JSON `{"ids":[...]}` containing every active exercise exactly once |
+| `GET /api/exercises/{id}/files/{kind}` | Member | Internal nginx redirect for `image` or `audio`; supports Range |
+| `HEAD /api/exercises/{id}/files/{kind}` | Member | Same authorization and headers without file bytes |
+
+Multipart fields are `title`, `description`, `category`, `image`, `audio`, `remove_image`, and `remove_audio`.
+Title requires 1–200 nonblank characters.
+Description permits 10000 characters; category permits 100 and normalizes an empty value to null.
+Description defaults to empty; both removal flags default to false.
+Omitted file fields preserve existing attachments during updates.
+A removal flag and replacement file for the same kind conflict.
+Every saved exercise requires at least one image or audio attachment.
+
+Responses contain `id`, `title`, `description`, `category`, `position`, `image`, and `audio`.
+Each non-null attachment contains its UUID, `mime_type`, `size_bytes`, and nullable `duration_seconds`.
+Responses never contain storage paths or client filenames.
+The list defaults to 10000 rows and permits at most 10000 per request.
+A partial or changed list cannot replace the global order.
+Order conflicts return 409 `EXERCISE_ORDER_CONFLICT`.
+
+Deleted exercises return 404 `EXERCISE_NOT_FOUND`.
+Missing attachments return 404 `FILE_NOT_FOUND`.
+Missing required attachments return 422 `EXERCISE_MEDIA_REQUIRED`.
+Oversized requests or files return 413 `FILE_TOO_LARGE`.
+Unsupported signatures return 415 `UNSUPPORTED_MEDIA`.
+Invalid files, excessive duration, and processor timeouts return specific 422 codes.
+Unavailable processors and storage failures return specific 503 codes.
+See `storage.md` for conversion and retention details.

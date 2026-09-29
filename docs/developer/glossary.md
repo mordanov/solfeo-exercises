@@ -39,3 +39,8 @@ Prerequisites:
 | login session | A persistent authenticated session, distinct from a listening session or database session. |
 | CSRF | Cross-site request forgery; origin and session-token checks reject unauthorized browser mutations. |
 | scrypt | A memory-hard password hashing algorithm with a random salt for each password. |
+| multipart form | An HTTP request containing separate text and file parts. |
+| MIME type | A content-type identifier determined from file signatures for uploads. |
+| soft deletion | Marking an exercise as deleted while preserving its database record and files. |
+| AAC | The audio codec used inside each converted MP4 audio file. |
+| MiB | 1048576 bytes. |

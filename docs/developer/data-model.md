@@ -1,6 +1,6 @@
 # Database and migrations
 
-This document explains the PostgreSQL account schema and migrations.
+This document explains the PostgreSQL account, exercise, and media schemas.
 
 Prerequisites:
 - Prepare private configuration with `docs/developer/setup.md`.
@@ -15,13 +15,23 @@ Alembic maintains its own `alembic_version` table.
 Development uses `public`; production uses a private version schema, normally `migrations`.
 The configured schema must already exist before migration execution.
 Revision `0002_auth` adds the PHASE 1 tables.
-Exercises, the journal, and worker jobs belong to later phases.
+Revision `0003_exercises` adds exercises and media.
+The journal and worker jobs belong to later phases.
 
 | Table | Contents and constraints |
 |---|---|
 | `users` | Unique lowercase username, names, role, password hash, active/emergency flags, obligatory password change, language, note naming |
 | `login_sessions` | Hashed token primary key, user foreign key, CSRF token, creation time, expiry |
 | `login_limits` | Hashed username/IP budget key, attempt count, expiry |
+| `media_files` | UUID, generated filename, MIME type, positive byte count, optional positive duration, creation time |
+| `exercises` | Title, description, optional category, nonnegative position, image/audio foreign keys, deletion time, creation time |
+
+Exercises require at least one media foreign key.
+Create, delete, and reorder operations share a transaction-level advisory lock.
+Positions remain contiguous across active exercises.
+Deletion sets `deleted_at`; it does not remove rows or files.
+Replacements preserve previous media records and original images.
+The API exposes only current attachments of active exercises.
 
 Database checks constrain roles, languages, and note naming.
 A partial unique index permits at most 1 emergency account.
@@ -81,7 +91,7 @@ Do not remove the data volume.
    ```
 
 3. Repeat the revision command.
-   Alembic reports `0002_auth (head)`.
+   Alembic reports `0003_exercises (head)`.
 4. Open the local health page.
    Its existing behavior remains unchanged.
 

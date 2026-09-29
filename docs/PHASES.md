@@ -41,9 +41,10 @@ Status: complete on 2026-09-29 after the owner confirms the final deployed brows
 - Docs: user (login, settings, manage users), developer (auth, recovery with the emergency manager).
 Done when: manager creates a student, the student logs in, changes the language, and cannot open manager pages.
 Implementation status: deployed on 2026-09-29 with successful automated Chrome, API, container, and CI/CD checks.
-Final owner acceptance remains open; the disabled Allow Remote Automation permission blocks native Safari automation.
+Status: complete on 2026-09-29 after the owner confirms all final manual checks.
 
 ## PHASE 2: Exercises and files
+The owner authorizes the entire phase without intermediate confirmations on 2026-09-29.
 - Exercise model (soft delete, position, category). CRUD API. Reorder API. Validation: image or audio.
 - Upload pipeline: size and magic-byte checks, ffmpeg to AAC (.m4a), duration, original image kept.
 - Protected file serving with X-Accel-Redirect and Range.

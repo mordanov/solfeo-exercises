@@ -8,9 +8,9 @@ Prerequisites:
 Last updated: 2026-09-29 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
 
 ## Current phase
-PHASE 1: Users, authentication, and settings are implemented and deployed.
-Automatic checks pass; final owner acceptance remains open.
-The owner authorizes the entire phase without intermediate confirmations on 2026-09-29.
+PHASE 2: Exercises and files; implementation and automated verification are in progress.
+The owner confirms all PHASE 1 manual checks on 2026-09-29.
+The owner authorizes the entire PHASE 2 without intermediate confirmations on 2026-09-29.
 Manual checks follow the complete implementation.
 PHASE 0 is complete with owner-confirmed deployed browser acceptance.
 The owner confirms the requested local health-page and PostgreSQL restart scenarios on 2026-09-29.
@@ -18,6 +18,15 @@ The owner confirms the remaining bot checks and continuation on 2026-09-29.
 PHASE 0.5 is complete; the failed PWA result remains unchanged.
 
 ## Plan for the current phase
+- [x] Add exercise and media models, migration, CRUD, soft deletion, and atomic reordering.
+- [x] Add bounded uploads, signature checks, original images, AAC conversion, and duration checks.
+- [x] Add protected file endpoints and nginx byte-range delivery.
+- [x] Add translated exercise forms, upload progress, previews, and drag-and-drop controls.
+- [ ] Complete browser scenarios, container verification, and deployment.
+- [ ] Complete documentation and the final manual checklist.
+- [ ] Obtain owner acceptance after the complete implementation.
+
+## Completed PHASE 1 plan
 - [x] Add typed users, sessions, login budgets, and migration `0002_auth`.
 - [x] Add scrypt authentication, secure cookies, sliding expiry, CSRF, and login limits.
 - [x] Add startup emergency synchronization and all required lifecycle cases.
@@ -26,7 +35,7 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Add translated login, role guards, user administration, and settings forms.
 - [x] Complete automatic browser scenarios and the deployed release verification.
 - [x] Complete documentation and the final manual checklist.
-- [ ] Obtain owner acceptance after the complete implementation.
+- [x] Obtain owner acceptance after the complete implementation.
 
 ## Completed PHASE 0 plan
 - [x] Add the product layout and locked Python and TypeScript tooling.
@@ -249,9 +258,9 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - The owner does not supply device versions or a per-message evidence record.
 
 ## Next step
-- Complete final PHASE 1 owner acceptance with the manager and student guides.
-- Check Safari manually because its WebDriver permission is disabled on the automation computer.
-- Keep PHASE 2 out of this task.
+- Complete PHASE 2 deployment and final owner acceptance.
+- Check real image and Opus upload, playback, and seeking in Chrome and Safari.
+- Keep PHASE 3 out of this task.
 - Keep the active bot and superseded PWA deployment unchanged until an explicit deployment or cleanup task.
 
 ## PHASE 0 boundaries
@@ -271,13 +280,14 @@ Do not copy disposable prototype authentication into the product.
 - Owner-tested browser versions and a per-browser evidence matrix are not supplied.
 
 ## Final PHASE 1 manual acceptance
-- [ ] Sign in as a manager in Safari and Chrome.
-- [ ] Create a student and complete the obligatory password change.
-- [ ] Confirm language and naming persistence after reload and a new sign-in.
-- [ ] Confirm student denial at `/manager/users`.
-- [ ] Confirm password reset, deactivation/reactivation, and logout behavior.
+- [x] Sign in as a manager in Safari and Chrome.
+- [x] Create a student and complete the obligatory password change.
+- [x] Confirm language and naming persistence after reload and a new sign-in.
+- [x] Confirm student denial at `/manager/users`.
+- [x] Confirm password reset, deactivation/reactivation, and logout behavior.
 
-Chrome automation covers these scenarios; this checklist records final owner acceptance separately.
+The owner confirms all PHASE 1 checks on 2026-09-29.
+Chrome automation covers these scenarios separately.
 Safari 26.6.2 refuses WebDriver sessions until Allow Remote Automation is enabled.
 The task does not change that system permission or claim automated Safari success.
 
@@ -301,7 +311,7 @@ The task does not change that system permission or claim automated Safari succes
 The superseded Android PWA checklist is no longer required.
 The new local health-page procedure appears in `docs/user/manager.md` and `docs/user/student.md`.
 The owner confirms final PHASE 0 browser acceptance at the public HTTPS address.
-The final PHASE 1 procedures are in `docs/user/manager.md` and `docs/user/student.md`.
+The final PHASE 2 procedure is in `docs/user/manager.md`.
 
 ## Known issues
 - Image 6 produces no MusicXML; image 7 receives 46 % recognition.

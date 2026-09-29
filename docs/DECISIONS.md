@@ -7,6 +7,16 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-09-29: The owner confirms all PHASE 1 manual checks and authorizes the complete PHASE 2 implementation.
+  PHASE 2 needs no intermediate confirmations; manual acceptance follows implementation and deployment.
+- 2026-09-29: PHASE 2 saves exercise forms and their files as one operation.
+  Category is optional free text; metadata-only edits preserve current files.
+  PostgreSQL serializes create, delete, and reorder operations with an advisory transaction lock.
+  Reordering requires the exact active exercise set and rejects stale lists.
+  Original images and replaced files remain in private storage; soft deletion preserves exercise records and files.
+  Only authenticated members can read current files from active exercises.
+  Product listening, journaling, OMR, and Telegram integration remain in their planned later phases.
+
 - <date>: Job queue is in Postgres (SKIP LOCKED), no Redis. Reason: fewer services.
 - <date>: Audio is stored as AAC in .m4a. Reason: Chrome and Safari both play it.
 - <date>: Passwords use bcrypt or scrypt. Reason: the owner wants simple auth, plaintext is not allowed.
