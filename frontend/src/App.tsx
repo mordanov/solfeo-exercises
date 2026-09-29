@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { isLanguage } from "./configuration";
+import { AuthArea } from "./features/auth/AuthArea";
 import { HealthStatus } from "./features/health/HealthStatus";
 
 export function App() {
@@ -15,23 +15,7 @@ export function App() {
     <main>
       <h1>{t("app.title")}</h1>
       <p>{t("app.description")}</p>
-      <label htmlFor="language">{t("language.label")}</label>{" "}
-      <select
-        id="language"
-        value={i18n.resolvedLanguage}
-        onChange={(event) => {
-          const language = event.target.value;
-          if (isLanguage(language)) {
-            void i18n.changeLanguage(language);
-          }
-        }}
-      >
-        {(["en", "ru", "es"] as const).map((language) => (
-          <option key={language} value={language}>
-            {t(`language.${language}`)}
-          </option>
-        ))}
-      </select>
+      <AuthArea />
       <HealthStatus />
     </main>
   );

@@ -7,8 +7,19 @@ import { App } from "./App";
 import { i18n } from "./i18n";
 
 beforeEach(async () => {
+  window.history.replaceState({}, "", "/");
   await i18n.changeLanguage("en");
 });
+
+function mockHealth(health: () => Promise<Response>) {
+  vi.stubGlobal("fetch", (url: string) =>
+    url === "/api/auth/me"
+      ? Promise.resolve(
+          new Response('{"error":"AUTH_REQUIRED"}', { status: 401 }),
+        )
+      : health(),
+  );
+}
 
 function renderApp() {
   const client = new QueryClient({
@@ -24,20 +35,14 @@ function renderApp() {
 }
 
 it("shows pending state rather than claiming the backend is healthy", () => {
-  vi.stubGlobal(
-    "fetch",
-    vi.fn(() => new Promise<Response>(() => {})),
-  );
+  mockHealth(vi.fn(() => new Promise<Response>(() => {})));
   renderApp();
   expect(screen.getByRole("status")).toHaveTextContent("Checking the backend");
   expect(screen.queryByText("Backend is available")).not.toBeInTheDocument();
 });
 
 it("shows a successful health check", async () => {
-  vi.stubGlobal(
-    "fetch",
-    vi.fn().mockResolvedValue(new Response('{"status":"ok"}')),
-  );
+  mockHealth(vi.fn().mockResolvedValue(new Response('{"status":"ok"}')));
   renderApp();
   expect(await screen.findByText("Backend is available")).toBeInTheDocument();
   expect(screen.getByText(/does not check the database/)).toBeInTheDocument();
@@ -48,7 +53,7 @@ it("shows failure and recovers on explicit retry", async () => {
     .fn()
     .mockResolvedValueOnce(new Response("unavailable", { status: 503 }))
     .mockResolvedValueOnce(new Response('{"status":"ok"}'));
-  vi.stubGlobal("fetch", fetch);
+  mockHealth(fetch);
   renderApp();
   expect(await screen.findByRole("alert")).toHaveTextContent(
     "Backend is unavailable",
@@ -59,13 +64,12 @@ it("shows failure and recovers on explicit retry", async () => {
 });
 
 it("switches all visible status text and document metadata to Russian and Spanish", async () => {
-  vi.stubGlobal(
-    "fetch",
+  mockHealth(
     vi.fn().mockImplementation(async () => new Response('{"status":"ok"}')),
   );
   renderApp();
   await screen.findByText("Backend is available");
-  await userEvent.selectOptions(screen.getByLabelText("Language"), "ru");
+  await userEvent.selectOptions(await screen.findByLabelText("Language"), "ru");
   expect(await screen.findByText("Сервер доступен")).toBeInTheDocument();
   expect(document.documentElement.lang).toBe("ru");
   expect(document.title).toBe("Тренажёр сольфеджио");
@@ -77,8 +81,7 @@ it("switches all visible status text and document metadata to Russian and Spanis
 });
 
 it("does not show stale success after a failed recheck", async () => {
-  vi.stubGlobal(
-    "fetch",
+  mockHealth(
     vi
       .fn()
       .mockResolvedValueOnce(new Response('{"status":"ok"}'))

@@ -10,12 +10,13 @@ body {
 }
 
 main {
-  max-width: 42rem;
+  max-width: 64rem;
   margin: 2rem auto;
   padding: 1.5rem;
   background: #fff;
 }
 
+input,
 button,
 select {
   font: inherit;
@@ -24,4 +25,52 @@ select {
 
 [role="alert"] {
   color: #a01818;
+}
+
+form {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 32rem;
+  margin-block: 1rem;
+}
+
+label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+input:not([type="checkbox"]),
+select {
+  min-width: 0;
+  max-width: 100%;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-block: 1rem;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.5rem;
+  border-bottom: 1px solid #d3d9e0;
+}
+
+button:disabled {
+  opacity: 0.6;
 }
