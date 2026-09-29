@@ -19,7 +19,9 @@ DNS resolves to the existing VPS, and SSH access works.
 The initial HTTPS check fails because the existing certificate does not cover the hostname.
 The targeted deployment adds a valid certificate and passes public HTTPS checks.
 The prototype runs at `https://solfeo.miveralta.ru/prototype-share/`.
-Android acceptance remains pending.
+Android messenger sharing fails owner acceptance on 2026-09-29.
+The page reports "No audio file was received" after a share from Telegram or WhatsApp.
+The cause remains unconfirmed.
 
 ## Prototype scope
 
@@ -347,6 +349,34 @@ Check manifest paths and service-worker scope against the deployed prefix.
 Automated tests do not prove Android installation or messenger interoperability.
 The following owner checks remain mandatory.
 The device procedure also appears in `docs/user/pwa-prototype.md`.
+
+### Failed Android acceptance: 2026-09-29
+
+The owner does not confirm acceptance.
+Telegram or WhatsApp opens the prototype, but the receipt reports "No audio file was received".
+The owner suggests that the messenger shares a message containing audio rather than an audio file.
+This explanation remains a hypothesis.
+
+`handleShare()` returns `EMPTY_SHARE` when `form.getAll("audio")` contains no entries.
+This condition does not establish whether another field contains a file or whether the messenger supplies only text.
+The current manifest requests files but does not map text, title, or URL fields.
+The desktop test supplies an `audio` field explicitly and cannot reproduce the unknown Android payload.
+
+Proposed next task, subject to approval:
+
+1. Add failing tests for text-only, empty, mixed text/file, and unexpected file-field input.
+2. Map the manifest text, title, and URL parameters for diagnosis.
+3. Show local diagnostic metadata for the latest attempt separately from the last successful file.
+4. Report field kinds, file counts, MIME types, and byte sizes without message contents or URL values.
+5. Distinguish message-only input from a missing file without claiming successful audio receipt.
+6. Preserve the previous successful file when a new share fails.
+7. Publish the tested diagnostic prototype and deploy only its container.
+8. Repeat messenger tests after reinstalling the PWA to refresh its manifest.
+
+Do not fetch shared links or attempt to extract audio from message text.
+Do not upload diagnostic metadata or file contents.
+Do not broaden accepted file types without evidence.
+A successful file-manager control test does not establish messenger compatibility.
 
 ### Android acceptance checklist
 

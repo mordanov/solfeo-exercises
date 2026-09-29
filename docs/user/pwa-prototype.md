@@ -40,5 +40,20 @@ Send only 1 file per share.
 An invalid share does not replace the previous successful file.
 The receipt identifies the latest successful share.
 
+## Current Android failure
+
+The owner reports "No audio file was received" after sharing from Telegram or WhatsApp.
+The cause remains under investigation.
+Opening the application does not confirm that Android provides the audio file.
+
+1. Record whether the selected item is a voice message, audio attachment, or message link.
+2. Record the exact share action and the device and application versions.
+3. Save the audio to the device if the messenger permits this action.
+4. Share that saved file from the Android file manager to the PWA.
+5. Record the result separately from the messenger result.
+
+A successful file-manager share is a diagnostic control, not acceptance of messenger sharing.
+Do not send private message contents or private links with the report.
+
 After the phase, remove the prototype installation and its site data.
 Do not remove another application's data.
