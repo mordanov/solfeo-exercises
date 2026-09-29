@@ -20,10 +20,34 @@ It downloads through Telegram `getFile`, checks the actual file type, and conver
 It does not download message links.
 It does not create exercises, expose files, or add a database or Redis.
 
-The implementation and local checks are complete.
-Image publication and VPS staging remain in progress.
+The implementation, image publication, and opt-in VPS staging are complete.
 No dedicated bot token or sender allowlist is available.
 The worker must remain inactive until those settings exist.
+
+### Verified staging: 2026-09-29
+
+| Item | Result |
+|---|---|
+| Application commit | `ac3442ebcc1a05df5fe2ccde2ce6d274e5d78641` |
+| Shared configuration commit | `3b94837`, on shared `main` and the VPS |
+| Published and pinned digest | `sha256:5cc577ff83e00f2bb66ecbd1dae24defa5baccdbb553db857cc1048667db5d67` |
+| Runtime | x86-64, UID 1000 |
+| Python checks | 27 tests, Ruff, and strict mypy pass locally and in CI |
+| Container check | Simulated Telegram, actual Opus-to-AAC conversion, file permissions, and durable offset pass |
+| Existing services | All 43 containers retain their IDs and start times |
+| Live Telegram access | Not attempted; dedicated credentials are missing |
+
+The successful publication run is
+[`36539611695`](https://github.com/mordanov/solfeo-exercises/actions/runs/36539611695).
+The published image is available on the VPS, and the shared `.env` pins its digest.
+The worker remains outside the global manifest and has no running service container.
+The staging commit uses `[skip ci]` to avoid the unrelated general deployment.
+The isolated runtime check uses a separate temporary volume and no network.
+The temporary test volumes are removed after verification.
+
+The ignored local `prototypes/telegram/.env` exists with mode `0600`.
+Its token is blank and its sender list is empty.
+The owner must edit this file privately before live activation.
 
 ## Local setup
 

@@ -82,13 +82,15 @@ PHASE 0.5: Risk prototypes
 - Message-only sharing remains an unconfirmed hypothesis.
 - The owner approves a separate Telegram prototype and deployment on the existing VPS.
 - The bot implementation accepts allowlisted private attachments and saves validated AAC audio without creating exercises.
-- All 27 bot tests, Ruff, and strict mypy pass, including actual Opus-to-AAC conversion.
+- All 27 bot tests, Ruff, and strict mypy pass locally and in CI, including actual Opus-to-AAC conversion.
 - A non-root, read-only Docker check verifies simulated Telegram ingestion through real AAC conversion and durable checkpointing.
-- Image publication and opt-in VPS staging are in progress.
+- Bot source `ac3442e` is published; shared configuration `3b94837` is synchronized to the VPS.
+- The VPS `.env` pins the bot image digest; the opt-in worker remains inactive and outside global deployment registration.
+- The published x86-64 image passes an offline runtime check on the VPS using simulated Telegram and actual AAC conversion.
+- All 43 existing containers retain their original IDs and start times.
 - Live bot activation is blocked: a dedicated BotFather token and allowed Telegram user IDs are not configured.
 
 ## Next step
-- Complete image publication and opt-in VPS staging for the Telegram prototype.
 - Configure the dedicated bot token and sender allowlist privately, then activate and test the worker.
 - Keep PWA acceptance failed; do not replace the product share requirement without owner approval.
 - Retain the file-manager control test as an optional way to isolate the Android sharing failure.
@@ -96,6 +98,7 @@ PHASE 0.5: Risk prototypes
 ## Open questions for the owner
 - Identify the Android device and browser versions when manual testing starts.
 - Supply dedicated bot credentials through `prototypes/telegram/.env`, not through chat.
+- The ignored local configuration file is prepared with mode `0600`, but the required values remain empty.
 
 ## Manual checks the owner must do
 - [x] Confirm that images 1 through 10 represent the intended exercises.
