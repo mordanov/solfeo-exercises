@@ -17,7 +17,8 @@ The configured schema must already exist before migration execution.
 Revision `0002_auth` adds the PHASE 1 tables.
 Revision `0003_exercises` adds exercises and media.
 Revision `0004_listening` adds student progress and the listening journal.
-Worker jobs belong to a later phase.
+Revision `0005_telegram` adds account associations, hashed linking codes, durable imports, and bot state.
+The Telegram worker uses these tables; OMR jobs remain in PHASE 5.
 
 | Table | Contents and constraints |
 |---|---|
@@ -28,6 +29,10 @@ Worker jobs belong to a later phase.
 | `exercises` | Title, description, optional category, nonnegative position, image/audio foreign keys, deletion time, creation time |
 | `student_progress` | User primary key, sequential next-exercise reference, last random exercise reference |
 | `listening_sessions` | Unique client UUID, user/exercise/audio references, title snapshot, receipt timestamps, duration, maximum position, completion |
+| `telegram_links` | User primary key and unique numeric Telegram sender |
+| `telegram_link_codes` | User primary key, unique token hash, expiry |
+| `telegram_updates` | Telegram update primary key, owner, file reference, status, attempts, errors, converted media, applied exercise |
+| `telegram_state` | Bot identity, durable next offset, last successful heartbeat |
 
 Exercises require at least one media foreign key.
 Create, delete, and reorder operations share a transaction-level advisory lock.
@@ -98,7 +103,7 @@ Do not remove the data volume.
    ```
 
 3. Repeat the revision command.
-   Alembic reports `0004_listening (head)`.
+   Alembic reports `0005_telegram (head)`.
 4. Open the local health page.
    Its existing behavior remains unchanged.
 

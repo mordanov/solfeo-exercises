@@ -238,3 +238,13 @@ The local development stand and public health endpoints remain healthy.
 Final owner acceptance remains open.
 Safari automation remains unavailable because Allow Remote Automation is disabled.
 The manual procedures appear in `docs/user/student.md` and `docs/user/manager.md`.
+
+## PHASE 4 verification
+
+Local suites pass 98 backend tests, 76 frontend tests, and 36 container/release checks.
+The worker uses the backend image; CI also checks `worker/` and its runtime HTTPX dependency.
+Simulated Telegram responses exercise real PostgreSQL persistence, AAC conversion, retries, and durable offsets.
+Local Chrome verifies the manager interface and protected preview without modifying real accounts or exercises.
+Headless playback uses `--disable-audio-output` because the host audio renderer is unavailable.
+This preserves real decoding and playback timing, not audible speaker verification.
+Public HTTPS and release provenance follow deployment.

@@ -61,6 +61,30 @@ Frontend build values are public; never put a secret in `VITE_*`.
 | `VITE_HEALTH_TIMEOUT_MS` | `5000` | Shared health/account HTTP deadline in milliseconds; integer from 1 to 2147483647 |
 | `VITE_UPLOAD_TIMEOUT_MS` | `600000` | Multipart upload deadline, including conversion, in milliseconds |
 | `VITE_LISTENING_HEARTBEAT_MS` | `5000` | Playback heartbeat interval, from 1000 to 60000 milliseconds |
+
+## Telegram worker
+
+The worker uses the existing database, media, ffmpeg, duration, and audio-size settings.
+Only the worker receives `TELEGRAM_TOKEN` in production.
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `TELEGRAM_TOKEN` | Empty | Bot token; empty disables polling |
+| `TELEGRAM_BOT_USERNAME` | `solfeo_exercises_bot` | Public bot identity, checked at startup |
+| `TELEGRAM_LINK_SECONDS` | `600` | Single-use code lifetime |
+| `TELEGRAM_MAX_FILE_BYTES` | `20000000` | Download limit, never above the hosted API limit |
+| `TELEGRAM_POLL_SECONDS` | `25` | Long-poll wait |
+| `TELEGRAM_HTTP_SECONDS` | `15` | Network timeout; polling adds its wait |
+| `TELEGRAM_DOWNLOAD_SECONDS` | `90` | Overall streamed download budget |
+| `TELEGRAM_RETRY_SECONDS` | `5` | Minimum delay after transient failures |
+| `TELEGRAM_MAX_ATTEMPTS` | `3` | Attempts before a failed import needs manual retry |
+| `TELEGRAM_HEALTH_SECONDS` | `600` | Maximum age of the worker heartbeat |
+| `TELEGRAM_HEALTH_FILE` | `/tmp/telegram-ready` | Private readiness marker for the current worker process |
+
+## Container deployment
+
+| Variable | Default | Purpose |
+|---|---|---|
 | `WEB_BIND_ADDRESS` | `127.0.0.1` | Local Compose host bind address |
 | `WEB_PORT` | `18080` | Local Compose host port |
 | `BACKEND_IMAGE` | Required for production | Tested backend image reference; use an immutable digest |

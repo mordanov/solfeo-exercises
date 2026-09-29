@@ -95,5 +95,10 @@ The migration role remains the only schema owner.
 
 After migration, the PHASE 0 image does not recognize the new schema head.
 Automatic rollback therefore refuses that image and leaves application services stopped if verification fails.
-PHASE 3 advances the head to `0004_listening`; earlier images cannot recognize this newer revision.
+PHASE 4 advances the head to `0005_telegram`; earlier images cannot recognize this newer revision.
+
+Telegram associations require a one-time code from an authenticated manager.
+Password changes, resets, role changes, and deactivation revoke associations and unused codes with sessions.
+Emergency synchronization also revokes its association on each backend start.
+The bot never grants website access or authorizes Telegram usernames.
 Use a tested compatible forward fix instead of automatically downgrading or deleting account data.

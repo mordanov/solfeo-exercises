@@ -139,3 +139,26 @@ Date boundaries require time zones; an invalid range returns 422.
 `offset` defaults to 0; `limit` defaults to 50 and permits at most 100.
 Each row includes student identity, exercise snapshot and deletion flag, timestamps, maximum position, duration, and completion.
 See `listening.md` for idempotency, beacon delivery, and pointer behavior.
+
+## Manager Telegram imports
+
+Every endpoint below requires an active manager with no pending password change.
+Mutations also require the ordinary header CSRF token and allowed Origin.
+Import access is restricted to its owning manager.
+
+| Method and path | Result |
+|---|---|
+| `GET /api/telegram` | Association status, worker availability, public bot username |
+| `POST /api/telegram/link` | Single-use `code` and `expires_at` |
+| `DELETE /api/telegram/link` | Revoke the association and outstanding codes |
+| `GET /api/telegram/imports` | `imports` and `total`; offset and limit, default 50, maximum 100 |
+| `GET /api/telegram/imports/{id}/audio` | Protected staged audio; HEAD also supported |
+| `POST /api/telegram/imports/{id}/retry` | Requeue a failed import |
+| `POST /api/telegram/imports/{id}/apply` | Save the exercise and return `exercise_id` |
+
+Apply accepts optional `exercise_id`, required nonblank `title`, and optional `description`.
+Omitting the exercise ID creates a new exercise.
+Replacing audio preserves other attachments and the journal.
+Identical retries return the same exercise ID; different repeated choices return 409 `IMPORT_ALREADY_APPLIED`.
+The API never exposes Telegram tokens, file IDs, or sender IDs.
+See `telegram-import.md` for state, linking, and worker recovery.

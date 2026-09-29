@@ -45,6 +45,7 @@ Opening `/manager/users` does not grant manager access.
 Students can view original images and listen to exercise audio.
 Only managers can read the listening journal.
 Opening `/manager/journal` does not grant journal access.
+Opening `/manager/telegram` does not grant Telegram import access.
 Opening `/manager/exercises` does not grant exercise management rights.
 The separate Telegram prototype does not grant product import rights.
 

@@ -8,8 +8,9 @@ Prerequisites:
 Last updated: 2026-09-29 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
 
 ## Current phase
-PHASE 3: Listening module and journal are implemented and deployed.
-Automatic checks pass; final owner acceptance remains open.
+PHASE 4: Product Telegram audio import is in progress.
+The owner confirms all PHASE 3 checks and authorizes complete PHASE 4 automation on 2026-09-29.
+The application 404 page is scheduled in PHASE 7.
 The owner confirms all PHASE 2 checks and authorizes the complete PHASE 3 without intermediate confirmations on 2026-09-29.
 The owner confirms all PHASE 1 manual checks on 2026-09-29.
 The owner authorizes the entire PHASE 2 without intermediate confirmations on 2026-09-29.
@@ -20,6 +21,13 @@ The owner confirms the remaining bot checks and continuation on 2026-09-29.
 PHASE 0.5 is complete; the failed PWA result remains unchanged.
 
 ## Plan for the current phase
+- [x] Add manager linking, durable imports, role checks, and retry protection.
+- [x] Add Telegram polling and reuse protected AAC storage.
+- [x] Add the translated manager import interface.
+- [ ] Verify locally, publish, and replace only the existing bot poller on the VPS.
+- [ ] Complete documentation and the final manual checklist.
+
+## Completed PHASE 3 plan
 - [x] Add per-student pointers and listening sessions with migration `0004_listening`.
 - [x] Add sequential/random selection and idempotent, beacon-safe event handling.
 - [x] Add student playback, pause/resume, heartbeats, completion, and exit handling.
@@ -27,7 +35,7 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Complete local PostgreSQL, container, and actual Chrome tab-close scenarios.
 - [x] Deploy and verify the exact release over public HTTPS.
 - [x] Complete documentation and the final manual checklist.
-- [ ] Obtain owner acceptance after implementation.
+- [x] Obtain owner acceptance after implementation.
 
 ## Completed PHASE 2 plan
 - [x] Add exercise and media models, migration, CRUD, soft deletion, and atomic reordering.
@@ -73,6 +81,13 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Complete the remaining Telegram checklist, as confirmed by the owner.
 
 ## Done
+- PHASE 4 passes 98 backend tests, 76 frontend tests, and 36 container/release checks locally.
+- Local Chrome verifies code generation, AAC preview and seeking, new exercises, confirmed audio replacement, image retention, reload, and logout.
+- Simulated Telegram transport tests verify intake, actual conversion, durable offsets, duplicate updates, retry recovery, and notifications.
+- Bot startup identity and webhook checks pass against the real Telegram service.
+- The private product configuration now contains the existing token; the prototype remains the only active poller before deployment.
+- Headless Chrome reports a host audio-renderer error; `--disable-audio-output` permits real decoding and timeline verification.
+- The common AAC format remains unchanged; the unsuccessful sample-rate experiment is removed.
 - PHASE 3 is active at `https://solfeo.miveralta.ru/student` and `/manager/journal`.
 - Source `e141b75c803ad56733731965056ef969f0e22c8a` passes CI run `36621440972` and publication/CD run `36621939822`.
 - The pulled immutable images pass all 35 container/release checks before deployment.
@@ -305,10 +320,10 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - The owner does not supply device versions or a per-message evidence record.
 
 ## Next step
-- Complete final PHASE 3 owner acceptance with `docs/user/student.md` and `docs/user/manager.md`.
-- Repeat the listening and journal scenarios in Chrome and Safari.
-- Keep PHASE 4 out of this task.
-- Keep the active bot and superseded PWA deployment unchanged until an explicit deployment or cleanup task.
+- Publish PHASE 4 and replace the prototype poller with the product worker.
+- Complete the final PHASE 4 checklist in `docs/user/manager.md`.
+- Keep PHASE 5 out of this task.
+- Preserve prototype files and the historical PWA deployment.
 
 ## PHASE 0 boundaries
 
@@ -349,12 +364,22 @@ The task does not change that system permission or claim automated Safari succes
 The owner confirms all PHASE 2 checks on 2026-09-29.
 
 ## Final PHASE 3 manual acceptance
-- [ ] Complete the first audio exercise and interrupt the second by closing the tab.
-- [ ] Confirm completed and incomplete sessions in the manager journal.
-- [ ] Confirm pause/resume uses one row and replay after natural completion uses another.
-- [ ] Check sequential persistence, random selection, Previous, and no automatic playback.
-- [ ] Check journal filters and retention after exercise deletion.
-- [ ] Confirm student denial at `/manager/journal` in Chrome and Safari.
+- [x] Complete the first audio exercise and interrupt the second by closing the tab.
+- [x] Confirm completed and incomplete sessions in the manager journal.
+- [x] Confirm pause/resume uses one row and replay after natural completion uses another.
+- [x] Check sequential persistence, random selection, Previous, and no automatic playback.
+- [x] Check journal filters and retention after exercise deletion.
+- [x] Confirm student denial at `/manager/journal` in Chrome and Safari.
+
+The owner confirms all PHASE 3 checks on 2026-09-29.
+
+## Final PHASE 4 manual acceptance
+- [ ] Link a normal manager account to the bot.
+- [ ] Import real voice, forwarded audio, and audio documents.
+- [ ] Create an exercise and replace another exercise's audio.
+- [ ] Play and seek in Chrome and Safari; confirm original-image and journal retention.
+- [ ] Check unsupported input, size errors, and retry behavior.
+- [ ] Confirm unlinking and student denial.
 
 ## Manual checks the owner must do
 - [x] Confirm that images 1 through 10 represent the intended exercises.
@@ -376,7 +401,7 @@ The owner confirms all PHASE 2 checks on 2026-09-29.
 The superseded Android PWA checklist is no longer required.
 The new local health-page procedure appears in `docs/user/manager.md` and `docs/user/student.md`.
 The owner confirms final PHASE 0 browser acceptance at the public HTTPS address.
-The final PHASE 3 procedures are in `docs/user/manager.md` and `docs/user/student.md`.
+The final PHASE 4 procedure is in `docs/user/manager.md`.
 
 ## Known issues
 - Image 6 produces no MusicXML; image 7 receives 46 % recognition.
@@ -400,6 +425,7 @@ The final PHASE 3 procedures are in `docs/user/manager.md` and `docs/user/studen
 - The PHASE 0 image cannot recognize `0002_auth`; rollback across that schema boundary requires a compatible forward fix.
 - PHASE 1 images cannot recognize `0003_exercises`; PHASE 2 recovery requires a compatible image.
 - PHASE 2 images cannot recognize `0004_listening`; PHASE 3 recovery requires a compatible image.
+- PHASE 3 images cannot recognize `0005_telegram`; PHASE 4 recovery requires a compatible image.
 - Schema-incompatible rollback stops the product services and requires operator recovery; no automatic database downgrade occurs.
 - The current CLI credential cannot manage repository Actions secrets: the public-key API returns HTTP 403.
 - The deployment job confirms valid SSH configuration and removes its temporary registry credentials.

@@ -49,3 +49,6 @@ Prerequisites:
 | beacon | A browser request queued during page exit without custom headers. |
 | sequential pointer | The saved next exercise for one student in ordered mode. |
 | snapshot | Values retained when the first listening event creates a journal row. |
+| linking code | A single-use secret that associates a Telegram sender with an authenticated manager. |
+| staged import | Converted audio owned by a manager before application to an exercise. |
+| update offset | The next Telegram update ID requested after durable intake. |

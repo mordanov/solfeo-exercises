@@ -11,7 +11,7 @@ PHASE 0 provides the deployed health page, PostgreSQL, and targeted CI/CD.
 PHASE 1 adds cookie authentication, manager user administration, persisted settings, and emergency recovery.
 PHASE 2 adds exercise management, protected original images, and converted AAC audio with seeking.
 PHASE 3 adds student listening, saved sequence position, random selection, and the manager listening journal.
-Product Telegram import remains in PHASE 4.
+PHASE 4 adds manager-linked Telegram audio imports with creation and audio replacement on the website.
 
 ## Start locally
 
@@ -63,6 +63,7 @@ The publication workflow calls targeted CD after verifying the release bundle.
 - [Database and migrations](docs/developer/data-model.md)
 - [Uploads and protected storage](docs/developer/storage.md)
 - [Listening and journal events](docs/developer/listening.md)
+- [Product Telegram import](docs/developer/telegram-import.md)
 - [Production configuration and deployment boundaries](docs/developer/deploy.md)
 - [CI and deployment scope](docs/developer/ci-cd.md)
 - [Manager checks](docs/user/manager.md)

@@ -126,8 +126,12 @@ The job reports `ROLLBACK_FAILED_MANUAL_RECOVERY_REQUIRED`.
 The operator must select a compatible forward fix or an explicitly reviewed database recovery.
 The script never automatically downgrades a schema or removes a volume.
 Future migrations must preserve compatibility or explicitly require a maintenance deployment.
-The PHASE 3 schema head is `0004_listening`; earlier images cannot pass its compatibility check.
-After that migration, recovery from a failed healthcheck requires a compatible PHASE 3 image.
+The PHASE 4 schema head is `0005_telegram`; earlier images cannot pass its compatibility check.
+After that migration, recovery from a failed healthcheck requires a compatible PHASE 4 image.
+The rollout includes the Telegram worker in stop, start, health, and compatible rollback operations.
+Stop the legacy prototype poller before enabling the same bot token in the product worker.
+Preserve the prototype's files and optional Compose service.
+See `telegram-import.md` for configuration and readiness.
 
 A failed first deployment has no previous release.
 It leaves PostgreSQL and its volume intact and reports `FIRST_DEPLOY_FAILED_SERVICES_STOPPED`.

@@ -201,3 +201,58 @@ Manager audio previews do not create student journal records.
 7. Delete one test exercise.
    Its journal entry remains with the original title, duration, and deletion label.
 8. Repeat the browser scenario in Safari.
+
+## Import audio from Telegram
+
+1. Sign in with a normal manager account.
+2. Open **Telegram imports**.
+3. Click **Create linking code**.
+   The page shows a private `/start` command and its expiry time.
+4. Click **Open bot**.
+5. Copy the complete command into the bot's private chat.
+   The bot confirms the association.
+6. Send an audio file, voice message, or audio document.
+   The bot confirms storage after conversion.
+7. Return to **Telegram imports**.
+8. Click **Refresh imports**.
+   Your audio appears with its processing status.
+9. Play the preview.
+10. Select **Create a new exercise** or an existing exercise.
+11. Set the title and description.
+12. Confirm audio replacement if the selected exercise already has audio.
+13. Click **Save exercise**.
+    The page confirms the saved exercise.
+
+Files must fit Telegram's 20 MB download limit and the application's media limits.
+Send the actual file, not a message link.
+For WhatsApp audio, save or share the file into Telegram first.
+Text alone does not create an import.
+The bot does not automatically create exercises.
+
+Only your manager account can see your staged imports.
+Repeated delivery and repeated Save requests do not create duplicate exercises.
+Replacement preserves the original image and earlier listening sessions.
+Failed imports show an error and a Retry button.
+Refresh the list after retrying.
+
+Do not share linking codes.
+Click **Unlink Telegram and cancel codes** to revoke the association.
+Password changes, resets, deactivation, and role changes require a new association.
+The emergency manager must link again after each backend restart.
+Normal manager associations survive ordinary restarts.
+
+## Final PHASE 4 manual checklist
+
+1. Link a normal manager account to `@solfeo_exercises_bot`.
+2. Send a voice message, forwarded audio, and audio as a document.
+3. Refresh the import list.
+   Each accepted attachment appears once.
+4. Create an exercise from one import.
+5. Replace another exercise's audio from a second import.
+   Its original image and journal remain.
+6. Play and seek in Chrome and Safari.
+7. Send text, an unsupported file, and an oversized attachment.
+   The bot does not create an exercise from them.
+8. Unlink Telegram.
+   New attachments cannot enter that manager's import list.
+9. Confirm that a student cannot open `/manager/telegram`.

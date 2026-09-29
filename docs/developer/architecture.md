@@ -45,7 +45,9 @@ User administration is manager-only; all roles can change their own settings.
 Managers create, edit, delete, and reorder exercises.
 Authenticated members can read active exercises and their current attachments.
 Students use the listening interface; managers alone read the journal.
-The product bot remains in PHASE 4.
+The product Telegram worker supplies manager-owned staged imports.
+It shares the backend image and private media volume, but not the public proxy network.
+See `telegram-import.md` for account linking and recovery.
 API documentation routes remain disabled.
 PHASE 1 implements authentication and emergency manager synchronization.
 Database operations use synchronous SQLAlchemy 2.0 and psycopg 3.

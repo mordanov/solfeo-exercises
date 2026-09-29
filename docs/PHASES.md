@@ -63,9 +63,10 @@ The owner authorizes the entire phase without intermediate confirmations on 2026
 - Docs: user (student listening, manager journal), developer (event model).
 Done when: a student listens to two exercises, closes the tab during the second, and the journal shows one completed and one incomplete session.
 Implementation status: deployed on 2026-09-29 with successful CI/CD and local/public HTTPS Chrome scenarios.
-Final owner acceptance remains open; the manual checklist includes Safari.
+Status: complete on 2026-09-29 after the owner confirms all PHASE 3 checks.
 
 ## PHASE 4: Telegram audio import
+The owner authorizes the entire phase without intermediate confirmations on 2026-09-29.
 - Plan secure linking between Telegram sender IDs and active manager accounts before implementation.
 - Receive private audio, voice, and document attachments through the Telegram bot.
 - Reuse the PHASE 2 file pipeline, storage, and exercise operations.
@@ -97,6 +98,8 @@ Done when: a real exercise image is recognized, approved, and shown with note na
 Done when: an approved score is spoken with correct note names and durations in all three languages.
 
 ## PHASE 7: Hardening and documentation review
+- Replace nginx's default unknown-page response with a localized application 404 page and a home link.
+  Preserve HTTP 404, protected-file denial, API errors, and direct navigation in Chrome and Safari.
 - Security: cookie flags, CSRF, upload limits, nginx headers, dependency audit in CI.
 - Log rotation, structured logs, worker healthcheck.
 - Full documentation review against the rules in docs.instructions.md. Complete `.env` variable reference. Troubleshooting.

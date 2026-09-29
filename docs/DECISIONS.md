@@ -7,6 +7,15 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-09-29: The owner confirms PHASE 3 and authorizes all PHASE 4 work without intermediate confirmations.
+  The requested application 404 page belongs to PHASE 7.
+- 2026-09-29: Managers link Telegram through a short-lived, single-use code created in their authenticated web account.
+  PostgreSQL stores only the code hash; numeric sender IDs, not Telegram usernames, identify linked accounts.
+  Received audio enters the owning manager's import list.
+  The manager chooses creation or audio replacement, title, and description on the website.
+  Repeated updates and repeated application requests do not create duplicate imports or exercises.
+  The product worker replaces the existing bot poller; prototype files remain untouched.
+
 - 2026-09-29: The owner confirms all PHASE 2 checks and authorizes the entire PHASE 3 without intermediate confirmations.
   Manual acceptance follows the complete implementation and automated deployment.
 - 2026-09-29: A listening session starts on playback, survives pauses, and ends on navigation, exit, or natural completion.
