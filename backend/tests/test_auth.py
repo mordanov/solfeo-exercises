@@ -493,3 +493,12 @@ async def test_missing_origin_and_foreign_csrf_are_rejected(
     client.headers["X-CSRF-Token"] = "foreign-csrf"
     assert (await client.post("/api/auth/logout")).status_code == 403
     assert (await client.get("/api/auth/me")).status_code == 200
+
+
+async def test_non_ascii_csrf_is_rejected_without_a_server_error(
+    client: httpx.AsyncClient,
+) -> None:
+    await login(client)
+    response = await client.post("/api/auth/logout", headers={b"X-CSRF-Token": b"\xff"})
+    assert response.status_code == 403
+    assert response.json() == {"error": "CSRF_FAILED"}

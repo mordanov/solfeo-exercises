@@ -159,7 +159,8 @@ Manager = Annotated[auth.Identity, Depends(require_manager)]
 def require_csrf(request: Request, identity: Current, settings: Configuration) -> None:
     require_origin(request, settings)
     if not hmac.compare_digest(
-        request.headers.get("x-csrf-token", ""), identity.session.csrf_token
+        request.headers.get("x-csrf-token", "").encode(),
+        identity.session.csrf_token.encode(),
     ):
         raise auth.ServiceError("CSRF_FAILED", 403)
 

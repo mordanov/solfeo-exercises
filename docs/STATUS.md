@@ -63,6 +63,7 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - Local Chrome completes the full manager/student scenario, including reset, revocation, activation, persisted settings, and logout.
 - The local migration and backend now share one image, preventing a stale migration image during targeted builds.
 - Native Safari automation is unavailable because Allow Remote Automation is disabled; no system setting is changed.
+- A malformed non-ASCII CSRF header returns the stable rejection code instead of causing a server error.
 - The owner confirms Chrome/Safari, RU/EN/ES, status refresh, and failure/recovery checks on the deployed page.
 - PHASE 0 closes with successful CI, targeted CD, updated documentation, and owner acceptance.
 - Product source `13a081745a8cf0a5804f75f9a5831c0e9e7f4137` is active at `https://solfeo.miveralta.ru/`.
