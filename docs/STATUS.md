@@ -77,12 +77,15 @@ PHASE 0.5: Risk prototypes
 - Basic authentication is a localhost-only prototype assumption, not a product authentication decision.
 - The HTTPS deployment works, but Android messenger sharing fails owner acceptance.
 - On 2026-09-29, the owner reports "No audio file was received" after sharing from Telegram or WhatsApp.
-- The incoming Android payload remains unobserved; message-only sharing is a hypothesis, not a confirmed cause.
-- The diagnostic prototype is live; fresh Android messenger results remain required.
+- The owner repeats the Android test and reports a current attempt timestamp, `EMPTY_SHARE`, 0 file fields, and no form fields.
+- The receiver observes an empty form; the point where data disappears remains unknown.
+- Message-only sharing remains an unconfirmed hypothesis.
+- The owner proposes a Telegram bot as an alternative ingestion path; implementation and product changes are not approved.
 
 ## Next step
-- Reinstall the PWA to refresh the manifest before repeating messenger shares.
-- Record the diagnostic section and repeat the file-manager control test.
+- Review the proposed Telegram bot risk prototype in `docs/developer/pwa-share.md`.
+- Keep PWA acceptance failed; do not replace the product share requirement without owner approval.
+- Retain the file-manager control test as an optional way to isolate the Android sharing failure.
 
 ## Open questions for the owner
 - Identify the Android device and browser versions when manual testing starts.

@@ -428,6 +428,11 @@ A successful file-manager control test does not establish messenger compatibilit
 
 ### Android acceptance checklist
 
+The owner reports another failure after the diagnostic release.
+The attempt timestamp is current, the outcome is `EMPTY_SHARE`, and the form contains 0 fields.
+This confirms an empty form at the receiver, not the original contents of the Android sharing request.
+The failure does not establish that either messenger supplies only text.
+
 1. Record the Android device and application versions.
 2. Remove the previous PWA installation after the diagnostic deployment.
 3. Open the HTTPS prototype in Chrome.
@@ -447,6 +452,36 @@ A successful file-manager control test does not establish messenger compatibilit
 
 Send 1 file at a time within the configured size limit.
 The prototype keeps only the latest successful share.
+
+## Proposed Telegram alternative
+
+The owner proposes a Telegram bot after the repeated Android failure.
+This proposal does not replace the approved PWA requirement or authorize implementation.
+
+A bot can receive `audio`, `voice`, or `document` attachments in its private chat.
+It can use the attachment's `file_id` with Telegram `getFile` to retrieve the file.
+This route does not depend on the browser share target.
+A message containing only text or a link still does not supply an audio attachment.
+
+The proposed PHASE 0.5 prototype:
+- Uses a separate directory under `prototypes/`.
+- Receives updates through long polling without a new public endpoint.
+- Accepts messages only from configured Telegram user IDs in private chats.
+- Reads the token, allowed user IDs, size limit, and storage configuration from `.env`.
+- Downloads permitted attachments and checks their size and actual file type.
+- Reports success only after saving the file; reports failures explicitly.
+- Keeps credentials and received media out of Git and logs.
+- Tests direct attachments, forwarded attachments, voice messages, unsupported input, and unauthorized senders.
+- Does not create product exercises or add a database, Redis, or product authentication.
+
+The standard hosted Bot API currently limits `getFile` downloads to 20 MB.
+See the [official Telegram FAQ](https://core.telegram.org/bots/faq#how-do-i-download-files).
+This limit differs from the PWA prototype's default 25 MiB limit.
+
+WhatsApp has no direct connection to this Telegram bot.
+The owner must send the actual audio into Telegram or save it before attaching it to the bot.
+Acceptance must use the owner's real sharing workflow.
+A successful bot test does not count as successful PWA acceptance.
 
 ## Cleanup and phase gate
 
