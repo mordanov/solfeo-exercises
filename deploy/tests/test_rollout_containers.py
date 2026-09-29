@@ -78,6 +78,7 @@ class LocalImagesRollout(Rollout):
 @pytest.fixture
 def rollout_root() -> Iterator[Path]:
     # Colima shares the repository, but not macOS's default pytest temp directory.
+    (ROOT / ".pytest_cache").mkdir(exist_ok=True)
     with tempfile.TemporaryDirectory(
         prefix="rollout-", dir=ROOT / ".pytest_cache"
     ) as path:

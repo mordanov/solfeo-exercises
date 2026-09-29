@@ -43,6 +43,8 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - Real-container scenarios pass for first deployment, migration failure, health failure, and compatible previous-image recovery.
 - The proxy network test confirms that only the product frontend joins the external network.
 - Final Actions connectivity, deployed HTTPS, and browser acceptance remain pending.
+- The first CI attempt finds a missing temporary parent directory on a fresh runner.
+- The rollout fixture now creates that directory explicitly before its disposable container scenario.
 - The first product publication succeeds for source `03260e554b13c23b640ef6432775c50b331a7a39`.
 - Publication run `36572516719` pulls and checks the published x86-64 images before creating the release bundle.
 - The downloaded bundle matches the source files, manifest hashes, and CI run `36572315149`.
