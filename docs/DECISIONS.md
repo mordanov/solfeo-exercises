@@ -63,3 +63,7 @@ Format: date, decision, reason. Do not reverse a decision without asking the own
   The confirmation covers those checks; device versions and per-message evidence remain unrecorded.
   PHASE 0 starts with the local health-page skeleton.
   Product Telegram integration remains in PHASE 4; deployed prototypes remain unchanged.
+- 2026-09-29: The owner confirms the requested local health-page and PostgreSQL restart scenarios.
+  The local schema revision remains `0001_initial` after restart.
+  Browser versions and a detailed browser matrix are not supplied.
+  This confirmation does not close the later VPS acceptance gate.

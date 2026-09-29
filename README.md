@@ -35,6 +35,19 @@ docker compose --env-file .env -f deploy/compose.yaml down
 Use `docker-compose` instead of `docker compose` if the standalone v2 executable is installed.
 These commands do not change the existing VPS.
 
+## Checks before commits
+
+Install the repository hook after preparing developer dependencies.
+The [setup guide](docs/developer/setup.md#enable-checks-before-commits) lists prerequisites and correction commands.
+
+```sh
+uv run --locked pre-commit install --install-hooks
+uv run --locked pre-commit run --all-files
+```
+
+The same hooks run in CI.
+Database tests and application builds remain separate checks.
+
 ## Documentation
 
 - [Developer setup](docs/developer/setup.md)

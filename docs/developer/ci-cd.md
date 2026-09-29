@@ -10,18 +10,25 @@ Prerequisites:
 
 `.github/workflows/ci.yml` runs on relevant pull requests, pushes to `main`, and manual dispatch.
 It uses read-only repository permissions.
-The backend job checks tests, Ruff, formatting, strict mypy, and the hashed dependency export.
+The `checks` job runs `.pre-commit-config.yaml` with `--all-files`.
+It checks Ruff, formatting, strict mypy, ESLint, Prettier, and TypeScript with the same commands used before local commits.
+Python tools come from `uv.lock`; frontend tools come from `package-lock.json`.
+The JavaScript hooks use isolated Node.js 22.23.3 and npm 12.1.0.
+Changes to the hook configuration trigger CI.
+
+The backend job checks tests and the hashed dependency export.
 It starts pinned PostgreSQL 17 with a disposable `solfeo_test` database.
 The test fixture refuses any other database name.
 The job verifies migration upgrade, downgrade, repeated upgrade, the current revision, and model drift.
 Its fixed test password belongs only to the disposable CI service, not a deployed database.
-The frontend job checks tests, ESLint, Prettier, TypeScript, and the production build.
+The frontend job checks tests and the production build, including its TypeScript compilation.
 The container job generates a private password, builds both images, and runs the migration service.
 It verifies the schema revision and health through nginx.
 It stops its Compose project after the checks.
 
 The HTTP health endpoint remains independent of database readiness.
-Pre-commit integration remains a separate PHASE 0 task.
+Pre-commit selects product files only; prototype workflows remain independent.
+All 6 hooks reject deliberate defects during local verification and pass after removal of those temporary files.
 
 ## Deployment boundary
 

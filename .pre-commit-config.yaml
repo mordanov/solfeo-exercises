@@ -1,0 +1,48 @@
+minimum_pre_commit_version: "4.3.0"
+default_stages: [pre-commit]
+
+repos:
+  - repo: local
+    hooks:
+      - id: ruff
+        name: Ruff
+        entry: uv run --locked ruff check backend
+        language: system
+        files: ^(backend/|pyproject\.toml$|uv\.lock$|requirements\.txt$|\.pre-commit-config\.yaml$)
+        pass_filenames: false
+      - id: ruff-format
+        name: Ruff format
+        entry: uv run --locked ruff format --check backend
+        language: system
+        files: ^(backend/|pyproject\.toml$|uv\.lock$|requirements\.txt$|\.pre-commit-config\.yaml$)
+        pass_filenames: false
+      - id: mypy
+        name: mypy
+        entry: uv run --locked mypy --config-file pyproject.toml
+        language: system
+        files: ^(backend/|pyproject\.toml$|uv\.lock$|requirements\.txt$|\.pre-commit-config\.yaml$)
+        pass_filenames: false
+      - id: eslint
+        name: ESLint
+        entry: npm run lint
+        language: node
+        language_version: "22.23.3"
+        additional_dependencies: ["npm@12.1.0"]
+        files: ^(frontend/|package(-lock)?\.json$|\.pre-commit-config\.yaml$)
+        pass_filenames: false
+      - id: prettier
+        name: Prettier
+        entry: npm run format:check
+        language: node
+        language_version: "22.23.3"
+        additional_dependencies: ["npm@12.1.0"]
+        files: ^(frontend/|package(-lock)?\.json$|\.pre-commit-config\.yaml$)
+        pass_filenames: false
+      - id: tsc
+        name: TypeScript
+        entry: npm run typecheck
+        language: node
+        language_version: "22.23.3"
+        additional_dependencies: ["npm@12.1.0"]
+        files: ^(frontend/|package(-lock)?\.json$|\.pre-commit-config\.yaml$)
+        pass_filenames: false

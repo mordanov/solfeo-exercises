@@ -8,7 +8,8 @@ Prerequisites:
 Last updated: 2026-09-29 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
 
 ## Current phase
-PHASE 0: Walking skeleton and CI/CD; the local health page and PostgreSQL foundation are complete.
+PHASE 0: Walking skeleton and CI/CD; local application foundations and pre-commit integration are complete.
+The owner confirms the requested local health-page and PostgreSQL restart scenarios on 2026-09-29.
 The owner confirms the remaining bot checks and continuation on 2026-09-29.
 PHASE 0.5 is complete; the failed PWA result remains unchanged.
 
@@ -19,7 +20,8 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Select synchronous SQLAlchemy 2.0 with psycopg 3.
 - [x] Add PostgreSQL, an empty Alembic migration, and database settings.
 - [x] Add real PostgreSQL tests and migration checks to CI.
-- [ ] Add pre-commit checks, database CI, and production Compose configuration.
+- [x] Add shared pre-commit checks locally and in CI.
+- [ ] Add production Compose configuration.
 - [ ] Add targeted VPS deployment, migration, health verification, and rollback.
 - [ ] Complete the deployed health-page manual check.
 
@@ -34,6 +36,15 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Complete the remaining Telegram checklist, as confirmed by the owner.
 
 ## Done
+- The owner confirms that the requested local health-page and database persistence scenarios pass.
+- `.pre-commit-config.yaml` runs Ruff, Ruff format, strict mypy, ESLint, Prettier, and TypeScript.
+- Python hooks use the locked project tooling; JavaScript hooks use isolated Node.js 22.23.3 and npm 12.1.0.
+- The JavaScript hooks use existing workspace dependencies without replacing the system Node.js.
+- All 6 hooks reject deliberate lint, formatting, or type errors and pass after those temporary probes are removed.
+- Hook configuration changes trigger all checks; prototype-only changes trigger none of these product hooks.
+- The repository Git hook is installed locally without overwriting existing hooks.
+- CI runs the same configuration through its `checks` job; tests, migrations, and builds remain separate jobs.
+- The pre-commit dependency belongs only to development tooling; the runtime dependency export is unchanged.
 - The product backend and frontend remain separate from disposable prototypes.
 - `/api/health` returns `{"status":"ok"}` without authentication or caching.
 - This endpoint checks the process, not PostgreSQL or other services.
@@ -151,7 +162,7 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - The owner does not supply device versions or a per-message evidence record.
 
 ## Next step
-- Add pre-commit integration before the production deployment and CD tasks.
+- Plan production Compose configuration and the targeted VPS deployment/CD task.
 - Keep the active bot and superseded PWA deployment unchanged until an explicit deployment or cleanup task.
 
 ## PHASE 0 boundaries
@@ -165,8 +176,9 @@ Keep authentication in PHASE 1 and exercise/file operations in PHASE 2.
 Integrate the bot with manager accounts and exercises in PHASE 4.
 Do not copy disposable prototype authentication into the product.
 
-## Open questions for the owner
-- Record the Chrome and Safari versions during the health-page manual check.
+## Remaining acceptance details
+- The owner confirms the requested local scenarios without browser versions or a detailed browser matrix.
+- Complete the browser matrix during final VPS acceptance.
 
 ## Manual checks the owner must do
 - [x] Confirm that images 1 through 10 represent the intended exercises.
@@ -180,14 +192,13 @@ Do not copy disposable prototype authentication into the product.
 - [x] Select Telegram instead of PWA sharing for product audio import.
 - [x] Verify preserved audio and checkpoint state after a targeted VPS restart.
 - [x] Complete the real-message bot checklist, as confirmed by the owner.
-- [ ] Open the local health page in Chrome and Safari.
-- [ ] Switch between English, Russian, and Spanish.
-- [ ] Stop the local backend and confirm an error instead of a successful status.
-- [ ] Restart the local backend and confirm recovery with the retry button.
-- [ ] Confirm that the local schema revision survives a PostgreSQL restart.
+- [x] Confirm that the local health page opens.
+- [x] Confirm that the local schema revision survives a PostgreSQL restart.
+- [ ] Confirm Chrome and Safari behavior, all 3 languages, and failure/recovery during final VPS acceptance.
 
 The superseded Android PWA checklist is no longer required.
 The new local health-page procedure appears in `docs/user/manager.md` and `docs/user/student.md`.
+The pre-commit task adds no new browser or database manual checks.
 
 ## Known issues
 - Image 6 produces no MusicXML; image 7 receives 46 % recognition.
@@ -207,5 +218,5 @@ The new local health-page procedure appears in `docs/user/manager.md` and `docs/
 - The onboarding guide is `../web-projects/web-folders/documentation/onboarding.md`.
 - npm 10 fails during fresh workspace dependency resolution; npm 12.1.0 resolves the declared dependencies.
 - The health-page language selector is temporary and does not save user preferences.
-- Pre-commit integration, production configuration, product CD, and VPS acceptance remain for later PHASE 0 tasks.
+- Production configuration, product CD, and VPS acceptance remain for later PHASE 0 tasks.
 - Local PostgreSQL uses the bootstrap role; production needs a separate review of database roles and permissions.

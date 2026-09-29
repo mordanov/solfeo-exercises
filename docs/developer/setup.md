@@ -139,6 +139,7 @@ uv run mypy --config-file pyproject.toml
 npm test
 npm run lint
 npm run format:check
+npm run typecheck
 npm run build
 docker compose --env-file .env -f deploy/compose.test.yaml down
 ```
@@ -150,6 +151,53 @@ Set the test command's `DATABASE_PORT` to the configured `TEST_POSTGRES_HOST_POR
 Do not run migration tests against any database containing real data.
 Frontend tests cover translations, language changes, request failures, timeout, cancellation, and explicit retry.
 The first implementation follows failing tests for the API, health page, and locale completeness.
+
+## Enable checks before commits
+
+The hooks check product code only.
+They do not run database tests or alter the existing prototypes.
+The hooks report formatting errors without rewriting files.
+
+1. Prepare the locked dependencies.
+
+   ```sh
+   uv sync --locked --python 3.12
+   npm ci
+   ```
+
+2. Install the repository hook without an overwrite option.
+
+   ```sh
+   uv run --locked pre-commit install --install-hooks
+   ```
+
+3. Run all product checks.
+
+   ```sh
+   uv run --locked pre-commit run --all-files
+   ```
+
+   Ruff, Ruff format, mypy, ESLint, Prettier, and TypeScript must pass.
+
+4. Commit changes normally.
+   The Git hook selects checks from the staged file paths.
+
+Python hooks use the root `uv.lock`.
+JavaScript hooks share an isolated Node.js 22.23.3 environment with npm 12.1.0.
+The first hook installation requires network access to download that environment.
+Subsequent runs reuse it without changing the system Node.js installation.
+The hooks use workspace packages from `node_modules`; install those with `npm ci` before running them.
+Native development, tests, and builds still require the Node.js version listed in the prerequisites.
+
+Python changes and dependency configuration trigger all Python checks.
+Frontend changes and npm manifests trigger all JavaScript checks.
+Changes to `.pre-commit-config.yaml` trigger all 6 checks.
+Documentation-only and prototype-only changes do not trigger these product checks.
+Each selected hook checks its whole component, including dependent files.
+
+Use `uv run ruff format backend` and `npm run format` to correct formatting.
+Review the resulting changes before staging them again.
+Run the test and migration commands above separately; successful hooks do not replace those checks.
 
 ## Update dependencies
 
