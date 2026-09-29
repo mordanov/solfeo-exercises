@@ -239,7 +239,7 @@ Final owner acceptance remains open.
 Safari automation remains unavailable because Allow Remote Automation is disabled.
 The manual procedures appear in `docs/user/student.md` and `docs/user/manager.md`.
 
-## PHASE 4 verification
+## Deployed PHASE 4 release
 
 Local suites pass 98 backend tests, 76 frontend tests, and 36 container/release checks.
 The worker uses the backend image; CI also checks `worker/` and its runtime HTTPX dependency.
@@ -247,4 +247,41 @@ Simulated Telegram responses exercise real PostgreSQL persistence, AAC conversio
 Local Chrome verifies the manager interface and protected preview without modifying real accounts or exercises.
 Headless playback uses `--disable-audio-output` because the host audio renderer is unavailable.
 This preserves real decoding and playback timing, not audible speaker verification.
-Public HTTPS and release provenance follow deployment.
+Source `3e898fc08771dfecfec43533b9ee8a329d4a4f5e` passes
+CI [`36633406979`](https://github.com/mordanov/solfeo-exercises/actions/runs/36633406979).
+Run [`36633989417`](https://github.com/mordanov/solfeo-exercises/actions/runs/36633989417) publishes and verifies the immutable images.
+Its deployment job fails because the VPS disk fills.
+The historical workflow conclusion remains failure; do not describe that job as successful.
+
+The disk failure temporarily prevents product PostgreSQL startup.
+Recovery removes only 8 explicitly identified, unused historical Solfeo images.
+No production volume, exercise, journal, or prototype audio is deleted.
+The database retains `0004_listening` before the successful retry.
+GitHub refuses the CLI's job-rerun request with a permission error.
+
+The same standard rollout script retries the same verified bundle through trusted SSH.
+It pulls the pinned references, applies `0005_telegram`, starts the product services, verifies health, and promotes the release.
+The script reports `DEPLOYED:3e898fc08771dfecfec43533b9ee8a329d4a4f5e`.
+
+| Service | Active digest reference |
+|---|---|
+| Backend and Telegram worker | `ghcr.io/mordanov/solfeo-backend@sha256:57ae1a00671c320dca1e44ee878d1eb1c069d2207cc1a9843cdf919b86da4032` |
+| Frontend | `ghcr.io/mordanov/solfeo-frontend@sha256:3bb4b5795378e4fb9341832ad1a904cab230329ca0a337dfbf2127d7b263e8ce` |
+
+Public HTTPS Chrome completes the manager import workflow.
+Independent checks verify exact provenance, live bot identity, readiness, private storage, and registry credential cleanup.
+A targeted worker restart preserves its offset and import references.
+All 43 unrelated containers retain their IDs and start times.
+Product PostgreSQL retains its container ID and data but restarts during disk recovery.
+
+Shared commit `87fd752` removes only the prototype poller's automatic registration.
+The prototype remains stopped; its retained audio hashes do not change.
+The product worker alone uses the bot token.
+The browser scenarios retain 3 soft-deleted exercises, 4 synthetic imports, and 2 inactive synthetic managers.
+An initial browser timing failure leaves 2 of those imports unused.
+
+Approximately 1.1 GiB remains available, with filesystem usage near 98 %.
+Provide more capacity before another release.
+Final owner acceptance, including real Telegram messages and Safari playback, remains open.
+Cleanup removes the isolated browser profile and disposable local test database.
+The development stand remains healthy.

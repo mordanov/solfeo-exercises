@@ -8,7 +8,8 @@ Prerequisites:
 Last updated: 2026-09-29 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
 
 ## Current phase
-PHASE 4: Product Telegram audio import is in progress.
+PHASE 4: Product Telegram audio import is implemented and deployed.
+Final owner acceptance remains open.
 The owner confirms all PHASE 3 checks and authorizes complete PHASE 4 automation on 2026-09-29.
 The application 404 page is scheduled in PHASE 7.
 The owner confirms all PHASE 2 checks and authorizes the complete PHASE 3 without intermediate confirmations on 2026-09-29.
@@ -24,8 +25,8 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Add manager linking, durable imports, role checks, and retry protection.
 - [x] Add Telegram polling and reuse protected AAC storage.
 - [x] Add the translated manager import interface.
-- [ ] Verify locally, publish, and replace only the existing bot poller on the VPS.
-- [ ] Complete documentation and the final manual checklist.
+- [x] Verify locally, publish, and replace only the existing bot poller on the VPS.
+- [x] Complete documentation and the final manual checklist.
 
 ## Completed PHASE 3 plan
 - [x] Add per-student pointers and listening sessions with migration `0004_listening`.
@@ -81,14 +82,32 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Complete the remaining Telegram checklist, as confirmed by the owner.
 
 ## Done
+- PHASE 4 is active at `https://solfeo.miveralta.ru/manager/telegram` with `@solfeo_exercises_bot`.
+- Source `3e898fc08771dfecfec43533b9ee8a329d4a4f5e` passes CI run `36633406979`.
+- Run `36633989417` publishes and verifies both images; its initial deployment fails because the VPS disk fills.
+- PostgreSQL temporarily cannot start; its schema remains `0004_listening` before recovery.
+- Targeted removal of 8 unused historical Solfeo images restores space without deleting production volumes or files.
+- The standard rollout script successfully deploys the same verified bundle through SSH and advances to `0005_telegram`.
+- GitHub denies the CLI's request to rerun the failed job; its historical failure remains visible.
+- Public HTTPS Chrome verifies linking-code UI, private previews, byte ranges, exercise creation, confirmed replacement, image retention, reload, and logout.
+- Independent verification confirms immutable images, bot identity, live polling, readiness, private media mounts, and registry credential cleanup.
+- A targeted product-worker restart preserves the durable offset and synthetic import references.
+- Shared commit `87fd752` removes only the prototype poller's automatic registration.
+- The prototype stays stopped; all its saved audio remains byte-identical.
+- All 43 unrelated VPS containers retain exact IDs and start times.
+- Product PostgreSQL retains its container ID and data; its start time changes during disk recovery.
+- The browser scenarios retain 3 soft-deleted synthetic exercises and 4 synthetic imports, including 2 unused fixtures from a timing retry.
+- Both synthetic manager accounts are inactive.
+- Cleanup removes the isolated browser profile and disposable local test database.
+- The persistent development stand and all 4 product services remain healthy.
 - PHASE 4 passes 98 backend tests, 76 frontend tests, and 36 container/release checks locally.
 - Local Chrome verifies code generation, AAC preview and seeking, new exercises, confirmed audio replacement, image retention, reload, and logout.
 - Simulated Telegram transport tests verify intake, actual conversion, durable offsets, duplicate updates, retry recovery, and notifications.
 - Bot startup identity and webhook checks pass against the real Telegram service.
-- The private product configuration now contains the existing token; the prototype remains the only active poller before deployment.
+- The private product configuration contains the existing token; only the product worker polls the bot.
 - Headless Chrome reports a host audio-renderer error; `--disable-audio-output` permits real decoding and timeline verification.
 - The common AAC format remains unchanged; the unsuccessful sample-rate experiment is removed.
-- PHASE 3 is active at `https://solfeo.miveralta.ru/student` and `/manager/journal`.
+- PHASE 3 adds student listening and the manager journal.
 - Source `e141b75c803ad56733731965056ef969f0e22c8a` passes CI run `36621440972` and publication/CD run `36621939822`.
 - The pulled immutable images pass all 35 container/release checks before deployment.
 - Public HTTPS Chrome verifies selection, pause/resume, completion, actual tab closure, journal filters, and retained deleted exercises.
@@ -320,8 +339,8 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - The owner does not supply device versions or a per-message evidence record.
 
 ## Next step
-- Publish PHASE 4 and replace the prototype poller with the product worker.
 - Complete the final PHASE 4 checklist in `docs/user/manager.md`.
+- Provide more VPS disk capacity before the next release; approximately 1.1 GiB remains available.
 - Keep PHASE 5 out of this task.
 - Preserve prototype files and the historical PWA deployment.
 
@@ -404,6 +423,10 @@ The owner confirms final PHASE 0 browser acceptance at the public HTTPS address.
 The final PHASE 4 procedure is in `docs/user/manager.md`.
 
 ## Known issues
+- The VPS filesystem remains approximately 98 % full after targeted Solfeo image cleanup.
+- The initial PHASE 4 CD attempt fails from disk exhaustion; the verified SSH recovery succeeds.
+- The current CLI cannot rerun Actions jobs with its token; GitHub returns a permission error.
+- A real incoming owner Telegram attachment still requires final manual acceptance; simulated ingress does not replace it.
 - Image 6 produces no MusicXML; image 7 receives 46 % recognition.
 - Images 8 and 9 receive 95.35 % and 88 %, with important errors despite their `fully recognized` labels.
 - Local artifacts are under `prototypes/omr/output/20260928T201957Z-84f49a71/`.

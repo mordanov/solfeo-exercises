@@ -2,6 +2,11 @@
 
 This document describes the restricted Telegram audio prototype and its VPS activation requirements.
 
+PHASE 4 replaces this poller with the product worker on 2026-09-29.
+The prototype remains stopped, and its saved audio remains unchanged.
+Do not restart it while the product worker uses the same bot.
+Use `telegram-import.md` and the manager guide for the current workflow.
+
 Prerequisites:
 - Read `docs/PHASES.md`, `docs/DECISIONS.md`, and `docs/STATUS.md`.
 - Create a dedicated bot through the official Telegram `@BotFather`.
@@ -250,5 +255,5 @@ Do not replace the VPS `.env` with the local prototype file.
 For rollback, restore the prior image digest and recreate only this worker.
 Preserve the audio volume and checkpoint.
 Do not reuse that volume with a different bot identity.
-The current worker is active, and the owner confirms successful receipt and playback.
+The owner confirms successful prototype receipt and playback before the product transition.
 The owner confirms the remaining manual checks on 2026-09-29.

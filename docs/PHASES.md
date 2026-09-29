@@ -78,6 +78,9 @@ The owner authorizes the entire phase without intermediate confirmations on 2026
 - Keep secrets in `.env` and deploy the bot on the existing VPS without changing unrelated services.
 Done when: an authorized manager imports real Telegram audio into an exercise and the saved audio plays correctly.
 The PWA share target and browser share hand-off are no longer part of this phase.
+Implementation status: deployed on 2026-09-29 with successful CI, verified images, browser scenarios, and live bot polling.
+The first deployment exhausts VPS disk space; targeted cleanup and the standard SSH rollout recover the same verified release.
+Final owner acceptance remains open.
 
 ## PHASE 5: OMR, review, rendering, note names
 - Postgres job queue (SKIP LOCKED). Worker container with Audiveris behind the `OmrEngine` interface. Retries and failure state.
@@ -98,6 +101,8 @@ Done when: a real exercise image is recognized, approved, and shown with note na
 Done when: an approved score is spoken with correct note names and durations in all three languages.
 
 ## PHASE 7: Hardening and documentation review
+- Check free disk space before deployment image pulls and reserve capacity for extraction and rollback.
+  Fail before changing running services when capacity is insufficient.
 - Replace nginx's default unknown-page response with a localized application 404 page and a home link.
   Preserve HTTP 404, protected-file denial, API errors, and direct navigation in Chrome and Safari.
 - Security: cookie flags, CSRF, upload limits, nginx headers, dependency audit in CI.

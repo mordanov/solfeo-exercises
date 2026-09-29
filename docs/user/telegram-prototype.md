@@ -1,5 +1,10 @@
 # Telegram audio prototype
 
+This procedure is historical.
+The product worker replaces the prototype poller in PHASE 4.
+Use the Telegram import procedure in `manager.md`.
+Do not restart the old poller while the product bot is active.
+
 This document explains how to check audio ingestion through the dedicated Telegram bot.
 
 Prerequisites:
