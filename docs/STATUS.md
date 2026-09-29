@@ -80,15 +80,22 @@ PHASE 0.5: Risk prototypes
 - The owner repeats the Android test and reports a current attempt timestamp, `EMPTY_SHARE`, 0 file fields, and no form fields.
 - The receiver observes an empty form; the point where data disappears remains unknown.
 - Message-only sharing remains an unconfirmed hypothesis.
-- The owner proposes a Telegram bot as an alternative ingestion path; implementation and product changes are not approved.
+- The owner approves a separate Telegram prototype and deployment on the existing VPS.
+- The bot implementation accepts allowlisted private attachments and saves validated AAC audio without creating exercises.
+- All 27 bot tests, Ruff, and strict mypy pass, including actual Opus-to-AAC conversion.
+- A non-root, read-only Docker check verifies simulated Telegram ingestion through real AAC conversion and durable checkpointing.
+- Image publication and opt-in VPS staging are in progress.
+- Live bot activation is blocked: a dedicated BotFather token and allowed Telegram user IDs are not configured.
 
 ## Next step
-- Review the proposed Telegram bot risk prototype in `docs/developer/pwa-share.md`.
+- Complete image publication and opt-in VPS staging for the Telegram prototype.
+- Configure the dedicated bot token and sender allowlist privately, then activate and test the worker.
 - Keep PWA acceptance failed; do not replace the product share requirement without owner approval.
 - Retain the file-manager control test as an optional way to isolate the Android sharing failure.
 
 ## Open questions for the owner
 - Identify the Android device and browser versions when manual testing starts.
+- Supply dedicated bot credentials through `prototypes/telegram/.env`, not through chat.
 
 ## Manual checks the owner must do
 - [x] Confirm that images 1 through 10 represent the intended exercises.
@@ -100,6 +107,7 @@ PHASE 0.5: Risk prototypes
 - [ ] Reinstall the deployed PWA from Android Chrome and confirm the `diagnostics v1` section.
 - [ ] Share audio from WhatsApp and Telegram to the installed PWA.
 - [ ] Verify receipt details, reload persistence, clearing, and sharing after closing the PWA.
+- [ ] Complete the real-message bot checklist in `docs/user/telegram-prototype.md` after activation.
 
 ## Known issues
 - Image 6 produces no MusicXML; image 7 receives 46 % recognition.

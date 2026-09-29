@@ -1,0 +1,8 @@
+.env
+.env.*
+!.env.example
+data/
+output/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/

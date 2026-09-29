@@ -453,10 +453,12 @@ The failure does not establish that either messenger supplies only text.
 Send 1 file at a time within the configured size limit.
 The prototype keeps only the latest successful share.
 
-## Proposed Telegram alternative
+## Telegram alternative
 
 The owner proposes a Telegram bot after the repeated Android failure.
-This proposal does not replace the approved PWA requirement or authorize implementation.
+The owner subsequently approves the separate prototype and deployment on the existing VPS.
+This approval does not replace the product PWA requirement.
+Implementation and activation instructions are in `docs/developer/telegram-bot.md`.
 
 A bot can receive `audio`, `voice`, or `document` attachments in its private chat.
 It can use the attachment's `file_id` with Telegram `getFile` to retrieve the file.

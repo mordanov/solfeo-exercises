@@ -38,3 +38,7 @@ Format: date, decision, reason. Do not reverse a decision without asking the own
 - 2026-09-29: The owner confirms `ghcr.io/mordanov/solfeo-pwa-prototype` and authorizes publication, shared infrastructure changes, and VPS deployment.
   Only the prototype and necessary nginx configuration belong to this deployment.
   Reason: enable Android acceptance checks without restarting unrelated applications.
+- 2026-09-29: The owner approves a separate Telegram bot prototype and deployment on the existing VPS.
+  Reason: evaluate direct attachment ingestion after Android PWA sharing delivers an empty form.
+  The prototype stays in PHASE 0.5 and does not create exercises.
+  The failed PWA acceptance result remains unchanged.
