@@ -77,6 +77,8 @@ class FakeRollout(Rollout):
         self.calls.append(operation)
         if self.fail and self.fail in operation:
             raise DeploymentError("SYNTHETIC_FAILURE")
+        if args == ("config", "--services"):
+            return "backend\nfrontend\nmigrate\npostgres\n"
         return ""
 
     def verify(self, release: Path) -> None:
@@ -121,6 +123,30 @@ def test_first_install_failure_preserves_database(tmp_path: Path) -> None:
     with pytest.raises(DeploymentError, match="FIRST_DEPLOY_FAILED"):
         rollout.activate(rollout.candidate, None)
     assert not any("down" in call or "--volumes" in call for call in rollout.calls)
+
+
+def test_worker_stops_before_migration_and_participates_in_rollback(
+    tmp_path: Path,
+) -> None:
+    class WithWorker(FakeRollout):
+        def compose(self, release: Path, *args: str) -> str:
+            output = super().compose(release, *args)
+            if args == ("config", "--services") and release == self.candidate:
+                return output + "telegram\n"
+            return output
+
+    rollout = WithWorker(tmp_path, "health")
+    with pytest.raises(DeploymentError, match="ROLLED_BACK"):
+        rollout.activate(rollout.candidate, tmp_path / "previous")
+    stops = [call for call in rollout.calls if "candidate:stop" in call]
+    assert len(stops) == 2 and all("telegram" in call for call in stops)
+    assert rollout.calls.index(stops[0]) < next(
+        index for index, call in enumerate(rollout.calls) if "candidate:run" in call
+    )
+    assert any("candidate:up" in call and "telegram" in call for call in rollout.calls)
+    assert all(
+        "telegram" not in call for call in rollout.calls if "previous:up" in call
+    )
 
 
 def test_state_promotion_is_atomic_and_retains_previous(tmp_path: Path) -> None:

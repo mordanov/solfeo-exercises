@@ -166,6 +166,7 @@ class Rollout:
                         "FFMPEG_",
                         "FFPROBE_",
                         "FILE_",
+                        "TELEGRAM_",
                     )
                 )
                 or key == "DEFAULT_LANGUAGE"
@@ -240,9 +241,11 @@ class Rollout:
 
     def activate(self, candidate: Path, previous: Path | None) -> None:
         self.compose(candidate, "config", "--quiet")
+        services = self.application_services(candidate)
+        previous_services = self.application_services(previous) if previous else []
         self.compose(candidate, "pull")
         self.compose(candidate, "up", "-d", "--no-deps", "--wait", "postgres")
-        self.compose(candidate, "stop", "frontend", "backend")
+        self.compose(candidate, "stop", *reversed(services))
         try:
             self.compose(
                 candidate,
@@ -257,12 +260,10 @@ class Rollout:
                 "upgrade",
                 "head",
             )
-            self.compose(
-                candidate, "up", "-d", "--no-deps", "--wait", "backend", "frontend"
-            )
+            self.compose(candidate, "up", "-d", "--no-deps", "--wait", *services)
             self.verify(candidate)
         except (DeploymentError, subprocess.TimeoutExpired) as error:
-            self.compose(candidate, "stop", "frontend", "backend")
+            self.compose(candidate, "stop", *reversed(services))
             if previous is None:
                 raise DeploymentError("FIRST_DEPLOY_FAILED_SERVICES_STOPPED") from error
             try:
@@ -280,16 +281,26 @@ class Rollout:
                     "--check-heads",
                 )
                 self.compose(
-                    previous, "up", "-d", "--no-deps", "--wait", "backend", "frontend"
+                    previous, "up", "-d", "--no-deps", "--wait", *previous_services
                 )
                 self.verify(previous)
             except (DeploymentError, subprocess.TimeoutExpired) as rollback_error:
-                self.compose(previous, "stop", "frontend", "backend")
+                self.compose(previous, "stop", *reversed(previous_services))
                 raise DeploymentError(
                     "ROLLBACK_FAILED_MANUAL_RECOVERY_REQUIRED"
                 ) from rollback_error
             raise DeploymentError("DEPLOY_FAILED_ROLLED_BACK") from error
         self.promote(candidate)
+
+    def application_services(self, release: Path) -> list[str]:
+        services = self.compose(release, "config", "--services").splitlines()
+        if not {"backend", "frontend"}.issubset(services):
+            raise DeploymentError("APPLICATION_SERVICES_MISSING")
+        return [
+            "backend",
+            "frontend",
+            *(["telegram"] if "telegram" in services else []),
+        ]
 
     def deploy(self, artifact: Path, expected_sha: str, ci_run_id: int) -> None:
         manifest, files = verify_bundle(artifact, expected_sha, ci_run_id)

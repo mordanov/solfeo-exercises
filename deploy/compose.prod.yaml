@@ -85,6 +85,9 @@ services:
       LOGIN_IP_LIMIT: ${LOGIN_IP_LIMIT:-30}
       LOGIN_WINDOW_SECONDS: ${LOGIN_WINDOW_SECONDS:-900}
       DEFAULT_LANGUAGE: ${DEFAULT_LANGUAGE:-en}
+      TELEGRAM_BOT_USERNAME: ${TELEGRAM_BOT_USERNAME:-solfeo_exercises_bot}
+      TELEGRAM_LINK_SECONDS: ${TELEGRAM_LINK_SECONDS:-600}
+      TELEGRAM_HEALTH_SECONDS: ${TELEGRAM_HEALTH_SECONDS:-600}
       EMERGENCY_MANAGER_USERNAME: ${EMERGENCY_MANAGER_USERNAME:-}
       EMERGENCY_MANAGER_PASSWORD: ${EMERGENCY_MANAGER_PASSWORD:-}
       EMERGENCY_MANAGER_FIRST_NAME: ${EMERGENCY_MANAGER_FIRST_NAME:-Emergency}
@@ -113,6 +116,44 @@ services:
       timeout: 3s
       retries: 10
       start_period: 5s
+
+  telegram:
+    <<: *backend
+    restart: unless-stopped
+    command: ["python", "-m", "worker.telegram"]
+    environment:
+      <<: *database
+      TELEGRAM_TOKEN: ${TELEGRAM_TOKEN:-}
+      TELEGRAM_BOT_USERNAME: ${TELEGRAM_BOT_USERNAME:-solfeo_exercises_bot}
+      TELEGRAM_MAX_FILE_BYTES: ${TELEGRAM_MAX_FILE_BYTES:-20000000}
+      TELEGRAM_POLL_SECONDS: ${TELEGRAM_POLL_SECONDS:-25}
+      TELEGRAM_HTTP_SECONDS: ${TELEGRAM_HTTP_SECONDS:-15}
+      TELEGRAM_DOWNLOAD_SECONDS: ${TELEGRAM_DOWNLOAD_SECONDS:-90}
+      TELEGRAM_RETRY_SECONDS: ${TELEGRAM_RETRY_SECONDS:-5}
+      TELEGRAM_MAX_ATTEMPTS: ${TELEGRAM_MAX_ATTEMPTS:-3}
+      TELEGRAM_HEALTH_SECONDS: ${TELEGRAM_HEALTH_SECONDS:-600}
+      TELEGRAM_HEALTH_FILE: ${TELEGRAM_HEALTH_FILE:-/tmp/telegram-ready}
+      MEDIA_ROOT: /app/media
+      AUDIO_MAX_BYTES: ${AUDIO_MAX_BYTES:-52428800}
+      AUDIO_MAX_SECONDS: ${AUDIO_MAX_SECONDS:-1800}
+      MEDIA_TIMEOUT_SECONDS: ${MEDIA_TIMEOUT_SECONDS:-120}
+      AUDIO_BITRATE_KBPS: ${AUDIO_BITRATE_KBPS:-128}
+      FFMPEG_BINARY: ${FFMPEG_BINARY:-ffmpeg}
+      FFPROBE_BINARY: ${FFPROBE_BINARY:-ffprobe}
+      FILE_BINARY: ${FILE_BINARY:-file}
+    volumes:
+      - media_data:/app/media
+    tmpfs: [/tmp]
+    networks: [database, telegram]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-m", "worker.telegram", "--health"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 35s
 
   frontend:
     environment:
@@ -144,6 +185,7 @@ services:
 
 networks:
   application:
+  telegram:
   database:
     internal: true
 

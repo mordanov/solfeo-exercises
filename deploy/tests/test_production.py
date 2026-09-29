@@ -45,6 +45,11 @@ def test_development_migration_uses_the_same_backend_image() -> None:
         == services["backend"]["image"]
         == "solfeo-dev-backend"
     )
+    assert services["telegram"]["image"] == services["backend"]["image"]
+    assert (
+        services["telegram"]["environment"]["DATABASE_PASSWORD"] == "synthetic-password"
+    )
+    assert services["telegram"]["environment"]["TELEGRAM_TOKEN"] == ""
 
 
 @dataclass
@@ -188,7 +193,7 @@ try:
         version = connection.scalar(
             text("SELECT version_num FROM migrations.alembic_version")
         )
-        assert version == "0004_listening"
+        assert version == "0005_telegram"
         privileges = connection.execute(text(
             "SELECT rolsuper, rolcreatedb, rolcreaterole "
             "FROM pg_roles WHERE rolname=current_user"
