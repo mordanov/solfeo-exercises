@@ -52,17 +52,26 @@ PHASE 0.5: Risk prototypes
 - DNS and SSH access identify the existing x86-64 VPS.
 - Shared configuration adds the prototype without a database, Redis, or landing-page link.
 - A prototype-only workflow validates and publishes the x86-64 image without automatic VPS deployment.
+- The publishing workflow succeeds for application commit `8efc058`.
+- The VPS runs the published image by digest at `https://solfeo.miveralta.ru/prototype-share/`.
+- Shared infrastructure commits `900f62e` and `4578b73` persist on `main` and the VPS.
+- A one-time `[skip ci]` synchronization prevents the general shared deployment from restarting unrelated applications.
+- The hostname certificate is valid; the existing certificate watcher activates HTTPS.
+- All 17 public HTTP checks pass, including certificate validation, manifest icons, worker headers, and early POST rejection.
+- Desktop Chrome verifies the public share flow, persistence, clearing, and manifest installability without errors.
+- All 12 deployed static files match the locally validated build.
+- All 41 unrelated containers retain their original IDs and start times.
+- `docs/user/pwa-prototype.md` provides the Android acceptance procedure.
 
 ## In progress
 - The files protocol checks and owner manual step are complete.
 - Basic authentication is a localhost-only prototype assumption, not a product authentication decision.
-- The local PWA is complete; HTTPS onboarding and Android acceptance checks remain pending.
-- Image publication, targeted deployment, and certificate issuance are in progress.
-- Shared infrastructure uses a separate branch because pushes to shared `main` trigger a broader deployment.
+- The HTTPS prototype is complete; Android acceptance and final owner review remain pending.
 
 ## Next step
-- Complete the approved HTTPS onboarding and verify the public deployment.
-- Run the Android checklist after deployment.
+- Run the Android checklist at the deployed URL.
+- Record the device and application versions with the results.
+- Review the remaining PHASE 0.5 findings with the owner.
 
 ## Open questions for the owner
 - Identify the Android device and browser versions when manual testing starts.
@@ -74,9 +83,9 @@ PHASE 0.5: Risk prototypes
 - [x] Review the image 6 failure and the manual event counts.
 - [x] Confirm the recommendation to continue with Audiveris.
 - [x] Complete the protected-audio manual step, as confirmed by the owner.
-- [ ] Verify the PWA receipt page locally if desired before deployment.
-- [ ] Install the PWA from Android Chrome after HTTPS deployment.
-- [ ] Share audio from WhatsApp and Telegram after the PWA prototype.
+- [ ] Install the deployed PWA from Android Chrome.
+- [ ] Share audio from WhatsApp and Telegram to the installed PWA.
+- [ ] Verify receipt details, reload persistence, clearing, and sharing after closing the PWA.
 
 ## Known issues
 - Image 6 produces no MusicXML; image 7 receives 46 % recognition.
@@ -85,11 +94,11 @@ PHASE 0.5: Risk prototypes
 - Files evidence is under `prototypes/files/output/curl-20260928T204244Z-ec7ed479/`.
 - The owner reports completion of the files manual step; device versions and the test setup are not recorded.
 - Basic authentication uses disposable local credentials; product session authentication remains out of scope.
-- The tested Docker image is local, not published; operating-system package repositories remain unpinned.
+- The files prototype image remains local; operating-system package repositories remain unpinned.
 - The PWA keeps only the latest successful share and rejects files above 25 MiB by default.
 - Desktop browser checks do not establish Android sharing compatibility.
 - PWA browser and static-server evidence remain in `prototypes/pwa/output/`.
 - Samples and generated MusicXML remain local; a fresh clone does not contain them.
-- HTTPS onboarding remains pending for `https://solfeo.miveralta.ru`.
+- The HTTPS PWA runs at `https://solfeo.miveralta.ru/prototype-share/`.
 - The onboarding guide is `../web-projects/web-folders/documentation/onboarding.md`.
 - PHASE 0.5 remains incomplete until the remaining prototypes and owner review finish.

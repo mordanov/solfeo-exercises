@@ -1,6 +1,6 @@
 # PWA share prototype deployment
 
-This document describes the local PWA prototype, its approved deployment plan, and the remaining Android acceptance checks.
+This document describes the deployed PWA prototype and the remaining Android acceptance checks.
 
 Prerequisites:
 - Read `docs/PRODUCT_BRIEF.md`, `docs/PHASES.md`, and `docs/DECISIONS.md`.
@@ -17,7 +17,9 @@ The owner supplies `https://solfeo.miveralta.ru` as the target hostname.
 Shared configuration now includes the prototype site, service, and nginx templates.
 DNS resolves to the existing VPS, and SSH access works.
 The initial HTTPS check fails because the existing certificate does not cover the hostname.
-Publication, certificate issuance, and deployment verification remain in progress.
+The targeted deployment adds a valid certificate and passes public HTTPS checks.
+The prototype runs at `https://solfeo.miveralta.ru/prototype-share/`.
+Android acceptance remains pending.
 
 ## Prototype scope
 
@@ -36,7 +38,7 @@ Do not add analytics, a backend, a database, Redis, product login, or exercise m
 Do not copy local exercise samples into the public image.
 Product authentication and the login-return flow remain PHASE 4 work.
 
-### Proposed routes
+### Routes
 
 | Route | Purpose |
 |---|---|
@@ -190,7 +192,7 @@ Evidence remains in ignored `prototypes/pwa/output/`:
 - `compose-up.log`: build and startup output.
 
 These results do not prove Android installation or WhatsApp/Telegram interoperability.
-The HTTPS deployment and owner device checks remain open.
+The owner device checks remain open.
 
 ## Onboarding facts
 
@@ -228,11 +230,11 @@ Treat database, Redis, and backend-only steps as explicitly inapplicable to this
 - [x] Prepare the prototype-only image publishing workflow and its onboarding template.
 - [x] Confirm that no new mandatory CI placeholders apply.
 - [x] Verify DNS and the existing certificate state.
-- [ ] Configure actual VPS variables through the approved deployment process.
-- [ ] Publish the image under an immutable commit tag.
-- [ ] Deploy only the prototype service and necessary nginx configuration.
-- [ ] Issue or reuse the hostname certificate through the shared certbot setup.
-- [ ] Verify the HTTPS health response, manifest, icons, and service-worker headers.
+- [x] Configure actual VPS variables through the approved deployment process.
+- [x] Publish the image under a full commit tag.
+- [x] Deploy only the prototype service and necessary nginx configuration.
+- [x] Issue the hostname certificate through the shared certbot setup.
+- [x] Verify the HTTPS health response, manifest, icons, and service-worker headers.
 - [x] Confirm locally that unhandled POST requests return an error without retaining file bodies.
 
 The publishing workflow supports only this prototype.
@@ -264,6 +266,9 @@ Warning: pushing shared `main` starts the general deployment workflow.
 That workflow can restart unrelated applications.
 Use a separate infrastructure branch for this targeted onboarding.
 Preserve all unrelated VPS files and running services.
+After verification, synchronize the reviewed changes to shared `main` with a one-time `[skip ci]` documentation commit.
+This prevents the general deployment during synchronization.
+It does not disable later workflow runs.
 
 1. Apply the reviewed infrastructure commit with a fast-forward merge.
 2. Set the 3 prototype values in the VPS `.env`.
@@ -291,6 +296,46 @@ For initial onboarding failure, stop the prototype and restore the previous ngin
 Do not reset the shared repository or restart unrelated services.
 The static prototype must not retain uploaded request bodies or log their contents.
 
+### HTTPS verification: 2026-09-29
+
+The image publication workflow succeeds:
+[`36528824725`](https://github.com/mordanov/solfeo-exercises/actions/runs/36528824725).
+The VPS runs the x86-64 image by registry digest, not by a mutable tag.
+
+| Item | Verified value |
+|---|---|
+| Application source | `8efc058e69e6a5ff28a6f7d13b5adc4185354473` |
+| Published tag | `ghcr.io/mordanov/solfeo-pwa-prototype:sha-8efc058e69e6a5ff28a6f7d13b5adc4185354473` |
+| Deployed digest | `sha256:b780e044a9cc0a4093957d40dee1476f5b1c5a31f33ca5d639179e16c3871c99` |
+| Infrastructure commits | `900f62e` and `4578b73`, on shared `main` and the VPS |
+| TLS certificate expiry at issuance | `2026-12-28` |
+| Static files | All 12 match the locally validated build |
+| Unrelated containers | All 41 retain their IDs and start times |
+
+The existing certbot service handles renewals.
+The nginx watcher activates HTTPS after its 300 s polling interval.
+The previous nginx image remains available as `web-folders-nginx:before-solfeo-pwa` for an initial rollback.
+No unrelated VPS files change.
+
+All 17 public HTTP checks pass with normal certificate validation.
+They cover redirects, health, manifest scope, declared PNG dimensions, worker cache headers, HEAD requests, unknown paths, and POST rejection.
+The proxy rejects POST before accepting a body through `100 Continue`.
+The static container receives no POST requests.
+
+Desktop Chrome `154.0.8037.58` reports no manifest or installability errors.
+Actual multipart navigation stores a synthetic 23-byte file and opens the receipt.
+Reload preserves it; a failed share preserves the prior success; clearing persists after reload.
+The worker scope remains `/prototype-share/`, and Cache Storage remains empty.
+The proxy receives no browser share POSTs.
+
+The first browser assertion races asynchronous receipt loading.
+The test waits for that loading to finish before checking the preserved file.
+No application change is necessary.
+
+Local evidence remains in ignored `prototypes/pwa/output/https-static-checks.json` and `https-browser-smoke.json`.
+The isolated browser and temporary local containers stop after verification.
+These results do not prove Android installation or messenger compatibility.
+
 ## Validation plan
 
 Write failing tests before implementing share handling.
@@ -301,6 +346,7 @@ Check manifest paths and service-worker scope against the deployed prefix.
 
 Automated tests do not prove Android installation or messenger interoperability.
 The following owner checks remain mandatory.
+The device procedure also appears in `docs/user/pwa-prototype.md`.
 
 ### Android acceptance checklist
 
