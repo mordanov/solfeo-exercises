@@ -1,0 +1,18 @@
+{
+  "app.title": "Solfège Trainer",
+  "app.description": "The application skeleton is ready. Exercises and sign-in are not available yet.",
+  "language.label": "Language",
+  "language.en": "English",
+  "language.ru": "Russian",
+  "language.es": "Spanish",
+  "health.title": "Service status",
+  "health.pending": "Checking the backend…",
+  "health.ok": "Backend is available",
+  "health.scope": "This check verifies the backend process. It does not check the database or other services.",
+  "health.retry": "Check again",
+  "errors.SERVICE_UNAVAILABLE": "Backend is unavailable. Try again.",
+  "errors.INVALID_RESPONSE": "The backend returned an unexpected response.",
+  "errors.NETWORK_ERROR": "Cannot connect to the backend. Check your connection.",
+  "errors.REQUEST_TIMEOUT": "The backend did not respond in time. Try again.",
+  "errors.UNKNOWN": "The status check failed. Try again."
+}

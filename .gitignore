@@ -21,3 +21,14 @@ dist/
 build/
 
 examples/
+
+# Product runtime configuration and generated tooling output
+/.env
+/.env.*
+!/.env.example
+node_modules/
+frontend/dist/
+coverage/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/

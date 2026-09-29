@@ -1,0 +1,17 @@
+**
+!pyproject.toml
+!requirements.txt
+!package.json
+!package-lock.json
+!backend/
+!backend/app/
+!backend/app/**/*.py
+!frontend/
+!frontend/package.json
+!frontend/index.html
+!frontend/tsconfig.json
+!frontend/vite.config.ts
+!frontend/src/
+!frontend/src/**
+!deploy/
+!deploy/nginx.conf

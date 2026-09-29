@@ -1,0 +1,18 @@
+{
+  "app.title": "Entrenador de solfeo",
+  "app.description": "La estructura de la aplicación está lista. Los ejercicios y el inicio de sesión aún no están disponibles.",
+  "language.label": "Idioma",
+  "language.en": "Inglés",
+  "language.ru": "Ruso",
+  "language.es": "Español",
+  "health.title": "Estado del servicio",
+  "health.pending": "Comprobando el servidor…",
+  "health.ok": "El servidor está disponible",
+  "health.scope": "Esta comprobación verifica el proceso del servidor. No comprueba la base de datos ni otros servicios.",
+  "health.retry": "Comprobar de nuevo",
+  "errors.SERVICE_UNAVAILABLE": "El servidor no está disponible. Inténtelo de nuevo.",
+  "errors.INVALID_RESPONSE": "El servidor devolvió una respuesta inesperada.",
+  "errors.NETWORK_ERROR": "No se puede conectar con el servidor. Compruebe su conexión.",
+  "errors.REQUEST_TIMEOUT": "El servidor no respondió a tiempo. Inténtelo de nuevo.",
+  "errors.UNKNOWN": "La comprobación del estado falló. Inténtelo de nuevo."
+}

@@ -10,7 +10,8 @@ Prerequisites:
 The worker is active on the VPS as of 2026-09-29.
 The owner confirms successful audio receipt and playback on 2026-09-29.
 The Telegram bot replaces PWA sharing as the selected product audio import path.
-The remaining checklist results are not recorded.
+The owner confirms the remaining manual checks on 2026-09-29.
+The confirmation closes PHASE 0.5; device versions and per-message evidence remain unrecorded.
 
 The bot stores audio on the server as AAC `.m4a`.
 It does not create an exercise or provide a public download link.
@@ -39,7 +40,7 @@ Save the audio first if direct sharing does not attach the file.
 Sending only a message link does not transfer its audio.
 
 The operator confirms that a VPS restart preserves the saved audio and update checkpoint on 2026-09-29.
-The live unauthorized-sender check remains open.
+The owner confirms the live unauthorized-sender check with the remaining checks.
 An unauthorized sender receives no response, and the worker downloads no file.
 
 Do not post the bot token in chat or include it in a screenshot.

@@ -53,3 +53,9 @@ Format: date, decision, reason. Do not reverse a decision without asking the own
   The web application and its role boundaries remain unchanged.
   The old PWA result remains failed; no further PWA acceptance is required for the selected ingestion path.
   This decision does not claim completion of unreported bot checklist cases or authorize deletion of deployed prototypes.
+- 2026-09-29: The owner confirms the remaining manual checks and requests continuation.
+  PHASE 0.5 closes with Audiveris, protected AAC delivery, and Telegram ingestion as the selected paths.
+  The previous handoff requests voice, forwarded-audio, document, and unauthorized-sender checks.
+  The confirmation covers those checks; device versions and per-message evidence remain unrecorded.
+  PHASE 0 starts with the local health-page skeleton.
+  Product Telegram integration remains in PHASE 4; deployed prototypes remain unchanged.

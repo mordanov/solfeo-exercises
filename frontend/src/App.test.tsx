@@ -1,0 +1,94 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { I18nextProvider } from "react-i18next";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { beforeEach, expect, it, vi } from "vitest";
+import { App } from "./App";
+import { i18n } from "./i18n";
+
+beforeEach(async () => {
+  await i18n.changeLanguage("en");
+});
+
+function renderApp() {
+  const client = new QueryClient({
+    defaultOptions: { queries: { retry: false, gcTime: 0 } },
+  });
+  return render(
+    <I18nextProvider i18n={i18n}>
+      <QueryClientProvider client={client}>
+        <App />
+      </QueryClientProvider>
+    </I18nextProvider>,
+  );
+}
+
+it("shows pending state rather than claiming the backend is healthy", () => {
+  vi.stubGlobal(
+    "fetch",
+    vi.fn(() => new Promise<Response>(() => {})),
+  );
+  renderApp();
+  expect(screen.getByRole("status")).toHaveTextContent("Checking the backend");
+  expect(screen.queryByText("Backend is available")).not.toBeInTheDocument();
+});
+
+it("shows a successful health check", async () => {
+  vi.stubGlobal(
+    "fetch",
+    vi.fn().mockResolvedValue(new Response('{"status":"ok"}')),
+  );
+  renderApp();
+  expect(await screen.findByText("Backend is available")).toBeInTheDocument();
+  expect(screen.getByText(/does not check the database/)).toBeInTheDocument();
+});
+
+it("shows failure and recovers on explicit retry", async () => {
+  const fetch = vi
+    .fn()
+    .mockResolvedValueOnce(new Response("unavailable", { status: 503 }))
+    .mockResolvedValueOnce(new Response('{"status":"ok"}'));
+  vi.stubGlobal("fetch", fetch);
+  renderApp();
+  expect(await screen.findByRole("alert")).toHaveTextContent(
+    "Backend is unavailable",
+  );
+  await userEvent.click(screen.getByRole("button", { name: "Check again" }));
+  expect(await screen.findByText("Backend is available")).toBeInTheDocument();
+  expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+});
+
+it("switches all visible status text and document metadata to Russian and Spanish", async () => {
+  vi.stubGlobal(
+    "fetch",
+    vi.fn().mockImplementation(async () => new Response('{"status":"ok"}')),
+  );
+  renderApp();
+  await screen.findByText("Backend is available");
+  await userEvent.selectOptions(screen.getByLabelText("Language"), "ru");
+  expect(await screen.findByText("Сервер доступен")).toBeInTheDocument();
+  expect(document.documentElement.lang).toBe("ru");
+  expect(document.title).toBe("Тренажёр сольфеджио");
+  await userEvent.selectOptions(screen.getByLabelText("Язык"), "es");
+  await waitFor(() => expect(document.documentElement.lang).toBe("es"));
+  expect(
+    await screen.findByText("El servidor está disponible"),
+  ).toBeInTheDocument();
+});
+
+it("does not show stale success after a failed recheck", async () => {
+  vi.stubGlobal(
+    "fetch",
+    vi
+      .fn()
+      .mockResolvedValueOnce(new Response('{"status":"ok"}'))
+      .mockRejectedValueOnce(new TypeError("offline")),
+  );
+  renderApp();
+  await screen.findByText("Backend is available");
+  await userEvent.click(screen.getByRole("button", { name: "Check again" }));
+  expect(await screen.findByRole("alert")).toHaveTextContent(
+    "Cannot connect to the backend",
+  );
+  expect(screen.queryByText("Backend is available")).not.toBeInTheDocument();
+});

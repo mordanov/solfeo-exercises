@@ -17,6 +17,7 @@ Goal: find out early if the three risky parts work. Do not build product code he
 3. Audio ingestion: assess the Android PWA share target, then test the owner-approved Telegram replacement.
    PWA result: the real Android receiver gets an empty form; this path fails acceptance.
    Telegram result: the owner confirms receipt and successful playback of a real `.m4a` file.
+   The owner confirms the remaining manual checks and closes PHASE 0.5 on 2026-09-29.
    Keep the failed PWA report; do not claim that Telegram success fixes PWA sharing.
    Output: the bot report, real-message checklist, and the replacement decision in `DECISIONS.md`.
 Done when: the owner reads the report and confirms the decisions in DECISIONS.md.

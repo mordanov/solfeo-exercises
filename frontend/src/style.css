@@ -1,0 +1,27 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #17212b;
+  background: #f5f7fa;
+  line-height: 1.5;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  max-width: 42rem;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #fff;
+}
+
+button,
+select {
+  font: inherit;
+  padding: 0.5rem;
+}
+
+[role="alert"] {
+  color: #a01818;
+}

@@ -1,0 +1,1 @@
+"""Solfège Trainer backend."""

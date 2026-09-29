@@ -1,0 +1,76 @@
+name: Product CI
+
+on:
+  pull_request:
+    paths:
+      - backend/**
+      - frontend/**
+      - deploy/**
+      - pyproject.toml
+      - uv.lock
+      - requirements.txt
+      - package.json
+      - package-lock.json
+      - .dockerignore
+      - .env.example
+      - .github/workflows/ci.yml
+  push:
+    branches: [main]
+    paths:
+      - backend/**
+      - frontend/**
+      - deploy/**
+      - pyproject.toml
+      - uv.lock
+      - requirements.txt
+      - package.json
+      - package-lock.json
+      - .dockerignore
+      - .env.example
+      - .github/workflows/ci.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv sync --locked --python 3.12
+      - run: uv run pytest
+      - run: uv run ruff check backend
+      - run: uv run ruff format --check backend
+      - run: uv run mypy --config-file pyproject.toml
+      - name: Check the runtime dependency export
+        run: uv export --locked --no-dev --no-emit-project --no-header --no-annotate | diff requirements.txt -
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm install --global npm@12.1.0
+      - run: npm ci
+      - run: npm test
+      - run: npm run lint
+      - run: npm run format:check
+      - run: npm run build
+  containers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cp .env.example .env
+      - run: docker compose --env-file .env -f deploy/compose.yaml up --build --wait
+      - name: Verify the public health endpoint
+        run: |
+          curl --fail --silent http://127.0.0.1:18080/api/health | python -c 'import json, sys; assert json.load(sys.stdin) == {"status": "ok"}'
+          curl --fail --silent http://127.0.0.1:18080/ | grep 'id="root"'
+      - if: always()
+        run: docker compose --env-file .env -f deploy/compose.yaml down

@@ -1,0 +1,20 @@
+{
+  "name": "solfeo-exercises",
+  "private": true,
+  "packageManager": "npm@12.1.0",
+  "workspaces": [
+    "frontend"
+  ],
+  "engines": {
+    "node": ">=22.12 <23",
+    "npm": ">=12 <13"
+  },
+  "scripts": {
+    "dev": "npm run dev --workspace frontend",
+    "build": "npm run build --workspace frontend",
+    "test": "npm run test --workspace frontend",
+    "lint": "npm run lint --workspace frontend",
+    "format": "npm run format --workspace frontend",
+    "format:check": "npm run format:check --workspace frontend"
+  }
+}

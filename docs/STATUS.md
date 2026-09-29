@@ -8,9 +8,21 @@ Prerequisites:
 Last updated: 2026-09-29 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
 
 ## Current phase
-PHASE 0.5: Risk prototypes; ingestion decision accepted, remaining bot checks open.
+PHASE 0: Walking skeleton and CI/CD; the first local health-page task is complete.
+The owner confirms the remaining bot checks and continuation on 2026-09-29.
+PHASE 0.5 is complete; the failed PWA result remains unchanged.
 
 ## Plan for the current phase
+- [x] Add the product layout and locked Python and TypeScript tooling.
+- [x] Add the public FastAPI health endpoint and translated React health page.
+- [x] Add isolated local Docker images, nginx, Compose, and initial CI.
+- [ ] Select the SQLAlchemy execution model before database implementation.
+- [ ] Add PostgreSQL, an empty Alembic migration, and database settings.
+- [ ] Add pre-commit checks, database CI, and production Compose configuration.
+- [ ] Add targeted VPS deployment, migration, health verification, and rollback.
+- [ ] Complete the deployed health-page manual check.
+
+## Completed PHASE 0.5 plan
 - [x] Prepare the OMR sample set and owner-approved evaluation criteria.
 - [x] Run Audiveris in Docker and report recognition results.
 - [x] Demonstrate protected `.m4a` delivery with X-Accel-Redirect and Range.
@@ -18,9 +30,25 @@ PHASE 0.5: Risk prototypes; ingestion decision accepted, remaining bot checks op
 - [x] Evaluate Android PWA sharing and record its failure.
 - [x] Demonstrate the Telegram replacement with owner-confirmed receipt and playback.
 - [x] Record the owner-approved replacement of PWA audio sharing with the bot.
-- [ ] Complete the remaining Telegram checklist before closing the phase.
+- [x] Complete the remaining Telegram checklist, as confirmed by the owner.
 
 ## Done
+- The product backend and frontend remain separate from disposable prototypes.
+- `/api/health` returns `{"status":"ok"}` without authentication or caching.
+- This endpoint checks the process, not PostgreSQL or other services.
+- The health page supports English, Russian, and Spanish, with pending, success, failure, and retry states.
+- The page shows explicit network, timeout, unavailable-service, and invalid-response errors.
+- Language changes update the page, document title, and document language.
+- The root `.env.example` documents all settings for this slice.
+- Root `uv.lock`, `requirements.txt`, and `package-lock.json` lock dependencies.
+- Local checks pass: 12 backend tests, 34 frontend tests, Ruff, strict mypy, ESLint, Prettier, and TypeScript.
+- The production frontend build and isolated Compose healthchecks pass.
+- Desktop Chrome verifies the built page, all 3 languages, a stopped backend, explicit failure, and recovery.
+- The local stand remains available at `http://127.0.0.1:18080/` for owner checks.
+- `.github/workflows/ci.yml` checks the product without publishing or deploying images.
+- `docs/developer/setup.md` explains local execution and checks.
+- Product authentication, database access, and Telegram integration are not implemented.
+- The working VPS, bot, and superseded PWA deployment remain unchanged in this task.
 - The owner approves the PHASE 0.5 plan.
 - The owner approves 10 initial images, recognition criteria, and an owner-reviewed engine recommendation.
 - Local sample preparation uses images 1 through 10; image 11 remains outside the initial evaluation.
@@ -81,7 +109,7 @@ PHASE 0.5: Risk prototypes; ingestion decision accepted, remaining bot checks op
 - A targeted VPS restart preserves the saved audio hash, bot identity, and update checkpoint.
 - The bot returns to healthy status; all 43 unrelated containers remain unchanged.
 
-## In progress
+## PHASE 0.5 deployment record
 - The files protocol checks and owner manual step are complete.
 - Basic authentication is a localhost-only prototype assumption, not a product authentication decision.
 - The HTTPS deployment works, but Android messenger sharing fails owner acceptance.
@@ -105,34 +133,26 @@ PHASE 0.5: Risk prototypes; ingestion decision accepted, remaining bot checks op
 - All 43 pre-existing containers remain unchanged during activation.
 - The owner confirms successful real audio receipt on 2026-09-29.
 - The reported bot reply identifies `199163078.m4a`, with a size of 636644 bytes.
-- Playback is confirmed; the specific attachment type and remaining checklist results are not recorded.
-- Live checks for untested attachment types and an unauthorized sender remain open.
-- No new-phase product code or deployment cleanup occurs in this task.
+- The owner subsequently confirms that the remaining manual checks pass on 2026-09-29.
+- This confirms the voice, forwarded-audio, document, and unauthorized-sender cases requested in the previous handoff.
+- The owner does not supply device versions or a per-message evidence record.
 
 ## Next step
-- Complete the remaining bot checks without repeating the confirmed playback check.
-- Close PHASE 0.5 after the remaining checks, then approve the first PHASE 0 implementation task.
+- Plan the PostgreSQL and Alembic task, including the SQLAlchemy execution model.
 - Keep the active bot and superseded PWA deployment unchanged until an explicit deployment or cleanup task.
 
-## Proposed PHASE 0 sequence
+## PHASE 0 boundaries
 
-The next phase is the walking skeleton, not product Telegram integration.
-The following sequence is a plan, not implementation approval.
-
-- [ ] Define the product layout, Python and TypeScript tooling, and the SQLAlchemy execution model.
-- [ ] Add a tested FastAPI health endpoint and the translated React health page.
-- [ ] Add PostgreSQL, an empty Alembic migration, validated settings, and complete environment examples.
-- [ ] Add pre-commit checks, Docker images, Compose, and CI.
-- [ ] Add targeted VPS deployment, health verification, and rollback without restarting unrelated applications.
-- [ ] Update setup and deployment guides, then complete the manual health-page check.
+The owner requests continuation after completing PHASE 0.5 checks.
+The first implementation task establishes a local health page, not a complete production deployment.
+The SQLAlchemy choice remains open because this slice has no database access.
 
 Keep authentication in PHASE 1 and exercise/file operations in PHASE 2.
 Integrate the bot with manager accounts and exercises in PHASE 4.
 Do not copy disposable prototype authentication into the product.
 
 ## Open questions for the owner
-- Identify the Android device and browser versions when manual testing starts.
-- Record which Telegram attachment types passed; do not infer them from the saved filename.
+- Record the Chrome and Safari versions during the health-page manual check.
 - Select sync or async SQLAlchemy during PHASE 0 planning.
 
 ## Manual checks the owner must do
@@ -146,10 +166,14 @@ Do not copy disposable prototype authentication into the product.
 - [x] Confirm successful playback of the saved audio.
 - [x] Select Telegram instead of PWA sharing for product audio import.
 - [x] Verify preserved audio and checkpoint state after a targeted VPS restart.
-- [ ] Complete the real-message bot checklist in `docs/user/telegram-prototype.md`.
+- [x] Complete the real-message bot checklist, as confirmed by the owner.
+- [ ] Open the local health page in Chrome and Safari.
+- [ ] Switch between English, Russian, and Spanish.
+- [ ] Stop the local backend and confirm an error instead of a successful status.
+- [ ] Restart the local backend and confirm recovery with the retry button.
 
 The superseded Android PWA checklist is no longer required.
-Unreported bot checks remain unconfirmed; the replacement decision does not mark them as passed.
+The new local health-page procedure appears in `docs/user/manager.md` and `docs/user/student.md`.
 
 ## Known issues
 - Image 6 produces no MusicXML; image 7 receives 46 % recognition.
@@ -167,4 +191,6 @@ Unreported bot checks remain unconfirmed; the replacement decision does not mark
 - Samples and generated MusicXML remain local; a fresh clone does not contain them.
 - The HTTPS PWA runs at `https://solfeo.miveralta.ru/prototype-share/`.
 - The onboarding guide is `../web-projects/web-folders/documentation/onboarding.md`.
-- PHASE 0.5 remains incomplete until the remaining prototypes and owner review finish.
+- npm 10 fails during fresh workspace dependency resolution; npm 12.1.0 resolves the declared dependencies.
+- The health-page language selector is temporary and does not save user preferences.
+- PostgreSQL, migrations, pre-commit integration, product CD, and VPS acceptance remain for later PHASE 0 tasks.
