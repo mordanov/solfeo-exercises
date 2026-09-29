@@ -15,6 +15,7 @@ on:
       - .env.example
       - .pre-commit-config.yaml
       - .github/workflows/ci.yml
+      - .github/workflows/publish-product.yml
   push:
     branches: [main]
     paths:
@@ -30,6 +31,7 @@ on:
       - .env.example
       - .pre-commit-config.yaml
       - .github/workflows/ci.yml
+      - .github/workflows/publish-product.yml
   workflow_dispatch:
 
 permissions:

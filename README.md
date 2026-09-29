@@ -47,6 +47,8 @@ uv run --locked pre-commit run --all-files
 
 The same hooks run in CI.
 Database tests and application builds remain separate checks.
+Successful main-branch CI authorizes the product publication workflow.
+Its verified release bundle does not deploy the application to the VPS.
 
 ## Documentation
 

@@ -8,7 +8,7 @@ Prerequisites:
 Last updated: 2026-09-29 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
 
 ## Current phase
-PHASE 0: Walking skeleton and CI/CD; production Compose configuration is verified locally, but VPS deployment remains pending.
+PHASE 0: Walking skeleton and CI/CD; CI-gated release publication is implemented, but VPS rollout remains pending.
 The owner confirms the requested local health-page and PostgreSQL restart scenarios on 2026-09-29.
 The owner confirms the remaining bot checks and continuation on 2026-09-29.
 PHASE 0.5 is complete; the failed PWA result remains unchanged.
@@ -22,6 +22,7 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Add real PostgreSQL tests and migration checks to CI.
 - [x] Add shared pre-commit checks locally and in CI.
 - [x] Add production Compose configuration and isolated integration checks.
+- [x] Add CI-gated image publication and verified release bundles.
 - [ ] Add targeted VPS deployment, migration, health verification, and rollback.
 - [ ] Complete the deployed health-page manual check.
 
@@ -36,6 +37,12 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Complete the remaining Telegram checklist, as confirmed by the owner.
 
 ## Done
+- `publish-product.yml` publishes backend and frontend images only for a main-branch commit with matching successful CI.
+- It pulls the registry images by digest, checks their source labels, and runs the production container scenarios.
+- `deploy/release.py` packages only deployment files and a provenance manifest with immutable image references and file hashes.
+- All 13 release-bundle unit tests pass; the runtime dependencies remain unchanged.
+- A separate Actions job reports SSH-secret presence without exposing values or accessing the VPS.
+- This task does not change shared infrastructure, the active bot, or public routing.
 - `deploy/compose.prod.yaml` uses supplied images without building application code on the server.
 - It publishes only the frontend on loopback and keeps PostgreSQL on a private network.
 - Production uses separate bootstrap administrator, migration owner, and runtime application roles.
@@ -174,7 +181,9 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - The owner does not supply device versions or a per-message evidence record.
 
 ## Next step
-- Plan image publication, shared nginx integration, and targeted VPS deployment with migration verification and rollback.
+- Review the publication artifact and the deployment prerequisite report.
+- Configure any missing SSH secrets through repository settings.
+- Implement targeted VPS rollout, shared nginx integration, migration verification, and rollback.
 - Keep the active bot and superseded PWA deployment unchanged until an explicit deployment or cleanup task.
 
 ## PHASE 0 boundaries
@@ -231,5 +240,6 @@ The production configuration task adds no new browser manual checks before the a
 - npm 10 fails during fresh workspace dependency resolution; npm 12.1.0 resolves the declared dependencies.
 - The health-page language selector is temporary and does not save user preferences.
 - Product CD, public nginx integration, and VPS acceptance remain for later PHASE 0 tasks.
-- Product registry images are not published yet; production checks use locally built equivalents.
+- No product release is active on the VPS; publication artifacts provide the tested image digests for the next task.
+- The current CLI credential cannot manage repository Actions secrets: the public-key API returns HTTP 403.
 - Development still uses the bootstrap database role; the separate production configuration does not.

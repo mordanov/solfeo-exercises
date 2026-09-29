@@ -34,12 +34,69 @@ All 6 hooks reject deliberate defects during local verification and pass after r
 
 ## Deployment boundary
 
-This workflow neither publishes images nor connects to the VPS.
+The CI workflow neither publishes images nor connects to the VPS.
 The existing prototype publishing workflows remain separate.
 `deploy/compose.prod.yaml` provides a separate, image-based production configuration.
 See `docs/developer/deploy.md` for its role boundaries and operational requirements.
-Product CD, GHCR publication, production migration orchestration, rollback, and VPS acceptance remain unfinished PHASE 0 tasks.
+VPS rollout, public nginx integration, rollback, and VPS acceptance remain unfinished PHASE 0 tasks.
 
 Do not run the shared infrastructure's general deployment for a scoped product change.
 Plan the named services, nginx routes, migration order, and rollback before the first product deployment.
 Preserve the active Telegram prototype, its data, and unrelated services.
+
+## Product release publication
+
+`.github/workflows/publish-product.yml` runs after successful main-branch CI or through manual dispatch.
+It accepts only this repository's `main` branch and an exact commit with successful push or manual CI.
+Pull-request CI does not authorize publication.
+Manual publication also requires a successful CI run for the exact selected commit.
+Run Product CI manually first if a documentation-only commit has no matching CI run.
+
+The workflow builds x86-64 images for the VPS:
+- `ghcr.io/mordanov/solfeo-backend`
+- `ghcr.io/mordanov/solfeo-frontend`
+
+Only the publishing job has `packages: write`.
+It uses `GITHUB_TOKEN`; no personal registry credential is required for publication.
+The images have source-revision labels and `sha-<commit>` tags.
+Deployment references use registry digests, not those mutable tags.
+
+After publishing, the workflow pulls both images by digest and checks their source labels.
+It runs the production Compose scenarios against those pulled images.
+It emits a release bundle only after all those checks pass.
+A failed check can leave registry images, but it does not produce a verified release bundle.
+
+The artifact name is `solfeo-release-<source-sha>` and its retention is 30 days.
+It contains `solfeo-release.tar.gz` with exactly these files:
+- `release.json`
+- `deploy/compose.prod.yaml`
+- `deploy/postgres-init.sh`
+- `.env.example`
+
+`release.json` records format version, repository, source commit, CI run ID, image digests, and deployment-file SHA-256 hashes.
+The bundle excludes `.env`, prototype files, media, and unrelated repository content.
+The builder rejects mutable image references, unsafe symlinks, and non-executable bootstrap scripts.
+It normalizes file ownership and does not overwrite an existing artifact.
+
+Download the artifact from a successful publication run, not from an arbitrary branch or run.
+The later rollout implementation must verify its provenance and hashes before use.
+Publication alone does not deploy the application or satisfy PHASE 0 acceptance.
+
+## Deployment prerequisite report
+
+A separate job reports only whether the required SSH secrets are present.
+It does not print their values, test connectivity, or contact the VPS.
+Missing secrets appear as `DEPLOYMENT_SETUP_REQUIRED`, not as a successful deployment.
+
+| Secret | Required value |
+|---|---|
+| `VPS_HOST` | The intended SSH host |
+| `VPS_USER` | The deployment account |
+| `VPS_SSH_KEY` | A deployment private key authorized for that account |
+| `VPS_KNOWN_HOSTS` | Host-key entries from an already trusted source |
+
+The future deployment can use optional `VPS_PORT`, with port 22 as its default.
+Use the repository's Settings > Secrets and variables > Actions page to configure these values.
+Do not send private keys in chat or commit them.
+Do not replace pinned host verification with an unverified `ssh-keyscan`.
+The current CLI credential receives HTTP 403 for repository secret management, so it cannot provision missing secrets.

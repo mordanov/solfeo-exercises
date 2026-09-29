@@ -35,3 +35,4 @@ Prerequisites:
 | schema revision | The migration identifier recorded in the database by Alembic. |
 | liveness | Confirmation that the backend process responds, without proving database readiness. |
 | DML | Data operations such as selecting, inserting, updating, and deleting table rows. |
+| release bundle | An archive with verified image references, deployment files, source provenance, and file hashes. |

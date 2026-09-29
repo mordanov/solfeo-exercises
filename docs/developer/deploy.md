@@ -18,7 +18,8 @@ PostgreSQL and the backend have no published ports.
 Only PostgreSQL, the backend, and the migration service join the private database network.
 
 The configuration passes isolated container checks locally and in CI.
-This task does not publish product images, configure public routing, or deploy to the VPS.
+The separate publication workflow supplies verified product images and a versioned release bundle.
+Public routing and VPS deployment remain unimplemented.
 The following production procedure requires the later CD and nginx integration task.
 Do not invoke the shared infrastructure's general deployment.
 
@@ -34,7 +35,8 @@ Do not overwrite an existing production configuration file.
 5. Prefer registry digests instead of mutable tags.
 
 The intended image names are `ghcr.io/mordanov/solfeo-backend` and `ghcr.io/mordanov/solfeo-frontend`.
-Image publication remains unimplemented.
+Use image digests from a successful publication run's `release.json`.
+See `docs/developer/ci-cd.md` for the publication gate and artifact contents.
 Compose requires nonempty references but does not enforce their immutability; CD must supply the tested digests.
 Frontend language and timeout settings are build-time values within the frontend image.
 Changing those values in the server environment does not rebuild that image.
@@ -105,10 +107,11 @@ The integration task must connect only the frontend to an appropriate shared pro
 It must use an unambiguous upstream name and retain database network isolation.
 Review trusted forwarded headers before authentication starts in PHASE 1.
 
-The CD task must specify SSH host, port, user, private key, and pinned known-host keys through GitHub secrets.
+The deployment prerequisite report checks `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`, and `VPS_KNOWN_HOSTS`.
+The future rollout can use optional `VPS_PORT`, with port 22 as its default.
 It must also configure registry pull access when images are private.
 The pipeline needs `packages: write` to publish through `GITHUB_TOKEN`.
-Secret names, publication workflow, rollout script, and rollback remain part of that task.
+The rollout script, connectivity checks, and rollback remain part of that task.
 
 ## Reproduce the isolated checks
 

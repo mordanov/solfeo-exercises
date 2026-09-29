@@ -1,0 +1,155 @@
+name: Publish product release
+
+on:
+  workflow_run:
+    workflows: ["Product CI"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: publish-product-main
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       (github.event.workflow_run.event == 'push' ||
+        github.event.workflow_run.event == 'workflow_dispatch') &&
+       github.event.workflow_run.head_repository.full_name == github.repository)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+      packages: write
+    env:
+      SOURCE_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+    steps:
+      - name: Require successful main-branch CI for the exact source commit
+        id: source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if [ "$GITHUB_REF" != "refs/heads/main" ] ||
+             [ "$GITHUB_REPOSITORY" != "mordanov/solfeo-exercises" ]; then
+            echo "::error::PUBLICATION_REQUIRES_MAIN"
+            exit 1
+          fi
+          verified="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/ci.yml/runs?head_sha=$SOURCE_SHA&branch=main&status=success&per_page=20" --jq '[.workflow_runs[] | select(.event == "push" or .event == "workflow_dispatch")][0] | [.id, .head_sha] | @tsv')"
+          read -r run_id verified_sha <<< "$verified"
+          if [ -z "$run_id" ] || [ "$verified_sha" != "$SOURCE_SHA" ]; then
+            echo "::error::SUCCESSFUL_SOURCE_CI_REQUIRED"
+            exit 1
+          fi
+          echo "ci_run_id=$run_id" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.SOURCE_SHA }}
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv sync --locked --python 3.12
+      - name: Read public frontend build values
+        run: grep -E '^VITE_(DEFAULT_LANGUAGE|HEALTH_TIMEOUT_MS)=' .env.example >> "$GITHUB_ENV"
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish backend
+        id: backend
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: backend/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: ghcr.io/mordanov/solfeo-backend:sha-${{ env.SOURCE_SHA }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/mordanov/solfeo-exercises
+            org.opencontainers.image.revision=${{ env.SOURCE_SHA }}
+      - name: Publish frontend
+        id: frontend
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: frontend/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: ghcr.io/mordanov/solfeo-frontend:sha-${{ env.SOURCE_SHA }}
+          labels: |
+            org.opencontainers.image.source=https://github.com/mordanov/solfeo-exercises
+            org.opencontainers.image.revision=${{ env.SOURCE_SHA }}
+          build-args: |
+            VITE_DEFAULT_LANGUAGE=${{ env.VITE_DEFAULT_LANGUAGE }}
+            VITE_HEALTH_TIMEOUT_MS=${{ env.VITE_HEALTH_TIMEOUT_MS }}
+      - name: Verify the published images, not only the build
+        env:
+          BACKEND_IMAGE: ghcr.io/mordanov/solfeo-backend@${{ steps.backend.outputs.digest }}
+          FRONTEND_IMAGE: ghcr.io/mordanov/solfeo-frontend@${{ steps.frontend.outputs.digest }}
+        run: |
+          set -euo pipefail
+          docker pull "$BACKEND_IMAGE"
+          docker pull "$FRONTEND_IMAGE"
+          for image in "$BACKEND_IMAGE" "$FRONTEND_IMAGE"; do
+            revision="$(docker image inspect --format '{{ index .Config.Labels "org.opencontainers.image.revision" }}' "$image")"
+            test "$revision" = "$SOURCE_SHA"
+          done
+          docker tag "$BACKEND_IMAGE" solfeo-dev-backend
+          docker tag "$FRONTEND_IMAGE" solfeo-dev-frontend
+          uv run --locked pytest deploy/tests -q
+      - name: Package the verified release
+        env:
+          CI_RUN_ID: ${{ steps.source.outputs.ci_run_id }}
+          BACKEND_IMAGE: ghcr.io/mordanov/solfeo-backend@${{ steps.backend.outputs.digest }}
+          FRONTEND_IMAGE: ghcr.io/mordanov/solfeo-frontend@${{ steps.frontend.outputs.digest }}
+        run: |
+          uv run --locked python deploy/release.py \
+            --destination "$RUNNER_TEMP/solfeo-release" \
+            --repository "$GITHUB_REPOSITORY" \
+            --source-sha "$SOURCE_SHA" \
+            --ci-run-id "$CI_RUN_ID" \
+            --backend-image "$BACKEND_IMAGE" \
+            --frontend-image "$FRONTEND_IMAGE"
+          printf 'Source: `%s`\n\nBackend: `%s`\n\nFrontend: `%s`\n\nNo VPS deployment occurs in this workflow.\n' \
+            "$SOURCE_SHA" "$BACKEND_IMAGE" "$FRONTEND_IMAGE" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: solfeo-release-${{ env.SOURCE_SHA }}
+          path: ${{ runner.temp }}/solfeo-release/solfeo-release.tar.gz
+          if-no-files-found: error
+          retention-days: 30
+  deployment-prerequisites:
+    name: Report deployment prerequisites
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Report presence only, without accessing the VPS
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_KNOWN_HOSTS: ${{ secrets.VPS_KNOWN_HOSTS }}
+        run: |
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          names = ("VPS_HOST", "VPS_USER", "VPS_SSH_KEY", "VPS_KNOWN_HOSTS")
+          missing = [name for name in names if not os.environ.get(name, "").strip()]
+          if missing:
+              result = "DEPLOYMENT_SETUP_REQUIRED: " + ", ".join(missing)
+          else:
+              result = "SSH configuration is present; connectivity is not verified."
+          print(result)
+          with Path(os.environ["GITHUB_STEP_SUMMARY"]).open("a") as summary:
+              summary.write(result + "\n\nPublication does not deploy or close PHASE 0.\n")
+          PY
