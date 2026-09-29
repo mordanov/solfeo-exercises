@@ -174,6 +174,14 @@ Do not register its database or services under the shared stack's `compose_servi
 The existing hostname entry remains responsible for the certificate and prototype.
 The shared workflow guide links to the authoritative paired product workflows instead of a generic deployment template.
 
+The first live integration uses shared commit `ac76b1c`.
+The operator builds the shared nginx image, copies only the Solfège templates into the running container, and renders the active HTTPS configuration.
+The operator validates with `nginx -t` before a graceful reload.
+The existing container joins `solfeo-proxy` without recreation.
+The committed Compose network definition preserves this attachment during future recreation.
+These targeted operations preserve all 44 existing container IDs and start times.
+Do not substitute the shared infrastructure's general deployment for these scoped operations.
+
 The deployment prerequisite report checks `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`, and `VPS_KNOWN_HOSTS`.
 The rollout accepts optional `VPS_PORT`, with port 22 as its default.
 Host-key entries must match the configured host and port.

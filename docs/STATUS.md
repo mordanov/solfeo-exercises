@@ -8,7 +8,7 @@ Prerequisites:
 Last updated: 2026-09-29 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
 
 ## Current phase
-PHASE 0: Walking skeleton and CI/CD; targeted VPS rollout is under verification.
+PHASE 0: Walking skeleton and CI/CD; the product is deployed, with final owner browser acceptance pending.
 The owner confirms the requested local health-page and PostgreSQL restart scenarios on 2026-09-29.
 The owner confirms the remaining bot checks and continuation on 2026-09-29.
 PHASE 0.5 is complete; the failed PWA result remains unchanged.
@@ -23,7 +23,7 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Add shared pre-commit checks locally and in CI.
 - [x] Add production Compose configuration and isolated integration checks.
 - [x] Add CI-gated image publication and verified release bundles.
-- [ ] Add targeted VPS deployment, migration, health verification, and rollback.
+- [x] Add targeted VPS deployment, migration, health verification, and rollback.
 - [ ] Complete the deployed health-page manual check.
 
 ## Completed PHASE 0.5 plan
@@ -37,24 +37,37 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Complete the remaining Telegram checklist, as confirmed by the owner.
 
 ## Done
+- Product source `13a081745a8cf0a5804f75f9a5831c0e9e7f4137` is active at `https://solfeo.miveralta.ru/`.
+- CI run `36585295551` and publication/CD run `36585683212` succeed.
+- The runner passes all 30 release and production checks before deployment.
+- Actions verifies the owner's SSH configuration with pinned host keys and deploys through the separate product project.
+- The VPS stores 3 independent database passwords in private `.env.production`; no password enters Git or output.
+- Independent checks confirm the exact image digests, schema heads, container health, loopback-only frontend port, and proxy network membership.
+- The deployment removes its temporary registry credentials.
+- Chrome 154.0.8037.58 passes public HTTPS, all 3 languages, browser metadata, blocked-API failure, and recovery.
+- The browser-only failure scenario does not stop the VPS backend.
+- Shared commit `ac76b1c` persists nginx routing and its dedicated proxy network attachment.
+- Nginx validates and reloads without container recreation; its rebuilt image preserves the templates for later recreation.
+- All 44 pre-existing VPS containers retain their IDs and start times.
+- The Telegram worker remains healthy; `/prototype-share/` keeps its route and method restrictions.
 - The owner confirms Actions secret setup and requests continuation.
 - Rollout tests first fail because the implementation module does not exist.
 - The rollout validates archive provenance and hashes before activation.
 - Real-container scenarios pass for first deployment, migration failure, health failure, and compatible previous-image recovery.
 - The proxy network test confirms that only the product frontend joins the external network.
-- Final Actions connectivity, deployed HTTPS, and browser acceptance remain pending.
+- Final owner browser acceptance remains pending; automated Chrome checks do not establish Safari acceptance.
 - The first CI attempt finds a missing temporary parent directory on a fresh runner.
 - The rollout fixture now creates that directory explicitly before its disposable container scenario.
 - The first product publication succeeds for source `03260e554b13c23b640ef6432775c50b331a7a39`.
 - Publication run `36572516719` pulls and checks the published x86-64 images before creating the release bundle.
 - The downloaded bundle matches the source files, manifest hashes, and CI run `36572315149`.
-- The Actions prerequisite report finds `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`, and `VPS_KNOWN_HOSTS` unavailable.
+- The first publication's prerequisite report finds all 4 SSH secrets unavailable; the owner resolves this before the successful CD run.
 - `publish-product.yml` publishes backend and frontend images only for a main-branch commit with matching successful CI.
 - It pulls the registry images by digest, checks their source labels, and runs the production container scenarios.
 - `deploy/release.py` packages only deployment files and a provenance manifest with immutable image references and file hashes.
 - All 13 release-bundle unit tests pass; the runtime dependencies remain unchanged.
 - A separate Actions job reports SSH-secret presence without exposing values or accessing the VPS.
-- This task does not change shared infrastructure, the active bot, or public routing.
+- That first publication task does not change shared infrastructure, the active bot, or public routing.
 - `deploy/compose.prod.yaml` uses supplied images without building application code on the server.
 - It publishes only the frontend on loopback and keeps PostgreSQL on a private network.
 - Production uses separate bootstrap administrator, migration owner, and runtime application roles.
@@ -193,9 +206,9 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - The owner does not supply device versions or a per-message evidence record.
 
 ## Next step
-- Review the publication artifact and the deployment prerequisite report.
-- Verify targeted VPS rollout through Actions with the configured SSH secrets.
-- Verify shared nginx integration, schema state, and public HTTPS.
+- Complete the final owner Chrome/Safari checks at `https://solfeo.miveralta.ru/`.
+- Confirm language switching, status refresh, and failure/recovery.
+- Close PHASE 0 only after that acceptance; do not start PHASE 1 in this task.
 - Keep the active bot and superseded PWA deployment unchanged until an explicit deployment or cleanup task.
 
 ## PHASE 0 boundaries
@@ -232,7 +245,7 @@ Do not copy disposable prototype authentication into the product.
 
 The superseded Android PWA checklist is no longer required.
 The new local health-page procedure appears in `docs/user/manager.md` and `docs/user/student.md`.
-The production configuration task adds no new browser manual checks before the actual VPS deployment.
+The product now needs final browser acceptance at its public HTTPS address.
 
 ## Known issues
 - Image 6 produces no MusicXML; image 7 receives 46 % recognition.
@@ -252,8 +265,9 @@ The production configuration task adds no new browser manual checks before the a
 - The onboarding guide is `../web-projects/web-folders/documentation/onboarding.md`.
 - npm 10 fails during fresh workspace dependency resolution; npm 12.1.0 resolves the declared dependencies.
 - The health-page language selector is temporary and does not save user preferences.
-- Product CD, public nginx integration, and VPS acceptance remain for later PHASE 0 tasks.
-- No product release is active on the VPS; publication artifacts provide the tested image digests for the next task.
+- Product CD and public nginx integration are active; final owner VPS acceptance remains open.
+- The first deployment has no earlier production release; automatic rollback becomes available after a subsequent successful deployment.
+- Schema-incompatible rollback stops the product services and requires operator recovery; no automatic database downgrade occurs.
 - The current CLI credential cannot manage repository Actions secrets: the public-key API returns HTTP 403.
-- The owner confirms SSH secret setup; the deployment job must still verify their validity.
+- The deployment job confirms valid SSH configuration and removes its temporary registry credentials.
 - Development still uses the bootstrap database role; the separate production configuration does not.

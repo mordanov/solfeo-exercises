@@ -136,3 +136,20 @@ The downloaded artifact matches all 3 deployment-file hashes and preserves the b
 The prerequisite report finds all 4 required SSH secrets unavailable in the repository workflow context.
 That first publication does not connect to SSH or deploy the application.
 The owner subsequently confirms secret setup; the new deployment job verifies actual connectivity.
+
+## First deployed product release
+
+CI [`36585295551`](https://github.com/mordanov/solfeo-exercises/actions/runs/36585295551) succeeds for source `13a081745a8cf0a5804f75f9a5831c0e9e7f4137`.
+Publication and CD [`36585683212`](https://github.com/mordanov/solfeo-exercises/actions/runs/36585683212) succeed on 2026-09-29.
+All 30 release and production checks pass before the SSH deployment.
+The deployment validates real SSH credentials and the pinned host key.
+
+| Image | Active digest reference |
+|---|---|
+| Backend | `ghcr.io/mordanov/solfeo-backend@sha256:fc311fdb42c7b13a09eaca4667718a414cac48e2d349c414f5ca5bfc2d1dc16e` |
+| Frontend | `ghcr.io/mordanov/solfeo-frontend@sha256:9bb783a2af4f422de9f419097344800367c1b9fcc68c4fb1ad00989c9307a4cd` |
+
+Independent checks confirm these references, schema heads, public HTTPS, private network boundaries, and removal of temporary registry credentials.
+All 44 existing VPS containers retain their IDs and start times.
+Chrome 154.0.8037.58 passes the deployed page, 3 languages, browser-only API failure, and recovery.
+Owner acceptance in Chrome and Safari remains open.
