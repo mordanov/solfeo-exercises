@@ -14,8 +14,11 @@ Goal: find out early if the three risky parts work. Do not build product code he
    Output: a table per image (recognized fully / partly / failed), the MusicXML, and a recommendation: continue, or change the engine.
 2. Files: a minimal nginx + backend stand with X-Accel-Redirect and Range for an .m4a file.
    Output: curl commands and results for a Range request, and a manual Safari seek test checklist.
-3. PWA share: a "hello world" PWA with `share_target` served over HTTPS.
-   Output: a manual Android test checklist (install from Chrome, share an audio file from WhatsApp and Telegram, file arrives).
+3. Audio ingestion: assess the Android PWA share target, then test the owner-approved Telegram replacement.
+   PWA result: the real Android receiver gets an empty form; this path fails acceptance.
+   Telegram result: the owner confirms receipt and successful playback of a real `.m4a` file.
+   Keep the failed PWA report; do not claim that Telegram success fixes PWA sharing.
+   Output: the bot report, real-message checklist, and the replacement decision in `DECISIONS.md`.
 Done when: the owner reads the report and confirms the decisions in DECISIONS.md.
 
 ## PHASE 0: Walking skeleton and CI/CD
@@ -52,12 +55,18 @@ Done when: manager uploads an .opus file and an image, and the audio plays and s
 - Docs: user (student listening, manager journal), developer (event model).
 Done when: a student listens to two exercises, closes the tab during the second, and the journal shows one completed and one incomplete session.
 
-## PHASE 4: PWA and Android Share
-- Manifest, icons, service worker, install flow.
-- `share_target` POST handling, IndexedDB hand-off, `/share` page (manager only), login-then-return flow.
-- Unit tests for the share handler. Manual Android checklist in the developer docs.
-- Docs: user (install the app, share audio from WhatsApp and Telegram), developer (how `share_target` works, HTTPS requirement).
-Done when: an audio file shared from WhatsApp on Android becomes an exercise.
+## PHASE 4: Telegram audio import
+- Plan secure linking between Telegram sender IDs and active manager accounts before implementation.
+- Receive private audio, voice, and document attachments through the Telegram bot.
+- Reuse the PHASE 2 file pipeline, storage, and exercise operations.
+- Let the manager create an exercise or attach audio to an existing exercise, with title and description.
+- Persist import state and handle retries without duplicate files or exercises.
+- Enforce manager permissions, including rejection of students, unknown senders, and deactivated managers.
+- Test unauthorized input, unsupported files, size limits, conversion errors, retries, and restart recovery.
+- Document the real Telegram flow and the WhatsApp file-transfer step, without requiring PWA installation.
+- Keep secrets in `.env` and deploy the bot on the existing VPS without changing unrelated services.
+Done when: an authorized manager imports real Telegram audio into an exercise and the saved audio plays correctly.
+The PWA share target and browser share hand-off are no longer part of this phase.
 
 ## PHASE 5: OMR, review, rendering, note names
 - Postgres job queue (SKIP LOCKED). Worker container with Audiveris behind the `OmrEngine` interface. Retries and failure state.

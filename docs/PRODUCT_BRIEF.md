@@ -30,7 +30,8 @@ A child looks at the notes and listens to the audio.
 ## Users and auth
 - User: username (unique login), first_name, last_name, role (manager|student), password, is_active, is_emergency, settings.
 - No email. Simple username+password. Hash passwords with a standard library scheme (bcrypt via passlib, or hashlib.scrypt). Never store plaintext. No Argon2.
-- Session: httpOnly, Secure, SameSite=Lax cookie with a server-side session token, sliding expiry, long lifetime (env-configurable, default 90 days) so the Android PWA stays logged in.
+- Session: httpOnly, Secure, SameSite=Lax cookie with a server-side session token, sliding expiry, long lifetime (env-configurable, default 90 days).
+  The web application retains its session on mobile browsers.
 - Login rate limit (per username+IP) in backend, plus nginx limit_req on /api/auth/login.
 - Manager can create users and reset passwords. Optional flag "must change password on next login".
 - Per-user settings (available to every role, stored on server): ui_language (ru|en|es), note_naming (letters|solfege). Defaults: env DEFAULT_LANGUAGE, note_naming=letters (C-D-E).
@@ -72,8 +73,24 @@ A child looks at the notes and listens to the audio.
 - Implementation: pre-generated syllable clips (script calls OpenAI TTS once, output committed to frontend/public/solfege/<lang>/<naming>/), played with Web Audio API. Fit each note to its duration (playbackRate clamped to a sane range, silence for the rest). Rests = silence. Sharps/flats = extra suffix clip.
 - Available only when score status = approved.
 
-## PWA and Android Share
-- Installable PWA with manifest share_target (POST, multipart/form-data, accepts audio/* and .opus/.ogg, also application/octet-stream).
-- Service worker receives the POST, stores the file (IndexedDB), redirects to /share. The /share page (manager only): choose "new exercise" or "attach to existing", add title/description, upload.
-- If not logged in: login, then return to /share with the file still stored.
-- Requires HTTPS. Document that the PWA must be installed from Chrome on Android.
+## Telegram audio import
+
+The owner replaces PWA audio sharing with a Telegram bot on 2026-09-29.
+The web application remains the interface for exercises, users, listening, and the journal.
+Product delivery no longer requires an Android share target, IndexedDB share hand-off, or PWA installation.
+
+- A manager sends or forwards an audio attachment to the bot in a private Telegram chat.
+- Accept `audio`, `voice`, and audio sent as `document`; text or a link alone is not an audio file.
+- Authorize the Telegram sender against an active manager before accepting an import.
+- Students and unknown senders cannot create exercises or attach files through the bot.
+- Reuse the product file pipeline: size limits, magic-byte checks, AAC `.m4a` conversion, duration, and protected storage.
+- Preserve the manager's choice: create an exercise or attach audio to an existing exercise, with title and description.
+- Confirm completion only after persistence; retries must not duplicate imported files or exercises.
+- Keep tokens and configuration in `.env`; do not expose tokens or received media in logs or public URLs.
+- Document the hosted Telegram API download limit and reject oversized attachments explicitly.
+- For WhatsApp audio, transfer the actual file into Telegram or save it before attaching it to the bot.
+- Select the manager-account linking method and import interaction during PHASE 4 planning.
+
+The risk prototype's numeric sender allowlist is not a replacement for product role checks.
+The bot does not replace website login or grant manager access by Telegram username.
+The failed PWA prototype remains historical evidence, not an acceptance requirement for the replacement flow.

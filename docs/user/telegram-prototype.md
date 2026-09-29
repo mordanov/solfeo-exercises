@@ -8,7 +8,8 @@ Prerequisites:
 - Wait for confirmation that the worker is active on the VPS.
 
 The worker is active on the VPS as of 2026-09-29.
-The owner confirms one successful audio receipt on 2026-09-29.
+The owner confirms successful audio receipt and playback on 2026-09-29.
+The Telegram bot replaces PWA sharing as the selected product audio import path.
 The remaining checklist results are not recorded.
 
 The bot stores audio on the server as AAC `.m4a`.
@@ -37,9 +38,9 @@ For audio from WhatsApp, transfer the actual file into the Telegram bot's chat.
 Save the audio first if direct sharing does not attach the file.
 Sending only a message link does not transfer its audio.
 
-The operator must also test an unauthorized sender and a worker restart.
+The operator confirms that a VPS restart preserves the saved audio and update checkpoint on 2026-09-29.
+The live unauthorized-sender check remains open.
 An unauthorized sender receives no response, and the worker downloads no file.
-A restart must preserve accepted audio and the update checkpoint.
 
 Do not post the bot token in chat or include it in a screenshot.
-Bot success does not confirm that the separate PWA sharing path works.
+The earlier PWA sharing failure remains recorded; PWA retesting is no longer required for this import path.

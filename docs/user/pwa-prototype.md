@@ -1,11 +1,18 @@
 # Android share prototype
 
-This document explains how to test Android audio sharing with the disposable PWA prototype.
+This document preserves the test procedure for the superseded PWA audio-sharing prototype.
 
 Prerequisites:
 - Use Android Chrome with WhatsApp and Telegram.
 - Prepare 1 audio file below 25 MiB.
 - Record the device, Android version, Chrome version, and messenger versions.
+
+## Superseded on 2026-09-29
+
+The owner replaces PWA audio sharing with the Telegram bot after successful receipt and playback.
+Use `docs/user/telegram-prototype.md` for the selected audio import path.
+The procedure below is historical; you do not need to repeat it for product acceptance.
+The existing deployment remains unchanged until a separate cleanup task.
 
 The prototype stores only the latest successful share on your device.
 It does not upload audio or create an exercise.

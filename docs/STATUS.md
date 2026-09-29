@@ -8,15 +8,17 @@ Prerequisites:
 Last updated: 2026-09-29 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
 
 ## Current phase
-PHASE 0.5: Risk prototypes
+PHASE 0.5: Risk prototypes; ingestion decision accepted, remaining bot checks open.
 
 ## Plan for the current phase
 - [x] Prepare the OMR sample set and owner-approved evaluation criteria.
 - [x] Run Audiveris in Docker and report recognition results.
 - [x] Demonstrate protected `.m4a` delivery with X-Accel-Redirect and Range.
 - [x] Prepare the prototype deployment plan for owner review.
-- [ ] Demonstrate Android PWA sharing over HTTPS.
-- [ ] Obtain owner approval of the report and record the final decisions.
+- [x] Evaluate Android PWA sharing and record its failure.
+- [x] Demonstrate the Telegram replacement with owner-confirmed receipt and playback.
+- [x] Record the owner-approved replacement of PWA audio sharing with the bot.
+- [ ] Complete the remaining Telegram checklist before closing the phase.
 
 ## Done
 - The owner approves the PHASE 0.5 plan.
@@ -71,6 +73,13 @@ PHASE 0.5: Risk prototypes
 - Public HTTPS verifies the new manifest mappings and privacy-safe diagnostics through real browser form submissions.
 - Failed attempts preserve the last successful file; diagnostic clearing persists independently.
 - All 42 other containers, including nginx, retain their IDs and start times during this update.
+- The owner confirms successful playback of `199163078.m4a` on 2026-09-29.
+- The owner replaces product PWA audio sharing with the Telegram bot.
+- The product brief and PHASE 4 plan now specify manager-only Telegram audio import.
+- The existing web application scope, authentication, and student restrictions remain unchanged.
+- The PWA report remains historical evidence of a failed approach, not an open product acceptance requirement.
+- A targeted VPS restart preserves the saved audio hash, bot identity, and update checkpoint.
+- The bot returns to healthy status; all 43 unrelated containers remain unchanged.
 
 ## In progress
 - The files protocol checks and owner manual step are complete.
@@ -96,16 +105,35 @@ PHASE 0.5: Risk prototypes
 - All 43 pre-existing containers remain unchanged during activation.
 - The owner confirms successful real audio receipt on 2026-09-29.
 - The reported bot reply identifies `199163078.m4a`, with a size of 636644 bytes.
-- The specific attachment type and the remaining checklist results are not recorded.
+- Playback is confirmed; the specific attachment type and remaining checklist results are not recorded.
+- Live checks for untested attachment types and an unauthorized sender remain open.
+- No new-phase product code or deployment cleanup occurs in this task.
 
 ## Next step
-- Complete the remaining Telegram checks, including saved-audio playback and any untested attachment types.
-- Review the phase report and decide whether to retain or replace the product PWA share requirement.
-- Keep PWA acceptance failed; do not replace the product share requirement without owner approval.
-- Retain the file-manager control test as an optional way to isolate the Android sharing failure.
+- Complete the remaining bot checks without repeating the confirmed playback check.
+- Close PHASE 0.5 after the remaining checks, then approve the first PHASE 0 implementation task.
+- Keep the active bot and superseded PWA deployment unchanged until an explicit deployment or cleanup task.
+
+## Proposed PHASE 0 sequence
+
+The next phase is the walking skeleton, not product Telegram integration.
+The following sequence is a plan, not implementation approval.
+
+- [ ] Define the product layout, Python and TypeScript tooling, and the SQLAlchemy execution model.
+- [ ] Add a tested FastAPI health endpoint and the translated React health page.
+- [ ] Add PostgreSQL, an empty Alembic migration, validated settings, and complete environment examples.
+- [ ] Add pre-commit checks, Docker images, Compose, and CI.
+- [ ] Add targeted VPS deployment, health verification, and rollback without restarting unrelated applications.
+- [ ] Update setup and deployment guides, then complete the manual health-page check.
+
+Keep authentication in PHASE 1 and exercise/file operations in PHASE 2.
+Integrate the bot with manager accounts and exercises in PHASE 4.
+Do not copy disposable prototype authentication into the product.
 
 ## Open questions for the owner
 - Identify the Android device and browser versions when manual testing starts.
+- Record which Telegram attachment types passed; do not infer them from the saved filename.
+- Select sync or async SQLAlchemy during PHASE 0 planning.
 
 ## Manual checks the owner must do
 - [x] Confirm that images 1 through 10 represent the intended exercises.
@@ -114,11 +142,14 @@ PHASE 0.5: Risk prototypes
 - [x] Review the image 6 failure and the manual event counts.
 - [x] Confirm the recommendation to continue with Audiveris.
 - [x] Complete the protected-audio manual step, as confirmed by the owner.
-- [ ] Reinstall the deployed PWA from Android Chrome and confirm the `diagnostics v1` section.
-- [ ] Share audio from WhatsApp and Telegram to the installed PWA.
-- [ ] Verify receipt details, reload persistence, clearing, and sharing after closing the PWA.
 - [x] Confirm one successful real audio receipt through the Telegram bot.
+- [x] Confirm successful playback of the saved audio.
+- [x] Select Telegram instead of PWA sharing for product audio import.
+- [x] Verify preserved audio and checkpoint state after a targeted VPS restart.
 - [ ] Complete the real-message bot checklist in `docs/user/telegram-prototype.md`.
+
+The superseded Android PWA checklist is no longer required.
+Unreported bot checks remain unconfirmed; the replacement decision does not mark them as passed.
 
 ## Known issues
 - Image 6 produces no MusicXML; image 7 receives 46 % recognition.
@@ -131,7 +162,7 @@ PHASE 0.5: Risk prototypes
 - The PWA keeps only the latest successful share and rejects files above 25 MiB by default.
 - Desktop browser checks do not establish Android sharing compatibility.
 - The owner reports failed Android messenger sharing; successful desktop checks do not override this result.
-- The original receiver cannot distinguish message-only input; the diagnostic update requires a refreshed PWA installation.
+- The PWA diagnostic receiver observes an empty form; the loss point remains unknown and is no longer under active investigation.
 - PWA browser and static-server evidence remain in `prototypes/pwa/output/`.
 - Samples and generated MusicXML remain local; a fresh clone does not contain them.
 - The HTTPS PWA runs at `https://solfeo.miveralta.ru/prototype-share/`.

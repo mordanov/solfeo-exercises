@@ -7,7 +7,7 @@ Two roles:
 - student: listens to exercises (in order or random), changes own settings. Nothing else.
 
 ## Read first
-- docs/PRODUCT_BRIEF.md: full requirements (OMR, journal, PWA share, spoken notes).
+- docs/PRODUCT_BRIEF.md: full requirements (OMR, journal, Telegram audio import, spoken notes).
 - docs/PHASES.md: phase plan. Work on ONE phase at a time.
 - docs/STATUS.md: current state. Update it at the end of every session.
 - docs/DECISIONS.md: past decisions. Do not reverse them without asking.

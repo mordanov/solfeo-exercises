@@ -27,3 +27,5 @@ Prerequisites:
 | share target | A manifest entry that lets an installed PWA receive shared data. |
 | service worker | Browser code that handles requests within a defined scope. |
 | IndexedDB | Browser storage for structured data and files. |
+| Telegram bot | A service that receives Telegram messages through the Bot API. |
+| audio import | Transfer of an audio attachment into the application, with manager authorization and file validation. |

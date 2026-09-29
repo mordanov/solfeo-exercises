@@ -45,3 +45,11 @@ Format: date, decision, reason. Do not reverse a decision without asking the own
 - 2026-09-29: The owner confirms successful real audio receipt through the Telegram prototype.
   The reported reply identifies `199163078.m4a`, with a size of 636644 bytes.
   This confirms the basic bot ingestion path, not the full manual checklist or replacement of the product PWA requirement.
+- 2026-09-29: The owner confirms successful playback of the audio received through the Telegram prototype.
+  The earlier receipt identifies `199163078.m4a`, with a size of 636644 bytes.
+- 2026-09-29: The owner replaces product PWA audio sharing with the Telegram bot.
+  Reason: real Telegram receipt and playback succeed, while Android PWA sharing delivers an empty form.
+  PHASE 4 now implements manager-only Telegram audio import instead of an Android share target.
+  The web application and its role boundaries remain unchanged.
+  The old PWA result remains failed; no further PWA acceptance is required for the selected ingestion path.
+  This decision does not claim completion of unreported bot checklist cases or authorize deletion of deployed prototypes.

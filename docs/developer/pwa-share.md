@@ -1,6 +1,6 @@
 # PWA share prototype deployment
 
-This document describes the deployed PWA prototype and the remaining Android acceptance checks.
+This document preserves the deployment and failure report for the superseded PWA sharing prototype.
 
 Prerequisites:
 - Read `docs/PRODUCT_BRIEF.md`, `docs/PHASES.md`, and `docs/DECISIONS.md`.
@@ -9,6 +9,12 @@ Prerequisites:
 - Obtain an Android device with Chrome, WhatsApp, and Telegram.
 
 ## Current state
+
+The owner replaces product PWA audio sharing with the Telegram bot on 2026-09-29.
+The Telegram path receives real audio, and the owner confirms successful playback.
+PWA acceptance remains failed; the procedures below preserve the investigation rather than request further product acceptance.
+See `docs/developer/telegram-bot.md` for the selected path.
+This documentation change does not remove the deployed prototype, browser data, or certificate.
 
 The owner approves the deployment plan on 2026-09-29.
 The local prototype is implemented and verified.
@@ -40,7 +46,7 @@ The page must distinguish a completed receipt from empty input or a storage fail
 Keep file data and metadata on the device.
 Do not add analytics, a backend, a database, Redis, product login, or exercise management.
 Do not copy local exercise samples into the public image.
-Product authentication and the login-return flow remain PHASE 4 work.
+The originally planned browser login-return flow is superseded by Telegram audio import in PHASE 4.
 
 ### Routes
 
@@ -389,7 +395,7 @@ The error redirect contains only an error code.
 
 All 41 prototype tests, ESLint, Prettier, TypeScript, and the production build pass locally and in GitHub Actions.
 The diagnostic publication and targeted deployment are complete.
-Android acceptance remains failed until the owner repeats the messenger checks successfully.
+Android acceptance remains failed; the later replacement decision removes the requirement to repeat these checks.
 
 ### Diagnostic deployment: 2026-09-29
 
@@ -414,7 +420,8 @@ Evidence remains in ignored `prototypes/pwa/output/`:
 - `diagnostics-https-static.json`
 
 The isolated test browser and local container stop after verification.
-The owner must reinstall the Android PWA and repeat both messenger tests.
+The historical diagnostic procedure requires reinstalling the Android PWA before repeating messenger tests.
+Those retests are no longer required for the selected Telegram path.
 These diagnostic results do not establish the cause of the original Android failure.
 
 Warning: the old prototype image expects database version 1.
@@ -457,7 +464,7 @@ The prototype keeps only the latest successful share.
 
 The owner proposes a Telegram bot after the repeated Android failure.
 The owner subsequently approves the separate prototype and deployment on the existing VPS.
-This approval does not replace the product PWA requirement.
+The owner later confirms playback and explicitly replaces the product PWA requirement with the bot.
 Implementation and activation instructions are in `docs/developer/telegram-bot.md`.
 
 A bot can receive `audio`, `voice`, or `document` attachments in its private chat.
@@ -493,4 +500,6 @@ Unregister only the prototype service worker.
 Remove only the prototype container and site configuration through an approved change.
 Do not remove a certificate or resource that another application uses.
 
-PHASE 0.5 remains incomplete until the HTTPS prototype runs, Android checks pass, and the owner confirms the remaining decisions.
+The owner accepts Telegram as the replacement path after real audio receipt and successful playback.
+The failed Android PWA checklist no longer gates phase completion.
+Remaining Telegram checks and the phase status appear in `docs/STATUS.md`.

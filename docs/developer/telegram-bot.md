@@ -12,7 +12,8 @@ Prerequisites:
 
 The owner approves a Telegram bot prototype and deployment on the existing VPS.
 This remains PHASE 0.5, not the product exercise workflow.
-PWA acceptance remains failed; the bot does not change that result.
+The owner selects the bot to replace product PWA audio sharing on 2026-09-29.
+The historical PWA result remains failed and no longer gates the selected import path.
 
 The worker accepts private messages only from the configured sender allowlist.
 It accepts `audio`, `voice`, and `document` attachments, including forwarded attachments.
@@ -23,7 +24,7 @@ It does not create exercises, expose files, or add a database or Redis.
 The implementation, image publication, and VPS activation are complete.
 The owner supplies the dedicated token and sender allowlist privately.
 The bot runs at `https://t.me/solfeo_exercises_bot`.
-The owner confirms one successful real audio receipt.
+The owner confirms one successful real audio receipt and playback.
 The remaining manual checklist results are not recorded.
 
 ### Initial staging: 2026-09-29
@@ -74,9 +75,27 @@ Startup verification does not replace the owner's attachment tests.
 The owner reports that the bot works and confirms its success reply.
 The reply identifies `199163078.m4a`, with a converted size of 636644 bytes.
 This confirms one successful real-message receipt, not only a simulated API check.
-The specific attachment type and playback result are not recorded.
-The remaining attachment, unauthorized-sender, and restart checks remain open.
-This result does not confirm PWA sharing or change its product requirement.
+The owner subsequently confirms successful playback of the saved audio.
+The specific attachment type is not recorded.
+The remaining attachment and unauthorized-sender checks remain open.
+The owner explicitly replaces the product PWA requirement with Telegram audio import.
+
+### Restart verification: 2026-09-29
+
+A targeted VPS restart preserves the hash of the saved audio and the recorded bot identity.
+The persisted update offset does not regress.
+The worker returns to healthy status.
+All 43 unrelated containers retain their IDs and start times.
+The comparison runs on the VPS without copying audio or private state into this repository.
+
+### Product follow-up
+
+PHASE 4 integrates the bot with manager accounts, exercises, and the common file pipeline.
+The prototype remains a risk check, not product authentication or exercise creation.
+The product must verify that a linked Telegram sender is an active manager.
+The account-linking method and import interaction require a PHASE 4 plan.
+The web application remains the main interface; the bot supplies the audio import path.
+Do not remove the deployed PWA prototype or its evidence without a separate cleanup task.
 
 ## Local setup
 
@@ -230,5 +249,5 @@ Do not replace the VPS `.env` with the local prototype file.
 For rollback, restore the prior image digest and recreate only this worker.
 Preserve the audio volume and checkpoint.
 Do not reuse that volume with a different bot identity.
-The current worker is active, and the owner confirms one successful receipt.
+The current worker is active, and the owner confirms successful receipt and playback.
 Full checklist acceptance remains pending.

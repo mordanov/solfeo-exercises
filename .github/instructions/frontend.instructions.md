@@ -28,11 +28,14 @@ applyTo: "frontend/**"
 - Listening events: send `start`, then `heartbeat` every 5 seconds while playing, then `end`. On `pagehide` use `navigator.sendBeacon`.
 - Use a random `session_id` (uuid) for each listening session.
 
-## PWA
-- Service worker handles the `share_target` POST. Store the shared file in IndexedDB, then redirect to `/share`.
-- Never cache API responses or protected files in the service worker.
+## Audio import and legacy PWA
+- Telegram replaces the product `share_target` flow by owner decision on 2026-09-29.
+- Do not implement product IndexedDB share hand-off or `/share` routing for Android shares.
+- Product import actions remain manager-only; students cannot import audio.
+- Keep the PWA risk prototype as historical evidence until a separate cleanup task.
+- Never cache API responses or protected files if a service worker is present.
 
 ## Tests
-- TDD for logic (hooks, parsers, note-name mapping, MusicXML lyric injection, share handler).
+- TDD for logic (hooks, parsers, note-name mapping, MusicXML lyric injection, import handling).
 - Component tests for forms and role-based rendering.
 - Do not test third-party libraries (OpenSheetMusicDisplay). Test our code around them.
