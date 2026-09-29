@@ -66,7 +66,11 @@ PHASE 0.5: Risk prototypes
 - The prototype maps text, title, and URL fields and distinguishes text-only, empty, and unexpected file-field input.
 - On-device diagnostics retain field categories, file counts, types, and sizes without message contents, links, or filenames.
 - Diagnostics and the last successful file have separate storage and clear actions.
-- All 41 prototype tests, ESLint, TypeScript, and the production build pass locally.
+- All 41 prototype tests, ESLint, Prettier, TypeScript, and the production build pass locally and in GitHub Actions.
+- Diagnostic source commit `d171be5` is published and deployed by digest.
+- Public HTTPS verifies the new manifest mappings and privacy-safe diagnostics through real browser form submissions.
+- Failed attempts preserve the last successful file; diagnostic clearing persists independently.
+- All 42 other containers, including nginx, retain their IDs and start times during this update.
 
 ## In progress
 - The files protocol checks and owner manual step are complete.
@@ -74,10 +78,9 @@ PHASE 0.5: Risk prototypes
 - The HTTPS deployment works, but Android messenger sharing fails owner acceptance.
 - On 2026-09-29, the owner reports "No audio file was received" after sharing from Telegram or WhatsApp.
 - The incoming Android payload remains unobserved; message-only sharing is a hypothesis, not a confirmed cause.
-- The diagnostic prototype is implemented; publication and targeted deployment are in progress.
+- The diagnostic prototype is live; fresh Android messenger results remain required.
 
 ## Next step
-- Deploy and verify the diagnostic prototype.
 - Reinstall the PWA to refresh the manifest before repeating messenger shares.
 - Record the diagnostic section and repeat the file-manager control test.
 
@@ -91,7 +94,7 @@ PHASE 0.5: Risk prototypes
 - [x] Review the image 6 failure and the manual event counts.
 - [x] Confirm the recommendation to continue with Audiveris.
 - [x] Complete the protected-audio manual step, as confirmed by the owner.
-- [ ] Install the deployed PWA from Android Chrome.
+- [ ] Reinstall the deployed PWA from Android Chrome and confirm the `diagnostics v1` section.
 - [ ] Share audio from WhatsApp and Telegram to the installed PWA.
 - [ ] Verify receipt details, reload persistence, clearing, and sharing after closing the PWA.
 

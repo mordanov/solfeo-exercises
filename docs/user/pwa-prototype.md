@@ -50,7 +50,9 @@ The diagnostic update adds a separate section labelled `diagnostics v1`.
 It records the latest attempt without storing message text, link values, filenames, or unknown field names.
 The ordinary successful receipt still shows the stored filename.
 
-After the diagnostic deployment:
+The diagnostic update is live at the prototype URL.
+Preserve any needed test audio before removing an installation or clearing site data.
+Refresh the installed prototype:
 
 1. Remove the previous PWA installation.
 2. Open the prototype URL in Chrome.

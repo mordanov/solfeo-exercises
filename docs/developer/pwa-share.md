@@ -19,6 +19,7 @@ DNS resolves to the existing VPS, and SSH access works.
 The initial HTTPS check fails because the existing certificate does not cover the hostname.
 The targeted deployment adds a valid certificate and passes public HTTPS checks.
 The prototype runs at `https://solfeo.miveralta.ru/prototype-share/`.
+The deployed diagnostic build comes from commit `d171be5`.
 Android messenger sharing fails owner acceptance on 2026-09-29.
 The page reports "No audio file was received" after a share from Telegram or WhatsApp.
 The cause remains unconfirmed.
@@ -304,7 +305,7 @@ For initial onboarding failure, stop the prototype and restore the previous ngin
 Do not reset the shared repository or restart unrelated services.
 The static prototype must not retain uploaded request bodies or log their contents.
 
-### HTTPS verification: 2026-09-29
+### Initial HTTPS verification: 2026-09-29
 
 The image publication workflow succeeds:
 [`36528824725`](https://github.com/mordanov/solfeo-exercises/actions/runs/36528824725).
@@ -386,9 +387,35 @@ The recorded timestamp identifies the latest stored attempt, not necessarily the
 An unsuccessful diagnostic write reports `STORAGE_FAILED` rather than claiming that the diagnostic record is current.
 The error redirect contains only an error code.
 
-All 41 prototype tests, ESLint, TypeScript, and the production build pass locally.
-Diagnostic publication and targeted deployment remain in progress.
+All 41 prototype tests, ESLint, Prettier, TypeScript, and the production build pass locally and in GitHub Actions.
+The diagnostic publication and targeted deployment are complete.
 Android acceptance remains failed until the owner repeats the messenger checks successfully.
+
+### Diagnostic deployment: 2026-09-29
+
+The successful publication run is
+[`36531363171`](https://github.com/mordanov/solfeo-exercises/actions/runs/36531363171).
+The source commit is `d171be57752d47b414279b323d04314fcbbde131`.
+The VPS pins `ghcr.io/mordanov/solfeo-pwa-prototype@sha256:da3d90317c2b7910910dd017158dddd9f52c15725382f2bd0a8e1961e6d185d0` in `.env`.
+Only the prototype container changes.
+All 42 other containers, including nginx, retain their IDs and start times.
+
+All 12 deployed static files match the validated local build.
+All 17 public HTTP checks pass, and the manifest includes the new text, title, and URL mappings.
+Desktop Chrome exercises text-only and unexpected file-field submissions through real multipart navigation.
+Diagnostics exclude synthetic private text, URL values, filenames, and unknown field names.
+Failed attempts preserve the prior file.
+Both clear actions persist after reload.
+The proxy receives no browser share POSTs.
+
+Evidence remains in ignored `prototypes/pwa/output/`:
+- `diagnostics-local-browser.json`
+- `diagnostics-https-browser.json`
+- `diagnostics-https-static.json`
+
+The isolated test browser and local container stop after verification.
+The owner must reinstall the Android PWA and repeat both messenger tests.
+These diagnostic results do not establish the cause of the original Android failure.
 
 Warning: the old prototype image expects database version 1.
 An image rollback does not downgrade browser storage.
