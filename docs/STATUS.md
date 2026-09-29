@@ -37,6 +37,10 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Complete the remaining Telegram checklist, as confirmed by the owner.
 
 ## Done
+- The first product publication succeeds for source `03260e554b13c23b640ef6432775c50b331a7a39`.
+- Publication run `36572516719` pulls and checks the published x86-64 images before creating the release bundle.
+- The downloaded bundle matches the source files, manifest hashes, and CI run `36572315149`.
+- The Actions prerequisite report finds `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`, and `VPS_KNOWN_HOSTS` unavailable.
 - `publish-product.yml` publishes backend and frontend images only for a main-branch commit with matching successful CI.
 - It pulls the registry images by digest, checks their source labels, and runs the production container scenarios.
 - `deploy/release.py` packages only deployment files and a provenance manifest with immutable image references and file hashes.
@@ -216,6 +220,7 @@ Do not copy disposable prototype authentication into the product.
 - [x] Confirm that the local health page opens.
 - [x] Confirm that the local schema revision survives a PostgreSQL restart.
 - [ ] Confirm Chrome and Safari behavior, all 3 languages, and failure/recovery during final VPS acceptance.
+- [ ] Configure the 4 missing deployment secrets in the application repository's Actions settings.
 
 The superseded Android PWA checklist is no longer required.
 The new local health-page procedure appears in `docs/user/manager.md` and `docs/user/student.md`.
@@ -242,4 +247,5 @@ The production configuration task adds no new browser manual checks before the a
 - Product CD, public nginx integration, and VPS acceptance remain for later PHASE 0 tasks.
 - No product release is active on the VPS; publication artifacts provide the tested image digests for the next task.
 - The current CLI credential cannot manage repository Actions secrets: the public-key API returns HTTP 403.
+- VPS rollout cannot proceed through the planned Actions configuration until the owner provides the missing SSH secrets.
 - Development still uses the bootstrap database role; the separate production configuration does not.

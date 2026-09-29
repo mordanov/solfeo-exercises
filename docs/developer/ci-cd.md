@@ -100,3 +100,19 @@ Use the repository's Settings > Secrets and variables > Actions page to configur
 Do not send private keys in chat or commit them.
 Do not replace pinned host verification with an unverified `ssh-keyscan`.
 The current CLI credential receives HTTP 403 for repository secret management, so it cannot provision missing secrets.
+
+## First verified product release
+
+Publication run [`36572516719`](https://github.com/mordanov/solfeo-exercises/actions/runs/36572516719) succeeds on 2026-09-29.
+Its source commit is `03260e554b13c23b640ef6432775c50b331a7a39`.
+The matching CI run is `36572315149`.
+
+| Image | Verified digest reference |
+|---|---|
+| Backend | `ghcr.io/mordanov/solfeo-backend@sha256:8ace159a2b2fd0d3ca77a1b61bdd414611ca8eabe3d26bf3596c3d99d1f275e0` |
+| Frontend | `ghcr.io/mordanov/solfeo-frontend@sha256:d3109a2492538e60ef075d34f7053f33e6ec180c52ce8148430062c449b23929` |
+
+The runner pulls these images and passes all 16 release and production-configuration checks.
+The downloaded artifact matches all 3 deployment-file hashes and preserves the bootstrap executable mode.
+The prerequisite report finds all 4 required SSH secrets unavailable in the repository workflow context.
+No SSH connection, registry pull on the VPS, public routing change, or application rollout occurs.
