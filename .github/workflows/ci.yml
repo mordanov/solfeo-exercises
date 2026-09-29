@@ -100,6 +100,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv sync --locked --python 3.12
       - name: Prepare private local configuration
         run: |
           umask 077
@@ -111,5 +115,7 @@ jobs:
         run: |
           curl --fail --silent http://127.0.0.1:18080/api/health | python -c 'import json, sys; assert json.load(sys.stdin) == {"status": "ok"}'
           curl --fail --silent http://127.0.0.1:18080/ | grep 'id="root"'
+      - name: Check isolated production configuration
+        run: uv run --locked pytest deploy/tests -q
       - if: always()
         run: docker compose --env-file .env -f deploy/compose.yaml down

@@ -12,6 +12,8 @@ Prerequisites:
 The initial revision is `0001_initial`.
 It creates no product tables.
 Alembic maintains its own `alembic_version` table.
+Development uses `public`; production uses a private version schema, normally `migrations`.
+The configured schema must already exist before migration execution.
 Users, sessions, exercises, the journal, and worker jobs belong to later phases.
 
 `backend/app/models/__init__.py` provides the typed declarative base.
@@ -85,5 +87,8 @@ No SQLite or database mocks replace PostgreSQL.
 ## Production boundary
 
 The local stand uses the PostgreSQL bootstrap role for both application and migration connections.
-Do not copy that role design or the loopback port publication into production without review.
-Production credentials, access restrictions, migrations, and rollback belong to the later deployment task.
+The separate production configuration creates restricted application and migration roles.
+The application role receives table DML and sequence access in `public`, but no schema ownership.
+The private Alembic schema remains inaccessible to the application role.
+Production bootstrap runs only on an empty, independent volume.
+See `docs/developer/deploy.md` for role grants, migration order, and remaining CD requirements.

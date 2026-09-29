@@ -256,6 +256,9 @@ def test_password_with_url_characters_is_not_interpolated() -> None:
         ("DATABASE_POOL_TIMEOUT_SECONDS", "0"),
         ("DATABASE_CONNECT_TIMEOUT_SECONDS", "0"),
         ("DATABASE_PASSWORD", ""),
+        ("ALEMBIC_VERSION_SCHEMA", ""),
+        ("ALEMBIC_VERSION_SCHEMA", "invalid.name"),
+        ("ALEMBIC_VERSION_SCHEMA", "a" * 64),
     ],
 )
 def test_invalid_database_configuration_is_rejected(

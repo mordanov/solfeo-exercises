@@ -1,0 +1,280 @@
+import json
+import secrets
+import shutil
+import socket
+import subprocess
+import urllib.request
+import uuid
+from collections.abc import Iterator
+from dataclasses import dataclass, field
+from pathlib import Path
+
+import pytest
+
+ROOT = Path(__file__).resolve().parents[2]
+
+
+@dataclass
+class Stand:
+    command: list[str]
+    passwords: list[str] = field(repr=False)
+
+    def run(
+        self, *arguments: str, script: str | None = None, check: bool = True
+    ) -> subprocess.CompletedProcess[str]:
+        result = subprocess.run(
+            [*self.command, *arguments],
+            input=script,
+            capture_output=True,
+            text=True,
+            timeout=180,
+            cwd=ROOT,
+        )
+        if check and result.returncode:
+            output = result.stdout + result.stderr
+            for password in self.passwords:
+                output = output.replace(password, "[redacted]")
+            pytest.fail(f"Compose exits with {result.returncode}:\n{output}")
+        return result
+
+    def python(self, service: str, script: str) -> str:
+        if service == "migrate":
+            result = self.run(
+                "run",
+                "--rm",
+                "--no-deps",
+                "-T",
+                "migrate",
+                "python",
+                "-",
+                script=script,
+            )
+        else:
+            result = self.run("exec", "-T", service, "python", "-", script=script)
+        return result.stdout
+
+    def health(self) -> None:
+        address = self.run("port", "frontend", "8080").stdout.strip()
+        assert address.startswith("127.0.0.1:")
+        with urllib.request.urlopen(
+            f"http://{address}/api/health", timeout=10
+        ) as response:
+            assert response.status == 200
+            assert json.load(response) == {"status": "ok"}
+
+
+@pytest.fixture(scope="module")
+def stand(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Stand]:
+    directory = tmp_path_factory.mktemp("production")
+    compose = (
+        ["docker-compose"] if shutil.which("docker-compose") else ["docker", "compose"]
+    )
+    with socket.socket() as listener:
+        listener.bind(("127.0.0.1", 0))
+        port = listener.getsockname()[1]
+    passwords = [secrets.token_hex(24) + "%:@/#" for _ in range(3)]
+    values = {
+        "BACKEND_IMAGE": "solfeo-dev-backend",
+        "FRONTEND_IMAGE": "solfeo-dev-frontend",
+        "DATABASE_NAME": "solfeo_production_test",
+        "DATABASE_USER": "solfeo_app",
+        "DATABASE_PASSWORD": passwords[0],
+        "MIGRATION_DATABASE_USER": "solfeo_owner",
+        "MIGRATION_DATABASE_PASSWORD": passwords[1],
+        "POSTGRES_ADMIN_PASSWORD": passwords[2],
+        "PRODUCTION_MIGRATION_SCHEMA": "migrations",
+        "PRODUCTION_WEB_PORT": str(port),
+    }
+    environment = directory / ".env"
+    environment.touch(mode=0o600)
+    environment.write_text(
+        "".join(f"{key}='{value}'\n" for key, value in values.items())
+    )
+    project = f"solfeo-prod-check-{uuid.uuid4().hex[:12]}"
+    command = [
+        *compose,
+        "--project-name",
+        project,
+        "--env-file",
+        str(environment),
+        "-f",
+        str(ROOT / "deploy" / "compose.prod.yaml"),
+    ]
+    instance = Stand(command, passwords)
+    with pytest.MonkeyPatch.context() as patch:
+        for key in values:
+            patch.delenv(key, raising=False)
+        try:
+            instance.run("up", "-d", "--wait", "--wait-timeout", "120")
+            yield instance
+        finally:
+            # This unique project contains only disposable integration-test data.
+            try:
+                instance.run("down", "--volumes", "--remove-orphans")
+            finally:
+                environment.unlink()
+
+
+def test_runtime_roles_and_network_boundaries(stand: Stand) -> None:
+    stand.health()
+    assert not stand.run("port", "postgres", "5432", check=False).stdout.strip()
+    assert not stand.run("port", "backend", "8000", check=False).stdout.strip()
+    container = stand.run("ps", "-q", "backend").stdout.strip()
+    result = subprocess.run(
+        [
+            "docker",
+            "inspect",
+            "--format",
+            '{{range .Config.Env}}{{println (index (split . "=") 0)}}{{end}}',
+            container,
+        ],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    names = set(result.stdout.splitlines())
+    assert "POSTGRES_PASSWORD" not in names
+    assert "POSTGRES_ADMIN_PASSWORD" not in names
+    assert "MIGRATION_DATABASE_PASSWORD" not in names
+
+    stand.python(
+        "migrate",
+        """
+from sqlalchemy import text
+from app.database import Database
+from app.settings import Settings
+database = Database(Settings())
+try:
+    with database.engine.begin() as connection:
+        version = connection.scalar(
+            text("SELECT version_num FROM migrations.alembic_version")
+        )
+        assert version == "0001_initial"
+        privileges = connection.execute(text(
+            "SELECT rolsuper, rolcreatedb, rolcreaterole "
+            "FROM pg_roles WHERE rolname=current_user"
+        )).one()
+        assert privileges == (False, False, False)
+        connection.execute(text(
+            "CREATE TABLE public._permission_probe "
+            "(id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY, "
+            "value text NOT NULL)"
+        ))
+finally:
+    database.close()
+""",
+    )
+    try:
+        stand.python(
+            "backend",
+            """
+from sqlalchemy import text
+from sqlalchemy.exc import ProgrammingError
+from app.database import Database
+from app.settings import Settings
+database = Database(Settings())
+try:
+    with database.engine.begin() as connection:
+        privileges = connection.execute(text(
+            "SELECT rolsuper, rolcreatedb, rolcreaterole "
+            "FROM pg_roles WHERE rolname=current_user"
+        )).one()
+        assert privileges == (False, False, False)
+        assert not connection.scalar(text(
+            "SELECT pg_has_role(current_user, 'solfeo_owner', 'MEMBER')"
+        ))
+        identifier = connection.scalar(text(
+            "INSERT INTO public._permission_probe(value) "
+            "VALUES ('synthetic') RETURNING id"
+        ))
+        assert identifier == 1
+        connection.execute(text(
+            "UPDATE public._permission_probe SET value='updated' WHERE id=1"
+        ))
+        value = connection.scalar(text(
+            "SELECT value FROM public._permission_probe WHERE id=1"
+        ))
+        assert value == "updated"
+        connection.execute(text("DELETE FROM public._permission_probe WHERE id=1"))
+    for statement in [
+        "CREATE TABLE public._forbidden (id int)",
+        "ALTER TABLE public._permission_probe ADD COLUMN forbidden int",
+        "DROP TABLE public._permission_probe",
+        "SELECT * FROM migrations.alembic_version",
+    ]:
+        try:
+            with database.engine.begin() as connection:
+                connection.execute(text(statement))
+        except ProgrammingError as error:
+            assert error.orig.sqlstate == "42501"
+        else:
+            raise AssertionError("Runtime role unexpectedly has privileged access")
+finally:
+    database.close()
+""",
+        )
+    finally:
+        stand.python(
+            "migrate",
+            """
+from sqlalchemy import text
+from app.database import Database
+from app.settings import Settings
+database = Database(Settings())
+try:
+    with database.engine.begin() as connection:
+        connection.execute(text("DROP TABLE public._permission_probe"))
+finally:
+    database.close()
+""",
+        )
+    result = stand.run("logs", "--no-color")
+    logs = result.stdout + result.stderr
+    assert all(password not in logs for password in stand.passwords)
+
+
+def test_revision_survives_restart(stand: Stand) -> None:
+    stand.run("restart", "postgres")
+    stand.run("up", "-d", "--wait", "postgres")
+    stand.run(
+        "run",
+        "--rm",
+        "--no-deps",
+        "-T",
+        "migrate",
+        "alembic",
+        "-c",
+        "backend/alembic.ini",
+        "current",
+        "--check-heads",
+    )
+    stand.run(
+        "run",
+        "--rm",
+        "--no-deps",
+        "-T",
+        "migrate",
+        "alembic",
+        "-c",
+        "backend/alembic.ini",
+        "check",
+    )
+    stand.health()
+
+
+def test_failed_migration_blocks_backend_start(stand: Stand, tmp_path: Path) -> None:
+    override = tmp_path / "failure.yaml"
+    override.write_text(
+        'services:\n  migrate:\n    command: ["python", "-c", "raise SystemExit(17)"]\n'
+    )
+    stand.run("stop", "backend")
+    failed = Stand([*stand.command, "-f", str(override)], stand.passwords)
+    try:
+        result = failed.run("up", "-d", "backend", check=False)
+        assert result.returncode != 0
+        assert not stand.run(
+            "ps", "--status", "running", "-q", "backend"
+        ).stdout.strip()
+    finally:
+        stand.run("up", "-d", "--wait")
+    stand.health()

@@ -67,3 +67,8 @@ Format: date, decision, reason. Do not reverse a decision without asking the own
   The local schema revision remains `0001_initial` after restart.
   Browser versions and a detailed browser matrix are not supplied.
   This confirmation does not close the later VPS acceptance gate.
+- 2026-09-29: Production uses separate application and migration roles within a dedicated PostgreSQL instance.
+  Reason: runtime data access must not grant schema ownership or permission to alter migration metadata.
+  Alembic metadata uses a private production schema; the development schema remains unchanged.
+  Production Compose uses supplied images, a private database network, and a loopback frontend port.
+  Registry publication, TLS integration, and actual VPS deployment remain separate tasks.

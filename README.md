@@ -55,6 +55,7 @@ Database tests and application builds remain separate checks.
 - [Architecture](docs/developer/architecture.md)
 - [API](docs/developer/api.md)
 - [Database and migrations](docs/developer/data-model.md)
+- [Production configuration and deployment boundaries](docs/developer/deploy.md)
 - [CI and deployment scope](docs/developer/ci-cd.md)
 - [Manager checks](docs/user/manager.md)
 - [Student checks](docs/user/student.md)

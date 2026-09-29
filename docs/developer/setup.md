@@ -133,8 +133,8 @@ The tests require the database name `solfeo_test`; they refuse the development d
 ```sh
 docker compose --env-file .env -f deploy/compose.test.yaml up -d --wait
 DATABASE_NAME=solfeo_test DATABASE_PORT=15433 uv run pytest
-uv run ruff check backend
-uv run ruff format --check backend
+uv run ruff check backend deploy/tests
+uv run ruff format --check backend deploy/tests
 uv run mypy --config-file pyproject.toml
 npm test
 npm run lint
@@ -151,6 +151,7 @@ Set the test command's `DATABASE_PORT` to the configured `TEST_POSTGRES_HOST_POR
 Do not run migration tests against any database containing real data.
 Frontend tests cover translations, language changes, request failures, timeout, cancellation, and explicit retry.
 The first implementation follows failing tests for the API, health page, and locale completeness.
+Production configuration checks have a separate command in `docs/developer/deploy.md#reproduce-the-isolated-checks`.
 
 ## Enable checks before commits
 
@@ -189,13 +190,13 @@ Subsequent runs reuse it without changing the system Node.js installation.
 The hooks use workspace packages from `node_modules`; install those with `npm ci` before running them.
 Native development, tests, and builds still require the Node.js version listed in the prerequisites.
 
-Python changes and dependency configuration trigger all Python checks.
+Backend changes, deployment test changes, and dependency configuration trigger all Python checks.
 Frontend changes and npm manifests trigger all JavaScript checks.
 Changes to `.pre-commit-config.yaml` trigger all 6 checks.
 Documentation-only and prototype-only changes do not trigger these product checks.
 Each selected hook checks its whole component, including dependent files.
 
-Use `uv run ruff format backend` and `npm run format` to correct formatting.
+Use `uv run ruff format backend deploy/tests` and `npm run format` to correct formatting.
 Review the resulting changes before staging them again.
 Run the test and migration commands above separately; successful hooks do not replace those checks.
 

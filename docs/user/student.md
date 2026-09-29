@@ -9,6 +9,7 @@ Prerequisites:
 The current page does not provide sign-in, exercises, playback, or saved user settings.
 It does not grant manager access or let a student import audio.
 The PostgreSQL foundation does not change these limits or add new student actions.
+Production configuration does not make the product available on the VPS yet.
 
 1. Open `http://127.0.0.1:18080/`.
    The page shows the service status.

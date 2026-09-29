@@ -37,5 +37,5 @@ known-first-party = ["app"]
 python_version = "3.12"
 strict = true
 plugins = ["pydantic.mypy"]
-files = ["backend"]
+files = ["backend", "deploy/tests"]
 mypy_path = "backend"

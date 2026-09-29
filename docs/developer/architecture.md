@@ -23,7 +23,8 @@ The migration service completes before the backend starts.
 | `frontend/src/api/` | Typed HTTP client |
 | `frontend/src/features/health/` | Health query and status presentation |
 | `frontend/src/i18n/` | Translations and locale checks |
-| `deploy/` | Local Compose and nginx configuration |
+| `deploy/` | Development and production Compose, database bootstrap, and nginx configuration |
+| `deploy/tests/` | Isolated production container checks |
 | `prototypes/` | Independent risk prototypes |
 
 TanStack Query owns server state.
@@ -57,3 +58,11 @@ No product container shares a prototype volume or credentials.
 The worker directory will accompany worker implementation, not an empty placeholder.
 The PostgreSQL development container uses the official image initialization and a writable data volume.
 Its bootstrap database role is a local-development convenience, not the production role design.
+
+Production separates the application and database networks.
+PostgreSQL has no host port; only the backend and migration service share its network.
+The frontend exposes a loopback HTTP port for the later TLS integration.
+Application and migration credentials are distinct and cannot create databases or roles.
+The migration role owns schemas; the application role has data access only.
+The private version schema prevents runtime changes to Alembic metadata.
+Production containers use bounded Docker logs and persistent database storage.

@@ -46,6 +46,12 @@ class Settings(BaseSettings):
     database_connect_timeout_seconds: int = Field(
         default=5, ge=1, validation_alias="DATABASE_CONNECT_TIMEOUT_SECONDS"
     )
+    alembic_version_schema: str = Field(
+        default="public",
+        pattern=r"^[a-z_][a-z0-9_]*$",
+        max_length=63,
+        validation_alias="ALEMBIC_VERSION_SCHEMA",
+    )
 
     @field_validator("database_password")
     @classmethod

@@ -11,6 +11,7 @@ The Telegram prototype remains separate and does not create exercises.
 The local stand now includes PostgreSQL and an empty schema.
 Ask the operator to use `docs/developer/data-model.md` for the database restart check.
 This change adds no manager actions to the web page.
+The separate production configuration remains under local and CI checks; the product is not deployed to the VPS yet.
 
 1. Open `http://127.0.0.1:18080/`.
    The page shows the service status.

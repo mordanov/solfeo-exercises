@@ -34,3 +34,4 @@ Prerequisites:
 | migration | A versioned change to the database schema. |
 | schema revision | The migration identifier recorded in the database by Alembic. |
 | liveness | Confirmation that the backend process responds, without proving database readiness. |
+| DML | Data operations such as selecting, inserting, updating, and deleting table rows. |

@@ -8,7 +8,7 @@ Prerequisites:
 Last updated: 2026-09-29 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
 
 ## Current phase
-PHASE 0: Walking skeleton and CI/CD; local application foundations and pre-commit integration are complete.
+PHASE 0: Walking skeleton and CI/CD; production Compose configuration is verified locally, but VPS deployment remains pending.
 The owner confirms the requested local health-page and PostgreSQL restart scenarios on 2026-09-29.
 The owner confirms the remaining bot checks and continuation on 2026-09-29.
 PHASE 0.5 is complete; the failed PWA result remains unchanged.
@@ -21,7 +21,7 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Add PostgreSQL, an empty Alembic migration, and database settings.
 - [x] Add real PostgreSQL tests and migration checks to CI.
 - [x] Add shared pre-commit checks locally and in CI.
-- [ ] Add production Compose configuration.
+- [x] Add production Compose configuration and isolated integration checks.
 - [ ] Add targeted VPS deployment, migration, health verification, and rollback.
 - [ ] Complete the deployed health-page manual check.
 
@@ -36,6 +36,18 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Complete the remaining Telegram checklist, as confirmed by the owner.
 
 ## Done
+- `deploy/compose.prod.yaml` uses supplied images without building application code on the server.
+- It publishes only the frontend on loopback and keeps PostgreSQL on a private network.
+- Production uses separate bootstrap administrator, migration owner, and runtime application roles.
+- The runtime role can change table data but cannot create, alter, or drop tables.
+- Alembic metadata uses a private production schema, inaccessible to the runtime role.
+- The development version table remains in `public`; regression checks prevent an unwanted autogeneration diff.
+- Production startup waits for migrations; the integration test proves a failed migration blocks a stopped backend from starting.
+- Docker logs have configured size and file-count limits.
+- The backend suite passes 33 tests; 3 separate production container scenarios pass.
+- Production tests verify SQL permissions, hidden privileged credentials, unpublished ports, restart persistence, migration failure, and recovery.
+- The tests remove their own temporary projects and volumes without changing the development database or VPS.
+- `docs/developer/deploy.md` documents production configuration and the remaining TLS/CD integration.
 - The owner confirms that the requested local health-page and database persistence scenarios pass.
 - `.pre-commit-config.yaml` runs Ruff, Ruff format, strict mypy, ESLint, Prettier, and TypeScript.
 - Python hooks use the locked project tooling; JavaScript hooks use isolated Node.js 22.23.3 and npm 12.1.0.
@@ -162,7 +174,7 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - The owner does not supply device versions or a per-message evidence record.
 
 ## Next step
-- Plan production Compose configuration and the targeted VPS deployment/CD task.
+- Plan image publication, shared nginx integration, and targeted VPS deployment with migration verification and rollback.
 - Keep the active bot and superseded PWA deployment unchanged until an explicit deployment or cleanup task.
 
 ## PHASE 0 boundaries
@@ -198,7 +210,7 @@ Do not copy disposable prototype authentication into the product.
 
 The superseded Android PWA checklist is no longer required.
 The new local health-page procedure appears in `docs/user/manager.md` and `docs/user/student.md`.
-The pre-commit task adds no new browser or database manual checks.
+The production configuration task adds no new browser manual checks before the actual VPS deployment.
 
 ## Known issues
 - Image 6 produces no MusicXML; image 7 receives 46 % recognition.
@@ -218,5 +230,6 @@ The pre-commit task adds no new browser or database manual checks.
 - The onboarding guide is `../web-projects/web-folders/documentation/onboarding.md`.
 - npm 10 fails during fresh workspace dependency resolution; npm 12.1.0 resolves the declared dependencies.
 - The health-page language selector is temporary and does not save user preferences.
-- Production configuration, product CD, and VPS acceptance remain for later PHASE 0 tasks.
-- Local PostgreSQL uses the bootstrap role; production needs a separate review of database roles and permissions.
+- Product CD, public nginx integration, and VPS acceptance remain for later PHASE 0 tasks.
+- Product registry images are not published yet; production checks use locally built equivalents.
+- Development still uses the bootstrap database role; the separate production configuration does not.
