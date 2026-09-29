@@ -86,6 +86,18 @@ it("guards manager URLs from students", async () => {
   expect(fetch).toHaveBeenCalledTimes(1);
 });
 
+it("guards exercise management from students", async () => {
+  window.history.replaceState({}, "", "/manager/exercises");
+  const fetch = vi.fn().mockResolvedValue(json(auth(student)));
+  vi.stubGlobal("fetch", fetch);
+  mount();
+  expect(await screen.findByRole("alert")).toHaveTextContent("permission");
+  expect(
+    screen.queryByRole("link", { name: "Exercises" }),
+  ).not.toBeInTheDocument();
+  expect(fetch).toHaveBeenCalledTimes(1);
+});
+
 it("saves language and note naming and applies the returned language", async () => {
   window.history.replaceState({}, "", "/settings");
   const fetch = vi

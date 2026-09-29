@@ -34,7 +34,7 @@ export class ApiError extends Error {
   }
 }
 
-function record(value: unknown): value is Record<string, unknown> {
+export function record(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
 }
 
@@ -81,7 +81,7 @@ function parseAuth(value: unknown): Auth {
   return { user: parseUser(value.user), csrf_token: value.csrf_token };
 }
 
-async function request(
+export async function request(
   path: string,
   method = "GET",
   body?: unknown,

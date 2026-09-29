@@ -12,6 +12,7 @@ import {
 import { isLanguage } from "../../configuration";
 import { SettingsForm } from "../settings/SettingsForm";
 import { Users } from "../users/Users";
+import { Exercises } from "../exercises/Exercises";
 import { ErrorMessage, LanguageOptions } from "../../components/AccountUi";
 
 function LoginForm({ onLogin }: { onLogin: (value: Auth) => void }) {
@@ -166,8 +167,10 @@ export function AuthArea() {
     const expired = async () => {
       await cache.cancelQueries({ queryKey: ["auth"] });
       await cache.cancelQueries({ queryKey: ["users"] });
+      await cache.cancelQueries({ queryKey: ["exercises"] });
       cache.setQueryData(["auth"], null);
       cache.removeQueries({ queryKey: ["users"] });
+      cache.removeQueries({ queryKey: ["exercises"] });
     };
     const listener = () => void expired();
     window.addEventListener("solfeo:unauthorized", listener);
@@ -176,7 +179,9 @@ export function AuthArea() {
   const onAuth = async (value: Auth) => {
     await cache.cancelQueries({ queryKey: ["auth"] });
     await cache.cancelQueries({ queryKey: ["users"] });
+    await cache.cancelQueries({ queryKey: ["exercises"] });
     cache.removeQueries({ queryKey: ["users"] });
+    cache.removeQueries({ queryKey: ["exercises"] });
     cache.setQueryData(["auth"], value);
   };
   const signOut = useMutation({
@@ -184,8 +189,10 @@ export function AuthArea() {
     onSuccess: async () => {
       await cache.cancelQueries({ queryKey: ["auth"] });
       await cache.cancelQueries({ queryKey: ["users"] });
+      await cache.cancelQueries({ queryKey: ["exercises"] });
       cache.setQueryData(["auth"], null);
       cache.removeQueries({ queryKey: ["users"] });
+      cache.removeQueries({ queryKey: ["exercises"] });
     },
   });
   if (query.isPending) return <p aria-live="polite">{t("auth.loading")}</p>;
@@ -213,6 +220,9 @@ export function AuthArea() {
       <nav aria-label={t("nav.label")}>
         {!auth.user.must_change_password && (
           <>
+            {auth.user.role === "manager" && (
+              <a href="/manager/exercises">{t("exercises.title")}</a>
+            )}
             <a
               href={
                 auth.user.role === "manager" ? "/manager/users" : "/student"
@@ -244,6 +254,12 @@ export function AuthArea() {
             <PasswordForm auth={auth} onChange={onAuth} />
           )}
         </>
+      ) : path === "/manager/exercises" ? (
+        auth.user.role === "manager" ? (
+          <Exercises auth={auth} />
+        ) : (
+          <ErrorMessage error={new ApiError("FORBIDDEN")} />
+        )
       ) : managerPath ? (
         auth.user.role === "manager" ? (
           <Users auth={auth} />
