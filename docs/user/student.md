@@ -9,7 +9,8 @@ Prerequisites:
 The current page does not provide sign-in, exercises, playback, or saved user settings.
 It does not grant manager access or let a student import audio.
 The PostgreSQL foundation does not change these limits or add new student actions.
-Production configuration does not make the product available on the VPS yet.
+After successful CD, the same health page is available at `https://solfeo.miveralta.ru/`.
+The operator confirms deployment before the VPS checks.
 
 1. Open `http://127.0.0.1:18080/`.
    The page shows the service status.
@@ -20,4 +21,5 @@ Production configuration does not make the product available on the VPS yet.
 
 The language selection lasts only until a reload.
 The status does not confirm that exercises or the Telegram bot are available.
-The existing VPS does not show this new product page yet.
+For final VPS acceptance, repeat these checks in Chrome and Safari at the HTTPS address.
+The Telegram bot and `/prototype-share/` remain separate.

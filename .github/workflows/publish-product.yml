@@ -30,6 +30,9 @@ jobs:
       packages: write
     env:
       SOURCE_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+    outputs:
+      source_sha: ${{ env.SOURCE_SHA }}
+      ci_run_id: ${{ steps.source.outputs.ci_run_id }}
     steps:
       - name: Require successful main-branch CI for the exact source commit
         id: source
@@ -120,7 +123,7 @@ jobs:
             --ci-run-id "$CI_RUN_ID" \
             --backend-image "$BACKEND_IMAGE" \
             --frontend-image "$FRONTEND_IMAGE"
-          printf 'Source: `%s`\n\nBackend: `%s`\n\nFrontend: `%s`\n\nNo VPS deployment occurs in this workflow.\n' \
+          printf 'Source: `%s`\n\nBackend: `%s`\n\nFrontend: `%s`\n\nThe separate deployment job checks SSH and activates this release.\n' \
             "$SOURCE_SHA" "$BACKEND_IMAGE" "$FRONTEND_IMAGE" >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         with:
@@ -151,5 +154,16 @@ jobs:
               result = "SSH configuration is present; connectivity is not verified."
           print(result)
           with Path(os.environ["GITHUB_STEP_SUMMARY"]).open("a") as summary:
-              summary.write(result + "\n\nPublication does not deploy or close PHASE 0.\n")
+              summary.write(result + "\n\nThe deployment job verifies connectivity separately.\n")
           PY
+  deploy:
+    needs: [publish, deployment-prerequisites]
+    permissions:
+      contents: read
+      actions: read
+      packages: read
+    uses: ./.github/workflows/cd.yml
+    with:
+      source_sha: ${{ needs.publish.outputs.source_sha }}
+      ci_run_id: ${{ needs.publish.outputs.ci_run_id }}
+    secrets: inherit

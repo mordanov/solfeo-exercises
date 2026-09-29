@@ -11,7 +11,8 @@ The Telegram prototype remains separate and does not create exercises.
 The local stand now includes PostgreSQL and an empty schema.
 Ask the operator to use `docs/developer/data-model.md` for the database restart check.
 This change adds no manager actions to the web page.
-The separate production configuration remains under local and CI checks; the product is not deployed to the VPS yet.
+After successful CD, the same health page is available at `https://solfeo.miveralta.ru/`.
+The operator confirms deployment before the VPS checks.
 
 1. Open `http://127.0.0.1:18080/`.
    The page shows the service status.
@@ -28,4 +29,7 @@ The separate production configuration remains under local and CI checks; the pro
 
 The status checks the backend process, not the database or Telegram bot.
 The language selection does not persist after a reload.
-The existing VPS does not show this new product page yet.
+For final VPS acceptance, repeat the language and status checks in Chrome and Safari at the HTTPS address.
+Use browser developer tools to simulate an offline connection without stopping the production backend.
+The next status check shows an error; restoring the connection lets a repeated check succeed.
+The Telegram bot and `/prototype-share/` remain separate.

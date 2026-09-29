@@ -8,7 +8,7 @@ Prerequisites:
 Last updated: 2026-09-29 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
 
 ## Current phase
-PHASE 0: Walking skeleton and CI/CD; CI-gated release publication is implemented, but VPS rollout remains pending.
+PHASE 0: Walking skeleton and CI/CD; targeted VPS rollout is under verification.
 The owner confirms the requested local health-page and PostgreSQL restart scenarios on 2026-09-29.
 The owner confirms the remaining bot checks and continuation on 2026-09-29.
 PHASE 0.5 is complete; the failed PWA result remains unchanged.
@@ -37,6 +37,12 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Complete the remaining Telegram checklist, as confirmed by the owner.
 
 ## Done
+- The owner confirms Actions secret setup and requests continuation.
+- Rollout tests first fail because the implementation module does not exist.
+- The rollout validates archive provenance and hashes before activation.
+- Real-container scenarios pass for first deployment, migration failure, health failure, and compatible previous-image recovery.
+- The proxy network test confirms that only the product frontend joins the external network.
+- Final Actions connectivity, deployed HTTPS, and browser acceptance remain pending.
 - The first product publication succeeds for source `03260e554b13c23b640ef6432775c50b331a7a39`.
 - Publication run `36572516719` pulls and checks the published x86-64 images before creating the release bundle.
 - The downloaded bundle matches the source files, manifest hashes, and CI run `36572315149`.
@@ -186,8 +192,8 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 
 ## Next step
 - Review the publication artifact and the deployment prerequisite report.
-- Configure any missing SSH secrets through repository settings.
-- Implement targeted VPS rollout, shared nginx integration, migration verification, and rollback.
+- Verify targeted VPS rollout through Actions with the configured SSH secrets.
+- Verify shared nginx integration, schema state, and public HTTPS.
 - Keep the active bot and superseded PWA deployment unchanged until an explicit deployment or cleanup task.
 
 ## PHASE 0 boundaries
@@ -220,7 +226,7 @@ Do not copy disposable prototype authentication into the product.
 - [x] Confirm that the local health page opens.
 - [x] Confirm that the local schema revision survives a PostgreSQL restart.
 - [ ] Confirm Chrome and Safari behavior, all 3 languages, and failure/recovery during final VPS acceptance.
-- [ ] Configure the 4 missing deployment secrets in the application repository's Actions settings.
+- [x] Configure the 4 deployment secrets, as confirmed by the owner.
 
 The superseded Android PWA checklist is no longer required.
 The new local health-page procedure appears in `docs/user/manager.md` and `docs/user/student.md`.
@@ -247,5 +253,5 @@ The production configuration task adds no new browser manual checks before the a
 - Product CD, public nginx integration, and VPS acceptance remain for later PHASE 0 tasks.
 - No product release is active on the VPS; publication artifacts provide the tested image digests for the next task.
 - The current CLI credential cannot manage repository Actions secrets: the public-key API returns HTTP 403.
-- VPS rollout cannot proceed through the planned Actions configuration until the owner provides the missing SSH secrets.
+- The owner confirms SSH secret setup; the deployment job must still verify their validity.
 - Development still uses the bootstrap database role; the separate production configuration does not.

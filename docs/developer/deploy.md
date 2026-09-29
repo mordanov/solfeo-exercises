@@ -1,6 +1,6 @@
 # Production deployment
 
-This document describes the production Compose configuration and the remaining VPS deployment work.
+This document describes verified releases, targeted VPS deployment, and safe rollback.
 
 Prerequisites:
 - Use Docker with Compose v2.
@@ -19,8 +19,8 @@ Only PostgreSQL, the backend, and the migration service join the private databas
 
 The configuration passes isolated container checks locally and in CI.
 The separate publication workflow supplies verified product images and a versioned release bundle.
-Public routing and VPS deployment remain unimplemented.
-The following production procedure requires the later CD and nginx integration task.
+`cd.yml` downloads that bundle and runs `deploy/rollout.py` through pinned SSH.
+The shared nginx routes the existing TLS hostname to the product frontend.
 Do not invoke the shared infrastructure's general deployment.
 
 ## Prepare configuration
@@ -31,13 +31,14 @@ Do not overwrite an existing production configuration file.
 1. Create `.env.production` from `.env.example` with mode `0600`.
 2. Set separate values for `DATABASE_PASSWORD`, `MIGRATION_DATABASE_PASSWORD`, and `POSTGRES_ADMIN_PASSWORD`.
 3. Select distinct application and migration usernames.
-4. Set `BACKEND_IMAGE` and `FRONTEND_IMAGE` to tested registry references.
-5. Prefer registry digests instead of mutable tags.
+4. Keep the private configuration at `~/solfeo-production/.env.production`.
+5. Keep its database names and credentials stable after initialization.
 
 The intended image names are `ghcr.io/mordanov/solfeo-backend` and `ghcr.io/mordanov/solfeo-frontend`.
 Use image digests from a successful publication run's `release.json`.
 See `docs/developer/ci-cd.md` for the publication gate and artifact contents.
-Compose requires nonempty references but does not enforce their immutability; CD must supply the tested digests.
+CD supplies immutable references through each release's `images.env`.
+It validates image names, source provenance, archive members, and deployment-file hashes before activation.
 Frontend language and timeout settings are build-time values within the frontend image.
 Changing those values in the server environment does not rebuild that image.
 
@@ -72,16 +73,73 @@ Plan credential rotation explicitly.
 If first initialization fails, inspect the error before taking any action on the volume.
 Never remove an existing production volume as an automatic recovery step.
 
-## Start and verify
+## Targeted deployment
 
-Run these commands only after the image release and targeted VPS integration are ready.
+The product uses the `solfeo-production` Compose project.
+The server root is `~/solfeo-production`.
+The operator prepares its private configuration once; CD never generates replacement database passwords.
+CD requires Python 3.12 or newer and Docker Compose v2 or newer.
+The existing server uses Python 3.13 for orchestration; application containers use Python 3.12.
+
+Successful publication calls the reusable `cd.yml` workflow.
+CD rejects a source commit that no longer matches `main`.
+SSH uses a dedicated identity, `BatchMode`, and `StrictHostKeyChecking=yes`.
+Private GHCR access uses temporary `GITHUB_TOKEN` credentials, removed by the final workflow step.
+The workflow never runs the shared deployment script.
+
+The rollout performs these operations:
+1. Validate the bundle against the expected source commit and CI run.
+2. Store the deployment files under `releases/<archive-sha256>/`.
+3. Validate Compose and pull immutable image references.
+4. Start PostgreSQL and wait for its healthcheck.
+5. Stop only the product backend and frontend.
+6. Run `alembic upgrade head` with the migration role.
+7. Start the backend and frontend with container healthchecks.
+8. Check Alembic heads, public HTTPS health JSON, and the frontend HTML.
+9. Atomically record the current and previous release in `state.json`.
+
+A host file lock prevents overlapping activations.
+The stable `runtime/deploy/postgres-init.sh` path avoids unnecessary PostgreSQL recreation between releases.
+A changed bootstrap script requires operator review before deployment.
+The release files remain on the VPS after the Actions artifact expires.
+The script keeps Compose errors in private `last-error.log`, not public Actions output.
+Do not share that file without removing credentials.
+
+### Failure and rollback
+
+A migration or health failure stops the candidate backend and frontend.
+If a previous release exists, the script checks its Alembic heads against the current database.
+It restarts the previous images only when that check succeeds.
+It then checks the previous release's schema and HTTP health.
+Successful recovery still fails the deployment job with `DEPLOY_FAILED_ROLLED_BACK`.
+The successful release record does not change.
+
+If schema compatibility fails, both application services remain stopped.
+The job reports `ROLLBACK_FAILED_MANUAL_RECOVERY_REQUIRED`.
+The operator must select a compatible forward fix or an explicitly reviewed database recovery.
+The script never automatically downgrades a schema or removes a volume.
+Future migrations must preserve compatibility or explicitly require a maintenance deployment.
+
+A failed first deployment has no previous release.
+It leaves PostgreSQL and its volume intact and reports `FIRST_DEPLOY_FAILED_SERVICES_STOPPED`.
+Correct the cause before retrying the verified release.
+After a host crash or forced cancellation, inspect the saved state and containers before retrying.
+The script does not claim automatic recovery from a power failure.
+
+### Operator inspection
+
+Read `state.json` to select the current release directory.
+Use its Compose files and `images.env` together with the stable runtime directory.
 
 ```sh
-docker compose --env-file .env.production -f deploy/compose.prod.yaml config --quiet
-docker compose --env-file .env.production -f deploy/compose.prod.yaml pull
-docker compose --env-file .env.production -f deploy/compose.prod.yaml up -d --wait
-docker compose --env-file .env.production -f deploy/compose.prod.yaml run --rm --no-deps migrate alembic -c backend/alembic.ini current --check-heads
+cd ~/solfeo-production
+release="releases/$(python3 -c 'import json; print(json.load(open("state.json"))["current"])')"
+docker compose --project-name solfeo-production \
+  --project-directory "$PWD/runtime/deploy" \
+  --env-file .env.production --env-file "$release/images.env" \
+  -f "$release/deploy/compose.prod.yaml" -f "$release/deploy/compose.proxy.yaml" ps
 curl --fail http://127.0.0.1:18090/api/health
+curl --fail https://solfeo.miveralta.ru/api/health
 ```
 
 PostgreSQL must accept TCP connections before the migration service starts.
@@ -93,7 +151,7 @@ Check the schema revision separately through the migration service.
 Compose dependencies do not make a running release update atomic.
 An old backend can remain running while a new migration fails.
 The migration failure test stops the backend first and proves that the failed migration blocks its next start.
-CD must define release order, compatibility, and rollback before the first live update.
+The rollout script implements the explicit stop, migration, start, and recovery order above.
 
 ## TLS and VPS integration
 
@@ -103,15 +161,23 @@ Preserve the `/prototype-share/` route until a separate cleanup task.
 The production frontend serves internal HTTP behind that TLS boundary.
 
 A containerized shared nginx cannot reach the host through its own `127.0.0.1`.
-The integration task must connect only the frontend to an appropriate shared proxy network.
-It must use an unambiguous upstream name and retain database network isolation.
+The external `solfeo-proxy` network connects only shared nginx and the product frontend.
+`deploy/compose.proxy.yaml` gives the frontend the unique alias `solfeo-product-frontend`.
+Shared nginx resolves this alias dynamically and proxies to port `8080`.
+The backend and PostgreSQL do not join this network.
+The shared Compose file preserves nginx's network attachment after recreation.
+Only the prototype location retains its GET/HEAD restriction; product requests reach the application.
 Review trusted forwarded headers before authentication starts in PHASE 1.
 
+This dedicated product project is an exception to shared database onboarding.
+Do not register its database or services under the shared stack's `compose_services`.
+The existing hostname entry remains responsible for the certificate and prototype.
+The shared workflow guide links to the authoritative paired product workflows instead of a generic deployment template.
+
 The deployment prerequisite report checks `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`, and `VPS_KNOWN_HOSTS`.
-The future rollout can use optional `VPS_PORT`, with port 22 as its default.
-It must also configure registry pull access when images are private.
+The rollout accepts optional `VPS_PORT`, with port 22 as its default.
+Host-key entries must match the configured host and port.
 The pipeline needs `packages: write` to publish through `GITHUB_TOKEN`.
-The rollout script, connectivity checks, and rollback remain part of that task.
 
 ## Reproduce the isolated checks
 
@@ -124,6 +190,8 @@ uv run --locked pytest deploy/tests -q
 ```
 
 Each run creates a unique `solfeo-prod-check-*` project with generated credentials and a temporary host port.
-The checks cover role privileges, private ports, schema persistence, migration failure, recovery, and password-free logs.
+The checks cover privileges, private ports, schema persistence, failed migrations, failed healthchecks, previous-image recovery, and password-free logs.
+The rollout test maps synthetic digest references to CI-built images; all migrations and service operations use real containers.
+It also verifies that only the frontend joins its disposable proxy network.
 The test cleanup removes only its disposable project and volume.
 It does not change the development volume or contact the VPS.

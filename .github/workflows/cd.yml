@@ -1,0 +1,152 @@
+name: Deploy product release
+
+on:
+  workflow_call:
+    inputs:
+      source_sha:
+        required: true
+        type: string
+      ci_run_id:
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+  packages: read
+
+concurrency:
+  group: deploy-product-vps
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      SOURCE_SHA: ${{ inputs.source_sha }}
+      CI_RUN_ID: ${{ inputs.ci_run_id }}
+    steps:
+      - name: Reject stale releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REPOSITORY" = mordanov/solfeo-exercises
+          test "$GITHUB_REF" = refs/heads/main
+          current="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)"
+          test "$SOURCE_SHA" = "$current"
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source_sha }}
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: solfeo-release-${{ inputs.source_sha }}
+          path: ${{ runner.temp }}/solfeo-release
+      - name: Verify the downloaded bundle before SSH
+        env:
+          PYTHONPATH: deploy
+        run: |
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          from rollout import verify_bundle
+          verify_bundle(
+              Path(os.environ["RUNNER_TEMP"]) / "solfeo-release/solfeo-release.tar.gz",
+              os.environ["SOURCE_SHA"], int(os.environ["CI_RUN_ID"]),
+          )
+          print("RELEASE_BUNDLE_VERIFIED")
+          PY
+      - name: Configure pinned SSH identity
+        env:
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_PORT: ${{ secrets.VPS_PORT }}
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_KNOWN_HOSTS: ${{ secrets.VPS_KNOWN_HOSTS }}
+        run: |
+          python3 - <<'PY'
+          import os
+          import re
+          from pathlib import Path
+          required = ("VPS_HOST", "VPS_USER", "VPS_SSH_KEY", "VPS_KNOWN_HOSTS")
+          missing = [name for name in required if not os.environ[name].strip()]
+          if missing:
+              raise SystemExit("MISSING_SSH_SECRETS:" + ",".join(missing))
+          host = os.environ["VPS_HOST"].strip()
+          user = os.environ["VPS_USER"].strip()
+          port = os.environ["VPS_PORT"].strip() or "22"
+          if not re.fullmatch(r"[a-zA-Z0-9][a-zA-Z0-9.:-]*", host):
+              raise SystemExit("INVALID_VPS_HOST")
+          if not re.fullmatch(r"[a-z_][a-z0-9_-]*", user):
+              raise SystemExit("INVALID_VPS_USER")
+          if not port.isascii() or not port.isdecimal() or not 1 <= int(port) <= 65535:
+              raise SystemExit("INVALID_VPS_PORT")
+          folder = Path(os.environ["RUNNER_TEMP"]) / "solfeo-ssh"
+          folder.mkdir(mode=0o700)
+          for name, value in (
+              ("identity", os.environ["VPS_SSH_KEY"]),
+              ("known_hosts", os.environ["VPS_KNOWN_HOSTS"]),
+          ):
+              path = folder / name
+              path.touch(mode=0o600)
+              path.write_text(value.rstrip() + "\n")
+          config = folder / "config"
+          config.touch(mode=0o600)
+          config.write_text(
+              f"Host solfeo-vps\n  HostName {host}\n  User {user}\n  Port {port}\n"
+              f"  IdentityFile {folder}/identity\n  UserKnownHostsFile {folder}/known_hosts\n"
+              "  StrictHostKeyChecking yes\n  IdentitiesOnly yes\n  BatchMode yes\n"
+              "  ConnectTimeout 15\n  ServerAliveInterval 15\n  ServerAliveCountMax 4\n"
+          )
+          PY
+      - name: Verify access and prepare the isolated upload directory
+        run: |
+          ssh -F "$RUNNER_TEMP/solfeo-ssh/config" solfeo-vps '
+            set -eu
+            test -f "$HOME/solfeo-production/.env.production"
+            docker compose version --short
+            docker network inspect solfeo-proxy --format "{{.Name}}"
+            umask 077
+            mkdir -p "$HOME/solfeo-production/incoming"
+            echo SSH_PREREQUISITES_VERIFIED
+          '
+          scp -F "$RUNNER_TEMP/solfeo-ssh/config" \
+            deploy/rollout.py deploy/release.py \
+            "$RUNNER_TEMP/solfeo-release/solfeo-release.tar.gz" \
+            solfeo-vps:solfeo-production/incoming/
+      - name: Configure temporary registry access
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          printf '%s' "$GH_TOKEN" | ssh -F "$RUNNER_TEMP/solfeo-ssh/config" solfeo-vps '
+            set -eu
+            umask 077
+            export DOCKER_CONFIG="$HOME/solfeo-production/incoming/docker-auth"
+            mkdir -p "$DOCKER_CONFIG"
+            docker login ghcr.io --username mordanov --password-stdin >/dev/null 2>&1 ||
+              { echo REGISTRY_LOGIN_FAILED >&2; exit 1; }
+          '
+      - name: Deploy, migrate, verify, and roll back on failure
+        run: |
+          set -euo pipefail
+          [[ "$SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$CI_RUN_ID" =~ ^[0-9]+$ ]]
+          ssh -F "$RUNNER_TEMP/solfeo-ssh/config" solfeo-vps \
+            "export DOCKER_CONFIG=\"\$HOME/solfeo-production/incoming/docker-auth\"; \
+             python3 \"\$HOME/solfeo-production/incoming/rollout.py\" \
+             --root \"\$HOME/solfeo-production\" \
+             --bundle \"\$HOME/solfeo-production/incoming/solfeo-release.tar.gz\" \
+             --source-sha '$SOURCE_SHA' --ci-run-id '$CI_RUN_ID' --proxy \
+             --health-url https://solfeo.miveralta.ru"
+          printf 'Deployed `%s` to https://solfeo.miveralta.ru/.\n' "$SOURCE_SHA" >> "$GITHUB_STEP_SUMMARY"
+      - name: Remove temporary registry and SSH credentials
+        if: always()
+        run: |
+          if [ -f "$RUNNER_TEMP/solfeo-ssh/config" ]; then
+            ssh -F "$RUNNER_TEMP/solfeo-ssh/config" solfeo-vps '
+              rm -f "$HOME/solfeo-production/incoming/docker-auth/config.json"
+            '
+            rm -f "$RUNNER_TEMP/solfeo-ssh/identity" "$RUNNER_TEMP/solfeo-ssh/known_hosts" "$RUNNER_TEMP/solfeo-ssh/config"
+          fi

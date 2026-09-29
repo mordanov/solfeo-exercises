@@ -38,6 +38,7 @@ Frontend build values are public; never put a secret in `VITE_*`.
 | `BACKEND_IMAGE` | Required for production | Tested backend image reference; use an immutable digest |
 | `FRONTEND_IMAGE` | Required for production | Tested frontend image reference; use an immutable digest |
 | `PRODUCTION_WEB_PORT` | `18090` | Production frontend loopback port |
+| `PRODUCTION_PROXY_NETWORK` | `solfeo-proxy` | External network shared only by TLS nginx and the product frontend |
 | `POSTGRES_ADMIN_PASSWORD` | Required for production | Separate bootstrap administrator password |
 | `MIGRATION_DATABASE_USER` | `solfeo_migrator` | Production schema owner; different from the application user |
 | `MIGRATION_DATABASE_PASSWORD` | Required for production | Separate schema owner password |

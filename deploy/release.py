@@ -9,7 +9,12 @@ import tarfile
 import tempfile
 from pathlib import Path
 
-RELEASE_FILES = ("deploy/compose.prod.yaml", "deploy/postgres-init.sh", ".env.example")
+RELEASE_FILES = (
+    "deploy/compose.prod.yaml",
+    "deploy/compose.proxy.yaml",
+    "deploy/postgres-init.sh",
+    ".env.example",
+)
 
 
 def build_release(

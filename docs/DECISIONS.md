@@ -72,3 +72,8 @@ Format: date, decision, reason. Do not reverse a decision without asking the own
   Alembic metadata uses a private production schema; the development schema remains unchanged.
   Production Compose uses supplied images, a private database network, and a loopback frontend port.
   Registry publication, TLS integration, and actual VPS deployment remain separate tasks.
+- 2026-09-29: Product CD uses a separate proxy network, dedicated runtime directory, and immutable release bundles.
+  Reason: preserve unrelated VPS services and keep the backend and database off shared application networks.
+  Shared nginx and the product frontend join `solfeo-proxy`; existing TLS and prototype routes remain.
+  Rollback restores previous images only when their Alembic heads match the current database.
+  An incompatible schema requires operator recovery; automated downgrade and volume deletion are prohibited.

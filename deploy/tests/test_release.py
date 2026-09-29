@@ -9,7 +9,12 @@ from release import build_release
 SHA = "a" * 40
 BACKEND = "ghcr.io/mordanov/solfeo-backend@sha256:" + "b" * 64
 FRONTEND = "ghcr.io/mordanov/solfeo-frontend@sha256:" + "c" * 64
-FILES = ("deploy/compose.prod.yaml", "deploy/postgres-init.sh", ".env.example")
+FILES = (
+    "deploy/compose.prod.yaml",
+    "deploy/compose.proxy.yaml",
+    "deploy/postgres-init.sh",
+    ".env.example",
+)
 
 
 @pytest.fixture

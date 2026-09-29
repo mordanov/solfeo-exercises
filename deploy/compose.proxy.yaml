@@ -1,0 +1,11 @@
+services:
+  frontend:
+    networks:
+      application:
+      proxy:
+        aliases: [solfeo-product-frontend]
+
+networks:
+  proxy:
+    external: true
+    name: ${PRODUCTION_PROXY_NETWORK:-solfeo-proxy}

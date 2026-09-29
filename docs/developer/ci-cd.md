@@ -38,7 +38,8 @@ The CI workflow neither publishes images nor connects to the VPS.
 The existing prototype publishing workflows remain separate.
 `deploy/compose.prod.yaml` provides a separate, image-based production configuration.
 See `docs/developer/deploy.md` for its role boundaries and operational requirements.
-VPS rollout, public nginx integration, rollback, and VPS acceptance remain unfinished PHASE 0 tasks.
+`cd.yml` performs targeted VPS rollout after successful publication.
+Final browser acceptance remains a separate PHASE 0 gate.
 
 Do not run the shared infrastructure's general deployment for a scoped product change.
 Plan the named services, nginx routes, migration order, and rollback before the first product deployment.
@@ -70,6 +71,7 @@ The artifact name is `solfeo-release-<source-sha>` and its retention is 30 days.
 It contains `solfeo-release.tar.gz` with exactly these files:
 - `release.json`
 - `deploy/compose.prod.yaml`
+- `deploy/compose.proxy.yaml`
 - `deploy/postgres-init.sh`
 - `.env.example`
 
@@ -79,8 +81,25 @@ The builder rejects mutable image references, unsafe symlinks, and non-executabl
 It normalizes file ownership and does not overwrite an existing artifact.
 
 Download the artifact from a successful publication run, not from an arbitrary branch or run.
-The later rollout implementation must verify its provenance and hashes before use.
-Publication alone does not deploy the application or satisfy PHASE 0 acceptance.
+The rollout verifies provenance and hashes before SSH and again on the server.
+The publication workflow calls the separate deployment job only after verified artifact creation.
+Image publication alone does not establish successful VPS deployment.
+
+## Targeted CD
+
+`publish-product.yml` calls reusable `.github/workflows/cd.yml` with the exact source SHA and CI run ID.
+The deployment job downloads the artifact from that same workflow run.
+It rejects stale source commits, configures pinned SSH, and verifies server prerequisites.
+It never prints the SSH identity or host-key contents.
+It uploads the deployment scripts and verified bundle to `~/solfeo-production/incoming`.
+It uses temporary GHCR credentials instead of changing the account's existing Docker login.
+The final cleanup removes those credentials.
+
+The VPS must already contain private `.env.production` and the shared proxy network.
+Rollout and rollback operate only on the separate product project.
+The script verifies the schema, frontend HTML, and HTTPS health before promoting the release.
+A failed update returns a failed job even when recovery succeeds.
+See `deploy.md` for compatibility limits, private diagnostics, and operator recovery.
 
 ## Deployment prerequisite report
 
@@ -95,7 +114,7 @@ Missing secrets appear as `DEPLOYMENT_SETUP_REQUIRED`, not as a successful deplo
 | `VPS_SSH_KEY` | A deployment private key authorized for that account |
 | `VPS_KNOWN_HOSTS` | Host-key entries from an already trusted source |
 
-The future deployment can use optional `VPS_PORT`, with port 22 as its default.
+The deployment accepts optional `VPS_PORT`, with port 22 as its default.
 Use the repository's Settings > Secrets and variables > Actions page to configure these values.
 Do not send private keys in chat or commit them.
 Do not replace pinned host verification with an unverified `ssh-keyscan`.
@@ -115,4 +134,5 @@ The matching CI run is `36572315149`.
 The runner pulls these images and passes all 16 release and production-configuration checks.
 The downloaded artifact matches all 3 deployment-file hashes and preserves the bootstrap executable mode.
 The prerequisite report finds all 4 required SSH secrets unavailable in the repository workflow context.
-No SSH connection, registry pull on the VPS, public routing change, or application rollout occurs.
+That first publication does not connect to SSH or deploy the application.
+The owner subsequently confirms secret setup; the new deployment job verifies actual connectivity.
