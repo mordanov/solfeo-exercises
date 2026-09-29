@@ -36,3 +36,6 @@ Prerequisites:
 | liveness | Confirmation that the backend process responds, without proving database readiness. |
 | DML | Data operations such as selecting, inserting, updating, and deleting table rows. |
 | release bundle | An archive with verified image references, deployment files, source provenance, and file hashes. |
+| login session | A persistent authenticated session, distinct from a listening session or database session. |
+| CSRF | Cross-site request forgery; origin and session-token checks reject unauthorized browser mutations. |
+| scrypt | A memory-hard password hashing algorithm with a random salt for each password. |

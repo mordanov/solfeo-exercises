@@ -8,14 +8,26 @@ Prerequisites:
 Last updated: 2026-09-29 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
 
 ## Current phase
-PHASE 0: Walking skeleton and CI/CD is complete.
-The owner confirms the final deployed health-page checks on 2026-09-29.
-PHASE 1 has not started.
+PHASE 1: Users, authentication, and settings; implementation and automatic verification are in progress.
+The owner authorizes the entire phase without intermediate confirmations on 2026-09-29.
+Manual checks follow the complete implementation.
+PHASE 0 is complete with owner-confirmed deployed browser acceptance.
 The owner confirms the requested local health-page and PostgreSQL restart scenarios on 2026-09-29.
 The owner confirms the remaining bot checks and continuation on 2026-09-29.
 PHASE 0.5 is complete; the failed PWA result remains unchanged.
 
 ## Plan for the current phase
+- [x] Add typed users, sessions, login budgets, and migration `0002_auth`.
+- [x] Add scrypt authentication, secure cookies, sliding expiry, CSRF, and login limits.
+- [x] Add startup emergency synchronization and all required lifecycle cases.
+- [x] Add manager-only user administration, password resets, and session revocation.
+- [x] Add persisted language/naming settings and obligatory password changes.
+- [x] Add translated login, role guards, user administration, and settings forms.
+- [ ] Complete automatic browser scenarios and the deployed release verification.
+- [ ] Complete documentation and the final manual checklist.
+- [ ] Obtain owner acceptance after the complete implementation.
+
+## Completed PHASE 0 plan
 - [x] Add the product layout and locked Python and TypeScript tooling.
 - [x] Add the public FastAPI health endpoint and translated React health page.
 - [x] Add isolated local Docker images, nginx, Compose, and initial CI.
@@ -39,6 +51,18 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Complete the remaining Telegram checklist, as confirmed by the owner.
 
 ## Done
+- PHASE 1 backend tests first fail because the user/session models do not exist.
+- UI tests first fail because the account component does not exist.
+- Account service tests use real PostgreSQL; no database mocks replace permission or lifecycle checks.
+- The migration adds `users`, `login_sessions`, and `login_limits` above the previous empty baseline.
+- Login, logout, current-password checks, reset, expiry, and active/role changes enforce session boundaries.
+- Startup synchronizes the emergency manager and explicitly fails when recovery cannot reach the database.
+- All 3 languages include account forms, permission errors, manager controls, and settings.
+- Settings save to PostgreSQL and apply immediately after successful updates.
+- Container checks cover real nginx authentication, student API denial, session/settings persistence, and nginx throttling.
+- Local Chrome completes the full manager/student scenario, including reset, revocation, activation, persisted settings, and logout.
+- The local migration and backend now share one image, preventing a stale migration image during targeted builds.
+- Native Safari automation is unavailable because Allow Remote Automation is disabled; no system setting is changed.
 - The owner confirms Chrome/Safari, RU/EN/ES, status refresh, and failure/recovery checks on the deployed page.
 - PHASE 0 closes with successful CI, targeted CD, updated documentation, and owner acceptance.
 - Product source `13a081745a8cf0a5804f75f9a5831c0e9e7f4137` is active at `https://solfeo.miveralta.ru/`.
@@ -210,8 +234,9 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - The owner does not supply device versions or a per-message evidence record.
 
 ## Next step
-- Plan PHASE 1 (users, authentication, and settings) when the owner requests continuation.
-- Obtain approval for its first task before implementation.
+- Complete PHASE 1 automatic browser checks and targeted deployment.
+- Present only the final manual checklist; do not request intermediate approvals.
+- Keep PHASE 2 out of this task.
 - Keep the active bot and superseded PWA deployment unchanged until an explicit deployment or cleanup task.
 
 ## PHASE 0 boundaries
@@ -249,8 +274,8 @@ Do not copy disposable prototype authentication into the product.
 
 The superseded Android PWA checklist is no longer required.
 The new local health-page procedure appears in `docs/user/manager.md` and `docs/user/student.md`.
-The owner confirms final browser acceptance at the public HTTPS address.
-No further PHASE 0 manual checks remain.
+The owner confirms final PHASE 0 browser acceptance at the public HTTPS address.
+The final PHASE 1 procedures are in `docs/user/manager.md` and `docs/user/student.md`.
 
 ## Known issues
 - Image 6 produces no MusicXML; image 7 receives 46 % recognition.

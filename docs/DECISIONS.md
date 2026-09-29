@@ -16,7 +16,10 @@ Format: date, decision, reason. Do not reverse a decision without asking the own
   Database-dependent HTTP handlers use FastAPI's synchronous execution path.
   Future workers own separate engines and sessions; they do not share the backend pool.
   Do not run synchronous database calls directly inside an asynchronous handler.
-- <date>: CSRF method: <decide in PHASE 1>.
+- 2026-09-29: PHASE 1 uses session-bound CSRF tokens and an explicit origin allowlist.
+  Login requires an allowed `Origin`; other mutations also require `X-CSRF-Token`.
+  `/api/auth/me` returns the CSRF token after cookie authentication.
+  Reason: JSON requests and same-origin token delivery protect state changes without exposing the httpOnly session cookie.
 - 2026-09-28: PHASE 0.5 evaluates `ejercicio_1.jpeg` through `ejercicio_10.jpeg`; image 11 remains for a later check. Reason: use 10 samples without selecting by results.
 - 2026-09-28: Original samples and generated MusicXML remain local and uncommitted. Reason: the owner approves local-only sample handling.
 - 2026-09-28: Recognition uses `100 × max(0, 1 − errors / expected events)`. Reason: the owner approves event comparison against original images.
@@ -81,3 +84,17 @@ Format: date, decision, reason. Do not reverse a decision without asking the own
   The confirmation covers Chrome and Safari, RU/EN/ES, status refresh, and failure/recovery.
   Owner-tested browser versions and a per-browser evidence matrix are not supplied.
   PHASE 1 remains unstarted and requires a separate approved plan.
+- 2026-09-29: The owner authorizes the complete PHASE 1 implementation without intermediate confirmations.
+  Manual acceptance follows the complete implementation and automated checks.
+- 2026-09-29: Passwords use standard-library scrypt with `N=32768`, `r=8`, `p=3`, and independent 16-byte salts.
+  Login cookies contain random 256-bit tokens; PostgreSQL stores only their SHA-256 hashes.
+  Sessions use a 90-day sliding lifetime by default, with httpOnly, Secure, and SameSite=Lax cookies in production.
+  Password changes, manager resets, deactivation, and role changes revoke affected sessions.
+- 2026-09-29: PostgreSQL stores separate login budgets for normalized usernames and client IP addresses.
+  Transaction-level advisory locks serialize concurrent attempts; nginx adds a burst limit before password hashing.
+  Shared nginx overwrites client identity headers; the private frontend forwards that trusted identity to the private backend.
+  Do not expose the backend or attach untrusted services to these networks.
+- 2026-09-29: Emergency synchronization completes before backend startup succeeds.
+  Incomplete credentials fail configuration validation; absent credentials deactivate the flagged account and revoke its sessions.
+  Changing the emergency username retires the previous account without deleting it.
+  The manager interface cannot modify emergency accounts or change the current manager's own role or active status.

@@ -7,8 +7,9 @@ Prerequisites:
 - Read [the current status](docs/STATUS.md) before changing the code.
 
 PHASE 0.5 is complete.
-PHASE 0 provides a local health page, PostgreSQL, synchronous SQLAlchemy sessions, and an empty Alembic baseline.
-Authentication, exercises, and product Telegram import are not available yet.
+PHASE 0 provides the deployed health page, PostgreSQL, and targeted CI/CD.
+PHASE 1 adds cookie authentication, manager user administration, persisted settings, and emergency recovery.
+Exercises and product Telegram import remain for later phases.
 
 ## Start locally
 
@@ -48,7 +49,7 @@ uv run --locked pre-commit run --all-files
 The same hooks run in CI.
 Database tests and application builds remain separate checks.
 Successful main-branch CI authorizes the product publication workflow.
-Its verified release bundle does not deploy the application to the VPS.
+The publication workflow calls targeted CD after verifying the release bundle.
 
 ## Documentation
 
@@ -56,6 +57,7 @@ Its verified release bundle does not deploy the application to the VPS.
 - [Environment variables](docs/developer/env-variables.md)
 - [Architecture](docs/developer/architecture.md)
 - [API](docs/developer/api.md)
+- [Authentication and emergency recovery](docs/developer/auth.md)
 - [Database and migrations](docs/developer/data-model.md)
 - [Production configuration and deployment boundaries](docs/developer/deploy.md)
 - [CI and deployment scope](docs/developer/ci-cd.md)

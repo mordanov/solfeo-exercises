@@ -1,6 +1,6 @@
 # Database and migrations
 
-This document explains the PostgreSQL foundation and the empty initial schema.
+This document explains the PostgreSQL account schema and migrations.
 
 Prerequisites:
 - Prepare private configuration with `docs/developer/setup.md`.
@@ -14,7 +14,20 @@ It creates no product tables.
 Alembic maintains its own `alembic_version` table.
 Development uses `public`; production uses a private version schema, normally `migrations`.
 The configured schema must already exist before migration execution.
-Users, sessions, exercises, the journal, and worker jobs belong to later phases.
+Revision `0002_auth` adds the PHASE 1 tables.
+Exercises, the journal, and worker jobs belong to later phases.
+
+| Table | Contents and constraints |
+|---|---|
+| `users` | Unique lowercase username, names, role, password hash, active/emergency flags, obligatory password change, language, note naming |
+| `login_sessions` | Hashed token primary key, user foreign key, CSRF token, creation time, expiry |
+| `login_limits` | Hashed username/IP budget key, attempt count, expiry |
+
+Database checks constrain roles, languages, and note naming.
+A partial unique index permits at most 1 emergency account.
+Sessions reference users without cascading deletion.
+Manager operations deactivate users instead of deleting them.
+Expiry indexes support session and login-budget cleanup.
 
 `backend/app/models/__init__.py` provides the typed declarative base.
 Its naming convention gives indexes and constraints stable names.
@@ -68,7 +81,7 @@ Do not remove the data volume.
    ```
 
 3. Repeat the revision command.
-   Alembic reports `0001_initial (head)`.
+   Alembic reports `0002_auth (head)`.
 4. Open the local health page.
    Its existing behavior remains unchanged.
 

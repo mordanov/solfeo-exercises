@@ -16,6 +16,21 @@ Frontend build values are public; never put a secret in `VITE_*`.
 | `API_HOST` | `127.0.0.1` | Native backend bind address |
 | `API_PORT` | `18081` | Native backend port; integer from 1 to 65535 |
 | `API_LOG_LEVEL` | `info` | Backend logging: critical, error, warning, info, debug, or trace |
+| `API_FORWARDED_ALLOW_IPS` | `127.0.0.1` | Trusted forwarding sources; private Compose deployments use `*` |
+| `AUTH_ALLOWED_ORIGINS` | Localhost origins on port 18080 | JSON array of exact origins; production requires `https://solfeo.miveralta.ru` |
+| `SESSION_COOKIE_SECURE` | `true` | HTTPS-only session cookie; use `false` only for local HTTP |
+| `SESSION_LIFETIME_DAYS` | `90` | Sliding session lifetime, from 1 to 365 days |
+| `PASSWORD_MIN_LENGTH` | `12` | Minimum password length, from 8 to 128 characters |
+| `LOGIN_USERNAME_LIMIT` | `5` | Failed attempts per normalized username within the window |
+| `LOGIN_IP_LIMIT` | `30` | Login attempts per client IP within the window |
+| `LOGIN_WINDOW_SECONDS` | `900` | Login-budget window, from 1 to 86400 seconds |
+| `LOGIN_NGINX_RATE_PER_SECOND` | `5` | Frontend login limit, from 1 to 1000 requests per second |
+| `LOGIN_NGINX_BURST` | `10` | Frontend login burst, from 1 to 1000 requests |
+| `DEFAULT_LANGUAGE` | `en` | Initial stored language for new accounts: ru, en, or es |
+| `EMERGENCY_MANAGER_USERNAME` | Empty | Configured recovery username; requires a password |
+| `EMERGENCY_MANAGER_PASSWORD` | Empty | Recovery password; requires a username and configured password length |
+| `EMERGENCY_MANAGER_FIRST_NAME` | `Emergency` | Recovery account first name |
+| `EMERGENCY_MANAGER_LAST_NAME` | `Manager` | Recovery account last name |
 | `DATABASE_HOST` | `127.0.0.1` | PostgreSQL host for native execution |
 | `DATABASE_PORT` | `15432` | PostgreSQL port for native execution; integer from 1 to 65535 |
 | `DATABASE_NAME` | `solfeo` | Development database name |
@@ -32,7 +47,7 @@ Frontend build values are public; never put a secret in `VITE_*`.
 | `FRONTEND_PORT` | `18080` | Vite development port; integer from 1 to 65535 |
 | `API_PROXY_TARGET` | `http://127.0.0.1:18081` | Native backend origin for the Vite proxy |
 | `VITE_DEFAULT_LANGUAGE` | `en` | Initial page language: en, ru, or es |
-| `VITE_HEALTH_TIMEOUT_MS` | `5000` | Request deadline in milliseconds; integer from 1 to 2147483647 |
+| `VITE_HEALTH_TIMEOUT_MS` | `5000` | Shared health/account HTTP deadline in milliseconds; integer from 1 to 2147483647 |
 | `WEB_BIND_ADDRESS` | `127.0.0.1` | Local Compose host bind address |
 | `WEB_PORT` | `18080` | Local Compose host port |
 | `BACKEND_IMAGE` | Required for production | Tested backend image reference; use an immutable digest |
@@ -76,7 +91,11 @@ PostgreSQL initialization variables apply only when its data directory is empty.
 Changing a name, user, or password in `.env` does not change existing database objects.
 Keep the credentials stable or perform an explicit database change.
 
-The language selector changes only the current page.
-The application does not save a user language until PHASE 1 implements user settings.
-Authentication, storage, and product bot variables will accompany their implementation.
+Before login, language selection applies only to the current page.
+Authenticated settings persist in PostgreSQL and apply immediately after a successful update.
+Both emergency credentials must be empty or configured together.
+Never copy the example's insecure-cookie and localhost-origin values into production without adjusting them.
+Keep `SESSION_COOKIE_SECURE=true` and HTTPS-only allowed origins on the VPS.
+See `auth.md` before changing trusted proxy settings or emergency credentials.
+Storage and product bot variables will accompany their implementation.
 The prototype environment files remain separate.

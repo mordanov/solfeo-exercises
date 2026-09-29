@@ -28,6 +28,11 @@ Do not copy credentials from the VPS or prototype configuration.
 2. Adjust the documented values if necessary.
 3. Keep `.env` outside Git.
 
+To enable the first local manager, set both emergency credentials in this private file before backend startup.
+Use at least `PASSWORD_MIN_LENGTH` characters for the password.
+Keep `SESSION_COOKIE_SECURE=false` only for local HTTP.
+See `auth.md` for the complete recovery lifecycle.
+
 Do not regenerate the password for an existing database volume.
 Changing `POSTGRES_PASSWORD` does not change a password inside an initialized PostgreSQL database.
 Use a planned database password change instead.
@@ -74,6 +79,7 @@ The backend uses the private Compose network.
 PostgreSQL stores its data in the `solfeo-dev_postgres_data` volume.
 The stand has no media volume or Telegram credentials.
 The backend starts only after PostgreSQL becomes healthy and the migration service exits successfully.
+It also requires successful emergency account synchronization.
 
 1. Start the isolated stand from the repository root.
 
@@ -150,6 +156,7 @@ The tests never use SQLite or mock database operations.
 Set the test command's `DATABASE_PORT` to the configured `TEST_POSTGRES_HOST_PORT` if you change that port.
 Do not run migration tests against any database containing real data.
 Frontend tests cover translations, language changes, request failures, timeout, cancellation, and explicit retry.
+Account tests add session restoration, role guards, CSRF headers, saved settings, obligatory password change, and logout cleanup.
 The first implementation follows failing tests for the API, health page, and locale completeness.
 Production configuration checks have a separate command in `docs/developer/deploy.md#reproduce-the-isolated-checks`.
 

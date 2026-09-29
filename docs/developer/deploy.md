@@ -33,6 +33,13 @@ Do not overwrite an existing production configuration file.
 3. Select distinct application and migration usernames.
 4. Keep the private configuration at `~/solfeo-production/.env.production`.
 5. Keep its database names and credentials stable after initialization.
+6. Set `AUTH_ALLOWED_ORIGINS=["https://solfeo.miveralta.ru"]`.
+7. Set `SESSION_COOKIE_SECURE=true`.
+8. Configure both emergency credentials privately for first-user creation.
+
+The local example intentionally disables Secure cookies for HTTP.
+Do not retain that value or localhost origins in production.
+See `auth.md` for emergency synchronization and ordinary manager setup.
 
 The intended image names are `ghcr.io/mordanov/solfeo-backend` and `ghcr.io/mordanov/solfeo-frontend`.
 Use image digests from a successful publication run's `release.json`.
@@ -119,6 +126,8 @@ The job reports `ROLLBACK_FAILED_MANUAL_RECOVERY_REQUIRED`.
 The operator must select a compatible forward fix or an explicitly reviewed database recovery.
 The script never automatically downgrades a schema or removes a volume.
 Future migrations must preserve compatibility or explicitly require a maintenance deployment.
+The PHASE 1 schema head is `0002_auth`; PHASE 0 images cannot pass its compatibility check.
+After that migration, recovery from a failed healthcheck requires a compatible PHASE 1 image.
 
 A failed first deployment has no previous release.
 It leaves PostgreSQL and its volume intact and reports `FIRST_DEPLOY_FAILED_SERVICES_STOPPED`.
