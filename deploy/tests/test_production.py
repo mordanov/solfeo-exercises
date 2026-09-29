@@ -1,4 +1,5 @@
 import http.cookiejar
+import io
 import json
 import os
 import secrets
@@ -11,7 +12,9 @@ from collections.abc import Iterator
 from dataclasses import dataclass, field
 from pathlib import Path
 
+import httpx
 import pytest
+from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -185,7 +188,7 @@ try:
         version = connection.scalar(
             text("SELECT version_num FROM migrations.alembic_version")
         )
-        assert version == "0002_auth"
+        assert version == "0003_exercises"
         privileges = connection.execute(text(
             "SELECT rolsuper, rolcreatedb, rolcreaterole "
             "FROM pg_roles WHERE rolname=current_user"
@@ -296,6 +299,102 @@ def test_revision_survives_restart(stand: Stand) -> None:
         "check",
     )
     stand.health()
+
+
+def test_protected_media_ranges_persistence_and_soft_delete(stand: Stand) -> None:
+    origin = "http://" + stand.run("port", "frontend", "8080").stdout.strip()
+    image = io.BytesIO()
+    Image.new("RGB", (24, 24), "white").save(image, "PNG")
+    # Generate the fixture using the same installed ffmpeg, without host prerequisites.
+    encoded = stand.python(
+        "backend",
+        """
+import base64, subprocess, tempfile
+from pathlib import Path
+with tempfile.TemporaryDirectory() as directory:
+    path = Path(directory) / "tone.opus"
+    subprocess.run(["ffmpeg", "-v", "error", "-f", "lavfi", "-i",
+                    "sine=duration=3", "-c:a", "libopus", str(path)],
+                   check=True, timeout=15)
+    print(base64.b64encode(path.read_bytes()).decode())
+""",
+    )
+    import base64
+
+    with httpx.Client(
+        base_url=origin, headers={"Origin": origin}, timeout=30
+    ) as client:
+        signed_in = client.post(
+            "/api/auth/login",
+            json={
+                "username": "release-check",
+                "password": stand.passwords[3],
+            },
+        )
+        assert signed_in.status_code == 200
+        client.headers["X-CSRF-Token"] = signed_in.json()["csrf_token"]
+        result = client.post(
+            "/api/exercises",
+            data={"title": "Container media check"},
+            files={
+                "image": ("score.txt", image.getvalue(), "text/plain"),
+                "audio": ("sound.opus", base64.b64decode(encoded), "audio/ogg"),
+            },
+        )
+        assert result.status_code == 201, result.text
+        identifier = result.json()["id"]
+        path = f"/api/exercises/{identifier}/files/audio"
+        response = client.get(path)
+        assert (
+            response.status_code == 200
+            and response.headers["content-type"] == "audio/mp4"
+        )
+        assert set(response.headers.get_list("cache-control", split_commas=True)) == {
+            "no-store"
+        }
+        assert "x-accel-redirect" not in response.headers
+        full = response.content
+        partial = client.get(path, headers={"Range": "bytes=10-99"})
+        assert partial.status_code == 206
+        assert partial.content == full[10:100]
+        assert partial.headers["content-range"] == f"bytes 10-99/{len(full)}"
+        suffix = client.get(path, headers={"Range": "bytes=-32"})
+        assert suffix.status_code == 206 and suffix.content == full[-32:]
+        assert (
+            client.get(path, headers={"Range": f"bytes={len(full) + 10}-"}).status_code
+            == 416
+        )
+        assert client.head(path).headers["content-length"] == str(len(full))
+        assert (
+            client.get(f"/api/exercises/{identifier}/files/image").content
+            == image.getvalue()
+        )
+        filename = response.headers["content-disposition"].split('"')[1]
+        assert client.get("/_protected_media/" + filename).status_code == 404
+        with httpx.Client(base_url=origin) as anonymous:
+            assert (
+                anonymous.get(path, headers={"Range": "bytes=0-9"}).status_code == 401
+            )
+        stand.run("restart", "backend", "frontend")
+        stand.run("up", "-d", "--no-deps", "--wait", "backend", "frontend")
+        signed_in = client.post(
+            "/api/auth/login",
+            json={
+                "username": "release-check",
+                "password": stand.passwords[3],
+            },
+        )
+        client.headers["X-CSRF-Token"] = signed_in.json()["csrf_token"]
+        assert client.get(path).content == full
+        assert client.delete(f"/api/exercises/{identifier}").status_code == 200
+        assert client.get(path).status_code == 404
+    stand.python(
+        "backend",
+        f"""
+from pathlib import Path
+assert (Path("/app/media") / {filename!r}).is_file()
+""",
+    )
 
 
 def test_authentication_through_real_nginx(stand: Stand) -> None:

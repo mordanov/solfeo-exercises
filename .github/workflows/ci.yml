@@ -82,6 +82,7 @@ jobs:
         with:
           enable-cache: true
       - run: uv sync --locked --python 3.12
+      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg file
       - run: uv run pytest
       - run: uv run alembic -c backend/alembic.ini upgrade head
       - run: uv run alembic -c backend/alembic.ini current --check-heads

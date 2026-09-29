@@ -159,6 +159,13 @@ class Rollout:
                         "PASSWORD_",
                         "LOGIN_",
                         "EMERGENCY_MANAGER_",
+                        "MEDIA_",
+                        "IMAGE_",
+                        "AUDIO_",
+                        "UPLOAD_",
+                        "FFMPEG_",
+                        "FFPROBE_",
+                        "FILE_",
                     )
                 )
                 or key == "DEFAULT_LANGUAGE"

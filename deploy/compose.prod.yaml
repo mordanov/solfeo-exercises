@@ -89,6 +89,20 @@ services:
       EMERGENCY_MANAGER_PASSWORD: ${EMERGENCY_MANAGER_PASSWORD:-}
       EMERGENCY_MANAGER_FIRST_NAME: ${EMERGENCY_MANAGER_FIRST_NAME:-Emergency}
       EMERGENCY_MANAGER_LAST_NAME: ${EMERGENCY_MANAGER_LAST_NAME:-Manager}
+      MEDIA_ROOT: /app/media
+      IMAGE_MAX_BYTES: ${IMAGE_MAX_BYTES:-20971520}
+      AUDIO_MAX_BYTES: ${AUDIO_MAX_BYTES:-52428800}
+      UPLOAD_MAX_BYTES: ${UPLOAD_MAX_BYTES:-74448896}
+      IMAGE_MAX_PIXELS: ${IMAGE_MAX_PIXELS:-40000000}
+      AUDIO_MAX_SECONDS: ${AUDIO_MAX_SECONDS:-1800}
+      MEDIA_TIMEOUT_SECONDS: ${MEDIA_TIMEOUT_SECONDS:-120}
+      AUDIO_BITRATE_KBPS: ${AUDIO_BITRATE_KBPS:-128}
+      FFMPEG_BINARY: ${FFMPEG_BINARY:-ffmpeg}
+      FFPROBE_BINARY: ${FFPROBE_BINARY:-ffprobe}
+      FILE_BINARY: ${FILE_BINARY:-file}
+    volumes:
+      - media_data:/app/media
+    tmpfs: [/tmp]
     networks: [application, database]
     depends_on:
       migrate:
@@ -104,12 +118,16 @@ services:
     environment:
       LOGIN_NGINX_RATE_PER_SECOND: ${LOGIN_NGINX_RATE_PER_SECOND:-5}
       LOGIN_NGINX_BURST: ${LOGIN_NGINX_BURST:-10}
+      UPLOAD_MAX_BYTES: ${UPLOAD_MAX_BYTES:-74448896}
+      MEDIA_TIMEOUT_SECONDS: ${MEDIA_TIMEOUT_SECONDS:-120}
     image: ${FRONTEND_IMAGE:?Set an immutable frontend image reference}
     restart: unless-stopped
     ports:
       - "127.0.0.1:${PRODUCTION_WEB_PORT:-18090}:8080"
     read_only: true
     tmpfs: [/tmp]
+    volumes:
+      - media_data:/app/media:ro
     cap_drop: [ALL]
     security_opt: [no-new-privileges:true]
     networks: [application]
@@ -131,3 +149,4 @@ networks:
 
 volumes:
   postgres_data:
+  media_data:
