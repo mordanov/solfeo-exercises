@@ -8,7 +8,8 @@ Prerequisites:
 Last updated: 2026-09-29 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
 
 ## Current phase
-PHASE 1: Users, authentication, and settings; implementation and automatic verification are in progress.
+PHASE 1: Users, authentication, and settings are implemented and deployed.
+Automatic checks pass; final owner acceptance remains open.
 The owner authorizes the entire phase without intermediate confirmations on 2026-09-29.
 Manual checks follow the complete implementation.
 PHASE 0 is complete with owner-confirmed deployed browser acceptance.
@@ -23,8 +24,8 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Add manager-only user administration, password resets, and session revocation.
 - [x] Add persisted language/naming settings and obligatory password changes.
 - [x] Add translated login, role guards, user administration, and settings forms.
-- [ ] Complete automatic browser scenarios and the deployed release verification.
-- [ ] Complete documentation and the final manual checklist.
+- [x] Complete automatic browser scenarios and the deployed release verification.
+- [x] Complete documentation and the final manual checklist.
 - [ ] Obtain owner acceptance after the complete implementation.
 
 ## Completed PHASE 0 plan
@@ -51,6 +52,19 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Complete the remaining Telegram checklist, as confirmed by the owner.
 
 ## Done
+- PHASE 1 source `481c72b0cb137aa512798172f377e89e2aca42d8` is active at `https://solfeo.miveralta.ru/`.
+- CI run `36593904877` and publication/CD run `36594338338` succeed.
+- The current suites pass 62 backend tests, 46 frontend tests, and 33 deployment/release checks.
+- Real Chrome 154.0.8037.58 completes the manager/student workflow locally and over public HTTPS.
+- The scenarios cover user creation, obligatory password change, all 3 languages, saved naming, role denial, reset, revocation, activation, and logout.
+- The public browser check waits for user-list loading before editing; its first attempt identifies a test-harness timing issue.
+- All 4 synthetic VPS accounts remain inactive; their generated passwords do not enter logs or Git.
+- The 2 synthetic local accounts remain inactive.
+- Cleanup removes the disposable test database and isolated Chrome profile; the development stand remains running.
+- The private VPS configuration contains the generated `recovery-manager` credentials and HTTPS-only authentication settings.
+- The emergency password remains only in `~/solfeo-production/.env.production`; the operator retrieves it through trusted SSH.
+- Independent verification confirms exact image digests, `0002_auth`, secure settings, private network boundaries, and removal of temporary registry credentials.
+- All 45 other containers retain their IDs and start times, including PostgreSQL, shared nginx, the PWA, and the Telegram worker.
 - PHASE 1 backend tests first fail because the user/session models do not exist.
 - UI tests first fail because the account component does not exist.
 - Account service tests use real PostgreSQL; no database mocks replace permission or lifecycle checks.
@@ -64,9 +78,9 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - The local migration and backend now share one image, preventing a stale migration image during targeted builds.
 - Native Safari automation is unavailable because Allow Remote Automation is disabled; no system setting is changed.
 - A malformed non-ASCII CSRF header returns the stable rejection code instead of causing a server error.
-- The owner confirms Chrome/Safari, RU/EN/ES, status refresh, and failure/recovery checks on the deployed page.
+- The owner confirms Chrome/Safari, RU/EN/ES, status refresh, and failure/recovery checks on the deployed PHASE 0 health page.
 - PHASE 0 closes with successful CI, targeted CD, updated documentation, and owner acceptance.
-- Product source `13a081745a8cf0a5804f75f9a5831c0e9e7f4137` is active at `https://solfeo.miveralta.ru/`.
+- The initial PHASE 0 release uses source `13a081745a8cf0a5804f75f9a5831c0e9e7f4137`.
 - CI run `36585295551` and publication/CD run `36585683212` succeed.
 - The runner passes all 30 release and production checks before deployment.
 - Actions verifies the owner's SSH configuration with pinned host keys and deploys through the separate product project.
@@ -235,8 +249,8 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - The owner does not supply device versions or a per-message evidence record.
 
 ## Next step
-- Complete PHASE 1 automatic browser checks and targeted deployment.
-- Present only the final manual checklist; do not request intermediate approvals.
+- Complete final PHASE 1 owner acceptance with the manager and student guides.
+- Check Safari manually because its WebDriver permission is disabled on the automation computer.
 - Keep PHASE 2 out of this task.
 - Keep the active bot and superseded PWA deployment unchanged until an explicit deployment or cleanup task.
 
@@ -255,6 +269,17 @@ Do not copy disposable prototype authentication into the product.
 - The owner confirms the requested local scenarios without browser versions or a detailed browser matrix.
 - The owner confirms the requested final VPS scenarios on 2026-09-29.
 - Owner-tested browser versions and a per-browser evidence matrix are not supplied.
+
+## Final PHASE 1 manual acceptance
+- [ ] Sign in as a manager in Safari and Chrome.
+- [ ] Create a student and complete the obligatory password change.
+- [ ] Confirm language and naming persistence after reload and a new sign-in.
+- [ ] Confirm student denial at `/manager/users`.
+- [ ] Confirm password reset, deactivation/reactivation, and logout behavior.
+
+Chrome automation covers these scenarios; this checklist records final owner acceptance separately.
+Safari 26.6.2 refuses WebDriver sessions until Allow Remote Automation is enabled.
+The task does not change that system permission or claim automated Safari success.
 
 ## Manual checks the owner must do
 - [x] Confirm that images 1 through 10 represent the intended exercises.
@@ -284,7 +309,7 @@ The final PHASE 1 procedures are in `docs/user/manager.md` and `docs/user/studen
 - Local artifacts are under `prototypes/omr/output/20260928T201957Z-84f49a71/`.
 - Files evidence is under `prototypes/files/output/curl-20260928T204244Z-ec7ed479/`.
 - The owner reports completion of the files manual step; device versions and the test setup are not recorded.
-- Basic authentication uses disposable local credentials; product session authentication remains out of scope.
+- Basic authentication remains a disposable prototype mechanism; PHASE 1 uses independent product session cookies.
 - The files prototype image remains local; operating-system package repositories remain unpinned.
 - The PWA keeps only the latest successful share and rejects files above 25 MiB by default.
 - Desktop browser checks do not establish Android sharing compatibility.
@@ -295,9 +320,9 @@ The final PHASE 1 procedures are in `docs/user/manager.md` and `docs/user/studen
 - The HTTPS PWA runs at `https://solfeo.miveralta.ru/prototype-share/`.
 - The onboarding guide is `../web-projects/web-folders/documentation/onboarding.md`.
 - npm 10 fails during fresh workspace dependency resolution; npm 12.1.0 resolves the declared dependencies.
-- The health-page language selector is temporary and does not save user preferences.
+- Anonymous language selection remains temporary; authenticated language and note naming now persist per user.
 - Product CD and public nginx integration are active; the owner confirms final VPS acceptance.
-- The first deployment has no earlier production release; automatic rollback becomes available after a subsequent successful deployment.
+- The PHASE 0 image cannot recognize `0002_auth`; rollback across that schema boundary requires a compatible forward fix.
 - Schema-incompatible rollback stops the product services and requires operator recovery; no automatic database downgrade occurs.
 - The current CLI credential cannot manage repository Actions secrets: the public-key API returns HTTP 403.
 - The deployment job confirms valid SSH configuration and removes its temporary registry credentials.

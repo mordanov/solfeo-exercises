@@ -81,6 +81,11 @@ Its own password-change form is unavailable because the environment controls tha
 Emergency accounts can change their language and note naming.
 The existing prototype bot token and sender allowlist remain independent.
 
+The first PHASE 1 deployment configures `recovery-manager` with a generated password on the VPS.
+The password remains in `~/solfeo-production/.env.production`, readable only by the deployment account.
+The automated browser scenarios leave 4 inactive accounts with `check-manager-` or `check-student-` username prefixes.
+They do not grant access, and the operator does not need their temporary passwords.
+
 ## Deployment compatibility
 
 Revision `0002_auth` follows the empty `0001_initial` baseline.

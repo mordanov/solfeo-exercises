@@ -144,7 +144,7 @@ Publication and CD [`36585683212`](https://github.com/mordanov/solfeo-exercises/
 All 30 release and production checks pass before the SSH deployment.
 The deployment validates real SSH credentials and the pinned host key.
 
-| Image | Active digest reference |
+| Image | Initial PHASE 0 digest reference |
 |---|---|
 | Backend | `ghcr.io/mordanov/solfeo-backend@sha256:fc311fdb42c7b13a09eaca4667718a414cac48e2d349c414f5ca5bfc2d1dc16e` |
 | Frontend | `ghcr.io/mordanov/solfeo-frontend@sha256:9bb783a2af4f422de9f419097344800367c1b9fcc68c4fb1ad00989c9307a4cd` |
@@ -154,3 +154,26 @@ All 44 existing VPS containers retain their IDs and start times.
 Chrome 154.0.8037.58 passes the deployed page, 3 languages, browser-only API failure, and recovery.
 The owner confirms Chrome/Safari, language switching, status refresh, and failure/recovery on 2026-09-29.
 PHASE 0 is complete; owner-tested browser versions and per-browser evidence are not supplied.
+
+## Deployed PHASE 1 release
+
+Source `481c72b0cb137aa512798172f377e89e2aca42d8` completes PHASE 1 implementation on 2026-09-29.
+CI [`36593904877`](https://github.com/mordanov/solfeo-exercises/actions/runs/36593904877) succeeds.
+Publication and CD [`36594338338`](https://github.com/mordanov/solfeo-exercises/actions/runs/36594338338) succeed.
+The suites pass 62 backend, 46 frontend, and 33 deployment/release checks.
+
+| Image | Active digest reference |
+|---|---|
+| Backend | `ghcr.io/mordanov/solfeo-backend@sha256:b43d285569d9de5d74c9f0e7f8ba82ac44eb70f3e5b325e964aa75b148c35265` |
+| Frontend | `ghcr.io/mordanov/solfeo-frontend@sha256:499fea60aa30323fa6b55b387594e4a1223b0bb26331cb9da1a936d2b6d2bf47` |
+
+The migration advances the retained PostgreSQL volume to `0002_auth`.
+All 45 other containers retain their IDs and start times.
+Only the product backend and frontend change.
+The bot and historical PWA remain healthy.
+
+Chrome completes the account scenarios locally and through public HTTPS.
+Those scenarios create users, change temporary passwords, persist preferences, enforce roles, reset passwords, revoke sessions, and verify activation and logout.
+The automation deactivates its 4 synthetic VPS accounts and does not publish their passwords.
+The operator retrieves emergency credentials only from private server configuration.
+Final Safari/owner acceptance remains separate because local Safari blocks remote automation.

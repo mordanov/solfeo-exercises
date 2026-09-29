@@ -40,6 +40,8 @@ Status: complete on 2026-09-29 after the owner confirms the final deployed brows
 - Route guards on the frontend and permission dependencies on the backend. Tests for every boundary.
 - Docs: user (login, settings, manage users), developer (auth, recovery with the emergency manager).
 Done when: manager creates a student, the student logs in, changes the language, and cannot open manager pages.
+Implementation status: deployed on 2026-09-29 with successful automated Chrome, API, container, and CI/CD checks.
+Final owner acceptance remains open; the disabled Allow Remote Automation permission blocks native Safari automation.
 
 ## PHASE 2: Exercises and files
 - Exercise model (soft delete, position, category). CRUD API. Reorder API. Validation: image or audio.

@@ -176,7 +176,8 @@ Shared nginx resolves this alias dynamically and proxies to port `8080`.
 The backend and PostgreSQL do not join this network.
 The shared Compose file preserves nginx's network attachment after recreation.
 Only the prototype location retains its GET/HEAD restriction; product requests reach the application.
-Review trusted forwarded headers before authentication starts in PHASE 1.
+PHASE 1 uses the trusted header chain documented in `auth.md`.
+Keep the backend private when using `API_FORWARDED_ALLOW_IPS=*`.
 
 This dedicated product project is an exception to shared database onboarding.
 Do not register its database or services under the shared stack's `compose_services`.
@@ -208,6 +209,7 @@ uv run --locked pytest deploy/tests -q
 
 Each run creates a unique `solfeo-prod-check-*` project with generated credentials and a temporary host port.
 The checks cover privileges, private ports, schema persistence, failed migrations, failed healthchecks, previous-image recovery, and password-free logs.
+Account checks cover real nginx login, user creation, settings, role denial, backend restart persistence, and proxy-resistant login throttling.
 The rollout test maps synthetic digest references to CI-built images; all migrations and service operations use real containers.
 It also verifies that only the frontend joins its disposable proxy network.
 The test cleanup removes only its disposable project and volume.
