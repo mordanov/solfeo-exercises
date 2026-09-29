@@ -42,19 +42,25 @@ PHASE 0.5: Risk prototypes
 - The files prototype containers and networks stop after verification; local media and evidence remain available.
 - The owner confirms completion of the protected-audio manual step on 2026-09-29.
 - `docs/developer/pwa-share.md` proposes the static HTTPS prototype and the shared-infrastructure changes.
+- The owner approves the static PWA scope and deployment plan on 2026-09-29.
+- `prototypes/pwa/` contains the local React/i18n shell, share receiver, IndexedDB storage, manifest, icons, and static Docker image.
+- All 28 PWA tests, TypeScript, ESLint, Prettier, and the production build pass.
+- Desktop Chrome verifies real multipart navigation, receipt, persistent storage, clear, and explicit errors against the built image.
+- nginx rejects unhandled POSTs; browser-handled shares remain on the device.
+- The local PWA container and isolated test browser stop after verification.
 
 ## In progress
 - The files protocol checks and owner manual step are complete.
 - Basic authentication is a localhost-only prototype assumption, not a product authentication decision.
-- The PWA deployment plan awaits approval; no PWA code or shared-infrastructure change exists yet.
+- The local PWA is complete; HTTPS onboarding and Android acceptance checks remain pending.
+- No shared-infrastructure change or image publication occurs in this task.
 
 ## Next step
-- Approve the proposed static PWA scope in `docs/developer/pwa-share.md`.
-- Implement the local PWA with failing tests before changing shared infrastructure.
-- Confirm the registry owner and authorize shared-infrastructure changes before HTTPS deployment.
+- Confirm the registry owner and publishing permissions.
+- Apply the approved HTTPS onboarding plan as the next task.
+- Run the Android checklist after deployment.
 
 ## Open questions for the owner
-- Confirm the minimum prototype onboarding scope before changing the shared infrastructure.
 - Confirm the image registry owner and publishing permissions.
 - Identify the Android device and browser versions when manual testing starts.
 
@@ -65,6 +71,7 @@ PHASE 0.5: Risk prototypes
 - [x] Review the image 6 failure and the manual event counts.
 - [x] Confirm the recommendation to continue with Audiveris.
 - [x] Complete the protected-audio manual step, as confirmed by the owner.
+- [ ] Verify the PWA receipt page locally if desired before deployment.
 - [ ] Install the PWA from Android Chrome after HTTPS deployment.
 - [ ] Share audio from WhatsApp and Telegram after the PWA prototype.
 
@@ -76,6 +83,9 @@ PHASE 0.5: Risk prototypes
 - The owner reports completion of the files manual step; device versions and the test setup are not recorded.
 - Basic authentication uses disposable local credentials; product session authentication remains out of scope.
 - The tested Docker image is local, not published; operating-system package repositories remain unpinned.
+- The PWA keeps only the latest successful share and rejects files above 25 MiB by default.
+- Desktop browser checks do not establish Android sharing compatibility.
+- PWA browser and static-server evidence remain in `prototypes/pwa/output/`.
 - Samples and generated MusicXML remain local; a fresh clone does not contain them.
 - HTTPS onboarding remains pending for `https://solfeo.miveralta.ru`.
 - The onboarding guide is `../web-projects/web-folders/documentation/onboarding.md`.

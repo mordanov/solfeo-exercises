@@ -31,3 +31,7 @@ Format: date, decision, reason. Do not reverse a decision without asking the own
 - 2026-09-29: The owner confirms completion of the protected-audio manual step.
   X-Accel-Redirect and nginx byte-range delivery remain the planned file-serving mechanism.
   Device versions and the manual test setup are not recorded.
+- 2026-09-29: The owner approves the static PWA prototype and HTTPS onboarding plan.
+  The prototype uses `/prototype-share/` on `solfeo.miveralta.ru` and stores shared files on the device.
+  Reason: test Android sharing without building product authentication, uploads, or database services.
+  Registry ownership and publishing permissions still require confirmation.

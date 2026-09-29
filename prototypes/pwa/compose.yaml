@@ -1,0 +1,11 @@
+name: solfeo-pwa-prototype
+services:
+  web:
+    build:
+      context: .
+      args:
+        VITE_DEFAULT_LANGUAGE: ${VITE_DEFAULT_LANGUAGE:-en}
+        VITE_MAX_SHARE_BYTES: ${VITE_MAX_SHARE_BYTES:-26214400}
+        VITE_SW_READY_TIMEOUT_MS: ${VITE_SW_READY_TIMEOUT_MS:-15000}
+    ports:
+      - "127.0.0.1:${PWA_PORT:-18086}:80"

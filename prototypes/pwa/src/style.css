@@ -1,0 +1,47 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #172a37;
+  background: #f1f5f7;
+}
+body {
+  margin: 0;
+  padding: 1rem;
+}
+main {
+  max-width: 42rem;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 1rem;
+}
+h1 {
+  font-size: 1.7rem;
+}
+p {
+  line-height: 1.5;
+}
+select,
+button {
+  font: inherit;
+  padding: 0.65rem;
+}
+button {
+  cursor: pointer;
+}
+[role="alert"] {
+  padding: 0.75rem;
+  border-left: 0.3rem solid #a22121;
+  background: #fff0f0;
+  color: #7f1515;
+}
+[role="status"] {
+  font-weight: bold;
+}
+dt {
+  margin-top: 0.75rem;
+  font-weight: bold;
+}
+dd {
+  margin: 0.25rem 0;
+  overflow-wrap: anywhere;
+}
