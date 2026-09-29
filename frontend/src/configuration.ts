@@ -30,3 +30,12 @@ export function readUploadTimeout(value = "600000"): number {
     );
   return timeout;
 }
+
+export function readHeartbeat(value = "5000"): number {
+  const interval = Number(value);
+  if (!Number.isSafeInteger(interval) || interval < 1000 || interval > 60000)
+    throw new Error(
+      "VITE_LISTENING_HEARTBEAT_MS must be an integer from 1000 to 60000",
+    );
+  return interval;
+}

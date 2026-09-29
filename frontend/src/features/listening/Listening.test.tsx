@@ -1,0 +1,135 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { I18nextProvider } from "react-i18next";
+import { beforeEach, expect, it, vi } from "vitest";
+import type { Auth } from "../../api/auth";
+import * as api from "../../api/listening";
+import { i18n } from "../../i18n";
+import { Listening } from "./Listening";
+
+vi.mock("../../api/listening");
+const auth: Auth = {
+  csrf_token: "csrf",
+  user: {
+    id: 1,
+    username: "student",
+    first_name: "First",
+    last_name: "Last",
+    role: "student",
+    is_active: true,
+    is_emergency: false,
+    must_change_password: false,
+    ui_language: "en",
+    note_naming: "letters",
+  },
+};
+const exercise = {
+  id: 1,
+  title: "First exercise",
+  category: null,
+  description: "Practice",
+  position: 0,
+  image: null,
+  audio: {
+    id: "audio",
+    mime_type: "audio/mp4",
+    size_bytes: 100,
+    duration_seconds: 10,
+  },
+};
+beforeEach(async () => {
+  vi.resetAllMocks();
+  vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {});
+  await i18n.changeLanguage("en");
+  vi.mocked(api.currentExercise).mockResolvedValue(exercise);
+  vi.mocked(api.sendListeningEvent).mockResolvedValue();
+});
+function mount() {
+  return render(
+    <I18nextProvider i18n={i18n}>
+      <QueryClientProvider
+        client={
+          new QueryClient({
+            defaultOptions: {
+              queries: { retry: false, gcTime: 0 },
+              mutations: { retry: false },
+            },
+          })
+        }
+      >
+        <Listening auth={auth} />
+      </QueryClientProvider>
+    </I18nextProvider>,
+  );
+}
+it("does not create a journal row before play and keeps one session through pause", async () => {
+  mount();
+  const audio = await screen.findByLabelText("Audio: First exercise");
+  expect(audio).not.toHaveAttribute("autoplay");
+  expect(api.sendListeningEvent).not.toHaveBeenCalled();
+  fireEvent.play(audio);
+  await waitFor(() => expect(api.sendListeningEvent).toHaveBeenCalled());
+  fireEvent.pause(audio);
+  fireEvent.play(audio);
+  fireEvent.ended(audio);
+  await waitFor(() =>
+    expect(vi.mocked(api.sendListeningEvent).mock.calls.at(-1)?.[0].event).toBe(
+      "ended",
+    ),
+  );
+  expect(
+    new Set(
+      vi
+        .mocked(api.sendListeningEvent)
+        .mock.calls.map(([data]) => data.session_id),
+    ).size,
+  ).toBe(1);
+});
+it("finishes before navigating and does not autoplay the next exercise", async () => {
+  vi.mocked(api.selectExercise).mockResolvedValue({
+    ...exercise,
+    id: 2,
+    title: "Second exercise",
+  });
+  mount();
+  fireEvent.play(await screen.findByLabelText("Audio: First exercise"));
+  await userEvent.click(screen.getByRole("button", { name: "Next" }));
+  expect(
+    await screen.findByLabelText("Audio: Second exercise"),
+  ).not.toHaveAttribute("autoplay");
+  expect(api.selectExercise).toHaveBeenCalledWith(
+    "csrf",
+    "sequential",
+    "next",
+    1,
+    undefined,
+  );
+  expect(vi.mocked(api.sendListeningEvent).mock.calls.at(-1)?.[0].event).toBe(
+    "end",
+  );
+});
+it("flushes a terminal beacon on pagehide", async () => {
+  mount();
+  fireEvent.play(await screen.findByLabelText("Audio: First exercise"));
+  fireEvent(window, new Event("pagehide"));
+  expect(api.beaconListeningEvent).toHaveBeenCalledWith(
+    expect.objectContaining({ event: "end", csrf_token: "csrf" }),
+    expect.any(Function),
+  );
+});
+it("supports image-only exercises without inventing listening sessions", async () => {
+  vi.mocked(api.currentExercise).mockResolvedValue({
+    ...exercise,
+    audio: null,
+    image: {
+      id: "image",
+      mime_type: "image/png",
+      size_bytes: 100,
+      duration_seconds: null,
+    },
+  });
+  mount();
+  expect(await screen.findByText(/image only/)).toBeInTheDocument();
+  expect(api.sendListeningEvent).not.toHaveBeenCalled();
+});

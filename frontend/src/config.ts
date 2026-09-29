@@ -1,4 +1,8 @@
-import { readConfiguration, readUploadTimeout } from "./configuration";
+import {
+  readConfiguration,
+  readUploadTimeout,
+  readHeartbeat,
+} from "./configuration";
 
 export const config = readConfiguration(
   import.meta.env.VITE_DEFAULT_LANGUAGE,
@@ -6,4 +10,7 @@ export const config = readConfiguration(
 );
 export const uploadTimeoutMs = readUploadTimeout(
   import.meta.env.VITE_UPLOAD_TIMEOUT_MS,
+);
+export const listeningHeartbeatMs = readHeartbeat(
+  import.meta.env.VITE_LISTENING_HEARTBEAT_MS,
 );

@@ -87,6 +87,7 @@ export async function request(
   body?: unknown,
   csrf?: string,
   signal?: AbortSignal,
+  keepalive = false,
 ): Promise<unknown> {
   signal?.throwIfAborted();
   const controller = new AbortController();
@@ -101,6 +102,7 @@ export async function request(
       method,
       credentials: "same-origin",
       cache: "no-store",
+      keepalive,
       signal: controller.signal,
       headers: {
         "Content-Type": "application/json",

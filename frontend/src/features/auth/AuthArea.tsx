@@ -13,6 +13,9 @@ import { isLanguage } from "../../configuration";
 import { SettingsForm } from "../settings/SettingsForm";
 import { Users } from "../users/Users";
 import { Exercises } from "../exercises/Exercises";
+import { Listening } from "../listening/Listening";
+import { Journal } from "../journal/Journal";
+import { finishPlayback } from "../listening/tracker";
 import { ErrorMessage, LanguageOptions } from "../../components/AccountUi";
 
 function LoginForm({ onLogin }: { onLogin: (value: Auth) => void }) {
@@ -168,9 +171,15 @@ export function AuthArea() {
       await cache.cancelQueries({ queryKey: ["auth"] });
       await cache.cancelQueries({ queryKey: ["users"] });
       await cache.cancelQueries({ queryKey: ["exercises"] });
+      await cache.cancelQueries({ queryKey: ["listening"] });
+      await cache.cancelQueries({ queryKey: ["journal"] });
+      await cache.cancelQueries({ queryKey: ["journal-options"] });
       cache.setQueryData(["auth"], null);
       cache.removeQueries({ queryKey: ["users"] });
       cache.removeQueries({ queryKey: ["exercises"] });
+      cache.removeQueries({ queryKey: ["listening"] });
+      cache.removeQueries({ queryKey: ["journal"] });
+      cache.removeQueries({ queryKey: ["journal-options"] });
     };
     const listener = () => void expired();
     window.addEventListener("solfeo:unauthorized", listener);
@@ -180,19 +189,34 @@ export function AuthArea() {
     await cache.cancelQueries({ queryKey: ["auth"] });
     await cache.cancelQueries({ queryKey: ["users"] });
     await cache.cancelQueries({ queryKey: ["exercises"] });
+    await cache.cancelQueries({ queryKey: ["listening"] });
+    await cache.cancelQueries({ queryKey: ["journal"] });
+    await cache.cancelQueries({ queryKey: ["journal-options"] });
     cache.removeQueries({ queryKey: ["users"] });
     cache.removeQueries({ queryKey: ["exercises"] });
+    cache.removeQueries({ queryKey: ["listening"] });
+    cache.removeQueries({ queryKey: ["journal"] });
+    cache.removeQueries({ queryKey: ["journal-options"] });
     cache.setQueryData(["auth"], value);
   };
   const signOut = useMutation({
-    mutationFn: () => logout(auth?.csrf_token ?? ""),
+    mutationFn: async () => {
+      await finishPlayback();
+      await logout(auth?.csrf_token ?? "");
+    },
     onSuccess: async () => {
       await cache.cancelQueries({ queryKey: ["auth"] });
       await cache.cancelQueries({ queryKey: ["users"] });
       await cache.cancelQueries({ queryKey: ["exercises"] });
+      await cache.cancelQueries({ queryKey: ["listening"] });
+      await cache.cancelQueries({ queryKey: ["journal"] });
+      await cache.cancelQueries({ queryKey: ["journal-options"] });
       cache.setQueryData(["auth"], null);
       cache.removeQueries({ queryKey: ["users"] });
       cache.removeQueries({ queryKey: ["exercises"] });
+      cache.removeQueries({ queryKey: ["listening"] });
+      cache.removeQueries({ queryKey: ["journal"] });
+      cache.removeQueries({ queryKey: ["journal-options"] });
     },
   });
   if (query.isPending) return <p aria-live="polite">{t("auth.loading")}</p>;
@@ -221,7 +245,10 @@ export function AuthArea() {
         {!auth.user.must_change_password && (
           <>
             {auth.user.role === "manager" && (
-              <a href="/manager/exercises">{t("exercises.title")}</a>
+              <>
+                <a href="/manager/exercises">{t("exercises.title")}</a>
+                <a href="/manager/journal">{t("journal.title")}</a>
+              </>
             )}
             <a
               href={
@@ -254,6 +281,12 @@ export function AuthArea() {
             <PasswordForm auth={auth} onChange={onAuth} />
           )}
         </>
+      ) : path === "/manager/journal" ? (
+        auth.user.role === "manager" ? (
+          <Journal />
+        ) : (
+          <ErrorMessage error={new ApiError("FORBIDDEN")} />
+        )
       ) : path === "/manager/exercises" ? (
         auth.user.role === "manager" ? (
           <Exercises auth={auth} />
@@ -267,10 +300,11 @@ export function AuthArea() {
           <ErrorMessage error={new ApiError("FORBIDDEN")} />
         )
       ) : path === "/" || path === "/student" || path === "/login" ? (
-        <section>
-          <h2>{t("student.title")}</h2>
-          <p>{t("student.empty")}</p>
-        </section>
+        auth.user.role === "student" ? (
+          <Listening auth={auth} />
+        ) : (
+          <ErrorMessage error={new ApiError("FORBIDDEN")} />
+        )
       ) : (
         <ErrorMessage error={new ApiError("NOT_FOUND")} />
       )}
