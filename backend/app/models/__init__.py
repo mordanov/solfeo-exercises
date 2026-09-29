@@ -125,3 +125,33 @@ class Exercise(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )
+
+
+class StudentProgress(Base):
+    __tablename__ = "student_progress"
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), primary_key=True)
+    next_exercise_id: Mapped[int | None] = mapped_column(ForeignKey("exercises.id"))
+    last_random_id: Mapped[int | None] = mapped_column(ForeignKey("exercises.id"))
+
+
+class ListeningSession(Base):
+    __tablename__ = "listening_sessions"
+    __table_args__ = (
+        CheckConstraint("audio_duration_sec > 0", name="duration"),
+        CheckConstraint(
+            "max_position_sec >= 0 AND max_position_sec <= audio_duration_sec",
+            name="position",
+        ),
+    )
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    exercise_id: Mapped[int] = mapped_column(ForeignKey("exercises.id"), index=True)
+    audio_id: Mapped[str] = mapped_column(ForeignKey("media_files.id"))
+    exercise_title: Mapped[str] = mapped_column(String(200))
+    session_id: Mapped[str] = mapped_column(String(36), unique=True)
+    started_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
+    last_heartbeat_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    ended_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    max_position_sec: Mapped[float] = mapped_column(Float, default=0)
+    audio_duration_sec: Mapped[float] = mapped_column(Float)
+    completed: Mapped[bool] = mapped_column(Boolean, default=False)

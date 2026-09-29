@@ -1,4 +1,5 @@
 from typing import Annotated, Literal
+from uuid import UUID
 
 from fastapi import APIRouter, Depends, Form, Query, Response, UploadFile
 from pydantic import BaseModel, Field, field_validator
@@ -169,8 +170,11 @@ def protected_file(
     session: Db,
     settings: Configuration,
     response: Response,
+    version: UUID | None = None,
 ) -> Response:
     media = exercises.get_media(session, identifier, kind)
+    if version is not None and str(version) != media.id:
+        raise ServiceError("FILE_NOT_FOUND", 404)
     if not (settings.media_root / media.filename).is_file():
         raise ServiceError("FILE_NOT_FOUND", 404)
     response.headers["X-Accel-Redirect"] = "/_protected_media/" + media.filename
