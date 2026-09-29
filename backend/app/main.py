@@ -1,8 +1,14 @@
+from collections.abc import AsyncIterator
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, Request
+from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException
 
 from app.api.health import router as health_router
+from app.database import Database
+from app.settings import Settings
 
 
 async def http_error(_request: Request, error: Exception) -> JSONResponse:
@@ -16,8 +22,19 @@ async def http_error(_request: Request, error: Exception) -> JSONResponse:
     )
 
 
-def create_app() -> FastAPI:
-    app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
+def create_app(settings: Settings | None = None) -> FastAPI:
+    configuration = settings if settings is not None else Settings()
+
+    @asynccontextmanager
+    async def lifespan(application: FastAPI) -> AsyncIterator[None]:
+        database = Database(configuration)
+        application.state.database = database
+        try:
+            yield
+        finally:
+            await run_in_threadpool(database.close)
+
+    app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None, lifespan=lifespan)
     app.add_exception_handler(HTTPException, http_error)
     app.include_router(health_router)
     return app

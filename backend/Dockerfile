@@ -5,5 +5,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir --require-hashes -r requirements.txt \
     && useradd --uid 1000 --create-home app
 COPY backend/app backend/app
+COPY backend/alembic.ini backend/alembic.ini
+COPY backend/migrations backend/migrations
 USER 1000:1000
 CMD ["python", "-m", "app"]

@@ -36,6 +36,24 @@ permissions:
 jobs:
   backend:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_HOST: 127.0.0.1
+      DATABASE_PORT: 5432
+      DATABASE_NAME: solfeo_test
+      DATABASE_USER: solfeo
+      DATABASE_PASSWORD: ci-disposable-test-password
+    services:
+      postgres:
+        image: postgres:17-alpine@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24
+        env:
+          POSTGRES_DB: solfeo_test
+          POSTGRES_USER: solfeo
+          POSTGRES_PASSWORD: ci-disposable-test-password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U solfeo -d solfeo_test"
+          --health-interval 5s --health-timeout 3s --health-retries 10
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
@@ -46,6 +64,9 @@ jobs:
       - run: uv run ruff check backend
       - run: uv run ruff format --check backend
       - run: uv run mypy --config-file pyproject.toml
+      - run: uv run alembic -c backend/alembic.ini upgrade head
+      - run: uv run alembic -c backend/alembic.ini current --check-heads
+      - run: uv run alembic -c backend/alembic.ini check
       - name: Check the runtime dependency export
         run: uv export --locked --no-dev --no-emit-project --no-header --no-annotate | diff requirements.txt -
   frontend:
@@ -66,8 +87,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: cp .env.example .env
+      - name: Prepare private local configuration
+        run: |
+          umask 077
+          cp .env.example .env
+          printf '\nDATABASE_PASSWORD=%s\n' "$(openssl rand -hex 32)" >> .env
       - run: docker compose --env-file .env -f deploy/compose.yaml up --build --wait
+      - run: docker compose --env-file .env -f deploy/compose.yaml run --rm migrate alembic -c backend/alembic.ini current --check-heads
       - name: Verify the public health endpoint
         run: |
           curl --fail --silent http://127.0.0.1:18080/api/health | python -c 'import json, sys; assert json.load(sys.stdin) == {"status": "ok"}'

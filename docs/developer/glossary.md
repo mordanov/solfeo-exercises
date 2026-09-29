@@ -1,6 +1,6 @@
 # Glossary
 
-This document defines terms for the risk prototypes.
+This document defines terms for the application and its risk prototypes.
 
 Prerequisites:
 - Read `docs/PRODUCT_BRIEF.md`.
@@ -29,3 +29,8 @@ Prerequisites:
 | IndexedDB | Browser storage for structured data and files. |
 | Telegram bot | A service that receives Telegram messages through the Bot API. |
 | audio import | Transfer of an audio attachment into the application, with manager authorization and file validation. |
+| database session | A SQLAlchemy object that manages database operations within one request or worker operation. |
+| connection pool | A bounded set of database connections that the backend reuses. |
+| migration | A versioned change to the database schema. |
+| schema revision | The migration identifier recorded in the database by Alembic. |
+| liveness | Confirmation that the backend process responds, without proving database readiness. |

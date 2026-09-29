@@ -8,6 +8,9 @@ Prerequisites:
 
 The current page does not provide sign-in, user management, or exercise management.
 The Telegram prototype remains separate and does not create exercises.
+The local stand now includes PostgreSQL and an empty schema.
+Ask the operator to use `docs/developer/data-model.md` for the database restart check.
+This change adds no manager actions to the web page.
 
 1. Open `http://127.0.0.1:18080/`.
    The page shows the service status.

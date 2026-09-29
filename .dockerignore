@@ -6,6 +6,9 @@
 !backend/
 !backend/app/
 !backend/app/**/*.py
+!backend/alembic.ini
+!backend/migrations/
+!backend/migrations/**
 !frontend/
 !frontend/package.json
 !frontend/index.html

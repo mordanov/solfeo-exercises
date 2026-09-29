@@ -6,6 +6,7 @@ Prerequisites:
 - Install Python 3.12 and `uv`.
 - Install Node.js 22.12 or later within version 22, with npm 12.1.0.
 - Install Docker and Compose v2 for container checks.
+- Install `openssl` to generate a local database password.
 - Read `docs/developer/env-variables.md`.
 
 ## Prepare configuration
@@ -13,21 +14,44 @@ Prerequisites:
 Do not overwrite an existing `.env` file.
 Do not copy credentials from the VPS or prototype configuration.
 
-1. Copy `.env.example` to `.env` in a new checkout.
+1. Create private configuration in a new checkout.
+
+   ```sh
+   umask 077
+   cp .env.example .env
+   printf '\nDATABASE_PASSWORD=%s\n' "$(openssl rand -hex 32)" >> .env
+   ```
+
+   The final password entry replaces the empty example value.
+   The commands write the password to `.env` without printing it.
+
 2. Adjust the documented values if necessary.
 3. Keep `.env` outside Git.
 
-## Run without containers
+Do not regenerate the password for an existing database volume.
+Changing `POSTGRES_PASSWORD` does not change a password inside an initialized PostgreSQL database.
+Use a planned database password change instead.
 
-1. Run the backend from the repository root.
+## Run native application processes
+
+This procedure uses PostgreSQL in Docker and native Python and Node.js processes.
+
+1. Start PostgreSQL and apply migrations from the repository root.
 
    ```sh
    uv sync --locked --python 3.12
+   docker compose --env-file .env -f deploy/compose.yaml up -d --wait postgres
+   uv run alembic -c backend/alembic.ini upgrade head
+   ```
+
+2. Start the backend.
+
+   ```sh
    PYTHONPATH=backend uv run python -m app
    ```
 
-2. Open a second terminal at the repository root.
-3. Start the frontend.
+3. Open a second terminal at the repository root.
+4. Start the frontend.
 
    ```sh
    npm install --global npm@12.1.0
@@ -35,9 +59,9 @@ Do not copy credentials from the VPS or prototype configuration.
    npm run dev
    ```
 
-4. Open `http://127.0.0.1:18080/`.
+5. Open `http://127.0.0.1:18080/`.
    Vite forwards `/api` requests to `http://127.0.0.1:18081`.
-5. Press `Ctrl+C` in both terminals to stop the servers.
+6. Press `Ctrl+C` in both terminals to stop the application processes.
 
 The backend reads the root `.env` through `Settings`.
 Vite reads the same file but exposes only `VITE_*` values to browser code.
@@ -45,9 +69,11 @@ Changing a frontend build value requires a new build or development server resta
 
 ## Run with containers
 
-The local stand publishes only nginx on the loopback address.
+The local stand publishes nginx and PostgreSQL on loopback addresses.
 The backend uses the private Compose network.
-It has no database, file volume, or Telegram credentials.
+PostgreSQL stores its data in the `solfeo-dev_postgres_data` volume.
+The stand has no media volume or Telegram credentials.
+The backend starts only after PostgreSQL becomes healthy and the migration service exits successfully.
 
 1. Start the isolated stand from the repository root.
 
@@ -70,6 +96,8 @@ It has no database, file volume, or Telegram credentials.
    docker compose --env-file .env -f deploy/compose.yaml down
    ```
 
+The shutdown command preserves database data.
+Do not add `--volumes` when data must survive.
 Use `docker-compose` if the standalone v2 executable is installed.
 Do not run the container stand and Vite on the same host port simultaneously.
 Do not use this local configuration to change the shared VPS.
@@ -99,9 +127,12 @@ The frontend remains running during this check.
 ## Run checks
 
 Run these commands from the repository root.
+The test stand stores disposable data in memory and uses a separate loopback port.
+The tests require the database name `solfeo_test`; they refuse the development database.
 
 ```sh
-uv run pytest
+docker compose --env-file .env -f deploy/compose.test.yaml up -d --wait
+DATABASE_NAME=solfeo_test DATABASE_PORT=15433 uv run pytest
 uv run ruff check backend
 uv run ruff format --check backend
 uv run mypy --config-file pyproject.toml
@@ -109,10 +140,14 @@ npm test
 npm run lint
 npm run format:check
 npm run build
+docker compose --env-file .env -f deploy/compose.test.yaml down
 ```
 
 Backend health tests do not need PostgreSQL because the endpoint makes no database calls.
-Later database tests must use real PostgreSQL, not SQLite.
+The complete suite uses real PostgreSQL for sessions, request cleanup, transactions, and migrations.
+The tests never use SQLite or mock database operations.
+Set the test command's `DATABASE_PORT` to the configured `TEST_POSTGRES_HOST_PORT` if you change that port.
+Do not run migration tests against any database containing real data.
 Frontend tests cover translations, language changes, request failures, timeout, cancellation, and explicit retry.
 The first implementation follows failing tests for the API, health page, and locale completeness.
 
@@ -133,3 +168,4 @@ Use npm 12.1.0 for dependency updates; npm 10 fails during fresh workspace resol
 
 Docker installs Python dependencies with hashes and JavaScript dependencies with `npm ci`.
 Base image digests are fixed in both Dockerfiles.
+The Compose files and CI service also pin the PostgreSQL image digest.

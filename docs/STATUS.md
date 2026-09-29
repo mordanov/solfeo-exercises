@@ -8,7 +8,7 @@ Prerequisites:
 Last updated: 2026-09-29 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
 
 ## Current phase
-PHASE 0: Walking skeleton and CI/CD; the first local health-page task is complete.
+PHASE 0: Walking skeleton and CI/CD; the local health page and PostgreSQL foundation are complete.
 The owner confirms the remaining bot checks and continuation on 2026-09-29.
 PHASE 0.5 is complete; the failed PWA result remains unchanged.
 
@@ -16,8 +16,9 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Add the product layout and locked Python and TypeScript tooling.
 - [x] Add the public FastAPI health endpoint and translated React health page.
 - [x] Add isolated local Docker images, nginx, Compose, and initial CI.
-- [ ] Select the SQLAlchemy execution model before database implementation.
-- [ ] Add PostgreSQL, an empty Alembic migration, and database settings.
+- [x] Select synchronous SQLAlchemy 2.0 with psycopg 3.
+- [x] Add PostgreSQL, an empty Alembic migration, and database settings.
+- [x] Add real PostgreSQL tests and migration checks to CI.
 - [ ] Add pre-commit checks, database CI, and production Compose configuration.
 - [ ] Add targeted VPS deployment, migration, health verification, and rollback.
 - [ ] Complete the deployed health-page manual check.
@@ -41,13 +42,25 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - Language changes update the page, document title, and document language.
 - The root `.env.example` documents all settings for this slice.
 - Root `uv.lock`, `requirements.txt`, and `package-lock.json` lock dependencies.
-- Local checks pass: 12 backend tests, 34 frontend tests, Ruff, strict mypy, ESLint, Prettier, and TypeScript.
+- The health-page task passes 12 backend tests, 34 frontend tests, and all configured code checks.
+- The database task extends the backend suite to 30 passing tests against real PostgreSQL.
+- Ruff, formatting, and strict mypy pass for the database implementation and migrations.
+- PostgreSQL 17 uses a pinned image, a persistent development volume, and a loopback host port.
+- A separate disposable PostgreSQL stand isolates tests from the development database.
+- Alembic revision `0001_initial` records an empty baseline without product tables.
+- The migration check covers a fresh schema, repeated upgrade, downgrade, upgrade, and model drift.
+- FastAPI owns the connection pool and disposes it during shutdown.
+- Request sessions close without automatic commit; explicit transactions commit or roll back.
+- Configuration requires a private database password and hides SQL parameter values in errors.
+- A private root `.env` uses mode `0600` and remains outside Git.
+- Local Compose waits for PostgreSQL and successful migrations before starting the backend.
+- A local PostgreSQL restart preserves revision `0001_initial`; native and container migration commands confirm the current schema.
 - The production frontend build and isolated Compose healthchecks pass.
 - Desktop Chrome verifies the built page, all 3 languages, a stopped backend, explicit failure, and recovery.
 - The local stand remains available at `http://127.0.0.1:18080/` for owner checks.
 - `.github/workflows/ci.yml` checks the product without publishing or deploying images.
 - `docs/developer/setup.md` explains local execution and checks.
-- Product authentication, database access, and Telegram integration are not implemented.
+- Product authentication, domain models, and Telegram integration are not implemented.
 - The working VPS, bot, and superseded PWA deployment remain unchanged in this task.
 - The owner approves the PHASE 0.5 plan.
 - The owner approves 10 initial images, recognition criteria, and an owner-reviewed engine recommendation.
@@ -138,14 +151,15 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - The owner does not supply device versions or a per-message evidence record.
 
 ## Next step
-- Plan the PostgreSQL and Alembic task, including the SQLAlchemy execution model.
+- Add pre-commit integration before the production deployment and CD tasks.
 - Keep the active bot and superseded PWA deployment unchanged until an explicit deployment or cleanup task.
 
 ## PHASE 0 boundaries
 
 The owner requests continuation after completing PHASE 0.5 checks.
 The first implementation task establishes a local health page, not a complete production deployment.
-The SQLAlchemy choice remains open because this slice has no database access.
+The database task adds synchronous SQLAlchemy and an empty Alembic baseline.
+It does not add users, exercises, journal records, or worker jobs.
 
 Keep authentication in PHASE 1 and exercise/file operations in PHASE 2.
 Integrate the bot with manager accounts and exercises in PHASE 4.
@@ -153,7 +167,6 @@ Do not copy disposable prototype authentication into the product.
 
 ## Open questions for the owner
 - Record the Chrome and Safari versions during the health-page manual check.
-- Select sync or async SQLAlchemy during PHASE 0 planning.
 
 ## Manual checks the owner must do
 - [x] Confirm that images 1 through 10 represent the intended exercises.
@@ -171,6 +184,7 @@ Do not copy disposable prototype authentication into the product.
 - [ ] Switch between English, Russian, and Spanish.
 - [ ] Stop the local backend and confirm an error instead of a successful status.
 - [ ] Restart the local backend and confirm recovery with the retry button.
+- [ ] Confirm that the local schema revision survives a PostgreSQL restart.
 
 The superseded Android PWA checklist is no longer required.
 The new local health-page procedure appears in `docs/user/manager.md` and `docs/user/student.md`.
@@ -193,4 +207,5 @@ The new local health-page procedure appears in `docs/user/manager.md` and `docs/
 - The onboarding guide is `../web-projects/web-folders/documentation/onboarding.md`.
 - npm 10 fails during fresh workspace dependency resolution; npm 12.1.0 resolves the declared dependencies.
 - The health-page language selector is temporary and does not save user preferences.
-- PostgreSQL, migrations, pre-commit integration, product CD, and VPS acceptance remain for later PHASE 0 tasks.
+- Pre-commit integration, production configuration, product CD, and VPS acceptance remain for later PHASE 0 tasks.
+- Local PostgreSQL uses the bootstrap role; production needs a separate review of database roles and permissions.

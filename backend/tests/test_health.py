@@ -3,7 +3,7 @@ from pathlib import Path
 
 import httpx
 import pytest
-from pydantic import ValidationError
+from pydantic import SecretStr, ValidationError
 
 from app.main import create_app
 from app.settings import Settings
@@ -19,7 +19,14 @@ def anyio_backend() -> str:
 @pytest.fixture
 async def client() -> AsyncIterator[httpx.AsyncClient]:
     async with httpx.AsyncClient(
-        transport=httpx.ASGITransport(app=create_app()),
+        transport=httpx.ASGITransport(
+            app=create_app(
+                Settings(
+                    _env_file=None,
+                    database_password=SecretStr("synthetic-test-password"),
+                )
+            )
+        ),
         base_url="http://test",
     ) as client:
         yield client
@@ -60,7 +67,9 @@ async def test_health_post_is_not_a_success(client: httpx.AsyncClient) -> None:
 def test_settings_read_dotenv(tmp_path: Path) -> None:
     config = tmp_path / ".env"
     config.write_text("API_HOST=127.0.0.1\nAPI_PORT=18777\nAPI_LOG_LEVEL=warning\n")
-    settings = Settings(_env_file=config)
+    settings = Settings(
+        _env_file=config, database_password=SecretStr("synthetic-test-password")
+    )
     assert settings.host == "127.0.0.1"
     assert settings.port == 18777
     assert settings.log_level == "warning"
@@ -75,4 +84,8 @@ def test_default_dotenv_path_is_the_repository_root() -> None:
 @pytest.mark.parametrize("port", [0, -1, 65536])
 def test_settings_reject_invalid_port(port: int) -> None:
     with pytest.raises(ValidationError):
-        Settings(port=port, _env_file=None)
+        Settings(
+            port=port,
+            _env_file=None,
+            database_password=SecretStr("synthetic-test-password"),
+        )

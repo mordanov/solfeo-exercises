@@ -7,14 +7,18 @@ Prerequisites:
 
 The browser loads the React application from nginx.
 Requests to `/api/health` pass through nginx to FastAPI.
-The local stand publishes only nginx on loopback.
-The backend does not access PostgreSQL or external systems yet.
+The local stand publishes nginx and PostgreSQL on loopback.
+PostgreSQL uses a separate persistent volume.
+The migration service completes before the backend starts.
 
 | Path | Responsibility |
 |---|---|
 | `backend/app/api/` | HTTP routes and response schemas |
 | `backend/app/main.py` | Application creation and HTTP error codes |
 | `backend/app/settings.py` | Backend configuration |
+| `backend/app/database.py` | Synchronous engine and database sessions |
+| `backend/app/models/` | Typed declarative base and future domain models |
+| `backend/migrations/` | Versioned Alembic migrations |
 | `backend/tests/` | Backend behavior tests |
 | `frontend/src/api/` | Typed HTTP client |
 | `frontend/src/features/health/` | Health query and status presentation |
@@ -31,9 +35,25 @@ Health is public by design.
 The skeleton exposes no exercise, user, upload, media, or bot operation.
 API documentation routes remain disabled.
 Authentication and emergency manager synchronization belong to PHASE 1.
-The database task must choose sync or async SQLAlchemy before implementation.
+Database operations use synchronous SQLAlchemy 2.0 and psycopg 3.
+The application creates one connection pool during startup and disposes it during shutdown.
+Connections open lazily; creating the pool does not establish database readiness.
+The health route remains a liveness check.
 
-The local Docker images use non-root users and read-only filesystems.
+Database-dependent handlers use synchronous functions.
+Each request receives its own session through `get_session`.
+The dependency closes the session but never commits automatically.
+Business operations must use explicit transaction boundaries.
+An exception or an uncommitted session causes a rollback.
+
+Future workers create their own engines and sessions.
+They must not share sessions or inherit active connection pools between processes.
+Register future model imports in `backend/app/models/__init__.py` so Alembic sees their metadata.
+Use migrations, not application startup, to create product tables.
+
+The backend and frontend Docker images use non-root users and read-only filesystems.
 The frontend uses temporary nginx files under `/tmp`.
 No product container shares a prototype volume or credentials.
 The worker directory will accompany worker implementation, not an empty placeholder.
+The PostgreSQL development container uses the official image initialization and a writable data volume.
+Its bootstrap database role is a local-development convenience, not the production role design.
