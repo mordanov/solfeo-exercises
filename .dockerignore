@@ -9,6 +9,8 @@
 !backend/alembic.ini
 !backend/migrations/
 !backend/migrations/**
+!worker/
+!worker/*.py
 !frontend/
 !frontend/package.json
 !frontend/index.html

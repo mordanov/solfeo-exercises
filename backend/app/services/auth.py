@@ -10,7 +10,7 @@ from sqlalchemy import delete, func, select, text
 from sqlalchemy.orm import Session
 
 from app.database import Database
-from app.models import LoginLimit, LoginSession, User
+from app.models import LoginLimit, LoginSession, TelegramLink, TelegramLinkCode, User
 from app.settings import Settings
 
 logger = logging.getLogger(__name__)
@@ -64,7 +64,10 @@ def administration_lock(session: Session) -> None:
 
 
 def revoke_sessions(session: Session, user_id: int) -> None:
+    session.execute(select(User.id).where(User.id == user_id).with_for_update())
     session.execute(delete(LoginSession).where(LoginSession.user_id == user_id))
+    session.execute(delete(TelegramLinkCode).where(TelegramLinkCode.user_id == user_id))
+    session.execute(delete(TelegramLink).where(TelegramLink.user_id == user_id))
 
 
 def sync_emergency(database: Database, settings: Settings) -> None:

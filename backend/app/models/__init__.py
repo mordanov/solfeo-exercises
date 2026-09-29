@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from sqlalchemy import (
+    BigInteger,
     Boolean,
     CheckConstraint,
     DateTime,
@@ -155,3 +156,54 @@ class ListeningSession(Base):
     max_position_sec: Mapped[float] = mapped_column(Float, default=0)
     audio_duration_sec: Mapped[float] = mapped_column(Float)
     completed: Mapped[bool] = mapped_column(Boolean, default=False)
+
+
+class TelegramLink(Base):
+    __tablename__ = "telegram_links"
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), primary_key=True)
+    sender_id: Mapped[int] = mapped_column(BigInteger, unique=True)
+
+
+class TelegramLinkCode(Base):
+    __tablename__ = "telegram_link_codes"
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), primary_key=True)
+    token_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+
+
+class TelegramUpdate(Base):
+    __tablename__ = "telegram_updates"
+    __table_args__ = (
+        CheckConstraint(
+            "status IN ('message','pending','ready','failed','applied','discarded')",
+            name="status",
+        ),
+    )
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=False)
+    chat_id: Mapped[int] = mapped_column(BigInteger)
+    user_id: Mapped[int | None] = mapped_column(ForeignKey("users.id"), index=True)
+    file_id: Mapped[str | None] = mapped_column(String(512))
+    title: Mapped[str] = mapped_column(String(200), default="")
+    description: Mapped[str] = mapped_column(Text, default="")
+    language: Mapped[str] = mapped_column(String(2), default="en")
+    status: Mapped[str] = mapped_column(String(10), index=True)
+    attempts: Mapped[int] = mapped_column(default=0)
+    locked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    next_attempt_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    last_error: Mapped[str | None] = mapped_column(String(64))
+    media_id: Mapped[str | None] = mapped_column(ForeignKey("media_files.id"))
+    exercise_id: Mapped[int | None] = mapped_column(ForeignKey("exercises.id"))
+    applied_request: Mapped[str | None] = mapped_column(String(64))
+    reply_code: Mapped[str] = mapped_column(String(32), default="received")
+    notified: Mapped[bool] = mapped_column(Boolean, default=False)
+    received_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
+
+
+class TelegramState(Base):
+    __tablename__ = "telegram_state"
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=False)
+    bot_id: Mapped[int] = mapped_column(BigInteger)
+    next_offset: Mapped[int] = mapped_column(BigInteger, default=0)
+    heartbeat_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))

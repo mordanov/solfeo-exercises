@@ -1,12 +1,13 @@
 import json
 import logging
 import math
+import shutil
 import subprocess
 import warnings
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import BinaryIO, Literal
-from uuid import uuid4
+from uuid import UUID, uuid4
 
 from PIL import Image, UnidentifiedImageError
 
@@ -33,13 +34,18 @@ AUDIO_CONTAINERS = {
 
 
 def run_media(command: list[str], settings: Settings) -> bytes:
+    executable = shutil.which(command[0])
+    if executable is None:
+        logger.error("MEDIA_PROCESSOR_UNAVAILABLE")
+        raise ServiceError("MEDIA_PROCESSOR_UNAVAILABLE", 503)
     try:
         return subprocess.run(
-            command,
+            [executable, *command[1:]],
             check=True,
             capture_output=True,
             timeout=settings.media_timeout_seconds,
             shell=False,
+            env={},
         ).stdout
     except subprocess.TimeoutExpired as error:
         logger.warning("MEDIA_TIMEOUT")
@@ -84,7 +90,9 @@ def duration(path: Path, settings: Settings) -> float:
     return seconds
 
 
-def prepare_media(source: BinaryIO, kind: Kind, settings: Settings) -> MediaFile:
+def prepare_media(
+    source: BinaryIO, kind: Kind, settings: Settings, identifier: UUID | None = None
+) -> MediaFile:
     root = settings.media_root
     limit = settings.image_max_bytes if kind == "image" else settings.audio_max_bytes
     try:
@@ -178,12 +186,12 @@ def prepare_media(source: BinaryIO, kind: Kind, settings: Settings) -> MediaFile
                 size = output.stat().st_size
                 if size > settings.audio_max_bytes:
                     raise ServiceError("FILE_TOO_LARGE", 413)
-            identifier = str(uuid4())
-            filename = identifier + extension
+            media_id = str(identifier or uuid4())
+            filename = media_id + extension
             output.chmod(0o644)
             output.replace(root / filename)
             return MediaFile(
-                id=identifier,
+                id=media_id,
                 filename=filename,
                 mime_type=mime,
                 size_bytes=size,

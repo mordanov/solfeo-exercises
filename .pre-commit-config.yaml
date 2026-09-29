@@ -6,21 +6,21 @@ repos:
     hooks:
       - id: ruff
         name: Ruff
-        entry: uv run --locked ruff check backend deploy
+        entry: uv run --locked ruff check backend deploy worker
         language: system
-        files: ^(backend/|deploy/|pyproject\.toml$|uv\.lock$|requirements\.txt$|\.pre-commit-config\.yaml$)
+        files: ^(backend/|deploy/|worker/|pyproject\.toml$|uv\.lock$|requirements\.txt$|\.pre-commit-config\.yaml$)
         pass_filenames: false
       - id: ruff-format
         name: Ruff format
-        entry: uv run --locked ruff format --check backend deploy
+        entry: uv run --locked ruff format --check backend deploy worker
         language: system
-        files: ^(backend/|deploy/|pyproject\.toml$|uv\.lock$|requirements\.txt$|\.pre-commit-config\.yaml$)
+        files: ^(backend/|deploy/|worker/|pyproject\.toml$|uv\.lock$|requirements\.txt$|\.pre-commit-config\.yaml$)
         pass_filenames: false
       - id: mypy
         name: mypy
         entry: uv run --locked mypy --config-file pyproject.toml
         language: system
-        files: ^(backend/|deploy/|pyproject\.toml$|uv\.lock$|requirements\.txt$|\.pre-commit-config\.yaml$)
+        files: ^(backend/|deploy/|worker/|pyproject\.toml$|uv\.lock$|requirements\.txt$|\.pre-commit-config\.yaml$)
         pass_filenames: false
       - id: eslint
         name: ESLint

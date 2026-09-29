@@ -48,6 +48,41 @@ class Settings(BaseSettings):
     ffmpeg_binary: str = Field(default="ffmpeg", validation_alias="FFMPEG_BINARY")
     ffprobe_binary: str = Field(default="ffprobe", validation_alias="FFPROBE_BINARY")
     file_binary: str = Field(default="file", validation_alias="FILE_BINARY")
+    telegram_token: SecretStr = Field(
+        default=SecretStr(""), validation_alias="TELEGRAM_TOKEN"
+    )
+    telegram_health_file: Path = Field(
+        default=Path("/tmp/telegram-ready"), validation_alias="TELEGRAM_HEALTH_FILE"
+    )
+    telegram_bot_username: str = Field(
+        default="solfeo_exercises_bot",
+        pattern=r"^[A-Za-z0-9_]{5,32}$",
+        validation_alias="TELEGRAM_BOT_USERNAME",
+    )
+    telegram_link_seconds: int = Field(
+        default=600, ge=60, le=3600, validation_alias="TELEGRAM_LINK_SECONDS"
+    )
+    telegram_max_file_bytes: int = Field(
+        default=20000000, ge=1, le=20000000, validation_alias="TELEGRAM_MAX_FILE_BYTES"
+    )
+    telegram_poll_seconds: int = Field(
+        default=25, ge=1, le=50, validation_alias="TELEGRAM_POLL_SECONDS"
+    )
+    telegram_http_seconds: int = Field(
+        default=15, ge=1, le=60, validation_alias="TELEGRAM_HTTP_SECONDS"
+    )
+    telegram_download_seconds: int = Field(
+        default=90, ge=1, le=300, validation_alias="TELEGRAM_DOWNLOAD_SECONDS"
+    )
+    telegram_retry_seconds: int = Field(
+        default=5, ge=1, le=300, validation_alias="TELEGRAM_RETRY_SECONDS"
+    )
+    telegram_max_attempts: int = Field(
+        default=3, ge=1, le=10, validation_alias="TELEGRAM_MAX_ATTEMPTS"
+    )
+    telegram_health_seconds: int = Field(
+        default=600, ge=60, le=3600, validation_alias="TELEGRAM_HEALTH_SECONDS"
+    )
 
     database_host: str = Field(
         default="127.0.0.1", min_length=1, validation_alias="DATABASE_HOST"

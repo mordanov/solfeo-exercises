@@ -10,5 +10,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg file \
 COPY backend/app backend/app
 COPY backend/alembic.ini backend/alembic.ini
 COPY backend/migrations backend/migrations
+COPY worker worker
 USER 1000:1000
 CMD ["python", "-m", "app"]

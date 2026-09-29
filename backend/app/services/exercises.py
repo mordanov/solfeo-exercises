@@ -25,6 +25,17 @@ def get_exercise(session: Session, identifier: int) -> Exercise:
     return result
 
 
+def new_exercise(session: Session) -> Exercise:
+    return Exercise(
+        position=session.scalar(
+            select(func.count())
+            .select_from(Exercise)
+            .where(Exercise.deleted_at.is_(None))
+        )
+        or 0
+    )
+
+
 def list_exercises(
     session: Session, offset: int, limit: int
 ) -> tuple[list[Exercise], int]:
@@ -66,14 +77,7 @@ def save_exercise(
         row = (
             get_exercise(session, identifier)
             if identifier is not None
-            else Exercise(
-                position=session.scalar(
-                    select(func.count())
-                    .select_from(Exercise)
-                    .where(Exercise.deleted_at.is_(None))
-                )
-                or 0,
-            )
+            else new_exercise(session)
         )
         row.title, row.description, row.category = title, description, category
         if remove_image:
