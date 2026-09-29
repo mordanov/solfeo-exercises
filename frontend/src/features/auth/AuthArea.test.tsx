@@ -98,17 +98,20 @@ it("guards exercise management from students", async () => {
   expect(fetch).toHaveBeenCalledTimes(1);
 });
 
-it("guards the listening journal from students", async () => {
-  window.history.replaceState({}, "", "/manager/journal");
-  const fetch = vi.fn().mockResolvedValue(json(auth(student)));
-  vi.stubGlobal("fetch", fetch);
-  mount();
-  expect(await screen.findByRole("alert")).toHaveTextContent("permission");
-  expect(
-    screen.queryByRole("link", { name: "Listening journal" }),
-  ).not.toBeInTheDocument();
-  expect(fetch).toHaveBeenCalledTimes(1);
-});
+it.each(["/manager/journal", "/manager/telegram"])(
+  "guards %s from students",
+  async (path) => {
+    window.history.replaceState({}, "", path);
+    const fetch = vi.fn().mockResolvedValue(json(auth(student)));
+    vi.stubGlobal("fetch", fetch);
+    mount();
+    expect(await screen.findByRole("alert")).toHaveTextContent("permission");
+    expect(
+      screen.queryByRole("link", { name: "Listening journal" }),
+    ).not.toBeInTheDocument();
+    expect(fetch).toHaveBeenCalledTimes(1);
+  },
+);
 
 it("saves language and note naming and applies the returned language", async () => {
   window.history.replaceState({}, "", "/settings");

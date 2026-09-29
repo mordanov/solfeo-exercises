@@ -15,6 +15,7 @@ import { Users } from "../users/Users";
 import { Exercises } from "../exercises/Exercises";
 import { Listening } from "../listening/Listening";
 import { Journal } from "../journal/Journal";
+import { Telegram } from "../telegram/Telegram";
 import { finishPlayback } from "../listening/tracker";
 import { ErrorMessage, LanguageOptions } from "../../components/AccountUi";
 
@@ -174,12 +175,14 @@ export function AuthArea() {
       await cache.cancelQueries({ queryKey: ["listening"] });
       await cache.cancelQueries({ queryKey: ["journal"] });
       await cache.cancelQueries({ queryKey: ["journal-options"] });
+      await cache.cancelQueries({ queryKey: ["telegram"] });
       cache.setQueryData(["auth"], null);
       cache.removeQueries({ queryKey: ["users"] });
       cache.removeQueries({ queryKey: ["exercises"] });
       cache.removeQueries({ queryKey: ["listening"] });
       cache.removeQueries({ queryKey: ["journal"] });
       cache.removeQueries({ queryKey: ["journal-options"] });
+      cache.removeQueries({ queryKey: ["telegram"] });
     };
     const listener = () => void expired();
     window.addEventListener("solfeo:unauthorized", listener);
@@ -192,11 +195,13 @@ export function AuthArea() {
     await cache.cancelQueries({ queryKey: ["listening"] });
     await cache.cancelQueries({ queryKey: ["journal"] });
     await cache.cancelQueries({ queryKey: ["journal-options"] });
+    await cache.cancelQueries({ queryKey: ["telegram"] });
     cache.removeQueries({ queryKey: ["users"] });
     cache.removeQueries({ queryKey: ["exercises"] });
     cache.removeQueries({ queryKey: ["listening"] });
     cache.removeQueries({ queryKey: ["journal"] });
     cache.removeQueries({ queryKey: ["journal-options"] });
+    cache.removeQueries({ queryKey: ["telegram"] });
     cache.setQueryData(["auth"], value);
   };
   const signOut = useMutation({
@@ -211,12 +216,14 @@ export function AuthArea() {
       await cache.cancelQueries({ queryKey: ["listening"] });
       await cache.cancelQueries({ queryKey: ["journal"] });
       await cache.cancelQueries({ queryKey: ["journal-options"] });
+      await cache.cancelQueries({ queryKey: ["telegram"] });
       cache.setQueryData(["auth"], null);
       cache.removeQueries({ queryKey: ["users"] });
       cache.removeQueries({ queryKey: ["exercises"] });
       cache.removeQueries({ queryKey: ["listening"] });
       cache.removeQueries({ queryKey: ["journal"] });
       cache.removeQueries({ queryKey: ["journal-options"] });
+      cache.removeQueries({ queryKey: ["telegram"] });
     },
   });
   if (query.isPending) return <p aria-live="polite">{t("auth.loading")}</p>;
@@ -248,6 +255,7 @@ export function AuthArea() {
               <>
                 <a href="/manager/exercises">{t("exercises.title")}</a>
                 <a href="/manager/journal">{t("journal.title")}</a>
+                <a href="/manager/telegram">{t("telegram.title")}</a>
               </>
             )}
             <a
@@ -281,6 +289,12 @@ export function AuthArea() {
             <PasswordForm auth={auth} onChange={onAuth} />
           )}
         </>
+      ) : path === "/manager/telegram" ? (
+        auth.user.role === "manager" ? (
+          <Telegram auth={auth} />
+        ) : (
+          <ErrorMessage error={new ApiError("FORBIDDEN")} />
+        )
       ) : path === "/manager/journal" ? (
         auth.user.role === "manager" ? (
           <Journal />
