@@ -11,6 +11,7 @@ def main() -> None:
         host=settings.host,
         port=settings.port,
         log_level=settings.log_level,
+        forwarded_allow_ips=settings.forwarded_allow_ips,
     )
 
 

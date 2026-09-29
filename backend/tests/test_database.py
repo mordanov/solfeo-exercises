@@ -16,6 +16,7 @@ from sqlalchemy.pool import QueuePool
 from app.api.dependencies import get_session
 from app.database import Database
 from app.main import create_app
+from app.models import Base
 from app.settings import Settings
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -39,7 +40,9 @@ class Probe(ProbeBase):
 
 @pytest.fixture
 def database_settings() -> Settings:
-    settings = Settings()
+    settings = Settings(
+        emergency_manager_username="", emergency_manager_password=SecretStr("")
+    )
     if settings.database_name != "solfeo_test":
         raise pytest.UsageError(
             "Database tests require DATABASE_NAME=solfeo_test "
@@ -119,7 +122,7 @@ def test_database_error_rolls_back(probe: Database) -> None:
 
 def test_migration_upgrade_repeat_downgrade_and_upgrade(database: Database) -> None:
     tables = inspect(database.engine).get_table_names()
-    assert set(tables) <= {"alembic_version"}
+    assert set(tables) <= {"alembic_version", *Base.metadata.tables}
     if tables:
         with database.engine.begin() as connection:
             command.downgrade(migration_config(connection), "base")
@@ -131,9 +134,12 @@ def test_migration_upgrade_repeat_downgrade_and_upgrade(database: Database) -> N
         command.upgrade(config, "head")
         assert (
             connection.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0001_initial"
+            == "0002_auth"
         )
-        assert inspect(connection).get_table_names() == ["alembic_version"]
+        assert set(inspect(connection).get_table_names()) == {
+            "alembic_version",
+            *Base.metadata.tables,
+        }
         command.upgrade(config, "head")
         command.check(config)
         command.downgrade(config, "base")
@@ -141,7 +147,7 @@ def test_migration_upgrade_repeat_downgrade_and_upgrade(database: Database) -> N
         command.upgrade(config, "head")
         assert (
             connection.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0001_initial"
+            == "0002_auth"
         )
 
 
@@ -179,7 +185,7 @@ async def test_application_owns_database_and_dependency_closes_sessions(
 
 
 @pytest.mark.anyio
-async def test_health_does_not_claim_database_readiness() -> None:
+async def test_startup_fails_if_emergency_sync_cannot_reach_database() -> None:
     settings = Settings(
         _env_file=None,
         database_host="127.0.0.1",
@@ -187,11 +193,9 @@ async def test_health_does_not_claim_database_readiness() -> None:
         database_password=SecretStr("synthetic-test-password"),
     )
     application = create_app(settings)
-    async with application.router.lifespan_context(application):
-        async with httpx.AsyncClient(
-            transport=httpx.ASGITransport(app=application), base_url="http://test"
-        ) as client:
-            assert (await client.get("/api/health")).json() == {"status": "ok"}
+    with pytest.raises(OperationalError):
+        async with application.router.lifespan_context(application):
+            pytest.fail("Startup must complete emergency synchronization")
 
 
 def test_failed_connection_is_not_hidden() -> None:

@@ -11,8 +11,9 @@ ENV VITE_DEFAULT_LANGUAGE=$VITE_DEFAULT_LANGUAGE VITE_HEALTH_TIMEOUT_MS=$VITE_HE
 RUN npm run build
 
 FROM nginx:stable-alpine@sha256:0985e772fb9f729e6fa0980da05fca5d9c468e870eed43071545afa9d2e27d94
-COPY deploy/nginx.conf /etc/nginx/nginx.conf
+COPY deploy/nginx.conf /etc/nginx/nginx.conf.template
+COPY deploy/nginx-start.sh /usr/local/bin/solfeo-nginx-start.sh
 COPY --from=build /app/frontend/dist /usr/share/nginx/html
+ENV LOGIN_NGINX_RATE_PER_SECOND=5 LOGIN_NGINX_BURST=10
 USER nginx
-ENTRYPOINT ["nginx"]
-CMD ["-g", "daemon off;"]
+ENTRYPOINT ["/bin/sh", "/usr/local/bin/solfeo-nginx-start.sh"]

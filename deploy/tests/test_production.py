@@ -1,4 +1,6 @@
+import http.cookiejar
 import json
+import os
 import secrets
 import shutil
 import socket
@@ -12,6 +14,34 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[2]
+
+
+def test_development_migration_uses_the_same_backend_image() -> None:
+    compose = (
+        ["docker-compose"] if shutil.which("docker-compose") else ["docker", "compose"]
+    )
+    result = subprocess.run(
+        [
+            *compose,
+            "--env-file",
+            str(ROOT / ".env.example"),
+            "-f",
+            str(ROOT / "deploy/compose.yaml"),
+            "config",
+            "--format",
+            "json",
+        ],
+        env={"PATH": os.environ["PATH"], "DATABASE_PASSWORD": "synthetic-password"},
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    services = json.loads(result.stdout)["services"]
+    assert (
+        services["migrate"]["image"]
+        == services["backend"]["image"]
+        == "solfeo-dev-backend"
+    )
 
 
 @dataclass
@@ -72,7 +102,7 @@ def stand(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Stand]:
     with socket.socket() as listener:
         listener.bind(("127.0.0.1", 0))
         port = listener.getsockname()[1]
-    passwords = [secrets.token_hex(24) + "%:@/#" for _ in range(3)]
+    passwords = [secrets.token_hex(24) + "%:@/#" for _ in range(4)]
     values = {
         "BACKEND_IMAGE": "solfeo-dev-backend",
         "FRONTEND_IMAGE": "solfeo-dev-frontend",
@@ -84,6 +114,12 @@ def stand(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Stand]:
         "POSTGRES_ADMIN_PASSWORD": passwords[2],
         "PRODUCTION_MIGRATION_SCHEMA": "migrations",
         "PRODUCTION_WEB_PORT": str(port),
+        "AUTH_ALLOWED_ORIGINS": json.dumps([f"http://127.0.0.1:{port}"]),
+        "SESSION_COOKIE_SECURE": "false",
+        "EMERGENCY_MANAGER_USERNAME": "release-check",
+        "EMERGENCY_MANAGER_PASSWORD": passwords[3],
+        "LOGIN_NGINX_RATE_PER_SECOND": "1000",
+        "LOGIN_NGINX_BURST": "1000",
     }
     environment = directory / ".env"
     environment.touch(mode=0o600)
@@ -149,7 +185,7 @@ try:
         version = connection.scalar(
             text("SELECT version_num FROM migrations.alembic_version")
         )
-        assert version == "0001_initial"
+        assert version == "0002_auth"
         privileges = connection.execute(text(
             "SELECT rolsuper, rolcreatedb, rolcreaterole "
             "FROM pg_roles WHERE rolname=current_user"
@@ -260,6 +296,122 @@ def test_revision_survives_restart(stand: Stand) -> None:
         "check",
     )
     stand.health()
+
+
+def test_authentication_through_real_nginx(stand: Stand) -> None:
+    address = stand.run("port", "frontend", "8080").stdout.strip()
+    origin = f"http://{address}"
+    cookies = http.cookiejar.CookieJar()
+    client = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cookies))
+
+    def request(
+        path: str,
+        body: dict[str, object] | None = None,
+        csrf: str = "",
+        method: str = "POST",
+    ) -> dict[str, object]:
+        data = json.dumps(body).encode() if body is not None else None
+        with client.open(
+            urllib.request.Request(
+                origin + path,
+                data=data,
+                method=method,
+                headers={
+                    "Origin": origin,
+                    "Content-Type": "application/json",
+                    "X-CSRF-Token": csrf,
+                },
+            ),
+            timeout=15,
+        ) as response:
+            result: object = json.load(response)
+            assert isinstance(result, dict)
+            return result
+
+    signed_in = request(
+        "/api/auth/login", {"username": "release-check", "password": stand.passwords[3]}
+    )
+    csrf = signed_in["csrf_token"]
+    assert isinstance(csrf, str)
+    me = request("/api/auth/me", method="GET")
+    assert isinstance(me["user"], dict) and me["user"]["is_emergency"] is True
+    user = request(
+        "/api/users",
+        {
+            "username": "release-student",
+            "password": stand.passwords[3],
+            "first_name": "Release",
+            "last_name": "Student",
+            "role": "student",
+            "must_change_password": False,
+        },
+        csrf,
+    )
+    assert user["role"] == "student"
+    request("/api/auth/logout", {}, csrf)
+    signed_in = request(
+        "/api/auth/login",
+        {"username": "release-student", "password": stand.passwords[3]},
+    )
+    csrf = signed_in["csrf_token"]
+    assert isinstance(csrf, str)
+    settings = request(
+        "/api/settings", {"ui_language": "es", "note_naming": "solfege"}, csrf, "PATCH"
+    )
+    assert settings["ui_language"] == "es"
+    try:
+        request("/api/users", method="GET")
+    except urllib.error.HTTPError as error:
+        assert error.code == 403
+    else:
+        pytest.fail("Student accessed manager API")
+    for route in ("/login", "/settings", "/manager/users", "/student"):
+        with client.open(origin + route) as response:
+            assert b'id="root"' in response.read()
+    stand.run("restart", "backend")
+    stand.run("up", "-d", "--no-deps", "--wait", "backend")
+    restored = request("/api/auth/me", method="GET")
+    assert isinstance(restored["user"], dict)
+    assert restored["user"]["ui_language"] == "es"
+    assert restored["user"]["note_naming"] == "solfege"
+    request("/api/auth/logout", {}, csrf)
+
+
+def test_nginx_login_limit_ignores_client_forwarded_for(
+    stand: Stand, tmp_path: Path
+) -> None:
+    override = tmp_path / "login-limit.yaml"
+    override.write_text(
+        "services:\n  frontend:\n    environment:\n"
+        '      LOGIN_NGINX_RATE_PER_SECOND: "1"\n      LOGIN_NGINX_BURST: "1"\n'
+    )
+    limited = Stand([*stand.command, "-f", str(override)], stand.passwords)
+    try:
+        limited.run("up", "-d", "--no-deps", "--wait", "frontend")
+        origin = "http://" + limited.run("port", "frontend", "8080").stdout.strip()
+        statuses: list[int] = []
+        for index in range(8):
+            request = urllib.request.Request(
+                origin + "/api/auth/login",
+                data=json.dumps(
+                    {"username": f"throttle-{index}", "password": "incorrect"}
+                ).encode(),
+                headers={
+                    "Content-Type": "application/json",
+                    "Origin": origin,
+                    "X-Forwarded-For": f"192.0.2.{index}",
+                },
+            )
+            try:
+                urllib.request.urlopen(request, timeout=10).close()
+            except urllib.error.HTTPError as error:
+                statuses.append(error.code)
+                if error.code == 429:
+                    assert error.headers.get("Retry-After") is None
+                    assert json.load(error) == {"error": "RATE_LIMITED"}
+        assert 401 in statuses and 429 in statuses
+    finally:
+        stand.run("up", "-d", "--no-deps", "--wait", "frontend")
 
 
 def test_failed_migration_blocks_backend_start(stand: Stand, tmp_path: Path) -> None:

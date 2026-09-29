@@ -1,0 +1,495 @@
+from collections.abc import AsyncIterator, Iterator
+from datetime import UTC, datetime, timedelta
+from pathlib import Path
+
+import httpx
+import pytest
+from alembic import command
+from alembic.config import Config
+from pydantic import SecretStr, ValidationError
+from sqlalchemy import delete, select
+
+from app.database import Database
+from app.main import create_app
+from app.models import Base, LoginSession, User
+from app.services.auth import hash_password, sync_emergency, verify_password
+from app.settings import Settings
+
+PASSWORD = "synthetic-long-password"
+ORIGIN = "https://test"
+pytestmark = pytest.mark.anyio
+
+
+@pytest.fixture
+def anyio_backend() -> str:
+    return "asyncio"
+
+
+@pytest.fixture
+def settings() -> Settings:
+    result = Settings(
+        auth_allowed_origins=[ORIGIN],
+        emergency_manager_username="recovery",
+        emergency_manager_password=SecretStr(PASSWORD),
+        session_cookie_secure=True,
+        session_lifetime_days=90,
+        password_min_length=12,
+        login_username_limit=5,
+    )
+    if result.database_name != "solfeo_test":
+        raise pytest.UsageError("Auth tests require a disposable solfeo_test database")
+    return result
+
+
+@pytest.fixture
+def database(settings: Settings) -> Iterator[Database]:
+    database = Database(settings)
+    with database.engine.begin() as connection:
+        config = Config(str(Path(__file__).resolve().parents[1] / "alembic.ini"))
+        config.attributes["connection"] = connection
+        command.upgrade(config, "head")
+        for table in reversed(Base.metadata.sorted_tables):
+            connection.execute(delete(table))
+    try:
+        yield database
+    finally:
+        with database.engine.begin() as connection:
+            for table in reversed(Base.metadata.sorted_tables):
+                connection.execute(delete(table))
+        database.close()
+
+
+@pytest.fixture
+async def client(
+    settings: Settings, database: Database
+) -> AsyncIterator[httpx.AsyncClient]:
+    app = create_app(settings)
+    async with app.router.lifespan_context(app):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app),
+            base_url=ORIGIN,
+            headers={"Origin": ORIGIN},
+        ) as client:
+            yield client
+
+
+async def login(
+    client: httpx.AsyncClient, username: str = "recovery", password: str = PASSWORD
+) -> httpx.Response:
+    response = await client.post(
+        "/api/auth/login", json={"username": username, "password": password}
+    )
+    if response.status_code == 200:
+        client.headers["X-CSRF-Token"] = response.json()["csrf_token"]
+    return response
+
+
+async def create_user(
+    client: httpx.AsyncClient, username: str = "student", role: str = "student"
+) -> int:
+    response = await client.post(
+        "/api/users",
+        json={
+            "username": username,
+            "password": PASSWORD,
+            "first_name": "First",
+            "last_name": "Last",
+            "role": role,
+            "must_change_password": False,
+        },
+    )
+    assert response.status_code == 201, response.text
+    return int(response.json()["id"])
+
+
+def test_passwords_use_salted_scrypt() -> None:
+    first = hash_password(PASSWORD)
+    assert first.startswith("scrypt$")
+    assert first != hash_password(PASSWORD)
+    assert PASSWORD not in first
+    assert verify_password(PASSWORD, first)
+    assert not verify_password("wrong-password", first)
+
+
+def test_emergency_create_reset_disable_and_reactivate(
+    database: Database, settings: Settings
+) -> None:
+    sync_emergency(database, settings)
+    with database.session() as session:
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None and user.is_active and user.role == "manager"
+        identifier = user.id
+        assert verify_password(PASSWORD, user.password_hash)
+    changed = settings.model_copy(
+        update={"emergency_manager_password": SecretStr("changed-long-password")}
+    )
+    sync_emergency(database, changed)
+    with database.session() as session:
+        user = session.get(User, identifier)
+        assert user is not None and verify_password(
+            "changed-long-password", user.password_hash
+        )
+    disabled = settings.model_copy(
+        update={
+            "emergency_manager_username": "",
+            "emergency_manager_password": SecretStr(""),
+        }
+    )
+    sync_emergency(database, disabled)
+    with database.session() as session:
+        user = session.get(User, identifier)
+        assert user is not None and not user.is_active and user.is_emergency
+    sync_emergency(database, settings)
+    with database.session() as session:
+        user = session.get(User, identifier)
+        assert (
+            user is not None
+            and user.is_active
+            and verify_password(PASSWORD, user.password_hash)
+        )
+
+
+async def test_login_cookie_csrf_sliding_expiry_and_logout(
+    client: httpx.AsyncClient, database: Database
+) -> None:
+    assert (await client.get("/api/auth/me")).status_code == 401
+    response = await login(client)
+    assert response.status_code == 200
+    cookie = response.headers["set-cookie"]
+    assert all(
+        part in cookie.lower()
+        for part in ("httponly", "secure", "samesite=lax", "max-age=7776000")
+    )
+    token = client.cookies.get("solfeo_session")
+    with database.session() as session, session.begin():
+        stored = session.scalar(select(LoginSession))
+        assert stored is not None and stored.token_hash != token
+        stored.expires_at = datetime.now(UTC) + timedelta(hours=1)
+    assert (await client.get("/api/auth/me")).json()["user"]["role"] == "manager"
+    with database.session() as session:
+        stored = session.scalar(select(LoginSession))
+        assert stored is not None and stored.expires_at > datetime.now(UTC) + timedelta(
+            days=89
+        )
+    assert (await client.post("/api/auth/logout")).status_code == 200
+    assert (await client.get("/api/auth/me")).status_code == 401
+
+
+@pytest.mark.parametrize(
+    "path,method",
+    [
+        ("/api/auth/me", "GET"),
+        ("/api/users", "GET"),
+        ("/api/users", "POST"),
+        ("/api/settings", "PATCH"),
+        ("/api/users/1", "PATCH"),
+        ("/api/users/1/password", "POST"),
+        ("/api/auth/password", "PUT"),
+        ("/api/auth/logout", "POST"),
+    ],
+)
+async def test_anonymous_cannot_access_protected_routes(
+    client: httpx.AsyncClient, path: str, method: str
+) -> None:
+    assert (await client.request(method, path, json={})).status_code == 401
+
+
+async def test_csrf_and_login_origin_are_required(client: httpx.AsyncClient) -> None:
+    response = await client.post(
+        "/api/auth/login",
+        json={"username": "recovery", "password": PASSWORD},
+        headers={"Origin": "https://attacker.test"},
+    )
+    assert response.status_code == 403
+    await login(client)
+    del client.headers["X-CSRF-Token"]
+    response = await client.patch(
+        "/api/settings", json={"ui_language": "ru", "note_naming": "solfege"}
+    )
+    assert response.status_code == 403 and response.json()["error"] == "CSRF_FAILED"
+    response = await client.get("/api/auth/me")
+    client.headers["X-CSRF-Token"] = response.json()["csrf_token"]
+    response = await client.post(
+        "/api/auth/logout", headers={"Origin": "https://attacker.test"}
+    )
+    assert response.status_code == 403
+
+
+async def test_student_boundaries_settings_persist_and_deactivation_revokes(
+    client: httpx.AsyncClient, settings: Settings
+) -> None:
+    await login(client)
+    identifier = await create_user(client)
+    manager_cookie = client.cookies.get("solfeo_session")
+    manager_csrf = client.headers["X-CSRF-Token"]
+    client.cookies.clear()
+    assert (await login(client, "STUDENT")).status_code == 200
+    student_cookie = client.cookies.get("solfeo_session")
+    for method, path, data in [
+        ("GET", "/api/users", None),
+        ("POST", "/api/users", {}),
+        ("PATCH", f"/api/users/{identifier}", {"is_active": False}),
+        ("POST", f"/api/users/{identifier}/password", {"password": PASSWORD}),
+    ]:
+        assert (await client.request(method, path, json=data)).status_code == 403
+    response = await client.patch(
+        "/api/settings", json={"ui_language": "es", "note_naming": "solfege"}
+    )
+    assert response.status_code == 200
+    await client.post("/api/auth/logout")
+    response = await login(client, "student")
+    assert response.json()["user"]["ui_language"] == "es"
+    assert response.json()["user"]["note_naming"] == "solfege"
+    student_cookie = client.cookies.get("solfeo_session")
+    client.cookies.clear()
+    assert manager_cookie is not None
+    client.cookies.set("solfeo_session", manager_cookie)
+    client.headers["X-CSRF-Token"] = manager_csrf
+    assert (
+        await client.patch(f"/api/users/{identifier}", json={"is_active": False})
+    ).status_code == 200
+    client.cookies.clear()
+    assert student_cookie is not None
+    client.cookies.set("solfeo_session", student_cookie)
+    assert (await client.get("/api/auth/me")).status_code == 401
+    assert (await login(client, "student")).json()["error"] == "INVALID_CREDENTIALS"
+
+
+async def test_reset_requires_password_change_and_revokes_old_sessions(
+    client: httpx.AsyncClient,
+) -> None:
+    await login(client)
+    identifier = await create_user(client)
+    manager_cookie = client.cookies.get("solfeo_session")
+    manager_csrf = client.headers["X-CSRF-Token"]
+    client.cookies.clear()
+    await login(client, "student")
+    old_cookie = client.cookies.get("solfeo_session")
+    client.cookies.clear()
+    assert manager_cookie is not None
+    client.cookies.set("solfeo_session", manager_cookie)
+    client.headers["X-CSRF-Token"] = manager_csrf
+    replacement = "replacement-long-password"
+    assert (
+        await client.post(
+            f"/api/users/{identifier}/password",
+            json={"password": replacement, "must_change_password": True},
+        )
+    ).status_code == 200
+    client.cookies.clear()
+    assert old_cookie is not None
+    client.cookies.set("solfeo_session", old_cookie)
+    assert (await client.get("/api/auth/me")).status_code == 401
+    assert (await login(client, "student")).status_code == 401
+    assert (await login(client, "student", replacement)).json()["user"][
+        "must_change_password"
+    ]
+    assert (
+        await client.patch(
+            "/api/settings", json={"ui_language": "ru", "note_naming": "letters"}
+        )
+    ).json()["error"] == "PASSWORD_CHANGE_REQUIRED"
+    response = await client.put(
+        "/api/auth/password",
+        json={"current_password": replacement, "new_password": PASSWORD},
+    )
+    assert (
+        response.status_code == 200
+        and not response.json()["user"]["must_change_password"]
+    )
+    client.headers["X-CSRF-Token"] = response.json()["csrf_token"]
+    assert (
+        await client.patch(
+            "/api/settings", json={"ui_language": "ru", "note_naming": "letters"}
+        )
+    ).status_code == 200
+
+
+async def test_login_throttle_is_persistent_and_unknown_users_are_generic(
+    client: httpx.AsyncClient, settings: Settings
+) -> None:
+    for _ in range(settings.login_username_limit):
+        response = await login(client, "unknown", "wrong")
+        assert response.status_code == 401 and response.json() == {
+            "error": "INVALID_CREDENTIALS"
+        }
+    response = await login(client, "unknown", "wrong")
+    assert response.status_code == 429
+    assert int(response.headers["retry-after"]) > 0
+
+
+async def test_expired_sessions_and_emergency_restart_are_revoked(
+    client: httpx.AsyncClient, database: Database, settings: Settings
+) -> None:
+    await login(client)
+    with database.session() as session, session.begin():
+        stored = session.scalar(select(LoginSession))
+        assert stored is not None
+        stored.expires_at = datetime.now(UTC) - timedelta(seconds=1)
+    assert (await client.get("/api/auth/me")).status_code == 401
+    await login(client)
+    sync_emergency(database, settings)
+    assert (await client.get("/api/auth/me")).status_code == 401
+
+
+async def test_manager_validation_duplicate_username_and_emergency_protection(
+    client: httpx.AsyncClient,
+) -> None:
+    await login(client)
+    await create_user(client)
+    response = await client.post(
+        "/api/users",
+        json={
+            "username": "STUDENT",
+            "password": PASSWORD,
+            "first_name": "First",
+            "last_name": "Last",
+            "role": "student",
+        },
+    )
+    assert response.status_code == 409 and response.json()["error"] == "USERNAME_TAKEN"
+    me = (await client.get("/api/auth/me")).json()["user"]
+    assert (
+        await client.patch(f"/api/users/{me['id']}", json={"is_active": False})
+    ).status_code == 403
+    assert (
+        await client.post(
+            f"/api/users/{me['id']}/password", json={"password": PASSWORD}
+        )
+    ).status_code == 403
+    response = await client.patch(
+        "/api/settings", json={"ui_language": "xx", "note_naming": "letters"}
+    )
+    assert response.status_code == 422 and response.json() == {
+        "error": "VALIDATION_ERROR"
+    }
+    assert "password_hash" not in (await client.get("/api/users")).text
+
+
+@pytest.mark.parametrize(
+    "changes",
+    [
+        {
+            "emergency_manager_username": "recovery",
+            "emergency_manager_password": SecretStr(""),
+        },
+        {
+            "emergency_manager_username": "",
+            "emergency_manager_password": SecretStr(PASSWORD),
+        },
+        {
+            "emergency_manager_username": "bad user",
+            "emergency_manager_password": SecretStr(PASSWORD),
+        },
+        {
+            "emergency_manager_username": "recovery",
+            "emergency_manager_password": SecretStr("short"),
+        },
+        {"auth_allowed_origins": ["*"]},
+        {"auth_allowed_origins": ["https://example.test/path"]},
+    ],
+)
+def test_invalid_auth_configuration_fails_explicitly(
+    changes: dict[str, object],
+) -> None:
+    with pytest.raises(ValidationError):
+        Settings.model_validate({"DATABASE_PASSWORD": "synthetic-password", **changes})
+
+
+async def test_ip_budget_ignores_username_and_untrusted_forwarded_headers(
+    database: Database, settings: Settings
+) -> None:
+    app = create_app(settings.model_copy(update={"login_ip_limit": 2}))
+    async with app.router.lifespan_context(app):
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app),
+            base_url=ORIGIN,
+            headers={"Origin": ORIGIN},
+        ) as client:
+            for index in range(2):
+                response = await client.post(
+                    "/api/auth/login",
+                    json={"username": f"unknown{index}", "password": "wrong"},
+                    headers={"X-Forwarded-For": f"192.0.2.{index}"},
+                )
+                assert response.status_code == 401
+            assert (await login(client, "another", "wrong")).status_code == 429
+
+
+async def test_manager_can_reactivate_and_edit_other_users_but_not_demote_self(
+    client: httpx.AsyncClient,
+) -> None:
+    await login(client)
+    identifier = await create_user(client, "normal-manager", "manager")
+    response = await client.patch(
+        f"/api/users/{identifier}", json={"first_name": "Updated", "is_active": False}
+    )
+    assert response.json()["first_name"] == "Updated"
+    assert (
+        await client.patch(f"/api/users/{identifier}", json={"is_active": True})
+    ).json()["is_active"]
+    client.cookies.clear()
+    await login(client, "normal-manager")
+    assert (
+        await client.patch(f"/api/users/{identifier}", json={"role": "student"})
+    ).json()["error"] == "SELF_CHANGE_FORBIDDEN"
+
+
+async def test_emergency_username_change_retires_previous_account(
+    client: httpx.AsyncClient, database: Database, settings: Settings
+) -> None:
+    await login(client)
+    sync_emergency(
+        database,
+        settings.model_copy(
+            update={"emergency_manager_username": "replacement-manager"}
+        ),
+    )
+    assert (await client.get("/api/auth/me")).status_code == 401
+    with database.session() as session:
+        old = session.scalar(select(User).where(User.username == "recovery"))
+        assert old is not None and not old.is_active and not old.is_emergency
+        replacement = session.scalar(select(User).where(User.is_emergency))
+        assert replacement is not None and replacement.username == "replacement-manager"
+
+
+async def test_current_password_required_and_all_sessions_revoked_on_change(
+    client: httpx.AsyncClient, database: Database
+) -> None:
+    await login(client)
+    await create_user(client)
+    client.cookies.clear()
+    await login(client, "student")
+    original = client.cookies.get("solfeo_session")
+    client.cookies.clear()
+    await login(client, "student")
+    response = await client.put(
+        "/api/auth/password",
+        json={
+            "current_password": "incorrect",
+            "new_password": "different-long-password",
+        },
+    )
+    assert response.status_code == 400
+    response = await client.put(
+        "/api/auth/password",
+        json={"current_password": PASSWORD, "new_password": "different-long-password"},
+    )
+    assert response.status_code == 200
+    assert (await client.get("/api/auth/me")).status_code == 200
+    client.cookies.clear()
+    assert original is not None
+    client.cookies.set("solfeo_session", original)
+    assert (await client.get("/api/auth/me")).status_code == 401
+
+
+async def test_missing_origin_and_foreign_csrf_are_rejected(
+    client: httpx.AsyncClient,
+) -> None:
+    del client.headers["Origin"]
+    assert (await login(client)).status_code == 403
+    client.headers["Origin"] = ORIGIN
+    await login(client)
+    client.headers["X-CSRF-Token"] = "foreign-csrf"
+    assert (await client.post("/api/auth/logout")).status_code == 403
+    assert (await client.get("/api/auth/me")).status_code == 200

@@ -146,7 +146,23 @@ class Rollout:
         environment = dict(os.environ)
         # The server configuration and verified manifest override caller variables.
         for key in list(environment):
-            if key.startswith(("DATABASE_", "MIGRATION_", "POSTGRES_", "PRODUCTION_")):
+            if (
+                key.startswith(
+                    (
+                        "DATABASE_",
+                        "MIGRATION_",
+                        "POSTGRES_",
+                        "PRODUCTION_",
+                        "API_",
+                        "AUTH_",
+                        "SESSION_",
+                        "PASSWORD_",
+                        "LOGIN_",
+                        "EMERGENCY_MANAGER_",
+                    )
+                )
+                or key == "DEFAULT_LANGUAGE"
+            ):
                 environment.pop(key)
         environment.pop("BACKEND_IMAGE", None)
         environment.pop("FRONTEND_IMAGE", None)

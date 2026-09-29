@@ -18,3 +18,4 @@
 !frontend/src/**
 !deploy/
 !deploy/nginx.conf
+!deploy/nginx-start.sh
