@@ -77,3 +77,7 @@ Format: date, decision, reason. Do not reverse a decision without asking the own
   Shared nginx and the product frontend join `solfeo-proxy`; existing TLS and prototype routes remain.
   Rollback restores previous images only when their Alembic heads match the current database.
   An incompatible schema requires operator recovery; automated downgrade and volume deletion are prohibited.
+- 2026-09-29: The owner confirms the final deployed health-page checklist and closes PHASE 0.
+  The confirmation covers Chrome and Safari, RU/EN/ES, status refresh, and failure/recovery.
+  Owner-tested browser versions and a per-browser evidence matrix are not supplied.
+  PHASE 1 remains unstarted and requires a separate approved plan.

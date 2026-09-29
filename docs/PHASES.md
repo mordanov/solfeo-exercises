@@ -30,6 +30,7 @@ Done when: the owner reads the report and confirms the decisions in DECISIONS.md
 - GitHub Actions: `ci.yml` (pre-commit, backend tests with a Postgres service, frontend tests) and `cd.yml` (build, push to GHCR, SSH deploy, alembic upgrade, healthcheck, rollback to the previous tag).
 - Docs: developer setup, deploy guide (VPS prerequisites, GitHub secrets list, certbot and Let's Encrypt).
 Done when: the health page opens on the VPS after a CD run, and CI is green.
+Status: complete on 2026-09-29 after the owner confirms the final deployed browser checks.
 
 ## PHASE 1: Users, auth, settings
 - Models and migrations: users, sessions. Endpoints: login, logout, me. Login rate limit. Password hashing.

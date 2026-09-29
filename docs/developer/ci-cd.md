@@ -39,7 +39,7 @@ The existing prototype publishing workflows remain separate.
 `deploy/compose.prod.yaml` provides a separate, image-based production configuration.
 See `docs/developer/deploy.md` for its role boundaries and operational requirements.
 `cd.yml` performs targeted VPS rollout after successful publication.
-Final browser acceptance remains a separate PHASE 0 gate.
+The owner confirms the separate final browser acceptance gate on 2026-09-29.
 
 Do not run the shared infrastructure's general deployment for a scoped product change.
 Plan the named services, nginx routes, migration order, and rollback before the first product deployment.
@@ -152,4 +152,5 @@ The deployment validates real SSH credentials and the pinned host key.
 Independent checks confirm these references, schema heads, public HTTPS, private network boundaries, and removal of temporary registry credentials.
 All 44 existing VPS containers retain their IDs and start times.
 Chrome 154.0.8037.58 passes the deployed page, 3 languages, browser-only API failure, and recovery.
-Owner acceptance in Chrome and Safari remains open.
+The owner confirms Chrome/Safari, language switching, status refresh, and failure/recovery on 2026-09-29.
+PHASE 0 is complete; owner-tested browser versions and per-browser evidence are not supplied.

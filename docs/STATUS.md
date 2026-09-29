@@ -8,7 +8,9 @@ Prerequisites:
 Last updated: 2026-09-29 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
 
 ## Current phase
-PHASE 0: Walking skeleton and CI/CD; the product is deployed, with final owner browser acceptance pending.
+PHASE 0: Walking skeleton and CI/CD is complete.
+The owner confirms the final deployed health-page checks on 2026-09-29.
+PHASE 1 has not started.
 The owner confirms the requested local health-page and PostgreSQL restart scenarios on 2026-09-29.
 The owner confirms the remaining bot checks and continuation on 2026-09-29.
 PHASE 0.5 is complete; the failed PWA result remains unchanged.
@@ -24,7 +26,7 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Add production Compose configuration and isolated integration checks.
 - [x] Add CI-gated image publication and verified release bundles.
 - [x] Add targeted VPS deployment, migration, health verification, and rollback.
-- [ ] Complete the deployed health-page manual check.
+- [x] Complete the deployed health-page manual check.
 
 ## Completed PHASE 0.5 plan
 - [x] Prepare the OMR sample set and owner-approved evaluation criteria.
@@ -37,6 +39,8 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Complete the remaining Telegram checklist, as confirmed by the owner.
 
 ## Done
+- The owner confirms Chrome/Safari, RU/EN/ES, status refresh, and failure/recovery checks on the deployed page.
+- PHASE 0 closes with successful CI, targeted CD, updated documentation, and owner acceptance.
 - Product source `13a081745a8cf0a5804f75f9a5831c0e9e7f4137` is active at `https://solfeo.miveralta.ru/`.
 - CI run `36585295551` and publication/CD run `36585683212` succeed.
 - The runner passes all 30 release and production checks before deployment.
@@ -55,7 +59,7 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - The rollout validates archive provenance and hashes before activation.
 - Real-container scenarios pass for first deployment, migration failure, health failure, and compatible previous-image recovery.
 - The proxy network test confirms that only the product frontend joins the external network.
-- Final owner browser acceptance remains pending; automated Chrome checks do not establish Safari acceptance.
+- The owner confirms final browser acceptance; automated Chrome evidence remains separate from that confirmation.
 - The first CI attempt finds a missing temporary parent directory on a fresh runner.
 - The rollout fixture now creates that directory explicitly before its disposable container scenario.
 - The first product publication succeeds for source `03260e554b13c23b640ef6432775c50b331a7a39`.
@@ -206,9 +210,8 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - The owner does not supply device versions or a per-message evidence record.
 
 ## Next step
-- Complete the final owner Chrome/Safari checks at `https://solfeo.miveralta.ru/`.
-- Confirm language switching, status refresh, and failure/recovery.
-- Close PHASE 0 only after that acceptance; do not start PHASE 1 in this task.
+- Plan PHASE 1 (users, authentication, and settings) when the owner requests continuation.
+- Obtain approval for its first task before implementation.
 - Keep the active bot and superseded PWA deployment unchanged until an explicit deployment or cleanup task.
 
 ## PHASE 0 boundaries
@@ -222,9 +225,10 @@ Keep authentication in PHASE 1 and exercise/file operations in PHASE 2.
 Integrate the bot with manager accounts and exercises in PHASE 4.
 Do not copy disposable prototype authentication into the product.
 
-## Remaining acceptance details
+## Acceptance details
 - The owner confirms the requested local scenarios without browser versions or a detailed browser matrix.
-- Complete the browser matrix during final VPS acceptance.
+- The owner confirms the requested final VPS scenarios on 2026-09-29.
+- Owner-tested browser versions and a per-browser evidence matrix are not supplied.
 
 ## Manual checks the owner must do
 - [x] Confirm that images 1 through 10 represent the intended exercises.
@@ -240,12 +244,13 @@ Do not copy disposable prototype authentication into the product.
 - [x] Complete the real-message bot checklist, as confirmed by the owner.
 - [x] Confirm that the local health page opens.
 - [x] Confirm that the local schema revision survives a PostgreSQL restart.
-- [ ] Confirm Chrome and Safari behavior, all 3 languages, and failure/recovery during final VPS acceptance.
+- [x] Confirm Chrome and Safari behavior, all 3 languages, and failure/recovery during final VPS acceptance.
 - [x] Configure the 4 deployment secrets, as confirmed by the owner.
 
 The superseded Android PWA checklist is no longer required.
 The new local health-page procedure appears in `docs/user/manager.md` and `docs/user/student.md`.
-The product now needs final browser acceptance at its public HTTPS address.
+The owner confirms final browser acceptance at the public HTTPS address.
+No further PHASE 0 manual checks remain.
 
 ## Known issues
 - Image 6 produces no MusicXML; image 7 receives 46 % recognition.
@@ -265,7 +270,7 @@ The product now needs final browser acceptance at its public HTTPS address.
 - The onboarding guide is `../web-projects/web-folders/documentation/onboarding.md`.
 - npm 10 fails during fresh workspace dependency resolution; npm 12.1.0 resolves the declared dependencies.
 - The health-page language selector is temporary and does not save user preferences.
-- Product CD and public nginx integration are active; final owner VPS acceptance remains open.
+- Product CD and public nginx integration are active; the owner confirms final VPS acceptance.
 - The first deployment has no earlier production release; automatic rollback becomes available after a subsequent successful deployment.
 - Schema-incompatible rollback stops the product services and requires operator recovery; no automatic database downgrade occurs.
 - The current CLI credential cannot manage repository Actions secrets: the public-key API returns HTTP 403.
