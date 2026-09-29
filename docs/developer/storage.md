@@ -71,6 +71,9 @@ Responses use `Cache-Control: no-store` and `X-Content-Type-Options: nosniff`.
 nginx supports normal, suffix, and unsatisfiable byte ranges.
 Authenticated seeking returns 206 with `Content-Range`; invalid ranges return 416.
 HEAD returns the file length without a body.
+Student audio URLs include the selected media UUID as `version`.
+A replaced attachment returns 404 for that old version instead of mixing audio bytes during seeking.
+Existing journal rows keep their original audio reference and duration.
 
 The shared TLS proxy disables request buffering only for the product route.
 It delegates size enforcement to the private product nginx and preserves Range headers.

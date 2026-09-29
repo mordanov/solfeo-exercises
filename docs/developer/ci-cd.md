@@ -205,4 +205,12 @@ It verifies preview, AAC playback, seeking, metadata updates, reordering, persis
 Independent requests verify 206 byte ranges, anonymous denial, and internal-location protection.
 The automation leaves 2 soft-deleted production exercises and preserves their files.
 It restores the emergency manager's settings and does not publish credentials.
-Final owner acceptance remains open; Safari playback and seeking require the manual checklist.
+The owner confirms all PHASE 2 checks on 2026-09-29.
+
+## PHASE 3 verification
+
+Local suites pass 87 backend tests, 72 frontend tests, and 35 container/release checks.
+Real Chrome verifies student selection, heartbeats, pause/resume, completion, actual tab closure, journal filters, and retained deleted exercises.
+The container scenario verifies normal student session persistence and saved progress after a backend restart.
+The publication workflow supplies `VITE_LISTENING_HEARTBEAT_MS=5000` to the frontend build.
+Release provenance and public HTTPS verification follow deployment.

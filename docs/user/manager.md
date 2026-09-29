@@ -1,6 +1,6 @@
 # Manager guide
 
-This document explains accounts, settings, exercise management, and manual acceptance.
+This document explains accounts, exercise management, the listening journal, and manual acceptance.
 
 Prerequisites:
 - Use Chrome or Safari.
@@ -74,7 +74,7 @@ Role changes also end the target user's existing sessions.
 The letters option uses C–D–E by default.
 The solfège option uses do–re–mi.
 The Exercises page previews original images and converted audio.
-Score recognition and student listening belong to later phases.
+Students now have a separate listening interface; score recognition belongs to a later phase.
 The Telegram prototype remains separate and does not create exercises.
 
 ## Final PHASE 1 manual checklist
@@ -164,3 +164,40 @@ The bot prototype remains independent and cannot create product exercises yet.
     The page shows errors without creating an exercise.
 12. Open `/manager/exercises` as a student.
     The page refuses access.
+
+## Read the listening journal
+
+1. Open **Listening journal**.
+   The page shows the newest listening sessions first.
+2. Select a student or exercise when needed.
+3. Set From date and To date to filter session start times.
+4. Click **Apply filters**.
+   The table and total show matching sessions.
+5. Use **Previous** and **Next** for additional pages.
+6. Click **Refresh journal** to load recent events and filter options.
+
+Dates use the browser's displayed time zone.
+Both selected calendar dates are inclusive.
+Each row shows the student, original exercise title, start, last activity, end, maximum position, duration, and completion.
+The completion rule is 90 % of duration or a natural ended event.
+Seeking can satisfy the maximum-position rule; it does not measure uninterrupted listening.
+
+**No end event received** does not mean the student is still listening.
+A browser crash or lost connection can prevent the final event.
+The start and last heartbeat preserve the session independently.
+Deleted exercises remain in the journal with a deletion label.
+Replacement audio does not change earlier session durations.
+Manager audio previews do not create student journal records.
+
+## Final PHASE 3 manager checklist
+
+1. Prepare at least 2 audio exercises.
+2. Ask a student to complete the first and close the second during playback.
+3. Open Listening journal.
+4. Filter by that student.
+   The first row is complete; the interrupted session is incomplete.
+5. Confirm that pause and resume did not create duplicate rows.
+6. Filter by exercise and dates.
+7. Delete one test exercise.
+   Its journal entry remains with the original title, duration, and deletion label.
+8. Repeat the browser scenario in Safari.

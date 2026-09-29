@@ -16,7 +16,8 @@ Development uses `public`; production uses a private version schema, normally `m
 The configured schema must already exist before migration execution.
 Revision `0002_auth` adds the PHASE 1 tables.
 Revision `0003_exercises` adds exercises and media.
-The journal and worker jobs belong to later phases.
+Revision `0004_listening` adds student progress and the listening journal.
+Worker jobs belong to a later phase.
 
 | Table | Contents and constraints |
 |---|---|
@@ -25,6 +26,8 @@ The journal and worker jobs belong to later phases.
 | `login_limits` | Hashed username/IP budget key, attempt count, expiry |
 | `media_files` | UUID, generated filename, MIME type, positive byte count, optional positive duration, creation time |
 | `exercises` | Title, description, optional category, nonnegative position, image/audio foreign keys, deletion time, creation time |
+| `student_progress` | User primary key, sequential next-exercise reference, last random exercise reference |
+| `listening_sessions` | Unique client UUID, user/exercise/audio references, title snapshot, receipt timestamps, duration, maximum position, completion |
 
 Exercises require at least one media foreign key.
 Create, delete, and reorder operations share a transaction-level advisory lock.
@@ -32,6 +35,10 @@ Positions remain contiguous across active exercises.
 Deletion sets `deleted_at`; it does not remove rows or files.
 Replacements preserve previous media records and original images.
 The API exposes only current attachments of active exercises.
+Journal references do not cascade deletion.
+The journal retains exercise titles and audio durations after later changes.
+Indexes cover student, exercise, and start-time filters.
+Advisory locks serialize session UUID updates and student pointer changes.
 
 Database checks constrain roles, languages, and note naming.
 A partial unique index permits at most 1 emergency account.
@@ -91,7 +98,7 @@ Do not remove the data volume.
    ```
 
 3. Repeat the revision command.
-   Alembic reports `0003_exercises (head)`.
+   Alembic reports `0004_listening (head)`.
 4. Open the local health page.
    Its existing behavior remains unchanged.
 

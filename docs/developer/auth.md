@@ -95,5 +95,5 @@ The migration role remains the only schema owner.
 
 After migration, the PHASE 0 image does not recognize the new schema head.
 Automatic rollback therefore refuses that image and leaves application services stopped if verification fails.
-PHASE 2 advances the head to `0003_exercises`; PHASE 1 images cannot recognize this newer revision.
+PHASE 3 advances the head to `0004_listening`; earlier images cannot recognize this newer revision.
 Use a tested compatible forward fix instead of automatically downgrading or deleting account data.

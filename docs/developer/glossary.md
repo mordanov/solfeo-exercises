@@ -44,3 +44,8 @@ Prerequisites:
 | soft deletion | Marking an exercise as deleted while preserving its database record and files. |
 | AAC | The audio codec used inside each converted MP4 audio file. |
 | MiB | 1048576 bytes. |
+| listening event | A start, heartbeat, end, or ended request for one listening session. |
+| heartbeat | A periodic playback update that preserves the current session's maximum position. |
+| beacon | A browser request queued during page exit without custom headers. |
+| sequential pointer | The saved next exercise for one student in ordered mode. |
+| snapshot | Values retained when the first listening event creates a journal row. |

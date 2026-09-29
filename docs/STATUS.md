@@ -8,8 +8,9 @@ Prerequisites:
 Last updated: 2026-09-29 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
 
 ## Current phase
-PHASE 2: Exercises and files are implemented and deployed.
-Automated verification passes; final owner acceptance remains open.
+PHASE 3: Listening module and journal; implementation passes local automatic checks.
+Deployment and final owner acceptance remain open.
+The owner confirms all PHASE 2 checks and authorizes the complete PHASE 3 without intermediate confirmations on 2026-09-29.
 The owner confirms all PHASE 1 manual checks on 2026-09-29.
 The owner authorizes the entire PHASE 2 without intermediate confirmations on 2026-09-29.
 Manual checks follow the complete implementation.
@@ -19,13 +20,23 @@ The owner confirms the remaining bot checks and continuation on 2026-09-29.
 PHASE 0.5 is complete; the failed PWA result remains unchanged.
 
 ## Plan for the current phase
+- [x] Add per-student pointers and listening sessions with migration `0004_listening`.
+- [x] Add sequential/random selection and idempotent, beacon-safe event handling.
+- [x] Add student playback, pause/resume, heartbeats, completion, and exit handling.
+- [x] Add manager journal filters, pagination, deleted-exercise labels, and translations.
+- [x] Complete local PostgreSQL, container, and actual Chrome tab-close scenarios.
+- [ ] Deploy and verify the exact release over public HTTPS.
+- [ ] Complete documentation and the final manual checklist.
+- [ ] Obtain owner acceptance after implementation.
+
+## Completed PHASE 2 plan
 - [x] Add exercise and media models, migration, CRUD, soft deletion, and atomic reordering.
 - [x] Add bounded uploads, signature checks, original images, AAC conversion, and duration checks.
 - [x] Add protected file endpoints and nginx byte-range delivery.
 - [x] Add translated exercise forms, upload progress, previews, and drag-and-drop controls.
 - [x] Complete browser scenarios, container verification, and deployment.
 - [x] Complete documentation and the final manual checklist.
-- [ ] Obtain owner acceptance after the complete implementation.
+- [x] Obtain owner acceptance after the complete implementation.
 
 ## Completed PHASE 1 plan
 - [x] Add typed users, sessions, login budgets, and migration `0002_auth`.
@@ -62,6 +73,10 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Complete the remaining Telegram checklist, as confirmed by the owner.
 
 ## Done
+- PHASE 3 passes 87 backend tests, 72 frontend tests, and 35 container/release checks locally.
+- Real Chrome verifies random history, sequential persistence, pause/resume, heartbeats, completion, and actual tab closure.
+- The local journal retains the interrupted session after deletion and supports student/exercise filters.
+- Explicit quality checks pass Ruff, mypy strict, ESLint, Prettier, TypeScript, and frontend builds.
 - PHASE 2 is active at `https://solfeo.miveralta.ru/manager/exercises`.
 - Publication/CD run `36609836972` succeeds for source `61ed497df1c2bc295363df1f59248f76f251c14c`.
 - The published immutable images pass all 34 container/release checks before deployment.
@@ -279,9 +294,9 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - The owner does not supply device versions or a per-message evidence record.
 
 ## Next step
-- Complete final PHASE 2 owner acceptance with `docs/user/manager.md`.
-- Check real image and Opus upload, playback, and seeking in Chrome and Safari.
-- Keep PHASE 3 out of this task.
+- Deploy PHASE 3 and repeat the listening/journal scenario over public HTTPS.
+- Complete final PHASE 3 owner acceptance with `docs/user/student.md` and `docs/user/manager.md`.
+- Keep PHASE 4 out of this task.
 - Keep the active bot and superseded PWA deployment unchanged until an explicit deployment or cleanup task.
 
 ## PHASE 0 boundaries
@@ -313,12 +328,22 @@ Safari 26.6.2 refuses WebDriver sessions until Allow Remote Automation is enable
 The task does not change that system permission or claim automated Safari success.
 
 ## Final PHASE 2 manual acceptance
-- [ ] Create an exercise with a real Opus file and image in Chrome and Safari.
-- [ ] Play and seek forward and backward after conversion.
-- [ ] Edit metadata and replace attachments.
-- [ ] Reorder exercises by dragging or buttons; confirm the order after reload.
-- [ ] Confirm soft deletion and explicit errors for invalid or missing files.
-- [ ] Confirm student denial at `/manager/exercises`.
+- [x] Create an exercise with a real Opus file and image in Chrome and Safari.
+- [x] Play and seek forward and backward after conversion.
+- [x] Edit metadata and replace attachments.
+- [x] Reorder exercises by dragging or buttons; confirm the order after reload.
+- [x] Confirm soft deletion and explicit errors for invalid or missing files.
+- [x] Confirm student denial at `/manager/exercises`.
+
+The owner confirms all PHASE 2 checks on 2026-09-29.
+
+## Final PHASE 3 manual acceptance
+- [ ] Complete the first audio exercise and interrupt the second by closing the tab.
+- [ ] Confirm completed and incomplete sessions in the manager journal.
+- [ ] Confirm pause/resume uses one row and replay after natural completion uses another.
+- [ ] Check sequential persistence, random selection, Previous, and no automatic playback.
+- [ ] Check journal filters and retention after exercise deletion.
+- [ ] Confirm student denial at `/manager/journal` in Chrome and Safari.
 
 ## Manual checks the owner must do
 - [x] Confirm that images 1 through 10 represent the intended exercises.
@@ -340,7 +365,7 @@ The task does not change that system permission or claim automated Safari succes
 The superseded Android PWA checklist is no longer required.
 The new local health-page procedure appears in `docs/user/manager.md` and `docs/user/student.md`.
 The owner confirms final PHASE 0 browser acceptance at the public HTTPS address.
-The final PHASE 2 procedure is in `docs/user/manager.md`.
+The final PHASE 3 procedures are in `docs/user/manager.md` and `docs/user/student.md`.
 
 ## Known issues
 - Image 6 produces no MusicXML; image 7 receives 46 % recognition.
@@ -363,6 +388,7 @@ The final PHASE 2 procedure is in `docs/user/manager.md`.
 - Product CD and public nginx integration are active; the owner confirms final VPS acceptance.
 - The PHASE 0 image cannot recognize `0002_auth`; rollback across that schema boundary requires a compatible forward fix.
 - PHASE 1 images cannot recognize `0003_exercises`; PHASE 2 recovery requires a compatible image.
+- PHASE 2 images cannot recognize `0004_listening`; PHASE 3 recovery requires a compatible image.
 - Schema-incompatible rollback stops the product services and requires operator recovery; no automatic database downgrade occurs.
 - The current CLI credential cannot manage repository Actions secrets: the public-key API returns HTTP 403.
 - The deployment job confirms valid SSH configuration and removes its temporary registry credentials.

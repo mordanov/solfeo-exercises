@@ -7,6 +7,21 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-09-29: The owner confirms all PHASE 2 checks and authorizes the entire PHASE 3 without intermediate confirmations.
+  Manual acceptance follows the complete implementation and automated deployment.
+- 2026-09-29: A listening session starts on playback, survives pauses, and ends on navigation, exit, or natural completion.
+  Replay after completion uses a new UUID.
+  The event endpoint accepts the session-bound CSRF token in its JSON body because `sendBeacon` cannot set custom headers.
+  The authenticated cookie and exact allowed origin remain mandatory.
+  Other mutation endpoints keep their header-based CSRF checks.
+  Repeated and out-of-order events preserve one row, maximum position, terminal time, and completion.
+- 2026-09-29: Sequential selection persists per student and wraps at either end.
+  Completion advances the saved pointer once; the displayed exercise does not change automatically.
+  Random selection does not change the sequential pointer and excludes the current exercise when alternatives exist.
+  Random Previous uses the current page's selection history; reload starts in sequential mode.
+  Image-only exercises remain visible and create no listening session.
+  Journal rows preserve the exercise title, audio reference, and duration from their first accepted event.
+
 - 2026-09-29: The owner confirms all PHASE 1 manual checks and authorizes the complete PHASE 2 implementation.
   PHASE 2 needs no intermediate confirmations; manual acceptance follows implementation and deployment.
 - 2026-09-29: PHASE 2 saves exercise forms and their files as one operation.

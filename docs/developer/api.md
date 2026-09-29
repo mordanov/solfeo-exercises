@@ -112,3 +112,30 @@ Unsupported signatures return 415 `UNSUPPORTED_MEDIA`.
 Invalid files, excessive duration, and processor timeouts return specific 422 codes.
 Unavailable processors and storage failures return specific 503 codes.
 See `storage.md` for conversion and retention details.
+
+## Student listening and manager journal
+
+| Method and path | Permission | Input and result |
+|---|---|---|
+| `GET /api/listening/current` | Student | Returns `{"exercise": ...}` or a null exercise |
+| `POST /api/listening/select` | Student, header CSRF | `mode`, `direction`, optional `current_id` and `previous_id`; returns selected exercise |
+| `POST /api/listening/events` | Student, body CSRF | Records start, heartbeat, end, or ended; returns UUID, completion, and terminal time |
+| `GET /api/journal` | Manager | Filtered `sessions` and `total` |
+| `GET /api/journal/options` | Manager | Recorded `students` and `exercises` with IDs, labels, and deletion flags |
+
+Selection mode is `sequential` or `random`; direction is `current`, `next`, or `previous`.
+The optional `previous_id` supports random history navigation.
+Random and sequential choices do not start audio.
+
+Events require `session_id` as UUID, positive `exercise_id`, event type, nonnegative finite `position_seconds`, and `csrf_token`.
+The player also sends `audio_id` as UUID and the mode.
+An audio mismatch returns 409 `AUDIO_CHANGED`.
+A UUID with another exercise returns 409 `LISTENING_SESSION_CONFLICT`; another student's UUID returns 403.
+Image-only exercises return 422 `EXERCISE_HAS_NO_AUDIO`.
+The optional `version` UUID on protected file routes rejects stale media versions with 404.
+
+Journal filters are `student_id`, `exercise_id`, `started_from`, and `started_to`.
+Date boundaries require time zones; an invalid range returns 422.
+`offset` defaults to 0; `limit` defaults to 50 and permits at most 100.
+Each row includes student identity, exercise snapshot and deletion flag, timestamps, maximum position, duration, and completion.
+See `listening.md` for idempotency, beacon delivery, and pointer behavior.

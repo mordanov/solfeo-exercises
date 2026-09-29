@@ -1,6 +1,6 @@
 # Student guide
 
-This document explains student sign-in, password changes, settings, and access boundaries.
+This document explains student listening, account settings, and access boundaries.
 
 Prerequisites:
 - Use Chrome or Safari.
@@ -42,8 +42,9 @@ A successful password change ends your other sessions.
 
 Students cannot list, create, edit, deactivate, or reset other users.
 Opening `/manager/users` does not grant manager access.
-Managers can prepare exercises in PHASE 2.
-The student listening interface and journal arrive in PHASE 3.
+Students can view original images and listen to exercise audio.
+Only managers can read the listening journal.
+Opening `/manager/journal` does not grant journal access.
 Opening `/manager/exercises` does not grant exercise management rights.
 The separate Telegram prototype does not grant product import rights.
 
@@ -64,3 +65,51 @@ The service-status panel confirms backend liveness only.
 4. Verify that `/manager/users` refuses access.
 5. Confirm that manager reset or deactivation ends your access.
 6. Verify sign-out after page reload.
+
+## Listen to exercises
+
+1. Open **Student area**.
+   The saved sequential exercise appears with its description and original image.
+2. Press the audio play control.
+   Playback starts, and the application records a listening session.
+3. Pause and resume when necessary.
+   Both actions belong to the same listening session.
+4. Use the audio position control to seek.
+   The journal records the maximum position reached, not total listening time.
+5. Click **Next** or **Previous**.
+   The application ends the current session and shows another exercise without automatic playback.
+
+Reaching 90 % of the duration or receiving the natural ended event marks the session complete.
+Completion saves the next sequential exercise but leaves the current exercise visible.
+Replay after natural completion creates a new listening session.
+The ordered sequence wraps after the last exercise and before the first.
+Reload or a new sign-in restores the saved sequential pointer.
+An image-only exercise has no audio control and creates no journal row.
+
+1. Select **Random** in Listening mode.
+   The application selects a different exercise when more than one exists.
+2. Click **Next** for another random selection.
+3. Click **Previous** to revisit the previous random selection from this page.
+4. Select **In order** to restore the saved sequential position.
+
+Reload starts in sequential mode and clears the page's random history.
+Changing modes ends the current listening session without automatic playback.
+Settings navigation and tab closure also attempt to send an end event.
+The last accepted heartbeat keeps a valid journal row even if the browser cannot send that event.
+
+A delivery error pauses playback and shows an error.
+Check your connection before pressing play again.
+Reload if the manager replaces the current audio.
+The application does not silently switch a running player to a replacement file.
+
+## Final PHASE 3 manual checklist
+
+1. Sign in as a student in Chrome and Safari.
+2. Play an exercise, pause, and resume.
+3. Complete the first exercise.
+4. Click **Next** and play the second exercise for at least 5 seconds.
+5. Close the tab before reaching 90 %.
+6. Ask the manager to check one completed session and one incomplete session.
+7. Reopen the application and confirm the saved sequential position.
+8. Check Random, Previous, and return to In order.
+9. Confirm that `/manager/journal` refuses student access.

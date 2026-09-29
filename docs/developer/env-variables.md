@@ -60,6 +60,7 @@ Frontend build values are public; never put a secret in `VITE_*`.
 | `VITE_DEFAULT_LANGUAGE` | `en` | Initial page language: en, ru, or es |
 | `VITE_HEALTH_TIMEOUT_MS` | `5000` | Shared health/account HTTP deadline in milliseconds; integer from 1 to 2147483647 |
 | `VITE_UPLOAD_TIMEOUT_MS` | `600000` | Multipart upload deadline, including conversion, in milliseconds |
+| `VITE_LISTENING_HEARTBEAT_MS` | `5000` | Playback heartbeat interval, from 1000 to 60000 milliseconds |
 | `WEB_BIND_ADDRESS` | `127.0.0.1` | Local Compose host bind address |
 | `WEB_PORT` | `18080` | Local Compose host port |
 | `BACKEND_IMAGE` | Required for production | Tested backend image reference; use an immutable digest |

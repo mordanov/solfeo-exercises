@@ -52,9 +52,10 @@ The owner authorizes the entire phase without intermediate confirmations on 2026
 - Docs: user (manage exercises), developer (storage, conversion, nginx config).
 Done when: manager uploads an .opus file and an image, and the audio plays and seeks in Chrome and Safari.
 Implementation status: deployed on 2026-09-29 with successful CI/CD, container checks, and public HTTPS Chrome scenarios.
-Final owner acceptance remains open, including real-file playback and seeking in Safari.
+Status: complete on 2026-09-29 after the owner confirms all PHASE 2 manual checks.
 
 ## PHASE 3: Listening module and journal
+The owner authorizes the entire phase without intermediate confirmations on 2026-09-29.
 - Student UI: sequential mode (pointer per student), random mode (no immediate repeat), image and audio player, next/previous.
 - Events API: start, heartbeat, end, beacon-safe. The "completed" rule.
 - Manager journal UI with filters (student, exercise, date) and pagination.

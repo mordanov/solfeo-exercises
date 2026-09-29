@@ -126,8 +126,8 @@ The job reports `ROLLBACK_FAILED_MANUAL_RECOVERY_REQUIRED`.
 The operator must select a compatible forward fix or an explicitly reviewed database recovery.
 The script never automatically downgrades a schema or removes a volume.
 Future migrations must preserve compatibility or explicitly require a maintenance deployment.
-The PHASE 2 schema head is `0003_exercises`; earlier images cannot pass its compatibility check.
-After that migration, recovery from a failed healthcheck requires a compatible PHASE 2 image.
+The PHASE 3 schema head is `0004_listening`; earlier images cannot pass its compatibility check.
+After that migration, recovery from a failed healthcheck requires a compatible PHASE 3 image.
 
 A failed first deployment has no previous release.
 It leaves PostgreSQL and its volume intact and reports `FIRST_DEPLOY_FAILED_SERVICES_STOPPED`.
