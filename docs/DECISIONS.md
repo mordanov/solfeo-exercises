@@ -42,3 +42,6 @@ Format: date, decision, reason. Do not reverse a decision without asking the own
   Reason: evaluate direct attachment ingestion after Android PWA sharing delivers an empty form.
   The prototype stays in PHASE 0.5 and does not create exercises.
   The failed PWA acceptance result remains unchanged.
+- 2026-09-29: The owner confirms successful real audio receipt through the Telegram prototype.
+  The reported reply identifies `199163078.m4a`, with a size of 636644 bytes.
+  This confirms the basic bot ingestion path, not the full manual checklist or replacement of the product PWA requirement.

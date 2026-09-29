@@ -8,7 +8,8 @@ Prerequisites:
 - Wait for confirmation that the worker is active on the VPS.
 
 The worker is active on the VPS as of 2026-09-29.
-Real-message acceptance remains pending.
+The owner confirms one successful audio receipt on 2026-09-29.
+The remaining checklist results are not recorded.
 
 The bot stores audio on the server as AAC `.m4a`.
 It does not create an exercise or provide a public download link.

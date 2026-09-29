@@ -23,7 +23,8 @@ It does not create exercises, expose files, or add a database or Redis.
 The implementation, image publication, and VPS activation are complete.
 The owner supplies the dedicated token and sender allowlist privately.
 The bot runs at `https://t.me/solfeo_exercises_bot`.
-Real-message acceptance remains pending.
+The owner confirms one successful real audio receipt.
+The remaining manual checklist results are not recorded.
 
 ### Initial staging: 2026-09-29
 
@@ -68,7 +69,14 @@ All 43 pre-existing containers retain their IDs and start times.
 
 No real audio message reaches the worker during this activation check.
 Startup verification does not replace the owner's attachment tests.
-The next step is `/start`, followed by real attachments in the private bot chat.
+### Owner-confirmed receipt: 2026-09-29
+
+The owner reports that the bot works and confirms its success reply.
+The reply identifies `199163078.m4a`, with a converted size of 636644 bytes.
+This confirms one successful real-message receipt, not only a simulated API check.
+The specific attachment type and playback result are not recorded.
+The remaining attachment, unauthorized-sender, and restart checks remain open.
+This result does not confirm PWA sharing or change its product requirement.
 
 ## Local setup
 
@@ -222,4 +230,5 @@ Do not replace the VPS `.env` with the local prototype file.
 For rollback, restore the prior image digest and recreate only this worker.
 Preserve the audio volume and checkpoint.
 Do not reuse that volume with a different bot identity.
-The current worker is active; owner acceptance remains pending.
+The current worker is active, and the owner confirms one successful receipt.
+Full checklist acceptance remains pending.

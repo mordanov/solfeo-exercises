@@ -94,11 +94,13 @@ PHASE 0.5: Risk prototypes
 - `https://t.me/solfeo_exercises_bot` is active, healthy, and polling Telegram.
 - Both configuration files use mode `0600`; no token or allowed user ID enters Git or command output.
 - All 43 pre-existing containers remain unchanged during activation.
-- No real audio message reaches the bot during the activation check; owner acceptance remains pending.
+- The owner confirms successful real audio receipt on 2026-09-29.
+- The reported bot reply identifies `199163078.m4a`, with a size of 636644 bytes.
+- The specific attachment type and the remaining checklist results are not recorded.
 
 ## Next step
-- Send `/start` and real attachments to `https://t.me/solfeo_exercises_bot`.
-- Complete the Telegram checklist and report errors or successful receipt.
+- Complete the remaining Telegram checks, including saved-audio playback and any untested attachment types.
+- Review the phase report and decide whether to retain or replace the product PWA share requirement.
 - Keep PWA acceptance failed; do not replace the product share requirement without owner approval.
 - Retain the file-manager control test as an optional way to isolate the Android sharing failure.
 
@@ -115,6 +117,7 @@ PHASE 0.5: Risk prototypes
 - [ ] Reinstall the deployed PWA from Android Chrome and confirm the `diagnostics v1` section.
 - [ ] Share audio from WhatsApp and Telegram to the installed PWA.
 - [ ] Verify receipt details, reload persistence, clearing, and sharing after closing the PWA.
+- [x] Confirm one successful real audio receipt through the Telegram bot.
 - [ ] Complete the real-message bot checklist in `docs/user/telegram-prototype.md`.
 
 ## Known issues
