@@ -3,16 +3,19 @@
 This document explains how to check audio ingestion through the dedicated Telegram bot.
 
 Prerequisites:
-- Obtain the dedicated bot's username from the operator.
+- Use `https://t.me/solfeo_exercises_bot`.
 - Ask the operator to allow your numeric Telegram user ID.
 - Wait for confirmation that the worker is active on the VPS.
+
+The worker is active on the VPS as of 2026-09-29.
+Real-message acceptance remains pending.
 
 The bot stores audio on the server as AAC `.m4a`.
 It does not create an exercise or provide a public download link.
 The default limits are 20,000,000 bytes per file and 900 seconds of audio.
 The bot reports a capacity error rather than deleting earlier files.
 
-1. Open the bot's private chat in Telegram.
+1. Open `https://t.me/solfeo_exercises_bot` in Telegram.
 2. Send `/start`.
    The bot explains which attachments it accepts.
 3. Send an audio file as an attachment.

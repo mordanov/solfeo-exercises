@@ -20,11 +20,12 @@ It downloads through Telegram `getFile`, checks the actual file type, and conver
 It does not download message links.
 It does not create exercises, expose files, or add a database or Redis.
 
-The implementation, image publication, and opt-in VPS staging are complete.
-No dedicated bot token or sender allowlist is available.
-The worker must remain inactive until those settings exist.
+The implementation, image publication, and VPS activation are complete.
+The owner supplies the dedicated token and sender allowlist privately.
+The bot runs at `https://t.me/solfeo_exercises_bot`.
+Real-message acceptance remains pending.
 
-### Verified staging: 2026-09-29
+### Initial staging: 2026-09-29
 
 | Item | Result |
 |---|---|
@@ -40,14 +41,34 @@ The worker must remain inactive until those settings exist.
 The successful publication run is
 [`36539611695`](https://github.com/mordanov/solfeo-exercises/actions/runs/36539611695).
 The published image is available on the VPS, and the shared `.env` pins its digest.
-The worker remains outside the global manifest and has no running service container.
+The staging commit excludes the worker from the global manifest.
 The staging commit uses `[skip ci]` to avoid the unrelated general deployment.
 The isolated runtime check uses a separate temporary volume and no network.
 The temporary test volumes are removed after verification.
 
-The ignored local `prototypes/telegram/.env` exists with mode `0600`.
-Its token is blank and its sender list is empty.
-The owner must edit this file privately before live activation.
+### Verified activation: 2026-09-29
+
+The owner fills the ignored local `prototypes/telegram/.env`.
+Both the local configuration and the shared VPS `.env` use mode `0600`.
+Only validated bot settings cross SSH; the transfer does not print values or create a secret patch file.
+The VPS data path remains `/data`, and the image digest remains unchanged.
+
+Shared commit `5e2f6c0` registers the worker under `workers` in `sites.yaml`.
+The commit uses `[skip ci]` to avoid the general deployment.
+The targeted start adds only `web-folders-solfeo-telegram-prototype-1`.
+All 43 pre-existing containers retain their IDs and start times.
+
+| Check | Result |
+|---|---|
+| Telegram identity and webhook | Checks pass locally and from the VPS; no webhook exists |
+| Worker state | Running and healthy, with 0 restarts during verification |
+| Polling | The heartbeat advances during repeated Telegram polls |
+| Isolation | UID 1000, read-only root filesystem, no published ports |
+| Audio at activation check | 0 saved files; no processed-update checkpoint yet |
+
+No real audio message reaches the worker during this activation check.
+Startup verification does not replace the owner's attachment tests.
+The next step is `/start`, followed by real attachments in the private bot chat.
 
 ## Local setup
 
@@ -201,4 +222,4 @@ Do not replace the VPS `.env` with the local prototype file.
 For rollback, restore the prior image digest and recreate only this worker.
 Preserve the audio volume and checkpoint.
 Do not reuse that volume with a different bot identity.
-Activation and owner acceptance remain blocked until the dedicated token and allowed user IDs exist.
+The current worker is active; owner acceptance remains pending.

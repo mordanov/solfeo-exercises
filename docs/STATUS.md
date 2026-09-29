@@ -85,20 +85,25 @@ PHASE 0.5: Risk prototypes
 - All 27 bot tests, Ruff, and strict mypy pass locally and in CI, including actual Opus-to-AAC conversion.
 - A non-root, read-only Docker check verifies simulated Telegram ingestion through real AAC conversion and durable checkpointing.
 - Bot source `ac3442e` is published; shared configuration `3b94837` is synchronized to the VPS.
-- The VPS `.env` pins the bot image digest; the opt-in worker remains inactive and outside global deployment registration.
+- The VPS `.env` pins the bot image digest.
 - The published x86-64 image passes an offline runtime check on the VPS using simulated Telegram and actual AAC conversion.
 - All 43 existing containers retain their original IDs and start times.
-- Live bot activation is blocked: a dedicated BotFather token and allowed Telegram user IDs are not configured.
+- The owner supplies the dedicated bot configuration privately.
+- Telegram identity and webhook checks pass locally and from the VPS without exposing credentials.
+- Shared commit `5e2f6c0` registers and activates only the Telegram worker.
+- `https://t.me/solfeo_exercises_bot` is active, healthy, and polling Telegram.
+- Both configuration files use mode `0600`; no token or allowed user ID enters Git or command output.
+- All 43 pre-existing containers remain unchanged during activation.
+- No real audio message reaches the bot during the activation check; owner acceptance remains pending.
 
 ## Next step
-- Configure the dedicated bot token and sender allowlist privately, then activate and test the worker.
+- Send `/start` and real attachments to `https://t.me/solfeo_exercises_bot`.
+- Complete the Telegram checklist and report errors or successful receipt.
 - Keep PWA acceptance failed; do not replace the product share requirement without owner approval.
 - Retain the file-manager control test as an optional way to isolate the Android sharing failure.
 
 ## Open questions for the owner
 - Identify the Android device and browser versions when manual testing starts.
-- Supply dedicated bot credentials through `prototypes/telegram/.env`, not through chat.
-- The ignored local configuration file is prepared with mode `0600`, but the required values remain empty.
 
 ## Manual checks the owner must do
 - [x] Confirm that images 1 through 10 represent the intended exercises.
@@ -110,7 +115,7 @@ PHASE 0.5: Risk prototypes
 - [ ] Reinstall the deployed PWA from Android Chrome and confirm the `diagnostics v1` section.
 - [ ] Share audio from WhatsApp and Telegram to the installed PWA.
 - [ ] Verify receipt details, reload persistence, clearing, and sharing after closing the PWA.
-- [ ] Complete the real-message bot checklist in `docs/user/telegram-prototype.md` after activation.
+- [ ] Complete the real-message bot checklist in `docs/user/telegram-prototype.md`.
 
 ## Known issues
 - Image 6 produces no MusicXML; image 7 receives 46 % recognition.
