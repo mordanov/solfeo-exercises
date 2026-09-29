@@ -25,6 +25,9 @@ export function manifest(language: "en" | "ru" | "es" = "en") {
       method: "POST",
       enctype: "multipart/form-data",
       params: {
+        text: "text",
+        title: "title",
+        url: "url",
         files: [
           {
             name: "audio",

@@ -27,6 +27,9 @@ it("uses one scope and a multipart file share target", () => {
     method: "POST",
     enctype: "multipart/form-data",
     params: {
+      text: "text",
+      title: "title",
+      url: "url",
       files: [
         {
           name: "audio",

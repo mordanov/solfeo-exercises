@@ -46,6 +46,28 @@ The owner reports "No audio file was received" after sharing from Telegram or Wh
 The cause remains under investigation.
 Opening the application does not confirm that Android provides the audio file.
 
+The diagnostic update adds a separate section labelled `diagnostics v1`.
+It records the latest attempt without storing message text, link values, filenames, or unknown field names.
+The ordinary successful receipt still shows the stored filename.
+
+After the diagnostic deployment:
+
+1. Remove the previous PWA installation.
+2. Open the prototype URL in Chrome.
+3. Confirm that the page shows `diagnostics v1`.
+4. Wait for receiver readiness.
+5. Reinstall the PWA through Chrome.
+6. Repeat a share from each messenger.
+7. Record the diagnostic result, field categories, file count, types, and sizes.
+8. Include only the diagnostic section in a screenshot.
+9. Use **Clear diagnostics** after recording the result.
+
+The diagnostic clear action does not delete the last successful audio file.
+Text-only receipt does not confirm audio receipt.
+An empty result means the browser supplies no usable fields; it does not prove what the messenger originally sends.
+
+For the control test:
+
 1. Record whether the selected item is a voice message, audio attachment, or message link.
 2. Record the exact share action and the device and application versions.
 3. Save the audio to the device if the messenger permits this action.

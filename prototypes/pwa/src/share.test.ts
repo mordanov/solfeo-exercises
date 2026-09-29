@@ -1,5 +1,11 @@
 import { describe, expect, it, vi } from "vitest";
 import { handleShare, isShareRequest } from "./share";
+import { saveAttempt } from "./storage";
+
+vi.mock("./storage", () => ({
+  saveShare: vi.fn(),
+  saveAttempt: vi.fn().mockResolvedValue(undefined),
+}));
 
 const origin = "https://solfeo.example";
 
@@ -32,6 +38,113 @@ describe("share request boundary", () => {
 });
 
 describe("share receipt", () => {
+  it("reports text-only shares without retaining private content", async () => {
+    const body = new FormData();
+    body.append("text", "private message https://private.example/audio");
+    body.append("title", "private title");
+    body.append("url", "https://private.example/audio");
+    const store = vi.fn();
+    const result = await handleShare(
+      new Request(`${origin}/prototype-share/receive`, {
+        method: "POST",
+        body,
+      }),
+      store,
+    );
+    expect(result.headers.get("Location")).toContain("error=TEXT_ONLY_SHARE");
+    expect(store).not.toHaveBeenCalled();
+    const attempt = vi.mocked(saveAttempt).mock.calls.at(-1)?.[0];
+    expect(attempt).toMatchObject({
+      outcome: "TEXT_ONLY_SHARE",
+      fields: [
+        { field: "text", kind: "text", nonempty: true },
+        { field: "title", kind: "text", nonempty: true },
+        { field: "url", kind: "text", nonempty: true },
+      ],
+    });
+    expect(JSON.stringify(attempt)).not.toContain("private");
+  });
+
+  it("distinguishes unexpected file fields without copying their names", async () => {
+    const body = new FormData();
+    body.append("private-field-name", audio("private-filename.opus"));
+    const result = await handleShare(
+      new Request(`${origin}/prototype-share/receive`, {
+        method: "POST",
+        body,
+      }),
+      vi.fn(),
+    );
+    expect(result.headers.get("Location")).toContain(
+      "error=UNEXPECTED_FILE_FIELD",
+    );
+    const attempt = vi.mocked(saveAttempt).mock.calls.at(-1)?.[0];
+    expect(attempt).toMatchObject({
+      fields: [{ field: "other", kind: "file", type: "audio/ogg", size: 15 }],
+    });
+    expect(JSON.stringify(attempt)).not.toContain("private");
+  });
+
+  it("accepts audio with accompanying text and passes sanitized diagnostics to storage", async () => {
+    const body = new FormData();
+    body.append("audio", audio());
+    body.append("text", "private caption");
+    const store = vi.fn().mockResolvedValue(undefined);
+    const result = await handleShare(
+      new Request(`${origin}/prototype-share/receive`, {
+        method: "POST",
+        body,
+      }),
+      store,
+    );
+    expect(result.headers.get("Location")).not.toContain("error");
+    expect(store.mock.calls[0]?.[1]).toMatchObject({
+      outcome: "RECEIVED",
+      fields: [
+        { field: "audio", kind: "file", type: "audio/ogg", size: 15 },
+        { field: "text", kind: "text", nonempty: true },
+      ],
+    });
+    expect(JSON.stringify(store.mock.calls[0]?.[1])).not.toContain("private");
+  });
+
+  it("does not silently ignore an extra file under another field", async () => {
+    const body = new FormData();
+    body.append("audio", audio());
+    body.append("other", audio());
+    const store = vi.fn();
+    const result = await handleShare(
+      new Request(`${origin}/prototype-share/receive`, {
+        method: "POST",
+        body,
+      }),
+      store,
+    );
+    expect(result.headers.get("Location")).toContain(
+      "error=UNEXPECTED_FILE_FIELD",
+    );
+    expect(store).not.toHaveBeenCalled();
+  });
+
+  it("surfaces diagnostic storage failures", async () => {
+    vi.mocked(saveAttempt).mockRejectedValueOnce(new Error("blocked"));
+    const result = await handleShare(request([]), vi.fn());
+    expect(result.headers.get("Location")).toContain("error=STORAGE_FAILED");
+  });
+
+  it("treats blank text as an empty share", async () => {
+    const body = new FormData();
+    body.append("text", "  ");
+    const result = await handleShare(
+      new Request(`${origin}/prototype-share/receive`, {
+        method: "POST",
+        body,
+      }),
+      vi.fn(),
+    );
+    expect(result.headers.get("Location")).toContain("error=EMPTY_SHARE");
+  });
+
   it("waits for successful storage before redirecting", async () => {
     let finish: (() => void) | undefined;
     const store = vi.fn<(file: File) => Promise<void>>(

@@ -33,6 +33,7 @@ It does not create exercises or upload audio.
 The service worker handles the manifest's multipart POST share target.
 It stores the file in IndexedDB before redirecting to the receipt page.
 The manifest accepts `audio/*`, `.opus`, `.ogg`, and `application/octet-stream`.
+It also maps text, title, and URL fields to diagnose shares without files.
 The page must distinguish a completed receipt from empty input or a storage failure.
 
 Keep file data and metadata on the device.
@@ -148,6 +149,11 @@ The receipt labels that file explicitly as the most recent successful share.
 The clear action deletes it from IndexedDB.
 
 The database name is `solfeo-pwa-prototype`.
+Schema version 2 preserves version 1 files and adds a separate `attempts` store.
+The prototype retains only the latest diagnostic attempt.
+Successful receipt stores the file and its diagnostics in one transaction.
+Failed receipt updates diagnostics without replacing the last successful file.
+The separate clear actions remove the file or diagnostics independently.
 The prototype validates the reported MIME type, extension, count, and file size.
 It does not inspect magic bytes or claim that a file is valid audio.
 This check is not the product upload-validation pipeline.
@@ -362,16 +368,31 @@ This condition does not establish whether another field contains a file or wheth
 The current manifest requests files but does not map text, title, or URL fields.
 The desktop test supplies an `audio` field explicitly and cannot reproduce the unknown Android payload.
 
-Proposed next task, subject to approval:
+The owner approves the diagnostic task by requesting continuation.
+The implementation includes:
 
-1. Add failing tests for text-only, empty, mixed text/file, and unexpected file-field input.
-2. Map the manifest text, title, and URL parameters for diagnosis.
-3. Show local diagnostic metadata for the latest attempt separately from the last successful file.
-4. Report field kinds, file counts, MIME types, and byte sizes without message contents or URL values.
-5. Distinguish message-only input from a missing file without claiming successful audio receipt.
-6. Preserve the previous successful file when a new share fails.
-7. Publish the tested diagnostic prototype and deploy only its container.
-8. Repeat messenger tests after reinstalling the PWA to refresh its manifest.
+- Regression tests for text-only, blank, empty, mixed text/file, and unexpected file-field input.
+- Manifest mappings for text, title, and URL parameters.
+- A `diagnostics v1` section, separate from the last successful file.
+- Field categories, file counts, MIME types, byte sizes, and empty/nonempty text indicators.
+- Distinct `TEXT_ONLY_SHARE`, `EMPTY_SHARE`, and `UNEXPECTED_FILE_FIELD` outcomes.
+- Preservation of the previous file when a new attempt fails.
+- Independent clearing of diagnostics, with explicit storage errors.
+- Database upgrade coverage and identical translation keys in all 3 languages.
+
+Diagnostics retain no message contents, URL values, filenames, or unrecognized field names.
+Unknown field names become the category `other`.
+The recorded timestamp identifies the latest stored attempt, not necessarily the current navigation.
+An unsuccessful diagnostic write reports `STORAGE_FAILED` rather than claiming that the diagnostic record is current.
+The error redirect contains only an error code.
+
+All 41 prototype tests, ESLint, TypeScript, and the production build pass locally.
+Diagnostic publication and targeted deployment remain in progress.
+Android acceptance remains failed until the owner repeats the messenger checks successfully.
+
+Warning: the old prototype image expects database version 1.
+An image rollback does not downgrade browser storage.
+Preserve any needed test audio before clearing site data during an old-image rollback.
 
 Do not fetch shared links or attempt to extract audio from message text.
 Do not upload diagnostic metadata or file contents.
@@ -381,18 +402,21 @@ A successful file-manager control test does not establish messenger compatibilit
 ### Android acceptance checklist
 
 1. Record the Android device and application versions.
-2. Open the HTTPS prototype in Chrome.
-3. Confirm that the page reports a ready service worker.
-4. Install the PWA through Chrome.
-5. Share an audio file from WhatsApp to the installed PWA.
-6. Confirm that the receipt page shows the expected filename, type, and size.
-7. Reload the receipt page.
-8. Confirm that the stored file remains available.
-9. Clear the stored file.
-10. Confirm that the page shows no retained file.
-11. Repeat the sharing steps from Telegram.
-12. Repeat a share after closing the installed PWA.
-13. Record failures without replacing them with successful synthetic requests.
+2. Remove the previous PWA installation after the diagnostic deployment.
+3. Open the HTTPS prototype in Chrome.
+4. Confirm that the page shows `diagnostics v1`.
+5. Confirm that the page reports a ready service worker.
+6. Reinstall the PWA to refresh its share target.
+7. Share an audio file from WhatsApp to the installed PWA.
+8. Confirm that the receipt page shows the expected filename, type, and size.
+9. Reload the receipt page.
+10. Confirm that the stored file remains available.
+11. Clear the stored file.
+12. Confirm that the page shows no retained file.
+13. Repeat the sharing steps from Telegram.
+14. Repeat a share after closing the installed PWA.
+15. Record failures and diagnostic metadata without replacing them with successful synthetic requests.
+16. Clear the recorded diagnostics.
 
 Send 1 file at a time within the configured size limit.
 The prototype keeps only the latest successful share.

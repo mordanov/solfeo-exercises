@@ -62,6 +62,11 @@ PHASE 0.5: Risk prototypes
 - All 12 deployed static files match the locally validated build.
 - All 41 unrelated containers retain their original IDs and start times.
 - `docs/user/pwa-prototype.md` provides the Android acceptance procedure.
+- The owner approves the diagnostic follow-up after failed Android acceptance.
+- The prototype maps text, title, and URL fields and distinguishes text-only, empty, and unexpected file-field input.
+- On-device diagnostics retain field categories, file counts, types, and sizes without message contents, links, or filenames.
+- Diagnostics and the last successful file have separate storage and clear actions.
+- All 41 prototype tests, ESLint, TypeScript, and the production build pass locally.
 
 ## In progress
 - The files protocol checks and owner manual step are complete.
@@ -69,11 +74,12 @@ PHASE 0.5: Risk prototypes
 - The HTTPS deployment works, but Android messenger sharing fails owner acceptance.
 - On 2026-09-29, the owner reports "No audio file was received" after sharing from Telegram or WhatsApp.
 - The incoming Android payload remains unobserved; message-only sharing is a hypothesis, not a confirmed cause.
+- The diagnostic prototype is implemented; publication and targeted deployment are in progress.
 
 ## Next step
-- Review the diagnostic plan in `docs/developer/pwa-share.md` before changing the receiver.
-- Distinguish missing files from message-only input without collecting message contents.
-- Repeat Android acceptance after diagnosis and any necessary correction.
+- Deploy and verify the diagnostic prototype.
+- Reinstall the PWA to refresh the manifest before repeating messenger shares.
+- Record the diagnostic section and repeat the file-manager control test.
 
 ## Open questions for the owner
 - Identify the Android device and browser versions when manual testing starts.
@@ -100,7 +106,7 @@ PHASE 0.5: Risk prototypes
 - The PWA keeps only the latest successful share and rejects files above 25 MiB by default.
 - Desktop browser checks do not establish Android sharing compatibility.
 - The owner reports failed Android messenger sharing; successful desktop checks do not override this result.
-- The receiver checks only the `audio` field; the manifest does not request text, title, or URL fields.
+- The original receiver cannot distinguish message-only input; the diagnostic update requires a refreshed PWA installation.
 - PWA browser and static-server evidence remain in `prototypes/pwa/output/`.
 - Samples and generated MusicXML remain local; a fresh clone does not contain them.
 - The HTTPS PWA runs at `https://solfeo.miveralta.ru/prototype-share/`.
