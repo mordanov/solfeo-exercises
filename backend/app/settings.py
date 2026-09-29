@@ -23,6 +23,31 @@ class Settings(BaseSettings):
         "info"
     )
     forwarded_allow_ips: str = "127.0.0.1"
+    media_root: Path = Field(default=Path("/app/media"), validation_alias="MEDIA_ROOT")
+    image_max_bytes: int = Field(
+        default=20971520, ge=1, validation_alias="IMAGE_MAX_BYTES"
+    )
+    audio_max_bytes: int = Field(
+        default=52428800, ge=1, validation_alias="AUDIO_MAX_BYTES"
+    )
+    upload_max_bytes: int = Field(
+        default=74448896, ge=1024, validation_alias="UPLOAD_MAX_BYTES"
+    )
+    image_max_pixels: int = Field(
+        default=40000000, ge=1, validation_alias="IMAGE_MAX_PIXELS"
+    )
+    audio_max_seconds: int = Field(
+        default=1800, ge=1, validation_alias="AUDIO_MAX_SECONDS"
+    )
+    media_timeout_seconds: int = Field(
+        default=120, ge=1, validation_alias="MEDIA_TIMEOUT_SECONDS"
+    )
+    audio_bitrate_kbps: int = Field(
+        default=128, ge=32, le=320, validation_alias="AUDIO_BITRATE_KBPS"
+    )
+    ffmpeg_binary: str = Field(default="ffmpeg", validation_alias="FFMPEG_BINARY")
+    ffprobe_binary: str = Field(default="ffprobe", validation_alias="FFPROBE_BINARY")
+    file_binary: str = Field(default="file", validation_alias="FILE_BINARY")
 
     database_host: str = Field(
         default="127.0.0.1", min_length=1, validation_alias="DATABASE_HOST"

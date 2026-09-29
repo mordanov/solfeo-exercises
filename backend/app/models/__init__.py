@@ -4,10 +4,12 @@ from sqlalchemy import (
     Boolean,
     CheckConstraint,
     DateTime,
+    Float,
     ForeignKey,
     Index,
     MetaData,
     String,
+    Text,
     func,
     text,
 )
@@ -82,3 +84,44 @@ class LoginLimit(Base):
     key: Mapped[str] = mapped_column(String(67), primary_key=True)
     attempts: Mapped[int]
     expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True)
+
+
+class MediaFile(Base):
+    __tablename__ = "media_files"
+    __table_args__ = (
+        CheckConstraint("size_bytes > 0", name="size"),
+        CheckConstraint(
+            "duration_seconds IS NULL OR duration_seconds > 0", name="duration"
+        ),
+    )
+    id: Mapped[str] = mapped_column(String(36), primary_key=True)
+    filename: Mapped[str] = mapped_column(String(50), unique=True)
+    mime_type: Mapped[str] = mapped_column(String(50))
+    size_bytes: Mapped[int]
+    duration_seconds: Mapped[float | None] = mapped_column(Float)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
+
+
+class Exercise(Base):
+    __tablename__ = "exercises"
+    __table_args__ = (
+        CheckConstraint(
+            "image_id IS NOT NULL OR audio_id IS NOT NULL", name="media_required"
+        ),
+        CheckConstraint("position >= 0", name="position"),
+    )
+    id: Mapped[int] = mapped_column(primary_key=True)
+    title: Mapped[str] = mapped_column(String(200))
+    description: Mapped[str] = mapped_column(Text, default="", server_default="")
+    category: Mapped[str | None] = mapped_column(String(100))
+    position: Mapped[int] = mapped_column(index=True)
+    image_id: Mapped[str | None] = mapped_column(ForeignKey("media_files.id"))
+    audio_id: Mapped[str | None] = mapped_column(ForeignKey("media_files.id"))
+    deleted_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True), index=True
+    )
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )

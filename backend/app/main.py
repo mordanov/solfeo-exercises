@@ -9,7 +9,9 @@ from starlette.exceptions import HTTPException
 from starlette.middleware.base import RequestResponseEndpoint
 
 from app.api.auth import router as auth_router
+from app.api.exercises import router as exercises_router
 from app.api.health import router as health_router
+from app.api.upload_limit import UploadLimit
 from app.database import Database
 from app.services.auth import ServiceError, sync_emergency
 from app.settings import Settings
@@ -18,7 +20,7 @@ from app.settings import Settings
 async def http_error(_request: Request, error: Exception) -> JSONResponse:
     if not isinstance(error, HTTPException):
         raise error
-    codes = {404: "NOT_FOUND", 405: "METHOD_NOT_ALLOWED"}
+    codes = {404: "NOT_FOUND", 405: "METHOD_NOT_ALLOWED", 413: "FILE_TOO_LARGE"}
     return JSONResponse(
         status_code=error.status_code,
         content={"error": codes.get(error.status_code, "HTTP_ERROR")},
@@ -63,6 +65,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.add_exception_handler(RequestValidationError, validation_error)
     app.include_router(health_router)
     app.include_router(auth_router)
+    app.include_router(exercises_router)
+    app.add_middleware(UploadLimit, maximum=configuration.upload_max_bytes)
 
     @app.middleware("http")
     async def no_store(

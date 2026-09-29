@@ -134,7 +134,7 @@ def test_migration_upgrade_repeat_downgrade_and_upgrade(database: Database) -> N
         command.upgrade(config, "head")
         assert (
             connection.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0002_auth"
+            == "0003_exercises"
         )
         assert set(inspect(connection).get_table_names()) == {
             "alembic_version",
@@ -147,7 +147,7 @@ def test_migration_upgrade_repeat_downgrade_and_upgrade(database: Database) -> N
         command.upgrade(config, "head")
         assert (
             connection.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0002_auth"
+            == "0003_exercises"
         )
 
 
