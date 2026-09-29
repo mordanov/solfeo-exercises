@@ -48,20 +48,23 @@ PHASE 0.5: Risk prototypes
 - Desktop Chrome verifies real multipart navigation, receipt, persistent storage, clear, and explicit errors against the built image.
 - nginx rejects unhandled POSTs; browser-handled shares remain on the device.
 - The local PWA container and isolated test browser stop after verification.
+- The owner confirms the GHCR destination and authorizes shared configuration, publication, and targeted VPS deployment.
+- DNS and SSH access identify the existing x86-64 VPS.
+- Shared configuration adds the prototype without a database, Redis, or landing-page link.
+- A prototype-only workflow validates and publishes the x86-64 image without automatic VPS deployment.
 
 ## In progress
 - The files protocol checks and owner manual step are complete.
 - Basic authentication is a localhost-only prototype assumption, not a product authentication decision.
 - The local PWA is complete; HTTPS onboarding and Android acceptance checks remain pending.
-- No shared-infrastructure change or image publication occurs in this task.
+- Image publication, targeted deployment, and certificate issuance are in progress.
+- Shared infrastructure uses a separate branch because pushes to shared `main` trigger a broader deployment.
 
 ## Next step
-- Confirm the registry owner and publishing permissions.
-- Apply the approved HTTPS onboarding plan as the next task.
+- Complete the approved HTTPS onboarding and verify the public deployment.
 - Run the Android checklist after deployment.
 
 ## Open questions for the owner
-- Confirm the image registry owner and publishing permissions.
 - Identify the Android device and browser versions when manual testing starts.
 
 ## Manual checks the owner must do

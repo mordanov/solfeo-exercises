@@ -12,10 +12,12 @@ Prerequisites:
 
 The owner approves the deployment plan on 2026-09-29.
 The local prototype is implemented and verified.
-No shared-infrastructure change, image publication, or HTTPS deployment exists yet.
+The owner confirms publication and deployment permissions on 2026-09-29.
 The owner supplies `https://solfeo.miveralta.ru` as the target hostname.
-The local `web-folders/sites.yaml` contains no Solfège entry on 2026-09-29.
-DNS, TLS, registry permissions, and VPS access remain unverified.
+Shared configuration now includes the prototype site, service, and nginx templates.
+DNS resolves to the existing VPS, and SSH access works.
+The initial HTTPS check fails because the existing certificate does not cover the hostname.
+Publication, certificate issuance, and deployment verification remain in progress.
 
 ## Prototype scope
 
@@ -190,7 +192,7 @@ Evidence remains in ignored `prototypes/pwa/output/`:
 These results do not prove Android installation or WhatsApp/Telegram interoperability.
 The HTTPS deployment and owner device checks remain open.
 
-## Proposed onboarding facts
+## Onboarding facts
 
 These values describe the prototype, not the future production service layout.
 
@@ -203,12 +205,11 @@ These values describe the prototype, not the future production service layout.
 | Container port | `80`, internal to the shared stack |
 | Backend, database, worker, Redis | None |
 | Health path | `/prototype-share/health` |
-| Registry image | `ghcr.io/<approved-owner>/solfeo-pwa-prototype:<commit>` |
-| Site priority | `190`, subject to a fresh conflict check |
+| Registry image | `ghcr.io/mordanov/solfeo-pwa-prototype:sha-<full-commit>` |
+| Site priority | `190` |
 | Public landing-page link | Disabled for the prototype |
 
-The inspected site priorities currently end at `180`.
-Confirm the registry owner and push permissions before creating a publishing workflow.
+The owner confirms the registry and deployment permissions.
 Define all deployment variables in `.env.example`.
 Never copy the files prototype's Basic credentials into this deployment.
 
@@ -219,14 +220,14 @@ Treat database, Redis, and backend-only steps as explicitly inapplicable to this
 
 - [x] Build and test the local PWA before adding infrastructure references.
 - [x] Create the required manifest, favicon, installation icons, and Apple touch icon.
-- [ ] Add the site entry to `web-folders/sites.yaml`.
-- [ ] Add the HTTP, HTTP-redirect, and HTTPS nginx templates.
-- [ ] Add the static container service and nginx dependency to the shared Compose file.
-- [ ] Add the domain variables to nginx and the shared `.env.example`.
-- [ ] Document the disabled landing-page link.
-- [ ] Prepare the prototype-only image publishing workflow and its onboarding template.
-- [ ] Add CI placeholders for any genuinely required deployment variables.
-- [ ] Verify DNS and the existing certificate state.
+- [x] Add the site entry to `web-folders/sites.yaml`.
+- [x] Add the HTTP, HTTP-redirect, and HTTPS nginx templates.
+- [x] Add the static container service and nginx dependency to the shared Compose file.
+- [x] Add the domain variables to nginx and the shared `.env.example`.
+- [x] Document the disabled landing-page link.
+- [x] Prepare the prototype-only image publishing workflow and its onboarding template.
+- [x] Confirm that no new mandatory CI placeholders apply.
+- [x] Verify DNS and the existing certificate state.
 - [ ] Configure actual VPS variables through the approved deployment process.
 - [ ] Publish the image under an immutable commit tag.
 - [ ] Deploy only the prototype service and necessary nginx configuration.
@@ -238,6 +239,56 @@ The publishing workflow supports only this prototype.
 It does not replace the PHASE 0 product CI/CD work.
 Do not restart unrelated applications.
 Do not change the shared PostgreSQL configuration.
+
+### Publication and targeted deployment
+
+`.github/workflows/publish-pwa-prototype.yml` runs on relevant `main` changes or manual dispatch.
+It runs the prototype checks before publishing an x86-64 image.
+Build settings come from `prototypes/pwa/.env.example`.
+The workflow publishes a full commit tag and reports the registry digest.
+It does not deploy automatically or require VPS secrets.
+
+Set these values in the shared VPS `.env`:
+
+```dotenv
+SOLFEO_PWA_PROTOTYPE_PRIMARY_DOMAIN=solfeo.miveralta.ru
+SOLFEO_PWA_PROTOTYPE_SERVER_NAMES=solfeo.miveralta.ru
+SOLFEO_PWA_PROTOTYPE_IMAGE=ghcr.io/mordanov/solfeo-pwa-prototype@sha256:<published-digest>
+```
+
+The `unpublished` default prevents accidental use of an unpinned image.
+Pin the registry digest for deployment; commit tags identify the corresponding source.
+Do not pass a temporary image override that disappears during the next deployment.
+
+Warning: pushing shared `main` starts the general deployment workflow.
+That workflow can restart unrelated applications.
+Use a separate infrastructure branch for this targeted onboarding.
+Preserve all unrelated VPS files and running services.
+
+1. Apply the reviewed infrastructure commit with a fast-forward merge.
+2. Set the 3 prototype values in the VPS `.env`.
+3. Pull the configured prototype image.
+4. Start only the prototype service.
+
+   ```sh
+   docker compose pull solfeo-pwa-prototype
+   docker compose up -d --no-deps --wait solfeo-pwa-prototype
+   ```
+
+5. Build the shared nginx image with the new templates.
+6. Validate its configuration before replacing nginx.
+7. Recreate only nginx with `docker compose up -d --no-deps nginx`.
+8. Issue the hostname certificate through the shared certbot webroot.
+9. Wait for the certificate watcher to activate HTTPS.
+10. Verify the public routes and all previously running services.
+
+Do not run `deploy-one-db.sh` or the all-sites certificate script for this prototype.
+No application database or migration applies.
+
+For an image rollback, restore the previous digest in `.env`.
+Repeat the targeted pull and start commands.
+For initial onboarding failure, stop the prototype and restore the previous nginx image, manifest, and domain configuration.
+Do not reset the shared repository or restart unrelated services.
 The static prototype must not retain uploaded request bodies or log their contents.
 
 ## Validation plan

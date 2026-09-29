@@ -35,3 +35,6 @@ Format: date, decision, reason. Do not reverse a decision without asking the own
   The prototype uses `/prototype-share/` on `solfeo.miveralta.ru` and stores shared files on the device.
   Reason: test Android sharing without building product authentication, uploads, or database services.
   Registry ownership and publishing permissions still require confirmation.
+- 2026-09-29: The owner confirms `ghcr.io/mordanov/solfeo-pwa-prototype` and authorizes publication, shared infrastructure changes, and VPS deployment.
+  Only the prototype and necessary nginx configuration belong to this deployment.
+  Reason: enable Android acceptance checks without restarting unrelated applications.
