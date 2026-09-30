@@ -28,6 +28,21 @@ class Manifest(TypedDict):
     frontend_image: str
 
 
+def require_omr_memory(configuration: str, meminfo: str) -> None:
+    service = json.loads(configuration)["services"]["omr"]
+    environment = service["environment"]
+    if str(environment["OMR_ENABLED"]).lower() == "false":
+        return
+    available = re.search(r"^MemAvailable:\s+(\d+)\s+kB$", meminfo, re.MULTILINE)
+    if available is None:
+        raise DeploymentError("OMR_MEMORY_UNKNOWN")
+    required = (
+        int(service["mem_limit"]) + int(environment["OMR_HOST_RESERVE_MB"]) * 1024**2
+    )
+    if int(available.group(1)) * 1024 < required:
+        raise DeploymentError("OMR_MEMORY_INSUFFICIENT:PROVISION_RAM_BEFORE_DEPLOYMENT")
+
+
 def verify_bundle(
     artifact: Path, expected_sha: str, ci_run_id: int
 ) -> tuple[Manifest, dict[str, bytes]]:
@@ -243,6 +258,12 @@ class Rollout:
         self.compose(candidate, "config", "--quiet")
         services = self.application_services(candidate)
         previous_services = self.application_services(previous) if previous else []
+        if "omr" in services:
+            memory = Path("/proc/meminfo")
+            require_omr_memory(
+                self.compose(candidate, "config", "--format", "json"),
+                memory.read_text() if memory.is_file() else "",
+            )
         self.compose(candidate, "pull")
         self.compose(candidate, "up", "-d", "--no-deps", "--wait", "postgres")
         self.compose(candidate, "stop", *reversed(services))
@@ -300,6 +321,7 @@ class Rollout:
             "backend",
             "frontend",
             *(["telegram"] if "telegram" in services else []),
+            *(["omr"] if "omr" in services else []),
         ]
 
     def deploy(self, artifact: Path, expected_sha: str, ci_run_id: int) -> None:

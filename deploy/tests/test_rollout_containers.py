@@ -100,6 +100,7 @@ def rollout(rollout_root: Path) -> Iterator[LocalImagesRollout]:
         f"MIGRATION_DATABASE_PASSWORD={secrets.token_hex(32)}\n"
         f"POSTGRES_ADMIN_PASSWORD={secrets.token_hex(32)}\n"
         f"PRODUCTION_WEB_PORT={port}\nPRODUCTION_PROXY_NETWORK={network}\n"
+        "OMR_ENABLED=false\n"
     )
     instance = LocalImagesRollout(tmp_path, project, True, f"http://127.0.0.1:{port}")
     subprocess.run(

@@ -155,6 +155,46 @@ services:
       retries: 20
       start_period: 35s
 
+  omr:
+    <<: *backend
+    restart: unless-stopped
+    command: ["python", "-m", "worker.omr"]
+    mem_limit: ${OMR_MEMORY_MB:-1024}m
+    memswap_limit: ${OMR_MEMORY_MB:-1024}m
+    cpus: ${OMR_CPUS:-1}
+    pids_limit: 128
+    environment:
+      <<: *database
+      MEDIA_ROOT: /app/media
+      IMAGE_MAX_PIXELS: ${IMAGE_MAX_PIXELS:-40000000}
+      OMR_ENABLED: ${OMR_ENABLED:-true}
+      OMR_HOST_RESERVE_MB: ${OMR_HOST_RESERVE_MB:-512}
+      OMR_BINARY: ${OMR_BINARY:-/opt/audiveris/bin/Audiveris}
+      OMR_JAVA_HOME: ${OMR_JAVA_HOME:-/opt/java/openjdk}
+      OMR_TESSDATA: ${OMR_TESSDATA:-/usr/share/tesseract-ocr/5/tessdata}
+      OMR_JAVA_HEAP_MB: ${OMR_JAVA_HEAP_MB:-512}
+      OMR_TIMEOUT_SECONDS: ${OMR_TIMEOUT_SECONDS:-300}
+      OMR_LEASE_SECONDS: ${OMR_LEASE_SECONDS:-600}
+      OMR_POLL_SECONDS: ${OMR_POLL_SECONDS:-2}
+      OMR_RETRY_SECONDS: ${OMR_RETRY_SECONDS:-30}
+      OMR_MAX_ATTEMPTS: ${OMR_MAX_ATTEMPTS:-3}
+      OMR_MAX_XML_BYTES: ${OMR_MAX_XML_BYTES:-5242880}
+      OMR_HEALTH_FILE: ${OMR_HEALTH_FILE:-/tmp/omr-ready}
+      OMR_HEALTH_SECONDS: ${OMR_HEALTH_SECONDS:-600}
+    volumes:
+      - media_data:/app/media
+    tmpfs: ["/tmp:size=${OMR_TMP_MB:-256}m,mode=1777,exec"]
+    networks: [database]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-m", "worker.omr", "--health"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+
   frontend:
     environment:
       LOGIN_NGINX_RATE_PER_SECOND: ${LOGIN_NGINX_RATE_PER_SECOND:-5}

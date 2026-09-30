@@ -50,6 +50,9 @@ def test_development_migration_uses_the_same_backend_image() -> None:
         services["telegram"]["environment"]["DATABASE_PASSWORD"] == "synthetic-password"
     )
     assert services["telegram"]["environment"]["TELEGRAM_TOKEN"] == ""
+    assert int(services["omr"]["mem_limit"]) == 1024 * 1024 * 1024
+    assert services["omr"]["memswap_limit"] == services["omr"]["mem_limit"]
+    assert services["omr"]["tmpfs"] == ["/tmp:size=256m,mode=1777,exec"]
 
 
 @dataclass
@@ -193,7 +196,7 @@ try:
         version = connection.scalar(
             text("SELECT version_num FROM migrations.alembic_version")
         )
-        assert version == "0005_telegram"
+        assert version == "0006_omr"
         privileges = connection.execute(text(
             "SELECT rolsuper, rolcreatedb, rolcreaterole "
             "FROM pg_roles WHERE rolname=current_user"

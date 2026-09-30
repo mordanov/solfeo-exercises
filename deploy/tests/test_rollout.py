@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 from release import build_release
-from rollout import DeploymentError, Rollout, verify_bundle
+from rollout import DeploymentError, Rollout, require_omr_memory, verify_bundle
 
 SHA = "d" * 40
 
@@ -132,7 +132,9 @@ def test_worker_stops_before_migration_and_participates_in_rollback(
         def compose(self, release: Path, *args: str) -> str:
             output = super().compose(release, *args)
             if args == ("config", "--services") and release == self.candidate:
-                return output + "telegram\n"
+                return output + "telegram\nomr\n"
+            if args == ("config", "--format", "json"):
+                return '{"services":{"omr":{"environment":{"OMR_ENABLED":"false"}}}}'
             return output
 
     rollout = WithWorker(tmp_path, "health")
@@ -140,6 +142,7 @@ def test_worker_stops_before_migration_and_participates_in_rollback(
         rollout.activate(rollout.candidate, tmp_path / "previous")
     stops = [call for call in rollout.calls if "candidate:stop" in call]
     assert len(stops) == 2 and all("telegram" in call for call in stops)
+    assert all("omr" in call for call in stops)
     assert rollout.calls.index(stops[0]) < next(
         index for index, call in enumerate(rollout.calls) if "candidate:run" in call
     )
@@ -147,6 +150,27 @@ def test_worker_stops_before_migration_and_participates_in_rollback(
     assert all(
         "telegram" not in call for call in rollout.calls if "previous:up" in call
     )
+
+
+def test_omr_memory_preflight_rejects_insufficient_headroom() -> None:
+    configuration = json.dumps(
+        {
+            "services": {
+                "omr": {
+                    "mem_limit": 1024 * 1024 * 1024,
+                    "environment": {
+                        "OMR_ENABLED": "true",
+                        "OMR_HOST_RESERVE_MB": "512",
+                    },
+                }
+            }
+        }
+    )
+    with pytest.raises(DeploymentError, match="OMR_MEMORY_INSUFFICIENT"):
+        require_omr_memory(configuration, "MemAvailable: 130000 kB\nSwapFree: 0 kB\n")
+    require_omr_memory(configuration, "MemAvailable: 2097152 kB\n")
+    with pytest.raises(DeploymentError, match="OMR_MEMORY_UNKNOWN"):
+        require_omr_memory(configuration, "")
 
 
 def test_state_promotion_is_atomic_and_retains_previous(tmp_path: Path) -> None:
