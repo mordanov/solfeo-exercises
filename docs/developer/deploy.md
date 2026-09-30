@@ -38,6 +38,35 @@ The SSH account has no noninteractive sudo access.
 PHASE 5 production activation therefore requires operator action.
 Setting `OMR_ENABLED=false` is an explicit maintenance option, not successful OMR deployment.
 
+### Verified PHASE 5 release awaiting RAM
+
+Source `be0000d1e8208489b65fc939b77e1bbb013422e7` passes CI run `36674676116`.
+Publication run `36675174373` verifies both pulled x86-64 images before packaging the release.
+The deployment job then stops with `OMR_MEMORY_INSUFFICIENT`.
+Production retains PHASE 4, schema `0005_telegram`, and unchanged container start times.
+
+| Image | Verified digest |
+|---|---|
+| `ghcr.io/mordanov/solfeo-backend` | `sha256:550506cfb1790a50261c82eae7d8079eb78928f1806d5a63dcc9443bc6c26c62` |
+| `ghcr.io/mordanov/solfeo-frontend` | `sha256:9cd20857296beefc7a0552b65feaaaac237c2896f332e991af940a981e3968f8` |
+
+**Caution:** Provision sufficient available RAM before retrying this release.
+The memory guard remains active during a manual retry.
+Use the standard rollout and verified bundle, not an unversioned Compose update.
+Re-establish private registry access when required; the failed job removes its temporary credentials.
+
+```sh
+python3 /home/deploy/solfeo-production/incoming/rollout.py \
+  --root /home/deploy/solfeo-production \
+  --bundle /home/deploy/solfeo-production/incoming/solfeo-release.tar.gz \
+  --source-sha be0000d1e8208489b65fc939b77e1bbb013422e7 \
+  --ci-run-id 36674676116 --proxy \
+  --health-url https://solfeo.miveralta.ru
+```
+
+Confirm the bundle source and CI identifier before using this command if another upload replaces `incoming`.
+The rollout verifies those identifiers and the complete file hashes again.
+
 Rollout stops OMR before migration and includes it in health checks and compatible rollback.
 The existing release bundle still contains 2 images; OMR runs from the backend image.
 

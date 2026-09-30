@@ -93,6 +93,9 @@ The owner authorizes the entire phase without intermediate confirmations on 2026
 - Docs: developer (OMR pipeline, limits, how to replace the engine), user (review a recognized score).
 - Report the real recognition quality on the fixtures. Do not hide failures.
 Done when: a real exercise image is recognized, approved, and shown with note names.
+Implementation status: complete locally and published with successful CI on 2026-09-30.
+Production activation stops safely because the VPS lacks the configured memory reserve.
+PHASE 5 remains open until deployment and final owner acceptance.
 
 ## PHASE 6: Spoken notes
 - Script that generates syllable clips with OpenAI TTS for each language and naming. Commit the output.

@@ -95,8 +95,15 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Complete the remaining Telegram checklist, as confirmed by the owner.
 
 ## Done
+- PHASE 5 source `be0000d1e8208489b65fc939b77e1bbb013422e7` passes CI run `36674676116`.
+- Run `36675174373` publishes both immutable images and verifies the pulled x86-64 images.
+- Its deployment job stops with `OMR_MEMORY_INSUFFICIENT` before image pulls, service changes, or migration.
+- Before/after snapshots match all VPS container IDs, start times, image references, and release state.
+- Public health remains available; production schema remains `0005_telegram`.
+- The job removes temporary registry and SSH credentials after the blocked deployment.
+- The verified bundle remains available for an operator-approved retry after provisioning RAM.
 - PHASE 5 passes 117 backend tests, 92 frontend tests, and 38 deployment/container tests locally.
-- All 6 pre-commit checks pass, including strict types and the production frontend build.
+- All 6 pre-commit checks pass; the production frontend build also passes.
 - PHASE 5 adds migration `0006_omr`, image-bound jobs, expiring claim tokens, retries, and explicit manager review.
 - Upload transactions enqueue recognition; replacement and rerun invalidate previous scores.
 - Student MusicXML access requires current approval; original images remain available.
@@ -111,7 +118,9 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - The deployment guard requires 1536 MiB available host memory with default limits.
 - The latest VPS check finds approximately 116 MiB available, so activation must wait.
 - Only identified obsolete local Solfeo images and cache records are removed during build-space recovery.
-- The task does not stop unrelated services or change VPS swap, Telegram associations, or stored exercises.
+- The task does not stop unrelated services or change VPS swap, Telegram associations, or production exercises.
+- Cleanup removes the isolated Chrome profile and disposable test database.
+- All 5 services in the persistent local development stand remain healthy.
 - PHASE 4 is active at `https://solfeo.miveralta.ru/manager/telegram` with `@solfeo_exercises_bot`.
 - Source `3e898fc08771dfecfec43533b9ee8a329d4a4f5e` passes CI run `36633406979`.
 - Run `36633989417` publishes and verifies both images; its initial deployment fails because the VPS disk fills.
