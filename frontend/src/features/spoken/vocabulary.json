@@ -1,0 +1,80 @@
+{
+  "en": {
+    "letters": {
+      "C": "C",
+      "D": "D",
+      "E": "E",
+      "F": "F",
+      "G": "G",
+      "A": "A",
+      "B": "B"
+    },
+    "solfege": {
+      "C": "do",
+      "D": "re",
+      "E": "mi",
+      "F": "fa",
+      "G": "sol",
+      "A": "la",
+      "B": "si"
+    },
+    "suffixes": {
+      "sharp": "sharp",
+      "flat": "flat",
+      "double-sharp": "double sharp",
+      "double-flat": "double flat"
+    }
+  },
+  "es": {
+    "letters": {
+      "C": "ce",
+      "D": "de",
+      "E": "e",
+      "F": "efe",
+      "G": "ge",
+      "A": "a",
+      "B": "be"
+    },
+    "solfege": {
+      "C": "do",
+      "D": "re",
+      "E": "mi",
+      "F": "fa",
+      "G": "sol",
+      "A": "la",
+      "B": "si"
+    },
+    "suffixes": {
+      "sharp": "sostenido",
+      "flat": "bemol",
+      "double-sharp": "doble sostenido",
+      "double-flat": "doble bemol"
+    }
+  },
+  "ru": {
+    "letters": {
+      "C": "цэ",
+      "D": "дэ",
+      "E": "э",
+      "F": "эф",
+      "G": "гэ",
+      "A": "а",
+      "B": "бэ"
+    },
+    "solfege": {
+      "C": "до",
+      "D": "ре",
+      "E": "ми",
+      "F": "фа",
+      "G": "соль",
+      "A": "ля",
+      "B": "си"
+    },
+    "suffixes": {
+      "sharp": "диез",
+      "flat": "бемоль",
+      "double-sharp": "дубль-диез",
+      "double-flat": "дубль-бемоль"
+    }
+  }
+}

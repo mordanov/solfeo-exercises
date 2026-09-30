@@ -48,6 +48,25 @@ class Settings(BaseSettings):
     ffmpeg_binary: str = Field(default="ffmpeg", validation_alias="FFMPEG_BINARY")
     ffprobe_binary: str = Field(default="ffprobe", validation_alias="FFPROBE_BINARY")
     file_binary: str = Field(default="file", validation_alias="FILE_BINARY")
+    openai_api_key: SecretStr = Field(
+        default=SecretStr(""), validation_alias="OPENAI_API_KEY"
+    )
+    spoken_model: str = Field(
+        default="gpt-4o-mini-tts", validation_alias="SPOKEN_MODEL"
+    )
+    spoken_voice: str = Field(default="coral", validation_alias="SPOKEN_VOICE")
+    spoken_timeout_seconds: int = Field(
+        default=60, ge=1, le=300, validation_alias="SPOKEN_TIMEOUT_SECONDS"
+    )
+    spoken_max_clip_bytes: int = Field(
+        default=2097152, ge=1024, le=10485760, validation_alias="SPOKEN_MAX_CLIP_BYTES"
+    )
+    spoken_max_clip_seconds: int = Field(
+        default=5, ge=1, le=30, validation_alias="SPOKEN_MAX_CLIP_SECONDS"
+    )
+    spoken_output: Path = Field(
+        default=Path("frontend/public/solfege"), validation_alias="SPOKEN_OUTPUT"
+    )
     omr_enabled: bool = Field(default=True, validation_alias="OMR_ENABLED")
     omr_binary: str = Field(
         default="/opt/audiveris/bin/Audiveris", validation_alias="OMR_BINARY"

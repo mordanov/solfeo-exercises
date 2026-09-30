@@ -2,7 +2,11 @@ import {
   readConfiguration,
   readUploadTimeout,
   readHeartbeat,
+  readSpokenConfiguration,
 } from "./configuration";
+export const spokenConfig = readSpokenConfiguration(
+  import.meta.env.VITE_SPOKEN_CONFIG,
+);
 
 export const config = readConfiguration(
   import.meta.env.VITE_DEFAULT_LANGUAGE,
