@@ -81,7 +81,34 @@ Only the worker receives `TELEGRAM_TOKEN` in production.
 | `TELEGRAM_HEALTH_SECONDS` | `600` | Maximum age of the worker heartbeat |
 | `TELEGRAM_HEALTH_FILE` | `/tmp/telegram-ready` | Private readiness marker for the current worker process |
 
-## Container deployment
+## OMR worker
+
+The worker shares database settings and `MEDIA_ROOT`.
+Timeout validation requires the lease to exceed the engine deadline by more than 30 seconds.
+Health age must exceed the engine deadline.
+Only the OMR container needs executable temporary memory for JavaCPP native libraries.
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `OMR_ENABLED` | `true` | Process queued jobs; `false` leaves jobs pending |
+| `OMR_BINARY` | `/opt/audiveris/bin/Audiveris` | Pinned engine launcher |
+| `OMR_JAVA_HOME` | `/opt/java/openjdk` | Java runtime directory |
+| `OMR_TESSDATA` | `/usr/share/tesseract-ocr/5/tessdata` | OCR language data |
+| `OMR_JAVA_HEAP_MB` | `512` | Java heap maximum in MiB |
+| `OMR_MEMORY_MB` | `1024` | Container memory maximum in MiB; no container swap |
+| `OMR_HOST_RESERVE_MB` | `512` | Additional available host memory required before production activation |
+| `OMR_CPUS` | `1` | Container CPU limit |
+| `OMR_TMP_MB` | `256` | Temporary filesystem maximum in MiB |
+| `OMR_TIMEOUT_SECONDS` | `300` | Audiveris process deadline |
+| `OMR_LEASE_SECONDS` | `600` | Claim age before crash recovery |
+| `OMR_POLL_SECONDS` | `2` | Delay between worker cycles |
+| `OMR_RETRY_SECONDS` | `30` | Delay after transient engine failures |
+| `OMR_MAX_ATTEMPTS` | `3` | Maximum automatic attempts for one job |
+| `OMR_MAX_XML_BYTES` | `5242880` | XML and total expanded archive byte limit |
+| `OMR_HEALTH_FILE` | `/tmp/omr-ready` | Current worker process readiness marker |
+| `OMR_HEALTH_SECONDS` | `600` | Maximum marker age |
+
+## Container deployment settings
 
 | Variable | Default | Purpose |
 |---|---|---|

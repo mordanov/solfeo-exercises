@@ -7,6 +7,18 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-09-30: The owner accepts PHASE 4 and authorizes complete PHASE 5 automation.
+  The owner reports unlinking Telegram and clearing VPS disk space.
+  PHASE 5 does not restore the Telegram association.
+- 2026-09-30: OMR jobs refer to an immutable image version and require explicit manager approval.
+  Replacing an image or rerunning recognition withdraws the previous score from students.
+  Existing images support manual recognition; deployment does not enqueue the existing catalog automatically.
+  The original image remains available when recognition fails or the score is not approved.
+- 2026-09-30: Backend and OMR share an immutable image, but run in separate containers.
+  This retains the verified 2-image release bundle and avoids an independent engine release lifecycle.
+  OMR uses a private database network and explicit CPU, memory, process, and temporary-storage limits.
+  A deployment guard requires available RAM before image pulls or service changes.
+
 - 2026-09-29: The owner confirms PHASE 3 and authorizes all PHASE 4 work without intermediate confirmations.
   The requested application 404 page belongs to PHASE 7.
 - 2026-09-29: Managers link Telegram through a short-lived, single-use code created in their authenticated web account.

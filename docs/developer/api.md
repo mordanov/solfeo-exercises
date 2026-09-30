@@ -16,7 +16,28 @@ This endpoint checks the FastAPI process only.
 It does not establish database readiness, bot operation, or worker health.
 The frontend validates both the HTTP status and the JSON body.
 
-## Errors
+## OMR and scores
+
+Exercise responses include `omr`: `job_id`, `image_id`, `status`, `attempts`, and `last_error`.
+Status is `none`, `pending`, `processing`, `needs_review`, `approved`, `rejected`, or `failed`.
+The manager review panel resides on `/manager/exercises`; it does not introduce another page route.
+
+| Method | Path | Access and result |
+|---|---|---|
+| GET | `/api/exercises/{id}/omr` | Authenticated member; current image recognition state |
+| POST | `/api/exercises/{id}/omr/rerun` | Manager and CSRF; enqueue a new version, or return the existing active job |
+| POST | `/api/exercises/{id}/omr/review` | Manager and CSRF; body contains `job_id` and `action` (`approve` or `reject`) |
+| GET, HEAD | `/api/exercises/{id}/score?version={job_id}` | Manager review output, or current approved output for a student |
+
+Score retrieval uses `X-Accel-Redirect`, `no-store`, and the MusicXML content type.
+The internal `/_protected_scores/` location rejects direct requests.
+The score version is mandatory.
+Replacing the image or rerunning recognition makes an old version return `OMR_STALE`.
+Students receive `FORBIDDEN` for current unapproved output.
+Deleted exercises return `EXERCISE_NOT_FOUND`.
+Worker failures expose stable `OMR_*` codes for translated UI errors.
+
+## Error responses
 
 | HTTP status | Body |
 |---|---|

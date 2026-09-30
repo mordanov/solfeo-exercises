@@ -5,11 +5,15 @@ This document records progress and remaining checks for the current phase.
 Prerequisites:
 - Read `docs/PHASES.md` and `docs/DECISIONS.md`.
 
-Last updated: 2026-09-29 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
+Last updated: 2026-09-30 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
 
 ## Current phase
-PHASE 4: Product Telegram audio import is implemented and deployed.
-Final owner acceptance remains open.
+PHASE 5: OMR, manager review, rendering, and note names work locally.
+Production activation remains blocked by insufficient VPS memory.
+The owner confirms PHASE 4 acceptance and authorizes complete PHASE 5 automation on 2026-09-30.
+The owner reports unlinking Telegram; this phase does not restore that association.
+The VPS has approximately 18 GiB free disk space after owner cleanup.
+Production OMR needs additional memory: approximately 116 MiB remains, with no swap and no noninteractive sudo access.
 The owner confirms all PHASE 3 checks and authorizes complete PHASE 4 automation on 2026-09-29.
 The application 404 page is scheduled in PHASE 7.
 The owner confirms all PHASE 2 checks and authorizes the complete PHASE 3 without intermediate confirmations on 2026-09-29.
@@ -22,6 +26,15 @@ The owner confirms the remaining bot checks and continuation on 2026-09-29.
 PHASE 0.5 is complete; the failed PWA result remains unchanged.
 
 ## Plan for the current phase
+- [x] Add versioned OMR jobs, leases, retries, review, and protected MusicXML.
+- [x] Package Audiveris and implement the bounded worker.
+- [x] Add manager review, approved-score rendering, and localized note labels.
+- [x] Measure actual recognition quality and verify local browser workflows.
+- [ ] Deploy only when VPS memory capacity permits safe recognition.
+- [x] Complete developer and user documentation.
+- [ ] Obtain final manual acceptance after production activation.
+
+## Completed PHASE 4 plan
 - [x] Add manager linking, durable imports, role checks, and retry protection.
 - [x] Add Telegram polling and reuse protected AAC storage.
 - [x] Add the translated manager import interface.
@@ -82,6 +95,23 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Complete the remaining Telegram checklist, as confirmed by the owner.
 
 ## Done
+- PHASE 5 passes 117 backend tests, 92 frontend tests, and 38 deployment/container tests locally.
+- All 6 pre-commit checks pass, including strict types and the production frontend build.
+- PHASE 5 adds migration `0006_omr`, image-bound jobs, expiring claim tokens, retries, and explicit manager review.
+- Upload transactions enqueue recognition; replacement and rerun invalidate previous scores.
+- Student MusicXML access requires current approval; original images remain available.
+- OpenSheetMusicDisplay renders scores, with optional localized lyrics and explicit rendering-error fallback.
+- The worker uses pinned Audiveris, a 512 MiB Java heap, a 1024 MiB container limit, and one CPU.
+- A native-library failure reveals that JavaCPP needs executable mappings in its bounded temporary filesystem.
+- The final container check uses `exec` on that mount and succeeds without network access.
+- The local browser verifies actual recognition, side-by-side review, approval, rejection, original fallback, and localized note labels.
+- Synthetic scale recognition is 100 %; rhythm recognition is 57.14 %; the accidentals fixture produces no export.
+- Private images 1 and 7 reproduce the earlier event sequences; image 6 still fails.
+- The measured worker peak is 325550080 bytes; this is not a safe maximum for larger inputs.
+- The deployment guard requires 1536 MiB available host memory with default limits.
+- The latest VPS check finds approximately 116 MiB available, so activation must wait.
+- Only identified obsolete local Solfeo images and cache records are removed during build-space recovery.
+- The task does not stop unrelated services or change VPS swap, Telegram associations, or stored exercises.
 - PHASE 4 is active at `https://solfeo.miveralta.ru/manager/telegram` with `@solfeo_exercises_bot`.
 - Source `3e898fc08771dfecfec43533b9ee8a329d4a4f5e` passes CI run `36633406979`.
 - Run `36633989417` publishes and verifies both images; its initial deployment fails because the VPS disk fills.
@@ -339,9 +369,10 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - The owner does not supply device versions or a per-message evidence record.
 
 ## Next step
-- Complete the final PHASE 4 checklist in `docs/user/manager.md`.
-- Provide more VPS disk capacity before the next release; approximately 1.1 GiB remains available.
-- Keep PHASE 5 out of this task.
+- Provision sufficient VPS RAM before enabling the OMR worker.
+- Retry the verified PHASE 5 release after the default 1536 MiB available-memory requirement is satisfied.
+- Complete the final PHASE 5 checklist in `docs/user/manager.md` after production activation.
+- Keep PHASE 6 and the PHASE 7 application 404 page out of this task.
 - Preserve prototype files and the historical PWA deployment.
 
 ## PHASE 0 boundaries
@@ -393,12 +424,23 @@ The owner confirms all PHASE 2 checks on 2026-09-29.
 The owner confirms all PHASE 3 checks on 2026-09-29.
 
 ## Final PHASE 4 manual acceptance
-- [ ] Link a normal manager account to the bot.
-- [ ] Import real voice, forwarded audio, and audio documents.
-- [ ] Create an exercise and replace another exercise's audio.
-- [ ] Play and seek in Chrome and Safari; confirm original-image and journal retention.
-- [ ] Check unsupported input, size errors, and retry behavior.
-- [ ] Confirm unlinking and student denial.
+- [x] Link a normal manager account to the bot.
+- [x] Import real voice, forwarded audio, and audio documents.
+- [x] Create an exercise and replace another exercise's audio.
+- [x] Play and seek in Chrome and Safari; confirm original-image and journal retention.
+- [x] Check unsupported input, size errors, and retry behavior.
+- [x] Confirm unlinking and student denial.
+
+The owner confirms all PHASE 4 checks, Telegram unlinking, and VPS disk cleanup on 2026-09-30.
+
+## Final PHASE 5 manual acceptance
+- [ ] Review and approve a real image in Chrome and Safari.
+- [ ] Confirm original-image fallback before approval and after rejection or replacement.
+- [ ] Check note labels for letters and solfège in all 3 languages.
+- [ ] Toggle labels during audio playback without interrupting the listening session.
+- [ ] Check failed recognition, retry, and student permission boundaries.
+
+Production deployment and owner acceptance remain pending.
 
 ## Manual checks the owner must do
 - [x] Confirm that images 1 through 10 represent the intended exercises.
@@ -420,13 +462,14 @@ The owner confirms all PHASE 3 checks on 2026-09-29.
 The superseded Android PWA checklist is no longer required.
 The new local health-page procedure appears in `docs/user/manager.md` and `docs/user/student.md`.
 The owner confirms final PHASE 0 browser acceptance at the public HTTPS address.
-The final PHASE 4 procedure is in `docs/user/manager.md`.
+The final PHASE 5 procedure is in `docs/user/manager.md`.
 
 ## Known issues
-- The VPS filesystem remains approximately 98 % full after targeted Solfeo image cleanup.
+- The owner resolves the VPS disk constraint; approximately 18 GiB is now available.
+- Insufficient VPS RAM blocks PHASE 5 activation; the current public release remains PHASE 4.
 - The initial PHASE 4 CD attempt fails from disk exhaustion; the verified SSH recovery succeeds.
 - The current CLI cannot rerun Actions jobs with its token; GitHub returns a permission error.
-- A real incoming owner Telegram attachment still requires final manual acceptance; simulated ingress does not replace it.
+- The owner confirms real Telegram acceptance and subsequently unlinks the association.
 - Image 6 produces no MusicXML; image 7 receives 46 % recognition.
 - Images 8 and 9 receive 95.35 % and 88 %, with important errors despite their `fully recognized` labels.
 - Local artifacts are under `prototypes/omr/output/20260928T201957Z-84f49a71/`.
@@ -449,6 +492,7 @@ The final PHASE 4 procedure is in `docs/user/manager.md`.
 - PHASE 1 images cannot recognize `0003_exercises`; PHASE 2 recovery requires a compatible image.
 - PHASE 2 images cannot recognize `0004_listening`; PHASE 3 recovery requires a compatible image.
 - PHASE 3 images cannot recognize `0005_telegram`; PHASE 4 recovery requires a compatible image.
+- PHASE 4 images cannot recognize `0006_omr`; recovery after that migration requires a compatible image.
 - Schema-incompatible rollback stops the product services and requires operator recovery; no automatic database downgrade occurs.
 - The current CLI credential cannot manage repository Actions secrets: the public-key API returns HTTP 403.
 - The deployment job confirms valid SSH configuration and removes its temporary registry credentials.

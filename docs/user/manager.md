@@ -7,7 +7,42 @@ Prerequisites:
 - Obtain manager credentials privately from the operator.
 - Open `https://solfeo.miveralta.ru/`, or use the local stand from `docs/developer/setup.md`.
 
-## Sign in
+## Review recognized notes
+
+1. Upload an exercise image.
+   Recognition enters the queue; students continue to see the original image.
+2. Click **Review recognition** beside the exercise.
+3. Click **Refresh status** after processing.
+   The original image and recognized score appear side by side when recognition succeeds.
+4. Compare all notes, rests, durations, clefs, accidentals, and measure boundaries.
+5. Select **Show note names** to check labels in your saved naming system.
+6. Click **Approve** only when the score is correct.
+   Students can now see the rendered score.
+7. Click **Reject** when the score contains errors.
+   Students see the original image instead.
+8. Click **Run recognition** to retry or process an existing image.
+   This action withdraws the previous score until you approve the new result.
+
+An error state never hides the original image.
+Some clear images still produce incomplete or incorrect notation.
+Use the original image when repeated recognition fails.
+Replacing an image always requires new recognition and approval.
+Editing text or replacing audio preserves the current score.
+
+## Final PHASE 5 manual checklist
+
+Complete these checks after the operator resolves the production memory constraint and deploys PHASE 5.
+
+1. Repeat the review procedure with a real image in Chrome and Safari.
+2. Confirm that an unapproved or rejected score leaves the original visible to a student.
+3. Approve a correct score and open it as a student.
+4. Check note names in all 3 languages with letters and solfège settings.
+5. Toggle labels during audio playback and confirm uninterrupted playback.
+6. Replace the image and confirm that the old approved score disappears.
+7. Retry a failed recognition and confirm the visible status and retained original.
+8. Confirm that students cannot approve, reject, or rerun recognition.
+
+## Sign in to the application
 
 1. Enter your username and password.
 2. Click **Sign in**.

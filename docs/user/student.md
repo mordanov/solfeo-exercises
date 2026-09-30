@@ -43,6 +43,10 @@ A successful password change ends your other sessions.
 Students cannot list, create, edit, deactivate, or reset other users.
 Opening `/manager/users` does not grant manager access.
 Students can view original images and listen to exercise audio.
+An approved score replaces the original image in the listening area.
+Unapproved, rejected, or failed recognition keeps the original image visible.
+Rendering or access errors show an explicit message and the original image.
+Students cannot approve or change recognition results.
 Only managers can read the listening journal.
 Opening `/manager/journal` does not grant journal access.
 Opening `/manager/telegram` does not grant Telegram import access.
@@ -70,7 +74,7 @@ The service-status panel confirms backend liveness only.
 ## Listen to exercises
 
 1. Open **Student area**.
-   The saved sequential exercise appears with its description and original image.
+   The saved sequential exercise appears with its description and approved score or original image.
 2. Press the audio play control.
    Playback starts, and the application records a listening session.
 3. Pause and resume when necessary.
@@ -103,7 +107,22 @@ Check your connection before pressing play again.
 Reload if the manager replaces the current audio.
 The application does not silently switch a running player to a replacement file.
 
-## Final PHASE 3 manual checklist
+## Show note names
+
+1. Open an exercise with an approved score.
+2. Select **Show note names**.
+   Labels appear below the written notes.
+3. Open **Settings** to change letters or solfège naming and the interface language.
+4. Return to the exercise and select **Show note names** again.
+   Labels use the saved settings.
+5. Clear the checkbox to restore the unlabelled score.
+
+Rests have no note-name label.
+Accidentals use musical sharp and flat symbols.
+Changing this checkbox does not stop or recreate the audio player.
+The checkbox is local to the current score, not a saved account setting.
+
+## Final PHASE 3 listening checklist
 
 1. Sign in as a student in Chrome and Safari.
 2. Play an exercise, pause, and resume.

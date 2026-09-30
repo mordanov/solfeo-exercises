@@ -15,13 +15,31 @@ Prerequisites:
 It uses supplied images and never builds application code on the server.
 It publishes only the frontend on `127.0.0.1:18090` by default.
 PostgreSQL and the backend have no published ports.
-Only PostgreSQL, the backend, and the migration service join the private database network.
+PostgreSQL, the backend, migration service, and product workers join the private database network.
 
 The configuration passes isolated container checks locally and in CI.
 The separate publication workflow supplies verified product images and a versioned release bundle.
 `cd.yml` downloads that bundle and runs `deploy/rollout.py` through pinned SSH.
 The shared nginx routes the existing TLS hostname to the product frontend.
 Do not invoke the shared infrastructure's general deployment.
+
+## OMR capacity
+
+The rollout checks Linux `MemAvailable` before pulling images or stopping services when OMR is enabled.
+It requires `OMR_MEMORY_MB + OMR_HOST_RESERVE_MB`, normally 1536 MiB.
+`OMR_MEMORY_INSUFFICIENT` leaves the active release and database unchanged.
+Do not disable this protection to fit a busy shared host.
+Provision more RAM or arrange an operator-reviewed capacity change before retrying.
+Swap alone does not satisfy this check; the OMR container does not use swap.
+
+The 2026-09-30 VPS check finds approximately 116 MiB available RAM and no swap.
+Disk cleanup leaves approximately 18 GiB free, but does not resolve the RAM constraint.
+The SSH account has no noninteractive sudo access.
+PHASE 5 production activation therefore requires operator action.
+Setting `OMR_ENABLED=false` is an explicit maintenance option, not successful OMR deployment.
+
+Rollout stops OMR before migration and includes it in health checks and compatible rollback.
+The existing release bundle still contains 2 images; OMR runs from the backend image.
 
 ## Prepare configuration
 

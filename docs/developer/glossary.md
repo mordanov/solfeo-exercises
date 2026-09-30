@@ -52,3 +52,5 @@ Prerequisites:
 | linking code | A single-use secret that associates a Telegram sender with an authenticated manager. |
 | staged import | Converted audio owned by a manager before application to an exercise. |
 | update offset | The next Telegram update ID requested after durable intake. |
+| OMR lease | A time-limited job claim with a unique token that prevents stale results from replacing current results. |
+| OpenSheetMusicDisplay | The browser library that draws a score from MusicXML. |

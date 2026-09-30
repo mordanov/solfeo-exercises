@@ -80,9 +80,10 @@ Done when: an authorized manager imports real Telegram audio into an exercise an
 The PWA share target and browser share hand-off are no longer part of this phase.
 Implementation status: deployed on 2026-09-29 with successful CI, verified images, browser scenarios, and live bot polling.
 The first deployment exhausts VPS disk space; targeted cleanup and the standard SSH rollout recover the same verified release.
-Final owner acceptance remains open.
+Status: complete on 2026-09-30 after the owner confirms all PHASE 4 checks.
 
 ## PHASE 5: OMR, review, rendering, note names
+The owner authorizes the entire phase without intermediate confirmations on 2026-09-30.
 - Postgres job queue (SKIP LOCKED). Worker container with Audiveris behind the `OmrEngine` interface. Retries and failure state.
 - On image upload: enqueue a job. Show status in the manager UI. Store MusicXML and status.
 - Review screen: original image and rendered score side by side. Actions: Approve, Reject, Re-run.

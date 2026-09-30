@@ -1,6 +1,6 @@
-# OMR risk prototype
+# OMR pipeline and recognition reports
 
-This document defines the sample set and evaluation criteria for the PHASE 0.5 OMR prototype.
+This document describes product recognition, its limits, and the historical PHASE 0.5 evaluation.
 
 Prerequisites:
 - Read `docs/PRODUCT_BRIEF.md`, `docs/PHASES.md`, and `docs/DECISIONS.md`.
@@ -9,7 +9,91 @@ Prerequisites:
 - Install Python 3.12, uv, and Docker.
 - Start a Docker daemon with enough space for a Java build.
 
-## Scope and current state
+## Product pipeline: PHASE 5
+
+An image upload creates a pending job in the same transaction as the exercise.
+Metadata edits and audio replacement do not create new jobs.
+Image replacement creates a new version and withdraws the previous score.
+Existing images require **Run recognition**; deployment does not process the existing catalog automatically.
+
+The worker claims one job with `FOR UPDATE SKIP LOCKED`, then commits before recognition.
+An OMR lease records the attempt, claim time, and unique token.
+The worker can reclaim an expired lease after a crash.
+Only the current image, current job, and current token can publish a result.
+Transient failures retry within the configured attempt budget.
+Invalid output and recognition failures require a manager's explicit retry.
+The worker stores error codes, not subprocess output or credentials.
+
+`OmrEngine.recognize(Path) -> bytes` is the engine interface.
+`AudiverisEngine` implements it in `backend/app/services/omr_engine.py`.
+`worker/omr.py` selects the implementation.
+Replace that selection to test another engine without changing the queue or review API.
+The replacement must return validated, uncompressed `score-partwise` MusicXML.
+
+The product pins Audiveris 5.11.0 at commit `9e1e55cd2746037d059345881c53e6a6754bffbd`.
+Backend and workers share one immutable image, with Java and Audiveris layers before application code.
+The OMR container has a private database network, read-only root, one CPU, and a 1024 MiB memory limit.
+The Java heap limit is 512 MiB.
+The temporary filesystem permits executable mappings because JavaCPP extracts native libraries there.
+Its size limit is 256 MiB; the container memory limit includes those pages.
+Do not remove `exec` from this mount without another location for native libraries.
+Java receives only an explicit environment; it does not receive database passwords or Telegram tokens.
+
+The engine converts a private working copy to PNG and never changes the original image.
+It limits execution time and validates XML or compressed MXL output.
+Archive paths, entry count, expanded size, entities, external content, and note count have bounds or rejection checks.
+Recognition supports ordinary printed exercises; complex notation can fail.
+Validated XML goes into the private `scores/` media directory.
+The API authorizes access before nginx serves the file through an internal location.
+Students cannot fetch unapproved, rejected, stale, removed, or deleted scores.
+
+Managers compare the original image and score inside the exercise list.
+**Refresh status** retrieves progress; **Approve**, **Reject**, and **Run recognition** update the current version.
+OpenSheetMusicDisplay loads only when a score needs rendering.
+The note-name toggle injects lyrics into a copy of the XML.
+Names use persisted language and naming settings; rests receive no label.
+Rendering failures show an explicit error and the original image for students.
+Changing labels does not recreate the audio player.
+
+### Product recognition report: 2026-09-30
+
+This run uses the product API, PostgreSQL queue, bounded worker, and browser review screen.
+It does not reuse prototype output as new execution evidence.
+The 3 committed synthetic examples are newly authored for this project.
+Their PNG files come from OpenSheetMusicDisplay rendering their corresponding MusicXML.
+Their complete images include both measures, including systems on separate lines.
+Owner-provided images and their generated output remain local and uncommitted.
+
+| Input | Expected events | Recognized events | Event errors | Recognition | Result |
+|---|---:|---:|---:|---:|---|
+| Synthetic `scale.png` | 8 | 8 | 0 | 100 % | Both measures match |
+| Synthetic `rhythm.png` | 7 | 4 | 3 omissions | 57.14 % | The second system is missing |
+| Synthetic `accidentals.png` | 4 | No export | Not measured | Not measured | Engine failure |
+| Private image 1 | 21 | 21 | 0 | 100 % | Matches the accepted reference |
+| Private image 6 | 26 | No export | Not measured | Not measured | Engine failure |
+| Private image 7 | 50 | 40 | 17 substitutions, 10 omissions | 46 % | Retains the prototype's structural errors |
+
+Private images 1 and 7 produce event sequences identical to the earlier owner-accepted reference evaluation.
+Their new output still has 8 measures.
+This identity supports the reused reference counts, not a claim that image 7 is acceptable.
+Manager review remains mandatory even when the engine exports valid XML.
+
+The 6 jobs take approximately 4.5 to 7.8 seconds each, including queue polling.
+A repeat run during other regression checks takes approximately 4.3 to 16.2 seconds per job and produces the same outcomes.
+The worker's cumulative peak memory reaches 325550080 bytes, approximately 310.5 MiB, during this run.
+This measurement is not a safe maximum for larger input.
+The production limit remains 1024 MiB with an additional 512 MiB host reserve.
+The VPS currently lacks that reserve, so production activation remains blocked.
+
+The container regression recognizes the synthetic scale without network access.
+It verifies all 8 pitches, octaves, durations, and both measure boundaries.
+Run it after building the product image:
+
+```sh
+uv run pytest deploy/tests/test_omr_container.py -q
+```
+
+### Historical prototype scope
 
 The owner approves these criteria on 2026-09-28.
 The sample preparation task and the Audiveris prototype run are complete.

@@ -18,7 +18,7 @@ Revision `0002_auth` adds the PHASE 1 tables.
 Revision `0003_exercises` adds exercises and media.
 Revision `0004_listening` adds student progress and the listening journal.
 Revision `0005_telegram` adds account associations, hashed linking codes, durable imports, and bot state.
-The Telegram worker uses these tables; OMR jobs remain in PHASE 5.
+Revision `0006_omr` adds versioned OMR jobs and manager review.
 
 | Table | Contents and constraints |
 |---|---|
@@ -33,6 +33,13 @@ The Telegram worker uses these tables; OMR jobs remain in PHASE 5.
 | `telegram_link_codes` | User primary key, unique token hash, expiry |
 | `telegram_updates` | Telegram update primary key, owner, file reference, status, attempts, errors, converted media, applied exercise |
 | `telegram_state` | Bot identity, durable next offset, last successful heartbeat |
+| `omr_jobs` | Exercise/image versions, current-result flag, status, attempts, lease token, timing, errors, private score filename, reviewer |
+
+A partial unique index permits one current OMR job per exercise.
+Each job references an immutable original image.
+Replacing or removing the image invalidates older jobs.
+Approval applies only to the current job identifier.
+Soft deletion preserves job records and files but denies their retrieval.
 
 Exercises require at least one media foreign key.
 Create, delete, and reorder operations share a transaction-level advisory lock.

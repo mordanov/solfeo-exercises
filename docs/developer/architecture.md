@@ -29,6 +29,8 @@ The migration service completes before the backend starts.
 | `frontend/src/features/exercises/` | Manager forms, upload progress, protected previews, and reordering |
 | `frontend/src/features/listening/` | Student selection, player, heartbeat queue, and exit delivery |
 | `frontend/src/features/journal/` | Manager journal filters and pagination |
+| `frontend/src/features/omr/` | Review, lazy score rendering, and localized note-name lyrics |
+| `worker/omr.py` | PostgreSQL job claims, Audiveris execution, failure recovery, and readiness |
 | `frontend/src/i18n/` | Translations and locale checks |
 | `deploy/` | Development and production Compose, database bootstrap, and nginx configuration |
 | `deploy/tests/` | Isolated production container checks |
@@ -48,6 +50,10 @@ Students use the listening interface; managers alone read the journal.
 The product Telegram worker supplies manager-owned staged imports.
 It shares the backend image and private media volume, but not the public proxy network.
 See `telegram-import.md` for account linking and recovery.
+The OMR worker also shares the backend image and private media volume.
+Production gives it only the private database network.
+Its subprocess receives no application secrets.
+See `omr-pipeline.md` for leases, review, resource limits, and measured recognition failures.
 API documentation routes remain disabled.
 PHASE 1 implements authentication and emergency manager synchronization.
 Database operations use synchronous SQLAlchemy 2.0 and psycopg 3.
