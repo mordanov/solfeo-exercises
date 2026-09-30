@@ -40,7 +40,7 @@ beforeEach(async () => {
   vi.mocked(api.fetchScore).mockResolvedValue(xml);
   renderer.load.mockResolvedValue(undefined);
 });
-function mount() {
+function mount(approved = false) {
   return render(
     <I18nextProvider i18n={i18n}>
       <QueryClientProvider
@@ -51,6 +51,7 @@ function mount() {
         }
       >
         <Score
+          approved={approved}
           id={1}
           version="job"
           user={user}
@@ -93,4 +94,16 @@ it("reports renderer failure instead of hiding the exercise", async () => {
   expect(screen.getByRole("alert")).toHaveTextContent(
     "The score cannot be rendered",
   );
+});
+it("exposes spoken controls only for approved scores", async () => {
+  const view = mount();
+  await waitFor(() => expect(renderer.render).toHaveBeenCalled());
+  expect(
+    screen.queryByRole("button", { name: "Speak notes" }),
+  ).not.toBeInTheDocument();
+  view.unmount();
+  mount(true);
+  expect(
+    await screen.findByRole("button", { name: "Speak notes" }),
+  ).toBeInTheDocument();
 });

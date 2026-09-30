@@ -1,5 +1,5 @@
 import { afterEach, expect, it, vi } from "vitest";
-import { ListeningTracker } from "./tracker";
+import { finishPlayback, ListeningTracker, registerPlayback } from "./tracker";
 import * as api from "../../api/listening";
 
 vi.mock("../../api/listening");
@@ -13,6 +13,21 @@ const fixture = {
   mode: "sequential" as const,
   csrf_token: "csrf",
 };
+it("stops speech synchronously before awaiting recorded playback cleanup", async () => {
+  const speech = vi.fn();
+  window.addEventListener("solfeo:stop-spoken", speech);
+  let finish: () => void = () => {};
+  const pending = new Promise<void>((resolve) => {
+    finish = resolve;
+  });
+  const unregister = registerPlayback(() => pending);
+  const stopped = finishPlayback();
+  expect(speech).toHaveBeenCalledOnce();
+  finish();
+  await stopped;
+  unregister();
+  window.removeEventListener("solfeo:stop-spoken", speech);
+});
 
 it("starts once, heartbeats only while playing and retains the session across pause", async () => {
   vi.useFakeTimers();

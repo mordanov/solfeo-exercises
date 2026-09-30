@@ -18,6 +18,9 @@
 !frontend/vite.config.ts
 !frontend/src/
 !frontend/src/**
+!frontend/public/
+!frontend/public/solfege/
+!frontend/public/solfege/**
 !deploy/
 !deploy/nginx.conf
 !deploy/nginx-start.sh

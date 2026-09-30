@@ -101,5 +101,6 @@ export function registerPlayback(stop: () => Promise<void>) {
   };
 }
 export async function finishPlayback(): Promise<void> {
+  window.dispatchEvent(new Event("solfeo:stop-spoken"));
   await active?.();
 }

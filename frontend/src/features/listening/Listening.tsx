@@ -61,9 +61,12 @@ function Player({
       await tracker.finish();
     });
     window.addEventListener("pagehide", leave);
+    const pauseAudio = () => audio.current?.pause();
+    window.addEventListener("solfeo:pause-audio", pauseAudio);
     return () => {
       unregister();
       window.removeEventListener("pagehide", leave);
+      window.removeEventListener("solfeo:pause-audio", pauseAudio);
       leave();
     };
   }, [tracker]);
@@ -75,6 +78,7 @@ function Player({
       {exercise.image &&
         (exercise.omr.status === "approved" && exercise.omr.job_id ? (
           <Score
+            approved
             id={exercise.id}
             version={exercise.omr.job_id}
             user={auth.user}
@@ -101,7 +105,10 @@ function Player({
           preload="metadata"
           src={`/api/exercises/${exercise.id}/files/audio?version=${exercise.audio.id}`}
           aria-label={t("exercises.audioFor", { title: exercise.title })}
-          onPlay={() => tracker.play()}
+          onPlay={() => {
+            window.dispatchEvent(new Event("solfeo:stop-spoken"));
+            tracker.play();
+          }}
           onPause={() => tracker.pause()}
           onTimeUpdate={() => tracker.update()}
           onSeeked={() => tracker.update()}

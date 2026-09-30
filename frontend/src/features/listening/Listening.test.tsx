@@ -143,6 +143,26 @@ it("does not create a journal row before play and keeps one session through paus
     ).size,
   ).toBe(1);
 });
+it("coordinates speech without marking recorded audio complete", async () => {
+  mount();
+  const audio = await screen.findByLabelText("Audio: First exercise");
+  window.dispatchEvent(new Event("solfeo:pause-audio"));
+  expect(HTMLMediaElement.prototype.pause).toHaveBeenCalled();
+  expect(api.sendListeningEvent).not.toHaveBeenCalled();
+  const stop = vi.fn();
+  window.addEventListener("solfeo:stop-spoken", stop);
+  fireEvent.play(audio);
+  await waitFor(() => expect(api.sendListeningEvent).toHaveBeenCalled());
+  expect(stop).toHaveBeenCalledTimes(1);
+  window.dispatchEvent(new Event("solfeo:pause-audio"));
+  fireEvent.pause(audio);
+  expect(
+    vi
+      .mocked(api.sendListeningEvent)
+      .mock.calls.every(([data]) => data.event !== "ended"),
+  ).toBe(true);
+  window.removeEventListener("solfeo:stop-spoken", stop);
+});
 it("finishes before navigating and does not autoplay the next exercise", async () => {
   vi.mocked(api.selectExercise).mockResolvedValue({
     ...exercise,
