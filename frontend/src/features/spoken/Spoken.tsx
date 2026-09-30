@@ -50,10 +50,12 @@ export function Spoken({
     window.addEventListener("solfeo:stop-spoken", stop);
     window.addEventListener("pagehide", stop);
     document.addEventListener("visibilitychange", hidden);
+    document.addEventListener("play", stop, true);
     return () => {
       window.removeEventListener("solfeo:stop-spoken", stop);
       window.removeEventListener("pagehide", stop);
       document.removeEventListener("visibilitychange", hidden);
+      document.removeEventListener("play", stop, true);
       player.stop();
     };
   }, [player, id, version, user.note_naming, user.ui_language]);
@@ -82,7 +84,7 @@ export function Spoken({
         disabled={state !== "idle"}
         onClick={() => {
           window.dispatchEvent(new Event("solfeo:stop-spoken"));
-          window.dispatchEvent(new Event("solfeo:pause-audio"));
+          document.querySelectorAll("audio").forEach((audio) => audio.pause());
           setError(null);
           setState("loading");
           void player.play(

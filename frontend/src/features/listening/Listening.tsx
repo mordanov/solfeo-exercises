@@ -61,12 +61,9 @@ function Player({
       await tracker.finish();
     });
     window.addEventListener("pagehide", leave);
-    const pauseAudio = () => audio.current?.pause();
-    window.addEventListener("solfeo:pause-audio", pauseAudio);
     return () => {
       unregister();
       window.removeEventListener("pagehide", leave);
-      window.removeEventListener("solfeo:pause-audio", pauseAudio);
       leave();
     };
   }, [tracker]);

@@ -59,3 +59,24 @@ it("stops on tempo change, page exit, competing playback, and unmount", async ()
     expect(SpeechPlayer.prototype.stop).toHaveBeenCalledTimes(4),
   );
 });
+it("coordinates manager previews as well as the student recording", () => {
+  const pause = vi
+    .spyOn(HTMLMediaElement.prototype, "pause")
+    .mockImplementation(() => {});
+  render(
+    <I18nextProvider i18n={i18n}>
+      <audio aria-label="Manager preview" />
+      <Spoken
+        id={1}
+        version="version"
+        user={{ ...user, role: "manager" }}
+        highlight={vi.fn()}
+      />
+    </I18nextProvider>,
+  );
+  fireEvent.click(screen.getByRole("button", { name: "Speak notes" }));
+  expect(pause).toHaveBeenCalledOnce();
+  const calls = vi.mocked(SpeechPlayer.prototype.stop).mock.calls.length;
+  fireEvent.play(screen.getByLabelText("Manager preview"));
+  expect(SpeechPlayer.prototype.stop).toHaveBeenCalledTimes(calls + 1);
+});
