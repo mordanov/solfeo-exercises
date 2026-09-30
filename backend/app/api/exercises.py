@@ -13,8 +13,10 @@ from app.api.auth import (
     StatusOutput,
     require_csrf,
 )
+from app.api.omr import OmrOutput
+from app.api.omr import output as omr_output
 from app.models import Exercise, MediaFile
-from app.services import exercises
+from app.services import exercises, omr
 from app.services.auth import ServiceError
 
 router = APIRouter(prefix="/api/exercises")
@@ -57,6 +59,7 @@ class ExerciseOutput(BaseModel):
     position: int
     image: MediaOutput | None
     audio: MediaOutput | None
+    omr: OmrOutput
 
 
 class ExerciseListOutput(BaseModel):
@@ -90,6 +93,7 @@ def output(row: Exercise, session: Db) -> ExerciseOutput:
         position=row.position,
         image=media(row.image_id),
         audio=media(row.audio_id),
+        omr=omr_output(omr.current(session, row), row.image_id),
     )
 
 

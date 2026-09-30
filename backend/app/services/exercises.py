@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 from app.models import Exercise, MediaFile
 from app.services.auth import ServiceError
 from app.services.media import Kind, prepare_media
+from app.services.omr import enqueue
 from app.settings import Settings
 
 
@@ -91,6 +92,9 @@ def save_exercise(
         if row.image_id is None and row.audio_id is None:
             raise ServiceError("EXERCISE_MEDIA_REQUIRED", 422)
         session.add(row)
+        session.flush()
+        if "image" in prepared or remove_image:
+            enqueue(session, row)
         session.commit()
         return row
     except BaseException:

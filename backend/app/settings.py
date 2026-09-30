@@ -48,6 +48,44 @@ class Settings(BaseSettings):
     ffmpeg_binary: str = Field(default="ffmpeg", validation_alias="FFMPEG_BINARY")
     ffprobe_binary: str = Field(default="ffprobe", validation_alias="FFPROBE_BINARY")
     file_binary: str = Field(default="file", validation_alias="FILE_BINARY")
+    omr_enabled: bool = Field(default=True, validation_alias="OMR_ENABLED")
+    omr_binary: str = Field(
+        default="/opt/audiveris/bin/Audiveris", validation_alias="OMR_BINARY"
+    )
+    omr_java_home: Path = Field(
+        default=Path("/opt/java/openjdk"), validation_alias="OMR_JAVA_HOME"
+    )
+    omr_tessdata: Path = Field(
+        default=Path("/usr/share/tesseract-ocr/5/tessdata"),
+        validation_alias="OMR_TESSDATA",
+    )
+    omr_timeout_seconds: int = Field(
+        default=300, ge=1, le=900, validation_alias="OMR_TIMEOUT_SECONDS"
+    )
+    omr_lease_seconds: int = Field(
+        default=600, ge=60, le=1800, validation_alias="OMR_LEASE_SECONDS"
+    )
+    omr_poll_seconds: int = Field(
+        default=2, ge=1, le=60, validation_alias="OMR_POLL_SECONDS"
+    )
+    omr_retry_seconds: int = Field(
+        default=30, ge=1, le=600, validation_alias="OMR_RETRY_SECONDS"
+    )
+    omr_max_attempts: int = Field(
+        default=3, ge=1, le=10, validation_alias="OMR_MAX_ATTEMPTS"
+    )
+    omr_max_xml_bytes: int = Field(
+        default=5242880, ge=1024, le=20971520, validation_alias="OMR_MAX_XML_BYTES"
+    )
+    omr_java_heap_mb: int = Field(
+        default=512, ge=128, le=4096, validation_alias="OMR_JAVA_HEAP_MB"
+    )
+    omr_health_file: Path = Field(
+        default=Path("/tmp/omr-ready"), validation_alias="OMR_HEALTH_FILE"
+    )
+    omr_health_seconds: int = Field(
+        default=600, ge=60, le=1800, validation_alias="OMR_HEALTH_SECONDS"
+    )
     telegram_token: SecretStr = Field(
         default=SecretStr(""), validation_alias="TELEGRAM_TOKEN"
     )
@@ -193,6 +231,16 @@ class Settings(BaseSettings):
             or not self.password_min_length <= len(password) <= 256
         ):
             raise ValueError("Invalid emergency manager credentials")
+        return self
+
+    @model_validator(mode="after")
+    def validate_omr_timeouts(self) -> Self:
+        if self.omr_lease_seconds <= self.omr_timeout_seconds + 30:
+            raise ValueError(
+                "OMR lease must exceed engine timeout by more than 30 seconds"
+            )
+        if self.omr_health_seconds <= self.omr_timeout_seconds:
+            raise ValueError("OMR health age must exceed engine timeout")
         return self
 
     @field_validator("database_password")

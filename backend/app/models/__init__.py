@@ -207,3 +207,36 @@ class TelegramState(Base):
     bot_id: Mapped[int] = mapped_column(BigInteger)
     next_offset: Mapped[int] = mapped_column(BigInteger, default=0)
     heartbeat_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+
+
+class OmrJob(Base):
+    __tablename__ = "omr_jobs"
+    __table_args__ = (
+        CheckConstraint(
+            "status IN "
+            "('pending','processing','needs_review','approved','rejected','failed')",
+            name="status",
+        ),
+        Index(
+            "uq_omr_jobs_current",
+            "exercise_id",
+            unique=True,
+            postgresql_where=text("is_current"),
+        ),
+    )
+    id: Mapped[str] = mapped_column(String(36), primary_key=True)
+    exercise_id: Mapped[int] = mapped_column(ForeignKey("exercises.id"), index=True)
+    image_id: Mapped[str] = mapped_column(ForeignKey("media_files.id"))
+    is_current: Mapped[bool] = mapped_column(Boolean, default=True)
+    status: Mapped[str] = mapped_column(String(12), default="pending", index=True)
+    attempts: Mapped[int] = mapped_column(default=0)
+    locked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    lease_token: Mapped[str | None] = mapped_column(String(36))
+    next_attempt_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    last_error: Mapped[str | None] = mapped_column(String(64))
+    score_filename: Mapped[str | None] = mapped_column(String(64))
+    reviewed_by: Mapped[int | None] = mapped_column(ForeignKey("users.id"))
+    reviewed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )

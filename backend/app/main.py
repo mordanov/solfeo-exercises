@@ -12,6 +12,7 @@ from app.api.auth import router as auth_router
 from app.api.exercises import router as exercises_router
 from app.api.health import router as health_router
 from app.api.listening import router as listening_router
+from app.api.omr import router as omr_router
 from app.api.telegram import router as telegram_router
 from app.api.upload_limit import UploadLimit
 from app.database import Database
@@ -69,6 +70,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(auth_router)
     app.include_router(exercises_router)
     app.include_router(listening_router)
+    app.include_router(omr_router)
     app.include_router(telegram_router)
     app.add_middleware(UploadLimit, maximum=configuration.upload_max_bytes)
 
