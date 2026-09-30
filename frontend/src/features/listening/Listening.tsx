@@ -10,6 +10,7 @@ import {
 } from "../../api/listening";
 import { ErrorMessage } from "../../components/AccountUi";
 import { finishPlayback, ListeningTracker, registerPlayback } from "./tracker";
+import { Score } from "../omr/Score";
 
 function Player({
   exercise,
@@ -71,14 +72,28 @@ function Player({
       <h3>{exercise.title}</h3>
       {exercise.category && <p>{exercise.category}</p>}
       <p className="exercise-description">{exercise.description}</p>
-      {exercise.image && (
-        <img
-          className="exercise-image"
-          src={`/api/exercises/${exercise.id}/files/image`}
-          alt={t("exercises.imageFor", { title: exercise.title })}
-          onError={() => setMediaError(true)}
-        />
-      )}
+      {exercise.image &&
+        (exercise.omr.status === "approved" && exercise.omr.job_id ? (
+          <Score
+            id={exercise.id}
+            version={exercise.omr.job_id}
+            user={auth.user}
+            fallback={
+              <img
+                className="exercise-image"
+                src={`/api/exercises/${exercise.id}/files/image`}
+                alt={t("exercises.imageFor", { title: exercise.title })}
+              />
+            }
+          />
+        ) : (
+          <img
+            className="exercise-image"
+            src={`/api/exercises/${exercise.id}/files/image`}
+            alt={t("exercises.imageFor", { title: exercise.title })}
+            onError={() => setMediaError(true)}
+          />
+        ))}
       {exercise.audio ? (
         <audio
           ref={audio}

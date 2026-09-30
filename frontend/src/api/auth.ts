@@ -88,6 +88,7 @@ export async function request(
   csrf?: string,
   signal?: AbortSignal,
   keepalive = false,
+  responseType: "json" | "text" = "json",
 ): Promise<unknown> {
   signal?.throwIfAborted();
   const controller = new AbortController();
@@ -112,7 +113,10 @@ export async function request(
     });
     let data: unknown;
     try {
-      data = await response.json();
+      data =
+        responseType === "text" && response.ok
+          ? await response.text()
+          : await response.json();
     } catch {
       throw new ApiError(
         response.ok

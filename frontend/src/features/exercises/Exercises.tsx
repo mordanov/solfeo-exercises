@@ -10,6 +10,7 @@ import {
   type Exercise,
 } from "../../api/exercises";
 import { ErrorMessage } from "../../components/AccountUi";
+import { Review } from "../omr/Review";
 
 function ExerciseForm({
   auth,
@@ -208,6 +209,7 @@ export function Exercises({ auth }: { auth: Auth }) {
   const cache = useQueryClient();
   const [editing, setEditing] = useState<Exercise | null | undefined>();
   const [deleting, setDeleting] = useState<number | null>(null);
+  const [reviewing, setReviewing] = useState<number | null>(null);
   const query = useQuery({
     queryKey: ["exercises"],
     queryFn: ({ signal }) => listExercises(signal),
@@ -304,7 +306,25 @@ export function Exercises({ auth }: { auth: Auth }) {
               key={`${exercise.id}-${exercise.image?.id}-${exercise.audio?.id}`}
               exercise={exercise}
             />
+            {reviewing === exercise.id && exercise.image && (
+              <Review
+                exercise={exercise}
+                auth={auth}
+                close={() => setReviewing(null)}
+              />
+            )}
             <div className="exercise-actions">
+              {exercise.image && (
+                <>
+                  <p>{t(`omr.status.${exercise.omr.status}`)}</p>
+                  <button
+                    disabled={busy}
+                    onClick={() => setReviewing(exercise.id)}
+                  >
+                    {t("omr.review")}
+                  </button>
+                </>
+              )}
               <button
                 disabled={busy}
                 aria-label={t("exercises.editNamed", { title: exercise.title })}

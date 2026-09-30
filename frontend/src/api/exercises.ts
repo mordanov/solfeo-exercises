@@ -1,5 +1,6 @@
 import { ApiError, record, request } from "./auth";
 import { uploadTimeoutMs } from "../config";
+import { parseOmr, type Omr } from "./omr";
 
 export type Media = {
   id: string;
@@ -15,6 +16,7 @@ export type Exercise = {
   position: number;
   image: Media | null;
   audio: Media | null;
+  omr: Omr;
 };
 
 function parseMedia(value: unknown): Media | null {
@@ -65,6 +67,7 @@ export function parseExercise(value: unknown): Exercise {
     position: value.position,
     image,
     audio,
+    omr: parseOmr(value.omr),
   };
 }
 

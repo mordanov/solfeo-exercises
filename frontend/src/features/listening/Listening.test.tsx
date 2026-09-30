@@ -9,6 +9,9 @@ import { i18n } from "../../i18n";
 import { Listening } from "./Listening";
 
 vi.mock("../../api/listening");
+vi.mock("../omr/Score", () => ({
+  Score: () => <section data-testid="approved-score" />,
+}));
 const auth: Auth = {
   csrf_token: "csrf",
   user: {
@@ -30,6 +33,13 @@ const exercise = {
   category: null,
   description: "Practice",
   position: 0,
+  omr: {
+    status: "none" as const,
+    job_id: null,
+    image_id: null,
+    attempts: 0,
+    last_error: null,
+  },
   image: null,
   audio: {
     id: "audio",
@@ -38,6 +48,53 @@ const exercise = {
     duration_seconds: 10,
   },
 };
+
+it.each(["pending", "needs_review", "rejected", "failed"] as const)(
+  "keeps the original image for a %s score",
+  async (status) => {
+    vi.mocked(api.currentExercise).mockResolvedValue({
+      ...exercise,
+      image: {
+        id: "image",
+        mime_type: "image/png",
+        size_bytes: 100,
+        duration_seconds: null,
+      },
+      omr: {
+        status,
+        job_id: "job",
+        image_id: "image",
+        attempts: 1,
+        last_error: null,
+      },
+    });
+    mount();
+    expect(await screen.findByRole("img")).toBeInTheDocument();
+    expect(screen.queryByTestId("approved-score")).not.toBeInTheDocument();
+  },
+);
+
+it("renders only an approved score instead of the original", async () => {
+  vi.mocked(api.currentExercise).mockResolvedValue({
+    ...exercise,
+    image: {
+      id: "image",
+      mime_type: "image/png",
+      size_bytes: 100,
+      duration_seconds: null,
+    },
+    omr: {
+      status: "approved",
+      job_id: "job",
+      image_id: "image",
+      attempts: 1,
+      last_error: null,
+    },
+  });
+  mount();
+  expect(await screen.findByTestId("approved-score")).toBeInTheDocument();
+  expect(screen.queryByRole("img")).not.toBeInTheDocument();
+});
 beforeEach(async () => {
   vi.resetAllMocks();
   vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {});

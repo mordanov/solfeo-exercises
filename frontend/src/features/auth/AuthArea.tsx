@@ -176,6 +176,7 @@ export function AuthArea() {
       await cache.cancelQueries({ queryKey: ["journal"] });
       await cache.cancelQueries({ queryKey: ["journal-options"] });
       await cache.cancelQueries({ queryKey: ["telegram"] });
+      await cache.cancelQueries({ queryKey: ["omr"] });
       cache.setQueryData(["auth"], null);
       cache.removeQueries({ queryKey: ["users"] });
       cache.removeQueries({ queryKey: ["exercises"] });
@@ -183,6 +184,7 @@ export function AuthArea() {
       cache.removeQueries({ queryKey: ["journal"] });
       cache.removeQueries({ queryKey: ["journal-options"] });
       cache.removeQueries({ queryKey: ["telegram"] });
+      cache.removeQueries({ queryKey: ["omr"] });
     };
     const listener = () => void expired();
     window.addEventListener("solfeo:unauthorized", listener);
@@ -196,12 +198,14 @@ export function AuthArea() {
     await cache.cancelQueries({ queryKey: ["journal"] });
     await cache.cancelQueries({ queryKey: ["journal-options"] });
     await cache.cancelQueries({ queryKey: ["telegram"] });
+    await cache.cancelQueries({ queryKey: ["omr"] });
     cache.removeQueries({ queryKey: ["users"] });
     cache.removeQueries({ queryKey: ["exercises"] });
     cache.removeQueries({ queryKey: ["listening"] });
     cache.removeQueries({ queryKey: ["journal"] });
     cache.removeQueries({ queryKey: ["journal-options"] });
     cache.removeQueries({ queryKey: ["telegram"] });
+    cache.removeQueries({ queryKey: ["omr"] });
     cache.setQueryData(["auth"], value);
   };
   const signOut = useMutation({
@@ -217,6 +221,7 @@ export function AuthArea() {
       await cache.cancelQueries({ queryKey: ["journal"] });
       await cache.cancelQueries({ queryKey: ["journal-options"] });
       await cache.cancelQueries({ queryKey: ["telegram"] });
+      await cache.cancelQueries({ queryKey: ["omr"] });
       cache.setQueryData(["auth"], null);
       cache.removeQueries({ queryKey: ["users"] });
       cache.removeQueries({ queryKey: ["exercises"] });
@@ -224,6 +229,7 @@ export function AuthArea() {
       cache.removeQueries({ queryKey: ["journal"] });
       cache.removeQueries({ queryKey: ["journal-options"] });
       cache.removeQueries({ queryKey: ["telegram"] });
+      cache.removeQueries({ queryKey: ["omr"] });
     },
   });
   if (query.isPending) return <p aria-live="polite">{t("auth.loading")}</p>;

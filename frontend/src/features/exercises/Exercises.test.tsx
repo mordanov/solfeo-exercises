@@ -15,6 +15,13 @@ const exercise = {
   description: "Practice",
   category: null,
   position: 0,
+  omr: {
+    status: "none" as const,
+    job_id: null,
+    image_id: null,
+    attempts: 0,
+    last_error: null,
+  },
   image: {
     id: "image-id",
     mime_type: "image/png",

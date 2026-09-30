@@ -8,6 +8,13 @@ const exercise = {
   description: "",
   category: null,
   position: 0,
+  omr: {
+    status: "none",
+    job_id: null,
+    image_id: null,
+    attempts: 0,
+    last_error: null,
+  },
   image: {
     id: "image",
     mime_type: "image/png",

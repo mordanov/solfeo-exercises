@@ -120,3 +120,17 @@ audio {
   flex-wrap: wrap;
   gap: 0.5rem;
 }
+.omr-comparison {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+.omr-comparison > * {
+  min-width: 0;
+}
+.score-render {
+  overflow: auto;
+  background: white;
+  color: black;
+}
