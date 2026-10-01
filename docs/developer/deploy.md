@@ -29,7 +29,7 @@ Pull request #2 merges as source `165a1397` on 2026-10-01.
 Publication run `36921037861` verifies the images and completes the production rollout successfully.
 The public HTTPS health endpoint returns exactly `{"status":"ok"}`.
 The owner confirms completion of PHASE 5 and PHASE 6 after deployment.
-Final PHASE 7 smoke acceptance remains separate and open.
+The owner subsequently confirms final PHASE 7 smoke acceptance on 2026-10-01.
 The earlier RAM refusal below is historical evidence, not the current deployment state.
 
 ## Storage capacity

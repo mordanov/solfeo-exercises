@@ -16,7 +16,7 @@ PHASE 5 adds reviewed OMR scores and note labels.
 PHASE 6 adds the existing 66 spoken-note clips and timed playback.
 PHASE 7 adds deployment capacity checks, localized 404 pages, security headers, structured logs, and dependency audits.
 Production deployment succeeds on 2026-10-01; the owner accepts PHASE 5 and PHASE 6.
-The final PHASE 7 smoke acceptance remains open.
+PHASE 7 is complete after final owner acceptance on 2026-10-01.
 
 ## Start locally
 

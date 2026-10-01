@@ -9,7 +9,7 @@ Last updated: 2026-10-01 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a05
 
 ## Current phase
 PHASE 7: hardening and documentation review.
-Implementation is deployed; the final PHASE 7 smoke acceptance remains open.
+Status: complete after deployed owner acceptance on 2026-10-01.
 The owner authorizes the entire phase without intermediate confirmations on 2026-10-01.
 PHASE 7 merges from `feat/phase7-hardening` as source `165a1397`.
 The owner retains all 66 speech clips and declines regeneration.
@@ -55,7 +55,8 @@ The owner merges pull request #2 as `165a1397` on 2026-10-01.
 Publication run `36921037861` completes image verification and the production deployment successfully.
 The public HTTPS health endpoint returns exactly `{"status":"ok"}`.
 The owner confirms completion of PHASE 5 and PHASE 6 after deployment on 2026-10-01.
-This confirmation does not close the separate final PHASE 7 smoke checklist.
+The owner subsequently confirms final PHASE 7 smoke acceptance on 2026-10-01.
+PHASE 5, PHASE 6, and PHASE 7 are complete.
 
 Main-branch CI run `36866682091` succeeds for merged PHASE 6 source `f3ba47f`.
 Publication run `36867434244` verifies its images but deployment fails with `OMR_MEMORY_INSUFFICIENT`.
@@ -69,10 +70,10 @@ This change does not rewrite private server configuration or restart unrelated s
 The follow-up passes 37 rollout, real rollback, and documentation checks, plus all quality hooks.
 
 Follow-up CI run `36919176347` passes all 5 jobs for source `4af7f90` before merge.
-The verified production rollout removes the deployment prerequisite; final PHASE 7 smoke acceptance remains pending.
+The verified production rollout and owner-confirmed smoke acceptance close the final PHASE 7 gates.
 Chrome command-line DOM verification times out in this environment.
 HTTP and React component checks pass; they do not establish a successful real-browser acceptance pass.
-Chrome and Safari checks remain in the final checklist, after implementation.
+The owner confirms PHASE 7 acceptance; no new automated browser or device-specific evidence is inferred.
 
 ### Previous PHASE 6 acceptance
 PHASE 6 spoken notes are complete with owner-confirmed acceptance after production deployment.
@@ -133,7 +134,7 @@ The owner confirms the requested local health-page and PostgreSQL restart scenar
 The owner confirms the remaining bot checks and continuation on 2026-09-29.
 PHASE 0.5 is complete; the failed PWA result remains unchanged.
 
-## Plan for the current phase
+## Completed PHASE 7 plan
 - [x] Add deployment storage preflight and reserve checks.
 - [x] Add translated application 404 content without changing API or protected-file errors.
 - [x] Verify cookie, CSRF, upload, and proxy boundaries; add security headers.
@@ -144,7 +145,7 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Run local tests, builds, audits, and quality hooks.
 - [x] Obtain successful remote CI for the PHASE 7 branch.
 - [x] Deploy a verified release through the standard production workflow.
-- [ ] Complete the final smoke checklist in Chrome and Safari.
+- [x] Obtain owner confirmation of final production smoke acceptance.
 
 ## Separate Material Design feature
 The owner requests a separate visual migration through `material_design.md` after PHASE 7.
@@ -543,11 +544,10 @@ Do not include this migration in PHASE 7 or change existing business logic.
 - The owner does not supply device versions or a per-message evidence record.
 
 ## Next step
-- Complete final PHASE 7 acceptance; PR #2 is merged and deployment succeeds.
-- Check actual OMR memory use after deployment; host RAM no longer blocks rollout automatically.
-- Preserve the configured disk reserve and deploy only the verified immutable release.
-- Complete `docs/developer/smoke-check.md` in Chrome and Safari after deployment.
-- Retain the owner-accepted PHASE 5 and PHASE 6 results; do not regenerate the existing speech clips.
+- Continue the separate Material Design feature only after approval of its existing migration plan.
+- Preserve the accepted product behavior, disk guards, container limits, and compatible rollback.
+- Reuse `docs/developer/smoke-check.md` after future production changes.
+- Retain the owner-accepted PHASE 5, PHASE 6, and PHASE 7 results; do not regenerate the existing speech clips.
 - Preserve prototype files and the historical PWA deployment.
 
 ## PHASE 0 boundaries
@@ -641,7 +641,7 @@ The final PHASE 5 procedure is in `docs/user/manager.md`.
 
 ## Known issues
 - PHASE 5 and PHASE 6 have owner acceptance; automated Safari evidence remains unavailable.
-- The final PHASE 7 VPS smoke acceptance remains open; production activation succeeds.
+- PHASE 7 has final owner acceptance after successful production deployment on 2026-10-01.
 - Earlier publication run `36867434244` fails at the former OMR RAM guard; run `36921037861` deploys successfully.
 - Native Chrome DOM automation times out; local HTTP and React tests do not replace final browser acceptance.
 - The owner-created PR resolves the initial CI blocker without changing CLI permissions.

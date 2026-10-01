@@ -130,7 +130,8 @@ The owner merges PHASE 6 and declines regeneration of the existing 66 clips.
 - Full documentation review against the rules in docs.instructions.md. Complete `.env` variable reference. Troubleshooting.
 - Manual end-to-end smoke checklist for the full flow.
 Done when: the smoke checklist passes on the VPS from a clean deploy.
-Implementation status: deployed successfully through run `36921037861`; final PHASE 7 smoke acceptance remains open.
+Implementation status: deployed successfully through run `36921037861`.
+Status: complete after the owner confirms final PHASE 7 acceptance on 2026-10-01.
 The recorded merged PHASE 6 deployment fails with `OMR_MEMORY_INSUFFICIENT`.
 The owner explicitly removes this host-memory preflight on 2026-10-01.
 Docker memory limits, disk checks, health verification, and compatible rollback remain active.

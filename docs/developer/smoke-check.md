@@ -93,4 +93,7 @@ Do not deliberately exhaust production storage or break production migrations to
 
 Safari audible speech acceptance remains mandatory.
 Headless decoding and HTTP checks do not replace hearing the existing clips.
-PHASE 7 remains open until this checklist passes on the VPS.
+The owner confirms final PHASE 7 acceptance on 2026-10-01 after deployment run `36921037861` for source `165a1397`.
+PHASE 7 is complete.
+This confirmation does not add automated browser results or device-specific measurements.
+Reuse this checklist after future production changes.
