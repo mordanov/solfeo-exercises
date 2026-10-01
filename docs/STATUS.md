@@ -47,9 +47,10 @@ Public health and unknown-page HEAD checks pass against this persistent stand.
 The strengthened rollback check confirms that disk refusal preserves all running service identities and release state.
 
 Local commits record the complete implementation.
-The execution environment refuses automatic `git push`.
-The branch remains local; PHASE 7 has no pull request or remote CI run.
-Publish `feat/phase7-hardening` and open a pull request before production activation.
+The owner publishes the branch and opens pull request #2 on 2026-10-01.
+Product CI run `36896694237` succeeds for source `725e2a5`.
+All 5 jobs pass: dependencies, checks, backend, frontend, and containers.
+The pull request remains open; production activation requires owner merge and sufficient verified VPS capacity.
 
 Main-branch CI run `36866682091` succeeds for merged PHASE 6 source `f3ba47f`.
 Publication run `36867434244` verifies its images but deployment fails with `OMR_MEMORY_INSUFFICIENT`.
@@ -126,9 +127,16 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Review documentation and complete the environment reference and missing guides.
 - [x] Prepare the complete final VPS smoke checklist.
 - [x] Run local tests, builds, audits, and quality hooks.
-- [ ] Obtain successful remote CI for the PHASE 7 branch.
+- [x] Obtain successful remote CI for the PHASE 7 branch.
 - [ ] Deploy a verified release after resolving the VPS capacity constraint.
 - [ ] Complete the final smoke checklist in Chrome and Safari.
+
+## Separate Material Design feature
+The owner requests a separate visual migration through `material_design.md` after PHASE 7.
+Read-only analysis covers React compatibility, screens, styles, and migration constraints.
+The frontend build and linter pass; frontend code and dependency manifests remain unchanged.
+Implementation requires a separate feature branch and owner approval of the migration plan.
+Do not include this migration in PHASE 7 or change existing business logic.
 
 ## Completed PHASE 6 plan
 - [x] Add shared vocabulary and a strict MusicXML sequence parser.
