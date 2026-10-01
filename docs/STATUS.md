@@ -46,6 +46,11 @@ PostgreSQL, backend, frontend, and OMR report healthy states; Telegram remains s
 Public health and unknown-page HEAD checks pass against this persistent stand.
 The strengthened rollback check confirms that disk refusal preserves all running service identities and release state.
 
+Local commits record the complete implementation.
+The execution environment refuses automatic `git push`.
+The branch remains local; PHASE 7 has no pull request or remote CI run.
+Publish `feat/phase7-hardening` and open a pull request before production activation.
+
 Main-branch CI run `36866682091` succeeds for merged PHASE 6 source `f3ba47f`.
 Publication run `36867434244` verifies its images but deployment fails with `OMR_MEMORY_INSUFFICIENT`.
 The recorded failure is current evidence from the configured deployment target, not a new-host capacity measurement.
