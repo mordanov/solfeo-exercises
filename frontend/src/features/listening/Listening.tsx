@@ -117,6 +117,10 @@ function Player({
             void tracker.finish();
           }}
         />
+      ) : exercise.image &&
+        exercise.omr.status === "approved" &&
+        exercise.omr.job_id ? (
+        <p>{t("listening.noAudioSpoken")}</p>
       ) : (
         <p>{t("listening.noAudio")}</p>
       )}

@@ -82,6 +82,7 @@ A low-quality photo is the main cause of OMR errors. Follow these rules before u
 - Note duration is respected: whole note = long, quarter = short, etc., from MusicXML durations and a tempo (default 72 bpm, user-adjustable slider).
 - Implementation: pre-generated syllable clips (script calls OpenAI TTS once, output committed to frontend/public/solfege/<lang>/<naming>/), played with Web Audio API. Fit each note to its duration: play the word at its natural pitch (rate 1) and fill the rest with silence; speed up only when the word does not fit, up to a bounded maximum rate. Rests = silence. Sharps/flats = extra suffix clip.
 - Available only when score status = approved.
+- When an exercise has no recorded audio, the student sees the spoken notes controls instead of an audio control.
 
 ## Telegram audio import
 

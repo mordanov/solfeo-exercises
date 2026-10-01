@@ -90,6 +90,8 @@ Replay after natural completion creates a new listening session.
 The ordered sequence wraps after the last exercise and before the first.
 Reload or a new sign-in restores the saved sequential pointer.
 An image-only exercise has no audio control and creates no journal row.
+An approved exercise without recorded audio shows the spoken notes controls instead of an audio control.
+Speech still does not create a journal row.
 
 1. Select **Random** in Listening mode.
    The application selects a different exercise when more than one exists.

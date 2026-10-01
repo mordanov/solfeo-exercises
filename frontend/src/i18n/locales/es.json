@@ -36,6 +36,7 @@
   "listening.sequential": "En orden",
   "listening.random": "Aleatorio",
   "listening.noAudio": "Este ejercicio solo tiene imagen. Pulsa Siguiente para continuar.",
+  "listening.noAudioSpoken": "Este ejercicio no tiene audio grabado. Usa las notas habladas de arriba.",
   "listening.empty": "Todavía no hay ejercicios disponibles.",
   "listening.hint": "Pulsa reproducir para escuchar. La pausa conserva la sesión. El modo en orden guarda el siguiente ejercicio.",
   "journal.title": "Registro de escucha",

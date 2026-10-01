@@ -36,6 +36,7 @@
   "listening.sequential": "In order",
   "listening.random": "Random",
   "listening.noAudio": "This exercise has an image only. Use Next to continue.",
+  "listening.noAudioSpoken": "This exercise has no recorded audio. Use the spoken notes above.",
   "listening.empty": "No exercises are available yet.",
   "listening.hint": "Press play to listen. Pause keeps the same session. Your next exercise is saved in sequential mode.",
   "journal.title": "Listening journal",

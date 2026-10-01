@@ -207,3 +207,27 @@ it("supports image-only exercises without inventing listening sessions", async (
   expect(await screen.findByText(/image only/)).toBeInTheDocument();
   expect(api.sendListeningEvent).not.toHaveBeenCalled();
 });
+it("points to the spoken notes instead when an approved score has no recorded audio", async () => {
+  vi.mocked(api.currentExercise).mockResolvedValue({
+    ...exercise,
+    audio: null,
+    image: {
+      id: "image",
+      mime_type: "image/png",
+      size_bytes: 100,
+      duration_seconds: null,
+    },
+    omr: {
+      status: "approved",
+      job_id: "job",
+      image_id: "image",
+      attempts: 1,
+      last_error: null,
+    },
+  });
+  mount();
+  expect(await screen.findByTestId("approved-score")).toBeInTheDocument();
+  expect(await screen.findByText(/spoken notes above/)).toBeInTheDocument();
+  expect(screen.queryByText(/image only/)).not.toBeInTheDocument();
+  expect(api.sendListeningEvent).not.toHaveBeenCalled();
+});
