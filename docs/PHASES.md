@@ -110,7 +110,11 @@ The owner explicitly postpones PHASE 5 deployment; implementation uses a separat
 Done when: an approved score is spoken with correct note names and durations in all three languages.
 The generator, parser, scheduler, controls, and 66 real speech clips are implemented.
 The owner supplies the private API key and opens pull request #1 on 2026-10-01.
-This phase remains open until branch CI and audible manual acceptance are complete.
+The owner confirms audible acceptance in the local stand and accepts PHASE 6 on 2026-10-01.
+Fixes after that listening pass: natural voice pitch for every note duration, a spoken-notes
+fallback when an exercise has no recorded audio, and a native accent hint per language for future
+clip regeneration (optional; the committed 66 clips still use the original generic instructions).
+Status: complete.
 
 ## PHASE 7: Hardening and documentation review
 - Check free disk space before deployment image pulls and reserve capacity for extraction and rollback.

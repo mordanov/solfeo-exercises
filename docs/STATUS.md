@@ -5,14 +5,34 @@ This document records progress and remaining checks for the current phase.
 Prerequisites:
 - Read `docs/PHASES.md` and `docs/DECISIONS.md`.
 
-Last updated: 2026-10-01 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
+Last updated: 2026-10-01 by Copilot, session `2d97b6fc-84af-4fc4-bf46-81df4dd02379`.
 
 ## Current phase
-PHASE 6: spoken notes implementation, without deployment.
+PHASE 6: spoken notes implementation, without deployment. Status: complete.
 The owner authorizes complete phase automation and postpones PHASE 5 deployment on 2026-09-30.
 Work uses `feat/phase6-spoken-notes` so main-branch publication cannot deploy these changes.
 The owner supplies the private OpenAI key and opens pull request #1 on 2026-10-01.
-All 66 actual speech clips are generated, verified, and committed; audible owner acceptance remains open.
+All 66 actual speech clips are generated, verified, and committed.
+The owner confirms audible Chrome acceptance in the local container stand on 2026-10-01.
+The owner requests and receives 3 follow-up fixes after the listening pass, detailed below.
+
+### PHASE 6 follow-up fixes after owner acceptance
+- Poor photo quality causes genuine OMR chords and backups in exercises 32 and 33, so the strict
+  parser correctly refuses to speak them. `docs/PRODUCT_BRIEF.md`, `docs/PHASES.md`, and
+  `docs/user/manager.md` now document the required photo quality before OMR upload.
+- Spoken playback previously changed pitch per note duration because the rate limiter clamped
+  long notes down to `minRate`. The rate now floors at 1 and pads spare time with silence, so
+  every note keeps one natural voice pitch. `minRate` is removed from the spoken configuration.
+- The generator adds a native-accent hint per language (`ACCENT_HINTS` in
+  `worker/generate_spoken.py`). The fingerprint does not hash the instructions text, so the 66
+  committed clips remain valid without regeneration; applying the new accent requires the owner
+  to regenerate into a fresh `SPOKEN_OUTPUT` directory with their own key, listen, and replace the
+  committed set. This is optional future work, not a PHASE 6 blocker.
+- `Listening.tsx` now shows the spoken-notes controls with a dedicated message when an approved
+  exercise has no recorded audio, instead of the generic "image only" message.
+- All 3 fixes are committed locally on `feat/phase6-spoken-notes` (unpushed); pre-commit and
+  `backend/tests/test_spoken_generation.py` are green.
+
 The local container stand runs PHASE 6 at `http://127.0.0.1:18080/` on 2026-10-01.
 Removing duplicate database credentials from the private `.env` resolves the local migration authentication failure.
 Migration exits successfully; PostgreSQL, backend, frontend, and OMR report healthy states.
@@ -53,7 +73,7 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Finish local checks and record their evidence.
 - [x] Enable branch CI through the owner-created pull request #1.
 - [x] Update user and developer documentation.
-- [ ] Obtain audible Chrome and Safari acceptance after clip generation.
+- [x] Obtain audible Chrome acceptance after clip generation; Safari acceptance remains open.
 
 ## PHASE 5 implementation and deferred acceptance
 - [x] Add versioned OMR jobs, leases, retries, review, and protected MusicXML.
@@ -435,7 +455,8 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 ## Next step
 - Review the checks for pull request #1 without merging it.
 - Keep deployment postponed; do not merge the branch or start PHASE 7.
-- Complete the PHASE 6 audible checklist in `docs/user/student.md` after real clip generation.
+- Push the 4 local `feat/phase6-spoken-notes` commits and open review for the PHASE 6 follow-up fixes.
+- Obtain audible Safari acceptance for spoken notes; Chrome acceptance is confirmed.
 - Preserve prototype files and the historical PWA deployment.
 
 ## PHASE 0 boundaries
@@ -528,7 +549,7 @@ The owner confirms final PHASE 0 browser acceptance at the public HTTPS address.
 The final PHASE 5 procedure is in `docs/user/manager.md`.
 
 ## Known issues
-- PHASE 6 audible Chrome and Safari acceptance remains open; automated checks do not establish pronunciation quality.
+- PHASE 6 audible Safari acceptance remains open; Chrome acceptance is confirmed on 2026-10-01.
 - The owner-created PR resolves the initial CI blocker without changing CLI permissions.
 - The previous VPS check finds approximately 18 GiB free disk space but insufficient RAM for PHASE 5 activation.
 - The owner postpones deployment and reports a new host; this task does not verify or change that host.
