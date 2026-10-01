@@ -48,7 +48,8 @@ The CI workflow neither publishes images nor connects to the VPS.
 The owner merges [pull request #1](https://github.com/mordanov/solfeo-exercises/pull/1) on 2026-10-01.
 Source `f3ba47f` passes main-branch CI run `36866682091`.
 Publication run `36867434244` verifies the images, but deployment stops with `OMR_MEMORY_INSUFFICIENT`.
-The failed deployment does not authorize bypassing the memory guard.
+The owner explicitly removes the host-memory deployment gate on 2026-10-01.
+New rollouts retain disk checks, health verification, and compatible rollback.
 PHASE 7 continues on `feat/phase7-hardening`.
 The existing prototype publishing workflows remain separate.
 `deploy/compose.prod.yaml` provides a separate, image-based production configuration.

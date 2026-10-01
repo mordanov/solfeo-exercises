@@ -19,7 +19,8 @@ Natural quarter notes fit the default 72 BPM tempo in every combination.
 The owner confirms audible Chrome acceptance on 2026-10-01.
 Safari audible acceptance remains open.
 The owner merges pull request #1 later that day.
-The resulting deployment stops at the OMR memory guard; image publication does not establish production acceptance.
+That recorded deployment stops at the former OMR memory guard; image publication does not establish production acceptance.
+The owner removes the host-memory rollout check later that day; container memory limits remain active.
 
 The generator now adds a native-accent hint per language to the speech instructions.
 The fingerprint does not track that wording, so the 66 committed clips stay valid without regeneration.

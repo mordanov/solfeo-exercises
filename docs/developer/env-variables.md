@@ -133,7 +133,6 @@ Only the OMR container needs executable temporary memory for JavaCPP native libr
 | `OMR_TESSDATA` | `/usr/share/tesseract-ocr/5/tessdata` | OCR language data |
 | `OMR_JAVA_HEAP_MB` | `512` | Java heap maximum in MiB |
 | `OMR_MEMORY_MB` | `1024` | Container memory maximum in MiB; no container swap |
-| `OMR_HOST_RESERVE_MB` | `512` | Additional available host memory required before production activation |
 | `OMR_CPUS` | `1` | Container CPU limit |
 | `OMR_TMP_MB` | `256` | Temporary filesystem maximum in MiB |
 | `OMR_TIMEOUT_SECONDS` | `300` | Total recognition deadline, including the faint-staff retry |

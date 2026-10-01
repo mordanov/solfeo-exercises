@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 from release import build_release
-from rollout import DeploymentError, Rollout, require_omr_memory, verify_bundle
+from rollout import DeploymentError, Rollout, verify_bundle
 
 SHA = "d" * 40
 
@@ -142,9 +142,18 @@ def test_first_install_failure_preserves_database(tmp_path: Path) -> None:
     assert not any("down" in call or "--volumes" in call for call in rollout.calls)
 
 
-def test_worker_stops_before_migration_and_participates_in_rollback(
-    tmp_path: Path,
+@pytest.mark.parametrize("enabled", ["false", "true"])
+def test_worker_rollout_preserves_order_and_rollback_without_host_memory_probe(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, enabled: str
 ) -> None:
+    original = Path.is_file
+
+    def is_file(path: Path) -> bool:
+        assert path != Path("/proc/meminfo"), "Rollout must not inspect host memory"
+        return original(path)
+
+    monkeypatch.setattr(Path, "is_file", is_file)
+
     class WithWorker(FakeRollout):
         def compose(self, release: Path, *args: str) -> str:
             output = super().compose(release, *args)
@@ -153,7 +162,7 @@ def test_worker_stops_before_migration_and_participates_in_rollback(
             if args == ("config", "--format", "json"):
                 configuration = json.loads(output)
                 configuration["services"]["omr"] = {
-                    "environment": {"OMR_ENABLED": "false"}
+                    "environment": {"OMR_ENABLED": enabled}
                 }
                 return json.dumps(configuration)
             return output
@@ -171,27 +180,6 @@ def test_worker_stops_before_migration_and_participates_in_rollback(
     assert all(
         "telegram" not in call for call in rollout.calls if "previous:up" in call
     )
-
-
-def test_omr_memory_preflight_rejects_insufficient_headroom() -> None:
-    configuration = json.dumps(
-        {
-            "services": {
-                "omr": {
-                    "mem_limit": 1024 * 1024 * 1024,
-                    "environment": {
-                        "OMR_ENABLED": "true",
-                        "OMR_HOST_RESERVE_MB": "512",
-                    },
-                }
-            }
-        }
-    )
-    with pytest.raises(DeploymentError, match="OMR_MEMORY_INSUFFICIENT"):
-        require_omr_memory(configuration, "MemAvailable: 130000 kB\nSwapFree: 0 kB\n")
-    require_omr_memory(configuration, "MemAvailable: 2097152 kB\n")
-    with pytest.raises(DeploymentError, match="OMR_MEMORY_UNKNOWN"):
-        require_omr_memory(configuration, "")
 
 
 @pytest.mark.parametrize("storage", ["docker", "release"])

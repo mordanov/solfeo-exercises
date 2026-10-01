@@ -55,7 +55,12 @@ The pull request remains open; production activation requires owner merge and su
 Main-branch CI run `36866682091` succeeds for merged PHASE 6 source `f3ba47f`.
 Publication run `36867434244` verifies its images but deployment fails with `OMR_MEMORY_INSUFFICIENT`.
 The recorded failure is current evidence from the configured deployment target, not a new-host capacity measurement.
-PHASE 7 does not bypass this guard, rewrite private server configuration, or restart unrelated services.
+The owner explicitly removes the host-memory preflight on 2026-10-01 after the recorded failure.
+Rollout no longer inspects `/proc/meminfo` or rejects insufficient host RAM.
+Docker memory limits, disk checks, worker healthchecks, and compatible rollback remain active.
+The obsolete host-reserve setting is removed from the example and production Compose.
+This change does not rewrite private server configuration or restart unrelated services.
+The follow-up passes 37 rollout, real rollback, and documentation checks, plus all quality hooks.
 Its branch requires successful remote CI and a verified production rollout before final owner acceptance.
 Chrome command-line DOM verification times out in this environment.
 HTTP and React component checks pass; they do not establish a successful real-browser acceptance pass.
@@ -528,7 +533,7 @@ Do not include this migration in PHASE 7 or change existing business logic.
 
 ## Next step
 - Review and merge `feat/phase7-hardening` only after successful remote CI.
-- Provision enough available RAM for `OMR_MEMORY_MB + OMR_HOST_RESERVE_MB` before production activation.
+- Check actual OMR memory use after deployment; host RAM no longer blocks rollout automatically.
 - Preserve the configured disk reserve and deploy only the verified immutable release.
 - Complete `docs/developer/smoke-check.md` in Chrome and Safari after deployment.
 - Confirm audible Safari acceptance with the existing speech clips; do not regenerate them.

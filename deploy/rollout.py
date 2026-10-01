@@ -54,21 +54,6 @@ def require_disk_space(
             )
 
 
-def require_omr_memory(configuration: str, meminfo: str) -> None:
-    service = json.loads(configuration)["services"]["omr"]
-    environment = service["environment"]
-    if str(environment["OMR_ENABLED"]).lower() == "false":
-        return
-    available = re.search(r"^MemAvailable:\s+(\d+)\s+kB$", meminfo, re.MULTILINE)
-    if available is None:
-        raise DeploymentError("OMR_MEMORY_UNKNOWN")
-    required = (
-        int(service["mem_limit"]) + int(environment["OMR_HOST_RESERVE_MB"]) * 1024**2
-    )
-    if int(available.group(1)) * 1024 < required:
-        raise DeploymentError("OMR_MEMORY_INSUFFICIENT:PROVISION_RAM_BEFORE_DEPLOYMENT")
-
-
 def verify_bundle(
     artifact: Path, expected_sha: str, ci_run_id: int
 ) -> tuple[Manifest, dict[str, bytes]]:
@@ -335,12 +320,6 @@ class Rollout:
         previous_services = self.application_services(previous) if previous else []
         configuration = self.compose(candidate, "config", "--format", "json")
         require_disk_space(configuration, self.disk_free())
-        if "omr" in services:
-            memory = Path("/proc/meminfo")
-            require_omr_memory(
-                configuration,
-                memory.read_text() if memory.is_file() else "",
-            )
         self.compose(candidate, "pull")
         require_disk_space(configuration, self.disk_free(), pulled=True)
         self.compose(candidate, "up", "-d", "--no-deps", "--wait", "postgres")

@@ -130,6 +130,8 @@ The owner merges PHASE 6 and declines regeneration of the existing 66 clips.
 - Manual end-to-end smoke checklist for the full flow.
 Done when: the smoke checklist passes on the VPS from a clean deploy.
 Implementation status: complete locally; production deployment and final acceptance remain open.
-The merged PHASE 6 deployment still fails safely with `OMR_MEMORY_INSUFFICIENT`.
-PHASE 7 does not disable this protection or change unrelated VPS services.
+The recorded merged PHASE 6 deployment fails with `OMR_MEMORY_INSUFFICIENT`.
+The owner explicitly removes this host-memory preflight on 2026-10-01.
+Docker memory limits, disk checks, health verification, and compatible rollback remain active.
+PHASE 7 does not change unrelated VPS services.
 The final procedure appears in `docs/developer/smoke-check.md`.

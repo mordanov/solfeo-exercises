@@ -46,20 +46,22 @@ Increase the image budget when image growth requires more download and extractio
 
 ## OMR capacity
 
-The rollout checks Linux `MemAvailable` before pulling images or stopping services when OMR is enabled.
-It requires `OMR_MEMORY_MB + OMR_HOST_RESERVE_MB`, normally 1536 MiB.
-`OMR_MEMORY_INSUFFICIENT` leaves the active release and database unchanged.
-Do not disable this protection to fit a busy shared host.
-Provision more RAM or arrange an operator-reviewed capacity change before retrying.
-Swap alone does not satisfy this check; the OMR container does not use swap.
+The owner removes the host-memory preflight on 2026-10-01.
+The rollout does not read `/proc/meminfo` or reject deployment for insufficient host RAM.
+`OMR_MEMORY_MB` still limits the OMR container, which does not use swap.
+Disk checks, worker healthchecks, and compatible rollback remain active.
+
+**Caution:** Memory pressure can interrupt recognition or affect other services on the host.
+Inspect available RAM and OMR memory use before production recognition.
+A healthy idle worker does not establish sufficient memory for a recognition job.
 
 The 2026-09-30 VPS check finds approximately 116 MiB available RAM and no swap.
 Disk cleanup leaves approximately 18 GiB free, but does not resolve the RAM constraint.
 The SSH account has no noninteractive sudo access.
-PHASE 5 production activation therefore requires operator action.
+These measurements describe the recorded target, not the owner's reported new host.
 Setting `OMR_ENABLED=false` is an explicit maintenance option, not successful OMR deployment.
 
-### Verified PHASE 5 release awaiting RAM
+### Recorded PHASE 5 release and former RAM refusal
 
 Source `be0000d1e8208489b65fc939b77e1bbb013422e7` passes CI run `36674676116`.
 Publication run `36675174373` verifies both pulled x86-64 images before packaging the release.
@@ -71,8 +73,8 @@ Production retains PHASE 4, schema `0005_telegram`, and unchanged container star
 | `ghcr.io/mordanov/solfeo-backend` | `sha256:550506cfb1790a50261c82eae7d8079eb78928f1806d5a63dcc9443bc6c26c62` |
 | `ghcr.io/mordanov/solfeo-frontend` | `sha256:9cd20857296beefc7a0552b65feaaaac237c2896f332e991af940a981e3968f8` |
 
-**Caution:** Provision sufficient available RAM before retrying this release.
-The memory guard remains active during a manual retry.
+**Caution:** Older rollout scripts retain their original memory guard.
+Use a newly verified release with the updated rollout to remove this gate.
 Use the standard rollout and verified bundle, not an unversioned Compose update.
 Re-establish private registry access when required; the failed job removes its temporary credentials.
 

@@ -7,6 +7,11 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-10-01: The owner explicitly removes the host-memory preflight from rollout.
+  Rollout no longer reads `/proc/meminfo` or rejects deployment through `OMR_MEMORY_INSUFFICIENT` or `OMR_MEMORY_UNKNOWN`.
+  The obsolete host-reserve setting is removed from the example configuration and production Compose.
+  Docker memory limits, disk checks, worker healthchecks, and compatible rollback remain unchanged.
+  Memory pressure remains an operational risk; healthy startup does not establish successful recognition.
 - 2026-10-01: The owner merges pull request #1 and retains the existing 66 speech clips without regeneration.
   The owner authorizes complete PHASE 7 automation without intermediate confirmations.
   Manual acceptance follows the complete implementation.

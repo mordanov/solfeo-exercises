@@ -17,8 +17,6 @@ Do not print resolved Compose configuration or publish `last-error.log` without 
 | `DEPLOY_DISK_INSUFFICIENT` | Inspect the reported filesystem and provision sufficient free space |
 | `DEPLOY_DISK_UNKNOWN` | Run on the Docker host and verify access to its local storage path |
 | `DEPLOY_DISK_CONFIG_INVALID` | Set positive integer values for both deployment capacity settings |
-| `OMR_MEMORY_INSUFFICIENT` | Provision the configured OMR memory limit plus host reserve |
-| `OMR_MEMORY_UNKNOWN` | Use a Linux host with readable `/proc/meminfo` |
 
 1. Inspect free space with `df -h` on the Docker and release filesystems.
 2. Inspect Docker storage with `docker system df`.
@@ -27,9 +25,13 @@ Do not print resolved Compose configuration or publish `last-error.log` without 
 5. Retry the same verified bundle after provisioning sufficient capacity.
 
 The rollout never performs automatic cleanup.
-Swap does not replace the OMR RAM reserve.
 A failed preflight leaves active services and release state unchanged.
 Downloaded candidate images can remain after a failed post-pull reserve check.
+
+The owner removes the host-memory gate on 2026-10-01.
+Older rollout scripts can still report `OMR_MEMORY_INSUFFICIENT` or `OMR_MEMORY_UNKNOWN`.
+Use the updated rollout from a newly verified release.
+Docker still enforces the configured OMR memory limit without container swap.
 
 ## Structured logs and rotation
 
@@ -61,6 +63,7 @@ The OMR worker refreshes its marker after a successful database and processing c
 A missing or stale marker fails its healthcheck.
 A disabled worker remains alive but leaves recognition pending; this is not successful OMR acceptance.
 Java memory exhaustion, invalid output, and unclear images require separate diagnoses.
+Host RAM no longer blocks rollout; inspect memory pressure and container OOM status when recognition fails.
 Read `omr-pipeline.md` before changing engine limits.
 
 1. Inspect Telegram readiness and the import list.
