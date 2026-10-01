@@ -57,7 +57,7 @@ Production gives it only the private database network.
 Its subprocess receives no application secrets.
 See `omr-pipeline.md` for leases, review, resource limits, and measured recognition failures.
 Spoken notes use approved MusicXML and pre-generated public vocabulary, not runtime TTS requests.
-See `spoken-notes.md` for generation, timing, authorization, and the current missing-key limit.
+See `spoken-notes.md` for the committed vocabulary, timing, authorization, and browser acceptance.
 API documentation routes remain disabled.
 PHASE 1 implements authentication and emergency manager synchronization.
 Database operations use synchronous SQLAlchemy 2.0 and psycopg 3.
@@ -83,14 +83,24 @@ The backend writes media to the persistent `media_data` volume; frontend nginx m
 Authenticated file routes return an internal nginx redirect, not file bytes.
 See `storage.md` for file limits, conversion, retention, and byte-range delivery.
 No product container shares a prototype volume or credentials.
-The worker directory will accompany worker implementation, not an empty placeholder.
+The worker directory contains product OMR, Telegram, and offline speech generation.
 The PostgreSQL development container uses the official image initialization and a writable data volume.
 Its bootstrap database role is a local-development convenience, not the production role design.
 
 Production separates the application and database networks.
-PostgreSQL has no host port; only the backend and migration service share its network.
+PostgreSQL has no host port.
+The backend, migration service, and both product workers share its private network.
 The frontend exposes loopback HTTP and joins the dedicated shared-nginx proxy network.
 Application and migration credentials are distinct and cannot create databases or roles.
 The migration role owns schemas; the application role has data access only.
 The private version schema prevents runtime changes to Alembic metadata.
 Production containers use bounded Docker logs and persistent database storage.
+
+The backend and workers emit structured logs with fixed event fields.
+HTTP records contain methods, route templates, response statuses, and durations.
+They exclude query strings, client addresses, request bodies, cookies, and tokens.
+Exception records keep types and frame locations, not exception values.
+nginx emits JSON access records without request URLs or client identities.
+Docker rotates production logs using the configured size and file limits.
+Existing worker healthchecks reject stale readiness markers and incomplete processing cycles.
+See `troubleshooting.md` for inspection and recovery.

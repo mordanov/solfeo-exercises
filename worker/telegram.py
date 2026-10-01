@@ -9,13 +9,14 @@ from sqlalchemy import or_, select, text
 from sqlalchemy.exc import SQLAlchemyError
 
 from app.database import Database
+from app.logging import configure_logging
 from app.models import TelegramState, TelegramUpdate
 from app.services.auth import ServiceError
 from app.services.telegram import Update, process_one, receive
 from app.services.telegram_api import TelegramApi
 from app.settings import Settings
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("worker.telegram")
 TEXTS = {
     "en": {
         "link_required": (
@@ -147,10 +148,8 @@ def cycle(database: Database, settings: Settings, api: TelegramApi) -> None:
 
 
 def main() -> None:
-    logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
-    logging.getLogger("httpx").setLevel(logging.WARNING)
-    logging.getLogger("httpcore").setLevel(logging.WARNING)
     settings = Settings()
+    configure_logging("debug" if settings.log_level == "trace" else settings.log_level)
     database = Database(settings)
     try:
         if "--health" in sys.argv:
@@ -193,8 +192,10 @@ def main() -> None:
                         time.sleep(
                             max(settings.telegram_retry_seconds, error.retry_after or 0)
                         )
-    except (ServiceError, SQLAlchemyError, OSError):
-        logger.error("TELEGRAM_WORKER_STOPPED")
+    except (ServiceError, SQLAlchemyError, OSError) as error:
+        logger.exception(
+            error.code if isinstance(error, ServiceError) else "TELEGRAM_WORKER_STOPPED"
+        )
         raise SystemExit(1) from None
     finally:
         database.close()

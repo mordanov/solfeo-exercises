@@ -54,6 +54,10 @@ The frontend reports health failures through localized client error codes.
 nginx can return a gateway error when the backend stops; the frontend treats that response as a failure.
 `/docs`, `/redoc`, and `/openapi.json` are not public routes.
 
+Unknown application pages return HTTP 404 with the localized React page and a home link.
+This nginx fallback does not intercept API errors or direct protected-file denial.
+GET and HEAD retain the same status; HEAD has no body.
+
 ## Authentication and authorization
 
 Only health and login are public API endpoints.
