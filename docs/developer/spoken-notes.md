@@ -17,7 +17,8 @@ Both the source assets and the frontend build pass manifest verification.
 Chrome decodes all 66 real clips and verifies scheduled speech and rests for all 6 language and naming combinations.
 Natural quarter notes fit the default 72 BPM tempo in every combination.
 The owner confirms audible Chrome acceptance on 2026-10-01.
-Safari audible acceptance remains open.
+The owner confirms complete PHASE 6 acceptance after production deployment on 2026-10-01.
+This confirmation does not add automated Safari results or browser-specific measurements.
 The owner merges pull request #1 later that day.
 That recorded deployment stops at the former OMR memory guard; image publication does not establish production acceptance.
 The owner removes the host-memory rollout check later that day; container memory limits remain active.

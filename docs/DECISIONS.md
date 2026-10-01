@@ -7,6 +7,11 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-10-01: The owner confirms completion of PHASE 5 and PHASE 6 after successful production deployment.
+  Pull request #2 merges as `165a1397`; publication and deployment run `36921037861` succeeds.
+  Public HTTPS health returns `{"status":"ok"}`.
+  This acceptance closes the deferred OMR and spoken-notes gates without regenerating the existing 66 clips.
+  PHASE 7 still requires separate confirmation of its final smoke checklist.
 - 2026-10-01: The owner explicitly removes the host-memory preflight from rollout.
   Rollout no longer reads `/proc/meminfo` or rejects deployment through `OMR_MEMORY_INSUFFICIENT` or `OMR_MEMORY_UNKNOWN`.
   The obsolete host-reserve setting is removed from the example configuration and production Compose.
