@@ -40,14 +40,35 @@ The migration service completes before the backend starts.
 
 TanStack Query owns server state.
 
-The separate Material Design migration currently adds dependencies only.
-Material UI `9.4.0` uses Emotion; Community DataGrid `9.14.0` prepares the existing tables for later migration.
+Material UI `9.4.0` supplies visual components through Emotion.
+Community DataGrid `9.14.0` shows users and the journal.
 Fontsource supplies local Roboto assets without external font requests.
 React and React DOM remain at `19.3.0`.
 
-The application does not yet import these new libraries or change its presentation.
-The later component migration requires Chrome 117+ and Safari 17+, following the official Material UI v9 guide.
+The application requires Chrome 117+ and Safari 17+, following the official Material UI v9 guide.
 Native date controls remain because Date Pickers requires an additional, unapproved date library.
+
+`frontend/src/theme.ts` defines the shared palettes, typography, radius, shadows, and component overrides.
+`AppTheme` surrounds the existing providers' application content without recreating the query client.
+`ThemeToggle` uses Material UI color schemes and stores its presentation preference in `solfeo-theme`.
+It does not call the settings API or replace the application tree.
+Text colors meet 4.5:1 contrast; input outlines meet 3:1 contrast.
+
+`frontend/src/components/Ui.tsx` adapts native control attributes to Material components.
+Its explicit labels preserve keyboard access and form validation.
+Native selects retain their event types, option elements, and selection behavior.
+The native file controls and date controls preserve file selection and date boundaries.
+The native tempo slider preserves speech cancellation on every change.
+The obsolete shared CSS file no longer exists; component styling uses the theme and `sx`.
+
+`ReadOnlyGrid` keeps the existing 50-row server pages and external Previous and Next handlers.
+It disables sorting, filtering, selection, column menus, resizing, and dynamic evaluation.
+All page rows remain available without virtualization.
+Built-in grid text follows the selected interface language.
+Inline editors, confirmations, and OMR review remain inline.
+
+Native audio, score refs, rendering effects, and speech scheduling remain unchanged.
+The score surface remains white in dark mode.
 
 The health request has a deadline and follows query cancellation.
 The page does not show old successful data after a failed recheck.

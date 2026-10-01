@@ -2,6 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { fetchHealth, HealthError } from "../../api/health";
 import { config } from "../../config";
+import { Button, Panel } from "../../components/Ui";
+import Alert from "@mui/material/Alert";
 
 export function HealthStatus() {
   const { t } = useTranslation();
@@ -18,22 +20,26 @@ export function HealthStatus() {
       : "errors.UNKNOWN";
 
   return (
-    <section aria-labelledby="health-title">
+    <Panel aria-labelledby="health-title">
       <h2 id="health-title">{t("health.title")}</h2>
       {health.isFetching || health.isPending ? (
-        <p role="status">{t("health.pending")}</p>
+        <Alert severity="info" role="status">
+          {t("health.pending")}
+        </Alert>
       ) : health.isError ? (
-        <p role="alert">{t(errorKey)}</p>
+        <Alert severity="error">{t(errorKey)}</Alert>
       ) : (
-        <p role="status">{t("health.ok")}</p>
+        <Alert severity="success" role="status">
+          {t("health.ok")}
+        </Alert>
       )}
       <p>{t("health.scope")}</p>
-      <button
+      <Button
         disabled={health.isFetching}
         onClick={() => void health.refetch()}
       >
         {t("health.retry")}
-      </button>
-    </section>
+      </Button>
+    </Panel>
   );
 }

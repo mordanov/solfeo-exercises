@@ -10,10 +10,12 @@ Last updated: 2026-10-01 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a05
 ## Current phase
 Material Design: separate visual migration after accepted PHASE 7.
 The owner starts the feature on 2026-10-01.
-Step 1 analysis is complete; step 2 dependency installation is complete.
+Steps 1 through 6 are implemented and validated locally.
 The separate branch `feat/material-design` starts from merged main source `5108a9a`.
-Theme configuration and screen migration remain pending.
-Each step stops for owner review before the next step.
+The owner authorizes all remaining steps without intermediate confirmations.
+Implementation keeps separate screen commits and validates each screen before continuing.
+Safari automation remains unavailable because its remote automation setting is disabled.
+Final owner visual acceptance and production publication remain separate.
 
 ### Previous PHASE 7 completion
 PHASE 7: hardening and documentation review.
@@ -165,11 +167,48 @@ The official Material UI v9 guide requires Chrome 117+ and Safari 17+ when compo
 No charts exist, so Charts remains absent.
 Date Pickers requires an additional date library outside the allowed dependencies.
 Native date controls remain until the owner approves that exception.
-The build, linter, all 137 frontend tests, and dependency audit pass.
-The existing large score-rendering chunk warning remains unchanged.
-Application code, CSS, business logic, speech clips, and private configuration remain unchanged.
-Theme setup follows as step 3 after owner review.
+The owner authorizes the remaining steps without intermediate confirmations on 2026-10-01.
+The application uses a shared blue-gray theme with light and dark schemes, Roboto, and rounded Material controls.
+The theme toggle persists locally without changing account settings or remounting playback.
+Login, password, settings, users, exercises, journal, Telegram, student playback, OMR, health, and 404 presentation use Material components.
+
+Both tables use Community DataGrid with existing external server pagination.
+Grid sorting, filtering, selection, resizing, menus, and dynamic evaluation remain disabled.
+Native selects preserve existing event handlers and keyboard behavior.
+Native audio, file inputs, date inputs, and the tempo slider retain their existing operations.
+
+Score rendering keeps its refs and effects; the score surface remains white in both themes.
+Inline editors and confirmations remain inline; no new modal flow appears.
+The migration removes the unused legacy stylesheet without adding a new CSS file.
+
+The build, linter, all 148 frontend tests, and dependency audit pass.
+AST comparison confirms 200 unchanged business hooks and event handlers across 11 feature files.
+Theme tests verify text contrast of at least 4.5:1 and input outline contrast of at least 3:1.
+Playback tests preserve the audio element, listening session, tempo, and speech player when the theme changes.
+Chrome 154 checks 80 screen, width, and theme combinations with synthetic data and the production CSP.
+These checks cover widths of 320, 390, 768, and 1280 px, keyboard focus, local fonts, and white score surfaces.
+
+All 3 languages pass browser metadata and toggle checks without application runtime errors or CSP violations.
+Screenshots and reproducible browser checks remain in the session artifacts.
+Safari 27 refuses driver sessions because **Allow remote automation** is disabled.
+This task does not change browser preferences or claim successful Safari automation.
+
+Vite warns about the application and score bundle sizes; the build succeeds.
+Business logic, backend APIs, speech clips, private configuration, and deployed services remain unchanged.
 Do not include this migration in PHASE 7 or change existing business logic.
+
+### Completed Material Design checklist
+- [x] Analyze screens, compatibility, and dependency constraints.
+- [x] Install only approved dependencies.
+- [x] Add the shared theme, local font, and translated theme toggle.
+- [x] Migrate login and account settings.
+- [x] Migrate users and journal to Community DataGrid.
+- [x] Migrate exercises, OMR review, Telegram, playback, health, and 404.
+- [x] Remove unused legacy CSS.
+- [x] Verify contrast, focus, mobile layouts, and uninterrupted playback.
+- [x] Run the frontend suite, build, audits, and quality checks.
+- [ ] Obtain final Safari and real-media visual acceptance.
+- [ ] Publish the feature through a new PR and the standard deployment workflow.
 
 ## Completed PHASE 6 plan
 - [x] Add shared vocabulary and a strict MusicXML sequence parser.
@@ -561,7 +600,8 @@ Do not include this migration in PHASE 7 or change existing business logic.
 - The owner does not supply device versions or a per-message evidence record.
 
 ## Next step
-- Continue Material Design with step 3 theme configuration after owner review of step 2.
+- Publish the completed Material Design branch through a new PR; do not reuse merged PR #3.
+- Complete the visual checks in both user guides, especially Safari and real-media playback.
 - Preserve the accepted product behavior, disk guards, container limits, and compatible rollback.
 - Reuse `docs/developer/smoke-check.md` after future production changes.
 - Retain the owner-accepted PHASE 5, PHASE 6, and PHASE 7 results; do not regenerate the existing speech clips.

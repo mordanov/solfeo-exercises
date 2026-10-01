@@ -3,9 +3,36 @@
 This document explains accounts, exercise management, the listening journal, and manual acceptance.
 
 Prerequisites:
-- Use Chrome or Safari.
+- Use Chrome 117+ or Safari 17+.
 - Obtain manager credentials privately from the operator.
 - Open `https://solfeo.miveralta.ru/`, or use the local stand from `docs/developer/setup.md`.
+
+## Change the visual theme
+
+1. Click **Use dark theme** or **Use light theme** above the account area.
+   The page changes colors without resetting forms or stopping playback.
+2. Reload the page.
+   The browser retains the visual choice.
+
+The theme choice stays in this browser, not in your account settings.
+The score surface stays white in both themes.
+User and journal tables retain the existing Previous and Next controls.
+Scroll within a wide table on a small screen to reach its other columns.
+Date filters continue to use your browser's native date controls.
+
+## Material Design visual checklist
+
+1. Open login, Settings, Users, Exercises, Listening journal, and Telegram imports in Chrome and Safari.
+2. Check both themes at desktop and mobile widths.
+3. Use Tab to reach links, controls, table actions, and buttons.
+   The current control shows a visible focus indicator.
+4. Check Russian, English, and Spanish labels.
+5. Create and edit a user, reset a password, and test both pagination buttons.
+6. Upload files, reorder exercises, and review a recognized score.
+7. Apply date filters and inspect a deleted exercise in the journal.
+8. Confirm a Telegram audio replacement and preview its audio.
+9. Change the theme during playback.
+   Playback and the current form values remain unchanged.
 
 ## Review recognized notes
 

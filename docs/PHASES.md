@@ -137,3 +137,15 @@ The owner explicitly removes this host-memory preflight on 2026-10-01.
 Docker memory limits, disk checks, health verification, and compatible rollback remain active.
 PHASE 7 does not change unrelated VPS services.
 The final procedure appears in `docs/developer/smoke-check.md`.
+
+## Separate feature: Material Design
+The owner starts this feature after accepted PHASE 7 on 2026-10-01.
+The owner authorizes all remaining steps without intermediate confirmations.
+The migration adds Material UI v9, Emotion, local Roboto, and Community DataGrid v9.
+All screens use the shared light and dark theme without changing business hooks or event handlers.
+Native dates remain because Date Pickers requires an additional, unapproved dependency.
+Native audio, tempo events, inline confirmations, and score rendering remain unchanged.
+
+Implementation and local checks are complete; publication and final owner visual acceptance remain separate.
+Chrome checks 80 responsive theme cases under the production CSP.
+Safari automation requires the owner to enable its remote automation setting or complete the manual checklist.

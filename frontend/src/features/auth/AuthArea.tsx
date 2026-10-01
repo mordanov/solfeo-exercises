@@ -36,7 +36,7 @@ function LoginForm({ onLogin }: { onLogin: (value: Auth) => void }) {
     mutation.mutate();
   }
   return (
-    <Panel>
+    <Panel sx={{ maxWidth: 640, mx: "auto" }}>
       <Field>
         {t("language.label")}
         <Select
@@ -49,7 +49,9 @@ function LoginForm({ onLogin }: { onLogin: (value: Auth) => void }) {
           <LanguageOptions />
         </Select>
       </Field>
-      <h2>{t("auth.login")}</h2>
+      <Box component="h2" sx={{ mt: 3 }}>
+        {t("auth.login")}
+      </Box>
       <Form onSubmit={submit}>
         <Field>
           {t("auth.username")}
@@ -277,7 +279,7 @@ export function AuthArea() {
           my: 2,
           p: 2,
           bgcolor: "background.paper",
-          borderRadius: 3,
+          borderRadius: 1,
           boxShadow: 1,
           "& a": { py: 1, fontWeight: 500 },
         }}

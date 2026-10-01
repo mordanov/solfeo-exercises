@@ -17,6 +17,8 @@ PHASE 6 adds the existing 66 spoken-note clips and timed playback.
 PHASE 7 adds deployment capacity checks, localized 404 pages, security headers, structured logs, and dependency audits.
 Production deployment succeeds on 2026-10-01; the owner accepts PHASE 5 and PHASE 6.
 PHASE 7 is complete after final owner acceptance on 2026-10-01.
+The separate Material Design feature adds a responsive light/dark interface while preserving the accepted product behavior.
+Its implementation passes local checks; production publication and final owner visual acceptance remain separate.
 
 ## Start locally
 

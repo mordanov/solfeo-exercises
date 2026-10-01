@@ -3,9 +3,34 @@
 This document explains student listening, account settings, and access boundaries.
 
 Prerequisites:
-- Use Chrome or Safari.
+- Use Chrome 117+ or Safari 17+.
 - Obtain your username and temporary password privately from a manager.
 - Open `https://solfeo.miveralta.ru/`.
+
+## Change the visual theme
+
+1. Click **Use dark theme** or **Use light theme** above the account area.
+   The page changes colors without changing the exercise or stopping playback.
+2. Reload the page.
+   This browser retains your visual choice.
+
+The theme does not change saved language or note naming settings.
+The score surface stays white in both themes.
+
+## Material Design visual checklist
+
+1. Open the student area and Settings in Chrome and Safari.
+2. Check both themes at desktop and mobile widths.
+3. Check all 3 interface languages.
+4. Use Tab to reach the listening mode, playback controls, navigation, and theme toggle.
+   The current control shows a visible focus indicator.
+5. Play and seek a real recording.
+6. Change the theme during playback.
+   The current exercise and playback position remain unchanged.
+7. Speak an approved score and change its tempo.
+8. Change the theme during speech.
+   The tempo and speech playback remain unchanged.
+9. Confirm that manager pages still refuse access.
 
 ## Sign in and change a temporary password
 

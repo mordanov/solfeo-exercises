@@ -15,6 +15,7 @@ import NativeSelect from "@mui/material/NativeSelect";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import TextField from "@mui/material/TextField";
 import FormLabel from "@mui/material/FormLabel";
+import type { SxProps, Theme } from "@mui/material/styles";
 
 export function Button({
   type = "submit",
@@ -25,9 +26,13 @@ export function Button({
 
 export function Panel({
   component = "section",
+  sx,
   ...props
-}: HTMLAttributes<HTMLElement> & { component?: "section" | "article" | "li" }) {
-  return <Card component={component} {...props} sx={{ minWidth: 0 }} />;
+}: HTMLAttributes<HTMLElement> & {
+  component?: "section" | "article" | "li";
+  sx?: SxProps<Theme>;
+}) {
+  return <Card component={component} {...props} sx={sx} />;
 }
 
 export function Form(props: FormHTMLAttributes<HTMLFormElement>) {

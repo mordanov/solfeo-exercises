@@ -9,6 +9,8 @@ for (let index = 1; index < shadows.length; index++) {
     `0 ${Math.ceil(index / 2)}px ${8 + index * 2}px rgba(15, 23, 42, 0.08)`;
 }
 
+export const fieldOutline = { light: "#8491a6", dark: "#73839c" };
+
 export const theme = createTheme({
   cssVariables: { colorSchemeSelector: "[data-color-scheme='%s']" },
   colorSchemes: {
@@ -62,18 +64,34 @@ export const theme = createTheme({
     MuiButton: {
       defaultProps: { variant: "contained", disableElevation: true },
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           minHeight: 44,
           paddingInline: 18,
           marginBlock: 4,
           marginInlineEnd: 8,
-        },
+          "&:focus-visible": {
+            outline: `3px solid ${theme.vars.palette.primary.main}`,
+            outlineOffset: 3,
+          },
+        }),
+      },
+    },
+    MuiCheckbox: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          "&.Mui-focusVisible": {
+            outline: `3px solid ${theme.vars.palette.primary.main}`,
+            outlineOffset: 2,
+          },
+        }),
       },
     },
     MuiCard: {
       defaultProps: { elevation: 1 },
       styleOverrides: {
         root: {
+          minWidth: 0,
+          backgroundImage: "none",
           padding: "clamp(16px, 3vw, 28px)",
           marginBlock: 20,
           overflow: "visible",
@@ -84,7 +102,19 @@ export const theme = createTheme({
       defaultProps: { variant: "outlined", size: "small" },
     },
     MuiOutlinedInput: {
-      styleOverrides: { root: { minHeight: 44 } },
+      styleOverrides: {
+        root: ({ theme }) => ({
+          minHeight: 44,
+          "& .MuiOutlinedInput-notchedOutline": {
+            borderColor: fieldOutline.light,
+          },
+          ...theme.applyStyles("dark", {
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: fieldOutline.dark,
+            },
+          }),
+        }),
+      },
     },
     MuiDialog: {
       styleOverrides: { paper: { borderRadius: 12, backgroundImage: "none" } },

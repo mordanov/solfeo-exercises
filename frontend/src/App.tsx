@@ -8,14 +8,16 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { ThemeToggle } from "./components/ThemeToggle";
+import { Field, Panel, Select } from "./components/Ui";
+import Button from "@mui/material/Button";
 
 function NotFound() {
   const { t, i18n } = useTranslation();
   return (
-    <section>
-      <label>
+    <Panel>
+      <Field>
         {t("language.label")}
-        <select
+        <Select
           value={i18n.resolvedLanguage}
           onChange={(event) => {
             if (isLanguage(event.target.value))
@@ -23,12 +25,12 @@ function NotFound() {
           }}
         >
           <LanguageOptions />
-        </select>
-      </label>
+        </Select>
+      </Field>
       <h2>{t("notFound.title")}</h2>
       <p>{t("notFound.description")}</p>
-      <a href="/">{t("notFound.home")}</a>
-    </section>
+      <Button href="/">{t("notFound.home")}</Button>
+    </Panel>
   );
 }
 

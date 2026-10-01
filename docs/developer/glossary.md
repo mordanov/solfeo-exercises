@@ -63,3 +63,9 @@ Prerequisites:
 | disk reserve | Free storage retained after image downloads and extraction. |
 | image budget | Free storage allocated for a new release's compressed images and extracted layers. |
 | smoke check | A short end-to-end procedure that checks the deployed application's main functions. |
+| Material UI | The React component library used for the application's visual design. |
+| DataGrid | The Community table component that shows the existing server pages without additional filtering or sorting. |
+| theme | The light or dark colors, typography, and shared visual rules for the application. |
+| Emotion | The style engine used by Material UI. |
+| Roboto | The application font, served from local assets. |
+| AST | Abstract syntax tree, which represents code structure for comparison. |

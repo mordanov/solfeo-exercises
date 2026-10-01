@@ -12,12 +12,12 @@ A child looks at the notes and listens to the audio.
 
 ## Stack (fixed, do not change)
 - Backend: Python 3.12, FastAPI, SQLAlchemy 2.x (typed), Alembic, PostgreSQL, pytest, ruff, mypy (strict).
-- Frontend: React + TypeScript + Vite, react-i18next, Vitest + Testing Library, ESLint, Prettier.
+- Frontend: React + TypeScript + Vite, Material UI v9, Community DataGrid v9, react-i18next, Vitest + Testing Library, ESLint, Prettier.
 - Infra: nginx (reverse proxy, TLS, serves protected files via X-Accel-Redirect), Docker Compose.
 - Workers: OMR worker container (Audiveris, Java) + a Postgres-based job queue (SELECT ... FOR UPDATE SKIP LOCKED). No Redis.
 - CI/CD: GitHub Actions. CI = pre-commit (ruff, ruff-format, mypy, eslint, prettier, tsc) + backend unit tests + frontend unit tests.
   CD = build Docker images -> push to GHCR -> deploy to VPS via SSH (docker compose pull/up, alembic upgrade, healthcheck, rollback to previous tag on failure).
-- Target browsers: Chrome and Safari only. Backups are OUT OF SCOPE.
+- Target browsers: Chrome 117+ and Safari 17+ only. Backups are OUT OF SCOPE.
 
 ## Configuration
 - ALL settings live in .env (pydantic-settings). Keep .env.example complete and documented. No secrets in git.

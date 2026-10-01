@@ -5,7 +5,7 @@ import { I18nextProvider } from "react-i18next";
 import { beforeEach, expect, it } from "vitest";
 import { getContrastRatio } from "@mui/material/styles";
 import { i18n } from "./i18n";
-import { AppTheme, theme } from "./theme";
+import { AppTheme, fieldOutline, theme } from "./theme";
 import { ThemeToggle } from "./components/ThemeToggle";
 
 beforeEach(async () => {
@@ -88,5 +88,8 @@ it.each(["light", "dark"] as const)(
         palette.palette.primary.contrastText,
       ),
     ).toBeGreaterThanOrEqual(4.5);
+    expect(
+      getContrastRatio(fieldOutline[mode], palette.palette.background.paper),
+    ).toBeGreaterThanOrEqual(3);
   },
 );
