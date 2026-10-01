@@ -39,6 +39,16 @@ The migration service completes before the backend starts.
 | `prototypes/` | Independent risk prototypes |
 
 TanStack Query owns server state.
+
+The separate Material Design migration currently adds dependencies only.
+Material UI `9.4.0` uses Emotion; Community DataGrid `9.14.0` prepares the existing tables for later migration.
+Fontsource supplies local Roboto assets without external font requests.
+React and React DOM remain at `19.3.0`.
+
+The application does not yet import these new libraries or change its presentation.
+The later component migration requires Chrome 117+ and Safari 17+, following the official Material UI v9 guide.
+Native date controls remain because Date Pickers requires an additional, unapproved date library.
+
 The health request has a deadline and follows query cancellation.
 The page does not show old successful data after a failed recheck.
 Errors appear explicitly in the selected language.

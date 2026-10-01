@@ -7,6 +7,13 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-10-01: The owner starts the separate Material Design feature after accepted PHASE 7.
+  Step 2 adds Material UI v9, Emotion, self-hosted Roboto, and Community DataGrid v9.
+  The existing React 19 version satisfies the libraries' peer requirements.
+  Charts remains absent because the application has no charts.
+  Date Pickers remains absent because its required date library exceeds the approved dependencies.
+  Keep native date controls unless the owner approves an exception.
+  Installation does not change application code; theme configuration follows only after review of this step.
 - 2026-10-01: The owner confirms final PHASE 7 acceptance after the verified production deployment.
   This confirmation closes the full smoke acceptance gate and completes PHASE 7.
   PHASE 5 and PHASE 6 already have owner acceptance.

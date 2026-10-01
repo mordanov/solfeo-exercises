@@ -8,6 +8,14 @@ Prerequisites:
 Last updated: 2026-10-01 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a0523`.
 
 ## Current phase
+Material Design: separate visual migration after accepted PHASE 7.
+The owner starts the feature on 2026-10-01.
+Step 1 analysis is complete; step 2 dependency installation is complete.
+The separate branch `feat/material-design` starts from merged main source `5108a9a`.
+Theme configuration and screen migration remain pending.
+Each step stops for owner review before the next step.
+
+### Previous PHASE 7 completion
 PHASE 7: hardening and documentation review.
 Status: complete after deployed owner acceptance on 2026-10-01.
 The owner authorizes the entire phase without intermediate confirmations on 2026-10-01.
@@ -150,8 +158,17 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 ## Separate Material Design feature
 The owner requests a separate visual migration through `material_design.md` after PHASE 7.
 Read-only analysis covers React compatibility, screens, styles, and migration constraints.
-The frontend build and linter pass; frontend code and dependency manifests remain unchanged.
-Implementation requires a separate feature branch and owner approval of the migration plan.
+The owner starts implementation on 2026-10-01 after the analysis.
+Step 2 installs Material UI `9.4.0`, Community DataGrid `9.14.0`, Emotion, and self-hosted Roboto.
+React and React DOM remain at `19.3.0`; the installed libraries support React 19.
+The official Material UI v9 guide requires Chrome 117+ and Safari 17+ when components use the library.
+No charts exist, so Charts remains absent.
+Date Pickers requires an additional date library outside the allowed dependencies.
+Native date controls remain until the owner approves that exception.
+The build, linter, all 137 frontend tests, and dependency audit pass.
+The existing large score-rendering chunk warning remains unchanged.
+Application code, CSS, business logic, speech clips, and private configuration remain unchanged.
+Theme setup follows as step 3 after owner review.
 Do not include this migration in PHASE 7 or change existing business logic.
 
 ## Completed PHASE 6 plan
@@ -544,7 +561,7 @@ Do not include this migration in PHASE 7 or change existing business logic.
 - The owner does not supply device versions or a per-message evidence record.
 
 ## Next step
-- Continue the separate Material Design feature only after approval of its existing migration plan.
+- Continue Material Design with step 3 theme configuration after owner review of step 2.
 - Preserve the accepted product behavior, disk guards, container limits, and compatible rollback.
 - Reuse `docs/developer/smoke-check.md` after future production changes.
 - Retain the owner-accepted PHASE 5, PHASE 6, and PHASE 7 results; do not regenerate the existing speech clips.
