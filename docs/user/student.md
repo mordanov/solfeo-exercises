@@ -43,6 +43,7 @@ The score surface stays white in both themes.
    The student area becomes available.
 
 An incorrect password shows an error.
+New passwords require at least 8 characters by default.
 Repeated attempts can temporarily block sign-in.
 Ask a manager to reset a forgotten password.
 A manager reset ends your existing sessions.

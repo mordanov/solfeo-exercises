@@ -20,7 +20,7 @@ Frontend build values are public; never put a secret in `VITE_*`.
 | `AUTH_ALLOWED_ORIGINS` | Localhost origins on port 18080 | JSON array of exact origins; production requires `https://solfeo.miveralta.ru` |
 | `SESSION_COOKIE_SECURE` | `true` | HTTPS-only session cookie; use `false` only for local HTTP |
 | `SESSION_LIFETIME_DAYS` | `90` | Sliding session lifetime, from 1 to 365 days |
-| `PASSWORD_MIN_LENGTH` | `12` | Minimum password length, from 8 to 128 characters |
+| `PASSWORD_MIN_LENGTH` | `8` | Minimum password length, from 8 to 128 characters |
 | `LOGIN_USERNAME_LIMIT` | `5` | Failed attempts per normalized username within the window |
 | `LOGIN_IP_LIMIT` | `30` | Login attempts per client IP within the window |
 | `LOGIN_WINDOW_SECONDS` | `900` | Login-budget window, from 1 to 86400 seconds |

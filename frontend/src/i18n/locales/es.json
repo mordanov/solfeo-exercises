@@ -123,7 +123,7 @@
   "auth.newPassword": "Nueva contraseña",
   "auth.confirmPassword": "Confirmar nueva contraseña",
   "auth.changeRequired": "Cambia tu contraseña antes de continuar.",
-  "auth.passwordHint": "Usa una contraseña larga: al menos 12 caracteres de forma predeterminada.",
+  "auth.passwordHint": "Usa una contraseña larga: al menos 8 caracteres de forma predeterminada.",
   "auth.passwordChanged": "Contraseña cambiada",
   "auth.emergencyHint": "El operador configura la contraseña del gestor de emergencia en las variables de entorno.",
   "nav.label": "Navegación de la cuenta",

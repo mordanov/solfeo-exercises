@@ -12,7 +12,13 @@ from sqlalchemy import delete, select
 from app.database import Database
 from app.main import create_app
 from app.models import Base, LoginSession, User
-from app.services.auth import hash_password, sync_emergency, verify_password
+from app.services.auth import (
+    ServiceError,
+    hash_password,
+    require_password,
+    sync_emergency,
+    verify_password,
+)
 from app.settings import Settings
 
 PASSWORD = "synthetic-long-password"
@@ -33,7 +39,7 @@ def settings() -> Settings:
         emergency_manager_password=SecretStr(PASSWORD),
         session_cookie_secure=True,
         session_lifetime_days=90,
-        password_min_length=12,
+        password_min_length=8,
         login_username_limit=5,
     )
     if result.database_name != "solfeo_test":
@@ -109,6 +115,108 @@ def test_passwords_use_salted_scrypt() -> None:
     assert PASSWORD not in first
     assert verify_password(PASSWORD, first)
     assert not verify_password("wrong-password", first)
+
+
+@pytest.mark.parametrize(
+    "length,accepted", [(7, False), (8, True), (256, True), (257, False)]
+)
+def test_default_password_policy_boundaries(
+    monkeypatch: pytest.MonkeyPatch, length: int, accepted: bool
+) -> None:
+    monkeypatch.delenv("PASSWORD_MIN_LENGTH", raising=False)
+    policy = Settings(
+        _env_file=None,
+        database_password=SecretStr("synthetic-password"),
+        emergency_manager_username="",
+        emergency_manager_password=SecretStr(""),
+    )
+    assert policy.password_min_length == 8
+    if accepted:
+        require_password("x" * length, policy)
+    else:
+        with pytest.raises(ServiceError, match="WEAK_PASSWORD") as failure:
+            require_password("x" * length, policy)
+        assert failure.value.status == 422
+
+
+def test_operator_can_keep_a_stricter_password_policy(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv("PASSWORD_MIN_LENGTH", "12")
+    policy = Settings(
+        _env_file=None,
+        database_password=SecretStr("synthetic-password"),
+        emergency_manager_username="",
+        emergency_manager_password=SecretStr(""),
+    )
+    assert policy.password_min_length == 12
+    with pytest.raises(ServiceError, match="WEAK_PASSWORD"):
+        require_password("x" * 8, policy)
+    require_password("x" * 12, policy)
+
+
+@pytest.mark.parametrize("length,accepted", [(7, False), (8, True)])
+def test_emergency_credentials_follow_default_password_minimum(
+    monkeypatch: pytest.MonkeyPatch, length: int, accepted: bool
+) -> None:
+    monkeypatch.delenv("PASSWORD_MIN_LENGTH", raising=False)
+
+    def configured() -> Settings:
+        return Settings(
+            _env_file=None,
+            database_password=SecretStr("synthetic-password"),
+            emergency_manager_username="recovery",
+            emergency_manager_password=SecretStr("x" * length),
+        )
+
+    if accepted:
+        assert configured().password_min_length == 8
+    else:
+        with pytest.raises(
+            ValidationError, match="Invalid emergency manager credentials"
+        ):
+            configured()
+
+
+@pytest.mark.parametrize("operation", ["create", "reset", "change"])
+@pytest.mark.parametrize("length,accepted", [(7, False), (8, True)])
+async def test_password_minimum_at_every_mutation(
+    client: httpx.AsyncClient, operation: str, length: int, accepted: bool
+) -> None:
+    await login(client)
+    replacement = "x" * length
+    if operation == "create":
+        response = await client.post(
+            "/api/users",
+            json={
+                "username": "student",
+                "password": replacement,
+                "first_name": "First",
+                "last_name": "Last",
+                "role": "student",
+            },
+        )
+        success = 201
+    else:
+        identifier = await create_user(client)
+        if operation == "reset":
+            response = await client.post(
+                f"/api/users/{identifier}/password", json={"password": replacement}
+            )
+        else:
+            client.cookies.clear()
+            await login(client, "student")
+            response = await client.put(
+                "/api/auth/password",
+                json={"current_password": PASSWORD, "new_password": replacement},
+            )
+        success = 200
+    assert response.status_code == (success if accepted else 422)
+    if accepted:
+        client.cookies.clear()
+        assert (await login(client, "student", replacement)).status_code == 200
+    else:
+        assert response.json() == {"error": "WEAK_PASSWORD"}
 
 
 def test_emergency_create_reset_disable_and_reactivate(

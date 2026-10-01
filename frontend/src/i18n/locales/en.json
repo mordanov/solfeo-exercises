@@ -123,7 +123,7 @@
   "auth.newPassword": "New password",
   "auth.confirmPassword": "Confirm new password",
   "auth.changeRequired": "Change your password before continuing.",
-  "auth.passwordHint": "Use a long password: at least 12 characters by default.",
+  "auth.passwordHint": "Use a long password: at least 8 characters by default.",
   "auth.passwordChanged": "Password changed",
   "auth.emergencyHint": "The emergency manager password is controlled by the operator's environment configuration.",
   "nav.label": "Account navigation",

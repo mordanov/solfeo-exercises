@@ -7,6 +7,10 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-10-01: The owner reduces the default password minimum to 8 characters.
+  Creation, reset, change, and emergency credentials use the same configured minimum.
+  The maximum password length remains 256 characters; hashing, rate limits, and session protections remain unchanged.
+  Existing environment overrides retain precedence.
 - 2026-10-01: The owner authorizes all remaining Material Design steps without intermediate confirmations.
   Each screen uses a separate commit after its build, linter, and targeted tests pass.
   Presentation adapters preserve native attributes and event signatures without changing business state or API calls.

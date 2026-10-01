@@ -108,7 +108,7 @@ The manager interface cannot edit the emergency account or reset its password.
 Usernames accept 3–64 ASCII letters, digits, dots, underscores, or hyphens.
 They must start with a letter or digit.
 The application treats uppercase and lowercase usernames as the same username.
-Passwords require at least 12 characters by default; the operator can adjust that minimum.
+Passwords require at least 8 characters by default; the operator can adjust that minimum.
 The application never shows stored passwords.
 
 1. Click **Edit** beside another ordinary user.

@@ -17,6 +17,18 @@ Implementation keeps separate screen commits and validates each screen before co
 Safari automation remains unavailable because its remote automation setting is disabled.
 Final owner visual acceptance and production publication remain separate.
 
+### Password policy follow-up
+The owner reduces the default password minimum to 8 characters on 2026-10-01.
+Backend defaults, both Compose files, example configuration, and all 3 language hints use the new minimum.
+Creation, reset, change, and emergency credentials share the same configured policy.
+Passwords shorter than 8 characters remain invalid; the maximum length remains 256 characters.
+Existing hashes, sessions, rate limits, and private configuration remain unchanged.
+
+Set `PASSWORD_MIN_LENGTH=8` in an existing deployment environment if it explicitly overrides the old default.
+Restart the backend after updating its deployed configuration.
+All 42 auth tests and 4 documentation checks pass with an isolated PostgreSQL database.
+The translated hints, frontend build, and all repository quality hooks pass.
+
 ### Previous PHASE 7 completion
 PHASE 7: hardening and documentation review.
 Status: complete after deployed owner acceptance on 2026-10-01.

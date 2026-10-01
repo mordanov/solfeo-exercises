@@ -194,7 +194,7 @@ class Settings(BaseSettings):
         default=90, ge=1, le=365, validation_alias="SESSION_LIFETIME_DAYS"
     )
     password_min_length: int = Field(
-        default=12, ge=8, le=128, validation_alias="PASSWORD_MIN_LENGTH"
+        default=8, ge=8, le=128, validation_alias="PASSWORD_MIN_LENGTH"
     )
     login_username_limit: int = Field(
         default=5, ge=1, le=100, validation_alias="LOGIN_USERNAME_LIMIT"
