@@ -17,16 +17,15 @@ const durations = new Map([
 it("fits name and accidental inside the beat, preserves rest and long-note silence", () => {
   const plan = planPlayback(events, durations, 60, "en", "letters", config);
   expect(plan.total).toBe(6);
-  [0, 0.4, 2].forEach((start, index) =>
+  [0, 0.3, 2].forEach((start, index) =>
     expect(plan.clips[index].start).toBeCloseTo(start),
   );
   expect(
-    plan.clips.every(
-      (clip) => clip.rate >= config.minRate && clip.rate <= config.maxRate,
-    ),
+    plan.clips.every((clip) => clip.rate >= 1 && clip.rate <= config.maxRate),
   ).toBe(true);
   expect(plan.markers.map((marker) => marker.start)).toEqual([0, 1, 2]);
-  expect(plan.clips[2].duration).toBeCloseTo(0.4 / config.minRate);
+  // A long note plays the word at its natural pitch; silence fills the rest.
+  expect(plan.clips[2].duration).toBeCloseTo(0.4);
 });
 it("refuses to truncate a word or overlap the next beat", () => {
   expect(() =>
@@ -58,8 +57,6 @@ it("validates public playback configuration", () => {
   expect(config.defaultBpm).toBe(72);
   expect(() => readSpokenConfiguration('{"defaultBpm":0}')).toThrow();
   expect(() =>
-    readSpokenConfiguration(
-      JSON.stringify({ ...config, minRate: 2, maxRate: 1 }),
-    ),
+    readSpokenConfiguration(JSON.stringify({ ...config, maxRate: 0.5 })),
   ).toThrow();
 });

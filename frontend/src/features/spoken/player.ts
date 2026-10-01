@@ -51,10 +51,10 @@ export function planPlayback(
       const requiredRate = sizes.reduce((sum, size) => sum + size, 0) / seconds;
       if (requiredRate > limits.maxRate + 1e-9)
         throw new ApiError("SPOKEN_TEMPO_TOO_FAST");
-      const rate = Math.max(
-        limits.minRate,
-        Math.min(limits.maxRate, requiredRate),
-      );
+      // Never play below the natural rate: a slower rate only lowers pitch and
+      // makes long notes sound like a different voice. Silence fills any
+      // leftover time instead. Speed up only when the word truly does not fit.
+      const rate = Math.max(1, Math.min(limits.maxRate, requiredRate));
       let start = plan.total;
       paths.forEach((path, index) => {
         const duration = sizes[index] / rate;

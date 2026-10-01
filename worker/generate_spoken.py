@@ -31,6 +31,26 @@ class Clip:
     path: str
 
 
+# Native-accent hints per language, so every clip in a language sounds like one
+# consistent native speaker instead of a foreign-accented reading.
+ACCENT_HINTS = {
+    "en": "Speak with a neutral, native English accent and standard pronunciation.",
+    "ru": "Speak with a natural, native Russian accent and standard pronunciation.",
+    "es": "Speak with a natural, neutral Spanish accent and standard pronunciation.",
+}
+
+
+def speech_instructions(language: str) -> str:
+    return (
+        "Speak only the supplied note name or accidental "
+        f"in {language}. "
+        f"{ACCENT_HINTS[language]} "
+        "Use a clear, short, natural speaking voice. "
+        "Do not sing, hum, "
+        "add music, introductions, or other words."
+    )
+
+
 def vocabulary() -> list[Clip]:
     data: dict[str, dict[str, dict[str, str]]] = json.loads(VOCABULARY.read_text())
     return [
@@ -52,7 +72,10 @@ def fingerprint(settings: Settings, clip: Clip) -> str:
                 settings.spoken_voice,
                 clip.language,
                 clip.text,
-                "spoken-v1",
+                # Bump this tag whenever the speech instructions change, so a
+                # changed accent hint forces an explicit, separate-directory
+                # regeneration instead of silently reusing the old clip.
+                "spoken-v2",
                 settings.audio_bitrate_kbps,
             ],
             ensure_ascii=False,
@@ -158,13 +181,7 @@ def generate(settings: Settings, client: httpx.Client) -> None:
                         "voice": settings.spoken_voice,
                         "input": clip.text,
                         "response_format": "wav",
-                        "instructions": (
-                            "Speak only the supplied note name or accidental "
-                            f"in {clip.language}. "
-                            "Use a clear, short, natural speaking voice. "
-                            "Do not sing, hum, "
-                            "add music, introductions, or other words."
-                        ),
+                        "instructions": speech_instructions(clip.language),
                     },
                     timeout=settings.spoken_timeout_seconds,
                 ) as response:

@@ -90,8 +90,7 @@ Each clip request uses `VITE_HEALTH_TIMEOUT_MS`.
 | `defaultBpm` | `72` | Initial tempo |
 | `minBpm` | `40` | Minimum slider tempo |
 | `maxBpm` | `160` | Maximum slider tempo |
-| `minRate` | `0.75` | Minimum playback rate |
-| `maxRate` | `1.5` | Maximum playback rate |
+| `maxRate` | `1.5` | Maximum playback rate. Playback never goes below rate 1; silence fills unused time instead |
 | `maxSeconds` | `1800` | Maximum complete speech sequence |
 | `maxClipBytes` | `2097152` | Maximum downloaded clip bytes |
 | `maxClipSeconds` | `5` | Maximum decoded clip duration |

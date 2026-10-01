@@ -4,7 +4,6 @@ const spokenDefaults = {
   defaultBpm: 72,
   minBpm: 40,
   maxBpm: 160,
-  minRate: 0.75,
   maxRate: 1.5,
   maxSeconds: 1800,
   maxClipBytes: 2097152,
@@ -33,7 +32,7 @@ export function readSpokenConfiguration(value?: string): typeof spokenDefaults {
     !Number.isInteger(result.defaultBpm) ||
     result.defaultBpm < result.minBpm ||
     result.defaultBpm > result.maxBpm ||
-    result.minRate > result.maxRate ||
+    result.maxRate < 1 ||
     result.maxRate > 4 ||
     result.maxBpm > 400 ||
     result.maxSeconds > 3600 ||

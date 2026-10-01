@@ -22,6 +22,11 @@ The owner postpones deployment; this branch does not change either VPS.
 Pull request #1 enables branch CI without CLI permissions to create requests or dispatch workflows.
 Do not merge that request while deployment remains postponed.
 
+The generator now adds a native-accent hint per language to the speech instructions.
+The fingerprint tag moves from `spoken-v1` to `spoken-v2`, so every clip needs regeneration.
+Regenerate into a new `SPOKEN_OUTPUT` directory first, listen to the result, then replace the committed set.
+`backend/tests/test_spoken_generation.py::test_committed_speech_assets` fails until the committed clips match the new tag.
+
 ## Generate the vocabulary
 
 The shared vocabulary is `frontend/src/features/spoken/vocabulary.json`.
@@ -35,6 +40,9 @@ Keep the API key private and outside every `VITE_*` setting.
 
 1. Set `OPENAI_API_KEY` in the root `.env` file.
 2. Select `SPOKEN_MODEL` and `SPOKEN_VOICE`.
+   To compare accents, set a separate `SPOKEN_OUTPUT` directory and try a different `SPOKEN_VOICE` value.
+   Current OpenAI voice names include `alloy`, `ash`, `ballad`, `coral`, `echo`, `nova`, `onyx`, `sage`, `shimmer`, `verse`.
+   Repeat with another directory and voice, then keep the committed set that sounds best.
 3. Run the generator from the repository root.
 
 ```sh
@@ -97,7 +105,9 @@ The parser does not repair recognition errors; manager approval remains necessar
 The scheduler uses the Web Audio clock, not chained timers.
 Each note occupies `beats * 60 / BPM` seconds.
 The name and optional suffix share that slot.
-Playback rate remains within the configured range; silence fills the remaining duration.
+Playback rate never drops below 1; the word keeps its natural pitch and voice.
+Silence fills the remaining duration after the word, instead of a slower, lower-pitched voice.
+The scheduler speeds up the word only when it does not fit at the natural rate, up to the configured maximum.
 A name that cannot fit at the maximum rate produces `SPOKEN_TEMPO_TOO_FAST`.
 The player does not truncate speech or overlap the next note.
 The user must lower the tempo.
