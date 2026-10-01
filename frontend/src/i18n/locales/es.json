@@ -1,4 +1,7 @@
 {
+  "notFound.title": "Página no encontrada",
+  "notFound.description": "Esta página no existe. Usa la página de inicio para continuar.",
+  "notFound.home": "Ir al inicio",
   "telegram.title": "Importaciones de Telegram",
   "telegram.help": "Vincula tu cuenta, envía audio al bot y actualiza la lista. El tamaño máximo es de 20 MB.",
   "telegram.linked": "Telegram está vinculado.",
