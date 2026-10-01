@@ -117,6 +117,9 @@ clip regeneration (optional; the committed 66 clips still use the original gener
 Status: complete.
 
 ## PHASE 7: Hardening and documentation review
+The owner authorizes the entire phase without intermediate confirmations on 2026-10-01.
+Manual acceptance follows the complete implementation.
+The owner merges PHASE 6 and declines regeneration of the existing 66 clips.
 - Check free disk space before deployment image pulls and reserve capacity for extraction and rollback.
   Fail before changing running services when capacity is insufficient.
 - Replace nginx's default unknown-page response with a localized application 404 page and a home link.
@@ -126,3 +129,7 @@ Status: complete.
 - Full documentation review against the rules in docs.instructions.md. Complete `.env` variable reference. Troubleshooting.
 - Manual end-to-end smoke checklist for the full flow.
 Done when: the smoke checklist passes on the VPS from a clean deploy.
+Implementation status: complete locally; production deployment and final acceptance remain open.
+The merged PHASE 6 deployment still fails safely with `OMR_MEMORY_INSUFFICIENT`.
+PHASE 7 does not disable this protection or change unrelated VPS services.
+The final procedure appears in `docs/developer/smoke-check.md`.

@@ -1,18 +1,22 @@
 # Telegram audio prototype
 
-This procedure is historical.
+This document preserves the historical checks for the superseded Telegram audio prototype.
+
+Prerequisites:
+- Read the Telegram import procedure in `manager.md`.
+- Keep the old poller stopped while the product bot is active.
+
 The product worker replaces the prototype poller in PHASE 4.
 Use the Telegram import procedure in `manager.md`.
 Do not restart the old poller while the product bot is active.
 
-This document explains how to check audio ingestion through the dedicated Telegram bot.
-
-Prerequisites:
+Historical prerequisites:
 - Use `https://t.me/solfeo_exercises_bot`.
 - Ask the operator to allow your numeric Telegram user ID.
 - Wait for confirmation that the worker is active on the VPS.
 
-The worker is active on the VPS as of 2026-09-29.
+The prototype activation record confirms an active worker on 2026-09-29.
+The product transition later stops that prototype and preserves its files.
 The owner confirms successful audio receipt and playback on 2026-09-29.
 The Telegram bot replaces PWA sharing as the selected product audio import path.
 The owner confirms the remaining manual checks on 2026-09-29.

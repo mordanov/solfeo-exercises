@@ -110,7 +110,7 @@ Do not remove the data volume.
    ```
 
 3. Repeat the revision command.
-   Alembic reports `0005_telegram (head)`.
+   Alembic reports `0006_omr (head)`.
 4. Open the local health page.
    Its existing behavior remains unchanged.
 

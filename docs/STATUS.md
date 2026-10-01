@@ -5,10 +5,58 @@ This document records progress and remaining checks for the current phase.
 Prerequisites:
 - Read `docs/PHASES.md` and `docs/DECISIONS.md`.
 
-Last updated: 2026-10-01 by Copilot, session `2d97b6fc-84af-4fc4-bf46-81df4dd02379`.
+Last updated: 2026-10-01 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a0523`.
 
 ## Current phase
-PHASE 6: spoken notes implementation, without deployment. Status: complete.
+PHASE 7: hardening and documentation review.
+Implementation is complete locally; production deployment and final manual acceptance remain open.
+The owner authorizes the entire phase without intermediate confirmations on 2026-10-01.
+Work uses `feat/phase7-hardening`, based on merged PHASE 6 source `f3ba47f`.
+The owner retains all 66 speech clips and declines regeneration.
+The task does not call the paid speech generator.
+
+### PHASE 7 implementation
+- Add a configurable 6144 MiB cold-image budget and 2048 MiB free reserve.
+- Measure Docker and release storage before pulls and check the reserve again before changing services.
+- Fail closed for unknown storage, invalid limits, insufficient space, and remote Docker daemons.
+- Preserve active services, database volumes, release state, and existing rollback images after capacity refusal.
+- Add a translated application 404 page with a language selector and home link.
+- Preserve HTTP 404, HEAD behavior, API JSON errors, authenticated file checks, and direct internal-file denial.
+- Add CSP, frame denial, MIME protection, no-referrer, restricted browser permissions, and HTTPS-only HSTS.
+- Reject insecure HTTPS cookies and non-loopback HTTP authentication during settings validation.
+- Add structured backend, worker, and nginx access records without request bodies, tokens, or query strings.
+- Keep exception types and frame locations without logging exception values.
+- Record backend lifespan failures before rethrowing them; preserve cleanup and safe exception diagnostics.
+- Verify existing production log rotation and OMR/Telegram healthchecks.
+- Add strict Python and JavaScript dependency audits to CI.
+- Add documentation checks for required guides, environment coverage, relative links, and sentence lengths.
+- Review developer and user documentation; correct stale phase, schema, deployment, and prototype statements.
+- Add the missing language and troubleshooting guides and the complete final VPS smoke checklist.
+
+### PHASE 7 validation and deployment boundary
+Local backend and frontend suites, quality hooks, dependency audits, image builds, and real container checks pass.
+Local checks pass 150 backend tests, 137 frontend tests, and 56 deployment/container tests.
+Container checks cover 404 statuses, headers, API/file boundaries, Range playback, log rotation, migrations, and compatible rollback.
+Disk tests cover the exact 8192 MiB pre-pull boundary and the 2048 MiB post-pull reserve.
+Documentation checks cover all product environment variables and the complete user/developer guide set.
+The existing tracker test passes in the pinned Node container; no unrelated flaky-test change is necessary.
+
+The updated PHASE 7 stand responds at `http://127.0.0.1:18080/`.
+PostgreSQL, backend, frontend, and OMR report healthy states; Telegram remains stopped.
+Public health and unknown-page HEAD checks pass against this persistent stand.
+The strengthened rollback check confirms that disk refusal preserves all running service identities and release state.
+
+Main-branch CI run `36866682091` succeeds for merged PHASE 6 source `f3ba47f`.
+Publication run `36867434244` verifies its images but deployment fails with `OMR_MEMORY_INSUFFICIENT`.
+The recorded failure is current evidence from the configured deployment target, not a new-host capacity measurement.
+PHASE 7 does not bypass this guard, rewrite private server configuration, or restart unrelated services.
+Its branch requires successful remote CI and a verified production rollout before final owner acceptance.
+Chrome command-line DOM verification times out in this environment.
+HTTP and React component checks pass; they do not establish a successful real-browser acceptance pass.
+Chrome and Safari checks remain in the final checklist, after implementation.
+
+### Previous PHASE 6 acceptance
+PHASE 6 spoken notes are complete with owner-confirmed audible Chrome acceptance.
 The owner authorizes complete phase automation and postpones PHASE 5 deployment on 2026-09-30.
 Work uses `feat/phase6-spoken-notes` so main-branch publication cannot deploy these changes.
 The owner supplies the private OpenAI key and opens pull request #1 on 2026-10-01.
@@ -30,10 +78,10 @@ The owner requests and receives 3 follow-up fixes after the listening pass, deta
   committed set. This is optional future work, not a PHASE 6 blocker.
 - `Listening.tsx` now shows the spoken-notes controls with a dedicated message when an approved
   exercise has no recorded audio, instead of the generic "image only" message.
-- All 3 fixes are committed locally on `feat/phase6-spoken-notes` (unpushed); pre-commit and
+- All 3 fixes are committed, pushed, and merged through pull request #1; pre-commit and
   `backend/tests/test_spoken_generation.py` are green.
 
-The local container stand runs PHASE 6 at `http://127.0.0.1:18080/` on 2026-10-01.
+PHASE 6 acceptance uses the local container stand at `http://127.0.0.1:18080/` on 2026-10-01.
 Removing duplicate database credentials from the private `.env` resolves the local migration authentication failure.
 Migration exits successfully; PostgreSQL, backend, frontend, and OMR report healthy states.
 The startup recovery serves speech assets, preserves database passwords and volumes, and does not start Telegram.
@@ -65,6 +113,19 @@ The owner confirms the remaining bot checks and continuation on 2026-09-29.
 PHASE 0.5 is complete; the failed PWA result remains unchanged.
 
 ## Plan for the current phase
+- [x] Add deployment storage preflight and reserve checks.
+- [x] Add translated application 404 content without changing API or protected-file errors.
+- [x] Verify cookie, CSRF, upload, and proxy boundaries; add security headers.
+- [x] Add structured logs and verify bounded rotation and worker readiness.
+- [x] Add Python and JavaScript dependency audits.
+- [x] Review documentation and complete the environment reference and missing guides.
+- [x] Prepare the complete final VPS smoke checklist.
+- [x] Run local tests, builds, audits, and quality hooks.
+- [ ] Obtain successful remote CI for the PHASE 7 branch.
+- [ ] Deploy a verified release after resolving the VPS capacity constraint.
+- [ ] Complete the final smoke checklist in Chrome and Safari.
+
+## Completed PHASE 6 plan
 - [x] Add shared vocabulary and a strict MusicXML sequence parser.
 - [x] Add offline OpenAI generation, AAC conversion, resumability, and manifest verification.
 - [x] Generate, verify, and commit the real speech clips after private API-key configuration.
@@ -453,10 +514,11 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - The owner does not supply device versions or a per-message evidence record.
 
 ## Next step
-- Review the checks for pull request #1 without merging it.
-- Keep deployment postponed; do not merge the branch or start PHASE 7.
-- Push the 4 local `feat/phase6-spoken-notes` commits and open review for the PHASE 6 follow-up fixes.
-- Obtain audible Safari acceptance for spoken notes; Chrome acceptance is confirmed.
+- Review and merge `feat/phase7-hardening` only after successful remote CI.
+- Provision enough available RAM for `OMR_MEMORY_MB + OMR_HOST_RESERVE_MB` before production activation.
+- Preserve the configured disk reserve and deploy only the verified immutable release.
+- Complete `docs/developer/smoke-check.md` in Chrome and Safari after deployment.
+- Confirm audible Safari acceptance with the existing speech clips; do not regenerate them.
 - Preserve prototype files and the historical PWA deployment.
 
 ## PHASE 0 boundaries
@@ -550,6 +612,9 @@ The final PHASE 5 procedure is in `docs/user/manager.md`.
 
 ## Known issues
 - PHASE 6 audible Safari acceptance remains open; Chrome acceptance is confirmed on 2026-10-01.
+- PHASE 7 production activation and the final VPS smoke check remain open.
+- Merged PHASE 6 publication run `36867434244` fails deployment at the OMR RAM guard.
+- Native Chrome DOM automation times out; local HTTP and React tests do not replace final browser acceptance.
 - The owner-created PR resolves the initial CI blocker without changing CLI permissions.
 - The previous VPS check finds approximately 18 GiB free disk space but insufficient RAM for PHASE 5 activation.
 - The owner postpones deployment and reports a new host; this task does not verify or change that host.

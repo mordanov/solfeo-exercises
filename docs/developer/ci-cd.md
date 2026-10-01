@@ -15,6 +15,12 @@ It checks Ruff, formatting, strict mypy, ESLint, Prettier, and TypeScript with t
 Python tools come from `uv.lock`; frontend tools come from `package-lock.json`.
 The JavaScript hooks use isolated Node.js 22.23.3 and npm 12.1.0.
 Changes to the hook configuration trigger CI.
+Documentation changes also trigger CI.
+Backend documentation tests check guide completeness, links, sentence lengths, and the environment reference.
+The dependency job audits all installed locked Python packages and the complete npm lock.
+`pip-audit --strict` and `npm audit --audit-level=low` fail on known advisories.
+Unavailable audit services fail explicitly rather than silently passing.
+The Python auditor is a development dependency and never enters the runtime image.
 
 The backend job checks tests and the hashed dependency export.
 It starts pinned PostgreSQL 17 with a disposable `solfeo_test` database.
@@ -39,10 +45,11 @@ All 6 hooks reject deliberate defects during local verification and pass after r
 ## Deployment boundary
 
 The CI workflow neither publishes images nor connects to the VPS.
-PHASE 6 remains on `feat/phase6-spoken-notes` because the owner postpones deployment.
-The owner opens [pull request #1](https://github.com/mordanov/solfeo-exercises/pull/1) on 2026-10-01.
-The pull request runs branch CI without CLI permissions to create requests or dispatch workflows.
-Do not merge while deployment remains postponed.
+The owner merges [pull request #1](https://github.com/mordanov/solfeo-exercises/pull/1) on 2026-10-01.
+Source `f3ba47f` passes main-branch CI run `36866682091`.
+Publication run `36867434244` verifies the images, but deployment stops with `OMR_MEMORY_INSUFFICIENT`.
+The failed deployment does not authorize bypassing the memory guard.
+PHASE 7 continues on `feat/phase7-hardening`.
 The existing prototype publishing workflows remain separate.
 `deploy/compose.prod.yaml` provides a separate, image-based production configuration.
 See `docs/developer/deploy.md` for its role boundaries and operational requirements.
@@ -243,7 +250,7 @@ It does not change real accounts or exercises.
 Cleanup removes the isolated browser profile and disposable test database.
 The local development stand and public health endpoints remain healthy.
 
-Final owner acceptance remains open.
+The owner confirms final PHASE 3 acceptance on 2026-09-29.
 Safari automation remains unavailable because Allow Remote Automation is disabled.
 The manual procedures appear in `docs/user/student.md` and `docs/user/manager.md`.
 
@@ -290,6 +297,6 @@ An initial browser timing failure leaves 2 of those imports unused.
 
 Approximately 1.1 GiB remains available, with filesystem usage near 98 %.
 Provide more capacity before another release.
-Final owner acceptance, including real Telegram messages and Safari playback, remains open.
+The owner confirms final PHASE 4 acceptance, including real messages and Safari playback, on 2026-09-30.
 Cleanup removes the isolated browser profile and disposable local test database.
 The development stand remains healthy.
