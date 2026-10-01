@@ -23,6 +23,15 @@ The separate publication workflow supplies verified product images and a version
 The shared nginx routes the existing TLS hostname to the product frontend.
 Do not invoke the shared infrastructure's general deployment.
 
+## Latest verified deployment
+
+Pull request #2 merges as source `165a1397` on 2026-10-01.
+Publication run `36921037861` verifies the images and completes the production rollout successfully.
+The public HTTPS health endpoint returns exactly `{"status":"ok"}`.
+The owner confirms completion of PHASE 5 and PHASE 6 after deployment.
+The owner subsequently confirms final PHASE 7 smoke acceptance on 2026-10-01.
+The earlier RAM refusal below is historical evidence, not the current deployment state.
+
 ## Storage capacity
 
 The rollout checks the local Docker storage filesystem and the release filesystem before image pulls.
@@ -66,7 +75,7 @@ Setting `OMR_ENABLED=false` is an explicit maintenance option, not successful OM
 Source `be0000d1e8208489b65fc939b77e1bbb013422e7` passes CI run `36674676116`.
 Publication run `36675174373` verifies both pulled x86-64 images before packaging the release.
 The deployment job then stops with `OMR_MEMORY_INSUFFICIENT`.
-Production retains PHASE 4, schema `0005_telegram`, and unchanged container start times.
+That failed attempt retains PHASE 4, schema `0005_telegram`, and unchanged container start times.
 
 | Image | Verified digest |
 |---|---|

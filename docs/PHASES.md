@@ -94,8 +94,9 @@ The owner authorizes the entire phase without intermediate confirmations on 2026
 - Report the real recognition quality on the fixtures. Do not hide failures.
 Done when: a real exercise image is recognized, approved, and shown with note names.
 Implementation status: complete locally and published with successful CI on 2026-09-30.
-Production activation stops safely because the VPS lacks the configured memory reserve.
-PHASE 5 remains open until deployment and final owner acceptance.
+The initial production attempt stops at the former host-memory preflight.
+Deployment run `36921037861` succeeds for merged source `165a1397` on 2026-10-01.
+Status: complete after the owner confirms final PHASE 5 acceptance following deployment.
 Local exercises 32 and 33 confirm that photo quality, not the pipeline code, causes most recognition errors.
 See `docs/PRODUCT_BRIEF.md` (Photo quality requirements) for the upload rules.
 See `docs/developer/omr-pipeline.md` for the repair evidence and the remaining limits.
@@ -114,7 +115,7 @@ The owner confirms audible acceptance in the local stand and accepts PHASE 6 on 
 Fixes after that listening pass: natural voice pitch for every note duration, a spoken-notes
 fallback when an exercise has no recorded audio, and a native accent hint per language for future
 clip regeneration (optional; the committed 66 clips still use the original generic instructions).
-Status: complete.
+Status: complete; the owner reconfirms PHASE 6 completion after production deployment on 2026-10-01.
 
 ## PHASE 7: Hardening and documentation review
 The owner authorizes the entire phase without intermediate confirmations on 2026-10-01.
@@ -129,7 +130,8 @@ The owner merges PHASE 6 and declines regeneration of the existing 66 clips.
 - Full documentation review against the rules in docs.instructions.md. Complete `.env` variable reference. Troubleshooting.
 - Manual end-to-end smoke checklist for the full flow.
 Done when: the smoke checklist passes on the VPS from a clean deploy.
-Implementation status: complete locally; production deployment and final acceptance remain open.
+Implementation status: deployed successfully through run `36921037861`.
+Status: complete after the owner confirms final PHASE 7 acceptance on 2026-10-01.
 The recorded merged PHASE 6 deployment fails with `OMR_MEMORY_INSUFFICIENT`.
 The owner explicitly removes this host-memory preflight on 2026-10-01.
 Docker memory limits, disk checks, health verification, and compatible rollback remain active.

@@ -50,7 +50,10 @@ Source `f3ba47f` passes main-branch CI run `36866682091`.
 Publication run `36867434244` verifies the images, but deployment stops with `OMR_MEMORY_INSUFFICIENT`.
 The owner explicitly removes the host-memory deployment gate on 2026-10-01.
 New rollouts retain disk checks, health verification, and compatible rollback.
-PHASE 7 continues on `feat/phase7-hardening`.
+Pull request #2 merges as `165a1397` on 2026-10-01.
+Publication run `36921037861` completes publishing and the production deployment successfully.
+The public HTTPS health endpoint returns `{"status":"ok"}`.
+The owner accepts PHASE 5 and PHASE 6, then confirms final PHASE 7 acceptance on 2026-10-01.
 The existing prototype publishing workflows remain separate.
 `deploy/compose.prod.yaml` provides a separate, image-based production configuration.
 See `docs/developer/deploy.md` for its role boundaries and operational requirements.

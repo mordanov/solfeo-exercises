@@ -112,8 +112,10 @@ The 6 jobs take approximately 4.5 to 7.8 seconds each, including queue polling.
 A repeat run during other regression checks takes approximately 4.3 to 16.2 seconds per job and produces the same outcomes.
 The worker's cumulative peak memory reaches 325550080 bytes, approximately 310.5 MiB, during this run.
 This measurement is not a safe maximum for larger input.
-The production limit remains 1024 MiB with an additional 512 MiB host reserve.
-The VPS currently lacks that reserve, so production activation remains blocked.
+The default production container limit remains 1024 MiB.
+The owner removes the host-memory rollout preflight on 2026-10-01; Docker memory limits remain active.
+Deployment run `36921037861` succeeds for merged source `165a1397`.
+The owner confirms complete PHASE 5 acceptance after deployment.
 
 The container regression recognizes the synthetic scale without network access.
 It verifies all 8 pitches, octaves, durations, and both measure boundaries.
