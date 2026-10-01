@@ -29,6 +29,9 @@ The worker retries missing staff detection once with a threshold for faint lines
 If staff detection still fails, the page requests a clearer image.
 Some clear images still produce incomplete or incorrect notation.
 Check every line and measure even when recognition succeeds.
+Reject the score when it contains a stray chord, an extra measure, or a missing measure. Reshoot the image.
+An approved score with these errors also makes the spoken notes feature refuse that score.
+See `docs/PRODUCT_BRIEF.md` (Photo quality requirements) for how to photograph an exercise before upload.
 Use the original image when repeated recognition fails.
 Replacing an image always requires new recognition and approval.
 Editing text or replacing audio preserves the current score.

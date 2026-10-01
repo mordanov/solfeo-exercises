@@ -96,6 +96,9 @@ Done when: a real exercise image is recognized, approved, and shown with note na
 Implementation status: complete locally and published with successful CI on 2026-09-30.
 Production activation stops safely because the VPS lacks the configured memory reserve.
 PHASE 5 remains open until deployment and final owner acceptance.
+Local exercises 32 and 33 confirm that photo quality, not the pipeline code, causes most recognition errors.
+See `docs/PRODUCT_BRIEF.md` (Photo quality requirements) for the upload rules.
+See `docs/developer/omr-pipeline.md` for the repair evidence and the remaining limits.
 
 ## PHASE 6: Spoken notes
 The owner authorizes the entire phase without intermediate confirmations on 2026-09-30.
