@@ -7,6 +7,8 @@ import { fetchScore } from "../../api/omr";
 import { ErrorMessage } from "../../components/AccountUi";
 import { injectNoteNames } from "./notes";
 import { Spoken } from "../spoken/Spoken";
+import { Field, Input, Panel } from "../../components/Ui";
+import Box from "@mui/material/Box";
 
 export function Score({
   id,
@@ -97,15 +99,15 @@ export function Score({
   }, [query.data, labels, user.note_naming, user.ui_language, highlight]);
   const failed = query.isError || error !== null;
   return (
-    <section aria-label={t("omr.score")}>
-      <label>
-        <input
+    <Panel aria-label={t("omr.score")}>
+      <Field>
+        <Input
           type="checkbox"
           checked={labels}
           onChange={(event) => setLabels(event.target.checked)}
         />
         {t("omr.noteNames")}
-      </label>
+      </Field>
       {query.isPending && <p>{t("common.loading")}</p>}
       {failed && (
         <>
@@ -113,7 +115,18 @@ export function Score({
           {fallback}
         </>
       )}
-      <div ref={target} className="score-render" hidden={failed} />
+      <Box
+        ref={target}
+        className="score-render"
+        hidden={failed}
+        sx={{
+          overflow: "auto",
+          bgcolor: "#fff",
+          color: "#000",
+          borderRadius: 2,
+          my: 2,
+        }}
+      />
       {approved && query.data && !failed && (
         <Spoken
           key={`${id}-${version}-${user.ui_language}-${user.note_naming}`}
@@ -123,6 +136,6 @@ export function Score({
           highlight={highlight}
         />
       )}
-    </section>
+    </Panel>
   );
 }

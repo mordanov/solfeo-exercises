@@ -11,6 +11,9 @@ import {
 import { ErrorMessage } from "../../components/AccountUi";
 import { finishPlayback, ListeningTracker, registerPlayback } from "./tracker";
 import { Score } from "../omr/Score";
+import { Button, Field, Panel, Select } from "../../components/Ui";
+import Box from "@mui/material/Box";
+import Chip from "@mui/material/Chip";
 
 function Player({
   exercise,
@@ -68,10 +71,25 @@ function Player({
     };
   }, [tracker]);
   return (
-    <article>
+    <Panel component="article">
       <h3>{exercise.title}</h3>
-      {exercise.category && <p>{exercise.category}</p>}
-      <p className="exercise-description">{exercise.description}</p>
+      {exercise.category && (
+        <Chip
+          label={exercise.category}
+          variant="outlined"
+          sx={{
+            maxWidth: "100%",
+            height: "auto",
+            "& .MuiChip-label": { whiteSpace: "normal", py: 0.5 },
+          }}
+        />
+      )}
+      <Box
+        component="p"
+        sx={{ whiteSpace: "pre-wrap", overflowWrap: "anywhere" }}
+      >
+        {exercise.description}
+      </Box>
       {exercise.image &&
         (exercise.omr.status === "approved" && exercise.omr.job_id ? (
           <Score
@@ -80,16 +98,34 @@ function Player({
             version={exercise.omr.job_id}
             user={auth.user}
             fallback={
-              <img
-                className="exercise-image"
+              <Box
+                component="img"
+                sx={{
+                  display: "block",
+                  maxWidth: "100%",
+                  maxHeight: 400,
+                  objectFit: "contain",
+                  my: 2,
+                  bgcolor: "#fff",
+                  borderRadius: 2,
+                }}
                 src={`/api/exercises/${exercise.id}/files/image`}
                 alt={t("exercises.imageFor", { title: exercise.title })}
               />
             }
           />
         ) : (
-          <img
-            className="exercise-image"
+          <Box
+            component="img"
+            sx={{
+              display: "block",
+              maxWidth: "100%",
+              maxHeight: 400,
+              objectFit: "contain",
+              my: 2,
+              bgcolor: "#fff",
+              borderRadius: 2,
+            }}
             src={`/api/exercises/${exercise.id}/files/image`}
             alt={t("exercises.imageFor", { title: exercise.title })}
             onError={() => setMediaError(true)}
@@ -128,7 +164,7 @@ function Player({
       {mediaError && (
         <ErrorMessage error={new ApiError("MEDIA_PLAYBACK_ERROR")} />
       )}
-    </article>
+    </Panel>
   );
 }
 
@@ -177,11 +213,11 @@ export function Listening({ auth }: { auth: Auth }) {
     },
   });
   return (
-    <section>
+    <Panel>
       <h2>{t("student.title")}</h2>
-      <label>
+      <Field>
         {t("listening.mode")}
-        <select
+        <Select
           value={mode}
           disabled={navigation.isPending || query.isPending}
           onChange={(event) => {
@@ -192,15 +228,15 @@ export function Listening({ auth }: { auth: Auth }) {
         >
           <option value="sequential">{t("listening.sequential")}</option>
           <option value="random">{t("listening.random")}</option>
-        </select>
-      </label>
+        </Select>
+      </Field>
       {query.isPending && <p>{t("common.loading")}</p>}
       {query.isError && <ErrorMessage error={query.error} />}
       {navigation.isError && <ErrorMessage error={navigation.error} />}
       {(query.isError || exercise === null) && (
-        <button onClick={() => void query.refetch()}>
+        <Button onClick={() => void query.refetch()}>
           {t("common.retry")}
-        </button>
+        </Button>
       )}
       {exercise === null && <p>{t("listening.empty")}</p>}
       {exercise && (
@@ -211,8 +247,8 @@ export function Listening({ auth }: { auth: Auth }) {
             auth={auth}
             mode={mode}
           />
-          <div className="exercise-actions">
-            <button
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+            <Button
               disabled={
                 navigation.isPending ||
                 (mode === "random" && history.length === 0)
@@ -222,19 +258,19 @@ export function Listening({ auth }: { auth: Auth }) {
               }
             >
               {t("common.previous")}
-            </button>
-            <button
+            </Button>
+            <Button
               disabled={navigation.isPending}
               onClick={() =>
                 navigation.mutate({ nextMode: mode, direction: "next" })
               }
             >
               {t("common.next")}
-            </button>
-          </div>
+            </Button>
+          </Box>
           <p>{t("listening.hint")}</p>
         </>
       )}
-    </section>
+    </Panel>
   );
 }

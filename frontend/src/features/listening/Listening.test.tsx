@@ -7,6 +7,8 @@ import type { Auth } from "../../api/auth";
 import * as api from "../../api/listening";
 import { i18n } from "../../i18n";
 import { Listening } from "./Listening";
+import { AppTheme } from "../../theme";
+import { ThemeToggle } from "../../components/ThemeToggle";
 
 vi.mock("../../api/listening");
 vi.mock("../omr/Score", () => ({
@@ -97,6 +99,7 @@ it("renders only an approved score instead of the original", async () => {
 });
 beforeEach(async () => {
   vi.resetAllMocks();
+  localStorage.clear();
   vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {});
   await i18n.changeLanguage("en");
   vi.mocked(api.currentExercise).mockResolvedValue(exercise);
@@ -115,11 +118,30 @@ function mount() {
           })
         }
       >
-        <Listening auth={auth} />
+        <AppTheme>
+          <ThemeToggle />
+          <Listening auth={auth} />
+        </AppTheme>
       </QueryClientProvider>
     </I18nextProvider>,
   );
 }
+it("does not pause, remount or end a listening session when switching themes", async () => {
+  mount();
+  const audio = await screen.findByLabelText("Audio: First exercise");
+  if (!(audio instanceof HTMLAudioElement)) throw new Error("Missing audio");
+  audio.currentTime = 4;
+  fireEvent.play(audio);
+  await waitFor(() => expect(api.sendListeningEvent).toHaveBeenCalledTimes(1));
+  await userEvent.click(screen.getByRole("button", { name: "Use dark theme" }));
+  expect(screen.getByLabelText("Audio: First exercise")).toBe(audio);
+  expect(audio.currentTime).toBe(4);
+  expect(HTMLMediaElement.prototype.pause).not.toHaveBeenCalled();
+  expect(api.sendListeningEvent).toHaveBeenCalledTimes(1);
+  expect(vi.mocked(api.sendListeningEvent).mock.calls[0][0]).toMatchObject({
+    event: "start",
+  });
+});
 it("does not create a journal row before play and keeps one session through pause", async () => {
   mount();
   const audio = await screen.findByLabelText("Audio: First exercise");

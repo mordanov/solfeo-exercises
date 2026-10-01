@@ -6,6 +6,8 @@ import type { User } from "../../api/auth";
 import * as api from "../../api/omr";
 import { Spoken } from "./Spoken";
 import { SpeechPlayer } from "./player";
+import { AppTheme } from "../../theme";
+import { ThemeToggle } from "../../components/ThemeToggle";
 
 vi.mock("../../api/omr");
 vi.mock("./player");
@@ -23,15 +25,30 @@ const user: User = {
 };
 beforeEach(async () => {
   vi.resetAllMocks();
+  localStorage.clear();
   await i18n.changeLanguage("en");
 });
 function mount() {
   return render(
     <I18nextProvider i18n={i18n}>
-      <Spoken id={1} version="version" user={user} highlight={vi.fn()} />
+      <AppTheme>
+        <ThemeToggle />
+        <Spoken id={1} version="version" user={user} highlight={vi.fn()} />
+      </AppTheme>
     </I18nextProvider>,
   );
 }
+it("keeps the speech player and tempo unchanged across theme switches", () => {
+  mount();
+  fireEvent.change(screen.getByRole("slider"), { target: { value: "90" } });
+  fireEvent.click(screen.getByRole("button", { name: "Speak notes" }));
+  const stops = vi.mocked(SpeechPlayer.prototype.stop).mock.calls.length;
+  const players = vi.mocked(SpeechPlayer).mock.calls.length;
+  fireEvent.click(screen.getByRole("button", { name: "Use dark theme" }));
+  expect(screen.getByRole("slider")).toHaveValue("90");
+  expect(SpeechPlayer.prototype.stop).toHaveBeenCalledTimes(stops);
+  expect(SpeechPlayer).toHaveBeenCalledTimes(players);
+});
 it("starts only on click and checks current approval before reading the score", async () => {
   mount();
   expect(SpeechPlayer.prototype.play).not.toHaveBeenCalled();

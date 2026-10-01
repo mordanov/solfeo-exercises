@@ -7,6 +7,9 @@ import { ErrorMessage } from "../../components/AccountUi";
 import { parseSequence, type NoteEvent } from "./sequence";
 import { SpeechPlayer } from "./player";
 import { noteName } from "./vocabulary";
+import { Button, Field, Panel } from "../../components/Ui";
+import Box from "@mui/material/Box";
+import Alert from "@mui/material/Alert";
 
 export function Spoken({
   id,
@@ -60,27 +63,34 @@ export function Spoken({
     };
   }, [player, id, version, user.note_naming, user.ui_language]);
   return (
-    <section aria-label={t("spoken.title")}>
+    <Panel aria-label={t("spoken.title")}>
       <h4>{t("spoken.title")}</h4>
       <p>{t("spoken.disclosure")}</p>
-      <label>
+      <Field>
         {t("spoken.tempo", {
           bpm: new Intl.NumberFormat(i18n.language).format(bpm),
         })}
-        <input
+        <Box
+          component="input"
           type="range"
           min={spokenConfig.minBpm}
           max={spokenConfig.maxBpm}
           step={1}
           value={bpm}
+          sx={{
+            width: "100%",
+            minHeight: 44,
+            accentColor: "var(--mui-palette-primary-main)",
+            m: 0,
+          }}
           onChange={(event) => {
             player.stop();
             setState("idle");
             setBpm(Number(event.target.value));
           }}
         />
-      </label>
-      <button
+      </Field>
+      <Button
         disabled={state !== "idle"}
         onClick={() => {
           window.dispatchEvent(new Event("solfeo:stop-spoken"));
@@ -102,8 +112,8 @@ export function Spoken({
         }}
       >
         {t("spoken.play")}
-      </button>
-      <button
+      </Button>
+      <Button
         disabled={state === "idle"}
         onClick={() => {
           player.stop();
@@ -111,10 +121,14 @@ export function Spoken({
         }}
       >
         {t("spoken.stop")}
-      </button>
-      {state === "loading" && <p role="status">{t("spoken.loading")}</p>}
+      </Button>
+      {state === "loading" && (
+        <Alert severity="info" role="status">
+          {t("spoken.loading")}
+        </Alert>
+      )}
       {state === "playing" && (
-        <p role="status">
+        <Alert severity="info" role="status">
           {current?.pitch
             ? t("spoken.current", {
                 name: noteName(
@@ -124,10 +138,10 @@ export function Spoken({
                 ),
               })
             : t("spoken.rest")}
-        </p>
+        </Alert>
       )}
       {error !== null && <ErrorMessage error={error} />}
       <p>{t("spoken.journalHint")}</p>
-    </section>
+    </Panel>
   );
 }
