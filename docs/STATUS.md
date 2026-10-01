@@ -5,15 +5,21 @@ This document records progress and remaining checks for the current phase.
 Prerequisites:
 - Read `docs/PHASES.md` and `docs/DECISIONS.md`.
 
-Last updated: 2026-09-30 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
+Last updated: 2026-10-01 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
 
 ## Current phase
-PHASE 5: OMR, manager review, rendering, and note names work locally.
-Production activation remains blocked by insufficient VPS memory.
+PHASE 6: spoken notes implementation, without deployment.
+The owner authorizes complete phase automation and postpones PHASE 5 deployment on 2026-09-30.
+Work uses `feat/phase6-spoken-notes` so main-branch publication cannot deploy these changes.
+The generator reports `OPENAI_KEY_REQUIRED`; the environment has no OpenAI key.
+Actual speech clips and audible acceptance remain blocked, not replaced with synthetic audio.
+PHASE 5 OMR works locally, but its production acceptance remains open.
+The owner reports a new VPS target; this task does not connect to or deploy on that host.
+The previous VPS memory failure remains historical evidence, not a measurement of the new host.
 The owner confirms PHASE 4 acceptance and authorizes complete PHASE 5 automation on 2026-09-30.
 The owner reports unlinking Telegram; this phase does not restore that association.
-The VPS has approximately 18 GiB free disk space after owner cleanup.
-Production OMR needs additional memory: approximately 116 MiB remains, with no swap and no noninteractive sudo access.
+The previous VPS check records approximately 18 GiB free disk space after owner cleanup.
+That host has approximately 116 MiB available RAM, no swap, and no noninteractive sudo access at the recorded check.
 The owner confirms all PHASE 3 checks and authorizes complete PHASE 4 automation on 2026-09-29.
 The application 404 page is scheduled in PHASE 7.
 The owner confirms all PHASE 2 checks and authorizes the complete PHASE 3 without intermediate confirmations on 2026-09-29.
@@ -26,6 +32,17 @@ The owner confirms the remaining bot checks and continuation on 2026-09-29.
 PHASE 0.5 is complete; the failed PWA result remains unchanged.
 
 ## Plan for the current phase
+- [x] Add shared vocabulary and a strict MusicXML sequence parser.
+- [x] Add offline OpenAI generation, AAC conversion, resumability, and manifest verification.
+- [ ] Generate, inspect, and commit the real speech clips after private API-key configuration.
+- [x] Add approved-only speech, tempo controls, cancellation, and score highlighting.
+- [x] Preserve recorded-audio playback and journal boundaries.
+- [x] Finish local checks and record their evidence.
+- [ ] Run branch CI; GitHub rejects PR creation and manual dispatch with HTTP 403.
+- [x] Update user and developer documentation.
+- [ ] Obtain audible Chrome and Safari acceptance after clip generation.
+
+## PHASE 5 implementation and deferred acceptance
 - [x] Add versioned OMR jobs, leases, retries, review, and protected MusicXML.
 - [x] Package Audiveris and implement the bounded worker.
 - [x] Add manager review, approved-score rendering, and localized note labels.
@@ -95,6 +112,26 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Complete the remaining Telegram checklist, as confirmed by the owner.
 
 ## Done
+- PHASE 6 adds shared localized vocabulary, duration parsing, rests, ties, accidentals, and explicit unsupported-score errors.
+- Speech uses the Web Audio clock with bounded playback rates, silent tails, tempo controls, and score highlighting.
+- Current approval and job version are checked before every start.
+- Speech and recorded audio stop each other without changing recorded-audio completion.
+- Exit, hidden tabs, logout, score changes, and settings changes cancel pending and scheduled speech.
+- The offline generator produces bounded AAC assets with resumable receipts and an atomic verified manifest.
+- Conversion tests replace only the OpenAI transport and use real ffmpeg.
+- Local checks pass 125 backend tests, 128 frontend tests, and 38 deployment/container tests.
+- The production-asset test explicitly skips because the real clips do not exist.
+- The frontend production build and all 6 pre-commit checks pass.
+- Headless Chrome verifies 8 seconds, 4 spoken attacks, silent rests and tails, and 7 written cursor positions.
+- That browser check uses synthetic signals; it does not verify actual pronunciation or speaker output.
+- Source commits `2a7d008`, `a86e4fa`, and `8285252` belong only to `feat/phase6-spoken-notes`.
+- The last fix coordinates speech with manager audio previews as well as student recordings.
+- GitHub rejects draft PR creation and branch CI dispatch with HTTP 403 for the current CLI credential.
+- No pull request or new CI run is claimed; an authorized operator must open the branch comparison.
+- No OpenAI speech request, production clip generation, merge to main, publication, or deployment occurs.
+- The 2026-10-01 continuation confirms that the OpenAI key, pull request, and branch CI run remain absent.
+- Cleanup removes the stopped phase-six browser profile; temporary browser and frontend processes remain stopped.
+- `docs/developer/spoken-notes.md` and the student guide contain the remaining generation and audible acceptance steps.
 - PHASE 5 source `be0000d1e8208489b65fc939b77e1bbb013422e7` passes CI run `36674676116`.
 - Run `36675174373` publishes both immutable images and verifies the pulled x86-64 images.
 - Its deployment job stops with `OMR_MEMORY_INSUFFICIENT` before image pulls, service changes, or migration.
@@ -378,10 +415,11 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - The owner does not supply device versions or a per-message evidence record.
 
 ## Next step
-- Provision sufficient VPS RAM before enabling the OMR worker.
-- Retry the verified PHASE 5 release after the default 1536 MiB available-memory requirement is satisfied.
-- Complete the final PHASE 5 checklist in `docs/user/manager.md` after production activation.
-- Keep PHASE 6 and the PHASE 7 application 404 page out of this task.
+- Set `OPENAI_API_KEY` privately in the local root `.env`, not in chat or frontend configuration.
+- Generate, inspect, and commit speech assets with `docs/developer/spoken-notes.md`.
+- Open a draft pull request for `feat/phase6-spoken-notes` through an authorized GitHub session to run CI.
+- Keep deployment postponed; do not merge the branch or start PHASE 7.
+- Complete the PHASE 6 audible checklist in `docs/user/student.md` after real clip generation.
 - Preserve prototype files and the historical PWA deployment.
 
 ## PHASE 0 boundaries
@@ -474,8 +512,10 @@ The owner confirms final PHASE 0 browser acceptance at the public HTTPS address.
 The final PHASE 5 procedure is in `docs/user/manager.md`.
 
 ## Known issues
-- The owner resolves the VPS disk constraint; approximately 18 GiB is now available.
-- Insufficient VPS RAM blocks PHASE 5 activation; the current public release remains PHASE 4.
+- Actual PHASE 6 speech generation lacks an OpenAI key; synthetic checks do not establish pronunciation quality.
+- The CLI credential cannot create the branch PR or dispatch CI; both operations return HTTP 403.
+- The previous VPS check finds approximately 18 GiB free disk space but insufficient RAM for PHASE 5 activation.
+- The owner postpones deployment and reports a new host; this task does not verify or change that host.
 - The initial PHASE 4 CD attempt fails from disk exhaustion; the verified SSH recovery succeeds.
 - The current CLI cannot rerun Actions jobs with its token; GitHub returns a permission error.
 - The owner confirms real Telegram acceptance and subsequently unlinks the association.

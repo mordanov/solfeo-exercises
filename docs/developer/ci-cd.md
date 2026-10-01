@@ -22,6 +22,10 @@ The test fixture refuses any other database name.
 The job verifies migration upgrade, downgrade, repeated upgrade, the current revision, and model drift.
 Its fixed test password belongs only to the disposable CI service, not a deployed database.
 The frontend job checks tests and the production build, including its TypeScript compilation.
+Speech tests mock only the OpenAI transport and perform real AAC conversion.
+A separate check verifies committed speech files when their directory exists.
+It reports an explicit skip while real generation remains blocked by the missing API key.
+Synthetic conversion tests do not establish voice quality.
 The container job generates a private password, builds both images, and runs the migration service.
 It verifies the schema revision and health through nginx.
 It also runs `deploy/tests` against a separate production Compose project using the freshly built images.
@@ -35,6 +39,11 @@ All 6 hooks reject deliberate defects during local verification and pass after r
 ## Deployment boundary
 
 The CI workflow neither publishes images nor connects to the VPS.
+PHASE 6 remains on `feat/phase6-spoken-notes` because the owner postpones deployment.
+The current CLI credential cannot create its pull request or dispatch branch CI.
+Both operations return HTTP 403; local success does not establish remote CI success.
+Open a draft pull request through an authorized GitHub session to run its checks.
+Do not merge while deployment remains postponed.
 The existing prototype publishing workflows remain separate.
 `deploy/compose.prod.yaml` provides a separate, image-based production configuration.
 See `docs/developer/deploy.md` for its role boundaries and operational requirements.

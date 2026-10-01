@@ -54,3 +54,6 @@ Prerequisites:
 | update offset | The next Telegram update ID requested after durable intake. |
 | OMR lease | A time-limited job claim with a unique token that prevents stale results from replacing current results. |
 | OpenSheetMusicDisplay | The browser library that draws a score from MusicXML. |
+| speech clip | A generated recording of one public note name or accidental suffix. |
+| speech receipt | A file that records a clip hash and the settings used for generation. |
+| playback rate | The ratio between a clip's playback speed and its original speed. |

@@ -98,11 +98,15 @@ Production activation stops safely because the VPS lacks the configured memory r
 PHASE 5 remains open until deployment and final owner acceptance.
 
 ## PHASE 6: Spoken notes
+The owner authorizes the entire phase without intermediate confirmations on 2026-09-30.
+The owner explicitly postpones PHASE 5 deployment; implementation uses a separate branch without VPS changes.
 - Script that generates syllable clips with OpenAI TTS for each language and naming. Commit the output.
 - MusicXML -> note sequence parser (pitch, duration, rests, ties, accidentals). Unit tests.
 - Web Audio scheduler: tempo slider, play/stop, highlight of the current note if OSMD allows.
 - Docs: developer (regenerate the clips), user (use the spoken notes).
 Done when: an approved score is spoken with correct note names and durations in all three languages.
+The generator, parser, scheduler, and controls are implemented; actual speech generation requires the missing `OPENAI_API_KEY`.
+This phase remains open until generated clips and audible manual acceptance are complete.
 
 ## PHASE 7: Hardening and documentation review
 - Check free disk space before deployment image pulls and reserve capacity for extraction and rollback.
