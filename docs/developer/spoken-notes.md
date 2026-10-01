@@ -23,9 +23,8 @@ Pull request #1 enables branch CI without CLI permissions to create requests or 
 Do not merge that request while deployment remains postponed.
 
 The generator now adds a native-accent hint per language to the speech instructions.
-The fingerprint tag moves from `spoken-v1` to `spoken-v2`, so every clip needs regeneration.
-Regenerate into a new `SPOKEN_OUTPUT` directory first, listen to the result, then replace the committed set.
-`backend/tests/test_spoken_generation.py::test_committed_speech_assets` fails until the committed clips match the new tag.
+The fingerprint does not track that wording, so the 66 committed clips stay valid without regeneration.
+Regenerate into a new `SPOKEN_OUTPUT` directory, listen to the accent, then replace the committed set when ready.
 
 ## Generate the vocabulary
 

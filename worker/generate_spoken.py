@@ -72,10 +72,11 @@ def fingerprint(settings: Settings, clip: Clip) -> str:
                 settings.spoken_voice,
                 clip.language,
                 clip.text,
-                # Bump this tag whenever the speech instructions change, so a
-                # changed accent hint forces an explicit, separate-directory
-                # regeneration instead of silently reusing the old clip.
-                "spoken-v2",
+                # The fingerprint does not track the instructions text, so the
+                # committed clips stay valid after a wording-only change (for
+                # example, the accent hint). Bump this tag only when a change
+                # must force an explicit, separate-directory regeneration.
+                "spoken-v1",
                 settings.audio_bitrate_kbps,
             ],
             ensure_ascii=False,
