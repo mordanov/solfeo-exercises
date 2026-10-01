@@ -11,6 +11,18 @@ import {
 } from "../../api/exercises";
 import { ErrorMessage } from "../../components/AccountUi";
 import { Review } from "../omr/Review";
+import {
+  Button,
+  Field,
+  Form,
+  Input,
+  Panel,
+  Textarea,
+} from "../../components/Ui";
+import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
+import Alert from "@mui/material/Alert";
+import Chip from "@mui/material/Chip";
 
 function ExerciseForm({
   auth,
@@ -59,7 +71,7 @@ function ExerciseForm({
     },
   });
   return (
-    <form
+    <Form
       onSubmit={(event) => {
         event.preventDefault();
         const missing = !(
@@ -76,83 +88,90 @@ function ExerciseForm({
       }}
     >
       <h3>{t(exercise ? "exercises.edit" : "exercises.create")}</h3>
-      <fieldset disabled={mutation.isPending}>
-        <label>
+      <Box
+        component="fieldset"
+        disabled={mutation.isPending}
+        sx={{ border: 0, p: 0, m: 0, minWidth: 0, display: "grid", gap: 2 }}
+      >
+        <Field>
           {t("exercises.name")}
-          <input
+          <Input
             required
             maxLength={200}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-        </label>
-        <label>
+        </Field>
+        <Field>
           {t("exercises.description")}
-          <textarea
+          <Textarea
             maxLength={10000}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
-        </label>
-        <label>
+        </Field>
+        <Field>
           {t("exercises.category")}
-          <input
+          <Input
             maxLength={100}
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           />
-        </label>
-        <label>
+        </Field>
+        <Field>
           {t("exercises.image")}
-          <input
+          <Input
             type="file"
             accept="image/png,image/jpeg,image/webp"
             disabled={removeImage}
             onChange={(e) => setImage(e.target.files?.[0])}
           />
-        </label>
+        </Field>
         {exercise?.image && (
-          <label>
-            <input
+          <Field>
+            <Input
               type="checkbox"
               checked={removeImage}
               disabled={!!image}
               onChange={(e) => setRemoveImage(e.target.checked)}
             />
             {t("exercises.removeImage")}
-          </label>
+          </Field>
         )}
-        <label>
+        <Field>
           {t("exercises.audio")}
-          <input
+          <Input
             type="file"
             disabled={removeAudio}
             onChange={(e) => setAudio(e.target.files?.[0])}
           />
-        </label>
+        </Field>
         {exercise?.audio && (
-          <label>
-            <input
+          <Field>
+            <Input
               type="checkbox"
               checked={removeAudio}
               disabled={!!audio}
               onChange={(e) => setRemoveAudio(e.target.checked)}
             />
             {t("exercises.removeAudio")}
-          </label>
+          </Field>
         )}
         <p>{t("exercises.fileHint")}</p>
-        <button>{t("exercises.save")}</button>{" "}
-        <button type="button" onClick={close}>
+        <Button>{t("exercises.save")}</Button>{" "}
+        <Button type="button" onClick={close}>
           {t("common.close")}
-        </button>
-      </fieldset>
+        </Button>
+      </Box>
       {mutation.isPending && (
         <div role="status">
-          <label>
-            {t("exercises.uploading")}
-            <progress max={100} value={progress} />
-          </label>
+          <p>{t("exercises.uploading")}</p>
+          <LinearProgress
+            aria-label={t("exercises.uploading")}
+            variant="determinate"
+            value={progress}
+            sx={{ height: 8, borderRadius: 1, mb: 1 }}
+          />
           {new Intl.NumberFormat(i18n.language, { style: "percent" }).format(
             progress / 100,
           )}
@@ -163,7 +182,7 @@ function ExerciseForm({
         <ErrorMessage error={new ApiError("EXERCISE_MEDIA_REQUIRED")} />
       )}
       {mutation.isError && <ErrorMessage error={mutation.error} />}
-    </form>
+    </Form>
   );
 }
 
@@ -173,8 +192,17 @@ function Preview({ exercise }: { exercise: Exercise }) {
   return (
     <>
       {exercise.image && (
-        <img
-          className="exercise-image"
+        <Box
+          component="img"
+          sx={{
+            display: "block",
+            maxWidth: "100%",
+            maxHeight: 400,
+            objectFit: "contain",
+            my: 2,
+            bgcolor: "#fff",
+            borderRadius: 2,
+          }}
           loading="lazy"
           alt={t("exercises.imageFor", { title: exercise.title })}
           src={`/api/exercises/${exercise.id}/files/image`}
@@ -240,12 +268,12 @@ export function Exercises({ auth }: { auth: Auth }) {
     order.mutate(ids);
   }
   return (
-    <section>
+    <Panel>
       <h2>{t("exercises.title")}</h2>
       <p>{t("exercises.reorderHint")}</p>
-      <button disabled={busy} onClick={() => setEditing(null)}>
+      <Button disabled={busy} onClick={() => setEditing(null)}>
         {t("exercises.create")}
-      </button>
+      </Button>
       {editing !== undefined && (
         <ExerciseForm
           key={editing?.id ?? "new"}
@@ -258,9 +286,9 @@ export function Exercises({ auth }: { auth: Auth }) {
       {query.isError && (
         <>
           <ErrorMessage error={query.error} />
-          <button onClick={() => void query.refetch()}>
+          <Button onClick={() => void query.refetch()}>
             {t("common.retry")}
-          </button>
+          </Button>
         </>
       )}
       {deletion.isError && <ErrorMessage error={deletion.error} />}
@@ -277,9 +305,10 @@ export function Exercises({ auth }: { auth: Auth }) {
       {query.data && query.data.total !== rows.length && (
         <ErrorMessage error={new ApiError("EXERCISE_ORDER_CONFLICT")} />
       )}
-      <ol className="exercise-list">
+      <Box component="ol" sx={{ pl: 3 }}>
         {rows.map((exercise, index) => (
-          <li
+          <Panel
+            component="li"
             key={exercise.id}
             aria-label={exercise.title}
             draggable={!busy}
@@ -300,8 +329,24 @@ export function Exercises({ auth }: { auth: Auth }) {
             }}
           >
             <h3>{exercise.title}</h3>
-            {exercise.category && <p>{exercise.category}</p>}
-            <p className="exercise-description">{exercise.description}</p>
+            {exercise.category && (
+              <Chip
+                label={exercise.category}
+                variant="outlined"
+                sx={{
+                  mb: 1,
+                  maxWidth: "100%",
+                  height: "auto",
+                  "& .MuiChip-label": { whiteSpace: "normal", py: 0.5 },
+                }}
+              />
+            )}
+            <Box
+              component="p"
+              sx={{ whiteSpace: "pre-wrap", overflowWrap: "anywhere" }}
+            >
+              {exercise.description}
+            </Box>
             <Preview
               key={`${exercise.id}-${exercise.image?.id}-${exercise.audio?.id}`}
               exercise={exercise}
@@ -313,26 +358,40 @@ export function Exercises({ auth }: { auth: Auth }) {
                 close={() => setReviewing(null)}
               />
             )}
-            <div className="exercise-actions">
+            <Box
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                alignItems: "center",
+                gap: 1,
+              }}
+            >
               {exercise.image && (
                 <>
-                  <p>{t(`omr.status.${exercise.omr.status}`)}</p>
-                  <button
+                  <Chip
+                    label={t(`omr.status.${exercise.omr.status}`)}
+                    sx={{
+                      maxWidth: "100%",
+                      height: "auto",
+                      "& .MuiChip-label": { whiteSpace: "normal", py: 0.5 },
+                    }}
+                  />
+                  <Button
                     disabled={busy}
                     onClick={() => setReviewing(exercise.id)}
                   >
                     {t("omr.review")}
-                  </button>
+                  </Button>
                 </>
               )}
-              <button
+              <Button
                 disabled={busy}
                 aria-label={t("exercises.editNamed", { title: exercise.title })}
                 onClick={() => setEditing(exercise)}
               >
                 {t("exercises.edit")}
-              </button>
-              <button
+              </Button>
+              <Button
                 disabled={busy}
                 aria-label={t("exercises.deleteNamed", {
                   title: exercise.title,
@@ -340,39 +399,41 @@ export function Exercises({ auth }: { auth: Auth }) {
                 onClick={() => setDeleting(exercise.id)}
               >
                 {t("exercises.delete")}
-              </button>
-              <button
+              </Button>
+              <Button
                 disabled={busy || index === 0}
                 aria-label={t("exercises.moveUp", { title: exercise.title })}
                 onClick={() => move(index, index - 1)}
               >
                 {t("exercises.up")}
-              </button>
-              <button
+              </Button>
+              <Button
                 disabled={busy || index === rows.length - 1}
                 aria-label={t("exercises.moveDown", { title: exercise.title })}
                 onClick={() => move(index, index + 1)}
               >
                 {t("exercises.down")}
-              </button>
-            </div>
+              </Button>
+            </Box>
             {deleting === exercise.id && (
-              <div>
-                <p>{t("exercises.deleteWarning", { title: exercise.title })}</p>
-                <button
+              <Box sx={{ mt: 2 }}>
+                <Alert severity="warning" role="status">
+                  {t("exercises.deleteWarning", { title: exercise.title })}
+                </Alert>
+                <Button
                   disabled={busy}
                   onClick={() => deletion.mutate(exercise.id)}
                 >
                   {t("exercises.confirmDelete")}
-                </button>{" "}
-                <button disabled={busy} onClick={() => setDeleting(null)}>
+                </Button>{" "}
+                <Button disabled={busy} onClick={() => setDeleting(null)}>
                   {t("common.close")}
-                </button>
-              </div>
+                </Button>
+              </Box>
             )}
-          </li>
+          </Panel>
         ))}
-      </ol>
-    </section>
+      </Box>
+    </Panel>
   );
 }

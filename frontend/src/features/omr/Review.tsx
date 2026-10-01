@@ -5,6 +5,9 @@ import type { Exercise } from "../../api/exercises";
 import { fetchOmr, rerunOmr, reviewOmr } from "../../api/omr";
 import { ErrorMessage } from "../../components/AccountUi";
 import { Score } from "./Score";
+import { Button, Panel } from "../../components/Ui";
+import Box from "@mui/material/Box";
+import Alert from "@mui/material/Alert";
 
 export function Review({
   exercise,
@@ -39,20 +42,44 @@ export function Review({
       job.status === "approved" ||
       job.status === "rejected");
   return (
-    <section aria-label={t("omr.review")}>
+    <Panel aria-label={t("omr.review")}>
       <h4>{t("omr.review")}</h4>
       <p>{t("omr.reviewHint")}</p>
-      <button onClick={close}>{t("common.close")}</button>
-      <button disabled={query.isFetching} onClick={() => void query.refetch()}>
+      <Button onClick={close}>{t("common.close")}</Button>
+      <Button disabled={query.isFetching} onClick={() => void query.refetch()}>
         {t("omr.refresh")}
-      </button>
+      </Button>
       {query.isPending && <p>{t("common.loading")}</p>}
       {query.isError && <ErrorMessage error={query.error} />}
-      {job && <p role="status">{t(`omr.status.${job.status}`)}</p>}
+      {job && (
+        <Alert severity="info" role="status">
+          {t(`omr.status.${job.status}`)}
+        </Alert>
+      )}
       {job?.last_error && <ErrorMessage error={new ApiError(job.last_error)} />}
-      <div className="omr-comparison">
-        <img
-          className="exercise-image"
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: {
+            xs: "minmax(0, 1fr)",
+            md: "repeat(2, minmax(0, 1fr))",
+          },
+          gap: 2,
+          alignItems: "start",
+          "& > *": { minWidth: 0 },
+        }}
+      >
+        <Box
+          component="img"
+          sx={{
+            display: "block",
+            maxWidth: "100%",
+            maxHeight: 400,
+            objectFit: "contain",
+            my: 2,
+            bgcolor: "#fff",
+            borderRadius: 2,
+          }}
           src={`/api/exercises/${exercise.id}/files/image?version=${job?.image_id ?? exercise.image?.id}`}
           alt={t("exercises.imageFor", { title: exercise.title })}
         />
@@ -64,20 +91,20 @@ export function Review({
             approved={job.status === "approved"}
           />
         )}
-      </div>
-      <button
+      </Box>
+      <Button
         disabled={!rendered || mutation.isPending}
         onClick={() => mutation.mutate("approve")}
       >
         {t("omr.approve")}
-      </button>
-      <button
+      </Button>
+      <Button
         disabled={!rendered || mutation.isPending}
         onClick={() => mutation.mutate("reject")}
       >
         {t("omr.reject")}
-      </button>
-      <button
+      </Button>
+      <Button
         disabled={
           !job ||
           mutation.isPending ||
@@ -87,8 +114,8 @@ export function Review({
         onClick={() => mutation.mutate("rerun")}
       >
         {t("omr.rerun")}
-      </button>
+      </Button>
       {mutation.isError && <ErrorMessage error={mutation.error} />}
-    </section>
+    </Panel>
   );
 }
