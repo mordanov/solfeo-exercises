@@ -11,6 +11,11 @@ import {
   type User,
 } from "../../api/auth";
 import { ErrorMessage } from "../../components/AccountUi";
+import { Button, Field, Form, Input, Panel, Select } from "../../components/Ui";
+import { ReadOnlyGrid } from "../../components/ReadOnlyGrid";
+import type { GridColDef } from "@mui/x-data-grid";
+import Box from "@mui/material/Box";
+import Alert from "@mui/material/Alert";
 
 function RoleOptions() {
   const { t } = useTranslation();
@@ -55,35 +60,35 @@ function UserEditor({
     },
   });
   return (
-    <section aria-label={t("users.editUser", { username: user.username })}>
+    <Panel aria-label={t("users.editUser", { username: user.username })}>
       <h3>{t("users.editUser", { username: user.username })}</h3>
-      <form
+      <Form
         onSubmit={(event) => {
           event.preventDefault();
           update.mutate();
         }}
       >
-        <label>
+        <Field>
           {t("users.firstName")}
-          <input
+          <Input
             required
             maxLength={100}
             value={first}
             onChange={(event) => setFirst(event.target.value)}
           />
-        </label>
-        <label>
+        </Field>
+        <Field>
           {t("users.lastName")}
-          <input
+          <Input
             required
             maxLength={100}
             value={last}
             onChange={(event) => setLast(event.target.value)}
           />
-        </label>
-        <label>
+        </Field>
+        <Field>
           {t("users.role")}
-          <select
+          <Select
             value={role}
             onChange={(event) => {
               if (
@@ -94,20 +99,20 @@ function UserEditor({
             }}
           >
             <RoleOptions />
-          </select>
-        </label>
-        <button disabled={update.isPending}>{t("users.save")}</button>
+          </Select>
+        </Field>
+        <Button disabled={update.isPending}>{t("users.save")}</Button>
         {update.isError && <ErrorMessage error={update.error} />}
-      </form>
-      <form
+      </Form>
+      <Form
         onSubmit={(event) => {
           event.preventDefault();
           reset.mutate();
         }}
       >
-        <label>
+        <Field>
           {t("users.temporaryPassword")}
-          <input
+          <Input
             required
             type="password"
             autoComplete="new-password"
@@ -115,20 +120,20 @@ function UserEditor({
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
-        </label>
-        <label>
-          <input
+        </Field>
+        <Field>
+          <Input
             type="checkbox"
             checked={mustChange}
             onChange={(event) => setMustChange(event.target.checked)}
           />
           {t("users.mustChange")}
-        </label>
-        <button disabled={reset.isPending}>{t("users.resetPassword")}</button>
+        </Field>
+        <Button disabled={reset.isPending}>{t("users.resetPassword")}</Button>
         {reset.isError && <ErrorMessage error={reset.error} />}
-      </form>
-      <button onClick={onDone}>{t("common.close")}</button>
-    </section>
+      </Form>
+      <Button onClick={onDone}>{t("common.close")}</Button>
+    </Panel>
   );
 }
 
@@ -172,16 +177,82 @@ export function Users({ auth }: { auth: Auth }) {
       updateUser(auth.csrf_token, user.id, { is_active: !user.is_active }),
     onSuccess: refresh,
   });
+  const columns: GridColDef<User>[] = [
+    {
+      field: "username",
+      headerName: t("auth.username"),
+      minWidth: 160,
+      flex: 1,
+      renderCell: ({ row: user }) => (
+        <span>
+          {user.username}
+          {user.is_emergency && <span> ({t("users.emergency")})</span>}
+        </span>
+      ),
+    },
+    {
+      field: "name",
+      headerName: t("users.name"),
+      minWidth: 180,
+      flex: 1,
+      renderCell: ({ row: user }) => (
+        <span>
+          {user.first_name} {user.last_name}
+        </span>
+      ),
+    },
+    {
+      field: "role",
+      headerName: t("users.role"),
+      minWidth: 120,
+      renderCell: ({ row: user }) => t(`roles.${user.role}`),
+    },
+    {
+      field: "status",
+      headerName: t("users.status"),
+      minWidth: 120,
+      renderCell: ({ row: user }) =>
+        t(user.is_active ? "users.active" : "users.inactive"),
+    },
+    {
+      field: "actions",
+      headerName: t("users.actions"),
+      minWidth: 250,
+      flex: 1,
+      renderCell: ({ row: user }) =>
+        !user.is_emergency &&
+        user.id !== auth.user.id && (
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
+            <Button
+              aria-label={t("users.editUser", { username: user.username })}
+              onClick={() => setEditing(user)}
+            >
+              {t("users.edit")}
+            </Button>
+            <Button
+              disabled={activation.isPending}
+              aria-label={t(
+                user.is_active ? "users.deactivateUser" : "users.activateUser",
+                { username: user.username },
+              )}
+              onClick={() => activation.mutate(user)}
+            >
+              {t(user.is_active ? "users.deactivate" : "users.activate")}
+            </Button>
+          </Box>
+        ),
+    },
+  ];
   return (
-    <section>
+    <Panel>
       <h2>{t("users.title")}</h2>
       {query.isPending && <p aria-live="polite">{t("common.loading")}</p>}
       {query.isError && (
         <>
           <ErrorMessage error={query.error} />
-          <button onClick={() => void query.refetch()}>
+          <Button onClick={() => void query.refetch()}>
             {t("common.retry")}
-          </button>
+          </Button>
         </>
       )}
       {query.data && !query.isError && (
@@ -193,80 +264,23 @@ export function Users({ auth }: { auth: Auth }) {
               ),
             })}
           </p>
-          <div className="table-scroll">
-            <table>
-              <thead>
-                <tr>
-                  <th>{t("auth.username")}</th>
-                  <th>{t("users.name")}</th>
-                  <th>{t("users.role")}</th>
-                  <th>{t("users.status")}</th>
-                  <th>{t("users.actions")}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {query.data.users.map((user) => (
-                  <tr key={user.id}>
-                    <td>
-                      {user.username}
-                      {user.is_emergency && (
-                        <span> ({t("users.emergency")})</span>
-                      )}
-                    </td>
-                    <td>
-                      {user.first_name} {user.last_name}
-                    </td>
-                    <td>{t(`roles.${user.role}`)}</td>
-                    <td>
-                      {t(user.is_active ? "users.active" : "users.inactive")}
-                    </td>
-                    <td>
-                      {!user.is_emergency && user.id !== auth.user.id && (
-                        <>
-                          <button
-                            aria-label={t("users.editUser", {
-                              username: user.username,
-                            })}
-                            onClick={() => setEditing(user)}
-                          >
-                            {t("users.edit")}
-                          </button>{" "}
-                          <button
-                            disabled={activation.isPending}
-                            aria-label={t(
-                              user.is_active
-                                ? "users.deactivateUser"
-                                : "users.activateUser",
-                              { username: user.username },
-                            )}
-                            onClick={() => activation.mutate(user)}
-                          >
-                            {t(
-                              user.is_active
-                                ? "users.deactivate"
-                                : "users.activate",
-                            )}
-                          </button>
-                        </>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <button
+          <ReadOnlyGrid
+            rows={query.data.users}
+            columns={columns}
+            label={t("users.title")}
+          />
+          <Button
             disabled={offset === 0}
             onClick={() => setOffset(Math.max(0, offset - 50))}
           >
             {t("common.previous")}
-          </button>{" "}
-          <button
+          </Button>{" "}
+          <Button
             disabled={offset + 50 >= query.data.total}
             onClick={() => setOffset(offset + 50)}
           >
             {t("common.next")}
-          </button>
+          </Button>
         </>
       )}
       {activation.isError && <ErrorMessage error={activation.error} />}
@@ -283,45 +297,45 @@ export function Users({ auth }: { auth: Auth }) {
       ) : (
         <>
           <h3>{t("users.create")}</h3>
-          <form
+          <Form
             onSubmit={(event) => {
               event.preventDefault();
               creation.mutate();
             }}
           >
-            <label>
+            <Field>
               {t("auth.username")}
-              <input
+              <Input
                 required
                 autoComplete="off"
                 maxLength={64}
                 value={username}
                 onChange={(event) => setUsername(event.target.value)}
               />
-            </label>
-            <label>
+            </Field>
+            <Field>
               {t("users.firstName")}
-              <input
+              <Input
                 required
                 autoComplete="off"
                 maxLength={100}
                 value={first}
                 onChange={(event) => setFirst(event.target.value)}
               />
-            </label>
-            <label>
+            </Field>
+            <Field>
               {t("users.lastName")}
-              <input
+              <Input
                 required
                 autoComplete="off"
                 maxLength={100}
                 value={last}
                 onChange={(event) => setLast(event.target.value)}
               />
-            </label>
-            <label>
+            </Field>
+            <Field>
               {t("users.temporaryPassword")}
-              <input
+              <Input
                 required
                 type="password"
                 autoComplete="new-password"
@@ -329,11 +343,11 @@ export function Users({ auth }: { auth: Auth }) {
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
               />
-            </label>
+            </Field>
             <p>{t("auth.passwordHint")}</p>
-            <label>
+            <Field>
               {t("users.role")}
-              <select
+              <Select
                 value={role}
                 onChange={(event) => {
                   if (
@@ -344,22 +358,26 @@ export function Users({ auth }: { auth: Auth }) {
                 }}
               >
                 <RoleOptions />
-              </select>
-            </label>
-            <label>
-              <input
+              </Select>
+            </Field>
+            <Field>
+              <Input
                 type="checkbox"
                 checked={mustChange}
                 onChange={(event) => setMustChange(event.target.checked)}
               />
               {t("users.mustChange")}
-            </label>
-            <button disabled={creation.isPending}>{t("users.create")}</button>
+            </Field>
+            <Button disabled={creation.isPending}>{t("users.create")}</Button>
             {creation.isError && <ErrorMessage error={creation.error} />}
-            {creation.isSuccess && <p role="status">{t("users.created")}</p>}
-          </form>
+            {creation.isSuccess && (
+              <Alert severity="success" role="status">
+                {t("users.created")}
+              </Alert>
+            )}
+          </Form>
         </>
       )}
-    </section>
+    </Panel>
   );
 }
