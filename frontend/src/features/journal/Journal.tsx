@@ -5,9 +5,13 @@ import {
   dateBoundary,
   journalOptions,
   listJournal,
+  type JournalEntry,
   type JournalFilters,
 } from "../../api/journal";
 import { ErrorMessage } from "../../components/AccountUi";
+import { Button, Field, Form, Input, Panel, Select } from "../../components/Ui";
+import { ReadOnlyGrid } from "../../components/ReadOnlyGrid";
+import type { GridColDef } from "@mui/x-data-grid";
 
 export function Journal() {
   const { t, i18n } = useTranslation();
@@ -36,15 +40,77 @@ export function Journal() {
     new Intl.NumberFormat(i18n.language, { maximumFractionDigits: 1 }).format(
       value,
     );
+  const columns: GridColDef<JournalEntry>[] = [
+    {
+      field: "student",
+      headerName: t("journal.student"),
+      minWidth: 180,
+      flex: 1,
+      renderCell: ({ row }) => (
+        <span>
+          {row.first_name} {row.last_name} ({row.username})
+        </span>
+      ),
+    },
+    {
+      field: "exercise",
+      headerName: t("journal.exercise"),
+      minWidth: 180,
+      flex: 1,
+      renderCell: ({ row }) => (
+        <div>
+          {row.exercise_title}
+          {row.exercise_deleted && <p>{t("journal.deleted")}</p>}
+        </div>
+      ),
+    },
+    {
+      field: "started",
+      headerName: t("journal.started"),
+      minWidth: 190,
+      renderCell: ({ row }) => date(row.started_at),
+    },
+    {
+      field: "heartbeat",
+      headerName: t("journal.heartbeat"),
+      minWidth: 190,
+      renderCell: ({ row }) => date(row.last_heartbeat_at),
+    },
+    {
+      field: "ended",
+      headerName: t("journal.ended"),
+      minWidth: 190,
+      renderCell: ({ row }) =>
+        row.ended_at ? date(row.ended_at) : t("journal.noEnd"),
+    },
+    {
+      field: "position",
+      headerName: t("journal.position"),
+      minWidth: 160,
+      renderCell: ({ row }) => number(row.max_position_sec),
+    },
+    {
+      field: "duration",
+      headerName: t("journal.duration"),
+      minWidth: 130,
+      renderCell: ({ row }) => number(row.audio_duration_sec),
+    },
+    {
+      field: "completed",
+      headerName: t("journal.completed"),
+      minWidth: 130,
+      renderCell: ({ row }) => t(row.completed ? "journal.yes" : "journal.no"),
+    },
+  ];
   return (
-    <section>
+    <Panel>
       <h2>{t("journal.title")}</h2>
       <p>
         {t("journal.timezone", {
           zone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         })}
       </p>
-      <form
+      <Form
         onSubmit={(event) => {
           event.preventDefault();
           setOffset(0);
@@ -56,9 +122,9 @@ export function Journal() {
           });
         }}
       >
-        <label>
+        <Field>
           {t("journal.student")}
-          <select
+          <Select
             value={student}
             onChange={(event) => setStudent(event.target.value)}
           >
@@ -68,11 +134,11 @@ export function Journal() {
                 {value.label}
               </option>
             ))}
-          </select>
-        </label>
-        <label>
+          </Select>
+        </Field>
+        <Field>
           {t("journal.exercise")}
-          <select
+          <Select
             value={exercise}
             onChange={(event) => setExercise(event.target.value)}
           >
@@ -83,98 +149,62 @@ export function Journal() {
                 {value.deleted ? ` (${t("journal.deleted")})` : ""}
               </option>
             ))}
-          </select>
-        </label>
-        <label>
+          </Select>
+        </Field>
+        <Field>
           {t("journal.from")}
-          <input
+          <Input
             type="date"
             value={from}
             max={to || undefined}
             onChange={(event) => setFrom(event.target.value)}
           />
-        </label>
-        <label>
+        </Field>
+        <Field>
           {t("journal.to")}
-          <input
+          <Input
             type="date"
             value={to}
             min={from || undefined}
             onChange={(event) => setTo(event.target.value)}
           />
-        </label>
-        <button>{t("journal.filter")}</button>
-      </form>
-      <button
+        </Field>
+        <Button>{t("journal.filter")}</Button>
+      </Form>
+      <Button
         onClick={() => {
           void query.refetch();
           void options.refetch();
         }}
       >
         {t("journal.refresh")}
-      </button>
+      </Button>
       {query.isPending && <p>{t("common.loading")}</p>}
       {query.isError && <ErrorMessage error={query.error} />}
       {options.isError && <ErrorMessage error={options.error} />}
       {query.data && (
         <>
           <p>{t("journal.total", { total: number(query.data.total) })}</p>
-          <div className="table-scroll">
-            <table>
-              <thead>
-                <tr>
-                  {[
-                    "student",
-                    "exercise",
-                    "started",
-                    "heartbeat",
-                    "ended",
-                    "position",
-                    "duration",
-                    "completed",
-                  ].map((key) => (
-                    <th key={key}>{t(`journal.${key}`)}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {query.data.sessions.map((row) => (
-                  <tr key={row.id}>
-                    <td>
-                      {row.first_name} {row.last_name} ({row.username})
-                    </td>
-                    <td>
-                      {row.exercise_title}
-                      {row.exercise_deleted && <p>{t("journal.deleted")}</p>}
-                    </td>
-                    <td>{date(row.started_at)}</td>
-                    <td>{date(row.last_heartbeat_at)}</td>
-                    <td>
-                      {row.ended_at ? date(row.ended_at) : t("journal.noEnd")}
-                    </td>
-                    <td>{number(row.max_position_sec)}</td>
-                    <td>{number(row.audio_duration_sec)}</td>
-                    <td>{t(row.completed ? "journal.yes" : "journal.no")}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <ReadOnlyGrid
+            rows={query.data.sessions}
+            columns={columns}
+            label={t("journal.title")}
+          />
           {query.data.total === 0 && <p>{t("journal.empty")}</p>}
-          <button
+          <Button
             disabled={offset === 0}
             onClick={() => setOffset((value) => Math.max(0, value - 50))}
           >
             {t("common.previous")}
-          </button>{" "}
-          <button
+          </Button>{" "}
+          <Button
             disabled={offset + 50 >= query.data.total}
             onClick={() => setOffset((value) => value + 50)}
           >
             {t("common.next")}
-          </button>
+          </Button>
         </>
       )}
-    </section>
+    </Panel>
   );
 }
