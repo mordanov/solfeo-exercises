@@ -1,5 +1,6 @@
 import io
 import json
+import subprocess
 import tarfile
 import threading
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -7,7 +8,7 @@ from pathlib import Path
 
 import pytest
 from release import build_release
-from rollout import DeploymentError, Rollout, require_omr_memory, verify_bundle
+from rollout import DeploymentError, Rollout, verify_bundle
 
 SHA = "d" * 40
 
@@ -79,7 +80,23 @@ class FakeRollout(Rollout):
             raise DeploymentError("SYNTHETIC_FAILURE")
         if args == ("config", "--services"):
             return "backend\nfrontend\nmigrate\npostgres\n"
+        if args == ("config", "--format", "json"):
+            return json.dumps(
+                {
+                    "services": {
+                        "frontend": {
+                            "environment": {
+                                "DEPLOY_IMAGE_BUDGET_MB": "6144",
+                                "DEPLOY_DISK_RESERVE_MB": "2048",
+                            }
+                        }
+                    }
+                }
+            )
         return ""
+
+    def disk_free(self) -> dict[str, int]:
+        return {"docker": 1024**4, "release": 1024**4}
 
     def verify(self, release: Path) -> None:
         self.calls.append("verify:" + release.name)
@@ -125,16 +142,29 @@ def test_first_install_failure_preserves_database(tmp_path: Path) -> None:
     assert not any("down" in call or "--volumes" in call for call in rollout.calls)
 
 
-def test_worker_stops_before_migration_and_participates_in_rollback(
-    tmp_path: Path,
+@pytest.mark.parametrize("enabled", ["false", "true"])
+def test_worker_rollout_preserves_order_and_rollback_without_host_memory_probe(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, enabled: str
 ) -> None:
+    original = Path.is_file
+
+    def is_file(path: Path) -> bool:
+        assert path != Path("/proc/meminfo"), "Rollout must not inspect host memory"
+        return original(path)
+
+    monkeypatch.setattr(Path, "is_file", is_file)
+
     class WithWorker(FakeRollout):
         def compose(self, release: Path, *args: str) -> str:
             output = super().compose(release, *args)
             if args == ("config", "--services") and release == self.candidate:
                 return output + "telegram\nomr\n"
             if args == ("config", "--format", "json"):
-                return '{"services":{"omr":{"environment":{"OMR_ENABLED":"false"}}}}'
+                configuration = json.loads(output)
+                configuration["services"]["omr"] = {
+                    "environment": {"OMR_ENABLED": enabled}
+                }
+                return json.dumps(configuration)
             return output
 
     rollout = WithWorker(tmp_path, "health")
@@ -152,25 +182,107 @@ def test_worker_stops_before_migration_and_participates_in_rollback(
     )
 
 
-def test_omr_memory_preflight_rejects_insufficient_headroom() -> None:
-    configuration = json.dumps(
-        {
-            "services": {
-                "omr": {
-                    "mem_limit": 1024 * 1024 * 1024,
-                    "environment": {
-                        "OMR_ENABLED": "true",
-                        "OMR_HOST_RESERVE_MB": "512",
-                    },
-                }
-            }
-        }
-    )
-    with pytest.raises(DeploymentError, match="OMR_MEMORY_INSUFFICIENT"):
-        require_omr_memory(configuration, "MemAvailable: 130000 kB\nSwapFree: 0 kB\n")
-    require_omr_memory(configuration, "MemAvailable: 2097152 kB\n")
-    with pytest.raises(DeploymentError, match="OMR_MEMORY_UNKNOWN"):
-        require_omr_memory(configuration, "")
+@pytest.mark.parametrize("storage", ["docker", "release"])
+@pytest.mark.parametrize("free_mb", [0, 8191, 8192])
+def test_disk_guard_checks_exact_boundary_before_pull(
+    tmp_path: Path, storage: str, free_mb: int
+) -> None:
+    class Capacity(FakeRollout):
+        def disk_free(self) -> dict[str, int]:
+            return {**super().disk_free(), storage: free_mb * 1024**2}
+
+    rollout = Capacity(tmp_path)
+    if free_mb < 8192:
+        with pytest.raises(DeploymentError, match="DEPLOY_DISK_INSUFFICIENT"):
+            rollout.activate(rollout.candidate, None)
+        assert not any(
+            ":pull" in call or ":up" in call or ":stop" in call or ":run" in call
+            for call in rollout.calls
+        )
+    else:
+        rollout.activate(rollout.candidate, None)
+        assert any(":pull" in call for call in rollout.calls)
+
+
+def test_disk_reserve_is_rechecked_after_pull_before_service_changes(
+    tmp_path: Path,
+) -> None:
+    class Capacity(FakeRollout):
+        def disk_free(self) -> dict[str, int]:
+            pulled = any(":pull" in call for call in self.calls)
+            return {"docker": (2047 if pulled else 8192) * 1024**2, "release": 1024**4}
+
+    rollout = Capacity(tmp_path)
+    with pytest.raises(DeploymentError, match="DEPLOY_DISK_INSUFFICIENT"):
+        rollout.activate(rollout.candidate, None)
+    assert any(":pull" in call for call in rollout.calls)
+    assert not any(":up" in call or ":stop" in call for call in rollout.calls)
+
+
+@pytest.mark.parametrize("value", ["", "0", "-1", "many", "1.5"])
+def test_invalid_disk_configuration_fails_closed(tmp_path: Path, value: str) -> None:
+    class Invalid(FakeRollout):
+        def compose(self, release: Path, *args: str) -> str:
+            output = super().compose(release, *args)
+            if args == ("config", "--format", "json"):
+                data = json.loads(output)
+                data["services"]["frontend"]["environment"][
+                    "DEPLOY_IMAGE_BUDGET_MB"
+                ] = value
+                return json.dumps(data)
+            return output
+
+    rollout = Invalid(tmp_path)
+    with pytest.raises(DeploymentError, match="DEPLOY_DISK_CONFIG_INVALID"):
+        rollout.activate(rollout.candidate, None)
+    assert not any(":pull" in call for call in rollout.calls)
+
+
+@pytest.mark.parametrize("endpoint", ["ssh://remote", "tcp://remote:2376"])
+def test_disk_measurement_rejects_remote_daemons(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, endpoint: str
+) -> None:
+    monkeypatch.delenv("DOCKER_CONTEXT", raising=False)
+    monkeypatch.delenv("DOCKER_HOST", raising=False)
+    calls: list[list[str]] = []
+
+    def docker(
+        command: list[str], **kwargs: object
+    ) -> subprocess.CompletedProcess[str]:
+        calls.append(command)
+        output = str(tmp_path) if "info" in command else endpoint
+        return subprocess.CompletedProcess(command, 0, stdout=output, stderr="")
+
+    monkeypatch.setattr(subprocess, "run", docker)
+    rollout = Rollout(tmp_path, "solfeo-test", False, "http://127.0.0.1:18090")
+    with pytest.raises(DeploymentError, match="LOCAL_DOCKER_REQUIRED"):
+        rollout.disk_free()
+    assert len(calls) == 1
+
+
+def test_disk_measurement_rejects_remote_docker_host_override(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.delenv("DOCKER_CONTEXT", raising=False)
+    monkeypatch.setenv("DOCKER_HOST", "tcp://remote:2376")
+    rollout = Rollout(tmp_path, "solfeo-test", False, "http://127.0.0.1:18090")
+    with pytest.raises(DeploymentError, match="LOCAL_DOCKER_REQUIRED"):
+        rollout.disk_free()
+
+
+@pytest.mark.parametrize(
+    "endpoint",
+    ["tcp://[invalid", "tcp://synthetic-user:synthetic-password@\uff0fhost"],
+)
+def test_disk_measurement_rejects_malformed_endpoint_without_values(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, endpoint: str
+) -> None:
+    monkeypatch.delenv("DOCKER_CONTEXT", raising=False)
+    monkeypatch.setenv("DOCKER_HOST", endpoint)
+    rollout = Rollout(tmp_path, "solfeo-test", False, "http://127.0.0.1:18090")
+    with pytest.raises(DeploymentError, match="^DEPLOY_DISK_UNKNOWN$") as failure:
+        rollout.disk_free()
+    assert "synthetic-" not in str(failure.value)
 
 
 def test_state_promotion_is_atomic_and_retains_previous(tmp_path: Path) -> None:

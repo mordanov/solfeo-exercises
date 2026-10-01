@@ -23,22 +23,45 @@ The separate publication workflow supplies verified product images and a version
 The shared nginx routes the existing TLS hostname to the product frontend.
 Do not invoke the shared infrastructure's general deployment.
 
+## Storage capacity
+
+The rollout checks the local Docker storage filesystem and the release filesystem before image pulls.
+Each requires `DEPLOY_IMAGE_BUDGET_MB + DEPLOY_DISK_RESERVE_MB`, normally 8192 MiB.
+The 6144 MiB image budget covers compressed downloads and layer extraction for a cold release.
+The additional 2048 MiB reserve protects runtime storage and compatible rollback.
+Existing images remain on disk.
+
+The rollout checks the reserve again after image pulls, before changing running services.
+`DEPLOY_DISK_INSUFFICIENT` reports the storage name and available and required MiB.
+A failed check leaves active services, the database, and release state unchanged.
+Candidate release metadata or newly downloaded images can remain after failure.
+The rollout does not delete images, containers, volumes, or files to satisfy this check.
+
+Run the rollout on the Docker host with a local daemon.
+`DEPLOY_DISK_UNKNOWN` blocks deployment when the Docker storage path cannot be measured.
+The guard rejects SSH and TCP Docker endpoints instead of using a local-filesystem estimate.
+Set both positive integer limits in the private `.env.production`.
+Keep the default reserve unless an operator reviews the capacity change.
+Increase the image budget when image growth requires more download and extraction space.
+
 ## OMR capacity
 
-The rollout checks Linux `MemAvailable` before pulling images or stopping services when OMR is enabled.
-It requires `OMR_MEMORY_MB + OMR_HOST_RESERVE_MB`, normally 1536 MiB.
-`OMR_MEMORY_INSUFFICIENT` leaves the active release and database unchanged.
-Do not disable this protection to fit a busy shared host.
-Provision more RAM or arrange an operator-reviewed capacity change before retrying.
-Swap alone does not satisfy this check; the OMR container does not use swap.
+The owner removes the host-memory preflight on 2026-10-01.
+The rollout does not read `/proc/meminfo` or reject deployment for insufficient host RAM.
+`OMR_MEMORY_MB` still limits the OMR container, which does not use swap.
+Disk checks, worker healthchecks, and compatible rollback remain active.
+
+**Caution:** Memory pressure can interrupt recognition or affect other services on the host.
+Inspect available RAM and OMR memory use before production recognition.
+A healthy idle worker does not establish sufficient memory for a recognition job.
 
 The 2026-09-30 VPS check finds approximately 116 MiB available RAM and no swap.
 Disk cleanup leaves approximately 18 GiB free, but does not resolve the RAM constraint.
 The SSH account has no noninteractive sudo access.
-PHASE 5 production activation therefore requires operator action.
+These measurements describe the recorded target, not the owner's reported new host.
 Setting `OMR_ENABLED=false` is an explicit maintenance option, not successful OMR deployment.
 
-### Verified PHASE 5 release awaiting RAM
+### Recorded PHASE 5 release and former RAM refusal
 
 Source `be0000d1e8208489b65fc939b77e1bbb013422e7` passes CI run `36674676116`.
 Publication run `36675174373` verifies both pulled x86-64 images before packaging the release.
@@ -50,8 +73,8 @@ Production retains PHASE 4, schema `0005_telegram`, and unchanged container star
 | `ghcr.io/mordanov/solfeo-backend` | `sha256:550506cfb1790a50261c82eae7d8079eb78928f1806d5a63dcc9443bc6c26c62` |
 | `ghcr.io/mordanov/solfeo-frontend` | `sha256:9cd20857296beefc7a0552b65feaaaac237c2896f332e991af940a981e3968f8` |
 
-**Caution:** Provision sufficient available RAM before retrying this release.
-The memory guard remains active during a manual retry.
+**Caution:** Older rollout scripts retain their original memory guard.
+Use a newly verified release with the updated rollout to remove this gate.
 Use the standard rollout and verified bundle, not an unversioned Compose update.
 Re-establish private registry access when required; the failed job removes its temporary credentials.
 
@@ -144,13 +167,14 @@ The workflow never runs the shared deployment script.
 The rollout performs these operations:
 1. Validate the bundle against the expected source commit and CI run.
 2. Store the deployment files under `releases/<archive-sha256>/`.
-3. Validate Compose and pull immutable image references.
-4. Start PostgreSQL and wait for its healthcheck.
-5. Stop only the product backend and frontend.
-6. Run `alembic upgrade head` with the migration role.
-7. Start the backend and frontend with container healthchecks.
-8. Check Alembic heads, public HTTPS health JSON, and the frontend HTML.
-9. Atomically record the current and previous release in `state.json`.
+3. Validate Compose, free storage, and available OMR memory.
+4. Pull immutable image references and check the remaining disk reserve.
+5. Start PostgreSQL and wait for its healthcheck.
+6. Stop only the product backend, frontend, and workers.
+7. Run `alembic upgrade head` with the migration role.
+8. Start the backend, frontend, and workers with container healthchecks.
+9. Check Alembic heads, public HTTPS health JSON, and the frontend HTML.
+10. Atomically record the current and previous release in `state.json`.
 
 A host file lock prevents overlapping activations.
 The stable `runtime/deploy/postgres-init.sh` path avoids unnecessary PostgreSQL recreation between releases.
@@ -272,3 +296,11 @@ The rollout test maps synthetic digest references to CI-built images; all migrat
 It also verifies that only the frontend joins its disposable proxy network.
 The test cleanup removes only its disposable project and volume.
 It does not change the development volume or contact the VPS.
+
+## Final operational acceptance
+
+Complete `smoke-check.md` after deploying the exact verified release.
+Use Chrome and Safari for the browser checks.
+The checklist covers accounts, uploads, seeking, Telegram, OMR, speech, the journal, and failure boundaries.
+Read `troubleshooting.md` before investigating a capacity or health failure.
+Do not mark PHASE 7 complete from image publication or local checks alone.

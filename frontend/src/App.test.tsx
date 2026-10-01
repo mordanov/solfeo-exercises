@@ -95,3 +95,55 @@ it("does not show stale success after a failed recheck", async () => {
   );
   expect(screen.queryByText("Backend is available")).not.toBeInTheDocument();
 });
+
+it("shows an anonymous localized 404 with a home link, without API requests", async () => {
+  window.history.replaceState({}, "", "/missing-page?language=ru");
+  const fetch = vi.fn();
+  vi.stubGlobal("fetch", fetch);
+  renderApp();
+  expect(
+    screen.getByRole("heading", { name: "Page not found" }),
+  ).toBeInTheDocument();
+  expect(screen.getByRole("link", { name: "Go to home" })).toHaveAttribute(
+    "href",
+    "/",
+  );
+  expect(
+    screen.queryByRole("button", { name: "Sign in" }),
+  ).not.toBeInTheDocument();
+  expect(fetch).not.toHaveBeenCalled();
+  await userEvent.selectOptions(screen.getByLabelText("Language"), "ru");
+  expect(
+    screen.getByRole("heading", { name: "Страница не найдена" }),
+  ).toBeInTheDocument();
+  expect(document.documentElement.lang).toBe("ru");
+  await userEvent.selectOptions(screen.getByLabelText("Язык"), "es");
+  expect(
+    screen.getByRole("heading", { name: "Página no encontrada" }),
+  ).toBeInTheDocument();
+  expect(screen.getByRole("link", { name: "Ir al inicio" })).toHaveAttribute(
+    "href",
+    "/",
+  );
+});
+
+it.each([
+  "/login/",
+  "/settings",
+  "/manager/users",
+  "/manager/exercises/",
+  "/manager/journal",
+  "/manager/telegram",
+  "/student/",
+])(
+  "keeps direct navigation to %s on the application instead of the 404",
+  async (path) => {
+    window.history.replaceState({}, "", path);
+    mockHealth(async () => new Response('{"status":"ok"}'));
+    renderApp();
+    expect(
+      await screen.findByRole("button", { name: "Sign in" }),
+    ).toBeInTheDocument();
+    expect(screen.queryByText("Page not found")).not.toBeInTheDocument();
+  },
+);

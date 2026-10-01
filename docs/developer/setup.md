@@ -4,7 +4,7 @@ This document explains how to run and check the current product skeleton.
 
 Prerequisites:
 - Install Python 3.12 and `uv`.
-- Install Node.js 22.12 or later within version 22, with npm 12.1.0.
+- Install Node.js 22.23.3 and npm 12.1.0.
 - Install Docker and Compose v2 for container checks.
 - Install `openssl` to generate a local database password.
 - Install ffmpeg, ffprobe, and `file` for native media tests.
@@ -142,14 +142,16 @@ The tests require the database name `solfeo_test`; they refuse the development d
 ```sh
 docker compose --env-file .env -f deploy/compose.test.yaml up -d --wait
 DATABASE_NAME=solfeo_test DATABASE_PORT=15433 uv run pytest
-uv run ruff check backend deploy
-uv run ruff format --check backend deploy
+uv run ruff check backend deploy worker
+uv run ruff format --check backend deploy worker
 uv run mypy --config-file pyproject.toml
 npm test
 npm run lint
 npm run format:check
 npm run typecheck
 npm run build
+uv run --locked pip-audit --strict --progress-spinner off
+npm audit --audit-level=low
 docker compose --env-file .env -f deploy/compose.test.yaml down
 ```
 
@@ -206,7 +208,7 @@ Changes to `.pre-commit-config.yaml` trigger all 6 checks.
 Documentation-only and prototype-only changes do not trigger these product checks.
 Each selected hook checks its whole component, including dependent files.
 
-Use `uv run ruff format backend deploy` and `npm run format` to correct formatting.
+Use `uv run ruff format backend deploy worker` and `npm run format` to correct formatting.
 Review the resulting changes before staging them again.
 Run the test and migration commands above separately; successful hooks do not replace those checks.
 
@@ -228,3 +230,7 @@ Use npm 12.1.0 for dependency updates; npm 10 fails during fresh workspace resol
 Docker installs Python dependencies with hashes and JavaScript dependencies with `npm ci`.
 Base image digests are fixed in both Dockerfiles.
 The Compose files and CI service also pin the PostgreSQL image digest.
+CI audits runtime and development dependencies in both locked environments.
+Known advisories fail the dependency job; audit-service failures also fail it.
+Do not suppress an advisory without an explicit owner-reviewed decision.
+Read `troubleshooting.md` before updating affected dependencies.

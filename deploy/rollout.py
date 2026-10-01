@@ -14,6 +14,7 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 from typing import TypedDict
+from urllib.parse import urlsplit
 
 from release import RELEASE_FILES
 
@@ -28,19 +29,29 @@ class Manifest(TypedDict):
     frontend_image: str
 
 
-def require_omr_memory(configuration: str, meminfo: str) -> None:
-    service = json.loads(configuration)["services"]["omr"]
-    environment = service["environment"]
-    if str(environment["OMR_ENABLED"]).lower() == "false":
-        return
-    available = re.search(r"^MemAvailable:\s+(\d+)\s+kB$", meminfo, re.MULTILINE)
-    if available is None:
-        raise DeploymentError("OMR_MEMORY_UNKNOWN")
-    required = (
-        int(service["mem_limit"]) + int(environment["OMR_HOST_RESERVE_MB"]) * 1024**2
-    )
-    if int(available.group(1)) * 1024 < required:
-        raise DeploymentError("OMR_MEMORY_INSUFFICIENT:PROVISION_RAM_BEFORE_DEPLOYMENT")
+def require_disk_space(
+    configuration: str, free: dict[str, int], *, pulled: bool = False
+) -> None:
+    try:
+        environment = json.loads(configuration)["services"]["frontend"]["environment"]
+        values = [
+            str(environment[key])
+            for key in ("DEPLOY_IMAGE_BUDGET_MB", "DEPLOY_DISK_RESERVE_MB")
+        ]
+        if any(not value.isdecimal() or int(value) < 1 for value in values):
+            raise ValueError
+        budget, reserve = (int(value) * 1024**2 for value in values)
+    except (KeyError, TypeError, ValueError) as error:
+        raise DeploymentError("DEPLOY_DISK_CONFIG_INVALID") from error
+    required = reserve + (0 if pulled else budget)
+    if set(free) != {"docker", "release"} or any(value < 0 for value in free.values()):
+        raise DeploymentError("DEPLOY_DISK_UNKNOWN")
+    for storage, available in free.items():
+        if available < required:
+            raise DeploymentError(
+                f"DEPLOY_DISK_INSUFFICIENT:{storage}:"
+                f"AVAILABLE_MB={available // 1024**2}:REQUIRED_MB={required // 1024**2}"
+            )
 
 
 def verify_bundle(
@@ -182,6 +193,9 @@ class Rollout:
                         "FFPROBE_",
                         "FILE_",
                         "TELEGRAM_",
+                        "OMR_",
+                        "DEPLOY_",
+                        "DOCKER_LOG_",
                     )
                 )
                 or key == "DEFAULT_LANGUAGE"
@@ -206,6 +220,52 @@ class Rollout:
                 f"COMPOSE_FAILED:{args[0]}:{result.returncode}:SEE_PRIVATE_LAST_ERROR_LOG"
             )
         return result.stdout
+
+    def disk_free(self) -> dict[str, int]:
+        try:
+            endpoint = (
+                os.environ.get("DOCKER_HOST")
+                if not os.environ.get("DOCKER_CONTEXT")
+                else None
+            )
+            if not endpoint:
+                context = subprocess.run(
+                    [
+                        "docker",
+                        "context",
+                        "inspect",
+                        "--format",
+                        '{{(index .Endpoints "docker").Host}}',
+                    ],
+                    capture_output=True,
+                    text=True,
+                    timeout=30,
+                )
+                if context.returncode:
+                    raise DeploymentError("DEPLOY_DISK_UNKNOWN:DOCKER_CONTEXT")
+                endpoint = context.stdout.strip()
+            parsed = urlsplit(endpoint)
+            if (
+                parsed.scheme != "unix"
+                or parsed.netloc
+                or not Path(parsed.path).is_absolute()
+            ):
+                raise DeploymentError("DEPLOY_DISK_UNKNOWN:LOCAL_DOCKER_REQUIRED")
+            result = subprocess.run(
+                ["docker", "info", "--format", "{{.DockerRootDir}}"],
+                capture_output=True,
+                text=True,
+                timeout=30,
+            )
+            path = Path(result.stdout.strip())
+            if result.returncode or not path.is_absolute() or not path.is_dir():
+                raise DeploymentError("DEPLOY_DISK_UNKNOWN:LOCAL_DOCKER_ROOT_REQUIRED")
+            return {
+                "docker": shutil.disk_usage(path).free,
+                "release": shutil.disk_usage(self.root).free,
+            }
+        except (OSError, ValueError) as error:
+            raise DeploymentError("DEPLOY_DISK_UNKNOWN") from error
 
     def verify(self, release: Path) -> None:
         self.compose(
@@ -258,13 +318,10 @@ class Rollout:
         self.compose(candidate, "config", "--quiet")
         services = self.application_services(candidate)
         previous_services = self.application_services(previous) if previous else []
-        if "omr" in services:
-            memory = Path("/proc/meminfo")
-            require_omr_memory(
-                self.compose(candidate, "config", "--format", "json"),
-                memory.read_text() if memory.is_file() else "",
-            )
+        configuration = self.compose(candidate, "config", "--format", "json")
+        require_disk_space(configuration, self.disk_free())
         self.compose(candidate, "pull")
+        require_disk_space(configuration, self.disk_free(), pulled=True)
         self.compose(candidate, "up", "-d", "--no-deps", "--wait", "postgres")
         self.compose(candidate, "stop", *reversed(services))
         try:

@@ -1,4 +1,5 @@
 import re
+from ipaddress import ip_address
 from pathlib import Path
 from typing import Literal, Self
 from urllib.parse import urlsplit
@@ -248,6 +249,22 @@ class Settings(BaseSettings):
                     "AUTH_ALLOWED_ORIGINS must contain plain HTTP(S) origins"
                 )
         return origins
+
+    @model_validator(mode="after")
+    def validate_auth_transport(self) -> Self:
+        for origin in self.auth_allowed_origins:
+            parsed = urlsplit(origin)
+            if parsed.scheme == "https":
+                if not self.session_cookie_secure:
+                    raise ValueError("HTTPS origins require Secure session cookies")
+            elif parsed.hostname != "localhost":
+                try:
+                    local = ip_address(parsed.hostname or "").is_loopback
+                except ValueError:
+                    local = False
+                if not local:
+                    raise ValueError("HTTP authentication is restricted to loopback")
+        return self
 
     @model_validator(mode="after")
     def validate_emergency(self) -> Self:

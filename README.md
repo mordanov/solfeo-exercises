@@ -12,6 +12,10 @@ PHASE 1 adds cookie authentication, manager user administration, persisted setti
 PHASE 2 adds exercise management, protected original images, and converted AAC audio with seeking.
 PHASE 3 adds student listening, saved sequence position, random selection, and the manager listening journal.
 PHASE 4 adds manager-linked Telegram audio imports with creation and audio replacement on the website.
+PHASE 5 adds reviewed OMR scores and note labels.
+PHASE 6 adds the existing 66 spoken-note clips and timed playback.
+PHASE 7 adds deployment capacity checks, localized 404 pages, security headers, structured logs, and dependency audits.
+Production activation and the final PHASE 7 smoke check remain separate acceptance gates.
 
 ## Start locally
 
@@ -64,6 +68,11 @@ The publication workflow calls targeted CD after verifying the release bundle.
 - [Uploads and protected storage](docs/developer/storage.md)
 - [Listening and journal events](docs/developer/listening.md)
 - [Product Telegram import](docs/developer/telegram-import.md)
+- [OMR and score review](docs/developer/omr-pipeline.md)
+- [Spoken notes](docs/developer/spoken-notes.md)
+- [Adding a language](docs/developer/adding-a-language.md)
+- [Troubleshooting](docs/developer/troubleshooting.md)
+- [Full production smoke check](docs/developer/smoke-check.md)
 - [Production configuration and deployment boundaries](docs/developer/deploy.md)
 - [CI and deployment scope](docs/developer/ci-cd.md)
 - [Manager checks](docs/user/manager.md)
@@ -73,4 +82,4 @@ The publication workflow calls targeted CD after verifying the release bundle.
 - [Decisions](docs/DECISIONS.md)
 
 The `prototypes/` directory contains independent, disposable implementations.
-The active Telegram prototype stores audio but does not create exercises.
+The historical Telegram prototype remains stopped; the product worker handles current imports.

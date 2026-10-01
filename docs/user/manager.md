@@ -116,7 +116,7 @@ Role changes also end the target user's existing sessions.
 The letters option uses C–D–E by default.
 The solfège option uses do–re–mi.
 The Exercises page previews original images and converted audio.
-Students now have a separate listening interface; score recognition belongs to a later phase.
+Students have a separate listening interface with approved scores and spoken notes.
 The Telegram prototype remains separate and does not create exercises.
 
 ## Final PHASE 1 manual checklist
@@ -188,7 +188,7 @@ After a network failure, refresh the list before retrying.
 
 Deletion preserves the database record and files.
 The interface does not offer restoration in PHASE 2.
-The bot prototype remains independent and cannot create product exercises yet.
+The product bot supplies imports; only the website applies them to exercises.
 
 ## Final PHASE 2 manual checklist
 
@@ -298,6 +298,26 @@ Normal manager associations survive ordinary restarts.
 8. Unlink Telegram.
    New attachments cannot enter that manager's import list.
 9. Confirm that a student cannot open `/manager/telegram`.
+
+## Recover from an unknown page
+
+1. Open an unknown application address.
+   The page shows **Page not found**, not a manager form.
+2. Select the required language.
+   The message and home link change language.
+3. Click **Go to home**.
+   The application opens the home page and restores your authenticated access when the session remains valid.
+
+This page does not reveal protected exercises or bypass sign-in.
+An API or protected-file error does not use this application page.
+
+## Final PHASE 7 manual checklist
+
+1. Complete `docs/developer/smoke-check.md` with the operator after production deployment.
+2. Repeat account, upload, seeking, OMR, speech, Telegram, and journal checks in Chrome and Safari.
+3. Confirm the unknown-page message and home link in Russian, English, and Spanish.
+4. Confirm that student accounts still cannot use manager operations.
+5. Confirm that existing exercises, original images, imports, and journal rows remain unchanged.
 
 ## Check spoken notes
 

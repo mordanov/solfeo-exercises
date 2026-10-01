@@ -24,7 +24,9 @@ Browser policies or explicit cookie removal can shorten browser retention.
 
 Each session has an independent CSRF token.
 Login requires an exact allowed origin.
-Every other mutation requires that origin and `X-CSRF-Token`.
+Other mutations require that origin and `X-CSRF-Token`, except listening events.
+Listening events carry the same session token in their JSON body for `sendBeacon`.
+See `listening.md` for this narrowly scoped exception.
 The frontend obtains the CSRF token from login or `/api/auth/me`.
 It keeps authenticated state in TanStack Query, not localStorage.
 Logout and authorization failures remove protected cached data and cancel obsolete requests.
@@ -50,6 +52,19 @@ The backend trusts forwarded headers only inside its private deployment boundary
 `API_FORWARDED_ALLOW_IPS=*` is safe here only because no backend port is public.
 Only the shared TLS proxy and frontend join the dedicated proxy network.
 Do not connect untrusted containers or expose the frontend beyond loopback.
+
+Configuration rejects HTTPS origins with insecure cookies.
+HTTP authentication permits only `localhost` and loopback IP addresses.
+Production must retain HTTPS origins and Secure cookies.
+The request limit also bounds login and JSON requests, not only multipart uploads.
+The streamed-byte check remains active when a client omits `Content-Length`.
+
+nginx adds CSP, frame denial, MIME protection, a no-referrer policy, and restrictive browser permissions.
+HSTS applies only when the trusted proxy reports HTTPS.
+Its policy covers the current hostname, not unrelated subdomains.
+CSP permits same-origin scripts, API calls, audio, and public speech clips.
+Inline styles remain necessary for score rendering; inline scripts remain prohibited.
+The product does not request camera, microphone, or location permissions.
 
 ## First manager and emergency recovery
 

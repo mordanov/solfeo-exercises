@@ -1,4 +1,7 @@
 {
+  "notFound.title": "Page not found",
+  "notFound.description": "This page does not exist. Use the home page to continue.",
+  "notFound.home": "Go to home",
   "telegram.title": "Telegram imports",
   "telegram.help": "Link your account, send audio to the bot, then refresh this list. Files must not exceed 20 MB.",
   "telegram.linked": "Telegram is linked.",

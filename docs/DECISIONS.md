@@ -7,6 +7,28 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-10-01: The owner explicitly removes the host-memory preflight from rollout.
+  Rollout no longer reads `/proc/meminfo` or rejects deployment through `OMR_MEMORY_INSUFFICIENT` or `OMR_MEMORY_UNKNOWN`.
+  The obsolete host-reserve setting is removed from the example configuration and production Compose.
+  Docker memory limits, disk checks, worker healthchecks, and compatible rollback remain unchanged.
+  Memory pressure remains an operational risk; healthy startup does not establish successful recognition.
+- 2026-10-01: The owner merges pull request #1 and retains the existing 66 speech clips without regeneration.
+  The owner authorizes complete PHASE 7 automation without intermediate confirmations.
+  Manual acceptance follows the complete implementation.
+  Main-branch deployment still stops at the OMR memory guard; merge does not establish production activation.
+- 2026-10-01: Deployment reserves storage before image pulls and checks the reserve again before service changes.
+  The default image budget is 6144 MiB; the free reserve is 2048 MiB on both measured filesystems.
+  The rollout requires a local Docker daemon and never performs automatic image or volume cleanup.
+  Existing compatible rollback images remain available.
+- 2026-10-01: Unknown application pages use translated React content while retaining HTTP 404.
+  API errors and direct internal-file denial do not use that fallback.
+  CSP permits inline styles for score rendering, but not inline scripts or external resource loading.
+  HSTS applies only to trusted HTTPS responses and the current hostname.
+- 2026-10-01: Backend and worker diagnostics use fixed JSON fields without request bodies or credential-bearing values.
+  Exception diagnostics retain types and frame locations, not values.
+  CI audits all locked Python and JavaScript dependencies and checks documentation completeness.
+  The Python auditor is a development dependency, not a runtime dependency.
+
 - 2026-09-30: The owner accepts PHASE 4 and authorizes complete PHASE 5 automation.
   The owner reports unlinking Telegram and clearing VPS disk space.
   PHASE 5 does not restore the Telegram association.

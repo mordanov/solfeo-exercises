@@ -138,7 +138,7 @@ The checkbox is local to the current score, not a saved account setting.
 
 ## Use spoken notes
 
-The operator must generate and publish the voice files first.
+The release includes the existing 66 voice files; no regeneration is required.
 The voice speaks note names; it does not sing.
 The page identifies the voice as AI-generated.
 
@@ -181,3 +181,25 @@ Image-only speech creates no journal row.
 10. Ask the manager to verify unchanged audio completion after speech alone.
 11. Ask the manager to revoke approval before another start.
     Speech cannot start from the stale page.
+
+## Recover from an unknown page
+
+1. Open an unknown application address.
+   The page shows **Page not found**.
+2. Select Russian, English, or Spanish.
+   The page translates the message and home link.
+3. Click **Go to home**.
+   The application opens your student area when your session remains valid.
+4. Sign in when your session expires.
+   The application restores your saved settings.
+
+The unknown-page screen does not play audio or create a listening session.
+
+## Final PHASE 7 manual checklist
+
+1. Repeat the final listening and spoken-notes checks in Chrome and Safari after deployment.
+2. Confirm all 3 unknown-page translations and the home link.
+3. Reload `/student` and `/settings` directly.
+   Valid routes remain available.
+4. Confirm that manager pages still refuse your access.
+5. Ask the manager to verify journal retention after deleting a test exercise.

@@ -1,10 +1,14 @@
+import logging
+import socket
 from collections.abc import AsyncIterator
 from pathlib import Path
 
 import httpx
 import pytest
 from pydantic import SecretStr, ValidationError
+from sqlalchemy.exc import OperationalError
 
+from app.logging import JsonFormatter
 from app.main import create_app
 from app.settings import Settings
 
@@ -89,3 +93,75 @@ def test_settings_reject_invalid_port(port: int) -> None:
             _env_file=None,
             database_password=SecretStr("synthetic-test-password"),
         )
+
+
+@pytest.mark.parametrize(
+    "origins,secure",
+    [
+        (["https://example.test"], False),
+        (["http://example.test"], True),
+        (["http://example.test"], False),
+    ],
+)
+def test_settings_reject_insecure_public_authentication(
+    origins: list[str], secure: bool
+) -> None:
+    with pytest.raises(ValidationError):
+        Settings(
+            _env_file=None,
+            database_password=SecretStr("synthetic-password"),
+            auth_allowed_origins=origins,
+            session_cookie_secure=secure,
+        )
+
+
+@pytest.mark.parametrize(
+    "path,status,route",
+    [
+        ("/api/health?token=private", 200, "/api/health"),
+        ("/api/private-token?password=secret", 404, "unmatched"),
+    ],
+)
+async def test_request_logs_exclude_query_and_unmatched_paths(
+    client: httpx.AsyncClient,
+    caplog: pytest.LogCaptureFixture,
+    path: str,
+    status: int,
+    route: str,
+) -> None:
+    with caplog.at_level(logging.INFO, logger="app.requests"):
+        await client.get(path, headers={"Cookie": "secret-cookie"})
+    records = [record for record in caplog.records if record.message == "HTTP_REQUEST"]
+    assert len(records) == 1
+    assert records[0].__dict__["route"] == route
+    assert records[0].__dict__["status"] == status
+    assert "private-token" not in caplog.text
+    assert "secret-cookie" not in caplog.text
+
+
+async def test_startup_failure_has_explicit_safe_diagnostics(
+    caplog: pytest.LogCaptureFixture,
+) -> None:
+    with socket.socket() as unavailable:
+        unavailable.bind(("127.0.0.1", 0))
+        settings = Settings(
+            _env_file=None,
+            database_password=SecretStr("unused-private-password"),
+            database_host="127.0.0.1",
+            database_port=unavailable.getsockname()[1],
+        )
+        app = create_app(settings)
+        with caplog.at_level(logging.ERROR, logger="app.main"):
+            with pytest.raises(OperationalError):
+                async with app.router.lifespan_context(app):
+                    raise AssertionError("Startup must fail before serving")
+    records = [
+        record
+        for record in caplog.records
+        if record.message == "BACKEND_LIFESPAN_FAILED"
+    ]
+    assert len(records) == 1
+    assert records[0].exc_info and records[0].exc_info[0] is OperationalError
+    serialized = JsonFormatter().format(records[0])
+    assert '"error_type":"OperationalError"' in serialized
+    assert "unused-private-password" not in serialized

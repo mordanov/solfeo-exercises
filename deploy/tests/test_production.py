@@ -10,6 +10,7 @@ import urllib.request
 import uuid
 from collections.abc import Iterator
 from dataclasses import dataclass, field
+from http.client import HTTPResponse
 from pathlib import Path
 
 import httpx
@@ -53,6 +54,84 @@ def test_development_migration_uses_the_same_backend_image() -> None:
     assert int(services["omr"]["mem_limit"]) == 1024 * 1024 * 1024
     assert services["omr"]["memswap_limit"] == services["omr"]["mem_limit"]
     assert services["omr"]["tmpfs"] == ["/tmp:size=256m,mode=1777,exec"]
+
+
+def test_nginx_404_headers_logs_and_rotation(stand: "Stand") -> None:
+    address = stand.run("port", "frontend", "8080").stdout.strip()
+    with httpx.Client(base_url=f"http://{address}") as client:
+        for path in ("/", "/login", "/settings/", "/manager/exercises", "/student"):
+            response = client.get(path)
+            assert response.status_code == 200
+            assert 'id="root"' in response.text
+        for method in ("GET", "HEAD"):
+            response = client.request(method, "/unknown-page?token=private-query")
+            assert response.status_code == 404
+            assert response.headers["content-type"].startswith("text/html")
+            assert response.headers["cache-control"] == "no-store"
+            assert response.headers["x-frame-options"] == "DENY"
+            assert response.headers["referrer-policy"] == "no-referrer"
+            assert response.headers["x-content-type-options"] == "nosniff"
+            assert (
+                "frame-ancestors 'none'" in response.headers["content-security-policy"]
+            )
+            assert "object-src 'none'" in response.headers["content-security-policy"]
+            assert "strict-transport-security" not in response.headers
+            assert (
+                ('id="root"' in response.text)
+                if method == "GET"
+                else not response.content
+            )
+        https = client.get("/unknown-page", headers={"X-Forwarded-Proto": "https"})
+        assert https.headers["strict-transport-security"] == "max-age=31536000"
+        api = client.get("/api/unknown")
+        assert api.status_code == 404 and api.json() == {"error": "NOT_FOUND"}
+        for path in (
+            "/_protected_media/secret.m4a",
+            "/_protected_scores/secret.musicxml",
+        ):
+            response = client.get(path)
+            assert response.status_code == 404
+            assert 'id="root"' not in response.text
+        assert client.get("/api/exercises/1/files/audio").status_code == 401
+    host, port = address.rsplit(":", 1)
+    with socket.create_connection((host, int(port)), timeout=5) as connection:
+        connection.sendall(
+            b"POST /api/auth/login HTTP/1.1\r\nHost: localhost\r\n"
+            b"Content-Length: 999999999\r\nConnection: close\r\n\r\n"
+        )
+        oversized = HTTPResponse(connection)
+        oversized.begin()
+        assert oversized.status == 413
+        assert oversized.read() == b'{"error":"FILE_TOO_LARGE"}'
+    for service in ("postgres", "backend", "frontend", "omr", "telegram"):
+        container = stand.run("ps", "-q", service).stdout.strip()
+        result = subprocess.run(
+            [
+                "docker",
+                "inspect",
+                "--format",
+                "{{json .HostConfig.LogConfig}}",
+                container,
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        configuration = json.loads(result.stdout)
+        assert configuration == {
+            "Type": "json-file",
+            "Config": {"max-size": "10m", "max-file": "3"},
+        }
+    for service in ("backend", "frontend", "omr", "telegram"):
+        result = stand.run("logs", "--no-log-prefix", service)
+        output = result.stdout + result.stderr
+        assert "private-query" not in output
+        records = [
+            json.loads(line) for line in output.splitlines() if line.startswith("{")
+        ]
+        assert records and all(
+            "event" in record and "level" in record for record in records
+        ), service
 
 
 @dataclass

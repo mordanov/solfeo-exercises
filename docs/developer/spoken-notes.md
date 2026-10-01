@@ -16,15 +16,17 @@ Commit `39545ef` adds the complete vocabulary in English, Russian, and Spanish.
 Both the source assets and the frontend build pass manifest verification.
 Chrome decodes all 66 real clips and verifies scheduled speech and rests for all 6 language and naming combinations.
 Natural quarter notes fit the default 72 BPM tempo in every combination.
-These checks do not establish pronunciation quality or audible speaker output.
-Do not claim audible acceptance until the actual clips pass the checks below.
-The owner postpones deployment; this branch does not change either VPS.
-Pull request #1 enables branch CI without CLI permissions to create requests or dispatch workflows.
-Do not merge that request while deployment remains postponed.
+The owner confirms audible Chrome acceptance on 2026-10-01.
+Safari audible acceptance remains open.
+The owner merges pull request #1 later that day.
+That recorded deployment stops at the former OMR memory guard; image publication does not establish production acceptance.
+The owner removes the host-memory rollout check later that day; container memory limits remain active.
 
 The generator now adds a native-accent hint per language to the speech instructions.
 The fingerprint does not track that wording, so the 66 committed clips stay valid without regeneration.
-Regenerate into a new `SPOKEN_OUTPUT` directory, listen to the accent, then replace the committed set when ready.
+The owner decides to retain the existing clips and decline regeneration on 2026-10-01.
+Do not regenerate them as part of PHASE 7.
+The procedure below remains available for a future separately approved change.
 
 ## Generate the vocabulary
 

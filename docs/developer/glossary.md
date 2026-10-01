@@ -57,3 +57,9 @@ Prerequisites:
 | speech clip | A generated recording of one public note name or accidental suffix. |
 | speech receipt | A file that records a clip hash and the settings used for generation. |
 | playback rate | The ratio between a clip's playback speed and its original speed. |
+| CSP | Content Security Policy, which restricts browser resource loading and embedding. |
+| HSTS | HTTP Strict Transport Security, which tells a browser to use HTTPS for the current hostname. |
+| structured log | A JSON record with fixed fields for operational events, without request bodies or credentials. |
+| disk reserve | Free storage retained after image downloads and extraction. |
+| image budget | Free storage allocated for a new release's compressed images and extracted layers. |
+| smoke check | A short end-to-end procedure that checks the deployed application's main functions. |

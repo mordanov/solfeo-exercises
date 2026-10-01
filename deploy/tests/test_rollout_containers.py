@@ -2,6 +2,7 @@
 
 import json
 import secrets
+import shutil
 import socket
 import subprocess
 import tempfile
@@ -22,6 +23,28 @@ class LocalImagesRollout(Rollout):
 
     failure: str | None = None
     candidate: Path | None = None
+
+    def disk_free(self) -> dict[str, int]:
+        if shutil.which("colima") and not Path("/var/lib/docker").is_dir():
+            result = subprocess.run(
+                [
+                    "colima",
+                    "ssh",
+                    "--",
+                    "df",
+                    "-B1",
+                    "--output=avail",
+                    "/var/lib/docker",
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+            return {
+                "docker": int(result.stdout.splitlines()[-1]),
+                "release": shutil.disk_usage(self.root).free,
+            }
+        return super().disk_free()
 
     def activate(self, candidate: Path, previous: Path | None) -> None:
         self.candidate = candidate
@@ -101,6 +124,7 @@ def rollout(rollout_root: Path) -> Iterator[LocalImagesRollout]:
         f"POSTGRES_ADMIN_PASSWORD={secrets.token_hex(32)}\n"
         f"PRODUCTION_WEB_PORT={port}\nPRODUCTION_PROXY_NETWORK={network}\n"
         "OMR_ENABLED=false\n"
+        "DEPLOY_IMAGE_BUDGET_MB=128\nDEPLOY_DISK_RESERVE_MB=64\n"
     )
     instance = LocalImagesRollout(tmp_path, project, True, f"http://127.0.0.1:{port}")
     subprocess.run(
@@ -151,6 +175,19 @@ def test_real_deployment_and_failed_update_rollback(
     members = json.loads(attached.stdout)[0]["Containers"]
     assert len(members) == 1
     assert next(iter(members.values()))["Name"].endswith("-frontend-1")
+
+    class NoSpace(LocalImagesRollout):
+        def disk_free(self) -> dict[str, int]:
+            return {"docker": 0, "release": 0}
+
+    before = rollout.compose(initial, "ps", "-q").splitlines()
+    blocked = NoSpace(rollout.root, rollout.project, True, rollout.health_url)
+    with pytest.raises(DeploymentError, match="DEPLOY_DISK_INSUFFICIENT"):
+        blocked.deploy(publish(rollout.root, 5), SHA, 5)
+    assert rollout.state()["current"] == first
+    assert rollout.compose(initial, "ps", "-q").splitlines() == before
+    rollout.verify(initial)
+
     for run_id, failure in ((2, "migration"), (3, "health")):
         rollout.failure = failure
         with pytest.raises(DeploymentError, match="DEPLOY_FAILED_ROLLED_BACK"):

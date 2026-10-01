@@ -338,4 +338,4 @@ Continue with X-Accel-Redirect and nginx byte-range delivery.
 The owner confirms completion of the manual step on 2026-09-29.
 The curl evidence confirms protocol behavior, not device playback.
 Keep the product session-cookie design unchanged.
-PHASE 0.5 remains open until the remaining prototypes and owner decisions finish.
+The owner closes PHASE 0.5 on 2026-09-29 after confirming the remaining checks.

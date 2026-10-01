@@ -13,7 +13,8 @@ Prerequisites:
 The owner replaces product PWA audio sharing with the Telegram bot on 2026-09-29.
 The Telegram path receives real audio, and the owner confirms successful playback.
 PWA acceptance remains failed; the procedures below preserve the investigation rather than request further product acceptance.
-See `docs/developer/telegram-bot.md` for the selected path.
+See `telegram-import.md` for the current product path.
+See `telegram-bot.md` for the historical replacement prototype.
 This documentation change does not remove the deployed prototype, browser data, or certificate.
 
 The owner approves the deployment plan on 2026-09-29.
