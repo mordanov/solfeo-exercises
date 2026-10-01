@@ -8,16 +8,18 @@ Prerequisites:
 - Make `ffmpeg` and `ffprobe` available.
 - Keep a valid private root `.env` file.
 
-## Current delivery limit
+## Current delivery
 
-PHASE 6 has no generated production clips yet.
-The local environment has no `OPENAI_API_KEY`.
-The generator reports `OPENAI_KEY_REQUIRED`; it does not create substitute audio.
-Automated conversion checks use synthetic test signals in temporary directories, not production speech.
+PHASE 6 includes 66 generated AAC clips, their receipts, and a verified manifest.
+The owner supplies the private API key and opens pull request #1 on 2026-10-01.
+Commit `39545ef` adds the complete vocabulary in English, Russian, and Spanish.
+Both the source assets and the frontend build pass manifest verification.
+Chrome decodes all 66 real clips and verifies scheduled speech and rests for all 6 language and naming combinations.
+Natural quarter notes fit the default 72 BPM tempo in every combination.
+These checks do not establish pronunciation quality or audible speaker output.
 Do not claim audible acceptance until the actual clips pass the checks below.
 The owner postpones deployment; this branch does not change either VPS.
-The CLI credential cannot create a pull request or dispatch CI; GitHub returns HTTP 403.
-An authorized operator must open a draft pull request for branch CI.
+Pull request #1 enables branch CI without CLI permissions to create requests or dispatch workflows.
 Do not merge that request while deployment remains postponed.
 
 ## Generate the vocabulary
@@ -136,5 +138,6 @@ Missing clips, invalid media, unsupported notation, and audio failures show loca
 8. Confirm that speech does not change recorded-audio completion.
 
 Headless Chrome verifies decoded timing, silence, and cursor behavior with synthetic signals.
+It also verifies actual AAC decoding, scheduled signal output, and silent rests for every language and naming combination.
 It does not establish voice quality or audible speaker output.
 The owner must confirm those checks with generated speech.

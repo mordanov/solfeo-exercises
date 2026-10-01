@@ -11,8 +11,8 @@ Last updated: 2026-10-01 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a8
 PHASE 6: spoken notes implementation, without deployment.
 The owner authorizes complete phase automation and postpones PHASE 5 deployment on 2026-09-30.
 Work uses `feat/phase6-spoken-notes` so main-branch publication cannot deploy these changes.
-The generator reports `OPENAI_KEY_REQUIRED`; the environment has no OpenAI key.
-Actual speech clips and audible acceptance remain blocked, not replaced with synthetic audio.
+The owner supplies the private OpenAI key and opens pull request #1 on 2026-10-01.
+All 66 actual speech clips are generated, verified, and committed; audible owner acceptance remains open.
 PHASE 5 OMR works locally, but its production acceptance remains open.
 The owner reports a new VPS target; this task does not connect to or deploy on that host.
 The previous VPS memory failure remains historical evidence, not a measurement of the new host.
@@ -34,11 +34,11 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 ## Plan for the current phase
 - [x] Add shared vocabulary and a strict MusicXML sequence parser.
 - [x] Add offline OpenAI generation, AAC conversion, resumability, and manifest verification.
-- [ ] Generate, inspect, and commit the real speech clips after private API-key configuration.
+- [x] Generate, verify, and commit the real speech clips after private API-key configuration.
 - [x] Add approved-only speech, tempo controls, cancellation, and score highlighting.
 - [x] Preserve recorded-audio playback and journal boundaries.
 - [x] Finish local checks and record their evidence.
-- [ ] Run branch CI; GitHub rejects PR creation and manual dispatch with HTTP 403.
+- [x] Enable branch CI through the owner-created pull request #1.
 - [x] Update user and developer documentation.
 - [ ] Obtain audible Chrome and Safari acceptance after clip generation.
 
@@ -120,18 +120,23 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - The offline generator produces bounded AAC assets with resumable receipts and an atomic verified manifest.
 - Conversion tests replace only the OpenAI transport and use real ffmpeg.
 - Local checks pass 125 backend tests, 128 frontend tests, and 38 deployment/container tests.
-- The production-asset test explicitly skips because the real clips do not exist.
+- The 9 generation tests pass with real committed assets; missing assets now fail instead of skipping verification.
 - The frontend production build and all 6 pre-commit checks pass.
 - Headless Chrome verifies 8 seconds, 4 spoken attacks, silent rests and tails, and 7 written cursor positions.
 - That browser check uses synthetic signals; it does not verify actual pronunciation or speaker output.
 - Source commits `2a7d008`, `a86e4fa`, and `8285252` belong only to `feat/phase6-spoken-notes`.
 - The last fix coordinates speech with manager audio previews as well as student recordings.
-- GitHub rejects draft PR creation and branch CI dispatch with HTTP 403 for the current CLI credential.
-- No pull request or new CI run is claimed; an authorized operator must open the branch comparison.
-- No OpenAI speech request, production clip generation, merge to main, publication, or deployment occurs.
-- The 2026-10-01 continuation confirms that the OpenAI key, pull request, and branch CI run remain absent.
+- The owner resolves the initial key and PR blockers on 2026-10-01.
+- Commit `39545ef` adds 66 real OpenAI speech clips, 66 receipts, and the verified manifest.
+- AAC data totals 600676 bytes; the frontend build includes the complete verified set.
+- Chrome decodes all 66 clips and verifies 24-second schedules in all 6 language and naming combinations.
+- Each schedule contains 15 clips, all accidental suffixes, and a silent final rest.
+- Natural quarter notes fit 72 BPM in every combination; actual pronunciation still requires owner acceptance.
+- Pull request #1 starts CI; run `36816378757` passes for the earlier source `2782422`.
+- Read [the PR checks](https://github.com/mordanov/solfeo-exercises/pull/1/checks) for the current branch result.
+- No merge to main, image publication, or deployment occurs.
 - Cleanup removes the stopped phase-six browser profile; temporary browser and frontend processes remain stopped.
-- `docs/developer/spoken-notes.md` and the student guide contain the remaining generation and audible acceptance steps.
+- `docs/developer/spoken-notes.md` and the student guide contain regeneration and final audible acceptance steps.
 - PHASE 5 source `be0000d1e8208489b65fc939b77e1bbb013422e7` passes CI run `36674676116`.
 - Run `36675174373` publishes both immutable images and verifies the pulled x86-64 images.
 - Its deployment job stops with `OMR_MEMORY_INSUFFICIENT` before image pulls, service changes, or migration.
@@ -415,9 +420,7 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - The owner does not supply device versions or a per-message evidence record.
 
 ## Next step
-- Set `OPENAI_API_KEY` privately in the local root `.env`, not in chat or frontend configuration.
-- Generate, inspect, and commit speech assets with `docs/developer/spoken-notes.md`.
-- Open a draft pull request for `feat/phase6-spoken-notes` through an authorized GitHub session to run CI.
+- Review the checks for pull request #1 without merging it.
 - Keep deployment postponed; do not merge the branch or start PHASE 7.
 - Complete the PHASE 6 audible checklist in `docs/user/student.md` after real clip generation.
 - Preserve prototype files and the historical PWA deployment.
@@ -512,8 +515,8 @@ The owner confirms final PHASE 0 browser acceptance at the public HTTPS address.
 The final PHASE 5 procedure is in `docs/user/manager.md`.
 
 ## Known issues
-- Actual PHASE 6 speech generation lacks an OpenAI key; synthetic checks do not establish pronunciation quality.
-- The CLI credential cannot create the branch PR or dispatch CI; both operations return HTTP 403.
+- PHASE 6 audible Chrome and Safari acceptance remains open; automated checks do not establish pronunciation quality.
+- The owner-created PR resolves the initial CI blocker without changing CLI permissions.
 - The previous VPS check finds approximately 18 GiB free disk space but insufficient RAM for PHASE 5 activation.
 - The owner postpones deployment and reports a new host; this task does not verify or change that host.
 - The initial PHASE 4 CD attempt fails from disk exhaustion; the verified SSH recovery succeeds.

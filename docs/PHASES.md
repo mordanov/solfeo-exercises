@@ -105,8 +105,9 @@ The owner explicitly postpones PHASE 5 deployment; implementation uses a separat
 - Web Audio scheduler: tempo slider, play/stop, highlight of the current note if OSMD allows.
 - Docs: developer (regenerate the clips), user (use the spoken notes).
 Done when: an approved score is spoken with correct note names and durations in all three languages.
-The generator, parser, scheduler, and controls are implemented; actual speech generation requires the missing `OPENAI_API_KEY`.
-This phase remains open until generated clips and audible manual acceptance are complete.
+The generator, parser, scheduler, controls, and 66 real speech clips are implemented.
+The owner supplies the private API key and opens pull request #1 on 2026-10-01.
+This phase remains open until branch CI and audible manual acceptance are complete.
 
 ## PHASE 7: Hardening and documentation review
 - Check free disk space before deployment image pulls and reserve capacity for extraction and rollback.

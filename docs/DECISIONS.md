@@ -150,3 +150,6 @@ Format: date, decision, reason. Do not reverse a decision without asking the own
   Speech uses approved scores and public pre-generated vocabulary, as required by the brief.
   Speech does not report progress against a different uploaded recording.
   Missing OpenAI credentials block actual clip generation; synthetic test signals do not replace production speech.
+- 2026-10-01: The owner supplies the private OpenAI key and opens pull request #1.
+  Actual vocabulary generation and branch CI can proceed without merging or deploying.
+  Audible owner acceptance remains separate from automated media checks.
