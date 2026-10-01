@@ -15,7 +15,7 @@ Frontend build values are public; never put a secret in `VITE_*`.
 |---|---|---|
 | `API_HOST` | `127.0.0.1` | Native backend bind address |
 | `API_PORT` | `18081` | Native backend port; integer from 1 to 65535 |
-| `API_LOG_LEVEL` | `info` | Backend logging: critical, error, warning, info, debug, or trace |
+| `API_LOG_LEVEL` | `info` | Backend and worker JSON logging; trace maps to debug for application records |
 | `API_FORWARDED_ALLOW_IPS` | `127.0.0.1` | Trusted forwarding sources; private Compose deployments use `*` |
 | `AUTH_ALLOWED_ORIGINS` | Localhost origins on port 18080 | JSON array of exact origins; production requires `https://solfeo.miveralta.ru` |
 | `SESSION_COOKIE_SECURE` | `true` | HTTPS-only session cookie; use `false` only for local HTTP |
@@ -161,10 +161,13 @@ Only the OMR container needs executable temporary memory for JavaCPP native libr
 | `PRODUCTION_MIGRATION_SCHEMA` | `migrations` | Private production Alembic version schema |
 | `DOCKER_LOG_MAX_SIZE` | `10m` | Production Docker log size limit |
 | `DOCKER_LOG_MAX_FILE` | `3` | Maximum rotated Docker log files per production container |
+| `DEPLOY_IMAGE_BUDGET_MB` | `6144` | Cold image download and extraction budget in MiB; positive integer |
+| `DEPLOY_DISK_RESERVE_MB` | `2048` | Free space required after image pulls, in MiB; positive integer |
 
 Compose fixes the internal backend address to `0.0.0.0:8000` and nginx to port `8080`.
 Those internal ports form the container network contract; `API_HOST` and `API_PORT` apply to native execution.
-Compose passes `API_LOG_LEVEL` to the backend and frontend build values as build arguments.
+Production Compose passes `API_LOG_LEVEL` to the backend and both workers.
+Compose passes frontend build values as build arguments.
 Change `WEB_PORT` to select another published port.
 Keep the host bind addresses on loopback for local development.
 
@@ -198,9 +201,20 @@ Both emergency credentials must be empty or configured together.
 Never copy the example's insecure-cookie and localhost-origin values into production without adjusting them.
 Keep `SESSION_COOKIE_SECURE=true` and HTTPS-only allowed origins on the VPS.
 See `auth.md` before changing trusted proxy settings or emergency credentials.
-Product bot variables will accompany PHASE 4.
+Product bot variables appear in the Telegram worker table above.
 Keep `UPLOAD_MAX_BYTES` above the sum of both file limits plus multipart overhead.
 The product proxy waits `4 * MEDIA_TIMEOUT_SECONDS + 30` seconds for processing.
 The shared VPS proxy has a 600-second transport ceiling and delegates upload-size enforcement to the product proxy.
 Keep processing and browser deadlines consistent with that transport ceiling.
 The prototype environment files remain separate.
+
+HTTPS origins require `SESSION_COOKIE_SECURE=true`; invalid combinations prevent startup.
+HTTP origins must use `localhost` or a loopback IP address.
+Do not replace HTTPS with a public HTTP origin.
+
+The deployment guard reads its 2 settings from the resolved production Compose configuration.
+Both the Docker storage filesystem and release filesystem require the image budget plus disk reserve before pulling.
+After pulling, both filesystems must retain the disk reserve before any service changes.
+The budget remains conservative; it is not a registry-derived image-size calculation.
+Increase it before deploying larger images.
+The rollout keeps existing images for compatible rollback and never performs automatic cleanup.
