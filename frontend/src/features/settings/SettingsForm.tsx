@@ -9,6 +9,8 @@ import {
 } from "../../api/auth";
 import { isLanguage, type Language } from "../../configuration";
 import { ErrorMessage, LanguageOptions } from "../../components/AccountUi";
+import { Button, Field, Form, Panel, Select } from "../../components/Ui";
+import Alert from "@mui/material/Alert";
 
 export function SettingsForm({
   auth,
@@ -26,17 +28,17 @@ export function SettingsForm({
     onSuccess: onChange,
   });
   return (
-    <section>
+    <Panel>
       <h2>{t("settings.title")}</h2>
-      <form
+      <Form
         onSubmit={(event) => {
           event.preventDefault();
           mutation.mutate({ language, naming });
         }}
       >
-        <label>
+        <Field>
           {t("language.label")}
-          <select
+          <Select
             value={language}
             disabled={mutation.isPending}
             onChange={(event) => {
@@ -47,11 +49,11 @@ export function SettingsForm({
             }}
           >
             <LanguageOptions />
-          </select>
-        </label>
-        <label>
+          </Select>
+        </Field>
+        <Field>
           {t("settings.noteNaming")}
-          <select
+          <Select
             value={naming}
             disabled={mutation.isPending}
             onChange={(event) => {
@@ -66,12 +68,16 @@ export function SettingsForm({
           >
             <option value="letters">{t("settings.letters")}</option>
             <option value="solfege">{t("settings.solfege")}</option>
-          </select>
-        </label>
-        <button disabled={mutation.isPending}>{t("settings.save")}</button>
+          </Select>
+        </Field>
+        <Button disabled={mutation.isPending}>{t("settings.save")}</Button>
         {mutation.isError && <ErrorMessage error={mutation.error} />}
-        {mutation.isSuccess && <p role="status">{t("settings.saved")}</p>}
-      </form>
-    </section>
+        {mutation.isSuccess && (
+          <Alert severity="success" role="status">
+            {t("settings.saved")}
+          </Alert>
+        )}
+      </Form>
+    </Panel>
   );
 }

@@ -18,6 +18,10 @@ import { Journal } from "../journal/Journal";
 import { Telegram } from "../telegram/Telegram";
 import { finishPlayback } from "../listening/tracker";
 import { ErrorMessage, LanguageOptions } from "../../components/AccountUi";
+import { Button, Field, Form, Input, Panel, Select } from "../../components/Ui";
+import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
+import Alert from "@mui/material/Alert";
 
 function LoginForm({ onLogin }: { onLogin: (value: Auth) => void }) {
   const { t, i18n } = useTranslation();
@@ -32,10 +36,10 @@ function LoginForm({ onLogin }: { onLogin: (value: Auth) => void }) {
     mutation.mutate();
   }
   return (
-    <section>
-      <label>
+    <Panel>
+      <Field>
         {t("language.label")}
-        <select
+        <Select
           value={i18n.resolvedLanguage}
           onChange={(event) => {
             if (isLanguage(event.target.value))
@@ -43,23 +47,23 @@ function LoginForm({ onLogin }: { onLogin: (value: Auth) => void }) {
           }}
         >
           <LanguageOptions />
-        </select>
-      </label>
+        </Select>
+      </Field>
       <h2>{t("auth.login")}</h2>
-      <form onSubmit={submit}>
-        <label>
+      <Form onSubmit={submit}>
+        <Field>
           {t("auth.username")}
-          <input
+          <Input
             required
             autoComplete="username"
             maxLength={64}
             value={username}
             onChange={(event) => setUsername(event.target.value)}
           />
-        </label>
-        <label>
+        </Field>
+        <Field>
           {t("auth.password")}
-          <input
+          <Input
             required
             type="password"
             autoComplete="current-password"
@@ -67,13 +71,13 @@ function LoginForm({ onLogin }: { onLogin: (value: Auth) => void }) {
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
-        </label>
-        <button disabled={mutation.isPending}>
+        </Field>
+        <Button disabled={mutation.isPending}>
           {t(mutation.isPending ? "common.saving" : "auth.login")}
-        </button>
+        </Button>
         {mutation.isError && <ErrorMessage error={mutation.error} />}
-      </form>
-    </section>
+      </Form>
+    </Panel>
   );
 }
 
@@ -99,19 +103,23 @@ export function PasswordForm({
     },
   });
   return (
-    <section>
+    <Panel>
       <h2>{t("auth.changePassword")}</h2>
-      {auth.user.must_change_password && <p>{t("auth.changeRequired")}</p>}
-      <form
+      {auth.user.must_change_password && (
+        <Alert severity="info" role="status">
+          {t("auth.changeRequired")}
+        </Alert>
+      )}
+      <Form
         onSubmit={(event) => {
           event.preventDefault();
           setMismatch(replacement !== confirmation);
           if (replacement === confirmation) mutation.mutate();
         }}
       >
-        <label>
+        <Field>
           {t("auth.currentPassword")}
-          <input
+          <Input
             required
             type="password"
             autoComplete="current-password"
@@ -119,10 +127,10 @@ export function PasswordForm({
             value={current}
             onChange={(event) => setCurrent(event.target.value)}
           />
-        </label>
-        <label>
+        </Field>
+        <Field>
           {t("auth.newPassword")}
-          <input
+          <Input
             required
             type="password"
             autoComplete="new-password"
@@ -130,10 +138,10 @@ export function PasswordForm({
             value={replacement}
             onChange={(event) => setReplacement(event.target.value)}
           />
-        </label>
-        <label>
+        </Field>
+        <Field>
           {t("auth.confirmPassword")}
-          <input
+          <Input
             required
             type="password"
             autoComplete="new-password"
@@ -141,16 +149,20 @@ export function PasswordForm({
             value={confirmation}
             onChange={(event) => setConfirmation(event.target.value)}
           />
-        </label>
+        </Field>
         <p>{t("auth.passwordHint")}</p>
-        <button disabled={mutation.isPending}>
+        <Button disabled={mutation.isPending}>
           {t("auth.changePassword")}
-        </button>
+        </Button>
         {mismatch && <ErrorMessage error={new ApiError("PASSWORD_MISMATCH")} />}
         {mutation.isError && <ErrorMessage error={mutation.error} />}
-        {mutation.isSuccess && <p role="status">{t("auth.passwordChanged")}</p>}
-      </form>
-    </section>
+        {mutation.isSuccess && (
+          <Alert severity="success" role="status">
+            {t("auth.passwordChanged")}
+          </Alert>
+        )}
+      </Form>
+    </Panel>
   );
 }
 
@@ -235,12 +247,12 @@ export function AuthArea() {
   if (query.isPending) return <p aria-live="polite">{t("auth.loading")}</p>;
   if (query.isError)
     return (
-      <section>
+      <Panel>
         <ErrorMessage error={query.error} />
-        <button onClick={() => void query.refetch()}>
+        <Button onClick={() => void query.refetch()}>
           {t("common.retry")}
-        </button>
-      </section>
+        </Button>
+      </Panel>
     );
   if (!auth) return <LoginForm onLogin={onAuth} />;
   const path = window.location.pathname.replace(/\/+$/, "") || "/";
@@ -248,23 +260,38 @@ export function AuthArea() {
     path === "/manager/users" ||
     ((path === "/" || path === "/login") && auth.user.role === "manager");
   return (
-    <section>
+    <Box component="section">
       <p>
         {t("auth.signedIn", {
           name: `${auth.user.first_name} ${auth.user.last_name}`,
         })}
       </p>
-      <nav aria-label={t("nav.label")}>
+      <Box
+        component="nav"
+        aria-label={t("nav.label")}
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: "center",
+          gap: 2,
+          my: 2,
+          p: 2,
+          bgcolor: "background.paper",
+          borderRadius: 3,
+          boxShadow: 1,
+          "& a": { py: 1, fontWeight: 500 },
+        }}
+      >
         {!auth.user.must_change_password && (
           <>
             {auth.user.role === "manager" && (
               <>
-                <a href="/manager/exercises">{t("exercises.title")}</a>
-                <a href="/manager/journal">{t("journal.title")}</a>
-                <a href="/manager/telegram">{t("telegram.title")}</a>
+                <Link href="/manager/exercises">{t("exercises.title")}</Link>
+                <Link href="/manager/journal">{t("journal.title")}</Link>
+                <Link href="/manager/telegram">{t("telegram.title")}</Link>
               </>
             )}
-            <a
+            <Link
               href={
                 auth.user.role === "manager" ? "/manager/users" : "/student"
               }
@@ -272,14 +299,14 @@ export function AuthArea() {
               {t(
                 auth.user.role === "manager" ? "users.title" : "student.title",
               )}
-            </a>{" "}
-            <a href="/settings">{t("settings.title")}</a>{" "}
+            </Link>{" "}
+            <Link href="/settings">{t("settings.title")}</Link>{" "}
           </>
         )}
-        <button disabled={signOut.isPending} onClick={() => signOut.mutate()}>
+        <Button disabled={signOut.isPending} onClick={() => signOut.mutate()}>
           {t("auth.logout")}
-        </button>
-      </nav>
+        </Button>
+      </Box>
       {signOut.isError && <ErrorMessage error={signOut.error} />}
       {auth.user.must_change_password ? (
         <PasswordForm auth={auth} onChange={onAuth} />
@@ -328,6 +355,6 @@ export function AuthArea() {
       ) : (
         <ErrorMessage error={new ApiError("NOT_FOUND")} />
       )}
-    </section>
+    </Box>
   );
 }
