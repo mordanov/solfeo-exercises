@@ -5,6 +5,19 @@ import { ApiError, type Auth } from "../../api/auth";
 import { listExercises, type Exercise } from "../../api/exercises";
 import * as api from "../../api/telegram";
 import { ErrorMessage } from "../../components/AccountUi";
+import {
+  Button,
+  Field,
+  Form,
+  Input,
+  Panel,
+  Select,
+  Textarea,
+} from "../../components/Ui";
+import Alert from "@mui/material/Alert";
+import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
+import Chip from "@mui/material/Chip";
 
 function ImportRow({
   item,
@@ -41,7 +54,7 @@ function ImportRow({
     save.mutate();
   }
   return (
-    <article>
+    <Panel component="article">
       <h3>{item.title || t("telegram.untitled")}</h3>
       <p>
         {new Intl.DateTimeFormat(i18n.language, {
@@ -49,7 +62,7 @@ function ImportRow({
           timeStyle: "short",
         }).format(new Date(item.received_at))}
       </p>
-      <p>{t(`telegram.status.${item.status}`)}</p>
+      <Chip label={t(`telegram.status.${item.status}`)} sx={{ mb: 2 }} />
       {item.last_error && (
         <ErrorMessage error={new ApiError(item.last_error)} />
       )}
@@ -62,10 +75,10 @@ function ImportRow({
         />
       )}
       {item.status === "ready" && !save.isSuccess && (
-        <form onSubmit={submit}>
-          <label>
+        <Form onSubmit={submit}>
+          <Field>
             {t("telegram.destination")}
-            <select
+            <Select
               value={target}
               disabled={save.isPending}
               onChange={(event) => {
@@ -85,58 +98,60 @@ function ImportRow({
                   {exercise.title}
                 </option>
               ))}
-            </select>
-          </label>
-          <label>
+            </Select>
+          </Field>
+          <Field>
             {t("exercises.name")}
-            <input
+            <Input
               required
               maxLength={200}
               value={title}
               disabled={save.isPending}
               onChange={(event) => setTitle(event.target.value)}
             />
-          </label>
-          <label>
+          </Field>
+          <Field>
             {t("exercises.description")}
-            <textarea
+            <Textarea
               maxLength={10000}
               value={description}
               disabled={save.isPending}
               onChange={(event) => setDescription(event.target.value)}
             />
-          </label>
+          </Field>
           {selected?.audio && (
-            <label>
-              <input
+            <Field>
+              <Input
                 type="checkbox"
                 required
                 checked={confirm}
                 onChange={(event) => setConfirm(event.target.checked)}
               />
               {t("telegram.replaceConfirm")}
-            </label>
+            </Field>
           )}
-          <button
+          <Button
             disabled={
               save.isPending || !title.trim() || (!!selected?.audio && !confirm)
             }
           >
             {t("telegram.save")}
-          </button>
-        </form>
+          </Button>
+        </Form>
       )}
       {(save.isSuccess || item.status === "applied") && (
-        <p role="status">{t("telegram.saved")}</p>
+        <Alert severity="success" role="status">
+          {t("telegram.saved")}
+        </Alert>
       )}
       {save.isError && <ErrorMessage error={save.error} />}
       {item.status === "failed" && (
-        <button disabled={retry.isPending} onClick={() => retry.mutate()}>
+        <Button disabled={retry.isPending} onClick={() => retry.mutate()}>
           {t("common.retry")}
-        </button>
+        </Button>
       )}
       {retry.isError && <ErrorMessage error={retry.error} />}
-    </article>
+    </Panel>
   );
 }
 
@@ -171,7 +186,7 @@ export function Telegram({ auth }: { auth: Auth }) {
     },
   });
   return (
-    <section>
+    <Panel>
       <h2>{t("telegram.title")}</h2>
       <p>{t("telegram.help")}</p>
       {connection.isError && <ErrorMessage error={connection.error} />}
@@ -183,33 +198,36 @@ export function Telegram({ auth }: { auth: Auth }) {
             )}
           </p>
           {!connection.data.available && (
-            <p role="alert">{t("telegram.unavailable")}</p>
+            <Alert severity="warning">{t("telegram.unavailable")}</Alert>
           )}
-          <a
+          <Link
             href={`https://t.me/${connection.data.bot_username}`}
             target="_blank"
             rel="noreferrer"
           >
             {t("telegram.openBot")}
-          </a>
-          <button
+          </Link>
+          <Button
             disabled={code.isPending || disconnect.isPending}
             onClick={() => code.mutate()}
           >
             {t("telegram.code")}
-          </button>
-          <button
+          </Button>
+          <Button
             disabled={disconnect.isPending || code.isPending}
             onClick={() => disconnect.mutate()}
           >
             {t("telegram.unlink")}
-          </button>
+          </Button>
         </>
       )}
       {code.data && (
-        <div>
+        <Box sx={{ p: 2, my: 2, bgcolor: "action.hover", borderRadius: 2 }}>
           <p>{t("telegram.codeHint")}</p>
-          <code>{`/start ${code.data.code}`}</code>
+          <Box
+            component="code"
+            sx={{ userSelect: "all", overflowWrap: "anywhere" }}
+          >{`/start ${code.data.code}`}</Box>
           <p>
             {t("telegram.expires", {
               time: new Intl.DateTimeFormat(i18n.language, {
@@ -217,16 +235,16 @@ export function Telegram({ auth }: { auth: Auth }) {
               }).format(new Date(code.data.expires_at)),
             })}
           </p>
-        </div>
+        </Box>
       )}
       {code.isError && <ErrorMessage error={code.error} />}
       {disconnect.isError && <ErrorMessage error={disconnect.error} />}
-      <button
+      <Button
         disabled={imports.isFetching || connection.isFetching}
         onClick={() => void refresh()}
       >
         {t("telegram.refresh")}
-      </button>
+      </Button>
       {imports.isError && <ErrorMessage error={imports.error} />}
       {exercises.isError && <ErrorMessage error={exercises.error} />}
       {imports.data && (
@@ -241,20 +259,20 @@ export function Telegram({ auth }: { auth: Auth }) {
               refresh={refresh}
             />
           ))}
-          <button
+          <Button
             disabled={offset === 0 || imports.isFetching}
             onClick={() => setOffset(Math.max(0, offset - 50))}
           >
             {t("common.previous")}
-          </button>
-          <button
+          </Button>
+          <Button
             disabled={offset + 50 >= imports.data.total || imports.isFetching}
             onClick={() => setOffset(offset + 50)}
           >
             {t("common.next")}
-          </button>
+          </Button>
         </>
       )}
-    </section>
+    </Panel>
   );
 }
