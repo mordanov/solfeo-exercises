@@ -24,7 +24,11 @@ Prerequisites:
    This action withdraws the previous score until you approve the new result.
 
 An error state never hides the original image.
+One exercise can continue on several lines; a line break does not require a separate upload.
+The worker retries missing staff detection once with a threshold for faint lines.
+If staff detection still fails, the page requests a clearer image.
 Some clear images still produce incomplete or incorrect notation.
+Check every line and measure even when recognition succeeds.
 Use the original image when repeated recognition fails.
 Replacing an image always requires new recognition and approval.
 Editing text or replacing audio preserves the current score.

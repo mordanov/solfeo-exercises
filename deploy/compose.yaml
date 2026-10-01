@@ -126,6 +126,8 @@ services:
     environment:
       <<: *backend-environment
       OMR_ENABLED: ${OMR_ENABLED:-true}
+      OMR_DETECT_MOVEMENTS: ${OMR_DETECT_MOVEMENTS:-false}
+      OMR_FAINT_MEAN_COEFF: ${OMR_FAINT_MEAN_COEFF:-0.9}
       OMR_BINARY: ${OMR_BINARY:-/opt/audiveris/bin/Audiveris}
       OMR_JAVA_HOME: ${OMR_JAVA_HOME:-/opt/java/openjdk}
       OMR_TESSDATA: ${OMR_TESSDATA:-/usr/share/tesseract-ocr/5/tessdata}

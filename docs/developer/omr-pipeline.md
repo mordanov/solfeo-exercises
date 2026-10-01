@@ -40,6 +40,19 @@ Do not remove `exec` from this mount without another location for native librari
 Java receives only an explicit environment; it does not receive database passwords or Telegram tokens.
 
 The engine converts a private working copy to PNG and never changes the original image.
+By default, system indentation does not start a separate movement.
+One exercise can continue across several systems; managers must not combine unrelated exercises in one image.
+`OMR_DETECT_MOVEMENTS=true` restores the engine's indentation-based splitting.
+The importer still rejects multiple independent exports instead of selecting or concatenating them.
+
+If Audiveris reports `No system found`, the engine retries once with `OMR_FAINT_MEAN_COEFF`.
+The default recovery coefficient is 0.9; the first attempt retains Audiveris's normal threshold.
+The recovery uses a separate output directory and the remaining portion of the original deadline.
+It never accepts partial files from a failed process.
+Other process failures, invalid XML, and timeouts do not trigger this recovery.
+Worker logs contain `OMR_FAINT_STAFF_RETRY`, not raw engine text.
+Persistent staff-detection failure produces the localized `OMR_NO_STAFF` error.
+
 It limits execution time and validates XML or compressed MXL output.
 Archive paths, entry count, expanded size, entities, external content, and note count have bounds or rejection checks.
 Recognition supports ordinary printed exercises; complex notation can fail.
@@ -54,6 +67,23 @@ The note-name toggle injects lyrics into a copy of the XML.
 Names use persisted language and naming settings; rests receive no label.
 Rendering failures show an explicit error and the original image for students.
 Changing labels does not recreate the audio player.
+
+### Local repair report: 2026-10-01
+
+The owner reports failures for local exercises 32 and 33.
+Both original images remain in the local database's private media volume.
+The investigation does not connect to a VPS or send images to an external recognition service.
+
+Exercise 32 produces 2 movement exports because Audiveris interprets the second system's indentation as a new movement.
+Disabling that heuristic produces one part with 8 measures and 40 note or rest events.
+The result still contains recognition errors, including missing or incorrect clefs and pitches.
+
+Exercise 33 loses faint staff lines during binarization and fails with `No system found`.
+The bounded threshold retry produces an export with 7 measures and 29 events.
+The original contains 8 measures; the recovered result contains omissions and incorrect pitches or durations.
+These results are not approved and do not establish recognition accuracy.
+Managers must compare the original images and reject incorrect results.
+Clearer, flatter photographs can improve recognition; successful export alone does not establish correctness.
 
 ### Product recognition report: 2026-09-30
 

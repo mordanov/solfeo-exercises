@@ -68,6 +68,16 @@ class Settings(BaseSettings):
         default=Path("frontend/public/solfege"), validation_alias="SPOKEN_OUTPUT"
     )
     omr_enabled: bool = Field(default=True, validation_alias="OMR_ENABLED")
+    omr_detect_movements: bool = Field(
+        default=False, validation_alias="OMR_DETECT_MOVEMENTS"
+    )
+    omr_faint_mean_coeff: float = Field(
+        default=0.9,
+        gt=0,
+        le=1.5,
+        allow_inf_nan=False,
+        validation_alias="OMR_FAINT_MEAN_COEFF",
+    )
     omr_binary: str = Field(
         default="/opt/audiveris/bin/Audiveris", validation_alias="OMR_BINARY"
     )

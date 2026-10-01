@@ -16,7 +16,16 @@ All 66 actual speech clips are generated, verified, and committed; audible owner
 The local container stand runs PHASE 6 at `http://127.0.0.1:18080/` on 2026-10-01.
 Removing duplicate database credentials from the private `.env` resolves the local migration authentication failure.
 Migration exits successfully; PostgreSQL, backend, frontend, and OMR report healthy states.
-The frontend serves the speech assets; Telegram remains stopped, and database passwords and volumes remain unchanged.
+The startup recovery serves speech assets, preserves database passwords and volumes, and does not start Telegram.
+Local OMR repair on 2026-10-01 addresses the owner's exercises 32 and 33 without VPS changes.
+Disabling indentation-based movement splitting keeps both systems of exercise 32 in one score.
+A bounded threshold retry recovers an export for exercise 33 after faint staff detection fails.
+The original images remain unchanged and uncommitted; both results require manager review.
+Recognition errors remain: exercise 32 has clef and pitch errors; exercise 33 omits a measure and misreads notes.
+See `docs/developer/omr-pipeline.md` for the repair evidence and remaining quality limits.
+The repair passes 29 targeted backend tests, 22 frontend tests, all quality hooks, and the real container scale regression.
+Local Chrome renders both repaired scores in manager review; neither score receives automatic approval.
+The repair leaves the owner's Telegram container unchanged.
 PHASE 5 OMR works locally, but its production acceptance remains open.
 The owner reports a new VPS target; this task does not connect to or deploy on that host.
 The previous VPS memory failure remains historical evidence, not a measurement of the new host.

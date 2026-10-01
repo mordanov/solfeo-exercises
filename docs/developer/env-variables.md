@@ -127,6 +127,8 @@ Only the OMR container needs executable temporary memory for JavaCPP native libr
 | Variable | Default | Purpose |
 |---|---|---|
 | `OMR_ENABLED` | `true` | Process queued jobs; `false` leaves jobs pending |
+| `OMR_DETECT_MOVEMENTS` | `false` | Let indentation split separate movements; disabled for one exercise across several systems |
+| `OMR_FAINT_MEAN_COEFF` | `0.9` | Adaptive mean coefficient for one retry after missing staff detection; greater than 0, at most 1.5 |
 | `OMR_BINARY` | `/opt/audiveris/bin/Audiveris` | Pinned engine launcher |
 | `OMR_JAVA_HOME` | `/opt/java/openjdk` | Java runtime directory |
 | `OMR_TESSDATA` | `/usr/share/tesseract-ocr/5/tessdata` | OCR language data |
@@ -135,7 +137,7 @@ Only the OMR container needs executable temporary memory for JavaCPP native libr
 | `OMR_HOST_RESERVE_MB` | `512` | Additional available host memory required before production activation |
 | `OMR_CPUS` | `1` | Container CPU limit |
 | `OMR_TMP_MB` | `256` | Temporary filesystem maximum in MiB |
-| `OMR_TIMEOUT_SECONDS` | `300` | Audiveris process deadline |
+| `OMR_TIMEOUT_SECONDS` | `300` | Total recognition deadline, including the faint-staff retry |
 | `OMR_LEASE_SECONDS` | `600` | Claim age before crash recovery |
 | `OMR_POLL_SECONDS` | `2` | Delay between worker cycles |
 | `OMR_RETRY_SECONDS` | `30` | Delay after transient engine failures |
