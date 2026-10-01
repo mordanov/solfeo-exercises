@@ -13,6 +13,10 @@ The owner authorizes complete phase automation and postpones PHASE 5 deployment 
 Work uses `feat/phase6-spoken-notes` so main-branch publication cannot deploy these changes.
 The owner supplies the private OpenAI key and opens pull request #1 on 2026-10-01.
 All 66 actual speech clips are generated, verified, and committed; audible owner acceptance remains open.
+The local container stand runs PHASE 6 at `http://127.0.0.1:18080/` on 2026-10-01.
+Removing duplicate database credentials from the private `.env` resolves the local migration authentication failure.
+Migration exits successfully; PostgreSQL, backend, frontend, and OMR report healthy states.
+The frontend serves the speech assets; Telegram remains stopped, and database passwords and volumes remain unchanged.
 PHASE 5 OMR works locally, but its production acceptance remains open.
 The owner reports a new VPS target; this task does not connect to or deploy on that host.
 The previous VPS memory failure remains historical evidence, not a measurement of the new host.
