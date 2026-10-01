@@ -22,6 +22,10 @@ The test fixture refuses any other database name.
 The job verifies migration upgrade, downgrade, repeated upgrade, the current revision, and model drift.
 Its fixed test password belongs only to the disposable CI service, not a deployed database.
 The frontend job checks tests and the production build, including its TypeScript compilation.
+Speech tests mock only the OpenAI transport and perform real AAC conversion.
+A mandatory check verifies all 66 committed speech files, receipts, and the manifest.
+Missing or damaged assets fail CI instead of skipping verification.
+Synthetic conversion tests do not establish voice quality.
 The container job generates a private password, builds both images, and runs the migration service.
 It verifies the schema revision and health through nginx.
 It also runs `deploy/tests` against a separate production Compose project using the freshly built images.
@@ -35,6 +39,10 @@ All 6 hooks reject deliberate defects during local verification and pass after r
 ## Deployment boundary
 
 The CI workflow neither publishes images nor connects to the VPS.
+PHASE 6 remains on `feat/phase6-spoken-notes` because the owner postpones deployment.
+The owner opens [pull request #1](https://github.com/mordanov/solfeo-exercises/pull/1) on 2026-10-01.
+The pull request runs branch CI without CLI permissions to create requests or dispatch workflows.
+Do not merge while deployment remains postponed.
 The existing prototype publishing workflows remain separate.
 `deploy/compose.prod.yaml` provides a separate, image-based production configuration.
 See `docs/developer/deploy.md` for its role boundaries and operational requirements.

@@ -75,6 +75,7 @@ function Player({
       {exercise.image &&
         (exercise.omr.status === "approved" && exercise.omr.job_id ? (
           <Score
+            approved
             id={exercise.id}
             version={exercise.omr.job_id}
             user={auth.user}
@@ -101,7 +102,10 @@ function Player({
           preload="metadata"
           src={`/api/exercises/${exercise.id}/files/audio?version=${exercise.audio.id}`}
           aria-label={t("exercises.audioFor", { title: exercise.title })}
-          onPlay={() => tracker.play()}
+          onPlay={() => {
+            window.dispatchEvent(new Event("solfeo:stop-spoken"));
+            tracker.play();
+          }}
           onPause={() => tracker.pause()}
           onTimeUpdate={() => tracker.update()}
           onSeeked={() => tracker.update()}
@@ -113,6 +117,10 @@ function Player({
             void tracker.finish();
           }}
         />
+      ) : exercise.image &&
+        exercise.omr.status === "approved" &&
+        exercise.omr.job_id ? (
+        <p>{t("listening.noAudioSpoken")}</p>
       ) : (
         <p>{t("listening.noAudio")}</p>
       )}

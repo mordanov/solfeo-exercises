@@ -67,11 +67,22 @@ A child looks at the notes and listens to the audio.
 - Toggle "show note names" on the staff: client-side, inject <lyric> elements into the MusicXML before rendering. Naming from user setting (letters: C D E F G A B; solfege: do re mi fa sol la si; localized).
 - Assumptions: printed, monophonic, single-staff exercises. Complex scores may fail; the fallback (image) covers this.
 
+### Photo quality requirements
+A low-quality photo is the main cause of OMR errors. Follow these rules before upload:
+- Frame one exercise only. Two staff systems in one photo can look like a second movement to the engine.
+- Keep the page flat. Avoid page curl and camera angle. A curved or tilted staff often fails staff detection.
+- Use even, direct light. Avoid shadows and glare. Low contrast between ink and paper hides the staff lines.
+- Take the photo in focus. Keep noteheads separate. A blurry or noisy photo can look like extra chords.
+- Check every note, rest, and measure before approval, even for a clear photo. The engine can still misread notes.
+- Reject a score with a wrong note, a missing measure, or an extra chord. Reshoot the image instead.
+- The spoken notes feature also refuses a score with these errors. It reports code `SPOKEN_UNSUPPORTED_SCORE`.
+
 ## Spoken notes
 - Not singing. Notes are SPOKEN (do-re-mi or C-D-E per user setting and UI language).
 - Note duration is respected: whole note = long, quarter = short, etc., from MusicXML durations and a tempo (default 72 bpm, user-adjustable slider).
-- Implementation: pre-generated syllable clips (script calls OpenAI TTS once, output committed to frontend/public/solfege/<lang>/<naming>/), played with Web Audio API. Fit each note to its duration (playbackRate clamped to a sane range, silence for the rest). Rests = silence. Sharps/flats = extra suffix clip.
+- Implementation: pre-generated syllable clips (script calls OpenAI TTS once, output committed to frontend/public/solfege/<lang>/<naming>/), played with Web Audio API. Fit each note to its duration: play the word at its natural pitch (rate 1) and fill the rest with silence; speed up only when the word does not fit, up to a bounded maximum rate. Rests = silence. Sharps/flats = extra suffix clip.
 - Available only when score status = approved.
+- When an exercise has no recorded audio, the student sees the spoken notes controls instead of an audio control.
 
 ## Telegram audio import
 

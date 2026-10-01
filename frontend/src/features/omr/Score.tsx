@@ -1,26 +1,51 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import type { OpenSheetMusicDisplay } from "opensheetmusicdisplay";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { ApiError, type User } from "../../api/auth";
 import { fetchScore } from "../../api/omr";
 import { ErrorMessage } from "../../components/AccountUi";
 import { injectNoteNames } from "./notes";
+import { Spoken } from "../spoken/Spoken";
 
 export function Score({
   id,
   version,
   user,
   fallback,
+  approved = false,
 }: {
   id: number;
   version: string;
   user: User;
   fallback?: React.ReactNode;
+  approved?: boolean;
 }) {
   const { t } = useTranslation();
   const [labels, setLabels] = useState(false);
   const [error, setError] = useState<unknown>(null);
   const target = useRef<HTMLDivElement>(null);
+  const display = useRef<OpenSheetMusicDisplay | null>(null);
+  const highlighted = useRef(-1);
+  const cursorPosition = useRef(0);
+  const highlight = useCallback((index: number) => {
+    highlighted.current = index;
+    const cursor = display.current?.cursor;
+    if (!cursor) return;
+    if (index < cursorPosition.current) {
+      cursor.reset();
+      cursorPosition.current = 0;
+    }
+    if (index < 0) {
+      cursor.hide();
+      return;
+    }
+    while (cursorPosition.current < index) {
+      cursor.next();
+      cursorPosition.current++;
+    }
+    cursor.show();
+  }, []);
   const query = useQuery({
     queryKey: ["omr", id, "score", version],
     queryFn: ({ signal }) => fetchScore(id, version, signal),
@@ -53,6 +78,10 @@ export function Score({
         await renderer.load(xml ?? "");
         if (cancelled) return;
         renderer.render();
+        if (renderer.cursor) renderer.cursor.SkipInvisibleNotes = false;
+        display.current = renderer;
+        cursorPosition.current = 0;
+        highlight(highlighted.current);
         setError(null);
       } catch {
         if (!cancelled) setError(new ApiError("OMR_RENDER_FAILED"));
@@ -62,9 +91,10 @@ export function Score({
     return () => {
       cancelled = true;
       clear?.();
+      display.current = null;
       host.remove();
     };
-  }, [query.data, labels, user.note_naming, user.ui_language]);
+  }, [query.data, labels, user.note_naming, user.ui_language, highlight]);
   const failed = query.isError || error !== null;
   return (
     <section aria-label={t("omr.score")}>
@@ -84,6 +114,15 @@ export function Score({
         </>
       )}
       <div ref={target} className="score-render" hidden={failed} />
+      {approved && query.data && !failed && (
+        <Spoken
+          key={`${id}-${version}-${user.ui_language}-${user.note_naming}`}
+          id={id}
+          version={version}
+          user={user}
+          highlight={highlight}
+        />
+      )}
     </section>
   );
 }

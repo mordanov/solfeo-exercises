@@ -144,3 +144,12 @@ Format: date, decision, reason. Do not reverse a decision without asking the own
   Incomplete credentials fail configuration validation; absent credentials deactivate the flagged account and revoke its sessions.
   Changing the emergency username retires the previous account without deleting it.
   The manager interface cannot modify emergency accounts or change the current manager's own role or active status.
+- 2026-09-30: The owner authorizes complete PHASE 6 automation while explicitly postponing PHASE 5 deployment.
+  Work stays on `feat/phase6-spoken-notes`; no merge, publication, or VPS change belongs to this request.
+  PHASE 5 production acceptance remains open.
+  Speech uses approved scores and public pre-generated vocabulary, as required by the brief.
+  Speech does not report progress against a different uploaded recording.
+  Missing OpenAI credentials block actual clip generation; synthetic test signals do not replace production speech.
+- 2026-10-01: The owner supplies the private OpenAI key and opens pull request #1.
+  Actual vocabulary generation and branch CI can proceed without merging or deploying.
+  Audible owner acceptance remains separate from automated media checks.

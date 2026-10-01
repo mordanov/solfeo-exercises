@@ -30,6 +30,8 @@ The migration service completes before the backend starts.
 | `frontend/src/features/listening/` | Student selection, player, heartbeat queue, and exit delivery |
 | `frontend/src/features/journal/` | Manager journal filters and pagination |
 | `frontend/src/features/omr/` | Review, lazy score rendering, and localized note-name lyrics |
+| `frontend/src/features/spoken/` | Shared vocabulary, strict sequence parser, approved-only controls, and Web Audio scheduling |
+| `worker/generate_spoken.py` | Offline generation and verification of public speech clips |
 | `worker/omr.py` | PostgreSQL job claims, Audiveris execution, failure recovery, and readiness |
 | `frontend/src/i18n/` | Translations and locale checks |
 | `deploy/` | Development and production Compose, database bootstrap, and nginx configuration |
@@ -54,6 +56,8 @@ The OMR worker also shares the backend image and private media volume.
 Production gives it only the private database network.
 Its subprocess receives no application secrets.
 See `omr-pipeline.md` for leases, review, resource limits, and measured recognition failures.
+Spoken notes use approved MusicXML and pre-generated public vocabulary, not runtime TTS requests.
+See `spoken-notes.md` for generation, timing, authorization, and the current missing-key limit.
 API documentation routes remain disabled.
 PHASE 1 implements authentication and emergency manager synchronization.
 Database operations use synchronous SQLAlchemy 2.0 and psycopg 3.

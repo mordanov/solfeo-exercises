@@ -1,5 +1,48 @@
 export type Language = "en" | "ru" | "es";
 
+const spokenDefaults = {
+  defaultBpm: 72,
+  minBpm: 40,
+  maxBpm: 160,
+  maxRate: 1.5,
+  maxSeconds: 1800,
+  maxClipBytes: 2097152,
+  maxClipSeconds: 5,
+};
+export function readSpokenConfiguration(value?: string): typeof spokenDefaults {
+  const parsed: unknown = value ? JSON.parse(value) : spokenDefaults;
+  if (typeof parsed !== "object" || parsed === null)
+    throw new Error("INVALID_SPOKEN_CONFIG");
+  const result = { ...spokenDefaults };
+  for (const key of Object.keys(
+    spokenDefaults,
+  ) as (keyof typeof spokenDefaults)[]) {
+    const candidate: unknown = Reflect.get(parsed, key);
+    if (
+      typeof candidate !== "number" ||
+      !Number.isFinite(candidate) ||
+      candidate <= 0
+    )
+      throw new Error("INVALID_SPOKEN_CONFIG");
+    result[key] = candidate;
+  }
+  if (
+    !Number.isInteger(result.minBpm) ||
+    !Number.isInteger(result.maxBpm) ||
+    !Number.isInteger(result.defaultBpm) ||
+    result.defaultBpm < result.minBpm ||
+    result.defaultBpm > result.maxBpm ||
+    result.maxRate < 1 ||
+    result.maxRate > 4 ||
+    result.maxBpm > 400 ||
+    result.maxSeconds > 3600 ||
+    result.maxClipBytes > 10485760 ||
+    result.maxClipSeconds > 30
+  )
+    throw new Error("INVALID_SPOKEN_CONFIG");
+  return result;
+}
+
 export function isLanguage(value: string): value is Language {
   return value === "en" || value === "ru" || value === "es";
 }

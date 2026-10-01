@@ -5,15 +5,54 @@ This document records progress and remaining checks for the current phase.
 Prerequisites:
 - Read `docs/PHASES.md` and `docs/DECISIONS.md`.
 
-Last updated: 2026-09-30 by Copilot, session `1a328640-c756-4c7b-a686-ac6540a9a888`.
+Last updated: 2026-10-01 by Copilot, session `2d97b6fc-84af-4fc4-bf46-81df4dd02379`.
 
 ## Current phase
-PHASE 5: OMR, manager review, rendering, and note names work locally.
-Production activation remains blocked by insufficient VPS memory.
+PHASE 6: spoken notes implementation, without deployment. Status: complete.
+The owner authorizes complete phase automation and postpones PHASE 5 deployment on 2026-09-30.
+Work uses `feat/phase6-spoken-notes` so main-branch publication cannot deploy these changes.
+The owner supplies the private OpenAI key and opens pull request #1 on 2026-10-01.
+All 66 actual speech clips are generated, verified, and committed.
+The owner confirms audible Chrome acceptance in the local container stand on 2026-10-01.
+The owner requests and receives 3 follow-up fixes after the listening pass, detailed below.
+
+### PHASE 6 follow-up fixes after owner acceptance
+- Poor photo quality causes genuine OMR chords and backups in exercises 32 and 33, so the strict
+  parser correctly refuses to speak them. `docs/PRODUCT_BRIEF.md`, `docs/PHASES.md`, and
+  `docs/user/manager.md` now document the required photo quality before OMR upload.
+- Spoken playback previously changed pitch per note duration because the rate limiter clamped
+  long notes down to `minRate`. The rate now floors at 1 and pads spare time with silence, so
+  every note keeps one natural voice pitch. `minRate` is removed from the spoken configuration.
+- The generator adds a native-accent hint per language (`ACCENT_HINTS` in
+  `worker/generate_spoken.py`). The fingerprint does not hash the instructions text, so the 66
+  committed clips remain valid without regeneration; applying the new accent requires the owner
+  to regenerate into a fresh `SPOKEN_OUTPUT` directory with their own key, listen, and replace the
+  committed set. This is optional future work, not a PHASE 6 blocker.
+- `Listening.tsx` now shows the spoken-notes controls with a dedicated message when an approved
+  exercise has no recorded audio, instead of the generic "image only" message.
+- All 3 fixes are committed locally on `feat/phase6-spoken-notes` (unpushed); pre-commit and
+  `backend/tests/test_spoken_generation.py` are green.
+
+The local container stand runs PHASE 6 at `http://127.0.0.1:18080/` on 2026-10-01.
+Removing duplicate database credentials from the private `.env` resolves the local migration authentication failure.
+Migration exits successfully; PostgreSQL, backend, frontend, and OMR report healthy states.
+The startup recovery serves speech assets, preserves database passwords and volumes, and does not start Telegram.
+Local OMR repair on 2026-10-01 addresses the owner's exercises 32 and 33 without VPS changes.
+Disabling indentation-based movement splitting keeps both systems of exercise 32 in one score.
+A bounded threshold retry recovers an export for exercise 33 after faint staff detection fails.
+The original images remain unchanged and uncommitted; both results require manager review.
+Recognition errors remain: exercise 32 has clef and pitch errors; exercise 33 omits a measure and misreads notes.
+See `docs/developer/omr-pipeline.md` for the repair evidence and remaining quality limits.
+The repair passes 29 targeted backend tests, 22 frontend tests, all quality hooks, and the real container scale regression.
+Local Chrome renders both repaired scores in manager review; neither score receives automatic approval.
+The repair leaves the owner's Telegram container unchanged.
+PHASE 5 OMR works locally, but its production acceptance remains open.
+The owner reports a new VPS target; this task does not connect to or deploy on that host.
+The previous VPS memory failure remains historical evidence, not a measurement of the new host.
 The owner confirms PHASE 4 acceptance and authorizes complete PHASE 5 automation on 2026-09-30.
 The owner reports unlinking Telegram; this phase does not restore that association.
-The VPS has approximately 18 GiB free disk space after owner cleanup.
-Production OMR needs additional memory: approximately 116 MiB remains, with no swap and no noninteractive sudo access.
+The previous VPS check records approximately 18 GiB free disk space after owner cleanup.
+That host has approximately 116 MiB available RAM, no swap, and no noninteractive sudo access at the recorded check.
 The owner confirms all PHASE 3 checks and authorizes complete PHASE 4 automation on 2026-09-29.
 The application 404 page is scheduled in PHASE 7.
 The owner confirms all PHASE 2 checks and authorizes the complete PHASE 3 without intermediate confirmations on 2026-09-29.
@@ -26,6 +65,17 @@ The owner confirms the remaining bot checks and continuation on 2026-09-29.
 PHASE 0.5 is complete; the failed PWA result remains unchanged.
 
 ## Plan for the current phase
+- [x] Add shared vocabulary and a strict MusicXML sequence parser.
+- [x] Add offline OpenAI generation, AAC conversion, resumability, and manifest verification.
+- [x] Generate, verify, and commit the real speech clips after private API-key configuration.
+- [x] Add approved-only speech, tempo controls, cancellation, and score highlighting.
+- [x] Preserve recorded-audio playback and journal boundaries.
+- [x] Finish local checks and record their evidence.
+- [x] Enable branch CI through the owner-created pull request #1.
+- [x] Update user and developer documentation.
+- [x] Obtain audible Chrome acceptance after clip generation; Safari acceptance remains open.
+
+## PHASE 5 implementation and deferred acceptance
 - [x] Add versioned OMR jobs, leases, retries, review, and protected MusicXML.
 - [x] Package Audiveris and implement the bounded worker.
 - [x] Add manager review, approved-score rendering, and localized note labels.
@@ -95,6 +145,31 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - [x] Complete the remaining Telegram checklist, as confirmed by the owner.
 
 ## Done
+- PHASE 6 adds shared localized vocabulary, duration parsing, rests, ties, accidentals, and explicit unsupported-score errors.
+- Speech uses the Web Audio clock with bounded playback rates, silent tails, tempo controls, and score highlighting.
+- Current approval and job version are checked before every start.
+- Speech and recorded audio stop each other without changing recorded-audio completion.
+- Exit, hidden tabs, logout, score changes, and settings changes cancel pending and scheduled speech.
+- The offline generator produces bounded AAC assets with resumable receipts and an atomic verified manifest.
+- Conversion tests replace only the OpenAI transport and use real ffmpeg.
+- Local checks pass 125 backend tests, 128 frontend tests, and 38 deployment/container tests.
+- The 9 generation tests pass with real committed assets; missing assets now fail instead of skipping verification.
+- The frontend production build and all 6 pre-commit checks pass.
+- Headless Chrome verifies 8 seconds, 4 spoken attacks, silent rests and tails, and 7 written cursor positions.
+- That browser check uses synthetic signals; it does not verify actual pronunciation or speaker output.
+- Source commits `2a7d008`, `a86e4fa`, and `8285252` belong only to `feat/phase6-spoken-notes`.
+- The last fix coordinates speech with manager audio previews as well as student recordings.
+- The owner resolves the initial key and PR blockers on 2026-10-01.
+- Commit `39545ef` adds 66 real OpenAI speech clips, 66 receipts, and the verified manifest.
+- AAC data totals 600676 bytes; the frontend build includes the complete verified set.
+- Chrome decodes all 66 clips and verifies 24-second schedules in all 6 language and naming combinations.
+- Each schedule contains 15 clips, all accidental suffixes, and a silent final rest.
+- Natural quarter notes fit 72 BPM in every combination; actual pronunciation still requires owner acceptance.
+- Pull request #1 starts CI; run `36816378757` passes for the earlier source `2782422`.
+- Read [the PR checks](https://github.com/mordanov/solfeo-exercises/pull/1/checks) for the current branch result.
+- No merge to main, image publication, or deployment occurs.
+- Cleanup removes the stopped phase-six browser profile; temporary browser and frontend processes remain stopped.
+- `docs/developer/spoken-notes.md` and the student guide contain regeneration and final audible acceptance steps.
 - PHASE 5 source `be0000d1e8208489b65fc939b77e1bbb013422e7` passes CI run `36674676116`.
 - Run `36675174373` publishes both immutable images and verifies the pulled x86-64 images.
 - Its deployment job stops with `OMR_MEMORY_INSUFFICIENT` before image pulls, service changes, or migration.
@@ -378,10 +453,10 @@ PHASE 0.5 is complete; the failed PWA result remains unchanged.
 - The owner does not supply device versions or a per-message evidence record.
 
 ## Next step
-- Provision sufficient VPS RAM before enabling the OMR worker.
-- Retry the verified PHASE 5 release after the default 1536 MiB available-memory requirement is satisfied.
-- Complete the final PHASE 5 checklist in `docs/user/manager.md` after production activation.
-- Keep PHASE 6 and the PHASE 7 application 404 page out of this task.
+- Review the checks for pull request #1 without merging it.
+- Keep deployment postponed; do not merge the branch or start PHASE 7.
+- Push the 4 local `feat/phase6-spoken-notes` commits and open review for the PHASE 6 follow-up fixes.
+- Obtain audible Safari acceptance for spoken notes; Chrome acceptance is confirmed.
 - Preserve prototype files and the historical PWA deployment.
 
 ## PHASE 0 boundaries
@@ -474,8 +549,10 @@ The owner confirms final PHASE 0 browser acceptance at the public HTTPS address.
 The final PHASE 5 procedure is in `docs/user/manager.md`.
 
 ## Known issues
-- The owner resolves the VPS disk constraint; approximately 18 GiB is now available.
-- Insufficient VPS RAM blocks PHASE 5 activation; the current public release remains PHASE 4.
+- PHASE 6 audible Safari acceptance remains open; Chrome acceptance is confirmed on 2026-10-01.
+- The owner-created PR resolves the initial CI blocker without changing CLI permissions.
+- The previous VPS check finds approximately 18 GiB free disk space but insufficient RAM for PHASE 5 activation.
+- The owner postpones deployment and reports a new host; this task does not verify or change that host.
 - The initial PHASE 4 CD attempt fails from disk exhaustion; the verified SSH recovery succeeds.
 - The current CLI cannot rerun Actions jobs with its token; GitHub returns a permission error.
 - The owner confirms real Telegram acceptance and subsequently unlinks the association.

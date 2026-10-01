@@ -90,6 +90,8 @@ Replay after natural completion creates a new listening session.
 The ordered sequence wraps after the last exercise and before the first.
 Reload or a new sign-in restores the saved sequential pointer.
 An image-only exercise has no audio control and creates no journal row.
+An approved exercise without recorded audio shows the spoken notes controls instead of an audio control.
+Speech still does not create a journal row.
 
 1. Select **Random** in Listening mode.
    The application selects a different exercise when more than one exists.
@@ -133,3 +135,49 @@ The checkbox is local to the current score, not a saved account setting.
 7. Reopen the application and confirm the saved sequential position.
 8. Check Random, Previous, and return to In order.
 9. Confirm that `/manager/journal` refuses student access.
+
+## Use spoken notes
+
+The operator must generate and publish the voice files first.
+The voice speaks note names; it does not sing.
+The page identifies the voice as AI-generated.
+
+1. Open an exercise with an approved score.
+   The **Spoken notes** controls appear.
+2. Set the tempo with the slider.
+   The label shows beats per minute.
+3. Click **Speak notes**.
+   The cursor follows the spoken sequence.
+4. Click **Stop speaking** when necessary.
+   Playback and pending preparation stop.
+5. Lower the tempo if a name cannot fit its note.
+6. Click **Speak notes** again after changing the tempo.
+   Playback restarts from the beginning.
+
+Rests remain silent, and tied notes have one combined duration.
+A short spoken name can leave silence inside a long note.
+Sharps and flats follow the note name.
+Your saved language and naming settings determine the speech.
+Unsupported notation or missing clips produce an error, not guessed speech.
+
+Speech pauses the audio recording, and the recording stops speech.
+Leaving the page, hiding the tab, or signing out also stops speech.
+Speech does not complete the audio recording's listening session or advance the saved sequential pointer.
+Image-only speech creates no journal row.
+
+## Final PHASE 6 manual checklist
+
+1. Repeat the checks in Chrome and Safari after the operator publishes the clips.
+2. Check all 3 languages with letters and solfège naming.
+3. Listen for correct names, clear speech, and no singing or added words.
+4. Check whole notes, quarter notes, dotted notes, rests, and ties.
+5. Check sharp, flat, double-sharp, double-flat, and natural pitches.
+6. Change the tempo and confirm complete words without overlap.
+7. Toggle note labels during speech and confirm stable timing and cursor position.
+8. Alternate speech and the exercise recording.
+   Only one plays at a time.
+9. Stop during loading, hide the tab, navigate, and sign out.
+   No delayed sound starts.
+10. Ask the manager to verify unchanged audio completion after speech alone.
+11. Ask the manager to revoke approval before another start.
+    Speech cannot start from the stale page.

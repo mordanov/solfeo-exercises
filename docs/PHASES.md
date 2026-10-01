@@ -96,13 +96,25 @@ Done when: a real exercise image is recognized, approved, and shown with note na
 Implementation status: complete locally and published with successful CI on 2026-09-30.
 Production activation stops safely because the VPS lacks the configured memory reserve.
 PHASE 5 remains open until deployment and final owner acceptance.
+Local exercises 32 and 33 confirm that photo quality, not the pipeline code, causes most recognition errors.
+See `docs/PRODUCT_BRIEF.md` (Photo quality requirements) for the upload rules.
+See `docs/developer/omr-pipeline.md` for the repair evidence and the remaining limits.
 
 ## PHASE 6: Spoken notes
+The owner authorizes the entire phase without intermediate confirmations on 2026-09-30.
+The owner explicitly postpones PHASE 5 deployment; implementation uses a separate branch without VPS changes.
 - Script that generates syllable clips with OpenAI TTS for each language and naming. Commit the output.
 - MusicXML -> note sequence parser (pitch, duration, rests, ties, accidentals). Unit tests.
 - Web Audio scheduler: tempo slider, play/stop, highlight of the current note if OSMD allows.
 - Docs: developer (regenerate the clips), user (use the spoken notes).
 Done when: an approved score is spoken with correct note names and durations in all three languages.
+The generator, parser, scheduler, controls, and 66 real speech clips are implemented.
+The owner supplies the private API key and opens pull request #1 on 2026-10-01.
+The owner confirms audible acceptance in the local stand and accepts PHASE 6 on 2026-10-01.
+Fixes after that listening pass: natural voice pitch for every note duration, a spoken-notes
+fallback when an exercise has no recorded audio, and a native accent hint per language for future
+clip regeneration (optional; the committed 66 clips still use the original generic instructions).
+Status: complete.
 
 ## PHASE 7: Hardening and documentation review
 - Check free disk space before deployment image pulls and reserve capacity for extraction and rollback.

@@ -61,6 +61,41 @@ Frontend build values are public; never put a secret in `VITE_*`.
 | `VITE_HEALTH_TIMEOUT_MS` | `5000` | Shared health/account HTTP deadline in milliseconds; integer from 1 to 2147483647 |
 | `VITE_UPLOAD_TIMEOUT_MS` | `600000` | Multipart upload deadline, including conversion, in milliseconds |
 | `VITE_LISTENING_HEARTBEAT_MS` | `5000` | Playback heartbeat interval, from 1000 to 60000 milliseconds |
+| `VITE_SPOKEN_CONFIG` | JSON from `.env.example` | Public speech limits, validated at build and startup |
+
+## Speech generation
+
+Only the offline generator needs the OpenAI key.
+The frontend build, Compose services, and publication workflow never receive that key.
+See `spoken-notes.md` before generation or regeneration.
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `OPENAI_API_KEY` | Empty | Private OpenAI credential; required only for generation |
+| `SPOKEN_MODEL` | `gpt-4o-mini-tts` | OpenAI speech model |
+| `SPOKEN_VOICE` | `coral` | Speaking voice |
+| `SPOKEN_TIMEOUT_SECONDS` | `60` | HTTP timeout, from 1 to 300 seconds |
+| `SPOKEN_MAX_CLIP_BYTES` | `2097152` | Maximum provider response and AAC file size |
+| `SPOKEN_MAX_CLIP_SECONDS` | `5` | Maximum generated clip duration, from 1 to 30 seconds |
+| `SPOKEN_OUTPUT` | `frontend/public/solfege` | Output directory relative to the repository root |
+
+`VITE_SPOKEN_CONFIG` contains all fields shown below.
+Changing `.env.production` does not change an existing frontend image.
+Native Vite reads the root environment; Compose passes the JSON as a build argument.
+Publication reads the same JSON from `.env.example`.
+Each clip request uses `VITE_HEALTH_TIMEOUT_MS`.
+
+| JSON field | Default | Purpose |
+|---|---|---|
+| `defaultBpm` | `72` | Initial tempo |
+| `minBpm` | `40` | Minimum slider tempo |
+| `maxBpm` | `160` | Maximum slider tempo |
+| `maxRate` | `1.5` | Maximum playback rate. Playback never goes below rate 1; silence fills unused time instead |
+| `maxSeconds` | `1800` | Maximum complete speech sequence |
+| `maxClipBytes` | `2097152` | Maximum downloaded clip bytes |
+| `maxClipSeconds` | `5` | Maximum decoded clip duration |
+
+Keep generation limits and frontend limits consistent.
 
 ## Telegram worker
 
@@ -91,6 +126,8 @@ Only the OMR container needs executable temporary memory for JavaCPP native libr
 | Variable | Default | Purpose |
 |---|---|---|
 | `OMR_ENABLED` | `true` | Process queued jobs; `false` leaves jobs pending |
+| `OMR_DETECT_MOVEMENTS` | `false` | Let indentation split separate movements; disabled for one exercise across several systems |
+| `OMR_FAINT_MEAN_COEFF` | `0.9` | Adaptive mean coefficient for one retry after missing staff detection; greater than 0, at most 1.5 |
 | `OMR_BINARY` | `/opt/audiveris/bin/Audiveris` | Pinned engine launcher |
 | `OMR_JAVA_HOME` | `/opt/java/openjdk` | Java runtime directory |
 | `OMR_TESSDATA` | `/usr/share/tesseract-ocr/5/tessdata` | OCR language data |
@@ -99,7 +136,7 @@ Only the OMR container needs executable temporary memory for JavaCPP native libr
 | `OMR_HOST_RESERVE_MB` | `512` | Additional available host memory required before production activation |
 | `OMR_CPUS` | `1` | Container CPU limit |
 | `OMR_TMP_MB` | `256` | Temporary filesystem maximum in MiB |
-| `OMR_TIMEOUT_SECONDS` | `300` | Audiveris process deadline |
+| `OMR_TIMEOUT_SECONDS` | `300` | Total recognition deadline, including the faint-staff retry |
 | `OMR_LEASE_SECONDS` | `600` | Claim age before crash recovery |
 | `OMR_POLL_SECONDS` | `2` | Delay between worker cycles |
 | `OMR_RETRY_SECONDS` | `30` | Delay after transient engine failures |

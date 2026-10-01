@@ -57,7 +57,12 @@ export function Review({
           alt={t("exercises.imageFor", { title: exercise.title })}
         />
         {rendered && job.job_id && (
-          <Score id={exercise.id} version={job.job_id} user={auth.user} />
+          <Score
+            id={exercise.id}
+            version={job.job_id}
+            user={auth.user}
+            approved={job.status === "approved"}
+          />
         )}
       </div>
       <button

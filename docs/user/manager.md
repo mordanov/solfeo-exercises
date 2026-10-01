@@ -24,7 +24,14 @@ Prerequisites:
    This action withdraws the previous score until you approve the new result.
 
 An error state never hides the original image.
+One exercise can continue on several lines; a line break does not require a separate upload.
+The worker retries missing staff detection once with a threshold for faint lines.
+If staff detection still fails, the page requests a clearer image.
 Some clear images still produce incomplete or incorrect notation.
+Check every line and measure even when recognition succeeds.
+Reject the score when it contains a stray chord, an extra measure, or a missing measure. Reshoot the image.
+An approved score with these errors also makes the spoken notes feature refuse that score.
+See `docs/PRODUCT_BRIEF.md` (Photo quality requirements) for how to photograph an exercise before upload.
 Use the original image when repeated recognition fails.
 Replacing an image always requires new recognition and approval.
 Editing text or replacing audio preserves the current score.
@@ -291,3 +298,23 @@ Normal manager associations survive ordinary restarts.
 8. Unlink Telegram.
    New attachments cannot enter that manager's import list.
 9. Confirm that a student cannot open `/manager/telegram`.
+
+## Check spoken notes
+
+The operator must first publish the generated voice files.
+Speech controls appear only for an approved score, including the manager's review page.
+Approval permits playback; a review preview alone does not.
+
+1. Open an approved exercise in the recognition review.
+2. Click **Speak notes**.
+   The application checks current approval again before playback.
+3. Compare each spoken name with the original image.
+4. Check the language and naming choice in **Settings**.
+5. Reject incorrect recognition instead of accepting incorrect spoken notes.
+6. Repeat the student guide's PHASE 6 checklist in Chrome and Safari.
+7. Check the journal after a student uses speech alone.
+   Speech does not create or complete a recorded-audio listening session.
+
+Missing voice files require operator generation, not another OMR attempt.
+An excessive-tempo error requires a lower tempo.
+See `../developer/spoken-notes.md` for generation and supported notation.

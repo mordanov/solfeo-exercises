@@ -1,5 +1,7 @@
+import logging
 import subprocess
 import tempfile
+import time
 import xml.etree.ElementTree as ET
 import zipfile
 from pathlib import Path, PurePosixPath
@@ -10,6 +12,8 @@ from PIL import Image
 from app.services.auth import ServiceError
 from app.services.omr import validate_musicxml
 from app.settings import Settings
+
+logger = logging.getLogger(__name__)
 
 
 class OmrEngine(Protocol):
@@ -74,8 +78,8 @@ class AudiverisEngine:
             raise ServiceError("FILE_NOT_FOUND", 404)
         with tempfile.TemporaryDirectory(prefix="omr-") as temporary:
             root = Path(temporary)
-            source, output = root / "input.png", root / "output"
-            output.mkdir()
+            source = root / "input.png"
+            deadline = time.monotonic() + settings.omr_timeout_seconds
             try:
                 with Image.open(image) as picture:
                     if picture.width * picture.height > settings.image_max_pixels:
@@ -93,28 +97,54 @@ class AudiverisEngine:
                         "-Dsun.java2d.uiScale=1"
                     ),
                 }
-                subprocess.run(
-                    [
+                faint = False
+                while True:
+                    output = root / ("faint-output" if faint else "output")
+                    output.mkdir()
+                    command = [
                         settings.omr_binary,
                         "-batch",
                         "-transcribe",
                         "-export",
-                        "-output",
-                        str(output),
-                        "--",
-                        str(source),
-                    ],
-                    cwd=root,
-                    env=environment,
-                    check=True,
-                    timeout=settings.omr_timeout_seconds,
-                    stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL,
-                )
+                        "-option",
+                        "org.audiveris.omr.sheet.ProcessingSwitches.indentations="
+                        + str(settings.omr_detect_movements).lower(),
+                    ]
+                    if faint:
+                        command.extend(
+                            [
+                                "-option",
+                                "org.audiveris.omr.image.AdaptiveDescriptor.meanCoeff="
+                                + str(settings.omr_faint_mean_coeff),
+                            ]
+                        )
+                    command.extend(["-output", str(output), "--", str(source)])
+                    remaining = deadline - time.monotonic()
+                    if remaining <= 0:
+                        raise ServiceError("OMR_TIMEOUT", 503)
+                    with tempfile.TemporaryFile(dir=root) as diagnostics:
+                        try:
+                            subprocess.run(
+                                command,
+                                cwd=root,
+                                env=environment,
+                                check=True,
+                                timeout=remaining,
+                                stdout=diagnostics,
+                                stderr=subprocess.STDOUT,
+                            )
+                        except subprocess.CalledProcessError:
+                            diagnostics.seek(0, 2)
+                            diagnostics.seek(max(0, diagnostics.tell() - 65536))
+                            no_staff = b"No system found" in diagnostics.read(65536)
+                            if no_staff and not faint:
+                                logger.warning("OMR_FAINT_STAFF_RETRY")
+                                faint = True
+                                continue
+                            code = "OMR_NO_STAFF" if no_staff else "OMR_ENGINE_FAILED"
+                            raise ServiceError(code, 422) from None
+                    return read_export(output, settings.omr_max_xml_bytes)
             except subprocess.TimeoutExpired:
                 raise ServiceError("OMR_TIMEOUT", 503) from None
-            except subprocess.CalledProcessError:
-                raise ServiceError("OMR_ENGINE_FAILED", 422) from None
             except (OSError, Image.DecompressionBombError):
                 raise ServiceError("OMR_ENGINE_UNAVAILABLE", 503) from None
-            return read_export(output, settings.omr_max_xml_bytes)

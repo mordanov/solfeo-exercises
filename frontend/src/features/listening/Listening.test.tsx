@@ -143,6 +143,23 @@ it("does not create a journal row before play and keeps one session through paus
     ).size,
   ).toBe(1);
 });
+it("stops speech on recorded playback without marking it complete", async () => {
+  mount();
+  const audio = await screen.findByLabelText("Audio: First exercise");
+  expect(api.sendListeningEvent).not.toHaveBeenCalled();
+  const stop = vi.fn();
+  window.addEventListener("solfeo:stop-spoken", stop);
+  fireEvent.play(audio);
+  await waitFor(() => expect(api.sendListeningEvent).toHaveBeenCalled());
+  expect(stop).toHaveBeenCalledTimes(1);
+  fireEvent.pause(audio);
+  expect(
+    vi
+      .mocked(api.sendListeningEvent)
+      .mock.calls.every(([data]) => data.event !== "ended"),
+  ).toBe(true);
+  window.removeEventListener("solfeo:stop-spoken", stop);
+});
 it("finishes before navigating and does not autoplay the next exercise", async () => {
   vi.mocked(api.selectExercise).mockResolvedValue({
     ...exercise,
@@ -188,5 +205,29 @@ it("supports image-only exercises without inventing listening sessions", async (
   });
   mount();
   expect(await screen.findByText(/image only/)).toBeInTheDocument();
+  expect(api.sendListeningEvent).not.toHaveBeenCalled();
+});
+it("points to the spoken notes instead when an approved score has no recorded audio", async () => {
+  vi.mocked(api.currentExercise).mockResolvedValue({
+    ...exercise,
+    audio: null,
+    image: {
+      id: "image",
+      mime_type: "image/png",
+      size_bytes: 100,
+      duration_seconds: null,
+    },
+    omr: {
+      status: "approved",
+      job_id: "job",
+      image_id: "image",
+      attempts: 1,
+      last_error: null,
+    },
+  });
+  mount();
+  expect(await screen.findByTestId("approved-score")).toBeInTheDocument();
+  expect(await screen.findByText(/spoken notes above/)).toBeInTheDocument();
+  expect(screen.queryByText(/image only/)).not.toBeInTheDocument();
   expect(api.sendListeningEvent).not.toHaveBeenCalled();
 });
