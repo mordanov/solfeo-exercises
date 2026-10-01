@@ -1,4 +1,6 @@
 {
+  "theme.dark": "Use dark theme",
+  "theme.light": "Use light theme",
   "notFound.title": "Page not found",
   "notFound.description": "This page does not exist. Use the home page to continue.",
   "notFound.home": "Go to home",

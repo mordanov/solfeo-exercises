@@ -4,6 +4,10 @@ import { AuthArea } from "./features/auth/AuthArea";
 import { HealthStatus } from "./features/health/HealthStatus";
 import { LanguageOptions } from "./components/AccountUi";
 import { isLanguage } from "./configuration";
+import Container from "@mui/material/Container";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import { ThemeToggle } from "./components/ThemeToggle";
 
 function NotFound() {
   const { t, i18n } = useTranslation();
@@ -42,9 +46,30 @@ export function App() {
   }, [i18n, i18n.resolvedLanguage, t]);
 
   return (
-    <main>
-      <h1>{t("app.title")}</h1>
-      <p>{t("app.description")}</p>
+    <Container
+      component="main"
+      maxWidth="lg"
+      sx={{ py: { xs: 2, sm: 4 }, bgcolor: "transparent" }}
+    >
+      <Stack
+        component="header"
+        direction={{ xs: "column", sm: "row" }}
+        sx={{
+          justifyContent: "space-between",
+          alignItems: { xs: "flex-start", sm: "center" },
+          gap: 2,
+        }}
+      >
+        <div>
+          <Typography component="h1" variant="h1">
+            {t("app.title")}
+          </Typography>
+          <Typography color="text.secondary" sx={{ mt: 1 }}>
+            {t("app.description")}
+          </Typography>
+        </div>
+        <ThemeToggle />
+      </Stack>
       {knownPath ? (
         <>
           <AuthArea />
@@ -53,6 +78,6 @@ export function App() {
       ) : (
         <NotFound />
       )}
-    </main>
+    </Container>
   );
 }
