@@ -16,10 +16,6 @@ from worker.generate_spoken import GenerationError, generate, verify, vocabulary
 def test_committed_speech_assets() -> None:
     root = Path(__file__).resolve().parents[2]
     output = root / "frontend/public/solfege"
-    if not output.exists():
-        pytest.skip(
-            "Real speech generation awaits OPENAI_API_KEY; no production clips."
-        )
     settings = Settings(
         _env_file=root / ".env.example",
         database_password=SecretStr("unused"),
