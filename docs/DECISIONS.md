@@ -7,6 +7,11 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-10-02: The owner requires the student area to retain the original image alongside an available approved score.
+  These are independent media blocks, not alternatives.
+  Keep the original image visible during score loading and failures without adding a second fallback copy.
+  Preserve the approval gate, protected-file authorization, and recorded/spoken playback behavior.
+  This instruction supersedes the previous student display rule that replaces the image after approval.
 - 2026-10-02: The owner accepts paired appearance schemes, font settings, and a live example panel on a separate branch.
   `feat/appearance-settings` starts from Material Design follow-up source `c4ee4f1`.
   Each account stores independent light and dark choices from classic, forest, warm, and plum.

@@ -78,7 +78,8 @@ A child looks at the notes and listens to the audio.
 - Score status: none | pending | processing | needs_review | approved | rejected | failed.
 - Manager review shows the rendered score without a duplicate original image; actions Approve / Reject / Re-run remain.
 - The exercise preview retains the original image for comparison.
-- Students see the rendered score ONLY if status = approved. Otherwise they see the original image.
+- Students always see the original image when available, including after recognition approval.
+- Students also see the rendered score when available and approved; unapproved results remain hidden.
 - Rendering: OpenSheetMusicDisplay in the browser.
 - Toggle "show note names" on the staff: client-side, inject <lyric> elements into the MusicXML before rendering. Naming from user setting (letters: C D E F G A B; solfege: do re mi fa sol la si; localized).
 - Assumptions: printed, monophonic, single-staff exercises. Complex scores may fail; the fallback (image) covers this.

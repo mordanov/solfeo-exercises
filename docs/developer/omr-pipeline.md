@@ -65,7 +65,9 @@ Managers compare the original image and score inside the exercise list.
 OpenSheetMusicDisplay loads only when a score needs rendering.
 The note-name toggle injects lyrics into a copy of the XML.
 Names use persisted language and naming settings; rests receive no label.
-Rendering failures show an explicit error and the original image for students.
+
+The student area shows the available original image independently of the approved score.
+Score loading or rendering failures show an explicit error without removing or duplicating the image.
 Changing labels does not recreate the audio player.
 
 ### Local repair report: 2026-10-01

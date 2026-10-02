@@ -109,11 +109,14 @@ If saving fails, your draft remains available and the page shows an error.
 
 Students cannot list, create, edit, deactivate, or reset other users.
 Opening `/manager/users` does not grant manager access.
+
 Students can view original images and listen to exercise audio.
-An approved score replaces the original image in the listening area.
+The listening area always shows the available original image.
+An available approved score appears below it without replacing the image.
 Unapproved, rejected, or failed recognition keeps the original image visible.
 Rendering or access errors show an explicit message and the original image.
 Students cannot approve or change recognition results.
+
 Only managers can read the listening journal.
 Opening `/manager/journal` does not grant journal access.
 Opening `/manager/telegram` does not grant Telegram import access.
@@ -141,7 +144,8 @@ The service-status panel confirms backend liveness only.
 ## Listen to exercises
 
 1. Open **Student area**.
-   The saved sequential exercise appears with its description and approved score or original image.
+   The saved sequential exercise appears with its description and available original image.
+   The original image remains visible when an approved score also appears.
 2. Press the audio play control.
    Playback starts, and the application records a listening session.
 3. Pause and resume when necessary.

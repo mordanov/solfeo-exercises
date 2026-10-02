@@ -98,7 +98,8 @@ Width changes of at least 1 px trigger reflow; zero-width containers do not trig
 OSMD uses 75 % zoom below 600 px and the original scale on larger screens.
 The renderer recalculates line breaks instead of scaling a fixed, wide SVG.
 Rerendering restores the current cursor without fetching MusicXML again or replacing spoken controls.
-Cleanup disconnects the observer; rendering errors retain the translated error and original image fallback.
+Cleanup disconnects the observer; rendering errors show a translated error.
+The student area renders the available original image independently, including when the score loads or fails.
 
 Native audio, score refs, rendering effects, and speech scheduling remain unchanged.
 The score surface remains white in dark mode.

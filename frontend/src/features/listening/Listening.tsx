@@ -90,47 +90,31 @@ function Player({
       >
         {exercise.description}
       </Box>
-      {exercise.image &&
-        (exercise.omr.status === "approved" && exercise.omr.job_id ? (
-          <Score
-            approved
-            id={exercise.id}
-            version={exercise.omr.job_id}
-            user={auth.user}
-            fallback={
-              <Box
-                component="img"
-                sx={{
-                  display: "block",
-                  maxWidth: "100%",
-                  maxHeight: 400,
-                  objectFit: "contain",
-                  my: 2,
-                  bgcolor: "#fff",
-                  borderRadius: 2,
-                }}
-                src={`/api/exercises/${exercise.id}/files/image`}
-                alt={t("exercises.imageFor", { title: exercise.title })}
-              />
-            }
-          />
-        ) : (
-          <Box
-            component="img"
-            sx={{
-              display: "block",
-              maxWidth: "100%",
-              maxHeight: 400,
-              objectFit: "contain",
-              my: 2,
-              bgcolor: "#fff",
-              borderRadius: 2,
-            }}
-            src={`/api/exercises/${exercise.id}/files/image`}
-            alt={t("exercises.imageFor", { title: exercise.title })}
-            onError={() => setMediaError(true)}
-          />
-        ))}
+      {exercise.image && (
+        <Box
+          component="img"
+          sx={{
+            display: "block",
+            maxWidth: "100%",
+            maxHeight: 400,
+            objectFit: "contain",
+            my: 2,
+            bgcolor: "#fff",
+            borderRadius: 2,
+          }}
+          src={`/api/exercises/${exercise.id}/files/image`}
+          alt={t("exercises.imageFor", { title: exercise.title })}
+          onError={() => setMediaError(true)}
+        />
+      )}
+      {exercise.omr.status === "approved" && exercise.omr.job_id && (
+        <Score
+          approved
+          id={exercise.id}
+          version={exercise.omr.job_id}
+          user={auth.user}
+        />
+      )}
       {exercise.audio ? (
         <audio
           ref={audio}
@@ -153,9 +137,7 @@ function Player({
             void tracker.finish();
           }}
         />
-      ) : exercise.image &&
-        exercise.omr.status === "approved" &&
-        exercise.omr.job_id ? (
+      ) : exercise.omr.status === "approved" && exercise.omr.job_id ? (
         <p>{t("listening.noAudioSpoken")}</p>
       ) : (
         <p>{t("listening.noAudio")}</p>

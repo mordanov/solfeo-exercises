@@ -74,6 +74,25 @@ The production build, all 6 quality hooks, and 4 documentation checks pass.
 The old failed run remains historical; a new remote run requires publication of the fix commit.
 No VPS services or private environment files change.
 
+### Student original image and score
+The owner requires both available media blocks on 2026-10-02.
+The student area now always shows the available original image, followed by an available approved score.
+An approved score no longer replaces the image or depends on its presence.
+Score errors retain the original image without rendering a duplicate fallback.
+Image errors remain explicit, including when the score succeeds.
+Unapproved results and approved results without a score version remain hidden.
+
+The original regression fails before the fix and passes afterward.
+All 200 frontend tests, the production build, 6 quality hooks, and 4 documentation checks pass.
+New cases cover simultaneous media, an independent score, missing approval/version, image failures, and score failures.
+Existing recorded-audio, speech, navigation, and journal regressions remain green.
+No backend API, file authorization, dependencies, private configuration, or deployed services change.
+
+Remaining manual check:
+1. Open a student exercise with an original image and approved recognition.
+2. Confirm that both appear, including in Chrome and Safari on a phone.
+3. Confirm that a pending or rejected score leaves only the available original image.
+
 ### Material Design baseline
 Material Design: separate visual migration after accepted PHASE 7.
 The owner starts the feature on 2026-10-01.

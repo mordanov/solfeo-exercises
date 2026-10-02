@@ -87,7 +87,7 @@ The owner authorizes the entire phase without intermediate confirmations on 2026
 - Postgres job queue (SKIP LOCKED). Worker container with Audiveris behind the `OmrEngine` interface. Retries and failure state.
 - On image upload: enqueue a job. Show status in the manager UI. Store MusicXML and status.
 - Review screen: original image and rendered score side by side. Actions: Approve, Reject, Re-run.
-- Student view: approved score rendered with OpenSheetMusicDisplay, otherwise the original image.
+- Student view: show the available original image and also render an approved score with OpenSheetMusicDisplay.
 - "Show note names" toggle: inject `<lyric>` elements by the user's naming setting.
 - Tests: queue concurrency, status transitions, lyric injection. Use 2-3 sample scores as fixtures.
 - Docs: developer (OMR pipeline, limits, how to replace the engine), user (review a recognized score).
