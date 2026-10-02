@@ -10,8 +10,10 @@ import {
 } from "../../api/journal";
 import { ErrorMessage } from "../../components/AccountUi";
 import { Button, Field, Form, Input, Panel, Select } from "../../components/Ui";
-import { ReadOnlyGrid } from "../../components/ReadOnlyGrid";
-import type { GridColDef } from "@mui/x-data-grid";
+import {
+  ReadOnlyGrid,
+  type ReadOnlyColumn,
+} from "../../components/ReadOnlyGrid";
 
 export function Journal() {
   const { t, i18n } = useTranslation();
@@ -40,13 +42,13 @@ export function Journal() {
     new Intl.NumberFormat(i18n.language, { maximumFractionDigits: 1 }).format(
       value,
     );
-  const columns: GridColDef<JournalEntry>[] = [
+  const columns: ReadOnlyColumn<JournalEntry>[] = [
     {
       field: "student",
       headerName: t("journal.student"),
       minWidth: 180,
       flex: 1,
-      renderCell: ({ row }) => (
+      render: (row) => (
         <span>
           {row.first_name} {row.last_name} ({row.username})
         </span>
@@ -57,7 +59,7 @@ export function Journal() {
       headerName: t("journal.exercise"),
       minWidth: 180,
       flex: 1,
-      renderCell: ({ row }) => (
+      render: (row) => (
         <div>
           {row.exercise_title}
           {row.exercise_deleted && <p>{t("journal.deleted")}</p>}
@@ -68,38 +70,37 @@ export function Journal() {
       field: "started",
       headerName: t("journal.started"),
       minWidth: 190,
-      renderCell: ({ row }) => date(row.started_at),
+      render: (row) => date(row.started_at),
     },
     {
       field: "heartbeat",
       headerName: t("journal.heartbeat"),
       minWidth: 190,
-      renderCell: ({ row }) => date(row.last_heartbeat_at),
+      render: (row) => date(row.last_heartbeat_at),
     },
     {
       field: "ended",
       headerName: t("journal.ended"),
       minWidth: 190,
-      renderCell: ({ row }) =>
-        row.ended_at ? date(row.ended_at) : t("journal.noEnd"),
+      render: (row) => (row.ended_at ? date(row.ended_at) : t("journal.noEnd")),
     },
     {
       field: "position",
       headerName: t("journal.position"),
       minWidth: 160,
-      renderCell: ({ row }) => number(row.max_position_sec),
+      render: (row) => number(row.max_position_sec),
     },
     {
       field: "duration",
       headerName: t("journal.duration"),
       minWidth: 130,
-      renderCell: ({ row }) => number(row.audio_duration_sec),
+      render: (row) => number(row.audio_duration_sec),
     },
     {
       field: "completed",
       headerName: t("journal.completed"),
       minWidth: 130,
-      renderCell: ({ row }) => t(row.completed ? "journal.yes" : "journal.no"),
+      render: (row) => t(row.completed ? "journal.yes" : "journal.no"),
     },
   ];
   return (

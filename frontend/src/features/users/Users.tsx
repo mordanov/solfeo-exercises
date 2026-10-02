@@ -12,8 +12,10 @@ import {
 } from "../../api/auth";
 import { ErrorMessage } from "../../components/AccountUi";
 import { Button, Field, Form, Input, Panel, Select } from "../../components/Ui";
-import { ReadOnlyGrid } from "../../components/ReadOnlyGrid";
-import type { GridColDef } from "@mui/x-data-grid";
+import {
+  ReadOnlyGrid,
+  type ReadOnlyColumn,
+} from "../../components/ReadOnlyGrid";
 import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 
@@ -177,13 +179,13 @@ export function Users({ auth }: { auth: Auth }) {
       updateUser(auth.csrf_token, user.id, { is_active: !user.is_active }),
     onSuccess: refresh,
   });
-  const columns: GridColDef<User>[] = [
+  const columns: ReadOnlyColumn<User>[] = [
     {
       field: "username",
       headerName: t("auth.username"),
       minWidth: 160,
       flex: 1,
-      renderCell: ({ row: user }) => (
+      render: (user) => (
         <span>
           {user.username}
           {user.is_emergency && <span> ({t("users.emergency")})</span>}
@@ -195,7 +197,7 @@ export function Users({ auth }: { auth: Auth }) {
       headerName: t("users.name"),
       minWidth: 180,
       flex: 1,
-      renderCell: ({ row: user }) => (
+      render: (user) => (
         <span>
           {user.first_name} {user.last_name}
         </span>
@@ -205,21 +207,20 @@ export function Users({ auth }: { auth: Auth }) {
       field: "role",
       headerName: t("users.role"),
       minWidth: 120,
-      renderCell: ({ row: user }) => t(`roles.${user.role}`),
+      render: (user) => t(`roles.${user.role}`),
     },
     {
       field: "status",
       headerName: t("users.status"),
       minWidth: 120,
-      renderCell: ({ row: user }) =>
-        t(user.is_active ? "users.active" : "users.inactive"),
+      render: (user) => t(user.is_active ? "users.active" : "users.inactive"),
     },
     {
       field: "actions",
       headerName: t("users.actions"),
       minWidth: 250,
       flex: 1,
-      renderCell: ({ row: user }) =>
+      render: (user) =>
         !user.is_emergency &&
         user.id !== auth.user.id && (
           <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>

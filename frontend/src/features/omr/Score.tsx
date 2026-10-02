@@ -9,6 +9,7 @@ import { injectNoteNames } from "./notes";
 import { Spoken } from "../spoken/Spoken";
 import { Field, Input, Panel } from "../../components/Ui";
 import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
 
 export function Score({
   id,
@@ -24,6 +25,7 @@ export function Score({
   approved?: boolean;
 }) {
   const { t } = useTranslation();
+  const mobileBreakpoint = useTheme().breakpoints.values.sm;
   const [labels, setLabels] = useState(false);
   const [error, setError] = useState<unknown>(null);
   const target = useRef<HTMLDivElement>(null);
@@ -60,6 +62,7 @@ export function Score({
     const host = document.createElement("div");
     container.replaceChildren(host);
     let clear: (() => void) | undefined;
+    let observer: ResizeObserver | undefined;
     async function draw() {
       try {
         const { OpenSheetMusicDisplay } = await import("opensheetmusicdisplay");
@@ -79,12 +82,36 @@ export function Score({
           : query.data;
         await renderer.load(xml ?? "");
         if (cancelled) return;
-        renderer.render();
-        if (renderer.cursor) renderer.cursor.SkipInvisibleNotes = false;
-        display.current = renderer;
-        cursorPosition.current = 0;
-        highlight(highlighted.current);
-        setError(null);
+        const render = () => {
+          renderer.Zoom = window.innerWidth < mobileBreakpoint ? 0.75 : 1;
+          renderer.render();
+          if (renderer.cursor) {
+            renderer.cursor.SkipInvisibleNotes = false;
+            renderer.cursor.reset();
+          }
+          display.current = renderer;
+          cursorPosition.current = 0;
+          highlight(highlighted.current);
+          setError(null);
+        };
+        render();
+        let width = host.clientWidth;
+        observer = new ResizeObserver(([entry]) => {
+          if (
+            cancelled ||
+            !entry ||
+            entry.contentRect.width <= 0 ||
+            Math.abs(entry.contentRect.width - width) < 1
+          )
+            return;
+          width = entry.contentRect.width;
+          try {
+            render();
+          } catch {
+            setError(new ApiError("OMR_RENDER_FAILED"));
+          }
+        });
+        observer.observe(host);
       } catch {
         if (!cancelled) setError(new ApiError("OMR_RENDER_FAILED"));
       }
@@ -92,11 +119,19 @@ export function Score({
     void draw();
     return () => {
       cancelled = true;
+      observer?.disconnect();
       clear?.();
       display.current = null;
       host.remove();
     };
-  }, [query.data, labels, user.note_naming, user.ui_language, highlight]);
+  }, [
+    query.data,
+    labels,
+    user.note_naming,
+    user.ui_language,
+    highlight,
+    mobileBreakpoint,
+  ]);
   const failed = query.isError || error !== null;
   return (
     <Panel aria-label={t("omr.score")}>

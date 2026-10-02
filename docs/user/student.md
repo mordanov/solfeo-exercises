@@ -17,6 +17,19 @@ Prerequisites:
 The theme does not change saved language or note naming settings.
 The score surface stays white in both themes.
 
+## Mobile layout checklist
+
+1. Open the student area and Settings at 320, 360, 390, and 430 px.
+2. Check both themes and all 3 interface languages.
+3. Inspect a long exercise title, description, and original image.
+4. Select Show note names and inspect every measure.
+   The score adjusts its line breaks to the available width.
+5. Play a recording and turn the device.
+   The current exercise and playback position remain unchanged.
+6. Start spoken playback and turn the device.
+   Speech continues and the score retains the current note.
+7. Check password fields and native controls in Safari on an iPhone.
+
 ## Material Design visual checklist
 
 1. Open the student area and Settings in Chrome and Safari.

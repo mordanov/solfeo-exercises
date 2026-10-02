@@ -41,7 +41,7 @@ The migration service completes before the backend starts.
 TanStack Query owns server state.
 
 Material UI `9.4.0` supplies visual components through Emotion.
-Community DataGrid `9.14.0` shows users and the journal.
+Community DataGrid `9.14.0` shows users and the journal on larger screens.
 Fontsource supplies local Roboto assets without external font requests.
 React and React DOM remain at `19.3.0`.
 
@@ -65,7 +65,23 @@ The obsolete shared CSS file no longer exists; component styling uses the theme 
 It disables sorting, filtering, selection, column menus, resizing, and dynamic evaluation.
 All page rows remain available without virtualization.
 Built-in grid text follows the selected interface language.
+
+Below the theme's 600 px breakpoint, the component shows a semantic list of labeled cards.
+Both presentations use the same typed column renderers, including permitted actions and localized values.
+Changing the presentation does not change the server query, page size, filters, or inline editor.
 Inline editors, confirmations, and OMR review remain inline.
+
+Mobile theme overrides reduce heading sizes and repeated card padding.
+Navigation uses 2 columns; links, buttons, and checkboxes provide targets of at least 44 px.
+Forms use a shrinkable grid track; native selects retain their options and event handlers.
+The layout does not hide horizontal overflow to conceal oversized content.
+
+The score observes its host with `ResizeObserver`.
+Width changes of at least 1 px trigger reflow; zero-width containers do not trigger rendering.
+OSMD uses 75 % zoom below 600 px and the original scale on larger screens.
+The renderer recalculates line breaks instead of scaling a fixed, wide SVG.
+Rerendering restores the current cursor without fetching MusicXML again or replacing spoken controls.
+Cleanup disconnects the observer; rendering errors retain the translated error and original image fallback.
 
 Native audio, score refs, rendering effects, and speech scheduling remain unchanged.
 The score surface remains white in dark mode.

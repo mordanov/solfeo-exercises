@@ -7,6 +7,12 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-10-02: The owner requests focused mobile responsiveness without an architectural rewrite.
+  Labeled cards below 600 px reuse all user and journal fields, actions, and pagination; larger screens retain Community DataGrid.
+  Theme overrides reduce repeated mobile padding and improve navigation and touch targets.
+  Score width changes trigger rendering and cursor restoration without restarting audio or speech.
+  OSMD uses 75 % zoom on phones so notes remain distinct rather than squeezing a desktop score.
+  Browser fixtures do not replace Safari, real-device, or real-media acceptance.
 - 2026-10-01: The owner reduces the default password minimum to 8 characters.
   Creation, reset, change, and emergency credentials use the same configured minimum.
   The maximum password length remains 256 characters; hashing, rate limits, and session protections remain unchanged.

@@ -5,7 +5,7 @@ This document records progress and remaining checks for the current phase.
 Prerequisites:
 - Read `docs/PHASES.md` and `docs/DECISIONS.md`.
 
-Last updated: 2026-10-01 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a0523`.
+Last updated: 2026-10-02 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a0523`.
 
 ## Current phase
 Material Design: separate visual migration after accepted PHASE 7.
@@ -16,6 +16,34 @@ The owner authorizes all remaining steps without intermediate confirmations.
 Implementation keeps separate screen commits and validates each screen before continuing.
 Safari automation remains unavailable because its remote automation setting is disabled.
 Final owner visual acceptance and production publication remain separate.
+
+### Responsive layout follow-up
+The owner requests mobile responsiveness on 2026-10-02 without replacing the existing architecture.
+Measured problems include wide table content, retained desktop score dimensions, repeated nested padding, and undersized navigation targets.
+Below 600 px, user and journal cards retain every field, permitted action, filter, and pagination handler.
+Mobile navigation uses 2 columns; buttons, links, and checkboxes provide targets of at least 44 px.
+Forms shrink correctly and selected values stay within their controls.
+
+Nested panels preserve more width for images, audio, scores, and spoken controls.
+Score width changes recalculate line breaks and restore the current cursor without reloading MusicXML or restarting playback.
+Desktop presentation remains unchanged in all 9 baseline screenshots at 1280 px.
+
+The complete frontend suite passes 155 tests.
+Chrome passes 72 initial viewport checks, including 320, 360, 375, 390, 414, 430, 768, and 1280 px.
+
+Another 378 Chrome cases cover all languages, both themes, long unbroken text, selected options, and inline editing.
+These cases include 50-row pages, large original images, 24-measure scores, note labels, OMR review, and long filenames.
+These checks find no mobile page, table, or score horizontal scrolling.
+The Safari driver responds, but refuses sessions because Allow remote automation remains disabled.
+The task does not change browser preferences, private configuration, APIs, dependencies, or deployed services.
+
+Remaining manual checks:
+1. Check Chrome and Safari on real phones at 320-430 px.
+2. Check all languages and both themes with long real exercise content.
+3. Select files and dates on an iPhone.
+4. Check every measure and note label in a real approved score.
+5. Turn the device during recorded audio and spoken playback.
+6. Confirm stable playback position, tempo, note cursor, and account form values.
 
 ### Password policy follow-up
 The owner reduces the default password minimum to 8 characters on 2026-10-01.

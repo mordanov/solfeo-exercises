@@ -59,7 +59,18 @@ export const theme = createTheme({
           outline: `3px solid ${theme.vars.palette.primary.main}`,
           outlineOffset: 3,
         },
+        [theme.breakpoints.down("sm")]: {
+          h1: { fontSize: "1.75rem" },
+          h2: { fontSize: "1.5rem" },
+        },
       }),
+    },
+    MuiTypography: {
+      styleOverrides: {
+        h1: ({ theme }) => ({
+          [theme.breakpoints.down("sm")]: { fontSize: "1.75rem" },
+        }),
+      },
     },
     MuiButton: {
       defaultProps: { variant: "contained", disableElevation: true },
@@ -69,6 +80,10 @@ export const theme = createTheme({
           paddingInline: 18,
           marginBlock: 4,
           marginInlineEnd: 8,
+          [theme.breakpoints.down("sm")]: {
+            maxWidth: "100%",
+            marginInlineEnd: 0,
+          },
           "&:focus-visible": {
             outline: `3px solid ${theme.vars.palette.primary.main}`,
             outlineOffset: 3,
@@ -79,6 +94,10 @@ export const theme = createTheme({
     MuiCheckbox: {
       styleOverrides: {
         root: ({ theme }) => ({
+          [theme.breakpoints.down("sm")]: {
+            minWidth: 44,
+            minHeight: 44,
+          },
           "&.Mui-focusVisible": {
             outline: `3px solid ${theme.vars.palette.primary.main}`,
             outlineOffset: 2,
@@ -89,13 +108,21 @@ export const theme = createTheme({
     MuiCard: {
       defaultProps: { elevation: 1 },
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
           minWidth: 0,
           backgroundImage: "none",
           padding: "clamp(16px, 3vw, 28px)",
           marginBlock: 20,
           overflow: "visible",
-        },
+          [theme.breakpoints.down("sm")]: {
+            padding: 12,
+            marginBlock: 16,
+            "& .MuiCard-root": {
+              paddingInline: 0,
+              boxShadow: "none",
+            },
+          },
+        }),
       },
     },
     MuiTextField: {
@@ -105,6 +132,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: ({ theme }) => ({
           minHeight: 44,
+          minWidth: 0,
           "& .MuiOutlinedInput-notchedOutline": {
             borderColor: fieldOutline.light,
           },
@@ -124,6 +152,16 @@ export const theme = createTheme({
     },
     MuiLink: {
       defaultProps: { underline: "hover" },
+      styleOverrides: {
+        root: ({ theme }) => ({
+          [theme.breakpoints.down("sm")]: {
+            display: "inline-flex",
+            alignItems: "center",
+            minWidth: 44,
+            minHeight: 44,
+          },
+        }),
+      },
     },
   },
 });

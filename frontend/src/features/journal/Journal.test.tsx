@@ -58,48 +58,71 @@ function mount() {
     </I18nextProvider>,
   );
 }
-it("shows incomplete closed-tab rows and deleted exercise snapshots", async () => {
-  mount();
-  expect(await screen.findByText("Deleted scale")).toBeInTheDocument();
-  expect(screen.getByText("No end event received")).toBeInTheDocument();
-  expect(
-    within(screen.getByRole("grid", { name: "Listening journal" })).getByText(
-      "No",
-    ),
-  ).toBeInTheDocument();
-});
-it("preserves native date bounds, explicit filter application and all 50 server rows", async () => {
-  vi.mocked(api.listJournal).mockResolvedValue({
-    sessions: Array.from({ length: 50 }, (_, index) => ({
-      ...row,
-      id: index + 1,
-      exercise_title: `Scale ${index + 1}`,
-    })),
-    total: 51,
-  });
-  mount();
-  const grid = await screen.findByRole("grid", { name: "Listening journal" });
-  expect(within(grid).getByText("Scale 50")).toBeInTheDocument();
-  const from = screen.getByLabelText("From date");
-  const to = screen.getByLabelText("To date");
-  expect(from).toHaveAttribute("type", "date");
-  fireEvent.change(from, { target: { value: "2026-10-01" } });
-  fireEvent.change(to, { target: { value: "2026-10-02" } });
-  expect(from).toHaveAttribute("max", "2026-10-02");
-  expect(to).toHaveAttribute("min", "2026-10-01");
-  expect(api.listJournal).toHaveBeenCalledTimes(1);
-  await userEvent.click(screen.getByRole("button", { name: "Apply filters" }));
-  await waitFor(() =>
-    expect(api.listJournal).toHaveBeenCalledWith(
-      expect.objectContaining({
-        started_from: new Date(2026, 9, 1).toISOString(),
-        started_to: new Date(2026, 9, 3).toISOString(),
-      }),
-      0,
-      expect.any(AbortSignal),
-    ),
-  );
-});
+function viewport(mobile: boolean) {
+  vi.stubGlobal("matchMedia", (query: string) => ({
+    matches: mobile && query.includes("max-width"),
+    media: query,
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+  }));
+}
+
+it.each([false, true])(
+  "shows closed-tab rows and deleted snapshots (mobile=%s)",
+  async (mobile) => {
+    viewport(mobile);
+    mount();
+    expect(await screen.findByText("Deleted scale")).toBeInTheDocument();
+    expect(screen.getByText("No end event received")).toBeInTheDocument();
+    expect(
+      within(
+        screen.getByRole(mobile ? "list" : "grid", {
+          name: "Listening journal",
+        }),
+      ).getByText("No"),
+    ).toBeInTheDocument();
+  },
+);
+it.each([false, true])(
+  "preserves date bounds, explicit filters and all 50 rows (mobile=%s)",
+  async (mobile) => {
+    viewport(mobile);
+    vi.mocked(api.listJournal).mockResolvedValue({
+      sessions: Array.from({ length: 50 }, (_, index) => ({
+        ...row,
+        id: index + 1,
+        exercise_title: `Scale ${index + 1}`,
+      })),
+      total: 51,
+    });
+    mount();
+    const grid = await screen.findByRole(mobile ? "list" : "grid", {
+      name: "Listening journal",
+    });
+    expect(within(grid).getByText("Scale 50")).toBeInTheDocument();
+    const from = screen.getByLabelText("From date");
+    const to = screen.getByLabelText("To date");
+    expect(from).toHaveAttribute("type", "date");
+    fireEvent.change(from, { target: { value: "2026-10-01" } });
+    fireEvent.change(to, { target: { value: "2026-10-02" } });
+    expect(from).toHaveAttribute("max", "2026-10-02");
+    expect(to).toHaveAttribute("min", "2026-10-01");
+    expect(api.listJournal).toHaveBeenCalledTimes(1);
+    await userEvent.click(
+      screen.getByRole("button", { name: "Apply filters" }),
+    );
+    await waitFor(() =>
+      expect(api.listJournal).toHaveBeenCalledWith(
+        expect.objectContaining({
+          started_from: new Date(2026, 9, 1).toISOString(),
+          started_to: new Date(2026, 9, 3).toISOString(),
+        }),
+        0,
+        expect.any(AbortSignal),
+      ),
+    );
+  },
+);
 it("filters on student and exercise and paginates", async () => {
   mount();
   await screen.findByText("Deleted scale");

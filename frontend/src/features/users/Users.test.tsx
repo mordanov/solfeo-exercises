@@ -56,42 +56,66 @@ function mount() {
   );
 }
 
-it("keeps every server-page row, existing pagination and inline editing", async () => {
-  mount();
-  const grid = await screen.findByRole("grid", { name: "Users" });
-  expect(within(grid).getByText("student50")).toBeInTheDocument();
-  expect(within(grid).queryByRole("checkbox")).not.toBeInTheDocument();
-  await userEvent.click(screen.getByRole("button", { name: "Next" }));
-  await waitFor(() =>
-    expect(api.listUsers).toHaveBeenCalledWith(50, expect.any(AbortSignal)),
-  );
-  await userEvent.click(
-    await screen.findByRole("button", { name: "Edit student50" }),
-  );
-  const editor = screen.getByRole("region", { name: "Edit student50" });
-  await userEvent.clear(within(editor).getByLabelText("First name"));
-  await userEvent.type(within(editor).getByLabelText("First name"), "Changed");
-  await userEvent.click(
-    within(editor).getByRole("button", { name: "Save user" }),
-  );
-  await waitFor(() =>
-    expect(api.updateUser).toHaveBeenCalledWith("csrf", 51, {
-      first_name: "Changed",
-      last_name: "Last",
-      role: "student",
-    }),
-  );
-});
+function viewport(mobile: boolean) {
+  vi.stubGlobal("matchMedia", (query: string) => ({
+    matches: mobile && query.includes("max-width"),
+    media: query,
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+  }));
+}
 
-it("preserves emergency and current-account action restrictions", async () => {
-  vi.mocked(api.listUsers).mockResolvedValue({
-    users: [
-      manager,
-      { ...manager, id: 3, username: "emergency", is_emergency: true },
-    ],
-    total: 2,
-  });
-  mount();
-  const grid = await screen.findByRole("grid", { name: "Users" });
-  expect(within(grid).queryByRole("button")).not.toBeInTheDocument();
-});
+it.each([false, true])(
+  "keeps every server-page row, pagination and inline editing (mobile=%s)",
+  async (mobile) => {
+    viewport(mobile);
+    mount();
+    const grid = await screen.findByRole(mobile ? "list" : "grid", {
+      name: "Users",
+    });
+    expect(within(grid).getByText("student50")).toBeInTheDocument();
+    expect(within(grid).queryByRole("checkbox")).not.toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: "Next" }));
+    await waitFor(() =>
+      expect(api.listUsers).toHaveBeenCalledWith(50, expect.any(AbortSignal)),
+    );
+    await userEvent.click(
+      await screen.findByRole("button", { name: "Edit student50" }),
+    );
+    const editor = screen.getByRole("region", { name: "Edit student50" });
+    await userEvent.clear(within(editor).getByLabelText("First name"));
+    await userEvent.type(
+      within(editor).getByLabelText("First name"),
+      "Changed",
+    );
+    await userEvent.click(
+      within(editor).getByRole("button", { name: "Save user" }),
+    );
+    await waitFor(() =>
+      expect(api.updateUser).toHaveBeenCalledWith("csrf", 51, {
+        first_name: "Changed",
+        last_name: "Last",
+        role: "student",
+      }),
+    );
+  },
+);
+
+it.each([false, true])(
+  "preserves emergency and current-account restrictions (mobile=%s)",
+  async (mobile) => {
+    viewport(mobile);
+    vi.mocked(api.listUsers).mockResolvedValue({
+      users: [
+        manager,
+        { ...manager, id: 3, username: "emergency", is_emergency: true },
+      ],
+      total: 2,
+    });
+    mount();
+    const grid = await screen.findByRole(mobile ? "list" : "grid", {
+      name: "Users",
+    });
+    expect(within(grid).queryByRole("button")).not.toBeInTheDocument();
+  },
+);

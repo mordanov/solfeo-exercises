@@ -40,7 +40,14 @@ export function Form(props: FormHTMLAttributes<HTMLFormElement>) {
     <Box
       component="form"
       {...props}
-      sx={{ display: "grid", gap: 2, maxWidth: 560, my: 2 }}
+      sx={{
+        display: "grid",
+        gridTemplateColumns: "minmax(0, 1fr)",
+        gap: 2,
+        maxWidth: 560,
+        minWidth: 0,
+        my: 2,
+      }}
     />
   );
 }
@@ -125,7 +132,11 @@ export function Select({
       required={required}
       input={<OutlinedInput />}
       inputProps={native}
-      sx={{ width: "100%" }}
+      sx={{
+        width: "100%",
+        minWidth: 0,
+        "& select": { textOverflow: "ellipsis" },
+      }}
     >
       {children}
     </NativeSelect>

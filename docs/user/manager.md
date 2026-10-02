@@ -17,8 +17,25 @@ Prerequisites:
 The theme choice stays in this browser, not in your account settings.
 The score surface stays white in both themes.
 User and journal tables retain the existing Previous and Next controls.
-Scroll within a wide table on a small screen to reach its other columns.
+
+Screens below 600 px show labeled cards instead of wide tables.
+Each card retains every field and permitted action.
+Larger screens retain the existing tables.
 Date filters continue to use your browser's native date controls.
+
+## Mobile layout checklist
+
+1. Open all manager pages at 320, 360, 390, and 430 px.
+2. Check both themes and all 3 interface languages.
+3. Inspect long names, exercise titles, descriptions, and selected values.
+4. Edit a user and use Previous and Next.
+   Cards retain the same actions and pagination as tables.
+5. Select dates and files in Safari on an iPhone.
+6. Open recognition review and inspect every measure and note label.
+   The original image and score remain in separate vertical sections on a phone.
+7. Turn the device during audio preview or spoken playback.
+   The score adjusts to the available width without resetting playback.
+8. Confirm a Telegram replacement and inspect its selected exercise and confirmation control.
 
 ## Material Design visual checklist
 

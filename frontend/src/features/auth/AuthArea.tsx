@@ -272,16 +272,26 @@ export function AuthArea() {
         component="nav"
         aria-label={t("nav.label")}
         sx={{
-          display: "flex",
+          display: { xs: "grid", sm: "flex" },
+          gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
           flexWrap: "wrap",
           alignItems: "center",
-          gap: 2,
+          gap: { xs: 1, sm: 2 },
           my: 2,
-          p: 2,
+          p: { xs: 1.5, sm: 2 },
           bgcolor: "background.paper",
           borderRadius: 1,
           boxShadow: 1,
-          "& a": { py: 1, fontWeight: 500 },
+          "& a": {
+            py: 1,
+            fontWeight: 500,
+            minWidth: 0,
+            display: { xs: "flex", sm: "inline" },
+            alignItems: "center",
+            minHeight: { xs: 44, sm: "auto" },
+            px: { xs: 1, sm: 0 },
+          },
+          "& > button": { gridColumn: "1 / -1" },
         }}
       >
         {!auth.user.must_change_password && (
