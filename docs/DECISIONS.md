@@ -7,6 +7,22 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-10-02: The owner requires the student area to retain the original image alongside an available approved score.
+  These are independent media blocks, not alternatives.
+  Keep the original image visible during score loading and failures without adding a second fallback copy.
+  Preserve the approval gate, protected-file authorization, and recorded/spoken playback behavior.
+  This instruction supersedes the previous student display rule that replaces the image after approval.
+- 2026-10-02: The owner accepts paired appearance schemes, font settings, and a live example panel on a separate branch.
+  `feat/appearance-settings` starts from Material Design follow-up source `c4ee4f1`.
+  Each account stores independent light and dark choices from classic, forest, warm, and plum.
+  Roboto, system, and serif fonts require no new dependencies or external font requests.
+  Base sizes 16, 18, and 20 px scale interface typography without changing score engraving.
+
+  The light/dark mode remains browser-local; scheme and typography choices follow the account across devices.
+  Unsaved choices affect only the example panel; saving updates the existing theme provider without replacing application content.
+  Restore selects classic, Roboto, and 16 px; saving commits that choice without resetting language or note naming.
+  Migration `0007_appearance` preserves existing accounts with the original classic appearance.
+  Environment defaults apply only when creating accounts, including a new emergency manager.
 - 2026-10-02: The owner requests mobile installation, browser language defaults, focused management changes, and automatic speech tempo.
   Original icons and localized manifests support online installation without a service worker or protected-file caching.
   Safari installation uses manual Share guidance; Chrome uses its native prompt when available.

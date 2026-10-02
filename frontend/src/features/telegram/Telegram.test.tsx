@@ -1,5 +1,6 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { defaultAppearance } from "../../appearance";
 import { describe, expect, it, vi } from "vitest";
 import { Telegram } from "./Telegram";
 import * as api from "../../api/telegram";
@@ -22,6 +23,7 @@ const auth: Auth = {
     must_change_password: false,
     ui_language: "en",
     note_naming: "letters",
+    ...defaultAppearance,
   },
 };
 

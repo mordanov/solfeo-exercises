@@ -6,8 +6,9 @@ import type { User } from "../../api/auth";
 import * as api from "../../api/omr";
 import { Spoken } from "./Spoken";
 import { SpeechPlayer } from "./player";
-import { AppTheme } from "../../theme";
+import { AppTheme, useAppearance } from "../../theme";
 import { ThemeToggle } from "../../components/ThemeToggle";
+import { defaultAppearance } from "../../appearance";
 
 vi.mock("../../api/omr");
 const speech = vi.hoisted(() => ({
@@ -35,6 +36,7 @@ const user: User = {
   must_change_password: false,
   ui_language: "en",
   note_naming: "letters",
+  ...defaultAppearance,
 };
 beforeEach(async () => {
   vi.resetAllMocks();
@@ -42,11 +44,30 @@ beforeEach(async () => {
   await i18n.changeLanguage("en");
 });
 afterEach(() => vi.restoreAllMocks());
+function AppearanceChange() {
+  const { setAppearance } = useAppearance();
+  return (
+    <button
+      onClick={() =>
+        setAppearance({
+          ...defaultAppearance,
+          light_scheme: "forest",
+          dark_scheme: "plum",
+          ui_font: "serif",
+          ui_font_size: 20,
+        })
+      }
+    >
+      Change appearance
+    </button>
+  );
+}
 function mount(score = xml, id = 1, version = "version") {
   return render(
     <I18nextProvider i18n={i18n}>
       <AppTheme>
         <ThemeToggle />
+        <AppearanceChange />
         <Spoken
           id={id}
           version={version}
@@ -65,6 +86,10 @@ it("keeps the speech player and tempo unchanged across theme switches", () => {
   const stops = speech.stop.mock.calls.length;
   const players = vi.mocked(SpeechPlayer).mock.calls.length;
   fireEvent.click(screen.getByRole("button", { name: "Use dark theme" }));
+  expect(screen.getByRole("slider")).toHaveValue("90");
+  expect(speech.stop).toHaveBeenCalledTimes(stops);
+  expect(SpeechPlayer).toHaveBeenCalledTimes(players);
+  fireEvent.click(screen.getByRole("button", { name: "Change appearance" }));
   expect(screen.getByRole("slider")).toHaveValue("90");
   expect(speech.stop).toHaveBeenCalledTimes(stops);
   expect(SpeechPlayer).toHaveBeenCalledTimes(players);

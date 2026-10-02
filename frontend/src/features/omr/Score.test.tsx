@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { defaultAppearance } from "../../appearance";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { I18nextProvider } from "react-i18next";
@@ -78,6 +79,7 @@ const user: User = {
   must_change_password: false,
   ui_language: "ru",
   note_naming: "solfege",
+  ...defaultAppearance,
 };
 const xml = `<score-partwise><part><measure><note><pitch><step>D</step><octave>4</octave></pitch></note></measure></part></score-partwise>`;
 beforeEach(async () => {

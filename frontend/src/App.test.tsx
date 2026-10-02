@@ -5,6 +5,7 @@ import userEvent from "@testing-library/user-event";
 import { beforeEach, expect, it, vi } from "vitest";
 import { App } from "./App";
 import { i18n } from "./i18n";
+import { AppTheme } from "./theme";
 
 beforeEach(async () => {
   window.history.replaceState({}, "", "/settings");
@@ -28,7 +29,9 @@ function renderApp() {
   return render(
     <I18nextProvider i18n={i18n}>
       <QueryClientProvider client={client}>
-        <App />
+        <AppTheme>
+          <App />
+        </AppTheme>
       </QueryClientProvider>
     </I18nextProvider>,
   );

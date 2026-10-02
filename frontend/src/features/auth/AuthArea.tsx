@@ -22,6 +22,8 @@ import { Button, Field, Form, Input, Panel, Select } from "../../components/Ui";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Alert from "@mui/material/Alert";
+import { useAppearance } from "../../theme";
+import { defaultAppearance } from "../../appearance";
 
 function LoginForm({ onLogin }: { onLogin: (value: Auth) => void }) {
   const { t, i18n } = useTranslation();
@@ -177,6 +179,19 @@ export function AuthArea() {
     retry: false,
   });
   const auth = query.data;
+  const { setAppearance } = useAppearance();
+  const lightScheme = auth?.user.light_scheme ?? defaultAppearance.light_scheme;
+  const darkScheme = auth?.user.dark_scheme ?? defaultAppearance.dark_scheme;
+  const font = auth?.user.ui_font ?? defaultAppearance.ui_font;
+  const fontSize = auth?.user.ui_font_size ?? defaultAppearance.ui_font_size;
+  useEffect(() => {
+    setAppearance({
+      light_scheme: lightScheme,
+      dark_scheme: darkScheme,
+      ui_font: font,
+      ui_font_size: fontSize,
+    });
+  }, [setAppearance, lightScheme, darkScheme, font, fontSize]);
   const language = auth?.user.ui_language;
   useEffect(() => {
     if (language) void i18n.changeLanguage(language);

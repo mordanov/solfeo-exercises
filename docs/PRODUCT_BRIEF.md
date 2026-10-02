@@ -35,6 +35,12 @@ A child looks at the notes and listens to the audio.
 - Login rate limit (per username+IP) in backend, plus nginx limit_req on /api/auth/login.
 - Manager can create users and reset passwords. Optional flag "must change password on next login".
 - Per-user settings (available to every role, stored on server): ui_language (ru|en|es), note_naming (letters|solfege). Defaults: env DEFAULT_LANGUAGE, note_naming=letters (C-D-E).
+- Appearance settings also persist per account: independent light and dark color schemes, interface font, and base font size.
+- Schemes: classic, forest, warm, plum. Fonts: Roboto, system, serif. Sizes: 16, 18, 20 px.
+- Each scheme controls button backgrounds and text, page and panel backgrounds, text, links, borders, and interactive states.
+- Preserve semantic error and success colors; maintain readable contrast in every scheme.
+- Show a live example panel before saving; restore the standard appearance without changing language or note naming.
+- Keep light/dark mode local to each browser. Appearance changes do not reset forms, restart playback, or change score engraving.
 
 ## i18n
 - Every UI string goes through react-i18next. Ship ru, en, es from day one. A test must fail if any key is missing in any language.
@@ -72,7 +78,8 @@ A child looks at the notes and listens to the audio.
 - Score status: none | pending | processing | needs_review | approved | rejected | failed.
 - Manager review shows the rendered score without a duplicate original image; actions Approve / Reject / Re-run remain.
 - The exercise preview retains the original image for comparison.
-- Students see the rendered score ONLY if status = approved. Otherwise they see the original image.
+- Students always see the original image when available, including after recognition approval.
+- Students also see the rendered score when available and approved; unapproved results remain hidden.
 - Rendering: OpenSheetMusicDisplay in the browser.
 - Toggle "show note names" on the staff: client-side, inject <lyric> elements into the MusicXML before rendering. Naming from user setting (letters: C D E F G A B; solfege: do re mi fa sol la si; localized).
 - Assumptions: printed, monophonic, single-staff exercises. Complex scores may fail; the fallback (image) covers this.

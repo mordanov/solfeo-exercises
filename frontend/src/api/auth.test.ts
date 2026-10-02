@@ -1,5 +1,56 @@
 import { expect, it, vi } from "vitest";
-import { ApiError, fetchMe, login, parseUser, saveSettings } from "./auth";
+import {
+  ApiError,
+  fetchMe,
+  login,
+  parseUser,
+  saveSettings,
+  saveAppearance,
+} from "./auth";
+import { defaultAppearance } from "../appearance";
+
+const validUser = {
+  id: 1,
+  username: "student",
+  first_name: "First",
+  last_name: "Last",
+  role: "student",
+  is_active: true,
+  is_emergency: false,
+  must_change_password: false,
+  ui_language: "en",
+  note_naming: "letters",
+  ...defaultAppearance,
+};
+it("parses only complete supported appearance preferences", () => {
+  expect(parseUser(validUser)).toMatchObject(defaultAppearance);
+  for (const changes of [
+    { light_scheme: "#fff" },
+    { dark_scheme: "unknown" },
+    { ui_font: "external" },
+    { ui_font_size: 17 },
+    { ui_font_size: "20" },
+    { ui_font: undefined },
+  ])
+    expect(() => parseUser({ ...validUser, ...changes })).toThrow(
+      "INVALID_RESPONSE",
+    );
+});
+it("saves appearance alone without overwriting language or naming", async () => {
+  const fetch = vi
+    .fn()
+    .mockResolvedValue(new Response(JSON.stringify(validUser)));
+  vi.stubGlobal("fetch", fetch);
+  await saveAppearance("csrf", defaultAppearance);
+  expect(fetch).toHaveBeenCalledWith(
+    "/api/settings",
+    expect.objectContaining({
+      method: "PATCH",
+      body: JSON.stringify(defaultAppearance),
+      headers: expect.objectContaining({ "X-CSRF-Token": "csrf" }),
+    }),
+  );
+});
 
 it("distinguishes expired sessions from unavailable servers", async () => {
   vi.stubGlobal(

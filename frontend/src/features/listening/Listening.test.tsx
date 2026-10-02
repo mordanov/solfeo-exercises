@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { defaultAppearance } from "../../appearance";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { I18nextProvider } from "react-i18next";
@@ -9,10 +10,11 @@ import { i18n } from "../../i18n";
 import { Listening } from "./Listening";
 import { AppTheme } from "../../theme";
 import { ThemeToggle } from "../../components/ThemeToggle";
+import { Score } from "../omr/Score";
 
 vi.mock("../../api/listening");
 vi.mock("../omr/Score", () => ({
-  Score: () => <section data-testid="approved-score" />,
+  Score: vi.fn(() => <section data-testid="approved-score" />),
 }));
 const auth: Auth = {
   csrf_token: "csrf",
@@ -27,6 +29,7 @@ const auth: Auth = {
     must_change_password: false,
     ui_language: "en",
     note_naming: "letters",
+    ...defaultAppearance,
   },
 };
 const exercise = {
@@ -51,32 +54,14 @@ const exercise = {
   },
 };
 
-it.each(["pending", "needs_review", "rejected", "failed"] as const)(
-  "keeps the original image for a %s score",
-  async (status) => {
-    vi.mocked(api.currentExercise).mockResolvedValue({
-      ...exercise,
-      image: {
-        id: "image",
-        mime_type: "image/png",
-        size_bytes: 100,
-        duration_seconds: null,
-      },
-      omr: {
-        status,
-        job_id: "job",
-        image_id: "image",
-        attempts: 1,
-        last_error: null,
-      },
-    });
-    mount();
-    expect(await screen.findByRole("img")).toBeInTheDocument();
-    expect(screen.queryByTestId("approved-score")).not.toBeInTheDocument();
-  },
-);
-
-it("renders only an approved score instead of the original", async () => {
+it.each([
+  "none",
+  "pending",
+  "processing",
+  "needs_review",
+  "rejected",
+  "failed",
+] as const)("keeps the original image for a %s score", async (status) => {
   vi.mocked(api.currentExercise).mockResolvedValue({
     ...exercise,
     image: {
@@ -86,7 +71,7 @@ it("renders only an approved score instead of the original", async () => {
       duration_seconds: null,
     },
     omr: {
-      status: "approved",
+      status,
       job_id: "job",
       image_id: "image",
       attempts: 1,
@@ -94,11 +79,79 @@ it("renders only an approved score instead of the original", async () => {
     },
   });
   mount();
+  expect(await screen.findByRole("img")).toBeInTheDocument();
+  expect(screen.queryByTestId("approved-score")).not.toBeInTheDocument();
+});
+
+const approvedExercise = {
+  ...exercise,
+  image: {
+    id: "image",
+    mime_type: "image/png",
+    size_bytes: 100,
+    duration_seconds: null,
+  },
+  omr: {
+    status: "approved" as const,
+    job_id: "job",
+    image_id: "image",
+    attempts: 1,
+    last_error: null,
+  },
+};
+
+it("shows both the original image and approved score", async () => {
+  vi.mocked(api.currentExercise).mockResolvedValue(approvedExercise);
+  mount();
+  expect(await screen.findByTestId("approved-score")).toBeInTheDocument();
+  expect(
+    screen.getByRole("img", { name: "Score image: First exercise" }),
+  ).toHaveAttribute("src", "/api/exercises/1/files/image");
+  expect(screen.getAllByRole("img")).toHaveLength(1);
+});
+it("shows an available approved score independently of the original image", async () => {
+  vi.mocked(api.currentExercise).mockResolvedValue({
+    ...approvedExercise,
+    image: null,
+    audio: null,
+  });
+  mount();
   expect(await screen.findByTestId("approved-score")).toBeInTheDocument();
   expect(screen.queryByRole("img")).not.toBeInTheDocument();
+  expect(screen.getByText(/spoken notes above/)).toBeInTheDocument();
+});
+it("retains one original image and reports score rendering failures", async () => {
+  vi.mocked(api.currentExercise).mockResolvedValue(approvedExercise);
+  vi.mocked(Score).mockImplementation(({ fallback }) => (
+    <section role="alert">Recognition unavailable{fallback}</section>
+  ));
+  mount();
+  expect(await screen.findByRole("alert")).toHaveTextContent(
+    "Recognition unavailable",
+  );
+  expect(screen.getAllByRole("img")).toHaveLength(1);
+});
+it("reports an original-image load failure beside an approved score", async () => {
+  vi.mocked(api.currentExercise).mockResolvedValue(approvedExercise);
+  mount();
+  fireEvent.error(await screen.findByRole("img"));
+  expect(screen.getByRole("alert")).toBeInTheDocument();
+  expect(screen.getByTestId("approved-score")).toBeInTheDocument();
+});
+it("does not render a score without an approved version", async () => {
+  vi.mocked(api.currentExercise).mockResolvedValue({
+    ...approvedExercise,
+    omr: { ...approvedExercise.omr, job_id: null },
+  });
+  mount();
+  expect(await screen.findByRole("img")).toBeInTheDocument();
+  expect(screen.queryByTestId("approved-score")).not.toBeInTheDocument();
 });
 beforeEach(async () => {
   vi.resetAllMocks();
+  vi.mocked(Score).mockImplementation(() => (
+    <section data-testid="approved-score" />
+  ));
   localStorage.clear();
   vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {});
   await i18n.changeLanguage("en");

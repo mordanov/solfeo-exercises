@@ -19,10 +19,11 @@ Revision `0003_exercises` adds exercises and media.
 Revision `0004_listening` adds student progress and the listening journal.
 Revision `0005_telegram` adds account associations, hashed linking codes, durable imports, and bot state.
 Revision `0006_omr` adds versioned OMR jobs and manager review.
+Revision `0007_appearance` adds account appearance preferences with predefined choices and database checks.
 
 | Table | Contents and constraints |
 |---|---|
-| `users` | Unique lowercase username, names, role, password hash, active/emergency flags, obligatory password change, language, note naming |
+| `users` | Unique lowercase username, names, role, password hash, active/emergency flags, obligatory password change, language, note naming, appearance |
 | `login_sessions` | Hashed token primary key, user foreign key, CSRF token, creation time, expiry |
 | `login_limits` | Hashed username/IP budget key, attempt count, expiry |
 | `media_files` | UUID, generated filename, MIME type, positive byte count, optional positive duration, creation time |
@@ -53,6 +54,11 @@ Indexes cover student, exercise, and start-time filters.
 Advisory locks serialize session UUID updates and student pointer changes.
 
 Database checks constrain roles, languages, and note naming.
+The `light_scheme` and `dark_scheme` columns accept classic, forest, warm, or plum independently.
+The `ui_font` column accepts roboto, system, or serif; `ui_font_size` accepts 16, 18, or 20.
+Migration backfills preserve the classic schemes, Roboto font, and 16 px base size.
+New accounts use the configured environment defaults; emergency-manager updates preserve existing appearance preferences.
+Downgrade removes only the appearance columns and their checks.
 A partial unique index permits at most 1 emergency account.
 Sessions reference users without cascading deletion.
 Manager operations deactivate users instead of deleting them.

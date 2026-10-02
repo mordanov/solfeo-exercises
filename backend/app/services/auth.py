@@ -9,6 +9,7 @@ from datetime import UTC, datetime, timedelta
 from sqlalchemy import delete, func, select, text
 from sqlalchemy.orm import Session
 
+from app.appearance import ColorScheme, UiFont
 from app.database import Database
 from app.models import LoginLimit, LoginSession, TelegramLink, TelegramLinkCode, User
 from app.settings import Settings
@@ -90,6 +91,10 @@ def sync_emergency(database: Database, settings: Settings) -> None:
                 username=username,
                 ui_language=settings.default_language,
                 note_naming="letters",
+                light_scheme=settings.default_light_scheme,
+                dark_scheme=settings.default_dark_scheme,
+                ui_font=settings.default_ui_font,
+                ui_font_size=settings.default_ui_font_size,
             )
             session.add(user)
         else:
@@ -247,11 +252,29 @@ def change_password(
 
 
 def update_settings(
-    session: Session, identity: Identity, language: str, naming: str
+    session: Session,
+    identity: Identity,
+    language: str | None,
+    naming: str | None,
+    *,
+    light_scheme: ColorScheme | None = None,
+    dark_scheme: ColorScheme | None = None,
+    ui_font: UiFont | None = None,
+    ui_font_size: int | None = None,
 ) -> User:
     with session.begin():
-        identity.user.ui_language = language
-        identity.user.note_naming = naming
+        if language is not None:
+            identity.user.ui_language = language
+        if naming is not None:
+            identity.user.note_naming = naming
+        if light_scheme is not None:
+            identity.user.light_scheme = light_scheme
+        if dark_scheme is not None:
+            identity.user.dark_scheme = dark_scheme
+        if ui_font is not None:
+            identity.user.ui_font = ui_font
+        if ui_font_size is not None:
+            identity.user.ui_font_size = ui_font_size
     return identity.user
 
 
@@ -291,6 +314,10 @@ def create_user(
             role=role,
             password_hash=password_hash,
             ui_language=settings.default_language,
+            light_scheme=settings.default_light_scheme,
+            dark_scheme=settings.default_dark_scheme,
+            ui_font=settings.default_ui_font,
+            ui_font_size=settings.default_ui_font_size,
             note_naming="letters",
             must_change_password=must_change_password,
         )

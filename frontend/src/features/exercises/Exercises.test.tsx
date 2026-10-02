@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { defaultAppearance } from "../../appearance";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { I18nextProvider } from "react-i18next";
@@ -48,6 +49,7 @@ const auth: Auth = {
     must_change_password: false,
     ui_language: "en",
     note_naming: "letters",
+    ...defaultAppearance,
   },
 };
 beforeEach(async () => {

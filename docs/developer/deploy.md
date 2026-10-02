@@ -23,6 +23,16 @@ The separate publication workflow supplies verified product images and a version
 The shared nginx routes the existing TLS hostname to the product frontend.
 Do not invoke the shared infrastructure's general deployment.
 
+### Appearance feature compatibility
+
+**Caution:** Publish the appearance backend and frontend together through the normal verified release.
+The frontend requires the profile fields from schema revision `0007_appearance`.
+The migration preserves existing accounts with Classic, Roboto, and 16 px.
+The release applies migrations before starting the candidate application services.
+The older application ignores the added columns; compatible rollback does not require a schema downgrade.
+The 4 optional appearance defaults affect newly created accounts, not existing saved preferences.
+See `env-variables.md` for the accepted values.
+
 ## Latest verified deployment
 
 Pull request #2 merges as source `165a1397` on 2026-10-01.

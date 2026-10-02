@@ -1,11 +1,19 @@
 import hmac
-from typing import Annotated, Literal
+from typing import Annotated, Literal, Self
 
 from fastapi import APIRouter, Depends, Query, Request, Response
-from pydantic import BaseModel, ConfigDict, Field, SecretStr, field_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    SecretStr,
+    field_validator,
+    model_validator,
+)
 from sqlalchemy.orm import Session
 
 from app.api.dependencies import get_session
+from app.appearance import ColorScheme, UiFont, UiFontSize
 from app.models import User
 from app.services import auth
 from app.settings import Settings
@@ -35,6 +43,10 @@ class UserOutput(BaseModel):
     must_change_password: bool
     ui_language: Literal["ru", "en", "es"]
     note_naming: Literal["letters", "solfege"]
+    light_scheme: ColorScheme
+    dark_scheme: ColorScheme
+    ui_font: UiFont
+    ui_font_size: UiFontSize
 
 
 def user_output(user: User) -> UserOutput:
@@ -96,8 +108,32 @@ class ChangePasswordInput(Input):
 
 
 class SettingsInput(Input):
-    ui_language: Literal["ru", "en", "es"]
-    note_naming: Literal["letters", "solfege"]
+    ui_language: Literal["ru", "en", "es"] | None = None
+    note_naming: Literal["letters", "solfege"] | None = None
+    light_scheme: ColorScheme | None = None
+    dark_scheme: ColorScheme | None = None
+    ui_font: UiFont | None = None
+    ui_font_size: UiFontSize | None = None
+
+    @field_validator(
+        "ui_language",
+        "note_naming",
+        "light_scheme",
+        "dark_scheme",
+        "ui_font",
+        "ui_font_size",
+    )
+    @classmethod
+    def reject_null(cls, value: str | int | None) -> str | int:
+        if value is None:
+            raise ValueError("NULL_SETTING")
+        return value
+
+    @model_validator(mode="after")
+    def require_changes(self) -> Self:
+        if not self.model_fields_set:
+            raise ValueError("EMPTY_SETTINGS")
+        return self
 
 
 def get_settings(request: Request) -> Settings:
@@ -234,7 +270,16 @@ def change_password(
 @router.patch("/settings", dependencies=[Depends(require_csrf)])
 def settings_update(data: SettingsInput, identity: Member, session: Db) -> UserOutput:
     return user_output(
-        auth.update_settings(session, identity, data.ui_language, data.note_naming)
+        auth.update_settings(
+            session,
+            identity,
+            data.ui_language,
+            data.note_naming,
+            light_scheme=data.light_scheme,
+            dark_scheme=data.dark_scheme,
+            ui_font=data.ui_font,
+            ui_font_size=data.ui_font_size,
+        )
     )
 
 

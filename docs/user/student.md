@@ -77,15 +77,46 @@ Letters use C–D–E by default; solfège uses do–re–mi.
 You can also change your password in Settings.
 A successful password change ends your other sessions.
 
+## Customize appearance
+
+1. Open **Settings** and find **Appearance**.
+2. Select a scheme for the light theme.
+   Classic, Forest, Warm, and Plum coordinate buttons, text, backgrounds, and panels.
+3. Select a scheme for the dark theme independently.
+4. Select Roboto, System, or Serif in **Font**.
+5. Select a standard, larger, or large **Font size**.
+   These choices use base sizes of 16, 18, and 20 px.
+6. Select Light or Dark in **Preview theme**.
+   The example shows your draft without changing the page theme.
+7. Inspect the example text, field, buttons, and panel.
+   Example controls perform no account actions.
+8. Click **Save appearance**.
+   The page applies the saved appearance without reloading.
+9. Reload or sign in on another device.
+   Your account retains both schemes, font, and size.
+
+To restore the standard appearance:
+1. Click **Restore standard appearance**.
+   The example returns to Classic, Roboto, and 16 px.
+2. Click **Save appearance**.
+   Language and note naming remain unchanged.
+
+The header's light/dark switch remains local to this browser.
+Interface fonts do not change note engraving or enlarge the original image.
+If saving fails, your draft remains available and the page shows an error.
+
 ## Access and sign-out
 
 Students cannot list, create, edit, deactivate, or reset other users.
 Opening `/manager/users` does not grant manager access.
+
 Students can view original images and listen to exercise audio.
-An approved score replaces the original image in the listening area.
+The listening area always shows the available original image.
+An available approved score appears below it without replacing the image.
 Unapproved, rejected, or failed recognition keeps the original image visible.
 Rendering or access errors show an explicit message and the original image.
 Students cannot approve or change recognition results.
+
 Only managers can read the listening journal.
 Opening `/manager/journal` does not grant journal access.
 Opening `/manager/telegram` does not grant Telegram import access.
@@ -113,7 +144,8 @@ The service-status panel confirms backend liveness only.
 ## Listen to exercises
 
 1. Open **Student area**.
-   The saved sequential exercise appears with its description and approved score or original image.
+   The saved sequential exercise appears with its description and available original image.
+   The original image remains visible when an approved score also appears.
 2. Press the audio play control.
    Playback starts, and the application records a listening session.
 3. Pause and resume when necessary.

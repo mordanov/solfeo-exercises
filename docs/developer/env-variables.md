@@ -27,6 +27,10 @@ Frontend build values are public; never put a secret in `VITE_*`.
 | `LOGIN_NGINX_RATE_PER_SECOND` | `5` | Frontend login limit, from 1 to 1000 requests per second |
 | `LOGIN_NGINX_BURST` | `10` | Frontend login burst, from 1 to 1000 requests |
 | `DEFAULT_LANGUAGE` | `en` | Initial stored language for new accounts: ru, en, or es |
+| `DEFAULT_LIGHT_SCHEME` | `classic` | New account light scheme: classic, forest, warm, or plum |
+| `DEFAULT_DARK_SCHEME` | `classic` | New account dark scheme: classic, forest, warm, or plum |
+| `DEFAULT_UI_FONT` | `roboto` | New account interface font: roboto, system, or serif |
+| `DEFAULT_UI_FONT_SIZE` | `16` | New account base font size: 16, 18, or 20 px |
 | `EMERGENCY_MANAGER_USERNAME` | Empty | Configured recovery username; requires a password |
 | `EMERGENCY_MANAGER_PASSWORD` | Empty | Recovery password; requires a username and configured password length |
 | `EMERGENCY_MANAGER_FIRST_NAME` | `Emergency` | Recovery account first name |
@@ -97,6 +101,9 @@ Each clip request uses `VITE_HEALTH_TIMEOUT_MS`.
 
 Keep generation limits and frontend limits consistent.
 Saved account language retains priority after login; `DEFAULT_LANGUAGE` still initializes new account settings.
+Appearance defaults affect new accounts, not existing preferences or migration backfills.
+Both Compose configurations pass these defaults to the backend.
+Restoring the standard appearance selects classic schemes, Roboto, and 16 px independently of operator defaults.
 
 ## Telegram worker
 

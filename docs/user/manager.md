@@ -14,7 +14,7 @@ Prerequisites:
 2. Reload the page.
    The browser retains the visual choice.
 
-The theme choice stays in this browser, not in your account settings.
+The light/dark mode stays in this browser, not in your account settings.
 The score surface stays white in both themes.
 User and journal tables retain the existing Previous and Next controls.
 
@@ -22,6 +22,26 @@ Screens below 600 px show labeled cards instead of wide tables.
 Each card retains every field and permitted action.
 Larger screens retain the existing tables.
 Date filters continue to use your browser's native date controls.
+
+## Customize appearance
+
+1. Open **Settings** and find **Appearance**.
+2. Select light and dark schemes independently.
+   Classic, Forest, Warm, and Plum provide coordinated component colors.
+3. Select Roboto, System, or Serif and a base size of 16, 18, or 20 px.
+4. Select the example's Light or Dark mode.
+   The example shows backgrounds, panels, text, a field, and buttons without changing the active page.
+5. Click **Save appearance**.
+   Your account retains the appearance across devices.
+6. Click **Restore standard appearance** when necessary.
+   The example returns to Classic, Roboto, and 16 px.
+7. Click **Save appearance** to commit the restoration.
+   Language and note naming remain unchanged.
+
+Appearance changes preserve form values, recordings, speech tempo, and score engraving.
+The header's light/dark mode remains browser-local.
+An error retains the draft instead of claiming that saving succeeds.
+See the student guide for the complete appearance procedure.
 
 ## Mobile layout checklist
 

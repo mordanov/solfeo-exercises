@@ -16,6 +16,8 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
+from app.appearance import ColorScheme, UiFont
+
 
 class Base(DeclarativeBase):
     metadata = MetaData(
@@ -35,6 +37,14 @@ class User(Base):
         CheckConstraint("role IN ('manager', 'student')", name="role"),
         CheckConstraint("ui_language IN ('ru', 'en', 'es')", name="ui_language"),
         CheckConstraint("note_naming IN ('letters', 'solfege')", name="note_naming"),
+        CheckConstraint(
+            "light_scheme IN ('classic', 'forest', 'warm', 'plum')", name="light_scheme"
+        ),
+        CheckConstraint(
+            "dark_scheme IN ('classic', 'forest', 'warm', 'plum')", name="dark_scheme"
+        ),
+        CheckConstraint("ui_font IN ('roboto', 'system', 'serif')", name="ui_font"),
+        CheckConstraint("ui_font_size IN (16, 18, 20)", name="ui_font_size"),
         CheckConstraint("username = lower(username)", name="canonical_username"),
         Index(
             "uq_users_emergency",
@@ -64,6 +74,16 @@ class User(Base):
     note_naming: Mapped[str] = mapped_column(
         String(7), default="letters", server_default="letters"
     )
+    light_scheme: Mapped[ColorScheme] = mapped_column(
+        String(8), default="classic", server_default="classic"
+    )
+    dark_scheme: Mapped[ColorScheme] = mapped_column(
+        String(8), default="classic", server_default="classic"
+    )
+    ui_font: Mapped[UiFont] = mapped_column(
+        String(8), default="roboto", server_default="roboto"
+    )
+    ui_font_size: Mapped[int] = mapped_column(default=16, server_default="16")
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )

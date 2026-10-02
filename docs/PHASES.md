@@ -87,7 +87,7 @@ The owner authorizes the entire phase without intermediate confirmations on 2026
 - Postgres job queue (SKIP LOCKED). Worker container with Audiveris behind the `OmrEngine` interface. Retries and failure state.
 - On image upload: enqueue a job. Show status in the manager UI. Store MusicXML and status.
 - Review screen: original image and rendered score side by side. Actions: Approve, Reject, Re-run.
-- Student view: approved score rendered with OpenSheetMusicDisplay, otherwise the original image.
+- Student view: show the available original image and also render an approved score with OpenSheetMusicDisplay.
 - "Show note names" toggle: inject `<lyric>` elements by the user's naming setting.
 - Tests: queue concurrency, status transitions, lyric injection. Use 2-3 sample scores as fixtures.
 - Docs: developer (OMR pipeline, limits, how to replace the engine), user (review a recognized score).
@@ -149,3 +149,11 @@ Native audio, tempo events, inline confirmations, and score rendering remain unc
 Implementation and local checks are complete; publication and final owner visual acceptance remain separate.
 Chrome checks 80 responsive theme cases under the production CSP.
 Safari automation requires the owner to enable its remote automation setting or complete the manual checklist.
+
+## Separate feature: appearance settings
+The owner accepts the proposal and requests a separate branch on 2026-10-02.
+The feature extends the existing Material Design theme without replacing the application architecture.
+Add independent paired schemes, interface font, base size, a live example panel, and standard-appearance restoration.
+Persist appearance in the account; retain browser-local light/dark mode.
+Verify profile permissions, migration compatibility, contrast, typography, mobile widths, and playback continuity.
+Update the user and developer guides in the same feature.
