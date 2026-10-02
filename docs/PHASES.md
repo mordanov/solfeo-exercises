@@ -149,3 +149,11 @@ Native audio, tempo events, inline confirmations, and score rendering remain unc
 Implementation and local checks are complete; publication and final owner visual acceptance remain separate.
 Chrome checks 80 responsive theme cases under the production CSP.
 Safari automation requires the owner to enable its remote automation setting or complete the manual checklist.
+
+## Separate feature: appearance settings
+The owner accepts the proposal and requests a separate branch on 2026-10-02.
+The feature extends the existing Material Design theme without replacing the application architecture.
+Add independent paired schemes, interface font, base size, a live example panel, and standard-appearance restoration.
+Persist appearance in the account; retain browser-local light/dark mode.
+Verify profile permissions, migration compatibility, contrast, typography, mobile widths, and playback continuity.
+Update the user and developer guides in the same feature.

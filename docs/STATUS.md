@@ -8,6 +8,52 @@ Prerequisites:
 Last updated: 2026-10-02 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a0523`.
 
 ## Current phase
+Appearance settings: separate feature after the Material Design follow-ups.
+The owner accepts the proposal and requests `feat/appearance-settings` on 2026-10-02.
+The branch starts from source `c4ee4f1`; accepted PHASE 7 remains closed.
+Implementation and local verification are complete; production publication and owner device checks remain separate.
+
+### Appearance settings
+Settings includes independent light and dark schemes: Classic, Forest, Warm, and Plum.
+Each scheme coordinates buttons, their text, the page background, panels, ordinary text, and control outlines.
+Account preferences also select Roboto, System, or Serif and a base size of 16, 18, or 20 px.
+The example panel previews either mode without changing the page or saving automatically.
+Save applies the authenticated profile without a reload.
+Restore selects the standard appearance; Save commits it without resetting language or note naming.
+
+Light/dark mode remains browser-local; account preferences follow the user across devices.
+
+Migration `0007_appearance` adds constrained profile columns and preserves existing accounts with the original appearance.
+Partial settings updates retain omitted fields and reject nulls, empty updates, unsupported values, and unknown fields.
+New accounts use 4 documented environment defaults.
+Emergency-manager startup preserves previously saved appearance.
+Anonymous pages return to Classic, Roboto, and 16 px after logout.
+
+All 182 backend tests, 194 frontend tests, 46 focused release checks, and 6 quality hooks pass.
+The backend suite includes all 4 documentation checks, migration backfills, empty-database upgrades, downgrade, and schema-drift checks.
+Palette tests cover readable normal and hover states; Forest uses explicit dark hover shades to retain contrast.
+
+Chrome passes 134 cases with synthetic APIs across all schemes, modes, languages, fonts, sizes, and representative routes.
+The checks cover 320, 390, 430, and 1280 px with long account and exercise content.
+They confirm no page or mobile container overflow, independent draft saving, restoration, errors, and stable form values.
+An actual border click confirms the 44 px field target, including its smaller native input.
+Browser measurements confirm unchanged score dimensions and engraving fonts between standard and large serif interfaces.
+
+Component regressions confirm unchanged audio nodes, spoken players, and tempo during theme updates.
+
+The production frontend build and full frontend Docker image build pass.
+The final image serves 213 byte-identical assets and 5 application routes with the existing security headers.
+No dependencies, private configuration, original voice files, deployed services, push, or pull request changes occur.
+The owner's untracked `material_design.md` remains untouched.
+
+Remaining manual checks:
+1. Check all schemes and large fonts in Chrome and Safari on real phones and an iPad.
+2. Save different light and dark schemes, then reload and sign in on another device.
+3. Confirm local light/dark mode, profile preferences, and unchanged language and note naming after restoration.
+4. Check real recordings and spoken notes for unchanged position, tempo, cursor, and audible playback.
+5. Publish the paired backend and frontend release with migration `0007_appearance` before production acceptance.
+
+### Material Design baseline
 Material Design: separate visual migration after accepted PHASE 7.
 The owner starts the feature on 2026-10-01.
 Steps 1 through 6 are implemented and validated locally.

@@ -72,17 +72,35 @@ JSON inputs reject unknown fields; validation errors do not echo passwords or re
 | `GET /api/auth/me` | Active session | Returns `user` and `csrf_token`; renews the sliding expiry |
 | `POST /api/auth/logout` | Active session, CSRF | Revokes this session and expires its cookie |
 | `PUT /api/auth/password` | Active session, CSRF | `current_password`, `new_password`; revokes all sessions and creates a replacement session |
-| `PATCH /api/settings` | Student or manager, CSRF | `ui_language` and `note_naming`; returns the updated user |
+| `PATCH /api/settings` | Student or manager, CSRF | Nonempty partial language, note-naming, or appearance update; returns the complete updated user |
 | `GET /api/users` | Manager | `offset` and `limit`; returns `users` and `total` |
 | `POST /api/users` | Manager, CSRF | Creates a user; returns the user with status 201 |
 | `PATCH /api/users/{id}` | Manager, CSRF | Updates supplied `first_name`, `last_name`, `role`, or `is_active` |
 | `POST /api/users/{id}/password` | Manager, CSRF | `password`, optional `must_change_password`; returns `{"status":"ok"}` |
 
-User responses contain identity, names, role, active/emergency flags, password-change flag, language, and note naming.
+User responses include `light_scheme`, `dark_scheme`, `ui_font`, and `ui_font_size`.
+Schemes accept classic, forest, warm, or plum; fonts accept roboto, system, or serif.
+Font size accepts the JSON numbers 16, 18, and 20.
+Settings reject empty updates, explicit nulls, unsupported values, and unknown fields.
+Omitted fields retain their current values; validation occurs before any changes.
+The endpoint changes only the authenticated account and retains the existing origin and CSRF checks.
+
+Example appearance update:
+
+```json
+{
+  "light_scheme": "forest",
+  "dark_scheme": "plum",
+  "ui_font": "serif",
+  "ui_font_size": 20
+}
+```
+
+User responses contain identity, names, role, active/emergency flags, password-change flag, language, note naming, and appearance.
 They never contain password hashes or session-cookie values.
 Create-user input requires `username`, `password`, `first_name`, `last_name`, and `role`.
 Its optional `must_change_password` defaults to `true`.
-New settings use `DEFAULT_LANGUAGE` and `letters`.
+New settings use `DEFAULT_LANGUAGE`, `letters`, and the configured appearance defaults.
 Usernames use 3–64 ASCII letters, digits, dots, underscores, or hyphens, starting with a letter or digit.
 The service normalizes usernames to lowercase.
 First and last names contain 1–100 nonblank characters.

@@ -54,6 +54,23 @@ Native date controls remain because Date Pickers requires an additional, unappro
 It does not call the settings API or replace the application tree.
 Text colors meet 4.5:1 contrast; input outlines meet 3:1 contrast.
 
+`frontend/src/appearance.ts` defines the approved paired schemes, fonts, sizes, and typed appearance defaults.
+The original classic scheme remains the migration and anonymous-interface default.
+`AppTheme` creates the selected theme without replacing application children.
+Authenticated profile changes synchronize through its appearance context; logout restores the anonymous appearance.
+Light/dark mode retains `solfeo-theme` browser storage independently of account preferences.
+
+`AppearanceForm` keeps a local draft and renders an isolated example without changing the active page theme.
+The example includes page and panel backgrounds, text, a native input, and primary and secondary buttons.
+Its light/dark selector does not change the application's mode.
+Saving sends only appearance fields through the existing protected settings endpoint.
+Failed saving retains the draft and shows an explicit error.
+Reset selects the standard appearance; the user must save it.
+
+Base font sizes set root typography to 16, 18, or 20 px; relative interface sizes scale proportionally.
+Roboto remains locally hosted; system and serif choices use installed browser fonts.
+The score keeps its engraving, white surface, renderer, and playback lifecycle.
+
 `frontend/src/components/Ui.tsx` adapts native control attributes to Material components.
 Its explicit labels preserve keyboard access and form validation.
 Native selects retain their event types, option elements, and selection behavior.

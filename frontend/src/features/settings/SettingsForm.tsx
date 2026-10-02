@@ -11,6 +11,7 @@ import { isLanguage, type Language } from "../../configuration";
 import { ErrorMessage, LanguageOptions } from "../../components/AccountUi";
 import { Button, Field, Form, Panel, Select } from "../../components/Ui";
 import Alert from "@mui/material/Alert";
+import { AppearanceForm } from "./AppearanceForm";
 
 export function SettingsForm({
   auth,
@@ -78,6 +79,7 @@ export function SettingsForm({
           </Alert>
         )}
       </Form>
+      <AppearanceForm auth={auth} onChange={onChange} />
     </Panel>
   );
 }

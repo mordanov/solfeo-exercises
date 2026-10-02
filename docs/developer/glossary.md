@@ -38,6 +38,7 @@ Prerequisites:
 | release bundle | An archive with verified image references, deployment files, source provenance, and file hashes. |
 | login session | A persistent authenticated session, distinct from a listening session or database session. |
 | CSRF | Cross-site request forgery; origin and session-token checks reject unauthorized browser mutations. |
+| color scheme | A predefined set of compatible colors for buttons, text, backgrounds, panels, and control states. |
 | scrypt | A memory-hard password hashing algorithm with a random salt for each password. |
 | multipart form | An HTTP request containing separate text and file parts. |
 | MIME type | A content-type identifier determined from file signatures for uploads. |

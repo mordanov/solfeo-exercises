@@ -8,6 +8,8 @@ from pydantic import Field, SecretStr, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from sqlalchemy import URL
 
+from app.appearance import ColorScheme, UiFont
+
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
@@ -208,6 +210,26 @@ class Settings(BaseSettings):
     default_language: Literal["ru", "en", "es"] = Field(
         default="en", validation_alias="DEFAULT_LANGUAGE"
     )
+    default_light_scheme: ColorScheme = Field(
+        default="classic", validation_alias="DEFAULT_LIGHT_SCHEME"
+    )
+    default_dark_scheme: ColorScheme = Field(
+        default="classic", validation_alias="DEFAULT_DARK_SCHEME"
+    )
+    default_ui_font: UiFont = Field(
+        default="roboto", validation_alias="DEFAULT_UI_FONT"
+    )
+    default_ui_font_size: int = Field(
+        default=16, validation_alias="DEFAULT_UI_FONT_SIZE"
+    )
+
+    @field_validator("default_ui_font_size")
+    @classmethod
+    def supported_font_size(cls, value: int) -> int:
+        if value not in (16, 18, 20):
+            raise ValueError("INVALID_UI_FONT_SIZE")
+        return value
+
     emergency_manager_username: str = Field(
         default="", validation_alias="EMERGENCY_MANAGER_USERNAME"
     )

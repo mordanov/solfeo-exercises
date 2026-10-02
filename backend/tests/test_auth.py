@@ -22,6 +22,12 @@ from app.services.auth import (
 from app.settings import Settings
 
 PASSWORD = "synthetic-long-password"
+APPEARANCE = {
+    "light_scheme": "classic",
+    "dark_scheme": "classic",
+    "ui_font": "roboto",
+    "ui_font_size": 16,
+}
 ORIGIN = "https://test"
 pytestmark = pytest.mark.anyio
 
@@ -106,6 +112,166 @@ async def create_user(
     )
     assert response.status_code == 201, response.text
     return int(response.json()["id"])
+
+
+@pytest.mark.parametrize("role", ["manager", "student"])
+async def test_appearance_preferences_persist_without_changing_other_settings(
+    client: httpx.AsyncClient, role: str
+) -> None:
+    await login(client)
+    await create_user(client, role=role)
+    client.cookies.clear()
+    response = await login(client, "student")
+    assert {key: response.json()["user"][key] for key in APPEARANCE} == APPEARANCE
+    changed = {
+        "light_scheme": "forest",
+        "dark_scheme": "plum",
+        "ui_font": "serif",
+        "ui_font_size": 20,
+    }
+    response = await client.patch("/api/settings", json=changed)
+    assert response.status_code == 200, response.text
+    assert {key: response.json()[key] for key in changed} == changed
+    assert response.json()["ui_language"] == "en"
+    assert response.json()["note_naming"] == "letters"
+    await client.patch("/api/settings", json={"ui_language": "es"})
+    await client.post("/api/auth/logout")
+    response = await login(client, "student")
+    assert {key: response.json()["user"][key] for key in changed} == changed
+    assert response.json()["user"]["ui_language"] == "es"
+    assert (await client.patch("/api/settings", json=APPEARANCE)).status_code == 200
+    assert (await client.get("/api/auth/me")).json()["user"]["ui_language"] == "es"
+
+
+@pytest.mark.parametrize(
+    "changes",
+    [
+        {},
+        {"light_scheme": "#ffffff"},
+        {"dark_scheme": "unknown"},
+        {"ui_font": "url(https://example.invalid/font)"},
+        {"ui_font_size": 15},
+        {"ui_font_size": "20"},
+        {"ui_font_size": True},
+        {"light_scheme": "forest", "ui_font_size": 15},
+        {"ui_font": None},
+        {"ui_language": None},
+        {"user_id": 999, "light_scheme": "warm"},
+    ],
+)
+async def test_appearance_rejects_invalid_preferences_atomically(
+    client: httpx.AsyncClient, changes: dict[str, str | int | None]
+) -> None:
+    await login(client)
+    before = (await client.get("/api/auth/me")).json()["user"]
+    assert (await client.patch("/api/settings", json=changes)).status_code == 422
+    assert (await client.get("/api/auth/me")).json()["user"] == before
+
+
+async def test_appearance_requires_authentication_and_csrf(
+    client: httpx.AsyncClient,
+) -> None:
+    assert (await client.patch("/api/settings", json=APPEARANCE)).status_code == 401
+    await login(client)
+    client.headers.pop("X-CSRF-Token")
+    assert (await client.patch("/api/settings", json=APPEARANCE)).status_code == 403
+
+
+def test_appearance_defaults_from_environment(monkeypatch: pytest.MonkeyPatch) -> None:
+    for key, value in {
+        "DEFAULT_LIGHT_SCHEME": "forest",
+        "DEFAULT_DARK_SCHEME": "plum",
+        "DEFAULT_UI_FONT": "system",
+        "DEFAULT_UI_FONT_SIZE": "18",
+    }.items():
+        monkeypatch.setenv(key, value)
+    policy = Settings(_env_file=None, database_password=SecretStr("synthetic"))
+    assert policy.default_light_scheme == "forest"
+    assert policy.default_dark_scheme == "plum"
+    assert policy.default_ui_font == "system"
+    assert policy.default_ui_font_size == 18
+    monkeypatch.setenv("DEFAULT_UI_FONT_SIZE", "19")
+    with pytest.raises(ValidationError):
+        Settings(_env_file=None, database_password=SecretStr("synthetic"))
+
+
+async def test_new_accounts_use_configured_appearance(
+    client: httpx.AsyncClient, settings: Settings
+) -> None:
+    settings.default_light_scheme = "forest"
+    settings.default_dark_scheme = "plum"
+    settings.default_ui_font = "system"
+    settings.default_ui_font_size = 18
+    await login(client)
+    await create_user(client)
+    client.cookies.clear()
+    user = (await login(client, "student")).json()["user"]
+    assert {key: user[key] for key in APPEARANCE} == {
+        "light_scheme": "forest",
+        "dark_scheme": "plum",
+        "ui_font": "system",
+        "ui_font_size": 18,
+    }
+
+
+def test_emergency_appearance_defaults_do_not_replace_saved_preferences(
+    database: Database, settings: Settings
+) -> None:
+    settings.default_light_scheme = "forest"
+    settings.default_dark_scheme = "plum"
+    settings.default_ui_font = "system"
+    settings.default_ui_font_size = 18
+    expected = {
+        "light_scheme": "forest",
+        "dark_scheme": "plum",
+        "ui_font": "system",
+        "ui_font_size": 18,
+    }
+    sync_emergency(database, settings)
+    with database.session() as session:
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        assert {key: getattr(user, key) for key in APPEARANCE} == expected
+    settings.default_light_scheme = "classic"
+    settings.default_dark_scheme = "classic"
+    settings.default_ui_font = "roboto"
+    settings.default_ui_font_size = 16
+    sync_emergency(database, settings)
+    with database.session() as session:
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        assert {key: getattr(user, key) for key in APPEARANCE} == expected
+
+
+def test_appearance_migration_preserves_existing_accounts(database: Database) -> None:
+    from sqlalchemy import text
+
+    with database.engine.begin() as connection:
+        config = Config(str(Path(__file__).resolve().parents[1] / "alembic.ini"))
+        config.attributes["connection"] = connection
+        command.downgrade(config, "0006_omr")
+        connection.execute(
+            text(
+                "INSERT INTO users (username, first_name, last_name, "
+                "role, password_hash) VALUES ('migration', 'Existing', "
+                "'Student', 'student', 'synthetic-hash')"
+            )
+        )
+        command.upgrade(config, "head")
+        row = (
+            connection.execute(
+                text(
+                    "SELECT username, first_name, light_scheme, dark_scheme, "
+                    "ui_font, ui_font_size FROM users"
+                )
+            )
+            .mappings()
+            .one()
+        )
+        assert row["username"] == "migration" and row["first_name"] == "Existing"
+        assert {key: row[key] for key in APPEARANCE} == APPEARANCE
+        command.downgrade(config, "0006_omr")
+        command.upgrade(config, "head")
 
 
 def test_passwords_use_salted_scrypt() -> None:

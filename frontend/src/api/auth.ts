@@ -1,9 +1,15 @@
 import { config } from "../config";
 import { isLanguage, type Language } from "../configuration";
+import {
+  isColorScheme,
+  isUiFont,
+  isUiFontSize,
+  type Appearance,
+} from "../appearance";
 
 export type Role = "manager" | "student";
 export type NoteNaming = "letters" | "solfege";
-export type User = {
+export type User = Appearance & {
   id: number;
   username: string;
   first_name: string;
@@ -53,7 +59,11 @@ export function parseUser(value: unknown): User {
     typeof value.must_change_password !== "boolean" ||
     typeof value.ui_language !== "string" ||
     !isLanguage(value.ui_language) ||
-    (value.note_naming !== "letters" && value.note_naming !== "solfege")
+    (value.note_naming !== "letters" && value.note_naming !== "solfege") ||
+    !isColorScheme(value.light_scheme) ||
+    !isColorScheme(value.dark_scheme) ||
+    !isUiFont(value.ui_font) ||
+    !isUiFontSize(value.ui_font_size)
   )
     throw new ApiError("INVALID_RESPONSE");
   return {
@@ -67,6 +77,10 @@ export function parseUser(value: unknown): User {
     must_change_password: value.must_change_password,
     ui_language: value.ui_language,
     note_naming: value.note_naming,
+    light_scheme: value.light_scheme,
+    dark_scheme: value.dark_scheme,
+    ui_font: value.ui_font,
+    ui_font_size: value.ui_font_size,
   };
 }
 
@@ -192,6 +206,12 @@ export async function saveSettings(
   return parseUser(
     await request("/settings", "PATCH", { ui_language, note_naming }, csrf),
   );
+}
+export async function saveAppearance(
+  csrf: string,
+  appearance: Appearance,
+): Promise<User> {
+  return parseUser(await request("/settings", "PATCH", appearance, csrf));
 }
 export async function listUsers(
   offset: number,

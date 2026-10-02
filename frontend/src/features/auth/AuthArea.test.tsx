@@ -5,8 +5,11 @@ import { I18nextProvider } from "react-i18next";
 import { beforeEach, expect, it, vi } from "vitest";
 import { i18n } from "../../i18n";
 import { AuthArea } from "./AuthArea";
+import { AppTheme } from "../../theme";
+import { defaultAppearance } from "../../appearance";
 
 const manager = {
+  ...defaultAppearance,
   id: 1,
   username: "manager",
   first_name: "First",
@@ -41,7 +44,9 @@ function mount() {
           })
         }
       >
-        <AuthArea />
+        <AppTheme>
+          <AuthArea />
+        </AppTheme>
       </QueryClientProvider>
     </I18nextProvider>,
   );
@@ -74,6 +79,35 @@ it("does not render a login form when session lookup fails", async () => {
   mount();
   expect(await screen.findByRole("alert")).toHaveTextContent("Cannot connect");
   expect(screen.queryByLabelText("Password")).not.toBeInTheDocument();
+});
+
+it("applies saved account appearance and restores the standard appearance on logout", async () => {
+  window.history.replaceState({}, "", "/settings");
+  vi.stubGlobal(
+    "fetch",
+    vi.fn().mockImplementation(async (url: string) =>
+      url === "/api/auth/me"
+        ? json(
+            auth({
+              ...manager,
+              light_scheme: "forest",
+              dark_scheme: "plum",
+              ui_font: "serif",
+              ui_font_size: 20,
+            }),
+          )
+        : json({ status: "ok" }),
+    ),
+  );
+  mount();
+  await waitFor(() =>
+    expect(getComputedStyle(document.documentElement).fontSize).toBe("20px"),
+  );
+  await userEvent.click(screen.getByRole("button", { name: "Sign out" }));
+  expect(await screen.findByLabelText("Username")).toBeInTheDocument();
+  await waitFor(() =>
+    expect(getComputedStyle(document.documentElement).fontSize).toBe("16px"),
+  );
 });
 
 it("guards manager URLs from students", async () => {
