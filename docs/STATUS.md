@@ -53,6 +53,27 @@ Remaining manual checks:
 4. Check real recordings and spoken notes for unchanged position, tempo, cursor, and audible playback.
 5. Publish the paired backend and frontend release with migration `0007_appearance` before production acceptance.
 
+### CI follow-up: run 37008189410
+The owner requests investigation and repair through `vps-docker` on 2026-10-02.
+The failed run belongs to appearance pull request #4.
+Its production permission test expects `0006_omr`, although the built image correctly applies `0007_appearance`.
+Its frontend job also exceeds the default 5 s limit during the 50-row user-editing test.
+Backend, quality, and dependency jobs pass in that run.
+
+The production test now derives the expected head from the built backend's Alembic scripts.
+All role, port, schema-isolation, and permission assertions remain.
+Vitest now uses 2 workers for ordinary `npm test`, matching the previously successful bounded local runs.
+The fix does not increase timeouts, remove rows, skip tests, or change application behavior.
+
+Fresh local backend and frontend images reproduce the original production assertion failure.
+After the fix, the complete `deploy/tests` suite passes all 56 tests.
+Ordinary `npm test` passes all 194 tests in 2 consecutive local runs.
+It also passes twice inside Linux with 2 CPUs, 2 GiB memory, and the same default timeout.
+The production build, all 6 quality hooks, and 4 documentation checks pass.
+
+The old failed run remains historical; a new remote run requires publication of the fix commit.
+No VPS services or private environment files change.
+
 ### Material Design baseline
 Material Design: separate visual migration after accepted PHASE 7.
 The owner starts the feature on 2026-10-01.

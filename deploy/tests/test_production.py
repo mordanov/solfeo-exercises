@@ -266,6 +266,8 @@ def test_runtime_roles_and_network_boundaries(stand: Stand) -> None:
     stand.python(
         "migrate",
         """
+from alembic.config import Config
+from alembic.script import ScriptDirectory
 from sqlalchemy import text
 from app.database import Database
 from app.settings import Settings
@@ -275,7 +277,11 @@ try:
         version = connection.scalar(
             text("SELECT version_num FROM migrations.alembic_version")
         )
-        assert version == "0006_omr"
+        head = ScriptDirectory.from_config(
+            Config("backend/alembic.ini")
+        ).get_current_head()
+        assert head is not None
+        assert version == head
         privileges = connection.execute(text(
             "SELECT rolsuper, rolcreatedb, rolcreaterole "
             "FROM pg_roles WHERE rolname=current_user"

@@ -28,14 +28,23 @@ The test fixture refuses any other database name.
 The job verifies migration upgrade, downgrade, repeated upgrade, the current revision, and model drift.
 Its fixed test password belongs only to the disposable CI service, not a deployed database.
 The frontend job checks tests and the production build, including its TypeScript compilation.
+
+Vitest limits execution to 2 workers for consistent local and CI resource use.
+The default 5 s test timeout remains unchanged.
+Use `npm test` without a special local worker override.
+
 Speech tests mock only the OpenAI transport and perform real AAC conversion.
 A mandatory check verifies all 66 committed speech files, receipts, and the manifest.
 Missing or damaged assets fail CI instead of skipping verification.
 Synthetic conversion tests do not establish voice quality.
+
 The container job generates a private password, builds both images, and runs the migration service.
 It verifies the schema revision and health through nginx.
 It also runs `deploy/tests` against a separate production Compose project using the freshly built images.
 Those checks verify restricted database roles, private ports, migration metadata isolation, persistence, and failed-migration recovery.
+
+The production permission test compares database metadata with the migration head in the built backend image.
+It does not hard-code a previous feature's revision.
 It stops its Compose project after the checks.
 
 The HTTP health endpoint remains independent of database readiness.
