@@ -6,7 +6,6 @@ import { fetchOmr, rerunOmr, reviewOmr } from "../../api/omr";
 import { ErrorMessage } from "../../components/AccountUi";
 import { Score } from "./Score";
 import { Button, Panel } from "../../components/Ui";
-import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 
 export function Review({
@@ -57,41 +56,14 @@ export function Review({
         </Alert>
       )}
       {job?.last_error && <ErrorMessage error={new ApiError(job.last_error)} />}
-      <Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: {
-            xs: "minmax(0, 1fr)",
-            md: "repeat(2, minmax(0, 1fr))",
-          },
-          gap: 2,
-          alignItems: "start",
-          "& > *": { minWidth: 0 },
-        }}
-      >
-        <Box
-          component="img"
-          sx={{
-            display: "block",
-            maxWidth: "100%",
-            maxHeight: 400,
-            objectFit: "contain",
-            my: 2,
-            bgcolor: "#fff",
-            borderRadius: 2,
-          }}
-          src={`/api/exercises/${exercise.id}/files/image?version=${job?.image_id ?? exercise.image?.id}`}
-          alt={t("exercises.imageFor", { title: exercise.title })}
+      {rendered && job.job_id && (
+        <Score
+          id={exercise.id}
+          version={job.job_id}
+          user={auth.user}
+          approved={job.status === "approved"}
         />
-        {rendered && job.job_id && (
-          <Score
-            id={exercise.id}
-            version={job.job_id}
-            user={auth.user}
-            approved={job.status === "approved"}
-          />
-        )}
-      </Box>
+      )}
       <Button
         disabled={!rendered || mutation.isPending}
         onClick={() => mutation.mutate("approve")}

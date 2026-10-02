@@ -7,6 +7,16 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-10-02: The owner requests mobile installation, browser language defaults, focused management changes, and automatic speech tempo.
+  Original icons and localized manifests support online installation without a service worker or protected-file caching.
+  Safari installation uses manual Share guidance; Chrome uses its native prompt when available.
+  This decision restores optional installation, not the rejected Android share target.
+  Browser preferences select the anonymous interface language; saved account settings retain priority after login.
+  Recognition review shows only the score; exercise previews and student fallbacks retain the original image.
+  Conservative AAC timings choose a safe tempo before playback; decoded timings confirm the choice before scheduling.
+  Browser storage remembers tempo per account, exercise, score version, language, and naming choice.
+  The slider can extend below its preferred minimum without exceeding the speech-rate or complete-duration limits.
+  The existing 66 clips remain unchanged; no paid generation occurs.
 - 2026-10-02: The owner requests focused mobile responsiveness without an architectural rewrite.
   Labeled cards below 600 px reuse all user and journal fields, actions, and pagination; larger screens retain Community DataGrid.
   Theme overrides reduce repeated mobile padding and improve navigation and touch targets.

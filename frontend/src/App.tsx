@@ -8,6 +8,7 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { ThemeToggle } from "./components/ThemeToggle";
+import { InstallApp } from "./components/InstallApp";
 import { Field, Panel, Select } from "./components/Ui";
 import Button from "@mui/material/Button";
 
@@ -45,6 +46,12 @@ export function App() {
   useEffect(() => {
     document.documentElement.lang = i18n.resolvedLanguage ?? i18n.language;
     document.title = t("app.title");
+    const manifest = document.querySelector<HTMLLinkElement>(
+      'link[rel="manifest"]',
+    );
+    const language = i18n.resolvedLanguage;
+    if (manifest && language && isLanguage(language))
+      manifest.href = `/manifest-${language}.webmanifest`;
   }, [i18n, i18n.resolvedLanguage, t]);
 
   return (
@@ -72,10 +79,13 @@ export function App() {
         </div>
         <ThemeToggle />
       </Stack>
+      <InstallApp />
       {knownPath ? (
         <>
           <AuthArea />
-          <HealthStatus />
+          {window.location.pathname.replace(/\/+$/, "") === "/settings" && (
+            <HealthStatus />
+          )}
         </>
       ) : (
         <NotFound />

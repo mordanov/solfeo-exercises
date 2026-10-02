@@ -5,7 +5,13 @@ import { fetchOmr, fetchScore } from "../../api/omr";
 import { spokenConfig } from "../../config";
 import { ErrorMessage } from "../../components/AccountUi";
 import { parseSequence, type NoteEvent } from "./sequence";
-import { SpeechPlayer } from "./player";
+import {
+  SpeechPlayer,
+  chooseTempo,
+  tempoRange,
+  type TempoRange,
+} from "./player";
+import timings from "../../../public/solfege/timings.json";
 import { noteName } from "./vocabulary";
 import { Button, Field, Panel } from "../../components/Ui";
 import Box from "@mui/material/Box";
@@ -14,19 +20,71 @@ import Alert from "@mui/material/Alert";
 export function Spoken({
   id,
   version,
+  score,
   user,
   highlight,
 }: {
   id: number;
   version: string;
+  score: string;
   user: User;
   highlight: (index: number) => void;
 }) {
   const { t, i18n } = useTranslation();
-  const [bpm, setBpm] = useState(spokenConfig.defaultBpm);
+  const prepared = useMemo<
+    { ready: true; range: TempoRange } | { ready: false; error: unknown }
+  >(() => {
+    try {
+      return {
+        ready: true,
+        range: tempoRange(
+          parseSequence(score),
+          new Map(Object.entries(timings)),
+          user.ui_language,
+          user.note_naming,
+        ),
+      };
+    } catch (error: unknown) {
+      return { ready: false, error };
+    }
+  }, [score, user.ui_language, user.note_naming]);
+  const [bpm, setBpm] = useState(() =>
+    prepared.ready
+      ? chooseTempo(spokenConfig.defaultBpm, prepared.range)
+      : spokenConfig.defaultBpm,
+  );
   const [state, setState] = useState<"idle" | "loading" | "playing">("idle");
   const [error, setError] = useState<unknown>(null);
   const [current, setCurrent] = useState<NoteEvent | null>(null);
+  const storageKey = `solfeo-tempo:${user.id}:${id}:${version}:${user.ui_language}:${user.note_naming}`;
+  useEffect(() => {
+    if (!prepared.ready) return;
+    try {
+      const saved = localStorage.getItem(storageKey);
+      setBpm(
+        chooseTempo(
+          saved === null ? spokenConfig.defaultBpm : Number(saved),
+          prepared.range,
+        ),
+      );
+    } catch (failure: unknown) {
+      console.error("SPOKEN_TEMPO_STORAGE_FAILED");
+      setError(
+        failure instanceof ApiError
+          ? failure
+          : new ApiError("SPOKEN_TEMPO_STORAGE_FAILED"),
+      );
+    }
+  }, [prepared, storageKey]);
+  function remember(tempo: number) {
+    setBpm(tempo);
+    try {
+      localStorage.setItem(storageKey, String(tempo));
+    } catch {
+      console.error("SPOKEN_TEMPO_STORAGE_FAILED");
+      setError(new ApiError("SPOKEN_TEMPO_STORAGE_FAILED"));
+    }
+  }
   const player = useMemo(
     () =>
       new SpeechPlayer(
@@ -62,6 +120,13 @@ export function Spoken({
       player.stop();
     };
   }, [player, id, version, user.note_naming, user.ui_language]);
+  if (!prepared.ready)
+    return (
+      <Panel aria-label={t("spoken.title")}>
+        <h4>{t("spoken.title")}</h4>
+        <ErrorMessage error={prepared.error} />
+      </Panel>
+    );
   return (
     <Panel aria-label={t("spoken.title")}>
       <h4>{t("spoken.title")}</h4>
@@ -73,8 +138,12 @@ export function Spoken({
         <Box
           component="input"
           type="range"
-          min={spokenConfig.minBpm}
-          max={spokenConfig.maxBpm}
+          min={
+            bpm < spokenConfig.minBpm
+              ? prepared.range.min
+              : Math.max(prepared.range.min, spokenConfig.minBpm)
+          }
+          max={prepared.range.max}
           step={1}
           value={bpm}
           sx={{
@@ -86,7 +155,8 @@ export function Spoken({
           onChange={(event) => {
             player.stop();
             setState("idle");
-            setBpm(Number(event.target.value));
+            setError(null);
+            remember(chooseTempo(Number(event.target.value), prepared.range));
           }}
         />
       </Field>
@@ -107,7 +177,10 @@ export function Spoken({
             bpm,
             user.ui_language,
             user.note_naming,
-            () => setState("playing"),
+            (tempo) => {
+              remember(tempo);
+              setState("playing");
+            },
           );
         }}
       >

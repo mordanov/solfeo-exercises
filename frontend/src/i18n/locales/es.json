@@ -1,4 +1,12 @@
 {
+  "errors.SPOKEN_TEMPO_STORAGE_FAILED": "No se puede guardar el tempo en este navegador.",
+  "install.title": "Instalar el entrenador de solfeo",
+  "install.action": "Instalar aplicación",
+  "install.close": "Ahora no",
+  "install.safari": "En Safari, abre Compartir, elige Añadir a la pantalla de inicio y pulsa Añadir.",
+  "install.browser": "Abre el menú del navegador y elige Instalar aplicación o Añadir a la pantalla de inicio.",
+  "install.error": "No se pudo abrir la ventana de instalación. Utiliza el menú del navegador.",
+  "install.shortName": "Solfeo",
   "theme.dark": "Usar tema oscuro",
   "theme.light": "Usar tema claro",
   "notFound.title": "Página no encontrada",

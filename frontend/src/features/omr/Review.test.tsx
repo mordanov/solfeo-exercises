@@ -71,13 +71,10 @@ function mount() {
     </I18nextProvider>,
   );
 }
-it("shows original and score, and reviews the exact version", async () => {
+it("shows only the score and reviews the exact version", async () => {
   mount();
   expect(await screen.findByTestId("rendered-score")).toBeInTheDocument();
-  expect(screen.getByRole("img")).toHaveAttribute(
-    "src",
-    "/api/exercises/1/files/image?version=image",
-  );
+  expect(screen.queryByRole("img")).not.toBeInTheDocument();
   await userEvent.click(screen.getByRole("button", { name: "Approve" }));
   await waitFor(() =>
     expect(api.reviewOmr).toHaveBeenCalledWith(1, "job", "approve", "csrf"),

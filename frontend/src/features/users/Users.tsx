@@ -231,6 +231,7 @@ export function Users({ auth }: { auth: Auth }) {
               {t("users.edit")}
             </Button>
             <Button
+              style={{ width: "12em" }}
               disabled={activation.isPending}
               aria-label={t(
                 user.is_active ? "users.deactivateUser" : "users.activateUser",

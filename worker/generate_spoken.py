@@ -5,6 +5,7 @@ import hashlib
 import io
 import json
 import logging
+import math
 from dataclasses import dataclass
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -114,6 +115,50 @@ def validate_audio(path: Path, settings: Settings) -> None:
         "format", {}
     ).get("format_name", "").split(","):
         raise GenerationError("SPOKEN_INVALID_AUDIO")
+
+
+def write_timings(settings: Settings) -> None:
+    timings: dict[str, float] = {}
+    for clip in vocabulary():
+        data: dict[str, list[dict[str, str]]] = json.loads(
+            run_media(
+                [
+                    settings.ffprobe_binary,
+                    "-v",
+                    "error",
+                    "-protocol_whitelist",
+                    "file,pipe",
+                    "-show_entries",
+                    "stream=codec_name,profile,sample_rate,nb_frames",
+                    "-of",
+                    "json",
+                    str(settings.spoken_output / clip.path),
+                ],
+                settings,
+            )
+        )
+        try:
+            stream = data["streams"][0]
+            if (
+                len(data["streams"]) != 1
+                or stream["codec_name"] != "aac"
+                or stream["profile"] != "LC"
+            ):
+                raise GenerationError("SPOKEN_INVALID_AUDIO")
+            frames, rate = int(stream["nb_frames"]), int(stream["sample_rate"])
+            if frames <= 0 or rate <= 0:
+                raise GenerationError("SPOKEN_INVALID_AUDIO")
+            # Full AAC frames include padding, unlike the container duration.
+            seconds = math.ceil(frames * 1024 / rate * 1_000_000) / 1_000_000
+            if not 0 < seconds <= settings.spoken_max_clip_seconds:
+                raise GenerationError("SPOKEN_INVALID_AUDIO")
+            timings["/solfege/" + clip.path] = seconds
+        except (KeyError, ValueError, TypeError, IndexError):
+            raise GenerationError("SPOKEN_INVALID_AUDIO") from None
+    path = settings.spoken_output / "timings.json"
+    temporary = path.with_suffix(".json.tmp")
+    temporary.write_text(json.dumps(timings, indent=2, sort_keys=True) + "\n")
+    temporary.replace(path)
 
 
 def verify(settings: Settings, manifest_path: Path | None = None) -> None:
@@ -257,17 +302,22 @@ def generate(settings: Settings, client: httpx.Client) -> None:
         + "\n"
     )
     verify(settings, manifest)
+    write_timings(settings)
     manifest.replace(root / "manifest.json")
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true")
+    parser.add_argument("--write-timings", action="store_true")
     arguments = parser.parse_args()
     settings = Settings()
     logging.basicConfig(level=logging.WARNING)
     try:
-        if arguments.check:
+        if arguments.write_timings:
+            verify(settings)
+            write_timings(settings)
+        elif arguments.check:
             verify(settings)
         else:
             with httpx.Client(follow_redirects=False) as client:

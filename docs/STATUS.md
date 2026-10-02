@@ -45,6 +45,41 @@ Remaining manual checks:
 5. Turn the device during recorded audio and spoken playback.
 6. Confirm stable playback position, tempo, note cursor, and account form values.
 
+### Installation and usability follow-up
+The owner requests 5 focused improvements on 2026-10-02.
+Original favicon, phone, and dedicated iPad icons accompany 3 localized application manifests.
+Mobile installation uses a native prompt after a click, or browser-specific instructions when unavailable.
+Installed applications suppress the offer; no service worker, offline caching, or Android share target returns.
+Browser preferences select the anonymous language, with English fallback; saved account language takes priority after login.
+
+Activate and Deactivate use equal widths in every language.
+Only Settings shows and requests Service status.
+Recognition review omits the original image; exercise previews and student fallbacks retain it.
+Conservative AAC timings choose a safe tempo before playback; decoded lengths confirm it before scheduling.
+Browser storage remembers tempo per account, exercise, score version, language, and naming choice.
+Short notes can extend the slider below 40 BPM without relaxing speech-rate or complete-duration limits.
+
+All 181 frontend tests, 10 speech-generation tests, 4 documentation checks, production build, and 6 quality hooks pass.
+A 1470-case regression covers every committed language, naming choice, pitch, accidental, and short-note duration.
+Chrome passes 66 follow-up cases, including 320, 360, 390, 430, and 1280 px.
+Cases cover long content, matching button widths, localized manifests, health visibility, review, actual playback, and tempo persistence.
+Chrome decodes all 66 original clips and confirms that exported timings never underestimate their decoded lengths.
+Standalone browser checks use the WebKit property because CDP cannot override display mode.
+
+The restricted Docker context preserves all 11 new public assets.
+Pinned nginx returns their exact bytes, security headers, and the correct manifest MIME type.
+The full frontend image build stops at npm installation because local Docker storage has insufficient space.
+Only the failed task container is removed; no shared images, volumes, or caches are pruned.
+No dependencies, private configuration, original voice files, deployed services, or account schema change.
+
+Remaining manual checks:
+1. Install with Chrome on Android and Safari on an iPad.
+2. Check the favicon, Home Screen icon, launch, and standalone navigation.
+3. Check browser language before login and saved account language after login.
+4. Play real short notes and accidentals without cut words or overlapping notes.
+5. Adjust tempo and confirm its return after navigation and reload in the same browser.
+6. Complete the normal CI image build and deployment before checking the production installation.
+
 ### Password policy follow-up
 The owner reduces the default password minimum to 8 characters on 2026-10-01.
 Backend defaults, both Compose files, example configuration, and all 3 language hints use the new minimum.

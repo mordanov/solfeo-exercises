@@ -1,6 +1,7 @@
 import io
 import json
 import math
+import shutil
 import struct
 import wave
 from pathlib import Path
@@ -10,7 +11,13 @@ import pytest
 from pydantic import SecretStr
 
 from app.settings import Settings
-from worker.generate_spoken import GenerationError, generate, verify, vocabulary
+from worker.generate_spoken import (
+    GenerationError,
+    generate,
+    verify,
+    vocabulary,
+    write_timings,
+)
 
 
 def test_committed_speech_assets() -> None:
@@ -30,6 +37,30 @@ def test_vocabulary_has_every_language_naming_and_accidental() -> None:
     assert len({entry.path for entry in entries}) == 66
     assert {entry.language for entry in entries} == {"en", "ru", "es"}
     assert all(".." not in entry.path for entry in entries)
+
+
+def test_timings_cover_existing_aac_frames_without_rewriting_clips(
+    tmp_path: Path,
+) -> None:
+    root = Path(__file__).resolve().parents[2]
+    output = tmp_path / "solfege"
+    shutil.copytree(root / "frontend/public/solfege", output)
+    settings = Settings(
+        _env_file=root / ".env.example",
+        database_password=SecretStr("unused"),
+        spoken_output=output,
+    )
+    before = {path: path.read_bytes() for path in output.rglob("*.m4a")}
+    write_timings(settings)
+    timings = json.loads((output / "timings.json").read_text())
+    assert set(timings) == {"/solfege/" + clip.path for clip in vocabulary()}
+    assert all(
+        0 < value <= settings.spoken_max_clip_seconds for value in timings.values()
+    )
+    assert {path: path.read_bytes() for path in before} == before
+    previous = (output / "timings.json").read_bytes()
+    write_timings(settings)
+    assert (output / "timings.json").read_bytes() == previous
 
 
 def test_missing_key_does_not_create_fake_clips(tmp_path: Path) -> None:

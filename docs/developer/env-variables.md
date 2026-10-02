@@ -57,7 +57,7 @@ Frontend build values are public; never put a secret in `VITE_*`.
 | `FRONTEND_HOST` | `127.0.0.1` | Vite development bind address |
 | `FRONTEND_PORT` | `18080` | Vite development port; integer from 1 to 65535 |
 | `API_PROXY_TARGET` | `http://127.0.0.1:18081` | Native backend origin for the Vite proxy |
-| `VITE_DEFAULT_LANGUAGE` | `en` | Initial page language: en, ru, or es |
+| `VITE_DEFAULT_LANGUAGE` | `en` | Validated legacy build setting; browser preferences now select the initial page language |
 | `VITE_HEALTH_TIMEOUT_MS` | `5000` | Shared health/account HTTP deadline in milliseconds; integer from 1 to 2147483647 |
 | `VITE_UPLOAD_TIMEOUT_MS` | `600000` | Multipart upload deadline, including conversion, in milliseconds |
 | `VITE_LISTENING_HEARTBEAT_MS` | `5000` | Playback heartbeat interval, from 1000 to 60000 milliseconds |
@@ -87,15 +87,16 @@ Each clip request uses `VITE_HEALTH_TIMEOUT_MS`.
 
 | JSON field | Default | Purpose |
 |---|---|---|
-| `defaultBpm` | `72` | Initial tempo |
-| `minBpm` | `40` | Minimum slider tempo |
-| `maxBpm` | `160` | Maximum slider tempo |
+| `defaultBpm` | `72` | Preferred initial tempo; automatically fitted to the score |
+| `minBpm` | `40` | Preferred slider minimum; short notes can extend the range below this value |
+| `maxBpm` | `160` | Maximum tempo; each score can impose a lower safe maximum |
 | `maxRate` | `1.5` | Maximum playback rate. Playback never goes below rate 1; silence fills unused time instead |
 | `maxSeconds` | `1800` | Maximum complete speech sequence |
 | `maxClipBytes` | `2097152` | Maximum downloaded clip bytes |
 | `maxClipSeconds` | `5` | Maximum decoded clip duration |
 
 Keep generation limits and frontend limits consistent.
+Saved account language retains priority after login; `DEFAULT_LANGUAGE` still initializes new account settings.
 
 ## Telegram worker
 

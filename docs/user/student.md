@@ -175,6 +175,24 @@ The checkbox is local to the current score, not a saved account setting.
 8. Check Random, Previous, and return to In order.
 9. Confirm that `/manager/journal` refuses student access.
 
+## Install the application on a mobile device
+
+1. Open the website in Chrome or Safari.
+   Before login, the interface uses your browser language, or English when unsupported.
+2. Click **Install app**.
+   Chrome opens its native installation prompt when available.
+3. Follow the browser instructions when no native prompt appears.
+   In Safari, use **Share**, **Add to Home Screen**, and **Add**.
+4. Open the application from its new icon.
+   Installation requires a network connection and does not provide offline exercises.
+5. Sign in when the installed application requests your credentials.
+   Saved account language takes priority after login.
+6. Open **Settings** to inspect Service status.
+   Other pages do not show this panel.
+
+An iPad can present Share beside the address bar.
+Installed Safari applications can use separate login and browser storage.
+
 ## Use spoken notes
 
 The release includes the existing 66 voice files; no regeneration is required.
@@ -183,13 +201,15 @@ The page identifies the voice as AI-generated.
 
 1. Open an exercise with an approved score.
    The **Spoken notes** controls appear.
-2. Set the tempo with the slider.
+2. Inspect the automatically selected tempo.
+   The application reduces tempo when short notes need more speech time.
    The label shows beats per minute.
 3. Click **Speak notes**.
    The cursor follows the spoken sequence.
 4. Click **Stop speaking** when necessary.
    Playback and pending preparation stop.
-5. Lower the tempo if a name cannot fit its note.
+5. Adjust the tempo with the slider when necessary.
+   The available range keeps complete words within their notes.
 6. Click **Speak notes** again after changing the tempo.
    Playback restarts from the beginning.
 
@@ -198,6 +218,9 @@ A short spoken name can leave silence inside a long note.
 Sharps and flats follow the note name.
 Your saved language and naming settings determine the speech.
 Unsupported notation or missing clips produce an error, not guessed speech.
+The application remembers tempo in this browser for your account, exercise, score version, language, and naming choice.
+Clearing browser storage removes these tempo preferences.
+Very short notes can require a tempo below the usual 40 BPM minimum.
 
 Speech pauses the audio recording, and the recording stops speech.
 Leaving the page, hiding the tab, or signing out also stops speech.

@@ -19,6 +19,16 @@
 !frontend/src/
 !frontend/src/**
 !frontend/public/
+!frontend/public/favicon.svg
+!frontend/public/favicon.ico
+!frontend/public/apple-touch-icon.png
+!frontend/public/apple-touch-icon-ipad.png
+!frontend/public/apple-touch-icon-ipad-152.png
+!frontend/public/app-icon-192.png
+!frontend/public/app-icon-512.png
+!frontend/public/manifest-en.webmanifest
+!frontend/public/manifest-ru.webmanifest
+!frontend/public/manifest-es.webmanifest
 !frontend/public/solfege/
 !frontend/public/solfege/**
 !deploy/

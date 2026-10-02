@@ -39,6 +39,15 @@ A child looks at the notes and listens to the audio.
 ## i18n
 - Every UI string goes through react-i18next. Ship ru, en, es from day one. A test must fail if any key is missing in any language.
 - Backend returns stable error codes (not translated text); frontend translates them.
+- Before login, use the first supported browser language, including regional variants; use English when none matches.
+- Saved account language takes priority after login.
+
+## Mobile installation
+- Provide a favicon, dedicated iPad icons, and localized application manifests.
+- Offer installation on mobile devices, using the native browser prompt when available.
+- Explain Safari Share and Add to Home Screen when native installation is unavailable.
+- Require a network connection; do not cache protected files or introduce a share target.
+- Show service status only on the Settings page.
 
 ## Exercises
 - Fields: id, title, description (text), category/level (optional string), position (integer, manager can reorder), image (optional), audio (optional), score (optional, see OMR), deleted_at (soft delete).
@@ -61,7 +70,8 @@ A child looks at the notes and listens to the audio.
 ## OMR (part of MVP)
 - On image upload, enqueue an OMR job. Worker runs Audiveris in batch mode -> MusicXML. Engine sits behind a Python interface (OmrEngine) so it can be replaced (for example by oemer).
 - Score status: none | pending | processing | needs_review | approved | rejected | failed.
-- Manager reviews: original image and rendered score side by side; actions Approve / Reject / Re-run.
+- Manager review shows the rendered score without a duplicate original image; actions Approve / Reject / Re-run remain.
+- The exercise preview retains the original image for comparison.
 - Students see the rendered score ONLY if status = approved. Otherwise they see the original image.
 - Rendering: OpenSheetMusicDisplay in the browser.
 - Toggle "show note names" on the staff: client-side, inject <lyric> elements into the MusicXML before rendering. Naming from user setting (letters: C D E F G A B; solfege: do re mi fa sol la si; localized).
@@ -79,7 +89,9 @@ A low-quality photo is the main cause of OMR errors. Follow these rules before u
 
 ## Spoken notes
 - Not singing. Notes are SPOKEN (do-re-mi or C-D-E per user setting and UI language).
-- Note duration is respected: whole note = long, quarter = short, etc., from MusicXML durations and a tempo (default 72 bpm, user-adjustable slider).
+- MusicXML durations determine note timing; the preferred tempo is 72 BPM.
+- Automatically reduce tempo when short notes require more speech time; preserve complete words and bounded playback rates.
+- Remember adjusted tempo in this browser per account, exercise, score version, language, and naming choice.
 - Implementation: pre-generated syllable clips (script calls OpenAI TTS once, output committed to frontend/public/solfege/<lang>/<naming>/), played with Web Audio API. Fit each note to its duration: play the word at its natural pitch (rate 1) and fill the rest with silence; speed up only when the word does not fit, up to a bounded maximum rate. Rests = silence. Sharps/flats = extra suffix clip.
 - Available only when score status = approved.
 - When an exercise has no recorded audio, the student sees the spoken notes controls instead of an audio control.
@@ -88,7 +100,8 @@ A low-quality photo is the main cause of OMR errors. Follow these rules before u
 
 The owner replaces PWA audio sharing with a Telegram bot on 2026-09-29.
 The web application remains the interface for exercises, users, listening, and the journal.
-Product delivery no longer requires an Android share target, IndexedDB share hand-off, or PWA installation.
+Audio import does not require an Android share target, IndexedDB share hand-off, or application installation.
+Optional online installation returns separately on 2026-10-02.
 
 - A manager sends or forwards an audio attachment to the bot in a private Telegram chat.
 - Accept `audio`, `voice`, and audio sent as `document`; text or a link alone is not an audio file.

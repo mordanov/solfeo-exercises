@@ -15,6 +15,64 @@ export type PlaybackPlan = {
   clips: ClipTiming[];
   markers: { start: number; event: NoteEvent }[];
 };
+
+function clipLengths(
+  paths: string[],
+  durations: ReadonlyMap<string, number>,
+  limits: typeof spokenConfig,
+): number[] {
+  return paths.map((path) => {
+    const duration = durations.get(path);
+    if (
+      !duration ||
+      duration <= 0 ||
+      !Number.isFinite(duration) ||
+      duration > limits.maxClipSeconds
+    )
+      throw new ApiError("SPOKEN_CLIPS_UNAVAILABLE");
+    return duration;
+  });
+}
+
+export type TempoRange = { min: number; max: number };
+
+export function tempoRange(
+  events: NoteEvent[],
+  durations: ReadonlyMap<string, number>,
+  language: Language,
+  naming: NoteNaming,
+  limits = spokenConfig,
+): TempoRange {
+  let max = limits.maxBpm;
+  let beats = 0;
+  for (const event of events) {
+    if (!Number.isFinite(event.beats) || event.beats <= 0)
+      throw new ApiError("SPOKEN_UNSUPPORTED_SCORE");
+    beats += event.beats;
+    if (event.pitch) {
+      const lengths = clipLengths(
+        clipPaths(event.pitch.step, event.pitch.alter, language, naming),
+        durations,
+        limits,
+      );
+      const length = lengths.reduce((sum, value) => sum + value, 0);
+      max = Math.min(
+        max,
+        Math.floor((event.beats * 60 * limits.maxRate) / length),
+      );
+    }
+  }
+  if (!events.length || max < 1) throw new ApiError("SPOKEN_UNSUPPORTED_SCORE");
+  const minimum = Math.max(1, Math.ceil((beats * 60) / limits.maxSeconds));
+  if (minimum > max) throw new ApiError("SPOKEN_TOO_LONG");
+  return { min: minimum, max };
+}
+
+export function chooseTempo(bpm: number, range: TempoRange): number {
+  if (!Number.isInteger(bpm) || bpm <= 0)
+    throw new ApiError("SPOKEN_INVALID_TEMPO");
+  return Math.max(range.min, Math.min(range.max, bpm));
+}
 export function planPlayback(
   events: NoteEvent[],
   durations: ReadonlyMap<string, number>,
@@ -38,16 +96,7 @@ export function planPlayback(
         language,
         naming,
       );
-      const sizes = paths.map((path) => {
-        const duration = durations.get(path);
-        if (
-          !duration ||
-          !Number.isFinite(duration) ||
-          duration > limits.maxClipSeconds
-        )
-          throw new ApiError("SPOKEN_CLIPS_UNAVAILABLE");
-        return duration;
-      });
+      const sizes = clipLengths(paths, durations, limits);
       const requiredRate = sizes.reduce((sum, size) => sum + size, 0) / seconds;
       if (requiredRate > limits.maxRate + 1e-9)
         throw new ApiError("SPOKEN_TEMPO_TOO_FAST");
@@ -126,7 +175,7 @@ export class SpeechPlayer {
     bpm: number,
     language: Language,
     naming: NoteNaming,
-    ready: () => void,
+    ready: (bpm: number) => void,
   ): Promise<void> {
     this.stop();
     const generation = this.generation;
@@ -203,16 +252,25 @@ export class SpeechPlayer {
         if (generation !== this.generation) return;
       }
       if (generation !== this.generation) return;
+      const durations = new Map(
+        [...buffers].map(([path, buffer]) => [path, buffer.duration]),
+      );
+      const range = tempoRange(events, durations, language, naming, {
+        ...spokenConfig,
+        minBpm: Math.min(spokenConfig.minBpm, bpm),
+      });
+      const fittedBpm = chooseTempo(bpm, range);
       const plan = planPlayback(
         events,
-        new Map([...buffers].map(([path, buffer]) => [path, buffer.duration])),
-        bpm,
+        durations,
+        fittedBpm,
         language,
         naming,
+        { ...spokenConfig, minBpm: range.min },
       );
       const start = context.currentTime + 0.05;
       this.sources = scheduleAudio(context, plan, buffers, start);
-      ready();
+      ready(fittedBpm);
       let last = -1;
       const tick = () => {
         if (generation !== this.generation) return;

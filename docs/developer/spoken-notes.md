@@ -110,11 +110,28 @@ The name and optional suffix share that slot.
 Playback rate never drops below 1; the word keeps its natural pitch and voice.
 Silence fills the remaining duration after the word, instead of a slower, lower-pitched voice.
 The scheduler speeds up the word only when it does not fit at the natural rate, up to the configured maximum.
-A name that cannot fit at the maximum rate produces `SPOKEN_TEMPO_TOO_FAST`.
+Conservative AAC frame timings select a safe integer tempo before the first playback.
+Decoded buffer lengths confirm the tempo before scheduling.
+The low-level planner retains `SPOKEN_TEMPO_TOO_FAST` for callers that bypass automatic fitting.
 The player does not truncate speech or overlap the next note.
-The user must lower the tempo.
-The default tempo is 72 BPM; the default slider range is 40–160 BPM.
+The preferred tempo is 72 BPM; the preferred slider range is 40–160 BPM.
+Short notes can extend the minimum below 40 BPM, while each score imposes a safe maximum.
+The complete-duration limit remains active; impossible scores report an explicit unsupported-score or duration error.
 Tempo changes stop speech and apply to the next explicit start.
+
+Browser storage remembers tempo per account, exercise, immutable score version, language, and naming choice.
+Storage failures show a localized error; clearing storage removes these preferences.
+Installed Safari applications can have separate browser storage.
+
+Export conservative timing metadata without regeneration:
+
+```sh
+PYTHONPATH=backend uv run --locked python -m worker.generate_spoken --write-timings
+```
+
+The command verifies existing assets and writes `timings.json`; it makes no OpenAI request and changes no voice files.
+Normal generation also exports timings.
+Full AAC frame counts include decoder padding; container duration alone can underestimate decoded speech length.
 
 The cursor marks the first written note of a tied event for its combined duration.
 The animation clock updates the cursor; the audio clock controls sound.
@@ -134,7 +151,7 @@ Speech does not create or complete recorded-audio journal sessions.
 Image-only speech also creates no journal row.
 
 Generated vocabulary clips are public application assets, not uploaded exercise files.
-The Docker build explicitly includes only `frontend/public/solfege/` from the public directory.
+The Docker build explicitly includes public voice assets and application installation assets.
 Private originals, exercise recordings, and MusicXML retain authenticated delivery.
 Missing clips, invalid media, unsupported notation, and audio failures show localized errors.
 

@@ -1,4 +1,12 @@
 {
+  "errors.SPOKEN_TEMPO_STORAGE_FAILED": "The tempo cannot be remembered in this browser.",
+  "install.title": "Install Solfège Trainer",
+  "install.action": "Install app",
+  "install.close": "Not now",
+  "install.safari": "In Safari, open Share, choose Add to Home Screen, then tap Add.",
+  "install.browser": "Open your browser menu and choose Install app or Add to Home Screen.",
+  "install.error": "The installation prompt could not be opened. Use your browser menu.",
+  "install.shortName": "Solfège",
   "theme.dark": "Use dark theme",
   "theme.light": "Use light theme",
   "notFound.title": "Page not found",

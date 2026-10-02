@@ -86,6 +86,15 @@ Cleanup disconnects the observer; rendering errors retain the translated error a
 Native audio, score refs, rendering effects, and speech scheduling remain unchanged.
 The score surface remains white in dark mode.
 
+Browser preferences initialize the anonymous interface; saved account language takes priority after authentication.
+Localized manifests and original favicon, phone, and iPad icons support optional online installation.
+`InstallApp` offers native mobile installation after a click, or browser-specific manual guidance.
+Standalone applications suppress the offer; dismissal and installation listeners preserve existing authentication and playback trees.
+No service worker or protected-file cache exists.
+Docker context rules explicitly include only the public voice assets and installation assets.
+nginx serves manifests with `application/manifest+json`.
+
+The health panel appears only on Settings; other pages do not request health.
 The health request has a deadline and follows query cancellation.
 The page does not show old successful data after a failed recheck.
 Errors appear explicitly in the selected language.

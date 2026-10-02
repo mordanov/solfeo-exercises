@@ -167,6 +167,7 @@ export function Score({
           key={`${id}-${version}-${user.ui_language}-${user.note_naming}`}
           id={id}
           version={version}
+          score={query.data}
           user={user}
           highlight={highlight}
         />

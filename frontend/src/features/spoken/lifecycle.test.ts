@@ -67,6 +67,23 @@ it("resumes synchronously, schedules only after loading, and stops every source"
   expect(position).toHaveBeenLastCalledWith(null);
   expect(failed).not.toHaveBeenCalled();
 });
+it("lowers tempo against decoded clip lengths before scheduling instead of reporting a too-fast error", async () => {
+  const failed = vi.fn();
+  const ready = vi.fn();
+  const player = new SpeechPlayer(vi.fn(), vi.fn(), failed);
+  const pending = player.play(
+    async () => [{ ...note, beats: 0.125 }],
+    72,
+    "en",
+    "letters",
+    ready,
+  );
+  Context.latest.decodeAudioData.mockResolvedValue({ duration: 0.5 });
+  await pending;
+  expect(ready).toHaveBeenCalledWith(22);
+  expect(failed).not.toHaveBeenCalled();
+  expect(Context.latest.nodes).toHaveLength(1);
+});
 it("stopping during authorization prevents late playback", async () => {
   let finish: (events: NoteEvent[]) => void = () => {};
   const load = new Promise<NoteEvent[]>((resolve) => {

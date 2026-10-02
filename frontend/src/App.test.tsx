@@ -7,7 +7,7 @@ import { App } from "./App";
 import { i18n } from "./i18n";
 
 beforeEach(async () => {
-  window.history.replaceState({}, "", "/");
+  window.history.replaceState({}, "", "/settings");
   await i18n.changeLanguage("en");
 });
 
@@ -145,5 +145,18 @@ it.each([
       await screen.findByRole("button", { name: "Sign in" }),
     ).toBeInTheDocument();
     expect(screen.queryByText("Page not found")).not.toBeInTheDocument();
+  },
+);
+
+it.each(["/", "/login", "/student", "/manager/users"])(
+  "does not request or show service status on %s",
+  async (path) => {
+    window.history.replaceState({}, "", path);
+    const health = vi.fn().mockResolvedValue(new Response('{"status":"ok"}'));
+    mockHealth(health);
+    renderApp();
+    await screen.findByRole("button", { name: "Sign in" });
+    expect(screen.queryByText("Service status")).not.toBeInTheDocument();
+    expect(health).not.toHaveBeenCalled();
   },
 );

@@ -32,7 +32,7 @@ Date filters continue to use your browser's native date controls.
    Cards retain the same actions and pagination as tables.
 5. Select dates and files in Safari on an iPhone.
 6. Open recognition review and inspect every measure and note label.
-   The original image and score remain in separate vertical sections on a phone.
+   Review shows only the score; the exercise preview retains the original image.
 7. Turn the device during audio preview or spoken playback.
    The score adjusts to the available width without resetting playback.
 8. Confirm a Telegram replacement and inspect its selected exercise and confirmation control.
@@ -57,8 +57,8 @@ Date filters continue to use your browser's native date controls.
    Recognition enters the queue; students continue to see the original image.
 2. Click **Review recognition** beside the exercise.
 3. Click **Refresh status** after processing.
-   The original image and recognized score appear side by side when recognition succeeds.
-4. Compare all notes, rests, durations, clefs, accidentals, and measure boundaries.
+   The recognized score appears without a duplicate original image.
+4. Compare every note, rest, duration, clef, accidental, and measure with the original image in the exercise preview.
 5. Select **Show note names** to check labels in your saved naming system.
 6. Click **Approve** only when the score is correct.
    Students can now see the rendered score.
@@ -67,7 +67,7 @@ Date filters continue to use your browser's native date controls.
 8. Click **Run recognition** to retry or process an existing image.
    This action withdraws the previous score until you approve the new result.
 
-An error state never hides the original image.
+The exercise preview retains the original image even when recognition fails.
 One exercise can continue on several lines; a line break does not require a separate upload.
 The worker retries missing staff detection once with a threshold for faint lines.
 If staff detection still fails, the page requests a clearer image.
@@ -380,5 +380,9 @@ Approval permits playback; a review preview alone does not.
    Speech does not create or complete a recorded-audio listening session.
 
 Missing voice files require operator generation, not another OMR attempt.
-An excessive-tempo error requires a lower tempo.
+The application chooses a safe tempo before playback and remembers adjustments in this browser.
+The saved tempo separates accounts, exercises, score versions, languages, and naming choices.
+The slider can extend below its usual minimum for short notes.
+See the student guide for mobile installation and browser language defaults.
+The Service status panel appears only in Settings.
 See `../developer/spoken-notes.md` for generation and supported notation.

@@ -47,6 +47,17 @@ export function isLanguage(value: string): value is Language {
   return value === "en" || value === "ru" || value === "es";
 }
 
+export function browserLanguage(
+  languages: readonly string[] = navigator.languages,
+  language = navigator.language,
+): Language {
+  for (const preference of languages.length ? languages : [language]) {
+    const candidate = preference.trim().toLowerCase().split("-")[0];
+    if (isLanguage(candidate)) return candidate;
+  }
+  return "en";
+}
+
 export function readConfiguration(language = "en", timeout = "5000") {
   if (!isLanguage(language)) {
     throw new Error("VITE_DEFAULT_LANGUAGE must be en, ru, or es");
