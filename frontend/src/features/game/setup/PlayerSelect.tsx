@@ -47,7 +47,12 @@ export default function PlayerSelect({ onSelect }: Props) {
                 gap: 1,
               }}
             >
-              <AvatarImage animalId={p.avatar_animal ?? "unicorn"} size={80} />
+              <AvatarImage
+                animalId={p.avatar_animal ?? "unicorn"}
+                size={80}
+                stage={p.avatar_level}
+                customAvatarId={p.custom_avatar_id}
+              />
               <Typography
                 variant="body1"
                 sx={{ fontWeight: 600, textAlign: "center" }}
@@ -55,7 +60,7 @@ export default function PlayerSelect({ onSelect }: Props) {
                 {p.name}
               </Typography>
               <Typography variant="caption" color="text.secondary">
-                {p.xp} XP
+                {t("game.profile.level", { level: p.avatar_level })} · {p.xp} XP
               </Typography>
             </CardActionArea>
           </Card>

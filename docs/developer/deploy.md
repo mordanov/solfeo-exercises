@@ -42,6 +42,20 @@ The owner confirms completion of PHASE 5 and PHASE 6 after deployment.
 The owner subsequently confirms final PHASE 7 smoke acceptance on 2026-10-01.
 The earlier RAM refusal below is historical evidence, not the current deployment state.
 
+### Game avatar worker
+
+Publish the avatar backend and frontend together after the game migration `0008_game`.
+The release includes the 11-character public artwork and the `avatars` worker service.
+The worker shares the backend image, database, and private media volume.
+The rollout includes it in deployment and compatible rollback.
+Its dedicated external network does not publish a port.
+
+**Caution:** Avatar creation can incur image-generation charges.
+Set `OPENAI_API_KEY` privately in `.env.production` only when generation is needed.
+The empty default keeps the worker idle and returns an explicit unavailable error from the API.
+Built-in selection and XP progression do not require this credential.
+See `game-avatars.md` for generated-file authorization and offline artwork extraction.
+
 ## Storage capacity
 
 The rollout checks the local Docker storage filesystem and the release filesystem before image pulls.

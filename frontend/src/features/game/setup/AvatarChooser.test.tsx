@@ -1,0 +1,211 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from "@testing-library/react";
+import { beforeEach, afterEach, expect, it, vi } from "vitest";
+import { i18n } from "../../../i18n";
+import AvatarChooser from "./AvatarChooser";
+import ResultScreen from "../result/ResultScreen";
+import { useSubmitTask } from "../api/hooks";
+
+const player = {
+  id: 1,
+  name: "Hero",
+  avatar_animal: "rhino",
+  avatar_level: 6,
+  xp: 400,
+  custom_avatar_id: null,
+};
+let jobStatus = "ready";
+let unavailable = false;
+let resumeJob = false;
+const fetchMock = vi.fn(async (url: string, options?: RequestInit) => {
+  if (url.endsWith("/quota"))
+    return Response.json({ used: 0, limit: 3, resets_at: null });
+  if (url.endsWith("/avatars?player_id=1"))
+    return Response.json(resumeJob ? [{ id: 9, status: jobStatus }] : []);
+  if (url.endsWith("/generate"))
+    return unavailable
+      ? Response.json(
+          { error: "AVATAR_GENERATION_UNAVAILABLE" },
+          { status: 503 },
+        )
+      : Response.json({ job_id: 9 });
+  if (url.endsWith("/9/status"))
+    return Response.json({ id: 9, status: jobStatus, error_code: null });
+  if (url.endsWith("/1/avatar"))
+    return Response.json({
+      ...player,
+      avatar_animal: JSON.parse(String(options?.body)).avatar_animal,
+    });
+  if (url.endsWith("/1/submit"))
+    return Response.json({
+      correct: true,
+      score: 100,
+      next_task: null,
+      result: { correct_count: 7 },
+    });
+  if (url.endsWith("/9/use") || options?.method === "DELETE")
+    return Response.json({ ok: true });
+  if (url.endsWith("/players")) return Response.json([player]);
+  if (url.endsWith("/players/1")) return Response.json(player);
+  throw new Error(`Unexpected game request: ${url}`);
+});
+function mount(ui: React.ReactNode) {
+  const cache = new QueryClient({
+    defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
+  });
+  render(<QueryClientProvider client={cache}>{ui}</QueryClientProvider>);
+  return cache;
+}
+beforeEach(async () => {
+  await i18n.changeLanguage("en");
+  jobStatus = "ready";
+  unavailable = false;
+  resumeJob = false;
+  vi.stubGlobal("fetch", fetchMock);
+});
+afterEach(() => {
+  vi.unstubAllGlobals();
+  vi.clearAllMocks();
+});
+
+it.each(["Lion", "Panda", "Rhino"])(
+  "offers %s from the supplied art and persists the choice",
+  async (name) => {
+    const close = vi.fn();
+    mount(
+      <AvatarChooser playerId={1} csrf="synthetic-token" onClose={close} />,
+    );
+    const button = screen.getByRole("button", { name });
+    expect(within(button).getByRole("img")).toHaveAttribute(
+      "src",
+      `/assets/avatars/selection/${name.toLowerCase()}.png`,
+    );
+    fireEvent.click(button);
+    await waitFor(() => expect(close).toHaveBeenCalledOnce());
+    expect(fetchMock).toHaveBeenCalledWith(
+      "/api/game/players/1/avatar",
+      expect.objectContaining({
+        method: "POST",
+        body: JSON.stringify({ avatar_animal: name.toLowerCase() }),
+      }),
+    );
+  },
+);
+it("opens custom creation from the question card without an automatic paid request", async () => {
+  const close = vi.fn();
+  mount(<AvatarChooser playerId={1} csrf="synthetic-token" onClose={close} />);
+  expect(screen.getByRole("button", { name: "Close" })).toBeInTheDocument();
+  const question = screen.getByRole("button", { name: "Create avatar" });
+  expect(within(question).getByRole("img")).toHaveAttribute(
+    "src",
+    "/assets/avatars/selection/custom.png",
+  );
+  fireEvent.click(question);
+  expect(fetchMock.mock.calls.some(([url]) => url.endsWith("/generate"))).toBe(
+    false,
+  );
+  fireEvent.change(screen.getByRole("textbox"), {
+    target: { value: "An original rainbow animal" },
+  });
+  await waitFor(() =>
+    expect(
+      screen.getAllByRole("button", { name: "Create avatar" })[1],
+    ).toBeEnabled(),
+  );
+  fireEvent.click(screen.getAllByRole("button", { name: "Create avatar" })[1]);
+  const accept = await screen.findByRole("button", { name: "Use it" });
+  expect(
+    screen
+      .getAllByRole("img")
+      .some(
+        (image) =>
+          image.getAttribute("src") === "/api/game/avatars/9/files/neutral",
+      ),
+  ).toBe(true);
+  fireEvent.click(accept);
+  await waitFor(() => expect(close).toHaveBeenCalledOnce());
+});
+it("reports generation unavailability without closing the chooser", async () => {
+  unavailable = true;
+  const close = vi.fn();
+  mount(<AvatarChooser playerId={1} csrf="synthetic-token" onClose={close} />);
+  fireEvent.click(screen.getByRole("button", { name: "Create avatar" }));
+  fireEvent.change(screen.getByRole("textbox"), {
+    target: { value: "Original creature" },
+  });
+  await waitFor(() =>
+    expect(
+      screen.getAllByRole("button", { name: "Create avatar" })[1],
+    ).toBeEnabled(),
+  );
+  fireEvent.click(screen.getAllByRole("button", { name: "Create avatar" })[1]);
+  expect(await screen.findByRole("alert")).toHaveTextContent("unavailable");
+  expect(close).not.toHaveBeenCalled();
+});
+it("resumes a finished generation when the chooser reopens", async () => {
+  resumeJob = true;
+  mount(
+    <AvatarChooser playerId={1} csrf="synthetic-token" onClose={() => {}} />,
+  );
+  expect(await screen.findByRole("button", { name: "Use it" })).toBeEnabled();
+  expect(fetchMock.mock.calls.some(([url]) => url.endsWith("/generate"))).toBe(
+    false,
+  );
+});
+it.each([0, 1, 2, 3, 4, 5, 6, 7])(
+  "shows the authoritative level and correct emotion for %i answers",
+  async (correct) => {
+    mount(
+      <ResultScreen
+        playerId={1}
+        result={{
+          score: 100,
+          correct_count: correct,
+          is_win: correct >= 5,
+          xp_gained: 1,
+          level_up: false,
+          new_trophy: null,
+          practice_hint: "",
+        }}
+        onPlayAgain={() => {}}
+        onChangePlayer={() => {}}
+      />,
+    );
+    expect(await screen.findByRole("img")).toHaveAttribute(
+      "src",
+      `/assets/avatars/rhino/rhino_06_${correct >= 5 ? "happy" : correct >= 3 ? "neutral" : "sad"}.png`,
+    );
+  },
+);
+it("refreshes both player caches after a completed round", async () => {
+  function Submit() {
+    const submit = useSubmitTask(1);
+    return (
+      <button
+        onClick={() =>
+          submit.mutate({
+            csrf: "synthetic-token",
+            task_index: 6,
+            answers: [{ name: "C", octave: 4 }],
+          })
+        }
+      >
+        Submit
+      </button>
+    );
+  }
+  const cache = mount(<Submit />);
+  cache.setQueryData(["game", "players"], [{ ...player, avatar_level: 5 }]);
+  cache.setQueryData(["game", "player", 1], { ...player, avatar_level: 5 });
+  fireEvent.click(screen.getByRole("button"));
+  await waitFor(() =>
+    expect(cache.getQueryState(["game", "players"])?.isInvalidated).toBe(true),
+  );
+  expect(cache.getQueryState(["game", "player", 1])?.isInvalidated).toBe(true);
+});

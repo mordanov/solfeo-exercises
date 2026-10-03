@@ -79,7 +79,12 @@ export default function AdminScreen({ csrf, onPlayerDetail }: Props) {
             boxShadow: "0 2px 0 rgba(0,0,0,0.07)",
           }}
         >
-          <AvatarImage animalId={p.avatar_animal ?? "unicorn"} size={48} />
+          <AvatarImage
+            animalId={p.avatar_animal ?? "unicorn"}
+            size={48}
+            stage={p.avatar_level}
+            customAvatarId={p.custom_avatar_id}
+          />
           <Box sx={{ flex: 1 }}>
             <Typography sx={{ fontWeight: 600 }}>{p.name}</Typography>
             <Typography variant="caption" color="text.secondary">

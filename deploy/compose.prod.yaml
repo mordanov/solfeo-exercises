@@ -107,6 +107,11 @@ services:
       FFMPEG_BINARY: ${FFMPEG_BINARY:-ffmpeg}
       FFPROBE_BINARY: ${FFPROBE_BINARY:-ffprobe}
       FILE_BINARY: ${FILE_BINARY:-file}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      AVATAR_IMAGE_MODEL: ${AVATAR_IMAGE_MODEL:-dall-e-3}
+      AVATAR_GEN_DAILY_LIMIT: ${AVATAR_GEN_DAILY_LIMIT:-3}
+      AVATAR_GEN_GRACE_MS: ${AVATAR_GEN_GRACE_MS:-500}
+      AVATAR_ROUND_EXPIRE_S: ${AVATAR_ROUND_EXPIRE_S:-3600}
     volumes:
       - media_data:/app/media
     tmpfs: [/tmp]
@@ -202,6 +207,23 @@ services:
       retries: 10
       start_period: 10s
 
+  avatars:
+    <<: *backend
+    restart: unless-stopped
+    command: ["python", "-m", "worker.generate_avatar"]
+    environment:
+      <<: *database
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      AVATAR_IMAGE_MODEL: ${AVATAR_IMAGE_MODEL:-dall-e-3}
+      MEDIA_ROOT: /app/media
+    volumes:
+      - media_data:/app/media
+    tmpfs: [/tmp]
+    networks: [database, avatars]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
   frontend:
     environment:
       DEPLOY_IMAGE_BUDGET_MB: ${DEPLOY_IMAGE_BUDGET_MB:-6144}
@@ -235,6 +257,7 @@ services:
 networks:
   application:
   telegram:
+  avatars:
   database:
     internal: true
 

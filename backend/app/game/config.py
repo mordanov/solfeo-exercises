@@ -59,5 +59,8 @@ ANIMAL_IDS = [
     "kitsune_fox",
     "pegasus",
     "mermaid",
+    "lion",
+    "panda",
+    "rhino",
 ]
 AVATAR_WORKER_LOCK_ID = 710024007

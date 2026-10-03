@@ -37,6 +37,29 @@ Students receive `FORBIDDEN` for current unapproved output.
 Deleted exercises return `EXERCISE_NOT_FOUND`.
 Worker failures expose stable `OMR_*` codes for translated UI errors.
 
+## Game avatars
+
+Player responses include `avatar_animal`, `custom_avatar_id`, `xp`, and derived `avatar_level` from 1 to 10.
+Students access only their own players.
+Managers can choose avatars for any player without changing the existing player-management permissions.
+
+| Method | Path | Access and result |
+|---|---|---|
+| GET | `/api/game/avatars/catalog` | Authenticated member; all 11 built-in identifiers |
+| POST | `/api/game/players/{id}/avatar` | Owner or manager, with CSRF; body contains `avatar_animal`; clears custom selection |
+| GET | `/api/game/avatars?player_id={id}` | Owner or manager; up to 5 recent generation jobs, excluding the selected job |
+| POST | `/api/game/avatars/generate` | Owner or manager, with CSRF; description and player ID; configured service required |
+| GET | `/api/game/avatars/{id}/status` | Job creator or manager; pending, ready, or failed |
+| POST | `/api/game/avatars/{id}/use` | Job creator or manager, with CSRF; selects a ready job |
+| DELETE | `/api/game/avatars/{id}` | Job creator or manager, with CSRF; discards a job and clears its active selection |
+| GET, HEAD | `/api/game/avatars/{id}/files/{state}` | Job creator, player owner, or manager; private PNG through nginx |
+
+File states use `neutral`, `happy`, and `sad`.
+The neutral state uses the generated base image.
+Invalid paths and missing files return `FILE_NOT_FOUND`.
+Unconfigured creation returns status `503` with `AVATAR_GENERATION_UNAVAILABLE`.
+See `game-avatars.md` for artwork correspondence, progression, and worker operation.
+
 ## Error responses
 
 | HTTP status | Body |

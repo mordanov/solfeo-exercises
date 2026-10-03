@@ -7,6 +7,17 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-10-03: The owner authorizes the supplied game artwork and extends the catalog with lion, panda, and rhino.
+  Keep original sheets and extract transparent files for 10 levels and 3 emotions.
+  Repeat source artwork when needed; preserve final forms when a sheet has 11 groups.
+  The mermaid uses the owner's repeated left-to-right neutral, happy, sad correspondence.
+  Results show happy for 5–7 correct answers, neutral for 3–4, and sad for 0–2.
+  This matches the existing winning bonus without changing XP rules.
+  The question mark opens explicit custom generation, not random selection.
+  The selection sheet lacks a unicorn portrait, so its first neutral appearance supplies that choice.
+  Custom creation uses the existing paid provider only after a user request.
+  The worker stays idle without a private credential; validation performs no paid generation.
+
 - 2026-10-02: The owner requires the student area to retain the original image alongside an available approved score.
   These are independent media blocks, not alternatives.
   Keep the original image visible during score loading and failures without adding a second fallback copy.

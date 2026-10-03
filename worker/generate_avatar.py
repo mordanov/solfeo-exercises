@@ -19,6 +19,7 @@ from sqlalchemy import select, text
 from app.database import Database
 from app.game.config import AVATAR_WORKER_LOCK_ID
 from app.game.models import AvatarGenerationLog, CustomAvatar
+from app.logging import configure_logging
 from app.settings import Settings
 
 logger = logging.getLogger(__name__)
@@ -67,7 +68,7 @@ def _generate_image(settings: Settings, prompt: str) -> str:
         entry = data[0]
         if isinstance(entry, dict):
             return str(entry["url"])
-    return ""
+    raise ValueError("AVATAR_IMAGE_MISSING")
 
 
 def _download(url: str, dest: Path) -> None:
@@ -142,21 +143,24 @@ def process_one(database: Database, settings: Settings) -> bool:
                 j = session.get(CustomAvatar, job_id)
                 if j:
                     j.status = "failed"
-                    j.error_code = str(exc)[:50]
+                    j.error_code = "AVATAR_GENERATION_FAILED"
     return True
 
 
 def main() -> None:
-    logging.basicConfig(level=logging.INFO)
     settings = Settings()
+    configure_logging("debug" if settings.log_level == "trace" else settings.log_level)
     database = Database(settings)
+    if not settings.openai_api_key.get_secret_value():
+        logger.info("Avatar generation disabled: OPENAI_API_KEY is not configured")
     with database.session() as session:
         session.execute(text(f"SELECT pg_advisory_lock({AVATAR_WORKER_LOCK_ID})"))
     logger.info("Avatar worker started (lock %d)", AVATAR_WORKER_LOCK_ID)
     try:
         while True:
             try:
-                process_one(database, settings)
+                if settings.openai_api_key.get_secret_value():
+                    process_one(database, settings)
             except Exception:
                 logger.exception("Unexpected error in worker loop")
             time.sleep(2)

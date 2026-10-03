@@ -2,8 +2,11 @@ import { Box, Button, Typography } from "@mui/material";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { type Task, useStartRound } from "../api/hooks";
+import { type Task, usePlayer, useStartRound } from "../api/hooks";
 import { unlockAudio } from "../audio/synth";
+import AvatarImage from "./AvatarImage";
+import AvatarChooser from "./AvatarChooser";
+import { ErrorMessage } from "../../../components/AccountUi";
 
 const DIFFICULTIES = ["easy", "medium", "hard"] as const;
 const NOTE_COUNTS = [1, 2, 3, 4] as const;
@@ -24,6 +27,8 @@ export default function GameSetup({ playerId, csrf, onRoundStarted }: Props) {
   const [difficulty, setDifficulty] = useState<string>("easy");
   const [noteCount, setNoteCount] = useState<number>(1);
   const startRound = useStartRound();
+  const player = usePlayer(playerId);
+  const [choosingAvatar, setChoosingAvatar] = useState(false);
 
   const handleStart = () => {
     unlockAudio();
@@ -38,6 +43,31 @@ export default function GameSetup({ playerId, csrf, onRoundStarted }: Props) {
 
   return (
     <Box sx={{ p: 3, maxWidth: 400, mx: "auto" }}>
+      {player.isError && <ErrorMessage error={player.error} />}
+      {player.data && (
+        <Box sx={{ textAlign: "center", mb: 2 }}>
+          <AvatarImage
+            animalId={player.data.avatar_animal ?? "unicorn"}
+            customAvatarId={player.data.custom_avatar_id}
+            stage={player.data.avatar_level}
+            size={144}
+          />
+          <Typography>{player.data.name}</Typography>
+          <Typography>
+            {t("game.profile.level", { level: player.data.avatar_level })}
+          </Typography>
+          <Button onClick={() => setChoosingAvatar(true)}>
+            {t("game.avatar.choose")}
+          </Button>
+        </Box>
+      )}
+      {choosingAvatar && (
+        <AvatarChooser
+          playerId={playerId}
+          csrf={csrf}
+          onClose={() => setChoosingAvatar(false)}
+        />
+      )}
       <Typography variant="h5" sx={{ mb: 2, fontWeight: 700 }}>
         {t("game.selectDifficulty")}
       </Typography>
@@ -47,7 +77,7 @@ export default function GameSetup({ playerId, csrf, onRoundStarted }: Props) {
             key={d}
             variant={difficulty === d ? "contained" : "outlined"}
             onClick={() => setDifficulty(d)}
-            sx={{ flex: 1 }}
+            sx={{ flex: 1, minWidth: 0 }}
           >
             {t(`game.difficulty.${d}`)}
           </Button>
@@ -63,7 +93,7 @@ export default function GameSetup({ playerId, csrf, onRoundStarted }: Props) {
             key={n}
             variant={noteCount === n ? "contained" : "outlined"}
             onClick={() => setNoteCount(n)}
-            sx={{ flex: 1, minHeight: 64, fontSize: "1.4rem" }}
+            sx={{ flex: 1, minWidth: 0, minHeight: 64, fontSize: "1.4rem" }}
           >
             {n}
           </Button>
@@ -80,6 +110,7 @@ export default function GameSetup({ playerId, csrf, onRoundStarted }: Props) {
       >
         {t("game.startRound")}
       </Button>
+      {startRound.isError && <ErrorMessage error={startRound.error} />}
     </Box>
   );
 }

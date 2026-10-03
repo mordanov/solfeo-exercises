@@ -11,7 +11,9 @@ import {
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-import { usePlayerStats } from "../api/hooks";
+import { usePlayer, usePlayerStats } from "../api/hooks";
+import AvatarImage from "../setup/AvatarImage";
+import { ErrorMessage } from "../../../components/AccountUi";
 
 const TROPHY_ICONS: Record<number, string> = {
   20: "🥉",
@@ -35,9 +37,24 @@ export default function ProfileScreen({
 }: Props) {
   const { t } = useTranslation();
   const { data: stats = {} } = usePlayerStats(playerId);
+  const player = usePlayer(playerId);
 
   return (
     <Box sx={{ p: 3, maxWidth: 600, mx: "auto" }}>
+      {player.isError && <ErrorMessage error={player.error} />}
+      {player.data && (
+        <Box sx={{ textAlign: "center" }}>
+          <AvatarImage
+            animalId={player.data.avatar_animal ?? "unicorn"}
+            stage={player.data.avatar_level}
+            customAvatarId={player.data.custom_avatar_id}
+            size={144}
+          />
+          <Typography>
+            {t("game.profile.level", { level: player.data.avatar_level })}
+          </Typography>
+        </Box>
+      )}
       <Typography variant="h5" sx={{ fontWeight: 700, mb: 2 }}>
         {t("game.profile.stats")}
       </Typography>

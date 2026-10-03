@@ -158,7 +158,7 @@ Only the OMR container needs executable temporary memory for JavaCPP native libr
 |---|---|---|
 | `AVATAR_IMAGE_MODEL` | `dall-e-3` | OpenAI image model used for custom avatar generation |
 | `AVATAR_GEN_DAILY_LIMIT` | `3` | Maximum billable avatar generations per student per day |
-| `AVATAR_GEN_GRACE_MS` | `500` | Milliseconds the worker waits before marking a job failed |
+| `AVATAR_GEN_GRACE_MS` | `500` | Extra milliseconds allowed when the game checks a timed answer |
 | `AVATAR_ROUND_EXPIRE_S` | `3600` | Seconds before an unfinished round expires |
 
 ## Container deployment settings

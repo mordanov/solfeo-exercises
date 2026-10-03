@@ -7,6 +7,23 @@ Prerequisites:
 - Obtain manager credentials privately from the operator.
 - Open `https://solfeo.miveralta.ru/`, or use the local stand from `docs/developer/setup.md`.
 
+## Game avatar management
+
+1. Open **Guess the Note** and select a player.
+2. Click **Choose avatar**.
+   The window shows all 11 built-in characters, including Lion, Panda, and Rhino.
+3. Select a character.
+   The player retains XP and uses the corresponding avatar level.
+4. Inspect the player cards and game results.
+   Cards show the saved appearance; results show the emotion associated with the correct-answer count.
+5. Use the question mark only when you want to generate an original character.
+   The student guide explains preview, acceptance, and discard.
+
+Managers bypass the daily generation quota.
+The private deployment configuration still needs `OPENAI_API_KEY`.
+Generation remains unavailable without that setting.
+The avatar worker starts with the normal application release.
+
 ## Change the visual theme
 
 1. Click **Use dark theme** or **Use light theme** above the account area.

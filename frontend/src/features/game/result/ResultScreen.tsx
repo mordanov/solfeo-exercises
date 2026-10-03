@@ -1,5 +1,9 @@
 import { Box, Button, Chip, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { usePlayer } from "../api/hooks";
+import AvatarImage from "../setup/AvatarImage";
+import { roundMood } from "../setup/avatars";
+import { ErrorMessage } from "../../../components/AccountUi";
 
 interface RoundResult {
   score: number;
@@ -12,6 +16,7 @@ interface RoundResult {
 }
 
 interface Props {
+  playerId: number;
   result: RoundResult;
   onPlayAgain: () => void;
   onChangePlayer: () => void;
@@ -31,14 +36,32 @@ function Stars({ correct }: { correct: number }) {
 }
 
 export default function ResultScreen({
+  playerId,
   result,
   onPlayAgain,
   onChangePlayer,
 }: Props) {
   const { t } = useTranslation();
+  const player = usePlayer(playerId);
 
   return (
     <Box sx={{ p: 3, textAlign: "center", maxWidth: 400, mx: "auto" }}>
+      {player.isError && <ErrorMessage error={player.error} />}
+      {player.isPending && <Typography>{t("common.loading")}</Typography>}
+      {player.data && (
+        <>
+          <AvatarImage
+            animalId={player.data.avatar_animal ?? "unicorn"}
+            stage={player.data.avatar_level}
+            mood={roundMood(result.correct_count)}
+            customAvatarId={player.data.custom_avatar_id}
+            size={192}
+          />
+          <Typography>
+            {t("game.profile.level", { level: player.data.avatar_level })}
+          </Typography>
+        </>
+      )}
       <Typography variant="h3" sx={{ fontWeight: 800, mb: 1 }}>
         {result.is_win ? t("game.result.win") : t("game.result.lose")}
       </Typography>
@@ -78,7 +101,14 @@ export default function ResultScreen({
         {result.practice_hint}
       </Typography>
 
-      <Box sx={{ display: "flex", gap: 2, justifyContent: "center" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
+          gap: 2,
+          justifyContent: "center",
+        }}
+      >
         <Button
           variant="contained"
           size="large"
