@@ -11,6 +11,7 @@ router = APIRouter(prefix="/api/game/players", tags=["game-players"])
 class CreatePlayerBody(BaseModel):
     name: str = Field(min_length=1, max_length=20)
     avatar_animal: str | None = None
+    account_id: int | None = Field(default=None, gt=0)
 
 
 class PatchPlayerBody(BaseModel):
@@ -49,7 +50,8 @@ def create_player(
 ) -> dict[str, object]:
     from app.game.services.players import create_player as svc_create
 
-    player = svc_create(session, identity.user.id, body.name, body.avatar_animal)
+    account_id = body.account_id if body.account_id is not None else identity.user.id
+    player = svc_create(session, account_id, body.name, body.avatar_animal)
     return _player_out(player)
 
 

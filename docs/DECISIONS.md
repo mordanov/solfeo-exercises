@@ -7,6 +7,12 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-10-03: The game first-entry repair retains the approved manager-only profile creation policy.
+  Managers assign profiles to active accounts through the existing creation endpoint.
+  Students choose owned profiles; empty lists direct them to a manager.
+  No automatic profiles or student creation permissions are introduced.
+  This preserves the existing authorization boundary rather than assuming approval for new permissions.
+
 - 2026-10-03: The owner authorizes the supplied game artwork and extends the catalog with lion, panda, and rhino.
   Keep original sheets and extract transparent files for 10 levels and 3 emotions.
   Repeat source artwork when needed; preserve final forms when a sheet has 11 groups.

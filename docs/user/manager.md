@@ -7,6 +7,27 @@ Prerequisites:
 - Obtain manager credentials privately from the operator.
 - Open `https://solfeo.miveralta.ru/`, or use the local stand from `docs/developer/setup.md`.
 
+## Create a game profile
+
+1. Click **Guess the Note** in the account menu.
+   The player list opens.
+2. Click **Create player**.
+   The form shows a name field and an account selector.
+3. Enter a player name.
+4. Select the student's account, or retain your own account.
+   Use **Next** and **Previous** to find accounts beyond the first page.
+5. Click **Create player**.
+   The new profile appears with level 1 and a Unicorn avatar.
+6. Select the profile.
+7. Choose the difficulty and number of notes.
+8. Click **Let's go!**.
+   The first round starts.
+
+Only managers create profiles.
+Each student sees profiles assigned to their account.
+The application does not create a profile automatically when an account signs in.
+A failed request shows an error and **Try again**, not an empty player list.
+
 ## Game avatar management
 
 1. Open **Guess the Note** and select a player.

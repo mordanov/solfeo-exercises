@@ -7,6 +7,19 @@ Prerequisites:
 - Obtain your username and temporary password privately from a manager.
 - Open `https://solfeo.miveralta.ru/`.
 
+## Start Guess the Note
+
+1. Click **Guess the Note** in the account menu.
+   The list shows profiles assigned to your account.
+2. Ask a manager to create a profile if the list is empty.
+   Students cannot create profiles.
+3. Select a player.
+4. Choose the difficulty and number of notes.
+5. Click **Let's go!**.
+   The first round starts.
+
+A failed request shows an error and **Try again**, not the empty-profile message.
+
 ## Choose a game avatar
 
 1. Open **Guess the Note** and select a player.

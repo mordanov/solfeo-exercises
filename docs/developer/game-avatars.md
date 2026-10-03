@@ -7,6 +7,17 @@ Prerequisites:
 - Keep the owner's original artwork in `avatars/`.
 - Use the locked Python environment for extraction.
 
+## First entry
+
+The account menu links to `/game` for both roles after any required password change.
+The player list distinguishes loading, request failures, and genuinely empty results.
+Only managers can open **Create player** and assign a profile to an active account.
+The account selector uses the existing 50-account pagination.
+The default avatar is Unicorn; the existing chooser changes it after creation.
+Creation also adds the active season required to start a round.
+Students without profiles receive guidance to contact a manager.
+Logout, session expiry, and account changes cancel and remove cached game data.
+
 ## Built-in characters
 
 The catalog contains unicorn, dragon, phoenix, griffin, sphinx cat, fox, pegasus, mermaid, lion, panda, and rhino.

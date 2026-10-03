@@ -31,11 +31,12 @@ beforeEach(async () => {
   await i18n.changeLanguage("en");
 });
 
-function mount() {
+function mount(cache?: QueryClient) {
   return render(
     <I18nextProvider i18n={i18n}>
       <QueryClientProvider
         client={
+          cache ??
           new QueryClient({
             defaultOptions: {
               queries: { retry: false, gcTime: 0 },
@@ -51,6 +52,45 @@ function mount() {
     </I18nextProvider>,
   );
 }
+
+it.each([manager, student])(
+  "links to the game for $role accounts",
+  async (user) => {
+    window.history.replaceState({}, "", "/game");
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url: string) =>
+        url === "/api/auth/me" ? json(auth(user)) : json([]),
+      ),
+    );
+    mount();
+    expect(
+      await screen.findByRole("link", { name: "Guess the Note" }),
+    ).toHaveAttribute("href", "/game");
+  },
+);
+
+it("clears cached game profiles when signing out", async () => {
+  window.history.replaceState({}, "", "/game");
+  const cache = new QueryClient({
+    defaultOptions: { queries: { retry: false }, mutations: { retry: false } },
+  });
+  cache.setQueryData(["game", "player", 999], { name: "Other account" });
+  vi.stubGlobal(
+    "fetch",
+    vi.fn(async (url: string) => {
+      if (url === "/api/auth/me") return json(auth());
+      if (url === "/api/auth/logout") return json({ ok: true });
+      return json([]);
+    }),
+  );
+  mount(cache);
+  await userEvent.click(
+    await screen.findByRole("button", { name: "Sign out" }),
+  );
+  await screen.findByRole("button", { name: "Sign in" });
+  expect(cache.getQueryData(["game", "player", 999])).toBeUndefined();
+});
 
 it("signs in and sends credentials only in the JSON request body", async () => {
   const fetch = vi.fn().mockImplementation(async (url: string) => {
@@ -192,6 +232,9 @@ it("requires a password change before showing protected features", async () => {
   expect(
     await screen.findByText("Change your password before continuing."),
   ).toBeInTheDocument();
+  expect(
+    screen.queryByRole("link", { name: "Guess the Note" }),
+  ).not.toBeInTheDocument();
   expect(screen.getByLabelText("Current password")).toBeInTheDocument();
   expect(
     screen.queryByRole("link", { name: "Settings" }),

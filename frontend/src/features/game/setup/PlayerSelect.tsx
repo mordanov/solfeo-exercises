@@ -1,21 +1,28 @@
-import { Box, Card, CardActionArea, Typography } from "@mui/material";
+import { Box, Button, Card, CardActionArea, Typography } from "@mui/material";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { usePlayers } from "../api/hooks";
 import AvatarImage from "./AvatarImage";
+import CreatePlayerDialog from "./CreatePlayerDialog";
+import { type Auth } from "../../../api/auth";
+import { ErrorMessage } from "../../../components/AccountUi";
 
 interface Props {
+  auth: Auth;
   onSelect: (playerId: number) => void;
 }
 
-export default function PlayerSelect({ onSelect }: Props) {
+export default function PlayerSelect({ auth, onSelect }: Props) {
   const { t } = useTranslation();
-  const { data: players = [], isLoading } = usePlayers();
+  const query = usePlayers();
+  const players = query.data ?? [];
+  const [creating, setCreating] = useState(false);
 
-  if (isLoading)
+  if (query.isPending)
     return (
       <Box sx={{ p: 4, textAlign: "center" }}>
-        <Typography>…</Typography>
+        <Typography role="status">{t("common.loading")}</Typography>
       </Box>
     );
 
@@ -27,6 +34,34 @@ export default function PlayerSelect({ onSelect }: Props) {
       >
         {t("game.selectPlayer")}
       </Typography>
+      {auth.user.role === "manager" && (
+        <Box sx={{ textAlign: "center", mb: 2 }}>
+          <Button variant="contained" onClick={() => setCreating(true)}>
+            {t("game.players.create")}
+          </Button>
+        </Box>
+      )}
+      {creating && (
+        <CreatePlayerDialog auth={auth} onClose={() => setCreating(false)} />
+      )}
+      {query.isError ? (
+        <Box>
+          <ErrorMessage error={query.error} />
+          <Button onClick={() => void query.refetch()}>
+            {t("common.retry")}
+          </Button>
+        </Box>
+      ) : (
+        players.length === 0 && (
+          <Typography role="status" sx={{ textAlign: "center" }}>
+            {t(
+              auth.user.role === "manager"
+                ? "game.players.emptyManager"
+                : "game.players.emptyStudent",
+            )}
+          </Typography>
+        )
+      )}
       <Box
         sx={{
           display: "flex",
@@ -55,7 +90,11 @@ export default function PlayerSelect({ onSelect }: Props) {
               />
               <Typography
                 variant="body1"
-                sx={{ fontWeight: 600, textAlign: "center" }}
+                sx={{
+                  fontWeight: 600,
+                  textAlign: "center",
+                  overflowWrap: "anywhere",
+                }}
               >
                 {p.name}
               </Typography>
