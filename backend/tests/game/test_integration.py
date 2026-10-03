@@ -25,33 +25,31 @@ async def _login(
 
 async def _make_manager(settings: Settings, database: Database) -> tuple[str, str]:
     with database.session() as s:
-        with s.begin():
-            create_user(
-                s,
-                settings,
-                username="mgr_int",
-                password="P@ssw0rd!!",
-                first_name="M",
-                last_name="I",
-                role="manager",
-                must_change_password=False,
-            )
+        create_user(
+            s,
+            settings,
+            username="mgr_int",
+            password="P@ssw0rd!!",
+            first_name="M",
+            last_name="I",
+            role="manager",
+            must_change_password=False,
+        )
     return "mgr_int", "P@ssw0rd!!"
 
 
 async def _make_manager2(settings: Settings, database: Database) -> tuple[str, str]:
     with database.session() as s:
-        with s.begin():
-            create_user(
-                s,
-                settings,
-                username="mgr_idem",
-                password="P@ssw0rd!!",
-                first_name="M",
-                last_name="J",
-                role="manager",
-                must_change_password=False,
-            )
+        create_user(
+            s,
+            settings,
+            username="mgr_idem",
+            password="P@ssw0rd!!",
+            first_name="M",
+            last_name="J",
+            role="manager",
+            must_change_password=False,
+        )
     return "mgr_idem", "P@ssw0rd!!"
 
 

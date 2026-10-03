@@ -54,6 +54,8 @@ async def client(
     app = create_app(settings)
     async with app.router.lifespan_context(app):
         async with httpx.AsyncClient(
-            transport=httpx.ASGITransport(app=app), base_url=ORIGIN
+            transport=httpx.ASGITransport(app=app),
+            base_url=ORIGIN,
+            headers={"Origin": ORIGIN},
         ) as c:
             yield c

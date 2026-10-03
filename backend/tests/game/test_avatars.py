@@ -11,17 +11,17 @@ def test_check_daily_quota_empty(settings: Settings, database: Database) -> None
     from app.game.services.avatars import check_daily_quota
 
     with database.session() as session:
+        user = create_user(
+            session,
+            settings,
+            username="qtest",
+            password="P@ssw0rd!!",
+            first_name="Q",
+            last_name="T",
+            role="student",
+            must_change_password=False,
+        )
         with session.begin():
-            user = create_user(
-                session,
-                settings,
-                username="qtest",
-                password="P@ssw0rd!!",
-                first_name="Q",
-                last_name="T",
-                role="student",
-                must_change_password=False,
-            )
             remaining = check_daily_quota(session, user.id, limit=3)
     assert remaining == 3
 
@@ -31,17 +31,17 @@ def test_check_daily_quota_decrements(settings: Settings, database: Database) ->
     from app.game.services.avatars import check_daily_quota
 
     with database.session() as session:
+        user = create_user(
+            session,
+            settings,
+            username="qtest2",
+            password="P@ssw0rd!!",
+            first_name="Q",
+            last_name="T",
+            role="student",
+            must_change_password=False,
+        )
         with session.begin():
-            user = create_user(
-                session,
-                settings,
-                username="qtest2",
-                password="P@ssw0rd!!",
-                first_name="Q",
-                last_name="T",
-                role="student",
-                must_change_password=False,
-            )
             session.add(AvatarGenerationLog(account_id=user.id, billable=True))
             session.flush()
             remaining = check_daily_quota(session, user.id, limit=3)
@@ -53,17 +53,17 @@ def test_non_billable_does_not_count(settings: Settings, database: Database) -> 
     from app.game.services.avatars import check_daily_quota
 
     with database.session() as session:
+        user = create_user(
+            session,
+            settings,
+            username="qtest3",
+            password="P@ssw0rd!!",
+            first_name="Q",
+            last_name="T",
+            role="student",
+            must_change_password=False,
+        )
         with session.begin():
-            user = create_user(
-                session,
-                settings,
-                username="qtest3",
-                password="P@ssw0rd!!",
-                first_name="Q",
-                last_name="T",
-                role="student",
-                must_change_password=False,
-            )
             session.add(AvatarGenerationLog(account_id=user.id, billable=False))
             session.flush()
             remaining = check_daily_quota(session, user.id, limit=3)
