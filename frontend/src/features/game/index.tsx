@@ -3,14 +3,30 @@ import { useState } from "react";
 import { type Auth } from "../../api/auth";
 import { type Task } from "./api/hooks";
 import { unlockAudio } from "./audio/synth";
+import PlayScreen, { type RoundResult } from "./play/PlayScreen";
 import GameTheme from "./GameTheme";
 import GameSetup from "./setup/GameSetup";
 import PlayerSelect from "./setup/PlayerSelect";
 
+const TIME_LIMIT_MS: Record<string, number> = {
+  easy: 13000,
+  medium: 10000,
+  hard: 7000,
+};
+
 type Screen =
   | { name: "players" }
   | { name: "setup"; playerId: number }
-  | { name: "play"; roundId: number; firstTask: Task };
+  | {
+      name: "play";
+      roundId: number;
+      firstTask: Task;
+      noteCount: number;
+      difficulty: string;
+      timeLimitMs: number;
+      playerId: number;
+    }
+  | { name: "result"; roundId: number; result: RoundResult; playerId: number };
 
 interface Props {
   auth: Auth;
@@ -38,15 +54,46 @@ export default function GameArea({ auth }: Props) {
         <GameSetup
           playerId={screen.playerId}
           csrf={auth.csrf_token}
-          onRoundStarted={(roundId, firstTask) => {
+          onRoundStarted={(roundId, firstTask, noteCount, difficulty) => {
             unlockAudio();
             window.history.pushState(null, "", `/game/play/${roundId}`);
-            setScreen({ name: "play", roundId, firstTask });
+            setScreen({
+              name: "play",
+              roundId,
+              firstTask,
+              noteCount,
+              difficulty,
+              timeLimitMs: TIME_LIMIT_MS[difficulty] ?? 10000,
+              playerId: screen.playerId,
+            });
           }}
         />
       )}
       {screen.name === "play" && (
-        <div style={{ padding: 24 }}>Play screen — Task 8</div>
+        <PlayScreen
+          roundId={screen.roundId}
+          csrf={auth.csrf_token}
+          initialTask={screen.firstTask}
+          noteCount={screen.noteCount}
+          difficulty={screen.difficulty}
+          timeLimitMs={screen.timeLimitMs}
+          onResult={(result) => {
+            window.history.pushState(
+              null,
+              "",
+              `/game/result/${screen.roundId}`,
+            );
+            setScreen({
+              name: "result",
+              roundId: screen.roundId,
+              result,
+              playerId: screen.playerId,
+            });
+          }}
+        />
+      )}
+      {screen.name === "result" && (
+        <div style={{ padding: 24 }}>Result screen — Task 9</div>
       )}
     </GameTheme>
   );

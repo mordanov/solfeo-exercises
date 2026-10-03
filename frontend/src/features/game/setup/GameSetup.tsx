@@ -11,7 +11,12 @@ const NOTE_COUNTS = [1, 2, 3, 4] as const;
 interface Props {
   playerId: number;
   csrf: string;
-  onRoundStarted: (roundId: number, firstTask: Task) => void;
+  onRoundStarted: (
+    roundId: number,
+    firstTask: Task,
+    noteCount: number,
+    difficulty: string,
+  ) => void;
 }
 
 export default function GameSetup({ playerId, csrf, onRoundStarted }: Props) {
@@ -24,7 +29,10 @@ export default function GameSetup({ playerId, csrf, onRoundStarted }: Props) {
     unlockAudio();
     startRound.mutate(
       { csrf, player_id: playerId, difficulty, note_count: noteCount },
-      { onSuccess: (data) => onRoundStarted(data.round_id, data.task) },
+      {
+        onSuccess: (data) =>
+          onRoundStarted(data.round_id, data.task, noteCount, difficulty),
+      },
     );
   };
 
