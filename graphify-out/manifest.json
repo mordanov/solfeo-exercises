@@ -380,7 +380,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/App.tsx": {
-    "mtime": 1791052624.7372591,
+    "mtime": 1791055002.5989444,
     "ast_hash": "92ca17bac538947903f556630c18894d",
     "semantic_hash": ""
   },
@@ -395,7 +395,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/App.test.tsx": {
-    "mtime": 1791052377.3857718,
+    "mtime": 1791055002.5987523,
     "ast_hash": "b71728c36d5d653a99eada001477e080",
     "semantic_hash": ""
   },
@@ -500,12 +500,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/auth/AuthArea.test.tsx": {
-    "mtime": 1791050556.8213904,
+    "mtime": 1791055002.5992596,
     "ast_hash": "932d058de9e159b5d73ea951966426e6",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/auth/AuthArea.tsx": {
-    "mtime": 1791049796.0119698,
+    "mtime": 1791055002.5996785,
     "ast_hash": "5dbea64e571a7bd7d0b1cebdb06c7e14",
     "semantic_hash": ""
   },
@@ -515,57 +515,57 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/index.tsx": {
-    "mtime": 1791049686.7028842,
+    "mtime": 1791055002.6008418,
     "ast_hash": "82cce728c5dc3e3525fc4ba8f83ae778",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/GameTheme.tsx": {
-    "mtime": 1791030374.8415534,
+    "mtime": 1791055002.6000762,
     "ast_hash": "14cbe910481df9eba8ecda6f0e6ad48a",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/result/ResultScreen.tsx": {
-    "mtime": 1791030598.843362,
+    "mtime": 1791055002.6012099,
     "ast_hash": "fe3fd9a4cf12b24d6f4956b421304be6",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/setup/GameSetup.tsx": {
-    "mtime": 1791030456.005954,
+    "mtime": 1791055002.6021936,
     "ast_hash": "235b2c52520bbca4f5eb6b1f6f858973",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/setup/AvatarImage.tsx": {
-    "mtime": 1791028999.9597714,
+    "mtime": 1791055002.6017408,
     "ast_hash": "0ff9be5140ced734495bddbaf78d4d57",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/setup/avatars.ts": {
-    "mtime": 1791028999.9367445,
+    "mtime": 1791055002.6027906,
     "ast_hash": "1a0b2473fb6545e5db9673ecaeb4ac58",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/setup/AvatarChooser.tsx": {
-    "mtime": 1791030456.0047107,
+    "mtime": 1791055002.6015692,
     "ast_hash": "ec8c99b6f58f5f4130b4727475390ca3",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/setup/PlayerSelect.tsx": {
-    "mtime": 1791049814.976693,
+    "mtime": 1791055002.602538,
     "ast_hash": "914159fd4a0410869358061df03b895b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/setup/avatars.test.tsx": {
-    "mtime": 1791028999.9502027,
+    "mtime": 1791055002.6026764,
     "ast_hash": "513cce97977cabdb7ede6b6a4f0b8648",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/setup/AvatarChooser.test.tsx": {
-    "mtime": 1791030749.1638517,
+    "mtime": 1791055002.6013927,
     "ast_hash": "c3d078de8b0a2eed8fb8d000be038436",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/admin/AdminScreen.tsx": {
-    "mtime": 1791029000.0741453,
+    "mtime": 1791055002.6002998,
     "ast_hash": "a05bb13f18b1df67dbc9019ff6e55820",
     "semantic_hash": ""
   },
@@ -580,7 +580,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/profile/ProfileScreen.tsx": {
-    "mtime": 1791030568.3610828,
+    "mtime": 1791055002.601017,
     "ast_hash": "d3fc7635371be27b02e91ab3fb67f0ad",
     "semantic_hash": ""
   },
@@ -590,13 +590,13 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/api/hooks.ts": {
-    "mtime": 1791049686.700164,
+    "mtime": 1791055002.600647,
     "ast_hash": "d955946e7f3734b7824f281e007347ac",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/staff/clefPaths.ts": {
-    "mtime": 1791025290.4912274,
-    "ast_hash": "d60945f43c0e8b747443db16c6465e7b",
+    "mtime": 1791055517.7036798,
+    "ast_hash": "930c34c8080b8c40a072246ed632a3a3",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/staff/staffPos.test.ts": {
@@ -605,8 +605,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/staff/Staff.tsx": {
-    "mtime": 1791025290.491092,
-    "ast_hash": "c07b3731938e6e085fd3cfe5331e0d53",
+    "mtime": 1791055517.7048278,
+    "ast_hash": "fc8d3b44ab92cec3b0bc11da0ee0ae5d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/staff/staffPos.ts": {
@@ -825,18 +825,18 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/i18n/locales/ru.json": {
-    "mtime": 1791052092.143106,
-    "ast_hash": "713eca389e0a813d0e698f63a51be114",
+    "mtime": 1791055517.7073417,
+    "ast_hash": "bbb3d80e4d49c98c9b3a7726c2e7fceb",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/i18n/locales/en.json": {
-    "mtime": 1791052092.1444075,
-    "ast_hash": "58835ec5f2066e39346556c9a9fc392c",
+    "mtime": 1791055517.7061362,
+    "ast_hash": "d01d3121a094a1cb473c0bf038ad1c80",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/i18n/locales/es.json": {
-    "mtime": 1791052092.1456888,
-    "ast_hash": "c1cf7fe0ede9371991bf25d3e4cf22e3",
+    "mtime": 1791055517.7085967,
+    "ast_hash": "f61b2c7c1e8bc5c1ff452fc2818a3c1f",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/deploy/release.py": {
@@ -850,7 +850,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/deploy/rollout.py": {
-    "mtime": 1791029576.9957173,
+    "mtime": 1791055002.4509668,
     "ast_hash": "8c65d8cc99afbcdb12b8c22f2b6f82c5",
     "semantic_hash": ""
   },
@@ -865,12 +865,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/deploy/tests/test_production.py": {
-    "mtime": 1791030587.833125,
+    "mtime": 1791055002.4511855,
     "ast_hash": "a3242c38fd66e4841df4aa9b56df9f0b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/deploy/tests/test_rollout.py": {
-    "mtime": 1791029608.3150911,
+    "mtime": 1791055002.4514441,
     "ast_hash": "262394ab4c69d7eb932aa6dd6ec0f52f",
     "semantic_hash": ""
   },
@@ -975,7 +975,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/backend/app/game/config.py": {
-    "mtime": 1791028775.774377,
+    "mtime": 1791055002.4484797,
     "ast_hash": "b63595c50b66a27789c6d8286b642bbb",
     "semantic_hash": ""
   },
@@ -1010,12 +1010,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/backend/app/game/api/players.py": {
-    "mtime": 1791049686.6980321,
+    "mtime": 1791055002.4483173,
     "ast_hash": "954905d27643ba225645c289e56591fa",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/backend/app/game/api/avatars.py": {
-    "mtime": 1791029608.3149383,
+    "mtime": 1791055002.4481244,
     "ast_hash": "a023aa4d623b74b0876a88b6d2f2404f",
     "semantic_hash": ""
   },
@@ -1035,7 +1035,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/backend/app/game/services/players.py": {
-    "mtime": 1791049686.6990588,
+    "mtime": 1791055002.4486418,
     "ast_hash": "86e9b22e24d8a0cd42536e0f07c40506",
     "semantic_hash": ""
   },
@@ -1205,7 +1205,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/backend/tests/game/conftest.py": {
-    "mtime": 1791028986.591192,
+    "mtime": 1791055002.4488177,
     "ast_hash": "1187d60e855f2695406b344fd04757cd",
     "semantic_hash": ""
   },
@@ -1245,7 +1245,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/backend/tests/game/test_avatar_art.py": {
-    "mtime": 1791030810.6101947,
+    "mtime": 1791055002.4490829,
     "ast_hash": "3d2aca26e8a06a57a5273c38312bf555",
     "semantic_hash": ""
   },
@@ -1775,7 +1775,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/worker/generate_avatar.py": {
-    "mtime": 1791029920.2460692,
+    "mtime": 1791055002.6619318,
     "ast_hash": "bbc5da7a73741803f3d5b7d30d179a15",
     "semantic_hash": ""
   },
@@ -1800,12 +1800,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/worker/extract_avatar_art.py": {
-    "mtime": 1791029357.0465589,
+    "mtime": 1791055002.661542,
     "ast_hash": "1665b773335c77fce3e903c40462f5b7",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/crops.json": {
-    "mtime": 1791029401.8407254,
+    "mtime": 1791055002.1034842,
     "ast_hash": "80606fc0b87214b2b042875537fc70a7",
     "semantic_hash": ""
   },
@@ -1845,12 +1845,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/deploy/compose.prod.yaml": {
-    "mtime": 1791028986.5953763,
+    "mtime": 1791055002.4500692,
     "ast_hash": "d8487451b0349507bb2a16481a07eafc",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/deploy/compose.yaml": {
-    "mtime": 1791028986.5944078,
+    "mtime": 1791055002.4503608,
     "ast_hash": "80dbcb32d5a5a16e64d6dfce597d2efc",
     "semantic_hash": ""
   },
@@ -1860,7 +1860,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/PRODUCT_BRIEF.md": {
-    "mtime": 1791029839.227213,
+    "mtime": 1791055002.4519284,
     "ast_hash": "928976d8cdae7a922287abc394a29f36",
     "semantic_hash": ""
   },
@@ -1870,12 +1870,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/STATUS.md": {
-    "mtime": 1791052525.680132,
-    "ast_hash": "eb981dfd75ea93a4ca6f10b397f38195",
+    "mtime": 1791055899.8068504,
+    "ast_hash": "3e9e98c00f95f945129cb8ab5691697b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/DECISIONS.md": {
-    "mtime": 1791049926.300545,
+    "mtime": 1791055002.4516659,
     "ast_hash": "757cd8bd507f3f8670016d1c38dba43d",
     "semantic_hash": ""
   },
@@ -1905,7 +1905,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/developer/api.md": {
-    "mtime": 1791050311.6328444,
+    "mtime": 1791055002.4524043,
     "ast_hash": "683e81246144b2b62c03f83c57905c7e",
     "semantic_hash": ""
   },
@@ -1925,8 +1925,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/developer/glossary.md": {
-    "mtime": 1791050556.822425,
-    "ast_hash": "51d63de8410e4bd0a6eb7b8352789c09",
+    "mtime": 1791055899.8013742,
+    "ast_hash": "58fb0217ddd71a84c557371d9116850d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/developer/adding-a-language.md": {
@@ -1945,7 +1945,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/developer/deploy.md": {
-    "mtime": 1791029839.225613,
+    "mtime": 1791055002.4525976,
     "ast_hash": "b3a0316f6c8a29670339ea1deb7863b2",
     "semantic_hash": ""
   },
@@ -1955,8 +1955,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/developer/game-avatars.md": {
-    "mtime": 1791052377.3890622,
-    "ast_hash": "f3bd63f71f81aec365330d83dbb85f78",
+    "mtime": 1791055899.8052056,
+    "ast_hash": "b1603597ec22f000d912f62e02ed059e",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/developer/data-model.md": {
@@ -1975,7 +1975,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/developer/env-variables.md": {
-    "mtime": 1791030055.388114,
+    "mtime": 1791055002.4528787,
     "ast_hash": "53cc3f9639d4e0221dc4e88c3067a6af",
     "semantic_hash": ""
   },
@@ -1985,8 +1985,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/user/manager.md": {
-    "mtime": 1791052377.3870363,
-    "ast_hash": "7375bd8f8130375e7a9a44c84b782346",
+    "mtime": 1791055899.8041952,
+    "ast_hash": "d631e41190fc1aa997addb9a418b5618",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/user/telegram-prototype.md": {
@@ -1995,8 +1995,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/user/student.md": {
-    "mtime": 1791052377.3881161,
-    "ast_hash": "8d868f3c1769a5295694cbf1404051f0",
+    "mtime": 1791055899.8027968,
+    "ast_hash": "054a7c5546062df809f2df2ed8091784",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/user/pwa-prototype.md": {
@@ -2235,7 +2235,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_03_happy.png": {
-    "mtime": 1791029383.6757357,
+    "mtime": 1791055002.5765984,
     "ast_hash": "a1b762ffc6e41f182f64e06fd3a14730",
     "semantic_hash": ""
   },
@@ -2245,7 +2245,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_04_sad.png": {
-    "mtime": 1791029383.9083757,
+    "mtime": 1791055002.579237,
     "ast_hash": "790f961bca30928b5f3ba3277ca84dbf",
     "semantic_hash": ""
   },
@@ -2270,7 +2270,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_06_neutral.png": {
-    "mtime": 1791029384.121527,
+    "mtime": 1791055002.5811727,
     "ast_hash": "9abf1d42f74716185d59d5ac7256b102",
     "semantic_hash": ""
   },
@@ -2285,17 +2285,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_03_neutral.png": {
-    "mtime": 1791029383.6162617,
+    "mtime": 1791055002.5774093,
     "ast_hash": "3d05fc0a345fd277a3ef43897f3e3d0e",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_05_happy.png": {
-    "mtime": 1791029384.0151434,
+    "mtime": 1791055002.5796492,
     "ast_hash": "8696f225463b3b14fdb3d18ad4d5d7ed",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_05_sad.png": {
-    "mtime": 1791029384.0685935,
+    "mtime": 1791055002.5803723,
     "ast_hash": "7e032110fcdbd41e951a7064b663e63d",
     "semantic_hash": ""
   },
@@ -2305,7 +2305,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_08_happy.png": {
-    "mtime": 1791029384.4438903,
+    "mtime": 1791055002.5834455,
     "ast_hash": "4f40b4e9008ded89793f8c64ee9107ab",
     "semantic_hash": ""
   },
@@ -2315,12 +2315,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_09_neutral.png": {
-    "mtime": 1791029384.5236204,
+    "mtime": 1791055002.584906,
     "ast_hash": "78167d6d3a2f3c3555545314d9b4d637",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_02_happy.png": {
-    "mtime": 1791029383.4713576,
+    "mtime": 1791055002.5751183,
     "ast_hash": "8cd2c866aa173811311d547850f8414c",
     "semantic_hash": ""
   },
@@ -2330,7 +2330,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_07_sad.png": {
-    "mtime": 1791029384.3533754,
+    "mtime": 1791055002.5827765,
     "ast_hash": "c3a9b834e859222e5cfcdc78b6fee416",
     "semantic_hash": ""
   },
@@ -2340,22 +2340,22 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_05_neutral.png": {
-    "mtime": 1791029383.961235,
+    "mtime": 1791055002.5800102,
     "ast_hash": "6e17b902e079343a7b06466253e5a387",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_06_sad.png": {
-    "mtime": 1791029384.22122,
+    "mtime": 1791055002.581562,
     "ast_hash": "7a24ddc98461f3115fbac0f97dd30f9c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_10_happy.png": {
-    "mtime": 1791029384.684865,
+    "mtime": 1791055002.5860994,
     "ast_hash": "0f306f008a8f041b5df85748e284a5d6",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_04_happy.png": {
-    "mtime": 1791029383.850441,
+    "mtime": 1791055002.5783205,
     "ast_hash": "2ce51e2e614fdc3e49eac51dca6d7ca2",
     "semantic_hash": ""
   },
@@ -2375,12 +2375,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_10_neutral.png": {
-    "mtime": 1791029384.643417,
+    "mtime": 1791055002.5864847,
     "ast_hash": "78167d6d3a2f3c3555545314d9b4d637",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_09_happy.png": {
-    "mtime": 1791029384.5634797,
+    "mtime": 1791055002.5845582,
     "ast_hash": "0f306f008a8f041b5df85748e284a5d6",
     "semantic_hash": ""
   },
@@ -2390,7 +2390,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_01_happy.png": {
-    "mtime": 1791029383.2069597,
+    "mtime": 1791055002.5740001,
     "ast_hash": "d49691d9e3bc844a9d8cccf34e828bd4",
     "semantic_hash": ""
   },
@@ -2400,7 +2400,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_02_neutral.png": {
-    "mtime": 1791029383.3866243,
+    "mtime": 1791055002.5758405,
     "ast_hash": "a48d76cae1cac544dc4c70bc675b9596",
     "semantic_hash": ""
   },
@@ -2415,17 +2415,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_03_sad.png": {
-    "mtime": 1791029383.7372684,
+    "mtime": 1791055002.577803,
     "ast_hash": "43b10404473ac2d80a2d3540651c46de",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_07_happy.png": {
-    "mtime": 1791029384.3103182,
+    "mtime": 1791055002.5819438,
     "ast_hash": "daec184fd7c779f8655a67b821f4701f",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_07_neutral.png": {
-    "mtime": 1791029384.266888,
+    "mtime": 1791055002.5823662,
     "ast_hash": "498d9d983b6032ac044c7b7d1208fc13",
     "semantic_hash": ""
   },
@@ -2435,7 +2435,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_02_sad.png": {
-    "mtime": 1791029383.5528195,
+    "mtime": 1791055002.5762625,
     "ast_hash": "44b17f59b9a56e5afbd8954a84daf57e",
     "semantic_hash": ""
   },
@@ -2455,7 +2455,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_10_sad.png": {
-    "mtime": 1791029384.7221866,
+    "mtime": 1791055002.58697,
     "ast_hash": "36dfd0fc9f072764da09c3a42de731af",
     "semantic_hash": ""
   },
@@ -2475,12 +2475,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_04_neutral.png": {
-    "mtime": 1791029383.7937276,
+    "mtime": 1791055002.5788045,
     "ast_hash": "7bd6627a1da6a877a54f35365901cca3",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_09_sad.png": {
-    "mtime": 1791029384.6009812,
+    "mtime": 1791055002.5857573,
     "ast_hash": "36dfd0fc9f072764da09c3a42de731af",
     "semantic_hash": ""
   },
@@ -2495,7 +2495,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_06_happy.png": {
-    "mtime": 1791029384.1733437,
+    "mtime": 1791055002.5807998,
     "ast_hash": "9d0a7c6997d71455a91a864813169b48",
     "semantic_hash": ""
   },
@@ -2505,12 +2505,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_01_neutral.png": {
-    "mtime": 1791029383.1146266,
+    "mtime": 1791055002.574373,
     "ast_hash": "ac64a30dd46cf19e60b253be40ca3949",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_08_sad.png": {
-    "mtime": 1791029384.4816632,
+    "mtime": 1791055002.5841982,
     "ast_hash": "dd30ac7f323beadb905d5b7f10f8551c",
     "semantic_hash": ""
   },
@@ -2525,167 +2525,167 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_01_sad.png": {
-    "mtime": 1791029383.295503,
+    "mtime": 1791055002.5747566,
     "ast_hash": "e65bf5a2b58e1483f71a2bb843b908ec",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/sphinx_cat/sphinx_cat_08_neutral.png": {
-    "mtime": 1791029384.3998969,
+    "mtime": 1791055002.5838184,
     "ast_hash": "ff33a7e3f56cc585ca19193b5a8459f6",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_10_neutral.png": {
-    "mtime": 1791029376.8495631,
+    "mtime": 1791055002.5290275,
     "ast_hash": "b0e25836c091921ce8d689fe322525b2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_06_sad.png": {
-    "mtime": 1791029376.1393673,
+    "mtime": 1791055002.5223296,
     "ast_hash": "9b75c1a2b272e2b37a577da5a72800ea",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_04_happy.png": {
-    "mtime": 1791029375.6488385,
+    "mtime": 1791055002.5177321,
     "ast_hash": "5508859df9e0e9f2c73e5a8d045fc5b0",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_10_happy.png": {
-    "mtime": 1791029376.9174614,
+    "mtime": 1791055002.528648,
     "ast_hash": "df9f26a64a2461f0bd66faac5841deb8",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_05_neutral.png": {
-    "mtime": 1791029375.7859514,
+    "mtime": 1791055002.5195258,
     "ast_hash": "d3047ea0afbf3cb67a45efefcff9ab06",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_09_happy.png": {
-    "mtime": 1791029376.72301,
+    "mtime": 1791055002.5272567,
     "ast_hash": "c64352da64b7a87351aa0693288dc369",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_02_happy.png": {
-    "mtime": 1791029375.2132707,
+    "mtime": 1791055002.5142744,
     "ast_hash": "57b7697f95e71d5bf6f7779e6b342304",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_07_sad.png": {
-    "mtime": 1791029376.357399,
+    "mtime": 1791055002.524834,
     "ast_hash": "5042f3fa281dcbd3259fa84309c94de2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_09_neutral.png": {
-    "mtime": 1791029376.6569378,
+    "mtime": 1791055002.5275977,
     "ast_hash": "be06f6b58a4da74319cc6d3cd1d419fd",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_05_happy.png": {
-    "mtime": 1791029375.8538737,
+    "mtime": 1791055002.5191326,
     "ast_hash": "1413a0c8fe8daea352194540838aab81",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_03_neutral.png": {
-    "mtime": 1791029375.3750188,
+    "mtime": 1791055002.5161214,
     "ast_hash": "d6ec1606ab27c34306a3838e05407133",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_05_sad.png": {
-    "mtime": 1791029375.9288843,
+    "mtime": 1791055002.5199046,
     "ast_hash": "434af28425110c367e7bcc0e935bbcce",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_08_happy.png": {
-    "mtime": 1791029376.5171397,
+    "mtime": 1791055002.5255103,
     "ast_hash": "2d58c1b788d7a9363d58b64356cb2507",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_03_happy.png": {
-    "mtime": 1791029375.4489381,
+    "mtime": 1791055002.515551,
     "ast_hash": "681e46be6fd03c286c9e560091eefba3",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_06_neutral.png": {
-    "mtime": 1791029375.9984345,
+    "mtime": 1791055002.5214443,
     "ast_hash": "741690fc7444a2642cf6d2ae1f249118",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_04_sad.png": {
-    "mtime": 1791029375.7125869,
+    "mtime": 1791055002.5186982,
     "ast_hash": "8f5a0de8df78c650f984257ddf3cfc8a",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_08_sad.png": {
-    "mtime": 1791029376.5924819,
+    "mtime": 1791055002.5267155,
     "ast_hash": "0d5bf52b37464f095dc0885706e2e58a",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_06_happy.png": {
-    "mtime": 1791029376.068733,
+    "mtime": 1791055002.5207014,
     "ast_hash": "28054f3be61d578e2cc007473ad457fc",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_08_neutral.png": {
-    "mtime": 1791029376.4374173,
+    "mtime": 1791055002.526131,
     "ast_hash": "016ae928936b244883483fd24df4da84",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_01_sad.png": {
-    "mtime": 1791029375.0400991,
+    "mtime": 1791055002.513908,
     "ast_hash": "61f065ad32b4b5fc550f2170df1e2ff6",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_01_neutral.png": {
-    "mtime": 1791029374.8530524,
+    "mtime": 1791055002.5134728,
     "ast_hash": "6cda0a8306ad3f99e489d0654070b7cb",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_04_neutral.png": {
-    "mtime": 1791029375.5879557,
+    "mtime": 1791055002.5182312,
     "ast_hash": "405dfca871b4863e578481ab62a54ed3",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_10_sad.png": {
-    "mtime": 1791029376.9746954,
+    "mtime": 1791055002.5293753,
     "ast_hash": "80e7a7222bbc7a49bd29ec23892ee0e2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_09_sad.png": {
-    "mtime": 1791029376.7860677,
+    "mtime": 1791055002.528147,
     "ast_hash": "9234c1d814bdd4bd01769677ff6959db",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_02_sad.png": {
-    "mtime": 1791029375.3051865,
+    "mtime": 1791055002.5150583,
     "ast_hash": "c18d1af6bcd2fb5fa7e93d2893f0039f",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_07_happy.png": {
-    "mtime": 1791029376.2843418,
+    "mtime": 1791055002.5232613,
     "ast_hash": "9db150a9dcd1cb4f704b6e4c80bc535a",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_07_neutral.png": {
-    "mtime": 1791029376.2103283,
+    "mtime": 1791055002.5238912,
     "ast_hash": "1595bcca6f7ef3a0b4696052c028d12d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_02_neutral.png": {
-    "mtime": 1791029375.1283777,
+    "mtime": 1791055002.5146236,
     "ast_hash": "feb5452e8ce239b6ff56a1baaca5ef2a",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_01_happy.png": {
-    "mtime": 1791029374.9444401,
+    "mtime": 1791055002.5130591,
     "ast_hash": "9a2626794eb61f6c63b5dbd57f57f3cb",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/panda/panda_03_sad.png": {
-    "mtime": 1791029375.525818,
+    "mtime": 1791055002.5170906,
     "ast_hash": "6970e97d5305c62505889c4f3f99c151",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_02_sad.png": {
-    "mtime": 1791029371.649634,
+    "mtime": 1791055002.5459914,
     "ast_hash": "d6f238b83043e32b7ecbdf3b87979af2",
     "semantic_hash": ""
   },
@@ -2700,12 +2700,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_08_neutral.png": {
-    "mtime": 1791029372.5016315,
+    "mtime": 1791055002.5527723,
     "ast_hash": "337b7d6da5f163e29fd6dd72c7b56aec",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_01_happy.png": {
-    "mtime": 1791029371.377318,
+    "mtime": 1791055002.5437696,
     "ast_hash": "255233680ee409a5747369c10013ff05",
     "semantic_hash": ""
   },
@@ -2725,7 +2725,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_01_neutral.png": {
-    "mtime": 1791029371.2927933,
+    "mtime": 1791055002.544635,
     "ast_hash": "34fdc8fffbe6fae85648c27248c20032",
     "semantic_hash": ""
   },
@@ -2735,7 +2735,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_04_neutral.png": {
-    "mtime": 1791029371.883817,
+    "mtime": 1791055002.5478623,
     "ast_hash": "4b48a16c6b709ce0ac3611f3a49fe62f",
     "semantic_hash": ""
   },
@@ -2745,7 +2745,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_03_sad.png": {
-    "mtime": 1791029371.8333385,
+    "mtime": 1791055002.5470836,
     "ast_hash": "412b44d0428db0dfab05ac3695a92a07",
     "semantic_hash": ""
   },
@@ -2755,7 +2755,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_07_happy.png": {
-    "mtime": 1791029372.3916698,
+    "mtime": 1791055002.551343,
     "ast_hash": "f18d7ac68cdb5f884cadac96734c1d66",
     "semantic_hash": ""
   },
@@ -2765,7 +2765,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_08_sad.png": {
-    "mtime": 1791029372.626222,
+    "mtime": 1791055002.5531092,
     "ast_hash": "5b5c08b870ff9de35209dca5b0712566",
     "semantic_hash": ""
   },
@@ -2775,7 +2775,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_01_sad.png": {
-    "mtime": 1791029371.4512868,
+    "mtime": 1791055002.5449445,
     "ast_hash": "a98d5836a70148b920066f1c5c8d1a2b",
     "semantic_hash": ""
   },
@@ -2785,17 +2785,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_07_neutral.png": {
-    "mtime": 1791029372.3401253,
+    "mtime": 1791055002.5516644,
     "ast_hash": "68edc9afff45de8155470a2954a612de",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_10_sad.png": {
-    "mtime": 1791029372.9678044,
+    "mtime": 1791055002.5549192,
     "ast_hash": "72139b3c550023c62e4e6f6f268b5247",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_02_neutral.png": {
-    "mtime": 1791029371.5148206,
+    "mtime": 1791055002.5456252,
     "ast_hash": "172f403202605cdb065615cf74ebac53",
     "semantic_hash": ""
   },
@@ -2805,7 +2805,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_09_sad.png": {
-    "mtime": 1791029372.791518,
+    "mtime": 1791055002.55404,
     "ast_hash": "72139b3c550023c62e4e6f6f268b5247",
     "semantic_hash": ""
   },
@@ -2820,7 +2820,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_06_happy.png": {
-    "mtime": 1791029372.2443843,
+    "mtime": 1791055002.5502162,
     "ast_hash": "7814dea8269a24a77be534a3a99a2a89",
     "semantic_hash": ""
   },
@@ -2830,7 +2830,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_10_neutral.png": {
-    "mtime": 1791029372.8494303,
+    "mtime": 1791055002.5546424,
     "ast_hash": "9f3517fcd3e37758acc51e944cd27bef",
     "semantic_hash": ""
   },
@@ -2840,17 +2840,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_03_happy.png": {
-    "mtime": 1791029371.7749696,
+    "mtime": 1791055002.5462618,
     "ast_hash": "ae9b034814dde06fa31fbfe3265f6c96",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_05_neutral.png": {
-    "mtime": 1791029372.0410073,
+    "mtime": 1791055002.5491388,
     "ast_hash": "b01f8f1051cafb26f09d305b88cd70cc",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_05_sad.png": {
-    "mtime": 1791029372.1432223,
+    "mtime": 1791055002.5496123,
     "ast_hash": "97f94dcc87c630caf39058c1ececa29a",
     "semantic_hash": ""
   },
@@ -2865,7 +2865,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_08_happy.png": {
-    "mtime": 1791029372.5656059,
+    "mtime": 1791055002.5524511,
     "ast_hash": "dce91646cb193689a009e3574451b7b9",
     "semantic_hash": ""
   },
@@ -2875,12 +2875,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_04_sad.png": {
-    "mtime": 1791029371.9894104,
+    "mtime": 1791055002.548297,
     "ast_hash": "9c6d2decb818d1b0650fb028dd48958f",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_05_happy.png": {
-    "mtime": 1791029372.0924494,
+    "mtime": 1791055002.5486612,
     "ast_hash": "eb3838909a73d27f917e4f7f8fa5512a",
     "semantic_hash": ""
   },
@@ -2900,17 +2900,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_09_neutral.png": {
-    "mtime": 1791029372.6811502,
+    "mtime": 1791055002.5537322,
     "ast_hash": "9f3517fcd3e37758acc51e944cd27bef",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_06_sad.png": {
-    "mtime": 1791029372.2920985,
+    "mtime": 1791055002.5509903,
     "ast_hash": "49093e64a5ee4c763458c726ab994d0b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_03_neutral.png": {
-    "mtime": 1791029371.7060964,
+    "mtime": 1791055002.5466383,
     "ast_hash": "ce4b7edfe9f01e0bc7c465fb5b9aa3ec",
     "semantic_hash": ""
   },
@@ -2930,7 +2930,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_02_happy.png": {
-    "mtime": 1791029371.5865343,
+    "mtime": 1791055002.545244,
     "ast_hash": "c65cba587e55a699ab82fea80cdc5e5f",
     "semantic_hash": ""
   },
@@ -2945,12 +2945,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_06_neutral.png": {
-    "mtime": 1791029372.1932955,
+    "mtime": 1791055002.5505722,
     "ast_hash": "62b7e87de1794925ec37cc605c68adfe",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_09_happy.png": {
-    "mtime": 1791029372.7382076,
+    "mtime": 1791055002.553424,
     "ast_hash": "7c19adca96beec1f01d178e314a1f2c4",
     "semantic_hash": ""
   },
@@ -2960,7 +2960,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_10_happy.png": {
-    "mtime": 1791029372.908334,
+    "mtime": 1791055002.5543602,
     "ast_hash": "7c19adca96beec1f01d178e314a1f2c4",
     "semantic_hash": ""
   },
@@ -2975,17 +2975,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_04_happy.png": {
-    "mtime": 1791029371.9377642,
+    "mtime": 1791055002.5474207,
     "ast_hash": "2ceb65bd0727d605c532bb584c057352",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/phoenix/phoenix_07_sad.png": {
-    "mtime": 1791029372.4407601,
+    "mtime": 1791055002.5521247,
     "ast_hash": "bf0e34083cf0e4270e1a8673beb0ad43",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_05_sad.png": {
-    "mtime": 1791029387.845092,
+    "mtime": 1791055002.5363495,
     "ast_hash": "d8a0daa55661aee3929c6a0106b65214",
     "semantic_hash": ""
   },
@@ -2995,7 +2995,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_10_neutral.png": {
-    "mtime": 1791029388.6342363,
+    "mtime": 1791055002.5428507,
     "ast_hash": "f6f649b86cdbe8a5a69a1ce09aac8eac",
     "semantic_hash": ""
   },
@@ -3020,7 +3020,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_05_neutral.png": {
-    "mtime": 1791029387.7070158,
+    "mtime": 1791055002.535917,
     "ast_hash": "3941da86babb7a6a1b913200b6a6e8b3",
     "semantic_hash": ""
   },
@@ -3035,12 +3035,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_06_happy.png": {
-    "mtime": 1791029387.9788563,
+    "mtime": 1791055002.5367835,
     "ast_hash": "f473c7c981dc5ce0960bca96dacb2aa5",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_04_sad.png": {
-    "mtime": 1791029387.6372478,
+    "mtime": 1791055002.5351853,
     "ast_hash": "b8ca6d0d26b6107dc32eb2275bbd42d0",
     "semantic_hash": ""
   },
@@ -3055,7 +3055,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_09_neutral.png": {
-    "mtime": 1791029388.4501047,
+    "mtime": 1791055002.5414078,
     "ast_hash": "16bf1ca80ba46f655e0be6b20541e108",
     "semantic_hash": ""
   },
@@ -3065,17 +3065,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_01_happy.png": {
-    "mtime": 1791029386.8462336,
+    "mtime": 1791055002.5298452,
     "ast_hash": "46fae6ec83994c1a5b3411b1097dad6c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_03_neutral.png": {
-    "mtime": 1791029387.286189,
+    "mtime": 1791055002.5334313,
     "ast_hash": "64c70ef1067afd4c88803e50f2dae85c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_06_sad.png": {
-    "mtime": 1791029388.0497413,
+    "mtime": 1791055002.5376515,
     "ast_hash": "73828cbcddd957698532baf6639b3dec",
     "semantic_hash": ""
   },
@@ -3085,17 +3085,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_07_sad.png": {
-    "mtime": 1791029388.2185788,
+    "mtime": 1791055002.5391607,
     "ast_hash": "2848245bf4533e151963aa9661f3f5ac",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_06_neutral.png": {
-    "mtime": 1791029387.9146404,
+    "mtime": 1791055002.5371437,
     "ast_hash": "28076e6fbdfdd237bd224e81f1920bbf",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_07_happy.png": {
-    "mtime": 1791029388.1610854,
+    "mtime": 1791055002.5380874,
     "ast_hash": "475f841f4ea4e6dca10e62f4c218205b",
     "semantic_hash": ""
   },
@@ -3120,12 +3120,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_08_neutral.png": {
-    "mtime": 1791029388.278177,
+    "mtime": 1791055002.5403335,
     "ast_hash": "4c4d597ae8e14e932bded5eb0a4c9c81",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_02_happy.png": {
-    "mtime": 1791029387.1229198,
+    "mtime": 1791055002.531423,
     "ast_hash": "f688b841ab608af7681d845f52995298",
     "semantic_hash": ""
   },
@@ -3135,12 +3135,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_01_neutral.png": {
-    "mtime": 1791029386.7383182,
+    "mtime": 1791055002.5305252,
     "ast_hash": "abceff34ebb28a08a832d500ad6dc461",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_02_sad.png": {
-    "mtime": 1791029387.206666,
+    "mtime": 1791055002.5322628,
     "ast_hash": "8c582a03db0c9b9c69099360151e8ecb",
     "semantic_hash": ""
   },
@@ -3155,12 +3155,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_04_happy.png": {
-    "mtime": 1791029387.5683887,
+    "mtime": 1791055002.5342789,
     "ast_hash": "dd302aed4dc915df95d88c8efbcd7c20",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_04_neutral.png": {
-    "mtime": 1791029387.5015347,
+    "mtime": 1791055002.5346687,
     "ast_hash": "d2f0280761fce50ac3fa232be8b16e55",
     "semantic_hash": ""
   },
@@ -3170,17 +3170,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_10_happy.png": {
-    "mtime": 1791029388.6986768,
+    "mtime": 1791055002.5424027,
     "ast_hash": "b599b1674de9b2545fe6ce55bccb4293",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_03_sad.png": {
-    "mtime": 1791029387.4359946,
+    "mtime": 1791055002.5338264,
     "ast_hash": "6fa6c16009fd32f890301104e6d625f4",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_09_happy.png": {
-    "mtime": 1791029388.5099847,
+    "mtime": 1791055002.541115,
     "ast_hash": "60f63ccc2d7ca43722f1e0f06d6014c7",
     "semantic_hash": ""
   },
@@ -3200,12 +3200,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_01_sad.png": {
-    "mtime": 1791029386.9587224,
+    "mtime": 1791055002.531015,
     "ast_hash": "04b779c969fa05f63823ac6042938b9d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_03_happy.png": {
-    "mtime": 1791029387.3602014,
+    "mtime": 1791055002.533073,
     "ast_hash": "acdf88aab93a58089187cde38dcfeb4f",
     "semantic_hash": ""
   },
@@ -3225,12 +3225,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_07_neutral.png": {
-    "mtime": 1791029388.1054947,
+    "mtime": 1791055002.5386877,
     "ast_hash": "f059cb1d9bf291bb00bb4ccce4e08630",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_08_sad.png": {
-    "mtime": 1791029388.3936865,
+    "mtime": 1791055002.540784,
     "ast_hash": "0b96c4846f04b3b7e62ee4b28e45ab4c",
     "semantic_hash": ""
   },
@@ -3245,7 +3245,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_05_happy.png": {
-    "mtime": 1791029387.7771654,
+    "mtime": 1791055002.5355282,
     "ast_hash": "3d8d76e1ad8d363bffff2e5482248ccf",
     "semantic_hash": ""
   },
@@ -3255,12 +3255,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_02_neutral.png": {
-    "mtime": 1791029387.04117,
+    "mtime": 1791055002.531893,
     "ast_hash": "e23674b937ac92765fa910edbb101de8",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_09_sad.png": {
-    "mtime": 1791029388.5677292,
+    "mtime": 1791055002.5417686,
     "ast_hash": "92b96743abe343479fe94d01c984ee82",
     "semantic_hash": ""
   },
@@ -3275,12 +3275,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_08_happy.png": {
-    "mtime": 1791029388.3346896,
+    "mtime": 1791055002.5399878,
     "ast_hash": "5a63db2c23fca9905512650c8b91fb1b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/pegasus/pegasus_10_sad.png": {
-    "mtime": 1791029388.758279,
+    "mtime": 1791055002.5433266,
     "ast_hash": "b093f69582f8be3216855500125e7328",
     "semantic_hash": ""
   },
@@ -3290,7 +3290,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_03_happy.png": {
-    "mtime": 1791029367.8571167,
+    "mtime": 1791055002.4661334,
     "ast_hash": "da05711d0e874f4ec5be9fe356abd41d",
     "semantic_hash": ""
   },
@@ -3300,7 +3300,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_10_sad.png": {
-    "mtime": 1791029369.458649,
+    "mtime": 1791055002.4751515,
     "ast_hash": "7175c054656609fd5610773f0082b8ab",
     "semantic_hash": ""
   },
@@ -3320,12 +3320,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_03_neutral.png": {
-    "mtime": 1791029367.7831779,
+    "mtime": 1791055002.4664624,
     "ast_hash": "d24eea376bd3ca4df59a4e50e8292765",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_09_sad.png": {
-    "mtime": 1791029369.2884538,
+    "mtime": 1791055002.4741066,
     "ast_hash": "7175c054656609fd5610773f0082b8ab",
     "semantic_hash": ""
   },
@@ -3340,17 +3340,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_08_sad.png": {
-    "mtime": 1791029369.116044,
+    "mtime": 1791055002.4722059,
     "ast_hash": "75b42fa427733d3e61cdae5ab2894f20",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_06_neutral.png": {
-    "mtime": 1791029368.55702,
+    "mtime": 1791055002.4696343,
     "ast_hash": "a5b9adf2aeeace12c90db698f7008f29",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_05_happy.png": {
-    "mtime": 1791029368.3812547,
+    "mtime": 1791055002.4680817,
     "ast_hash": "eea8826c92bb3a11719fea14b89c044d",
     "semantic_hash": ""
   },
@@ -3360,7 +3360,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_01_sad.png": {
-    "mtime": 1791029367.4724143,
+    "mtime": 1791055002.4645467,
     "ast_hash": "838816c4a2961b7076a035bd2cc5df9b",
     "semantic_hash": ""
   },
@@ -3370,12 +3370,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_08_happy.png": {
-    "mtime": 1791029369.055412,
+    "mtime": 1791055002.4715316,
     "ast_hash": "92f308a08d9407bb0fb7d5e991d1812f",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_02_happy.png": {
-    "mtime": 1791029367.62958,
+    "mtime": 1791055002.465178,
     "ast_hash": "e07f0dbc1dc59aabebdea2bd6f538db0",
     "semantic_hash": ""
   },
@@ -3385,12 +3385,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_10_neutral.png": {
-    "mtime": 1791029369.3475358,
+    "mtime": 1791055002.474832,
     "ast_hash": "c7351754ee349aaf776b524bcb5b7669",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_05_neutral.png": {
-    "mtime": 1791029368.2882934,
+    "mtime": 1791055002.4683483,
     "ast_hash": "f39645a74b31ef94128a32abd9f42172",
     "semantic_hash": ""
   },
@@ -3400,22 +3400,22 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_03_sad.png": {
-    "mtime": 1791029367.9371681,
+    "mtime": 1791055002.4668195,
     "ast_hash": "08d334181226d997e049ee772fc5e6cd",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_02_sad.png": {
-    "mtime": 1791029367.7061365,
+    "mtime": 1791055002.4657953,
     "ast_hash": "fc2fd5ded56bb2a6f64bd3d3ba2deb78",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_04_happy.png": {
-    "mtime": 1791029368.1048918,
+    "mtime": 1791055002.4671588,
     "ast_hash": "a061d619f548c259bd3f891fb5f08c28",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_10_happy.png": {
-    "mtime": 1791029369.4017556,
+    "mtime": 1791055002.4744658,
     "ast_hash": "b00778957ae8680e8bb4fe2d46637bad",
     "semantic_hash": ""
   },
@@ -3425,7 +3425,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_09_neutral.png": {
-    "mtime": 1791029369.1759684,
+    "mtime": 1791055002.4737284,
     "ast_hash": "c7351754ee349aaf776b524bcb5b7669",
     "semantic_hash": ""
   },
@@ -3435,7 +3435,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_09_happy.png": {
-    "mtime": 1791029369.2315803,
+    "mtime": 1791055002.4725242,
     "ast_hash": "b00778957ae8680e8bb4fe2d46637bad",
     "semantic_hash": ""
   },
@@ -3450,7 +3450,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_01_happy.png": {
-    "mtime": 1791029367.3752458,
+    "mtime": 1791055002.46396,
     "ast_hash": "eab0709128f4bfb6f02ddb7e18bbe70d",
     "semantic_hash": ""
   },
@@ -3460,12 +3460,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_07_sad.png": {
-    "mtime": 1791029368.927239,
+    "mtime": 1791055002.471267,
     "ast_hash": "e5d19407512bc9e6774e9519168946d1",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_07_neutral.png": {
-    "mtime": 1791029368.7796817,
+    "mtime": 1791055002.47098,
     "ast_hash": "23add7a277abcf44efddce81b1554d57",
     "semantic_hash": ""
   },
@@ -3480,17 +3480,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_06_sad.png": {
-    "mtime": 1791029368.703709,
+    "mtime": 1791055002.4701412,
     "ast_hash": "2ffe083c4612eb5ba4088ae9f16b08c3",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_02_neutral.png": {
-    "mtime": 1791029367.5449016,
+    "mtime": 1791055002.4655025,
     "ast_hash": "9d9f1c83b279780bb3ec5c88c7a15c9d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_07_happy.png": {
-    "mtime": 1791029368.8537455,
+    "mtime": 1791055002.470673,
     "ast_hash": "ec19e3380001536f7964b78cb5ab5f67",
     "semantic_hash": ""
   },
@@ -3515,12 +3515,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_04_sad.png": {
-    "mtime": 1791029368.1912792,
+    "mtime": 1791055002.4677627,
     "ast_hash": "29fe37755d77eabbb33337cbae7cbdf0",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_08_neutral.png": {
-    "mtime": 1791029368.996744,
+    "mtime": 1791055002.4718697,
     "ast_hash": "ebe16b6d5005e8e7a0b0e86445ef0313",
     "semantic_hash": ""
   },
@@ -3540,7 +3540,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_01_neutral.png": {
-    "mtime": 1791029367.279978,
+    "mtime": 1791055002.4642708,
     "ast_hash": "d51f6c845d91c0cd77a7389af3c55385",
     "semantic_hash": ""
   },
@@ -3550,7 +3550,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_06_happy.png": {
-    "mtime": 1791029368.6308398,
+    "mtime": 1791055002.4691617,
     "ast_hash": "4c2ffcaadd87c95e89c461f46af8fe56",
     "semantic_hash": ""
   },
@@ -3565,7 +3565,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_04_neutral.png": {
-    "mtime": 1791029368.021681,
+    "mtime": 1791055002.4674625,
     "ast_hash": "53f006477a3efd67976f6621826a0cb2",
     "semantic_hash": ""
   },
@@ -3580,12 +3580,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/griffin/griffin_05_sad.png": {
-    "mtime": 1791029368.4833968,
+    "mtime": 1791055002.4688635,
     "ast_hash": "a5e1f7f8e442fb6ae7e7799d8032f09c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_06_happy.png": {
-    "mtime": 1791029396.013672,
+    "mtime": 1791055002.4803553,
     "ast_hash": "5a1d83d60a06ae480c008382f0d41b27",
     "semantic_hash": ""
   },
@@ -3595,7 +3595,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_06_sad.png": {
-    "mtime": 1791029396.082211,
+    "mtime": 1791055002.481032,
     "ast_hash": "19b50bbf130a6a42745c9b262bbe0ea7",
     "semantic_hash": ""
   },
@@ -3605,7 +3605,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_03_neutral.png": {
-    "mtime": 1791029395.2754612,
+    "mtime": 1791055002.4774694,
     "ast_hash": "8e5833b6d639c9379e34be6c2d8bbbb7",
     "semantic_hash": ""
   },
@@ -3635,7 +3635,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_06_neutral.png": {
-    "mtime": 1791029395.9500105,
+    "mtime": 1791055002.480681,
     "ast_hash": "c969b7ea10b6e671fa8c708e677a6931",
     "semantic_hash": ""
   },
@@ -3645,7 +3645,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_07_sad.png": {
-    "mtime": 1791029396.28303,
+    "mtime": 1791055002.482494,
     "ast_hash": "51fa1dbefa9bb04981120a86c38ebb35",
     "semantic_hash": ""
   },
@@ -3655,7 +3655,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_07_happy.png": {
-    "mtime": 1791029396.2096465,
+    "mtime": 1791055002.4814355,
     "ast_hash": "5e57afbe8f6b3439bdca062fc98b3bac",
     "semantic_hash": ""
   },
@@ -3665,17 +3665,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_05_neutral.png": {
-    "mtime": 1791029395.7493985,
+    "mtime": 1791055002.4796402,
     "ast_hash": "d0d4b18009e6a810c740c51041ee7b0d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_10_neutral.png": {
-    "mtime": 1791029396.8041475,
+    "mtime": 1791055002.486207,
     "ast_hash": "26373917e7db796d039bff91b807308a",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_05_sad.png": {
-    "mtime": 1791029395.888672,
+    "mtime": 1791055002.4800026,
     "ast_hash": "1d7f6c43ed4e82d24daa7cd4f8f3dfaf",
     "semantic_hash": ""
   },
@@ -3685,17 +3685,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_04_sad.png": {
-    "mtime": 1791029395.6751223,
+    "mtime": 1791055002.478883,
     "ast_hash": "2931df6e581e33e30fed357420b6b8af",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_09_neutral.png": {
-    "mtime": 1791029396.5825944,
+    "mtime": 1791055002.484471,
     "ast_hash": "063729d36179c3249eb1a53ce6ccc57e",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_01_happy.png": {
-    "mtime": 1791029394.861963,
+    "mtime": 1791055002.4754896,
     "ast_hash": "fc016ee896001da0c1212bb2f54b07c6",
     "semantic_hash": ""
   },
@@ -3720,22 +3720,22 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_04_happy.png": {
-    "mtime": 1791029395.6049125,
+    "mtime": 1791055002.4781182,
     "ast_hash": "79898f94c9e4d6226f5698e4259bd6ca",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_07_neutral.png": {
-    "mtime": 1791029396.1454945,
+    "mtime": 1791055002.4821253,
     "ast_hash": "7c9cc89e05b0c522de19821ce55ca4e2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_08_sad.png": {
-    "mtime": 1791029396.4986415,
+    "mtime": 1791055002.483598,
     "ast_hash": "052a6c7f039aabe518298e53feb42510",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_10_happy.png": {
-    "mtime": 1791029396.8425128,
+    "mtime": 1791055002.4852328,
     "ast_hash": "9e0b8c09d5d7e30b7403a5bbadbf3674",
     "semantic_hash": ""
   },
@@ -3745,12 +3745,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_09_happy.png": {
-    "mtime": 1791029396.6631732,
+    "mtime": 1791055002.484067,
     "ast_hash": "2c3d3c4f56ecc6c1edd19d3d803e5fbc",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_01_sad.png": {
-    "mtime": 1791029394.9496744,
+    "mtime": 1791055002.4760075,
     "ast_hash": "98c8ac55fc3af331722a1e7f3af46232",
     "semantic_hash": ""
   },
@@ -3765,7 +3765,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_02_happy.png": {
-    "mtime": 1791029395.1136808,
+    "mtime": 1791055002.4763145,
     "ast_hash": "f66ebe59cdcd13c7beed8bc3589e06e6",
     "semantic_hash": ""
   },
@@ -3775,7 +3775,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_10_sad.png": {
-    "mtime": 1791029396.8813841,
+    "mtime": 1791055002.4866068,
     "ast_hash": "51a742b46e97d9c60cfa0b31de643b7e",
     "semantic_hash": ""
   },
@@ -3795,32 +3795,32 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_02_neutral.png": {
-    "mtime": 1791029395.0314004,
+    "mtime": 1791055002.476578,
     "ast_hash": "7db279881d1d57abdd33f9d72dac1718",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_09_sad.png": {
-    "mtime": 1791029396.7428007,
+    "mtime": 1791055002.4848914,
     "ast_hash": "a939c0e212cfa05260c746947a5126a2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_01_neutral.png": {
-    "mtime": 1791029394.7674305,
+    "mtime": 1791055002.4757457,
     "ast_hash": "4b338fc67ca4d214d84940a3e5f7f93b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_05_happy.png": {
-    "mtime": 1791029395.8200247,
+    "mtime": 1791055002.4792738,
     "ast_hash": "863a8043dc11492d3325dec5bc00a817",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_02_sad.png": {
-    "mtime": 1791029395.1966777,
+    "mtime": 1791055002.4768784,
     "ast_hash": "8e94c39883c8d32f24a201bc7e81329c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_08_neutral.png": {
-    "mtime": 1791029396.3587863,
+    "mtime": 1791055002.4832153,
     "ast_hash": "16b48984f0b61a595d4a0ca8b0666f45",
     "semantic_hash": ""
   },
@@ -3840,7 +3840,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_08_happy.png": {
-    "mtime": 1791029396.426104,
+    "mtime": 1791055002.4828475,
     "ast_hash": "52ce77526a2d0ff42d864c014d7cdf23",
     "semantic_hash": ""
   },
@@ -3855,7 +3855,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_03_happy.png": {
-    "mtime": 1791029395.359105,
+    "mtime": 1791055002.4771576,
     "ast_hash": "b65bd273fcea5962c13ffe6b4bc3eae3",
     "semantic_hash": ""
   },
@@ -3875,17 +3875,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_04_neutral.png": {
-    "mtime": 1791029395.5212214,
+    "mtime": 1791055002.4784982,
     "ast_hash": "8993cfb9dcfbd96f23d30f3250831234",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/kitsune_fox/kitsune_fox_03_sad.png": {
-    "mtime": 1791029395.4441345,
+    "mtime": 1791055002.477773,
     "ast_hash": "e26e92678bf5d0e6fffd8d28e50419ce",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_05_neutral.png": {
-    "mtime": 1791029360.278435,
+    "mtime": 1791055002.4585345,
     "ast_hash": "10554d2e2374cd1a3604843216ead366",
     "semantic_hash": ""
   },
@@ -3895,7 +3895,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_08_happy.png": {
-    "mtime": 1791029360.9572837,
+    "mtime": 1791055002.4610786,
     "ast_hash": "dc537d8b44a103e6310712679874c4ce",
     "semantic_hash": ""
   },
@@ -3905,7 +3905,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_09_sad.png": {
-    "mtime": 1791029361.1895392,
+    "mtime": 1791055002.4626496,
     "ast_hash": "a9c27e698972a17bee82d5c7af6bb2c1",
     "semantic_hash": ""
   },
@@ -3925,17 +3925,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_05_happy.png": {
-    "mtime": 1791029360.3653896,
+    "mtime": 1791055002.4582307,
     "ast_hash": "df8f45c71075752025cb2e95c23791a2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_10_sad.png": {
-    "mtime": 1791029361.3949664,
+    "mtime": 1791055002.4636304,
     "ast_hash": "a9c27e698972a17bee82d5c7af6bb2c1",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_10_neutral.png": {
-    "mtime": 1791029361.2495315,
+    "mtime": 1791055002.4633334,
     "ast_hash": "352725b53b7db4fd6f9a5be77abec5b0",
     "semantic_hash": ""
   },
@@ -3950,12 +3950,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_09_neutral.png": {
-    "mtime": 1791029361.0724547,
+    "mtime": 1791055002.4623606,
     "ast_hash": "352725b53b7db4fd6f9a5be77abec5b0",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_01_sad.png": {
-    "mtime": 1791029359.548271,
+    "mtime": 1791055002.4547567,
     "ast_hash": "43c32fd169432e68dea8439c9f6f6352",
     "semantic_hash": ""
   },
@@ -3970,17 +3970,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_08_sad.png": {
-    "mtime": 1791029361.0127654,
+    "mtime": 1791055002.461724,
     "ast_hash": "ee55236098dc25c5925f19427fecf851",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_03_happy.png": {
-    "mtime": 1791029359.93917,
+    "mtime": 1791055002.4562097,
     "ast_hash": "9e4cfbc725e647ab2cb4c908f3e7c5cb",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_09_happy.png": {
-    "mtime": 1791029361.1321795,
+    "mtime": 1791055002.4620678,
     "ast_hash": "37b40d9c502a5b072ebb403123271287",
     "semantic_hash": ""
   },
@@ -3990,22 +3990,22 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_03_neutral.png": {
-    "mtime": 1791029359.8581095,
+    "mtime": 1791055002.4565406,
     "ast_hash": "b70e8bab57a8ed3fbe5960cf3b188b26",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_03_sad.png": {
-    "mtime": 1791029360.0121908,
+    "mtime": 1791055002.4570832,
     "ast_hash": "83df416d748d34983f3486dc750ed69b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_04_happy.png": {
-    "mtime": 1791029360.1435897,
+    "mtime": 1791055002.4573517,
     "ast_hash": "c8e910b123f98515cc801c4886adfbdf",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_10_happy.png": {
-    "mtime": 1791029361.3074503,
+    "mtime": 1791055002.462997,
     "ast_hash": "37b40d9c502a5b072ebb403123271287",
     "semantic_hash": ""
   },
@@ -4030,17 +4030,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_02_happy.png": {
-    "mtime": 1791029359.7098134,
+    "mtime": 1791055002.455032,
     "ast_hash": "cb96c1f19bfd37864344874ad39f45db",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_02_sad.png": {
-    "mtime": 1791029359.7802126,
+    "mtime": 1791055002.4556415,
     "ast_hash": "15d1588024db71dce639c32b12138a10",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_06_neutral.png": {
-    "mtime": 1791029360.51375,
+    "mtime": 1791055002.4594195,
     "ast_hash": "a58a2c02d0796a0a48093019e3c29667",
     "semantic_hash": ""
   },
@@ -4050,12 +4050,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_07_sad.png": {
-    "mtime": 1791029360.8402069,
+    "mtime": 1791055002.4605641,
     "ast_hash": "b9dad8087749b764384acdb6c3d0b988",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_01_neutral.png": {
-    "mtime": 1791029359.372865,
+    "mtime": 1791055002.454461,
     "ast_hash": "68438946e0678fc3c31f501fcf820d08",
     "semantic_hash": ""
   },
@@ -4065,7 +4065,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_07_happy.png": {
-    "mtime": 1791029360.778193,
+    "mtime": 1791055002.4600332,
     "ast_hash": "c40fb107cfe61d106358f48cb3b8fdb4",
     "semantic_hash": ""
   },
@@ -4075,7 +4075,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_08_neutral.png": {
-    "mtime": 1791029360.8986878,
+    "mtime": 1791055002.4613872,
     "ast_hash": "c1550666a58eac54738f63de1466cf78",
     "semantic_hash": ""
   },
@@ -4090,7 +4090,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_01_happy.png": {
-    "mtime": 1791029359.4608808,
+    "mtime": 1791055002.4540908,
     "ast_hash": "5803634280582274c8c91082ea36d68f",
     "semantic_hash": ""
   },
@@ -4100,7 +4100,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_06_sad.png": {
-    "mtime": 1791029360.645364,
+    "mtime": 1791055002.4597101,
     "ast_hash": "9f2c043ccdab021a7e943cd399c02ba4",
     "semantic_hash": ""
   },
@@ -4110,7 +4110,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_04_neutral.png": {
-    "mtime": 1791029360.0762856,
+    "mtime": 1791055002.4576807,
     "ast_hash": "3517e5d0663992c356f6ae76aa6089f7",
     "semantic_hash": ""
   },
@@ -4120,12 +4120,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_07_neutral.png": {
-    "mtime": 1791029360.711737,
+    "mtime": 1791055002.4603045,
     "ast_hash": "948bfe9e3d995f155f57b231ba38b081",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_04_sad.png": {
-    "mtime": 1791029360.2092602,
+    "mtime": 1791055002.4579356,
     "ast_hash": "3e2251dbc29e81b350695cd5e9a9308c",
     "semantic_hash": ""
   },
@@ -4135,7 +4135,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_06_happy.png": {
-    "mtime": 1791029360.5821874,
+    "mtime": 1791055002.4591427,
     "ast_hash": "e1d784989f6ae6a5c306a9166395f989",
     "semantic_hash": ""
   },
@@ -4150,7 +4150,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_05_sad.png": {
-    "mtime": 1791029360.445685,
+    "mtime": 1791055002.4588594,
     "ast_hash": "fb4a1d00cd1fa7bdacae57182214d909",
     "semantic_hash": ""
   },
@@ -4170,7 +4170,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/dragon/dragon_02_neutral.png": {
-    "mtime": 1791029359.6263542,
+    "mtime": 1791055002.455348,
     "ast_hash": "e89c53fa8e35129048faffe71ebd96a8",
     "semantic_hash": ""
   },
@@ -4185,152 +4185,152 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_10_neutral.png": {
-    "mtime": 1791029392.6467483,
+    "mtime": 1791055002.56804,
     "ast_hash": "b4434e6b56ac8d05caa8613086aa5a50",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_04_happy.png": {
-    "mtime": 1791029391.5230727,
+    "mtime": 1791055002.5598006,
     "ast_hash": "7c3ae10f2220a2e27434b85bbb8d9a56",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_10_happy.png": {
-    "mtime": 1791029392.7065537,
+    "mtime": 1791055002.5676978,
     "ast_hash": "6225d2cf261b6b055fe0b2f9c086b83a",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_10_sad.png": {
-    "mtime": 1791029392.7671962,
+    "mtime": 1791055002.5684087,
     "ast_hash": "3bc72ad858182922911be9531a2c8d59",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_09_sad.png": {
-    "mtime": 1791029392.5857682,
+    "mtime": 1791055002.5673559,
     "ast_hash": "2163568e20c8e919e46a3965c9ef6c1c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_09_happy.png": {
-    "mtime": 1791029392.5260668,
+    "mtime": 1791055002.5666618,
     "ast_hash": "a4476010523e98279fda00e0624255b6",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_05_neutral.png": {
-    "mtime": 1791029391.6769502,
+    "mtime": 1791055002.5614257,
     "ast_hash": "35a5f0fff4cea138a75010537e0ccdb7",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_02_happy.png": {
-    "mtime": 1791029391.0765839,
+    "mtime": 1791055002.5564084,
     "ast_hash": "6f37f132dfc858626507e476d9afc98e",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_08_sad.png": {
-    "mtime": 1791029392.4019842,
+    "mtime": 1791055002.5662947,
     "ast_hash": "567e1153b53b92b1bfc1a578c4b22a78",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_09_neutral.png": {
-    "mtime": 1791029392.4638286,
+    "mtime": 1791055002.56702,
     "ast_hash": "72172661354ccbd2e3fc6e9da38da8d5",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_01_sad.png": {
-    "mtime": 1791029390.920286,
+    "mtime": 1791055002.5559871,
     "ast_hash": "705776921092b42eff419aae05081ae6",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_05_happy.png": {
-    "mtime": 1791029391.7456415,
+    "mtime": 1791055002.5610442,
     "ast_hash": "b91956929102d1104eadf57f01aa421b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_03_neutral.png": {
-    "mtime": 1791029391.2267637,
+    "mtime": 1791055002.5588574,
     "ast_hash": "171600d17514c790824c676df4133e23",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_03_sad.png": {
-    "mtime": 1791029391.3709342,
+    "mtime": 1791055002.5593307,
     "ast_hash": "64f0fe9624ff9279e03e6a6c241e282c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_08_happy.png": {
-    "mtime": 1791029392.3425856,
+    "mtime": 1791055002.5654116,
     "ast_hash": "e7af2f4fac4d88edf3e4c76ea09fe16b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_06_neutral.png": {
-    "mtime": 1791029391.8918705,
+    "mtime": 1791055002.5627449,
     "ast_hash": "6049f9f2702f7b3254eb42ac4f9304e8",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_03_happy.png": {
-    "mtime": 1791029391.2964516,
+    "mtime": 1791055002.5583754,
     "ast_hash": "9d261d4108bb9931aa79773388d8b11e",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_02_sad.png": {
-    "mtime": 1791029391.1541784,
+    "mtime": 1791055002.5578496,
     "ast_hash": "568d9dc087cd0e9104f5d7a6842c9734",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_08_neutral.png": {
-    "mtime": 1791029392.2817032,
+    "mtime": 1791055002.5658233,
     "ast_hash": "ef552edd3b01a7d3e5d0ecb64797abe0",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_06_happy.png": {
-    "mtime": 1791029391.958262,
+    "mtime": 1791055002.5623467,
     "ast_hash": "6278c7e03ff8c784ed06e77ca26db931",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_07_sad.png": {
-    "mtime": 1791029392.2113757,
+    "mtime": 1791055002.565013,
     "ast_hash": "c732ed305c804cbdf9ab074ba943d2e1",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_01_neutral.png": {
-    "mtime": 1791029390.7203004,
+    "mtime": 1791055002.5556295,
     "ast_hash": "d30465bd92ca8971be6069383fbe9af1",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_06_sad.png": {
-    "mtime": 1791029392.0271463,
+    "mtime": 1791055002.563238,
     "ast_hash": "05727cacda3bc597350cfaac059e5333",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_04_neutral.png": {
-    "mtime": 1791029391.4446645,
+    "mtime": 1791055002.5602095,
     "ast_hash": "db6d7d056438234e41e7f1e16f509282",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_04_sad.png": {
-    "mtime": 1791029391.5988843,
+    "mtime": 1791055002.5606658,
     "ast_hash": "d9a95ba25dae665b929ee603ce1f7604",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_07_happy.png": {
-    "mtime": 1791029392.1489851,
+    "mtime": 1791055002.5640786,
     "ast_hash": "cdde87fcd6c4600cf8a39167b6ae5c37",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_07_neutral.png": {
-    "mtime": 1791029392.088832,
+    "mtime": 1791055002.5645554,
     "ast_hash": "85bcbb1f07ea172d356126ebad798ab9",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_01_happy.png": {
-    "mtime": 1791029390.820312,
+    "mtime": 1791055002.555296,
     "ast_hash": "aca30d51a1eaeb859dfb5784c66aa950",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_02_neutral.png": {
-    "mtime": 1791029390.9996,
+    "mtime": 1791055002.557493,
     "ast_hash": "f8cea2f57ae1776a87081052c07281fd",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/rhino/rhino_05_sad.png": {
-    "mtime": 1791029391.8251433,
+    "mtime": 1791055002.561844,
     "ast_hash": "12362931ab7ade1061a47607bcc213a8",
     "semantic_hash": ""
   },
@@ -4340,7 +4340,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_04_neutral.png": {
-    "mtime": 1791029399.3702788,
+    "mtime": 1791055002.503129,
     "ast_hash": "87ff5a002f7a63831c711a837190999e",
     "semantic_hash": ""
   },
@@ -4350,7 +4350,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_07_happy.png": {
-    "mtime": 1791029399.9789438,
+    "mtime": 1791055002.507104,
     "ast_hash": "2b8bf74530818e3390aa51944d6b4e3e",
     "semantic_hash": ""
   },
@@ -4370,7 +4370,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_07_sad.png": {
-    "mtime": 1791029400.0363452,
+    "mtime": 1791055002.5085232,
     "ast_hash": "faf448cf0f0b66480216c540c40de9b1",
     "semantic_hash": ""
   },
@@ -4380,7 +4380,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_01_happy.png": {
-    "mtime": 1791029398.7947528,
+    "mtime": 1791055002.4988592,
     "ast_hash": "75b763f777c2ca02cfe80778e59e270b",
     "semantic_hash": ""
   },
@@ -4390,17 +4390,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_08_neutral.png": {
-    "mtime": 1791029400.0907722,
+    "mtime": 1791055002.5093975,
     "ast_hash": "a5b8a47bd9b8f038a7fca18900f655da",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_06_sad.png": {
-    "mtime": 1791029399.8447704,
+    "mtime": 1791055002.5064785,
     "ast_hash": "2eb12859d25b6d853cd8bb931b9ab09d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_01_neutral.png": {
-    "mtime": 1791029398.7224452,
+    "mtime": 1791055002.4994922,
     "ast_hash": "c4babdf02e0cfdff5a52cf02fa8b6453",
     "semantic_hash": ""
   },
@@ -4420,17 +4420,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_02_neutral.png": {
-    "mtime": 1791029398.9510143,
+    "mtime": 1791055002.500427,
     "ast_hash": "f0aac7b49d8198e80cb8014d5026c038",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_04_sad.png": {
-    "mtime": 1791029399.487129,
+    "mtime": 1791055002.5035465,
     "ast_hash": "42d1f081db7ea817f17385cef90227d7",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_06_happy.png": {
-    "mtime": 1791029399.7794635,
+    "mtime": 1791055002.50534,
     "ast_hash": "a1af6f0242a9e940a6a52d7972cc0dda",
     "semantic_hash": ""
   },
@@ -4455,22 +4455,22 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_05_sad.png": {
-    "mtime": 1791029399.6584997,
+    "mtime": 1791055002.504999,
     "ast_hash": "0ae83be7daefa2beaa68be72483b3b7d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_07_neutral.png": {
-    "mtime": 1791029399.9090044,
+    "mtime": 1791055002.5077448,
     "ast_hash": "b3b5847ae9f4e90dd5354a983f0ebf32",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_10_sad.png": {
-    "mtime": 1791029400.5765183,
+    "mtime": 1791055002.5126474,
     "ast_hash": "7ab7bad3fd2008609706d8b00d8c9069",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_05_happy.png": {
-    "mtime": 1791029399.6045268,
+    "mtime": 1791055002.5040164,
     "ast_hash": "19152e96e777d29384aa1b8750885c04",
     "semantic_hash": ""
   },
@@ -4485,17 +4485,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_08_happy.png": {
-    "mtime": 1791029400.1456375,
+    "mtime": 1791055002.5089467,
     "ast_hash": "38d78c299bc2a8a23539b6eab31593a5",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_09_sad.png": {
-    "mtime": 1791029400.3796844,
+    "mtime": 1791055002.5111241,
     "ast_hash": "c86687cea53e8bb971da301a10997b14",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_09_neutral.png": {
-    "mtime": 1791029400.259617,
+    "mtime": 1791055002.510796,
     "ast_hash": "aee25bafaaae3cd7102225bcf259e887",
     "semantic_hash": ""
   },
@@ -4510,12 +4510,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_10_neutral.png": {
-    "mtime": 1791029400.4479253,
+    "mtime": 1791055002.5122654,
     "ast_hash": "1f23038484df9f4f446712f48d56a617",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_08_sad.png": {
-    "mtime": 1791029400.201956,
+    "mtime": 1791055002.5098984,
     "ast_hash": "efd296c8b0df03ee3ee715b607bc84f3",
     "semantic_hash": ""
   },
@@ -4525,12 +4525,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_03_happy.png": {
-    "mtime": 1791029399.253918,
+    "mtime": 1791055002.5012743,
     "ast_hash": "63aaa057cd310cfd1e4a25deacc5ac19",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_01_sad.png": {
-    "mtime": 1791029398.872637,
+    "mtime": 1791055002.499805,
     "ast_hash": "239e8af97a1644e782af3187e5b4988d",
     "semantic_hash": ""
   },
@@ -4540,7 +4540,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_05_neutral.png": {
-    "mtime": 1791029399.542393,
+    "mtime": 1791055002.5045097,
     "ast_hash": "6f59673ccf278c6af20e91b147cc4d64",
     "semantic_hash": ""
   },
@@ -4555,17 +4555,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_10_happy.png": {
-    "mtime": 1791029400.5129282,
+    "mtime": 1791055002.511535,
     "ast_hash": "eb5eb6590bb5c297aa24ff4465586d62",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_06_neutral.png": {
-    "mtime": 1791029399.7186215,
+    "mtime": 1791055002.5056722,
     "ast_hash": "f71257065fb8df800acb2356d24f5af5",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_04_happy.png": {
-    "mtime": 1791029399.4295788,
+    "mtime": 1791055002.5021517,
     "ast_hash": "cf33796109e144885ba1b322f6fffae2",
     "semantic_hash": ""
   },
@@ -4575,12 +4575,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_03_sad.png": {
-    "mtime": 1791029399.3128965,
+    "mtime": 1791055002.5018296,
     "ast_hash": "2295461815828d24c9f19d4d084936dc",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_09_happy.png": {
-    "mtime": 1791029400.3198628,
+    "mtime": 1791055002.5104513,
     "ast_hash": "a80edb74ecf1f7709c15ae569db69883",
     "semantic_hash": ""
   },
@@ -4605,7 +4605,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_02_sad.png": {
-    "mtime": 1791029399.1216516,
+    "mtime": 1791055002.5007133,
     "ast_hash": "f2026717466a521c9011af59326d74c9",
     "semantic_hash": ""
   },
@@ -4615,12 +4615,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_02_happy.png": {
-    "mtime": 1791029399.0460808,
+    "mtime": 1791055002.500135,
     "ast_hash": "3509326228486ac85817a33dfd1dde5d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/mermaid/mermaid_03_neutral.png": {
-    "mtime": 1791029399.1951592,
+    "mtime": 1791055002.5015728,
     "ast_hash": "a7ab74ebe88a859256c7b01ef41c1563",
     "semantic_hash": ""
   },
@@ -4635,62 +4635,62 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/selection/unicorn.png": {
-    "mtime": 1791029401.8391776,
+    "mtime": 1791055002.573579,
     "ast_hash": "bdce3f8a46a430c0c5a3c69ae585cda5",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/selection/custom.png": {
-    "mtime": 1791029401.83773,
+    "mtime": 1791055002.5688357,
     "ast_hash": "862bb728ee25727afc73155ad96ed9bf",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/selection/rhino.png": {
-    "mtime": 1791029401.5886211,
+    "mtime": 1791055002.5728405,
     "ast_hash": "c9c42e5809ca176943b4f1bf3191f7ed",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/selection/lion.png": {
-    "mtime": 1791029401.0521567,
+    "mtime": 1791055002.5706902,
     "ast_hash": "bfe7ac391cf3d24c53001d7ecee90c71",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/selection/dragon.png": {
-    "mtime": 1791029400.7197711,
+    "mtime": 1791055002.5696113,
     "ast_hash": "0375eb663a31e86bf0f4b9d3de209ac2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/selection/griffin.png": {
-    "mtime": 1791029400.9434052,
+    "mtime": 1791055002.5699835,
     "ast_hash": "05c3d743734e7e6854aebae80e08ad2a",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/selection/mermaid.png": {
-    "mtime": 1791029401.1542027,
+    "mtime": 1791055002.5710363,
     "ast_hash": "8b38bc5a79d74016cee91c280c15ebe2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/selection/panda.png": {
-    "mtime": 1791029401.2653232,
+    "mtime": 1791055002.5713356,
     "ast_hash": "8b52353ea1a0fb169f41297d76bdb1b4",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/selection/kitsune_fox.png": {
-    "mtime": 1791029400.8311515,
+    "mtime": 1791055002.5703423,
     "ast_hash": "e1d59b38487b11d59684dc9b7f4a2a3e",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/selection/pegasus.png": {
-    "mtime": 1791029401.3729334,
+    "mtime": 1791055002.571747,
     "ast_hash": "78399fca5df734efb5b17159e9dea387",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/selection/sphinx_cat.png": {
-    "mtime": 1791029401.703041,
+    "mtime": 1791055002.5732224,
     "ast_hash": "f32a111f300c2f2e03746474cbdc295c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/selection/phoenix.png": {
-    "mtime": 1791029401.478579,
+    "mtime": 1791055002.5724745,
     "ast_hash": "01fa033309a4055755fffdda578ab3a4",
     "semantic_hash": ""
   },
@@ -4705,17 +4705,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_01_sad.png": {
-    "mtime": 1791029363.5593643,
+    "mtime": 1791055002.5879247,
     "ast_hash": "f3a1d2afdcecb8534c9fe00244a9c3c6",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_07_happy.png": {
-    "mtime": 1791029364.603371,
+    "mtime": 1791055002.5941079,
     "ast_hash": "6fb249b8f77ea122773ea41a4cc4b36b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_10_neutral.png": {
-    "mtime": 1791029365.1285286,
+    "mtime": 1791055002.597628,
     "ast_hash": "6c278f693f98563e24a49e0af0ef9b95",
     "semantic_hash": ""
   },
@@ -4730,7 +4730,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_08_sad.png": {
-    "mtime": 1791029364.8521383,
+    "mtime": 1791055002.596241,
     "ast_hash": "cb66ce2fc4e5cbf0c3259fd893098ec1",
     "semantic_hash": ""
   },
@@ -4740,12 +4740,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_05_neutral.png": {
-    "mtime": 1791029364.2032924,
+    "mtime": 1791055002.5925448,
     "ast_hash": "97b612914f846f3d3547992ac3cfa4e9",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_09_sad.png": {
-    "mtime": 1791029365.0631933,
+    "mtime": 1791055002.5970583,
     "ast_hash": "94b21c97d8b768738e0f1885b0fae6bf",
     "semantic_hash": ""
   },
@@ -4755,7 +4755,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_01_happy.png": {
-    "mtime": 1791029363.4725115,
+    "mtime": 1791055002.5872934,
     "ast_hash": "58f75b9eb93bf3e08bed5f84fa143e28",
     "semantic_hash": ""
   },
@@ -4765,12 +4765,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_09_neutral.png": {
-    "mtime": 1791029364.917025,
+    "mtime": 1791055002.596773,
     "ast_hash": "6c278f693f98563e24a49e0af0ef9b95",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_10_sad.png": {
-    "mtime": 1791029365.2739086,
+    "mtime": 1791055002.5979118,
     "ast_hash": "94b21c97d8b768738e0f1885b0fae6bf",
     "semantic_hash": ""
   },
@@ -4790,12 +4790,12 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_06_happy.png": {
-    "mtime": 1791029364.4359114,
+    "mtime": 1791055002.5931876,
     "ast_hash": "983b7a6abbcefe70090e154bd411fe7e",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_02_sad.png": {
-    "mtime": 1791029363.7606223,
+    "mtime": 1791055002.589235,
     "ast_hash": "6ec55d261c6f7bd39cb19328d1da0206",
     "semantic_hash": ""
   },
@@ -4805,17 +4805,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_03_neutral.png": {
-    "mtime": 1791029363.8245902,
+    "mtime": 1791055002.5900545,
     "ast_hash": "eafa66b4f42370962bdc6a0206de7cb1",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_03_sad.png": {
-    "mtime": 1791029363.9529772,
+    "mtime": 1791055002.590417,
     "ast_hash": "9b85ebc74ac46e814515e3a41190892c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_06_neutral.png": {
-    "mtime": 1791029364.381952,
+    "mtime": 1791055002.593471,
     "ast_hash": "2a8de18c8ad9bf15080520ed5e7d36d9",
     "semantic_hash": ""
   },
@@ -4835,7 +4835,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_05_happy.png": {
-    "mtime": 1791029364.2626176,
+    "mtime": 1791055002.5921712,
     "ast_hash": "aec365c7cfd9bf75098b2007c3e5c534",
     "semantic_hash": ""
   },
@@ -4845,7 +4845,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_08_neutral.png": {
-    "mtime": 1791029364.718005,
+    "mtime": 1791055002.5959482,
     "ast_hash": "14499bc027bcb079298fc5a0e3425a75",
     "semantic_hash": ""
   },
@@ -4855,17 +4855,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_08_happy.png": {
-    "mtime": 1791029364.7848043,
+    "mtime": 1791055002.5956597,
     "ast_hash": "a056c820a1d5e9597dbf394a7f51b7a8",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_01_neutral.png": {
-    "mtime": 1791029363.393106,
+    "mtime": 1791055002.5875723,
     "ast_hash": "bdce3f8a46a430c0c5a3c69ae585cda5",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_06_sad.png": {
-    "mtime": 1791029364.499997,
+    "mtime": 1791055002.5938122,
     "ast_hash": "2f5384a3717cbe60d6e67737f29e3d28",
     "semantic_hash": ""
   },
@@ -4885,17 +4885,17 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_07_sad.png": {
-    "mtime": 1791029364.6569753,
+    "mtime": 1791055002.595334,
     "ast_hash": "9e11384c8fd8849155e3dc4da017e836",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_03_happy.png": {
-    "mtime": 1791029363.887148,
+    "mtime": 1791055002.5896437,
     "ast_hash": "e4dae63718de26c02605b0d3e0dfd829",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_04_neutral.png": {
-    "mtime": 1791029364.0158734,
+    "mtime": 1791055002.5914426,
     "ast_hash": "86c2fc666261dbff91350110266b5ba5",
     "semantic_hash": ""
   },
@@ -4915,22 +4915,22 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_10_happy.png": {
-    "mtime": 1791029365.2002697,
+    "mtime": 1791055002.5973642,
     "ast_hash": "f18e7cd06b2768dae9023b6c3b91c333",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_04_happy.png": {
-    "mtime": 1791029364.07798,
+    "mtime": 1791055002.591055,
     "ast_hash": "8f0417d796707e615aad83ca1f1a6cb7",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_05_sad.png": {
-    "mtime": 1791029364.3241808,
+    "mtime": 1791055002.5929039,
     "ast_hash": "cf6b12cd0e04b4aaa413ccb6675c27df",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_07_neutral.png": {
-    "mtime": 1791029364.551886,
+    "mtime": 1791055002.5943654,
     "ast_hash": "27de2b0931624c1ab1b0fa9a469d338f",
     "semantic_hash": ""
   },
@@ -4940,7 +4940,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_09_happy.png": {
-    "mtime": 1791029364.9894364,
+    "mtime": 1791055002.5965207,
     "ast_hash": "f18e7cd06b2768dae9023b6c3b91c333",
     "semantic_hash": ""
   },
@@ -4965,7 +4965,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_02_neutral.png": {
-    "mtime": 1791029363.6260254,
+    "mtime": 1791055002.5888593,
     "ast_hash": "892b492f906814bdf162cd3e007c696f",
     "semantic_hash": ""
   },
@@ -4975,7 +4975,7 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_02_happy.png": {
-    "mtime": 1791029363.693733,
+    "mtime": 1791055002.5884395,
     "ast_hash": "fa76811902f8bb559e20408e511cad44",
     "semantic_hash": ""
   },
@@ -4990,157 +4990,157 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/unicorn/unicorn_04_sad.png": {
-    "mtime": 1791029364.1451108,
+    "mtime": 1791055002.5917997,
     "ast_hash": "bb9abbdfa38d8337504b74e8577224b0",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_04_neutral.png": {
-    "mtime": 1791029379.7255855,
+    "mtime": 1791055002.4904878,
     "ast_hash": "0eb1e56e7e39a669c61d9e44bed391eb",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_09_happy.png": {
-    "mtime": 1791029380.9454505,
+    "mtime": 1791055002.4966447,
     "ast_hash": "726b53236546a3550df9df74d2e5dd0c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_07_sad.png": {
-    "mtime": 1791029380.6074488,
+    "mtime": 1791055002.495298,
     "ast_hash": "525b86d4ee3c922a3491a3d7e16897f0",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_10_happy.png": {
-    "mtime": 1791029381.1285093,
+    "mtime": 1791055002.4978178,
     "ast_hash": "7e6e75816fdca25f7798f18797b39a17",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_04_happy.png": {
-    "mtime": 1791029379.8098016,
+    "mtime": 1791055002.4901059,
     "ast_hash": "fdc9e4743997ca6ae948d90c755d0a1b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_08_neutral.png": {
-    "mtime": 1791029380.6780221,
+    "mtime": 1791055002.4961028,
     "ast_hash": "3942099c94f0779702934a0c59edd4d6",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_01_neutral.png": {
-    "mtime": 1791029378.9414282,
+    "mtime": 1791055002.4873176,
     "ast_hash": "cfbda686c5e2a0931d3bb926a7b8d451",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_06_sad.png": {
-    "mtime": 1791029380.383537,
+    "mtime": 1791055002.49357,
     "ast_hash": "18634969dd8e17ac52d99481ca3ffb54",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_02_happy.png": {
-    "mtime": 1791029379.3107138,
+    "mtime": 1791055002.4879687,
     "ast_hash": "f8e01b7eac49ffb614d0985a0881127e",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_08_happy.png": {
-    "mtime": 1791029380.7502744,
+    "mtime": 1791055002.4957862,
     "ast_hash": "d3e314b4d5097b5e500663782edaf2e1",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_02_neutral.png": {
-    "mtime": 1791029379.2227404,
+    "mtime": 1791055002.4883206,
     "ast_hash": "b545aba99f6cf8c9184cc67d37a7f8ba",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_04_sad.png": {
-    "mtime": 1791029379.8960097,
+    "mtime": 1791055002.490929,
     "ast_hash": "8f7a984db0b64b9b64a89bbe3fe1557e",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_05_happy.png": {
-    "mtime": 1791029380.0711162,
+    "mtime": 1791055002.4913847,
     "ast_hash": "f9890c670f75cc94d024724c3067a471",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_05_sad.png": {
-    "mtime": 1791029380.157965,
+    "mtime": 1791055002.4922106,
     "ast_hash": "0d90164565a3e33f1099ee3cb9103dc7",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_03_happy.png": {
-    "mtime": 1791029379.5583887,
+    "mtime": 1791055002.488944,
     "ast_hash": "269df7d35c8ff3270bac8bcc4a3ab17b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_07_neutral.png": {
-    "mtime": 1791029380.4604738,
+    "mtime": 1791055002.4948194,
     "ast_hash": "ca54d01ef7548c0965d373e17e25aaf7",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_09_sad.png": {
-    "mtime": 1791029381.0077887,
+    "mtime": 1791055002.4974277,
     "ast_hash": "60a43f66041798fa7569d4d0167f99f2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_09_neutral.png": {
-    "mtime": 1791029380.8833396,
+    "mtime": 1791055002.4969792,
     "ast_hash": "085b1cf3582e1204bb5111b45a451780",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_10_sad.png": {
-    "mtime": 1791029381.183987,
+    "mtime": 1791055002.49855,
     "ast_hash": "188ff9da4a4e85ff0e4f5138fee10666",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_06_happy.png": {
-    "mtime": 1791029380.3054276,
+    "mtime": 1791055002.492655,
     "ast_hash": "b33e1199cb19b90e32f3686962a4f8db",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_10_neutral.png": {
-    "mtime": 1791029381.0691428,
+    "mtime": 1791055002.4982014,
     "ast_hash": "8628efa918555b7ee3e28ecc85f4068b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_01_sad.png": {
-    "mtime": 1791029379.1364255,
+    "mtime": 1791055002.487627,
     "ast_hash": "3206e1fcca0015d71c8b73c68d4fc1ee",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_08_sad.png": {
-    "mtime": 1791029380.8165572,
+    "mtime": 1791055002.4963834,
     "ast_hash": "c19bdc693f3d1c2301fbfd56ae9a18c2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_05_neutral.png": {
-    "mtime": 1791029379.9804194,
+    "mtime": 1791055002.4917638,
     "ast_hash": "3a5cf211d101bef44becd8271cdbf377",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_06_neutral.png": {
-    "mtime": 1791029380.2299073,
+    "mtime": 1791055002.4931304,
     "ast_hash": "757fb367880cd3b70246a20f6e461a90",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_03_sad.png": {
-    "mtime": 1791029379.6424625,
+    "mtime": 1791055002.4897697,
     "ast_hash": "21b10dcde04cb962d544a4549b4d35f1",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_07_happy.png": {
-    "mtime": 1791029380.5348158,
+    "mtime": 1791055002.493994,
     "ast_hash": "104a93091bcdb364a9a5b8f1d2800187",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_01_happy.png": {
-    "mtime": 1791029379.0395026,
+    "mtime": 1791055002.4869828,
     "ast_hash": "44c16c175cfd4a594a9cdba2418d1b4d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_03_neutral.png": {
-    "mtime": 1791029379.4734466,
+    "mtime": 1791055002.489236,
     "ast_hash": "f8a25fcbe1f62aaf93de55ab812b5be3",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/avatars/lion/lion_02_sad.png": {
-    "mtime": 1791029379.394952,
+    "mtime": 1791055002.4886465,
     "ast_hash": "bcc754ced992ead623abd209e640eae3",
     "semantic_hash": ""
   },
@@ -5270,1772 +5270,1772 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/selection.png": {
-    "mtime": 1791023806.020043,
+    "mtime": 1791055002.3738565,
     "ast_hash": "cea899bbcf5f24886d3068b9980e66c0",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_06_happy.png": {
-    "mtime": 1791029395.9818008,
+    "mtime": 1791055002.1578598,
     "ast_hash": "5a1d83d60a06ae480c008382f0d41b27",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_06_sad.png": {
-    "mtime": 1791029396.04746,
+    "mtime": 1791055002.1591988,
     "ast_hash": "19b50bbf130a6a42745c9b262bbe0ea7",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_03_neutral.png": {
-    "mtime": 1791029395.2360466,
+    "mtime": 1791055002.1514556,
     "ast_hash": "8e5833b6d639c9379e34be6c2d8bbbb7",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/download.png": {
-    "mtime": 1791021656.1641433,
+    "mtime": 1791055002.1440575,
     "ast_hash": "389eb49b0d2301a2a5707802951cf616",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_06_neutral.png": {
-    "mtime": 1791029395.9198132,
+    "mtime": 1791055002.15861,
     "ast_hash": "c969b7ea10b6e671fa8c708e677a6931",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_07_sad.png": {
-    "mtime": 1791029396.2462316,
+    "mtime": 1791055002.1613464,
     "ast_hash": "51fa1dbefa9bb04981120a86c38ebb35",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_07_happy.png": {
-    "mtime": 1791029396.177259,
+    "mtime": 1791055002.1596851,
     "ast_hash": "5e57afbe8f6b3439bdca062fc98b3bac",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_05_neutral.png": {
-    "mtime": 1791029395.712032,
+    "mtime": 1791055002.1565397,
     "ast_hash": "d0d4b18009e6a810c740c51041ee7b0d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_10_neutral.png": {
-    "mtime": 1791029396.7743192,
+    "mtime": 1791055002.1675134,
     "ast_hash": "26373917e7db796d039bff91b807308a",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_05_sad.png": {
-    "mtime": 1791029395.854992,
+    "mtime": 1791055002.157341,
     "ast_hash": "1d7f6c43ed4e82d24daa7cd4f8f3dfaf",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_04_sad.png": {
-    "mtime": 1791029395.640588,
+    "mtime": 1791055002.1538806,
     "ast_hash": "2931df6e581e33e30fed357420b6b8af",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_09_neutral.png": {
-    "mtime": 1791029396.5411847,
+    "mtime": 1791055002.1647043,
     "ast_hash": "063729d36179c3249eb1a53ce6ccc57e",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_01_happy.png": {
-    "mtime": 1791029394.813671,
+    "mtime": 1791055002.1460547,
     "ast_hash": "fc016ee896001da0c1212bb2f54b07c6",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_04_happy.png": {
-    "mtime": 1791029395.5626726,
+    "mtime": 1791055002.1525283,
     "ast_hash": "79898f94c9e4d6226f5698e4259bd6ca",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_07_neutral.png": {
-    "mtime": 1791029396.1137338,
+    "mtime": 1791055002.1607091,
     "ast_hash": "7c9cc89e05b0c522de19821ce55ca4e2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_08_sad.png": {
-    "mtime": 1791029396.4625397,
+    "mtime": 1791055002.1630445,
     "ast_hash": "052a6c7f039aabe518298e53feb42510",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_10_happy.png": {
-    "mtime": 1791029396.8234782,
+    "mtime": 1791055002.1662395,
     "ast_hash": "9e0b8c09d5d7e30b7403a5bbadbf3674",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_09_happy.png": {
-    "mtime": 1791029396.6231275,
+    "mtime": 1791055002.16374,
     "ast_hash": "2c3d3c4f56ecc6c1edd19d3d803e5fbc",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_01_sad.png": {
-    "mtime": 1791029394.9059942,
+    "mtime": 1791055002.147593,
     "ast_hash": "98c8ac55fc3af331722a1e7f3af46232",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_02_happy.png": {
-    "mtime": 1791029395.0733318,
+    "mtime": 1791055002.1485183,
     "ast_hash": "f66ebe59cdcd13c7beed8bc3589e06e6",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_10_sad.png": {
-    "mtime": 1791029396.8619652,
+    "mtime": 1791055002.1685233,
     "ast_hash": "51a742b46e97d9c60cfa0b31de643b7e",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_02_neutral.png": {
-    "mtime": 1791029394.990325,
+    "mtime": 1791055002.1490486,
     "ast_hash": "7db279881d1d57abdd33f9d72dac1718",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_09_sad.png": {
-    "mtime": 1791029396.7036767,
+    "mtime": 1791055002.1655066,
     "ast_hash": "a939c0e212cfa05260c746947a5126a2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_01_neutral.png": {
-    "mtime": 1791029394.7256205,
+    "mtime": 1791055002.146911,
     "ast_hash": "4b338fc67ca4d214d84940a3e5f7f93b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_05_happy.png": {
-    "mtime": 1791029395.785117,
+    "mtime": 1791055002.15491,
     "ast_hash": "863a8043dc11492d3325dec5bc00a817",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_02_sad.png": {
-    "mtime": 1791029395.1560562,
+    "mtime": 1791055002.1498785,
     "ast_hash": "8e94c39883c8d32f24a201bc7e81329c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_08_neutral.png": {
-    "mtime": 1791029396.32059,
+    "mtime": 1791055002.1625032,
     "ast_hash": "16b48984f0b61a595d4a0ca8b0666f45",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_08_happy.png": {
-    "mtime": 1791029396.3917022,
+    "mtime": 1791055002.1618376,
     "ast_hash": "52ce77526a2d0ff42d864c014d7cdf23",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_03_happy.png": {
-    "mtime": 1791029395.3167148,
+    "mtime": 1791055002.1507275,
     "ast_hash": "b65bd273fcea5962c13ffe6b4bc3eae3",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_04_neutral.png": {
-    "mtime": 1791029395.481529,
+    "mtime": 1791055002.1533997,
     "ast_hash": "8993cfb9dcfbd96f23d30f3250831234",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/fox/kitsune_fox_03_sad.png": {
-    "mtime": 1791029395.4017596,
+    "mtime": 1791055002.1519446,
     "ast_hash": "e26e92678bf5d0e6fffd8d28e50419ce",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_10_neutral.png": {
-    "mtime": 1791029376.817179,
+    "mtime": 1791055002.2843106,
     "ast_hash": "b0e25836c091921ce8d689fe322525b2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_06_sad.png": {
-    "mtime": 1791029376.1051133,
+    "mtime": 1791055002.2763467,
     "ast_hash": "9b75c1a2b272e2b37a577da5a72800ea",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_04_happy.png": {
-    "mtime": 1791029375.61881,
+    "mtime": 1791055002.2706544,
     "ast_hash": "5508859df9e0e9f2c73e5a8d045fc5b0",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_10_happy.png": {
-    "mtime": 1791029376.883027,
+    "mtime": 1791055002.283104,
     "ast_hash": "df9f26a64a2461f0bd66faac5841deb8",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_05_neutral.png": {
-    "mtime": 1791029375.7490752,
+    "mtime": 1791055002.2731616,
     "ast_hash": "d3047ea0afbf3cb67a45efefcff9ab06",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_09_happy.png": {
-    "mtime": 1791029376.6903787,
+    "mtime": 1791055002.2813196,
     "ast_hash": "c64352da64b7a87351aa0693288dc369",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_02_happy.png": {
-    "mtime": 1791029375.1710083,
+    "mtime": 1791055002.2666667,
     "ast_hash": "57b7697f95e71d5bf6f7779e6b342304",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/download.png": {
-    "mtime": 1791021609.4687047,
+    "mtime": 1791055002.2628884,
     "ast_hash": "3ea22f7b2be7cd5be56039491f4c11ca",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_07_sad.png": {
-    "mtime": 1791029376.3205278,
+    "mtime": 1791055002.2782624,
     "ast_hash": "5042f3fa281dcbd3259fa84309c94de2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_09_neutral.png": {
-    "mtime": 1791029376.624457,
+    "mtime": 1791055002.2819502,
     "ast_hash": "be06f6b58a4da74319cc6d3cd1d419fd",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_05_happy.png": {
-    "mtime": 1791029375.8200245,
+    "mtime": 1791055002.272623,
     "ast_hash": "1413a0c8fe8daea352194540838aab81",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_03_neutral.png": {
-    "mtime": 1791029375.3407593,
+    "mtime": 1791055002.2693284,
     "ast_hash": "d6ec1606ab27c34306a3838e05407133",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_05_sad.png": {
-    "mtime": 1791029375.8925304,
+    "mtime": 1791055002.2739809,
     "ast_hash": "434af28425110c367e7bcc0e935bbcce",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_08_happy.png": {
-    "mtime": 1791029376.4771354,
+    "mtime": 1791055002.278937,
     "ast_hash": "2d58c1b788d7a9363d58b64356cb2507",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_03_happy.png": {
-    "mtime": 1791029375.4111803,
+    "mtime": 1791055002.2685423,
     "ast_hash": "681e46be6fd03c286c9e560091eefba3",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_06_neutral.png": {
-    "mtime": 1791029375.96403,
+    "mtime": 1791055002.2757528,
     "ast_hash": "741690fc7444a2642cf6d2ae1f249118",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_04_sad.png": {
-    "mtime": 1791029375.6805608,
+    "mtime": 1791055002.2720816,
     "ast_hash": "8f5a0de8df78c650f984257ddf3cfc8a",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_08_sad.png": {
-    "mtime": 1791029376.5546725,
+    "mtime": 1791055002.280559,
     "ast_hash": "0d5bf52b37464f095dc0885706e2e58a",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_06_happy.png": {
-    "mtime": 1791029376.0314534,
+    "mtime": 1791055002.2751708,
     "ast_hash": "28054f3be61d578e2cc007473ad457fc",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_08_neutral.png": {
-    "mtime": 1791029376.3976521,
+    "mtime": 1791055002.2796571,
     "ast_hash": "016ae928936b244883483fd24df4da84",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_01_sad.png": {
-    "mtime": 1791029374.9928138,
+    "mtime": 1791055002.2660787,
     "ast_hash": "61f065ad32b4b5fc550f2170df1e2ff6",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_01_neutral.png": {
-    "mtime": 1791029374.8075345,
+    "mtime": 1791055002.2655065,
     "ast_hash": "6cda0a8306ad3f99e489d0654070b7cb",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_04_neutral.png": {
-    "mtime": 1791029375.5566308,
+    "mtime": 1791055002.271284,
     "ast_hash": "405dfca871b4863e578481ab62a54ed3",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_10_sad.png": {
-    "mtime": 1791029376.9459417,
+    "mtime": 1791055002.2847466,
     "ast_hash": "80e7a7222bbc7a49bd29ec23892ee0e2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_09_sad.png": {
-    "mtime": 1791029376.7545145,
+    "mtime": 1791055002.2826009,
     "ast_hash": "9234c1d814bdd4bd01769677ff6959db",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_02_sad.png": {
-    "mtime": 1791029375.258661,
+    "mtime": 1791055002.2677546,
     "ast_hash": "c18d1af6bcd2fb5fa7e93d2893f0039f",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_07_happy.png": {
-    "mtime": 1791029376.2483928,
+    "mtime": 1791055002.276887,
     "ast_hash": "9db150a9dcd1cb4f704b6e4c80bc535a",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_07_neutral.png": {
-    "mtime": 1791029376.174598,
+    "mtime": 1791055002.2775168,
     "ast_hash": "1595bcca6f7ef3a0b4696052c028d12d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_02_neutral.png": {
-    "mtime": 1791029375.084041,
+    "mtime": 1791055002.2673237,
     "ast_hash": "feb5452e8ce239b6ff56a1baaca5ef2a",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_01_happy.png": {
-    "mtime": 1791029374.8983655,
+    "mtime": 1791055002.2643907,
     "ast_hash": "9a2626794eb61f6c63b5dbd57f57f3cb",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/panda/panda_03_sad.png": {
-    "mtime": 1791029375.4873543,
+    "mtime": 1791055002.2700572,
     "ast_hash": "6970e97d5305c62505889c4f3f99c151",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_02_sad.png": {
-    "mtime": 1791029371.6181014,
+    "mtime": 1791055002.323327,
     "ast_hash": "d6f238b83043e32b7ecbdf3b87979af2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/download (1).png": {
-    "mtime": 1791021774.1128376,
+    "mtime": 1791055002.3183436,
     "ast_hash": "3f4e647ced6970dc08f3b5dc049b3684",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_08_neutral.png": {
-    "mtime": 1791029372.4712062,
+    "mtime": 1791055002.334162,
     "ast_hash": "337b7d6da5f163e29fd6dd72c7b56aec",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_01_happy.png": {
-    "mtime": 1791029371.3344607,
+    "mtime": 1791055002.3197448,
     "ast_hash": "255233680ee409a5747369c10013ff05",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_01_neutral.png": {
-    "mtime": 1791029371.2565286,
+    "mtime": 1791055002.320839,
     "ast_hash": "34fdc8fffbe6fae85648c27248c20032",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_04_neutral.png": {
-    "mtime": 1791029371.858831,
+    "mtime": 1791055002.326274,
     "ast_hash": "4b48a16c6b709ce0ac3611f3a49fe62f",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_03_sad.png": {
-    "mtime": 1791029371.8037443,
+    "mtime": 1791055002.325101,
     "ast_hash": "412b44d0428db0dfab05ac3695a92a07",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_07_happy.png": {
-    "mtime": 1791029372.3652387,
+    "mtime": 1791055002.3310454,
     "ast_hash": "f18d7ac68cdb5f884cadac96734c1d66",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_08_sad.png": {
-    "mtime": 1791029372.5962255,
+    "mtime": 1791055002.334792,
     "ast_hash": "5b5c08b870ff9de35209dca5b0712566",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_01_sad.png": {
-    "mtime": 1791029371.4147015,
+    "mtime": 1791055002.3215556,
     "ast_hash": "a98d5836a70148b920066f1c5c8d1a2b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_07_neutral.png": {
-    "mtime": 1791029372.3161302,
+    "mtime": 1791055002.3322816,
     "ast_hash": "68edc9afff45de8155470a2954a612de",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_10_sad.png": {
-    "mtime": 1791029372.935282,
+    "mtime": 1791055002.337736,
     "ast_hash": "72139b3c550023c62e4e6f6f268b5247",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_02_neutral.png": {
-    "mtime": 1791029371.4829853,
+    "mtime": 1791055002.3225515,
     "ast_hash": "172f403202605cdb065615cf74ebac53",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_09_sad.png": {
-    "mtime": 1791029372.7648692,
+    "mtime": 1791055002.3365016,
     "ast_hash": "72139b3c550023c62e4e6f6f268b5247",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_06_happy.png": {
-    "mtime": 1791029372.2194982,
+    "mtime": 1791055002.329194,
     "ast_hash": "7814dea8269a24a77be534a3a99a2a89",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_10_neutral.png": {
-    "mtime": 1791029372.8197744,
+    "mtime": 1791055002.3372085,
     "ast_hash": "9f3517fcd3e37758acc51e944cd27bef",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_03_happy.png": {
-    "mtime": 1791029371.7404573,
+    "mtime": 1791055002.3238568,
     "ast_hash": "ae9b034814dde06fa31fbfe3265f6c96",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_05_neutral.png": {
-    "mtime": 1791029372.0143812,
+    "mtime": 1791055002.3279228,
     "ast_hash": "b01f8f1051cafb26f09d305b88cd70cc",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_05_sad.png": {
-    "mtime": 1791029372.117841,
+    "mtime": 1791055002.3286211,
     "ast_hash": "97f94dcc87c630caf39058c1ececa29a",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_08_happy.png": {
-    "mtime": 1791029372.5327382,
+    "mtime": 1791055002.3335378,
     "ast_hash": "dce91646cb193689a009e3574451b7b9",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_04_sad.png": {
-    "mtime": 1791029371.9635608,
+    "mtime": 1791055002.3268254,
     "ast_hash": "9c6d2decb818d1b0650fb028dd48958f",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_05_happy.png": {
-    "mtime": 1791029372.067233,
+    "mtime": 1791055002.3273222,
     "ast_hash": "eb3838909a73d27f917e4f7f8fa5512a",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_09_neutral.png": {
-    "mtime": 1791029372.6534681,
+    "mtime": 1791055002.3359754,
     "ast_hash": "9f3517fcd3e37758acc51e944cd27bef",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_06_sad.png": {
-    "mtime": 1791029372.268361,
+    "mtime": 1791055002.3305008,
     "ast_hash": "49093e64a5ee4c763458c726ab994d0b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_03_neutral.png": {
-    "mtime": 1791029371.6778755,
+    "mtime": 1791055002.3243823,
     "ast_hash": "ce4b7edfe9f01e0bc7c465fb5b9aa3ec",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_02_happy.png": {
-    "mtime": 1791029371.5500374,
+    "mtime": 1791055002.3219914,
     "ast_hash": "c65cba587e55a699ab82fea80cdc5e5f",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_06_neutral.png": {
-    "mtime": 1791029372.1680481,
+    "mtime": 1791055002.3299341,
     "ast_hash": "62b7e87de1794925ec37cc605c68adfe",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_09_happy.png": {
-    "mtime": 1791029372.7096179,
+    "mtime": 1791055002.335546,
     "ast_hash": "7c19adca96beec1f01d178e314a1f2c4",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_10_happy.png": {
-    "mtime": 1791029372.8789158,
+    "mtime": 1791055002.3368838,
     "ast_hash": "7c19adca96beec1f01d178e314a1f2c4",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_04_happy.png": {
-    "mtime": 1791029371.911188,
+    "mtime": 1791055002.3257105,
     "ast_hash": "2ceb65bd0727d605c532bb584c057352",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/phoenix/phoenix_07_sad.png": {
-    "mtime": 1791029372.416492,
+    "mtime": 1791055002.3330421,
     "ast_hash": "bf0e34083cf0e4270e1a8673beb0ad43",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_05_sad.png": {
-    "mtime": 1791029387.8110652,
+    "mtime": 1791055002.301071,
     "ast_hash": "d8a0daa55661aee3929c6a0106b65214",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_10_neutral.png": {
-    "mtime": 1791029388.6019297,
+    "mtime": 1791055002.310714,
     "ast_hash": "f6f649b86cdbe8a5a69a1ce09aac8eac",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_05_neutral.png": {
-    "mtime": 1791029387.671811,
+    "mtime": 1791055002.300115,
     "ast_hash": "3941da86babb7a6a1b913200b6a6e8b3",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/download.png": {
-    "mtime": 1791021728.6576302,
+    "mtime": 1791055002.2907298,
     "ast_hash": "3f7bdd43b51b1b0d81b41d776508ba96",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_06_happy.png": {
-    "mtime": 1791029387.9468203,
+    "mtime": 1791055002.3016145,
     "ast_hash": "f473c7c981dc5ce0960bca96dacb2aa5",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_04_sad.png": {
-    "mtime": 1791029387.6030345,
+    "mtime": 1791055002.2989304,
     "ast_hash": "b8ca6d0d26b6107dc32eb2275bbd42d0",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_09_neutral.png": {
-    "mtime": 1791029388.4225535,
+    "mtime": 1791055002.307719,
     "ast_hash": "16bf1ca80ba46f655e0be6b20541e108",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_01_happy.png": {
-    "mtime": 1791029386.7904932,
+    "mtime": 1791055002.2923355,
     "ast_hash": "46fae6ec83994c1a5b3411b1097dad6c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_03_neutral.png": {
-    "mtime": 1791029387.2460315,
+    "mtime": 1791055002.2969296,
     "ast_hash": "64c70ef1067afd4c88803e50f2dae85c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_06_sad.png": {
-    "mtime": 1791029388.0138643,
+    "mtime": 1791055002.3030078,
     "ast_hash": "73828cbcddd957698532baf6639b3dec",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_07_sad.png": {
-    "mtime": 1791029388.1891656,
+    "mtime": 1791055002.304593,
     "ast_hash": "2848245bf4533e151963aa9661f3f5ac",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_06_neutral.png": {
-    "mtime": 1791029387.8802786,
+    "mtime": 1791055002.3023837,
     "ast_hash": "28076e6fbdfdd237bd224e81f1920bbf",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_07_happy.png": {
-    "mtime": 1791029388.1333628,
+    "mtime": 1791055002.303495,
     "ast_hash": "475f841f4ea4e6dca10e62f4c218205b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_08_neutral.png": {
-    "mtime": 1791029388.2478657,
+    "mtime": 1791055002.3060384,
     "ast_hash": "4c4d597ae8e14e932bded5eb0a4c9c81",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_02_happy.png": {
-    "mtime": 1791029387.0824502,
+    "mtime": 1791055002.2946763,
     "ast_hash": "f688b841ab608af7681d845f52995298",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_01_neutral.png": {
-    "mtime": 1791029386.6914608,
+    "mtime": 1791055002.2934027,
     "ast_hash": "abceff34ebb28a08a832d500ad6dc461",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_02_sad.png": {
-    "mtime": 1791029387.1656697,
+    "mtime": 1791055002.2958782,
     "ast_hash": "8c582a03db0c9b9c69099360151e8ecb",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_04_happy.png": {
-    "mtime": 1791029387.5353951,
+    "mtime": 1791055002.2977967,
     "ast_hash": "dd302aed4dc915df95d88c8efbcd7c20",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_04_neutral.png": {
-    "mtime": 1791029387.4682236,
+    "mtime": 1791055002.2984183,
     "ast_hash": "d2f0280761fce50ac3fa232be8b16e55",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_10_happy.png": {
-    "mtime": 1791029388.6658828,
+    "mtime": 1791055002.3089688,
     "ast_hash": "b599b1674de9b2545fe6ce55bccb4293",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_03_sad.png": {
-    "mtime": 1791029387.39842,
+    "mtime": 1791055002.2972791,
     "ast_hash": "6fa6c16009fd32f890301104e6d625f4",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_09_happy.png": {
-    "mtime": 1791029388.480254,
+    "mtime": 1791055002.3071673,
     "ast_hash": "60f63ccc2d7ca43722f1e0f06d6014c7",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_01_sad.png": {
-    "mtime": 1791029386.9010005,
+    "mtime": 1791055002.2941906,
     "ast_hash": "04b779c969fa05f63823ac6042938b9d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_03_happy.png": {
-    "mtime": 1791029387.3231447,
+    "mtime": 1791055002.296528,
     "ast_hash": "acdf88aab93a58089187cde38dcfeb4f",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_07_neutral.png": {
-    "mtime": 1791029388.0774467,
+    "mtime": 1791055002.3041236,
     "ast_hash": "f059cb1d9bf291bb00bb4ccce4e08630",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_08_sad.png": {
-    "mtime": 1791029388.3641946,
+    "mtime": 1791055002.3067024,
     "ast_hash": "0b96c4846f04b3b7e62ee4b28e45ab4c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_05_happy.png": {
-    "mtime": 1791029387.7422931,
+    "mtime": 1791055002.2994616,
     "ast_hash": "3d8d76e1ad8d363bffff2e5482248ccf",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_02_neutral.png": {
-    "mtime": 1791029386.9996617,
+    "mtime": 1791055002.295332,
     "ast_hash": "e23674b937ac92765fa910edbb101de8",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_09_sad.png": {
-    "mtime": 1791029388.538642,
+    "mtime": 1791055002.3084714,
     "ast_hash": "92b96743abe343479fe94d01c984ee82",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_08_happy.png": {
-    "mtime": 1791029388.3065467,
+    "mtime": 1791055002.3053353,
     "ast_hash": "5a63db2c23fca9905512650c8b91fb1b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/pegasus/pegasus_10_sad.png": {
-    "mtime": 1791029388.7285075,
+    "mtime": 1791055002.3114886,
     "ast_hash": "b093f69582f8be3216855500125e7328",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_03_happy.png": {
-    "mtime": 1791029367.8205798,
+    "mtime": 1791055002.1809437,
     "ast_hash": "da05711d0e874f4ec5be9fe356abd41d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_10_sad.png": {
-    "mtime": 1791029369.4294224,
+    "mtime": 1791055002.197987,
     "ast_hash": "7175c054656609fd5610773f0082b8ab",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_03_neutral.png": {
-    "mtime": 1791029367.746761,
+    "mtime": 1791055002.1817777,
     "ast_hash": "d24eea376bd3ca4df59a4e50e8292765",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_09_sad.png": {
-    "mtime": 1791029369.2605536,
+    "mtime": 1791055002.1962464,
     "ast_hash": "7175c054656609fd5610773f0082b8ab",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/download.png": {
-    "mtime": 1791021759.4927447,
+    "mtime": 1791055002.1751013,
     "ast_hash": "26c7699722b9c22a5c6e18c117b3d83f",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_08_sad.png": {
-    "mtime": 1791029369.085456,
+    "mtime": 1791055002.193688,
     "ast_hash": "75b42fa427733d3e61cdae5ab2894f20",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_06_neutral.png": {
-    "mtime": 1791029368.520337,
+    "mtime": 1791055002.1882482,
     "ast_hash": "a5b9adf2aeeace12c90db698f7008f29",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_05_happy.png": {
-    "mtime": 1791029368.3354719,
+    "mtime": 1791055002.184947,
     "ast_hash": "eea8826c92bb3a11719fea14b89c044d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_01_sad.png": {
-    "mtime": 1791029367.4230874,
+    "mtime": 1791055002.1783886,
     "ast_hash": "838816c4a2961b7076a035bd2cc5df9b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_08_happy.png": {
-    "mtime": 1791029369.025841,
+    "mtime": 1791055002.1921854,
     "ast_hash": "92f308a08d9407bb0fb7d5e991d1812f",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_02_happy.png": {
-    "mtime": 1791029367.5863898,
+    "mtime": 1791055002.1790395,
     "ast_hash": "e07f0dbc1dc59aabebdea2bd6f538db0",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_10_neutral.png": {
-    "mtime": 1791029369.3178916,
+    "mtime": 1791055002.1976025,
     "ast_hash": "c7351754ee349aaf776b524bcb5b7669",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_05_neutral.png": {
-    "mtime": 1791029368.2394426,
+    "mtime": 1791055002.185657,
     "ast_hash": "f39645a74b31ef94128a32abd9f42172",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_03_sad.png": {
-    "mtime": 1791029367.896389,
+    "mtime": 1791055002.1825533,
     "ast_hash": "08d334181226d997e049ee772fc5e6cd",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_02_sad.png": {
-    "mtime": 1791029367.6680498,
+    "mtime": 1791055002.179871,
     "ast_hash": "fc2fd5ded56bb2a6f64bd3d3ba2deb78",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_04_happy.png": {
-    "mtime": 1791029368.063301,
+    "mtime": 1791055002.1831965,
     "ast_hash": "a061d619f548c259bd3f891fb5f08c28",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_10_happy.png": {
-    "mtime": 1791029369.3747761,
+    "mtime": 1791055002.1967323,
     "ast_hash": "b00778957ae8680e8bb4fe2d46637bad",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_09_neutral.png": {
-    "mtime": 1791029369.146194,
+    "mtime": 1791055002.1951292,
     "ast_hash": "c7351754ee349aaf776b524bcb5b7669",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_09_happy.png": {
-    "mtime": 1791029369.2028477,
+    "mtime": 1791055002.1941369,
     "ast_hash": "b00778957ae8680e8bb4fe2d46637bad",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_01_happy.png": {
-    "mtime": 1791029367.3274162,
+    "mtime": 1791055002.1767783,
     "ast_hash": "eab0709128f4bfb6f02ddb7e18bbe70d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_07_sad.png": {
-    "mtime": 1791029368.8905966,
+    "mtime": 1791055002.1917484,
     "ast_hash": "e5d19407512bc9e6774e9519168946d1",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_07_neutral.png": {
-    "mtime": 1791029368.7415388,
+    "mtime": 1791055002.1902788,
     "ast_hash": "23add7a277abcf44efddce81b1554d57",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_06_sad.png": {
-    "mtime": 1791029368.6678605,
+    "mtime": 1791055002.1886384,
     "ast_hash": "2ffe083c4612eb5ba4088ae9f16b08c3",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_02_neutral.png": {
-    "mtime": 1791029367.5086381,
+    "mtime": 1791055002.1794205,
     "ast_hash": "9d9f1c83b279780bb3ec5c88c7a15c9d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_07_happy.png": {
-    "mtime": 1791029368.817265,
+    "mtime": 1791055002.1891463,
     "ast_hash": "ec19e3380001536f7964b78cb5ab5f67",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_04_sad.png": {
-    "mtime": 1791029368.147348,
+    "mtime": 1791055002.1844351,
     "ast_hash": "29fe37755d77eabbb33337cbae7cbdf0",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_08_neutral.png": {
-    "mtime": 1791029368.9622803,
+    "mtime": 1791055002.1929834,
     "ast_hash": "ebe16b6d5005e8e7a0b0e86445ef0313",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_01_neutral.png": {
-    "mtime": 1791029367.2266161,
+    "mtime": 1791055002.177623,
     "ast_hash": "d51f6c845d91c0cd77a7389af3c55385",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_06_happy.png": {
-    "mtime": 1791029368.5941799,
+    "mtime": 1791055002.1875992,
     "ast_hash": "4c2ffcaadd87c95e89c461f46af8fe56",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_04_neutral.png": {
-    "mtime": 1791029367.9788182,
+    "mtime": 1791055002.1839147,
     "ast_hash": "53f006477a3efd67976f6621826a0cb2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/griffin/griffin_05_sad.png": {
-    "mtime": 1791029368.4326918,
+    "mtime": 1791055002.186925,
     "ast_hash": "a5e1f7f8e442fb6ae7e7799d8032f09c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_03_happy.png": {
-    "mtime": 1791029383.6460795,
+    "mtime": 1791055002.4037738,
     "ast_hash": "a1b762ffc6e41f182f64e06fd3a14730",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/download (1).png": {
-    "mtime": 1791021744.0717027,
+    "mtime": 1791055002.3957684,
     "ast_hash": "224869d57d1586608bce28b382b9bb86",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_04_sad.png": {
-    "mtime": 1791029383.8788416,
+    "mtime": 1791055002.4086199,
     "ast_hash": "790f961bca30928b5f3ba3277ca84dbf",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_06_neutral.png": {
-    "mtime": 1791029384.0950782,
+    "mtime": 1791055002.4125202,
     "ast_hash": "9abf1d42f74716185d59d5ac7256b102",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_03_neutral.png": {
-    "mtime": 1791029383.5843432,
+    "mtime": 1791055002.404836,
     "ast_hash": "3d05fc0a345fd277a3ef43897f3e3d0e",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_05_happy.png": {
-    "mtime": 1791029383.9885879,
+    "mtime": 1791055002.4093523,
     "ast_hash": "8696f225463b3b14fdb3d18ad4d5d7ed",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_05_sad.png": {
-    "mtime": 1791029384.0419645,
+    "mtime": 1791055002.4111693,
     "ast_hash": "7e032110fcdbd41e951a7064b663e63d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_08_happy.png": {
-    "mtime": 1791029384.4219518,
+    "mtime": 1791055002.4161959,
     "ast_hash": "4f40b4e9008ded89793f8c64ee9107ab",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_09_neutral.png": {
-    "mtime": 1791029384.5026045,
+    "mtime": 1791055002.4187295,
     "ast_hash": "78167d6d3a2f3c3555545314d9b4d637",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_02_happy.png": {
-    "mtime": 1791029383.4290159,
+    "mtime": 1791055002.4005208,
     "ast_hash": "8cd2c866aa173811311d547850f8414c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_07_sad.png": {
-    "mtime": 1791029384.3318346,
+    "mtime": 1791055002.4151325,
     "ast_hash": "c3a9b834e859222e5cfcdc78b6fee416",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_05_neutral.png": {
-    "mtime": 1791029383.9351819,
+    "mtime": 1791055002.4101477,
     "ast_hash": "6e17b902e079343a7b06466253e5a387",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_06_sad.png": {
-    "mtime": 1791029384.197085,
+    "mtime": 1791055002.4131358,
     "ast_hash": "7a24ddc98461f3115fbac0f97dd30f9c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_10_happy.png": {
-    "mtime": 1791029384.664287,
+    "mtime": 1791055002.4198353,
     "ast_hash": "0f306f008a8f041b5df85748e284a5d6",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_04_happy.png": {
-    "mtime": 1791029383.8213124,
+    "mtime": 1791055002.4065313,
     "ast_hash": "2ce51e2e614fdc3e49eac51dca6d7ca2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_10_neutral.png": {
-    "mtime": 1791029384.6221669,
+    "mtime": 1791055002.4206069,
     "ast_hash": "78167d6d3a2f3c3555545314d9b4d637",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_09_happy.png": {
-    "mtime": 1791029384.5437768,
+    "mtime": 1791055002.4181662,
     "ast_hash": "0f306f008a8f041b5df85748e284a5d6",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_01_happy.png": {
-    "mtime": 1791029383.1602178,
+    "mtime": 1791055002.3975916,
     "ast_hash": "d49691d9e3bc844a9d8cccf34e828bd4",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_02_neutral.png": {
-    "mtime": 1791029383.3467736,
+    "mtime": 1791055002.4015317,
     "ast_hash": "a48d76cae1cac544dc4c70bc675b9596",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_03_sad.png": {
-    "mtime": 1791029383.7066665,
+    "mtime": 1791055002.4056673,
     "ast_hash": "43b10404473ac2d80a2d3540651c46de",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_07_happy.png": {
-    "mtime": 1791029384.2886274,
+    "mtime": 1791055002.4138467,
     "ast_hash": "daec184fd7c779f8655a67b821f4701f",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_07_neutral.png": {
-    "mtime": 1791029384.2443817,
+    "mtime": 1791055002.4142985,
     "ast_hash": "498d9d983b6032ac044c7b7d1208fc13",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_02_sad.png": {
-    "mtime": 1791029383.5122392,
+    "mtime": 1791055002.4026186,
     "ast_hash": "44b17f59b9a56e5afbd8954a84daf57e",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_10_sad.png": {
-    "mtime": 1791029384.7035987,
+    "mtime": 1791055002.4211576,
     "ast_hash": "36dfd0fc9f072764da09c3a42de731af",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_04_neutral.png": {
-    "mtime": 1791029383.7654617,
+    "mtime": 1791055002.4079762,
     "ast_hash": "7bd6627a1da6a877a54f35365901cca3",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_09_sad.png": {
-    "mtime": 1791029384.5824003,
+    "mtime": 1791055002.4194336,
     "ast_hash": "36dfd0fc9f072764da09c3a42de731af",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_06_happy.png": {
-    "mtime": 1791029384.146223,
+    "mtime": 1791055002.4119997,
     "ast_hash": "9d0a7c6997d71455a91a864813169b48",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_01_neutral.png": {
-    "mtime": 1791029383.0688748,
+    "mtime": 1791055002.39878,
     "ast_hash": "ac64a30dd46cf19e60b253be40ca3949",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_08_sad.png": {
-    "mtime": 1791029384.462817,
+    "mtime": 1791055002.4173558,
     "ast_hash": "dd30ac7f323beadb905d5b7f10f8551c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_01_sad.png": {
-    "mtime": 1791029383.251504,
+    "mtime": 1791055002.3998835,
     "ast_hash": "e65bf5a2b58e1483f71a2bb843b908ec",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/sphinx cat/sphinx_cat_08_neutral.png": {
-    "mtime": 1791029384.375999,
+    "mtime": 1791055002.4167542,
     "ast_hash": "ff33a7e3f56cc585ca19193b5a8459f6",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_05_neutral.png": {
-    "mtime": 1791029360.2437806,
+    "mtime": 1791055002.1218228,
     "ast_hash": "10554d2e2374cd1a3604843216ead366",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_08_happy.png": {
-    "mtime": 1791029360.9279664,
+    "mtime": 1791055002.1286912,
     "ast_hash": "dc537d8b44a103e6310712679874c4ce",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_09_sad.png": {
-    "mtime": 1791029361.1618109,
+    "mtime": 1791055002.1329124,
     "ast_hash": "a9c27e698972a17bee82d5c7af6bb2c1",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_05_happy.png": {
-    "mtime": 1791029360.3216825,
+    "mtime": 1791055002.1211596,
     "ast_hash": "df8f45c71075752025cb2e95c23791a2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_10_sad.png": {
-    "mtime": 1791029361.3665547,
+    "mtime": 1791055002.134438,
     "ast_hash": "a9c27e698972a17bee82d5c7af6bb2c1",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_10_neutral.png": {
-    "mtime": 1791029361.2186432,
+    "mtime": 1791055002.1338573,
     "ast_hash": "352725b53b7db4fd6f9a5be77abec5b0",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/download.png": {
-    "mtime": 1791021788.8416286,
+    "mtime": 1791055002.111973,
     "ast_hash": "fb1f4946f65d170c57cb02cdf7eac348",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_09_neutral.png": {
-    "mtime": 1791029361.0428429,
+    "mtime": 1791055002.1318939,
     "ast_hash": "352725b53b7db4fd6f9a5be77abec5b0",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_01_sad.png": {
-    "mtime": 1791029359.5053842,
+    "mtime": 1791055002.1149933,
     "ast_hash": "43c32fd169432e68dea8439c9f6f6352",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_08_sad.png": {
-    "mtime": 1791029360.9850872,
+    "mtime": 1791055002.129873,
     "ast_hash": "ee55236098dc25c5925f19427fecf851",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_03_happy.png": {
-    "mtime": 1791029359.897966,
+    "mtime": 1791055002.117409,
     "ast_hash": "9e4cfbc725e647ab2cb4c908f3e7c5cb",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_09_happy.png": {
-    "mtime": 1791029361.1024299,
+    "mtime": 1791055002.1305563,
     "ast_hash": "37b40d9c502a5b072ebb403123271287",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_03_neutral.png": {
-    "mtime": 1791029359.8184462,
+    "mtime": 1791055002.1178572,
     "ast_hash": "b70e8bab57a8ed3fbe5960cf3b188b26",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_03_sad.png": {
-    "mtime": 1791029359.9764447,
+    "mtime": 1791055002.118301,
     "ast_hash": "83df416d748d34983f3486dc750ed69b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_04_happy.png": {
-    "mtime": 1791029360.1101367,
+    "mtime": 1791055002.1188707,
     "ast_hash": "c8e910b123f98515cc801c4886adfbdf",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_10_happy.png": {
-    "mtime": 1791029361.2788796,
+    "mtime": 1791055002.1332943,
     "ast_hash": "37b40d9c502a5b072ebb403123271287",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_02_happy.png": {
-    "mtime": 1791029359.669514,
+    "mtime": 1791055002.11558,
     "ast_hash": "cb96c1f19bfd37864344874ad39f45db",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_02_sad.png": {
-    "mtime": 1791029359.7450984,
+    "mtime": 1791055002.1164935,
     "ast_hash": "15d1588024db71dce639c32b12138a10",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_06_neutral.png": {
-    "mtime": 1791029360.4801717,
+    "mtime": 1791055002.124037,
     "ast_hash": "a58a2c02d0796a0a48093019e3c29667",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_07_sad.png": {
-    "mtime": 1791029360.808801,
+    "mtime": 1791055002.1280055,
     "ast_hash": "b9dad8087749b764384acdb6c3d0b988",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_01_neutral.png": {
-    "mtime": 1791029359.3278465,
+    "mtime": 1791055002.1134858,
     "ast_hash": "68438946e0678fc3c31f501fcf820d08",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_07_happy.png": {
-    "mtime": 1791029360.7450662,
+    "mtime": 1791055002.1256056,
     "ast_hash": "c40fb107cfe61d106358f48cb3b8fdb4",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_08_neutral.png": {
-    "mtime": 1791029360.869394,
+    "mtime": 1791055002.129365,
     "ast_hash": "c1550666a58eac54738f63de1466cf78",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_01_happy.png": {
-    "mtime": 1791029359.4162028,
+    "mtime": 1791055002.1130278,
     "ast_hash": "5803634280582274c8c91082ea36d68f",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_06_sad.png": {
-    "mtime": 1791029360.6141095,
+    "mtime": 1791055002.1244974,
     "ast_hash": "9f2c043ccdab021a7e943cd399c02ba4",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_04_neutral.png": {
-    "mtime": 1791029360.043717,
+    "mtime": 1791055002.1193018,
     "ast_hash": "3517e5d0663992c356f6ae76aa6089f7",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_07_neutral.png": {
-    "mtime": 1791029360.6777008,
+    "mtime": 1791055002.1275609,
     "ast_hash": "948bfe9e3d995f155f57b231ba38b081",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_04_sad.png": {
-    "mtime": 1791029360.1769707,
+    "mtime": 1791055002.1199539,
     "ast_hash": "3e2251dbc29e81b350695cd5e9a9308c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_06_happy.png": {
-    "mtime": 1791029360.5480013,
+    "mtime": 1791055002.1235375,
     "ast_hash": "e1d784989f6ae6a5c306a9166395f989",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_05_sad.png": {
-    "mtime": 1791029360.4060931,
+    "mtime": 1791055002.1224823,
     "ast_hash": "fb4a1d00cd1fa7bdacae57182214d909",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/dragon/dragon_02_neutral.png": {
-    "mtime": 1791029359.5875828,
+    "mtime": 1791055002.1160626,
     "ast_hash": "e89c53fa8e35129048faffe71ebd96a8",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/download (1).png": {
-    "mtime": 1791021559.4533243,
+    "mtime": 1791055002.343901,
     "ast_hash": "e86028e4e975d09b28e545ed74931fc2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_10_neutral.png": {
-    "mtime": 1791029392.616127,
+    "mtime": 1791055002.3642993,
     "ast_hash": "b4434e6b56ac8d05caa8613086aa5a50",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_04_happy.png": {
-    "mtime": 1791029391.484011,
+    "mtime": 1791055002.3518896,
     "ast_hash": "7c3ae10f2220a2e27434b85bbb8d9a56",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_10_happy.png": {
-    "mtime": 1791029392.6772342,
+    "mtime": 1791055002.3637998,
     "ast_hash": "6225d2cf261b6b055fe0b2f9c086b83a",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_10_sad.png": {
-    "mtime": 1791029392.7369697,
+    "mtime": 1791055002.364841,
     "ast_hash": "3bc72ad858182922911be9531a2c8d59",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_09_sad.png": {
-    "mtime": 1791029392.5557184,
+    "mtime": 1791055002.36307,
     "ast_hash": "2163568e20c8e919e46a3965c9ef6c1c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_09_happy.png": {
-    "mtime": 1791029392.4951613,
+    "mtime": 1791055002.361585,
     "ast_hash": "a4476010523e98279fda00e0624255b6",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_05_neutral.png": {
-    "mtime": 1791029391.6369395,
+    "mtime": 1791055002.3546035,
     "ast_hash": "35a5f0fff4cea138a75010537e0ccdb7",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_02_happy.png": {
-    "mtime": 1791029391.038137,
+    "mtime": 1791055002.3484116,
     "ast_hash": "6f37f132dfc858626507e476d9afc98e",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_08_sad.png": {
-    "mtime": 1791029392.3726666,
+    "mtime": 1791055002.3610616,
     "ast_hash": "567e1153b53b92b1bfc1a578c4b22a78",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_09_neutral.png": {
-    "mtime": 1791029392.433099,
+    "mtime": 1791055002.3623562,
     "ast_hash": "72172661354ccbd2e3fc6e9da38da8d5",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_01_sad.png": {
-    "mtime": 1791029390.8704267,
+    "mtime": 1791055002.347632,
     "ast_hash": "705776921092b42eff419aae05081ae6",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_05_happy.png": {
-    "mtime": 1791029391.7112162,
+    "mtime": 1791055002.3539486,
     "ast_hash": "b91956929102d1104eadf57f01aa421b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_03_neutral.png": {
-    "mtime": 1791029391.190964,
+    "mtime": 1791055002.3507168,
     "ast_hash": "171600d17514c790824c676df4133e23",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_03_sad.png": {
-    "mtime": 1791029391.333046,
+    "mtime": 1791055002.3513062,
     "ast_hash": "64f0fe9624ff9279e03e6a6c241e282c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_08_happy.png": {
-    "mtime": 1791029392.3123057,
+    "mtime": 1791055002.3599703,
     "ast_hash": "e7af2f4fac4d88edf3e4c76ea09fe16b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_06_neutral.png": {
-    "mtime": 1791029391.8586018,
+    "mtime": 1791055002.356495,
     "ast_hash": "6049f9f2702f7b3254eb42ac4f9304e8",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_03_happy.png": {
-    "mtime": 1791029391.2619574,
+    "mtime": 1791055002.350014,
     "ast_hash": "9d261d4108bb9931aa79773388d8b11e",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_02_sad.png": {
-    "mtime": 1791029391.1152034,
+    "mtime": 1791055002.3493855,
     "ast_hash": "568d9dc087cd0e9104f5d7a6842c9734",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_08_neutral.png": {
-    "mtime": 1791029392.2460415,
+    "mtime": 1791055002.36048,
     "ast_hash": "ef552edd3b01a7d3e5d0ecb64797abe0",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_06_happy.png": {
-    "mtime": 1791029391.9266663,
+    "mtime": 1791055002.355923,
     "ast_hash": "6278c7e03ff8c784ed06e77ca26db931",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_07_sad.png": {
-    "mtime": 1791029392.1803744,
+    "mtime": 1791055002.3592317,
     "ast_hash": "c732ed305c804cbdf9ab074ba943d2e1",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_01_neutral.png": {
-    "mtime": 1791029390.670384,
+    "mtime": 1791055002.346605,
     "ast_hash": "d30465bd92ca8971be6069383fbe9af1",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_06_sad.png": {
-    "mtime": 1791029391.9932883,
+    "mtime": 1791055002.3575814,
     "ast_hash": "05727cacda3bc597350cfaac059e5333",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_04_neutral.png": {
-    "mtime": 1791029391.4072163,
+    "mtime": 1791055002.3525515,
     "ast_hash": "db6d7d056438234e41e7f1e16f509282",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_04_sad.png": {
-    "mtime": 1791029391.561566,
+    "mtime": 1791055002.3532345,
     "ast_hash": "d9a95ba25dae665b929ee603ce1f7604",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_07_happy.png": {
-    "mtime": 1791029392.1182697,
+    "mtime": 1791055002.358096,
     "ast_hash": "cdde87fcd6c4600cf8a39167b6ae5c37",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_07_neutral.png": {
-    "mtime": 1791029392.0580752,
+    "mtime": 1791055002.3586183,
     "ast_hash": "85bcbb1f07ea172d356126ebad798ab9",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_01_happy.png": {
-    "mtime": 1791029390.7702224,
+    "mtime": 1791055002.3458548,
     "ast_hash": "aca30d51a1eaeb859dfb5784c66aa950",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_02_neutral.png": {
-    "mtime": 1791029390.9604597,
+    "mtime": 1791055002.3489044,
     "ast_hash": "f8cea2f57ae1776a87081052c07281fd",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/rhino/rhino_05_sad.png": {
-    "mtime": 1791029391.7856367,
+    "mtime": 1791055002.3552248,
     "ast_hash": "12362931ab7ade1061a47607bcc213a8",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/download (1).png": {
-    "mtime": 1791021666.2699177,
+    "mtime": 1791055002.2348588,
     "ast_hash": "55c7c05923780ea0d77f23d4bbddd955",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_04_neutral.png": {
-    "mtime": 1791029399.3416295,
+    "mtime": 1791055002.24253,
     "ast_hash": "87ff5a002f7a63831c711a837190999e",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_07_happy.png": {
-    "mtime": 1791029399.9422193,
+    "mtime": 1791055002.248194,
     "ast_hash": "2b8bf74530818e3390aa51944d6b4e3e",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_07_sad.png": {
-    "mtime": 1791029400.008089,
+    "mtime": 1791055002.2495363,
     "ast_hash": "faf448cf0f0b66480216c540c40de9b1",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_01_happy.png": {
-    "mtime": 1791029398.7584121,
+    "mtime": 1791055002.2358913,
     "ast_hash": "75b763f777c2ca02cfe80778e59e270b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_08_neutral.png": {
-    "mtime": 1791029400.0641043,
+    "mtime": 1791055002.250602,
     "ast_hash": "a5b8a47bd9b8f038a7fca18900f655da",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_06_sad.png": {
-    "mtime": 1791029399.8133316,
+    "mtime": 1791055002.2474122,
     "ast_hash": "2eb12859d25b6d853cd8bb931b9ab09d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_01_neutral.png": {
-    "mtime": 1791029398.6839178,
+    "mtime": 1791055002.2367122,
     "ast_hash": "c4babdf02e0cfdff5a52cf02fa8b6453",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_02_neutral.png": {
-    "mtime": 1791029398.9125822,
+    "mtime": 1791055002.239269,
     "ast_hash": "f0aac7b49d8198e80cb8014d5026c038",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_04_sad.png": {
-    "mtime": 1791029399.458445,
+    "mtime": 1791055002.2430072,
     "ast_hash": "42d1f081db7ea817f17385cef90227d7",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_06_happy.png": {
-    "mtime": 1791029399.7489538,
+    "mtime": 1791055002.2462327,
     "ast_hash": "a1af6f0242a9e940a6a52d7972cc0dda",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_05_sad.png": {
-    "mtime": 1791029399.631547,
+    "mtime": 1791055002.2453806,
     "ast_hash": "0ae83be7daefa2beaa68be72483b3b7d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_07_neutral.png": {
-    "mtime": 1791029399.8766716,
+    "mtime": 1791055002.248874,
     "ast_hash": "b3b5847ae9f4e90dd5354a983f0ebf32",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_10_sad.png": {
-    "mtime": 1791029400.5445454,
+    "mtime": 1791055002.256951,
     "ast_hash": "7ab7bad3fd2008609706d8b00d8c9069",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_05_happy.png": {
-    "mtime": 1791029399.5722973,
+    "mtime": 1791055002.2441065,
     "ast_hash": "19152e96e777d29384aa1b8750885c04",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_08_happy.png": {
-    "mtime": 1791029400.1177695,
+    "mtime": 1791055002.2501972,
     "ast_hash": "38d78c299bc2a8a23539b6eab31593a5",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_09_sad.png": {
-    "mtime": 1791029400.3497527,
+    "mtime": 1791055002.2542126,
     "ast_hash": "c86687cea53e8bb971da301a10997b14",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_09_neutral.png": {
-    "mtime": 1791029400.2314634,
+    "mtime": 1791055002.2526398,
     "ast_hash": "aee25bafaaae3cd7102225bcf259e887",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_10_neutral.png": {
-    "mtime": 1791029400.4128406,
+    "mtime": 1791055002.255934,
     "ast_hash": "1f23038484df9f4f446712f48d56a617",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_08_sad.png": {
-    "mtime": 1791029400.173919,
+    "mtime": 1791055002.251159,
     "ast_hash": "efd296c8b0df03ee3ee715b607bc84f3",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_03_happy.png": {
-    "mtime": 1791029399.2249954,
+    "mtime": 1791055002.2401123,
     "ast_hash": "63aaa057cd310cfd1e4a25deacc5ac19",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_01_sad.png": {
-    "mtime": 1791029398.8331778,
+    "mtime": 1791055002.237813,
     "ast_hash": "239e8af97a1644e782af3187e5b4988d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_05_neutral.png": {
-    "mtime": 1791029399.514728,
+    "mtime": 1791055002.2445402,
     "ast_hash": "6f59673ccf278c6af20e91b147cc4d64",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_10_happy.png": {
-    "mtime": 1791029400.480508,
+    "mtime": 1791055002.255289,
     "ast_hash": "eb5eb6590bb5c297aa24ff4465586d62",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_06_neutral.png": {
-    "mtime": 1791029399.6882348,
+    "mtime": 1791055002.2468019,
     "ast_hash": "f71257065fb8df800acb2356d24f5af5",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_04_happy.png": {
-    "mtime": 1791029399.399137,
+    "mtime": 1791055002.2418292,
     "ast_hash": "cf33796109e144885ba1b322f6fffae2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_03_sad.png": {
-    "mtime": 1791029399.2834606,
+    "mtime": 1791055002.241292,
     "ast_hash": "2295461815828d24c9f19d4d084936dc",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_09_happy.png": {
-    "mtime": 1791029400.289737,
+    "mtime": 1791055002.2522097,
     "ast_hash": "a80edb74ecf1f7709c15ae569db69883",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_02_sad.png": {
-    "mtime": 1791029399.0842438,
+    "mtime": 1791055002.2397196,
     "ast_hash": "f2026717466a521c9011af59326d74c9",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_02_happy.png": {
-    "mtime": 1791029398.9977834,
+    "mtime": 1791055002.2386453,
     "ast_hash": "3509326228486ac85817a33dfd1dde5d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/mermaid/mermaid_03_neutral.png": {
-    "mtime": 1791029399.1584039,
+    "mtime": 1791055002.240903,
     "ast_hash": "a7ab74ebe88a859256c7b01ef41c1563",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/selection/unicorn.png": {
-    "mtime": 1791029401.838979,
+    "mtime": 1791055002.3871408,
     "ast_hash": "bdce3f8a46a430c0c5a3c69ae585cda5",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/selection/custom.png": {
-    "mtime": 1791029401.771391,
+    "mtime": 1791055002.3755596,
     "ast_hash": "862bb728ee25727afc73155ad96ed9bf",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/selection/rhino.png": {
-    "mtime": 1791029401.5353599,
+    "mtime": 1791055002.3852186,
     "ast_hash": "c9c42e5809ca176943b4f1bf3191f7ed",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/selection/lion.png": {
-    "mtime": 1791029400.9995704,
+    "mtime": 1791055002.3787982,
     "ast_hash": "bfe7ac391cf3d24c53001d7ecee90c71",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/selection/dragon.png": {
-    "mtime": 1791029400.6677191,
+    "mtime": 1791055002.3766747,
     "ast_hash": "0375eb663a31e86bf0f4b9d3de209ac2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/selection/griffin.png": {
-    "mtime": 1791029400.8882265,
+    "mtime": 1791055002.3776119,
     "ast_hash": "05c3d743734e7e6854aebae80e08ad2a",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/selection/mermaid.png": {
-    "mtime": 1791029401.1058888,
+    "mtime": 1791055002.3802688,
     "ast_hash": "8b38bc5a79d74016cee91c280c15ebe2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/selection/panda.png": {
-    "mtime": 1791029401.210392,
+    "mtime": 1791055002.3813436,
     "ast_hash": "8b52353ea1a0fb169f41297d76bdb1b4",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/selection/kitsune_fox.png": {
-    "mtime": 1791029400.7777262,
+    "mtime": 1791055002.3781025,
     "ast_hash": "e1d59b38487b11d59684dc9b7f4a2a3e",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/selection/pegasus.png": {
-    "mtime": 1791029401.3207543,
+    "mtime": 1791055002.3821979,
     "ast_hash": "78399fca5df734efb5b17159e9dea387",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/selection/sphinx_cat.png": {
-    "mtime": 1791029401.6490397,
+    "mtime": 1791055002.3862267,
     "ast_hash": "f32a111f300c2f2e03746474cbdc295c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/selection/phoenix.png": {
-    "mtime": 1791029401.4275148,
+    "mtime": 1791055002.3837066,
     "ast_hash": "01fa033309a4055755fffdda578ab3a4",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/download (1).png": {
-    "mtime": 1791021798.330075,
+    "mtime": 1791055002.4282646,
     "ast_hash": "2603f8f7948a0946f64a65b02fec4c68",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_01_sad.png": {
-    "mtime": 1791029363.5163732,
+    "mtime": 1791055002.430915,
     "ast_hash": "f3a1d2afdcecb8534c9fe00244a9c3c6",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_07_happy.png": {
-    "mtime": 1791029364.5778039,
+    "mtime": 1791055002.442176,
     "ast_hash": "6fb249b8f77ea122773ea41a4cc4b36b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_10_neutral.png": {
-    "mtime": 1791029365.0963123,
+    "mtime": 1791055002.4473605,
     "ast_hash": "6c278f693f98563e24a49e0af0ef9b95",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_08_sad.png": {
-    "mtime": 1791029364.8188982,
+    "mtime": 1791055002.4448504,
     "ast_hash": "cb66ce2fc4e5cbf0c3259fd893098ec1",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_05_neutral.png": {
-    "mtime": 1791029364.1741877,
+    "mtime": 1791055002.4387143,
     "ast_hash": "97b612914f846f3d3547992ac3cfa4e9",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_09_sad.png": {
-    "mtime": 1791029365.0259464,
+    "mtime": 1791055002.4467037,
     "ast_hash": "94b21c97d8b768738e0f1885b0fae6bf",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_01_happy.png": {
-    "mtime": 1791029363.4324791,
+    "mtime": 1791055002.4296255,
     "ast_hash": "58f75b9eb93bf3e08bed5f84fa143e28",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_09_neutral.png": {
-    "mtime": 1791029364.8847163,
+    "mtime": 1791055002.4459226,
     "ast_hash": "6c278f693f98563e24a49e0af0ef9b95",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_10_sad.png": {
-    "mtime": 1791029365.2371519,
+    "mtime": 1791055002.4477985,
     "ast_hash": "94b21c97d8b768738e0f1885b0fae6bf",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_06_happy.png": {
-    "mtime": 1791029364.4089262,
+    "mtime": 1791055002.439989,
     "ast_hash": "983b7a6abbcefe70090e154bd411fe7e",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_02_sad.png": {
-    "mtime": 1791029363.7273142,
+    "mtime": 1791055002.433054,
     "ast_hash": "6ec55d261c6f7bd39cb19328d1da0206",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_03_neutral.png": {
-    "mtime": 1791029363.7939262,
+    "mtime": 1791055002.4344907,
     "ast_hash": "eafa66b4f42370962bdc6a0206de7cb1",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_03_sad.png": {
-    "mtime": 1791029363.920452,
+    "mtime": 1791055002.435025,
     "ast_hash": "9b85ebc74ac46e814515e3a41190892c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_06_neutral.png": {
-    "mtime": 1791029364.35284,
+    "mtime": 1791055002.4405136,
     "ast_hash": "2a8de18c8ad9bf15080520ed5e7d36d9",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_05_happy.png": {
-    "mtime": 1791029364.2327824,
+    "mtime": 1791055002.4377108,
     "ast_hash": "aec365c7cfd9bf75098b2007c3e5c534",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_08_neutral.png": {
-    "mtime": 1791029364.6876702,
+    "mtime": 1791055002.4443533,
     "ast_hash": "14499bc027bcb079298fc5a0e3425a75",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_08_happy.png": {
-    "mtime": 1791029364.7519712,
+    "mtime": 1791055002.4439363,
     "ast_hash": "a056c820a1d5e9597dbf394a7f51b7a8",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_01_neutral.png": {
-    "mtime": 1791029363.3538132,
+    "mtime": 1791055002.430143,
     "ast_hash": "bdce3f8a46a430c0c5a3c69ae585cda5",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_06_sad.png": {
-    "mtime": 1791029364.4678676,
+    "mtime": 1791055002.4410622,
     "ast_hash": "2f5384a3717cbe60d6e67737f29e3d28",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_07_sad.png": {
-    "mtime": 1791029364.6296363,
+    "mtime": 1791055002.4432688,
     "ast_hash": "9e11384c8fd8849155e3dc4da017e836",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_03_happy.png": {
-    "mtime": 1791029363.8557856,
+    "mtime": 1791055002.4338787,
     "ast_hash": "e4dae63718de26c02605b0d3e0dfd829",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_04_neutral.png": {
-    "mtime": 1791029363.9842706,
+    "mtime": 1791055002.436456,
     "ast_hash": "86c2fc666261dbff91350110266b5ba5",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_10_happy.png": {
-    "mtime": 1791029365.164655,
+    "mtime": 1791055002.4470155,
     "ast_hash": "f18e7cd06b2768dae9023b6c3b91c333",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_04_happy.png": {
-    "mtime": 1791029364.0465796,
+    "mtime": 1791055002.4356148,
     "ast_hash": "8f0417d796707e615aad83ca1f1a6cb7",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_05_sad.png": {
-    "mtime": 1791029364.2937803,
+    "mtime": 1791055002.4395137,
     "ast_hash": "cf6b12cd0e04b4aaa413ccb6675c27df",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_07_neutral.png": {
-    "mtime": 1791029364.5264635,
+    "mtime": 1791055002.442777,
     "ast_hash": "27de2b0931624c1ab1b0fa9a469d338f",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_09_happy.png": {
-    "mtime": 1791029364.9536836,
+    "mtime": 1791055002.4454381,
     "ast_hash": "f18e7cd06b2768dae9023b6c3b91c333",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_02_neutral.png": {
-    "mtime": 1791029363.5930645,
+    "mtime": 1791055002.4324539,
     "ast_hash": "892b492f906814bdf162cd3e007c696f",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_02_happy.png": {
-    "mtime": 1791029363.6603138,
+    "mtime": 1791055002.4318492,
     "ast_hash": "fa76811902f8bb559e20408e511cad44",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/unicorn/unicorn_04_sad.png": {
-    "mtime": 1791029364.112043,
+    "mtime": 1791055002.4370198,
     "ast_hash": "bb9abbdfa38d8337504b74e8577224b0",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/download (1).png": {
-    "mtime": 1791021621.950989,
+    "mtime": 1791055002.2057974,
     "ast_hash": "627af829e8ee546e10249f2b9239ec64",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_04_neutral.png": {
-    "mtime": 1791029379.6842577,
+    "mtime": 1791055002.2155864,
     "ast_hash": "0eb1e56e7e39a669c61d9e44bed391eb",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_09_happy.png": {
-    "mtime": 1791029380.9146242,
+    "mtime": 1791055002.2254639,
     "ast_hash": "726b53236546a3550df9df74d2e5dd0c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_07_sad.png": {
-    "mtime": 1791029380.5709732,
+    "mtime": 1791055002.2230833,
     "ast_hash": "525b86d4ee3c922a3491a3d7e16897f0",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_10_happy.png": {
-    "mtime": 1791029381.0989947,
+    "mtime": 1791055002.2280202,
     "ast_hash": "7e6e75816fdca25f7798f18797b39a17",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_04_happy.png": {
-    "mtime": 1791029379.7683213,
+    "mtime": 1791055002.2149103,
     "ast_hash": "fdc9e4743997ca6ae948d90c755d0a1b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_08_neutral.png": {
-    "mtime": 1791029380.642427,
+    "mtime": 1791055002.2242877,
     "ast_hash": "3942099c94f0779702934a0c59edd4d6",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_01_neutral.png": {
-    "mtime": 1791029378.8931797,
+    "mtime": 1791055002.2093658,
     "ast_hash": "cfbda686c5e2a0931d3bb926a7b8d451",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_06_sad.png": {
-    "mtime": 1791029380.3449202,
+    "mtime": 1791055002.2212977,
     "ast_hash": "18634969dd8e17ac52d99481ca3ffb54",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_02_happy.png": {
-    "mtime": 1791029379.2672954,
+    "mtime": 1791055002.210581,
     "ast_hash": "f8e01b7eac49ffb614d0985a0881127e",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_08_happy.png": {
-    "mtime": 1791029380.7153149,
+    "mtime": 1791055002.223821,
     "ast_hash": "d3e314b4d5097b5e500663782edaf2e1",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_02_neutral.png": {
-    "mtime": 1791029379.1795723,
+    "mtime": 1791055002.2111545,
     "ast_hash": "b545aba99f6cf8c9184cc67d37a7f8ba",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_04_sad.png": {
-    "mtime": 1791029379.8531895,
+    "mtime": 1791055002.2160964,
     "ast_hash": "8f7a984db0b64b9b64a89bbe3fe1557e",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_05_happy.png": {
-    "mtime": 1791029380.0257146,
+    "mtime": 1791055002.216737,
     "ast_hash": "f9890c670f75cc94d024724c3067a471",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_05_sad.png": {
-    "mtime": 1791029380.1140437,
+    "mtime": 1791055002.2190795,
     "ast_hash": "0d90164565a3e33f1099ee3cb9103dc7",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_03_happy.png": {
-    "mtime": 1791029379.5164027,
+    "mtime": 1791055002.2131371,
     "ast_hash": "269df7d35c8ff3270bac8bcc4a3ab17b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_07_neutral.png": {
-    "mtime": 1791029380.4216597,
+    "mtime": 1791055002.2224782,
     "ast_hash": "ca54d01ef7548c0965d373e17e25aaf7",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_09_sad.png": {
-    "mtime": 1791029380.9765286,
+    "mtime": 1791055002.2275121,
     "ast_hash": "60a43f66041798fa7569d4d0167f99f2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_09_neutral.png": {
-    "mtime": 1791029380.8490427,
+    "mtime": 1791055002.2262747,
     "ast_hash": "085b1cf3582e1204bb5111b45a451780",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_10_sad.png": {
-    "mtime": 1791029381.155884,
+    "mtime": 1791055002.2292542,
     "ast_hash": "188ff9da4a4e85ff0e4f5138fee10666",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_06_happy.png": {
-    "mtime": 1791029380.2679253,
+    "mtime": 1791055002.2201912,
     "ast_hash": "b33e1199cb19b90e32f3686962a4f8db",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_10_neutral.png": {
-    "mtime": 1791029381.0382838,
+    "mtime": 1791055002.2288475,
     "ast_hash": "8628efa918555b7ee3e28ecc85f4068b",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_01_sad.png": {
-    "mtime": 1791029379.087571,
+    "mtime": 1791055002.2099843,
     "ast_hash": "3206e1fcca0015d71c8b73c68d4fc1ee",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_08_sad.png": {
-    "mtime": 1791029380.7832859,
+    "mtime": 1791055002.2249877,
     "ast_hash": "c19bdc693f3d1c2301fbfd56ae9a18c2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_05_neutral.png": {
-    "mtime": 1791029379.93747,
+    "mtime": 1791055002.2175343,
     "ast_hash": "3a5cf211d101bef44becd8271cdbf377",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_06_neutral.png": {
-    "mtime": 1791029380.1945007,
+    "mtime": 1791055002.2206721,
     "ast_hash": "757fb367880cd3b70246a20f6e461a90",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_03_sad.png": {
-    "mtime": 1791029379.5995216,
+    "mtime": 1791055002.2144334,
     "ast_hash": "21b10dcde04cb962d544a4549b4d35f1",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_07_happy.png": {
-    "mtime": 1791029380.4978554,
+    "mtime": 1791055002.2219949,
     "ast_hash": "104a93091bcdb364a9a5b8f1d2800187",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_01_happy.png": {
-    "mtime": 1791029378.9893632,
+    "mtime": 1791055002.2073982,
     "ast_hash": "44c16c175cfd4a594a9cdba2418d1b4d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_03_neutral.png": {
-    "mtime": 1791029379.4349623,
+    "mtime": 1791055002.2139797,
     "ast_hash": "f8a25fcbe1f62aaf93de55ab812b5be3",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/avatars/lion/lion_02_sad.png": {
-    "mtime": 1791029379.3527722,
+    "mtime": 1791055002.2126312,
     "ast_hash": "bcc754ced992ead623abd209e640eae3",
     "semantic_hash": ""
   },
@@ -7375,28 +7375,48 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/setup/CreatePlayerDialog.tsx": {
-    "mtime": 1791049815.01259,
+    "mtime": 1791055002.6019826,
     "ast_hash": "1b82945bfdd8ec3caea4fa378cffb353",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/setup/PlayerSelect.test.tsx": {
-    "mtime": 1791050119.3324432,
+    "mtime": 1791055002.602336,
     "ast_hash": "2748dd3a1ca1a6d374e03f1e9ebd9814",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/backend/tests/game/test_player_creation.py": {
-    "mtime": 1791050311.6314535,
+    "mtime": 1791055002.4493096,
     "ast_hash": "951faa69f6686c537ace3c162d841787",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/game-badge.png": {
-    "mtime": 1791052097.414861,
+    "mtime": 1791055002.5984604,
     "ast_hash": "bca63bc2e20e1fbb7f6db82bb98ec840",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/guess-the-note-prompts/Rainbow Unicorn Music Badge.png": {
     "mtime": 1791051154.93008,
     "ast_hash": "cd4d7bfda77d736f777cebfc5919cc55",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/staff/Staff.test.tsx": {
+    "mtime": 1791055541.0431478,
+    "ast_hash": "d53f241757d38cd6a34ae04af75a208a",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/public/licenses/bravura-OFL.txt": {
+    "mtime": 1791055517.7102487,
+    "ast_hash": "bc8867ce5ca28ac95090eb8da54a4b47",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/guess-the-note-prompts/key2.png": {
+    "mtime": 1791055067.2241595,
+    "ast_hash": "872417181b5546b791b32e005ce3b7aa",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/guess-the-note-prompts/key1.png": {
+    "mtime": 1791055059.767494,
+    "ast_hash": "8b9a9bcf96ffb6e0380e69a4b49fa377",
     "semantic_hash": ""
   }
 }
