@@ -381,7 +381,7 @@ export function AuthArea() {
           <ErrorMessage error={new ApiError("FORBIDDEN")} />
         )
       ) : path.startsWith("/game") ? (
-        <GameArea />
+        <GameArea auth={auth} />
       ) : (
         <ErrorMessage error={new ApiError("NOT_FOUND")} />
       )}
