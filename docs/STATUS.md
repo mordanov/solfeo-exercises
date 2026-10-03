@@ -8,8 +8,10 @@ Prerequisites:
 Last updated: 2026-10-03 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a0523`.
 
 ## Current phase
-Game note playback follows the standard clef repair on `fix/game-clef-glyphs`.
+Game note playback follows the standard clef repair.
 This task starts from clef repair commit `1383015`.
+The owner merges the clef repair through PR #8 during implementation.
+The playback changes commit locally on `main`, after merge source `4c25556`.
 Accepted PHASE 7 remains closed.
 The earlier game, appearance, and listening entries below remain historical session records.
 
