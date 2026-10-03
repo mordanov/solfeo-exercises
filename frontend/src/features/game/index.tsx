@@ -4,6 +4,7 @@ import { type Auth } from "../../api/auth";
 import { type Task } from "./api/hooks";
 import { unlockAudio } from "./audio/synth";
 import PlayScreen, { type RoundResult } from "./play/PlayScreen";
+import ResultScreen from "./result/ResultScreen";
 import GameTheme from "./GameTheme";
 import GameSetup from "./setup/GameSetup";
 import PlayerSelect from "./setup/PlayerSelect";
@@ -93,7 +94,21 @@ export default function GameArea({ auth }: Props) {
         />
       )}
       {screen.name === "result" && (
-        <div style={{ padding: 24 }}>Result screen — Task 9</div>
+        <ResultScreen
+          result={screen.result}
+          onPlayAgain={() => {
+            window.history.pushState(
+              null,
+              "",
+              `/game/setup/${screen.playerId}`,
+            );
+            setScreen({ name: "setup", playerId: screen.playerId });
+          }}
+          onChangePlayer={() => {
+            window.history.pushState(null, "", "/game");
+            setScreen({ name: "players" });
+          }}
+        />
       )}
     </GameTheme>
   );

@@ -18,6 +18,7 @@ from app.api.request_log import RequestLog
 from app.api.telegram import router as telegram_router
 from app.api.upload_limit import UploadLimit
 from app.database import Database
+from app.game.api.admin import router as game_admin_router
 from app.game.api.players import router as game_players_router
 from app.game.api.rounds import router as game_rounds_router
 from app.game.api.seasons import router as game_seasons_router
@@ -85,6 +86,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(game_players_router)
     app.include_router(game_rounds_router)
     app.include_router(game_seasons_router)
+    app.include_router(game_admin_router)
     app.add_middleware(UploadLimit, maximum=configuration.upload_max_bytes)
     app.add_middleware(RequestLog)
 
