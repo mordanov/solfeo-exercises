@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <circle cx="60" cy="60" r="56" fill="#f0d4b4" stroke="#fff" stroke-width="4"/>
+  <text x="60" y="62" font-size="40" text-anchor="middle" dominant-baseline="middle">🦅</text>
+  <text x="96" y="26" font-size="22" text-anchor="middle" dominant-baseline="middle">😢</text>
+  <circle cx="24" cy="96" r="14" fill="#4488cc"/>
+  <text x="24" y="100" font-size="12" font-family="monospace" fill="#fff" text-anchor="middle" dominant-baseline="middle">05</text>
+</svg>

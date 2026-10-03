@@ -3,7 +3,10 @@ import { useState } from "react";
 import { type Auth } from "../../api/auth";
 import { type Task } from "./api/hooks";
 import { unlockAudio } from "./audio/synth";
+import AdminPlayerDetail from "./admin/AdminPlayerDetail";
+import AdminScreen from "./admin/AdminScreen";
 import PlayScreen, { type RoundResult } from "./play/PlayScreen";
+import ProfileScreen from "./profile/ProfileScreen";
 import ResultScreen from "./result/ResultScreen";
 import GameTheme from "./GameTheme";
 import GameSetup from "./setup/GameSetup";
@@ -27,7 +30,10 @@ type Screen =
       timeLimitMs: number;
       playerId: number;
     }
-  | { name: "result"; roundId: number; result: RoundResult; playerId: number };
+  | { name: "result"; roundId: number; result: RoundResult; playerId: number }
+  | { name: "profile"; playerId: number; xp: number }
+  | { name: "admin" }
+  | { name: "admin-detail"; playerId: number };
 
 interface Props {
   auth: Auth;
@@ -36,8 +42,12 @@ interface Props {
 export default function GameArea({ auth }: Props) {
   const [screen, setScreen] = useState<Screen>(() => {
     const path = window.location.pathname;
-    const m = path.match(/^\/game\/setup\/(\d+)/);
-    if (m) return { name: "setup", playerId: Number(m[1]) };
+    const setup = path.match(/^\/game\/setup\/(\d+)/);
+    if (setup) return { name: "setup", playerId: Number(setup[1]) };
+    if (path === "/game/admin") return { name: "admin" };
+    const adminDetail = path.match(/^\/game\/admin\/(\d+)/);
+    if (adminDetail)
+      return { name: "admin-detail", playerId: Number(adminDetail[1]) };
     return { name: "players" };
   });
 
@@ -109,6 +119,21 @@ export default function GameArea({ auth }: Props) {
             setScreen({ name: "players" });
           }}
         />
+      )}
+      {screen.name === "profile" && (
+        <ProfileScreen playerId={screen.playerId} xp={screen.xp} />
+      )}
+      {screen.name === "admin" && (
+        <AdminScreen
+          csrf={auth.csrf_token}
+          onPlayerDetail={(playerId) => {
+            window.history.pushState(null, "", `/game/admin/${playerId}`);
+            setScreen({ name: "admin-detail", playerId });
+          }}
+        />
+      )}
+      {screen.name === "admin-detail" && (
+        <AdminPlayerDetail playerId={screen.playerId} />
       )}
     </GameTheme>
   );
