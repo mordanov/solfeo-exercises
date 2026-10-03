@@ -35,6 +35,20 @@ The treble clef identifies G4 on the second line from the bottom.
 The bass clef identifies F3 on the fourth line from the bottom.
 The symbols retain their proportions across interface fonts, themes, and screen sizes.
 
+## Listen to game notes
+
+1. Click the white round **Listen to notes** button below the staff during a round.
+   You hear all shown notes in order, with their written pitches and octaves.
+2. Click **Stop listening** to stop early.
+3. Click **Listen to notes** again to repeat the notes.
+4. Select an answer with a colored note button.
+   The answer stops playback.
+
+Listening plays tones without spoken names or automatic answers.
+It does not pause the timer or change points.
+Playback stops when time expires or you leave the round.
+A playback failure shows an error and permits another attempt.
+
 ## Game avatar management
 
 1. Open **Guess the Note** and select a player.

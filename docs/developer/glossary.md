@@ -81,3 +81,7 @@ Prerequisites:
 | clef | A symbol that identifies the pitch of a reference line on a staff. |
 | glyph | One symbol defined by a font's outline data. |
 | SMuFL | Standard Music Font Layout, which specifies musical glyph names, code points, and registration conventions. |
+| MIDI | Musical Instrument Digital Interface, whose note numbers identify pitches and octaves. |
+| Web Audio | The browser API for generating, processing, and scheduling sound. |
+| audio context | The Web Audio object that provides an audio clock and connects sound sources to output. |
+| triangle tone | A synthesized musical sound with a triangle-shaped waveform. |

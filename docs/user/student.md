@@ -27,6 +27,20 @@ The treble clef identifies G4 on the second line from the bottom.
 The bass clef identifies F3 on the fourth line from the bottom.
 Changing the interface font or theme does not change these symbols or note positions.
 
+## Listen to game notes
+
+1. Click the white round **Listen to notes** button below the staff.
+   You hear the shown notes in order, with their written pitches and octaves.
+2. Click **Stop listening** to stop early.
+3. Click **Listen to notes** again to repeat all shown notes.
+4. Select your answers with the colored note buttons.
+   An answer stops the current playback.
+
+The game plays tones, not spoken note names.
+Listening does not enter answers, change points, or pause the timer.
+Playback stops when time expires or you leave the round.
+A playback failure shows an error and permits another attempt.
+
 ## Choose a game avatar
 
 1. Open **Guess the Note** and select a player.

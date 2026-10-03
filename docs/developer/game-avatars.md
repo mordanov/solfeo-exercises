@@ -1,6 +1,6 @@
 # Game avatars
 
-This document describes game artwork, clefs, avatar progression, protected generation, and extraction.
+This document describes game artwork, clefs, note playback, avatar progression, protected generation, and extraction.
 
 Prerequisites:
 - Read `api.md` and `env-variables.md`.
@@ -54,6 +54,35 @@ PY
 
 FontTools serves only this extraction procedure.
 The application adds no font package or runtime dependency.
+
+## Note playback
+
+The white 56 × 56 px button below the staff plays the current task through Web Audio.
+It uses each task note's name and octave, not the answer buttons' reference octave.
+The existing MIDI conversion determines frequency, with A4 at 440 Hz.
+Triangle tones last 0.3 s; a 0.15 s gap separates consecutive notes.
+The gain decreases from 0.35 to 0.001 during each tone.
+No speech clips, media requests, or application dependencies are required.
+
+The click handler creates or resumes the audio context within the user gesture.
+This also handles Safari's interrupted context after returning to the page.
+The synthesizer schedules against the audio clock after resume.
+The button changes to **Stop listening** during playback.
+Cancellation stops and disconnects both active and scheduled sources.
+The final source releases all nodes after normal completion.
+
+Answer selection, submission, timeout, unmount, and `pagehide` cancel playback.
+The button is disabled during submission and feedback.
+A later task uses its own note list.
+Repeating after a partial answer still plays the complete task.
+Playback neither submits answers nor pauses the timer or changes scoring.
+The existing answer-button tones remain unchanged.
+
+Mute, invalid pitches, and unavailable audio produce an explicit translated error.
+Retry clears the error and starts a new playback.
+Cancelled operations cannot change a newer playback's state.
+Component tests cover these controls, cancellation, task changes, errors, and localization.
+Synthesizer tests verify exact pitches, sequence timing, resumed clocks, and source cleanup.
 
 ## First entry
 

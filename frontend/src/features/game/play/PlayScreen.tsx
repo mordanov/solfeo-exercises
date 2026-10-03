@@ -1,8 +1,16 @@
-import { Alert, Box, Button, Typography } from "@mui/material";
-import { useCallback, useRef, useState } from "react";
+import {
+  Alert,
+  Box,
+  Button,
+  IconButton,
+  Tooltip,
+  Typography,
+} from "@mui/material";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useSubmitTask } from "../api/hooks";
+import { playNotes } from "../audio/synth";
 import Staff from "../staff/Staff";
 import NoteButtons from "./NoteButtons";
 import Timer from "./Timer";
@@ -53,13 +61,59 @@ export default function PlayScreen({
   const [answers, setAnswers] = useState<string[]>([]);
   const [feedback, setFeedback] = useState<FeedbackState>("idle");
   const [timerKey, setTimerKey] = useState(0);
+  const [listening, setListening] = useState(false);
+  const [audioError, setAudioError] = useState(false);
+  const playbackRef = useRef<AbortController | null>(null);
   const submittingRef = useRef(false);
   const submitTask = useSubmitTask(roundId);
+
+  const stopListening = useCallback(() => {
+    const playback = playbackRef.current;
+    playbackRef.current = null;
+    playback?.abort();
+    setListening(false);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("pagehide", stopListening);
+    return () => {
+      window.removeEventListener("pagehide", stopListening);
+      const playback = playbackRef.current;
+      playbackRef.current = null;
+      playback?.abort();
+    };
+  }, [stopListening]);
+
+  const handleListen = () => {
+    if (submittingRef.current || feedback !== "idle") return;
+    if (playbackRef.current) {
+      stopListening();
+      return;
+    }
+    const playback = new AbortController();
+    playbackRef.current = playback;
+    setAudioError(false);
+    setListening(true);
+    void playNotes(task.notes, playback.signal)
+      .catch(() => {
+        if (playbackRef.current === playback && !playback.signal.aborted) {
+          setAudioError(true);
+        }
+      })
+      .finally(() => {
+        if (playbackRef.current === playback) {
+          playbackRef.current = null;
+          setListening(false);
+        }
+      });
+  };
 
   const doSubmit = useCallback(
     (givenAnswers: string[] | null, timedOut: boolean) => {
       if (submittingRef.current) return;
       submittingRef.current = true;
+      stopListening();
+      setAudioError(false);
 
       const body = timedOut
         ? { csrf, task_index: task.index, timed_out: true as const }
@@ -96,11 +150,12 @@ export default function PlayScreen({
       });
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [csrf, task.index, submitTask, onResult],
+    [csrf, task.index, submitTask, onResult, stopListening],
   );
 
   const handleAnswer = (name: string) => {
     if (feedback !== "idle") return;
+    stopListening();
     const next = [...answers, name];
     setAnswers(next);
     if (next.length === noteCount) {
@@ -150,6 +205,68 @@ export default function PlayScreen({
       <Box sx={{ background: "#FFFDF5", borderRadius: 3, p: 2, my: 2 }}>
         <Staff notes={task.notes} clef={clef} />
       </Box>
+
+      <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+        <Tooltip title={t(listening ? "game.stopListening" : "game.listen")}>
+          <span>
+            <IconButton
+              onClick={handleListen}
+              disabled={
+                isWaiting || submitTask.isPending || answers.length >= noteCount
+              }
+              aria-label={t(listening ? "game.stopListening" : "game.listen")}
+              sx={{
+                width: 56,
+                height: 56,
+                background: "#fff",
+                color: "#333",
+                border: "2px solid #ccc",
+                "&:hover": { background: "#f5f5f5" },
+                "&.Mui-focusVisible": {
+                  outline: "3px solid",
+                  outlineColor: "primary.main",
+                  outlineOffset: 3,
+                },
+              }}
+            >
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                {listening ? (
+                  <rect
+                    x="6"
+                    y="6"
+                    width="12"
+                    height="12"
+                    rx="1"
+                    fill="currentColor"
+                  />
+                ) : (
+                  <>
+                    <path d="M3 9H7L12 5V19L7 15H3Z" fill="currentColor" />
+                    <path
+                      d="M15 8Q19 12 15 16M18 5Q25 12 18 19"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                  </>
+                )}
+              </svg>
+            </IconButton>
+          </span>
+        </Tooltip>
+      </Box>
+      {audioError && (
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {t("game.audioError")}
+        </Alert>
+      )}
 
       <Box sx={{ display: "flex", gap: 1, justifyContent: "center", mb: 1 }}>
         {Array.from({ length: noteCount }).map((_, i) => (
