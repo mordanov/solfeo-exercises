@@ -39,7 +39,7 @@ export function App() {
   const { t, i18n } = useTranslation();
   const knownPath =
     window.location.pathname === "/" ||
-    /^\/(login|settings|manager\/users|manager\/exercises|manager\/journal|manager\/telegram|student)\/?$/.test(
+    /^\/(login|settings|manager\/users|manager\/exercises|manager\/journal|manager\/telegram|student|game(\/.*)?)\/?$/.test(
       window.location.pathname,
     );
 

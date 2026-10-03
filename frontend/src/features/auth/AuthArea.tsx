@@ -16,6 +16,7 @@ import { Exercises } from "../exercises/Exercises";
 import { Listening } from "../listening/Listening";
 import { Journal } from "../journal/Journal";
 import { Telegram } from "../telegram/Telegram";
+import GameArea from "../game/index";
 import { finishPlayback } from "../listening/tracker";
 import { ErrorMessage, LanguageOptions } from "../../components/AccountUi";
 import { Button, Field, Form, Input, Panel, Select } from "../../components/Ui";
@@ -379,6 +380,8 @@ export function AuthArea() {
         ) : (
           <ErrorMessage error={new ApiError("FORBIDDEN")} />
         )
+      ) : path.startsWith("/game") ? (
+        <GameArea />
       ) : (
         <ErrorMessage error={new ApiError("NOT_FOUND")} />
       )}
