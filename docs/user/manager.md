@@ -30,6 +30,11 @@ Each student sees profiles assigned to their account.
 The application does not create a profile automatically when an account signs in.
 A failed request shows an error and **Try again**, not an empty player list.
 
+Rounds use standard treble and bass clefs.
+The treble clef identifies G4 on the second line from the bottom.
+The bass clef identifies F3 on the fourth line from the bottom.
+The symbols retain their proportions across interface fonts, themes, and screen sizes.
+
 ## Game avatar management
 
 1. Open **Guess the Note** and select a player.

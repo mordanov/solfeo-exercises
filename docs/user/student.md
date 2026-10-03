@@ -22,6 +22,11 @@ A failed request shows an error and **Try again**, not the empty-profile message
 The badge shows **Play Guess the Note** on hover or keyboard focus.
 The existing **Guess the Note** menu link remains available.
 
+Rounds use standard treble and bass clefs.
+The treble clef identifies G4 on the second line from the bottom.
+The bass clef identifies F3 on the fourth line from the bottom.
+Changing the interface font or theme does not change these symbols or note positions.
+
 ## Choose a game avatar
 
 1. Open **Guess the Note** and select a player.

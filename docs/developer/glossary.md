@@ -77,3 +77,7 @@ Prerequisites:
 | avatar level | A character appearance numbered from 1 to 10, derived from the player's total XP. |
 | XP | Experience points earned through correct game answers and round bonuses. |
 | sprite sheet | An original image containing multiple character appearances and emotions. |
+| staff | The 5 horizontal lines that specify vertical note positions. |
+| clef | A symbol that identifies the pitch of a reference line on a staff. |
+| glyph | One symbol defined by a font's outline data. |
+| SMuFL | Standard Music Font Layout, which specifies musical glyph names, code points, and registration conventions. |

@@ -8,10 +8,36 @@ Prerequisites:
 Last updated: 2026-10-03 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a0523`.
 
 ## Current phase
-Game avatar artwork, first-entry repair, and the header shortcut follow the merged Guess the Note feature.
-Branch `feat/game-avatar-artwork` starts from merge source `24c1cfc`.
+Game clef repair follows the merged Guess the Note artwork and navigation changes.
+Branch `fix/game-clef-glyphs` starts from merge source `71a8c9f`.
 Accepted PHASE 7 remains closed.
-The earlier appearance and listening changes below remain historical session records.
+The earlier game, appearance, and listening entries below remain historical session records.
+
+### Standard game clefs
+The owner reports distorted treble and bass clefs with 2 example screenshots.
+The old renderer uses simplified hand-drawn curves and the same incorrect offset for both clefs.
+It now uses the original filled glyph contours from Bravura 1.482.
+The pinned source, copyright notice, and SIL Open Font License accompany the derived data.
+
+The treble origin sits on the G4 line; the bass origin sits on the F3 line.
+The bass dots correctly surround F3.
+The font's original staff-space scale preserves the symbols' proportions.
+Inline SVG avoids runtime font requests, fallback characters, and font-loading delays during the timer.
+Notes, stems, ledger lines, paper, and layout remain unchanged.
+Accessible clef descriptions now use Russian, English, and Spanish translations.
+
+All 270 frontend tests, the production frontend build, documentation checks, and 6 quality hooks pass.
+Chrome verifies 64 actual game cases with both clefs and 1 or 4 notes.
+The cases cover 320, 390, 430, and 1280 px, both themes, and standard or large account fonts.
+They confirm the original glyph bounds, exact G/F anchors, bass-dot placement, unchanged notes, and no clipping or horizontal overflow.
+The application makes no runtime music-font request.
+The knowledge graph receives an AST-only update.
+No application dependency, backend, migration, private configuration, push, or production changes occur.
+
+Remaining manual checks:
+1. Publish the frontend change.
+2. Inspect both clefs in real rounds on a phone or iPad in Chrome and Safari.
+3. Confirm unchanged note positions and correct answers in both clefs.
 
 ### Circular game shortcut
 The owner approves moving only the header branding to accommodate an upper-left badge.

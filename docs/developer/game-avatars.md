@@ -1,11 +1,59 @@
 # Game avatars
 
-This document describes the avatar artwork, progression, protected generation, and extraction procedure.
+This document describes game artwork, clefs, avatar progression, protected generation, and extraction.
 
 Prerequisites:
 - Read `api.md` and `env-variables.md`.
 - Keep the owner's original artwork in `avatars/`.
 - Use the locked Python environment for extraction.
+
+## Staff clefs
+
+`Staff.tsx` uses filled, unaltered Bravura 1.482 glyph outlines instead of the previous hand-drawn placeholders.
+`clefPaths.ts` contains only `gClef` (`U+E050`) and `fClef` (`U+E062`).
+The pinned upstream revision is `steinbergmedia/bravura@37b194378b710cc40e406ab6c4b07608bb9548ae`.
+The original font uses 1000 units per em and 250 units per staff space.
+
+The 12-unit staff spacing gives a glyph scale of `0.048`.
+The negative vertical scale converts the font's upward axis to SVG's downward axis.
+The treble origin sits on G4 at `y=76`; the bass origin sits on F3 at `y=52`.
+Bass dots surround the F3 line at `y=46` and `y=58`.
+No runtime font download, system-font fallback, or image-loading delay affects the round.
+Interface font settings cannot distort the outlines.
+
+Existing staff lines, note heads, stems, ledger lines, paper, and viewport dimensions remain unchanged.
+Accessible labels describe the clef and note count in all 3 interface languages.
+Tests lock the original outline fingerprints and verify both reference lines and unchanged note geometry.
+
+The outline data retains the SIL Open Font License 1.1.
+The release includes its copyright notice and full text at `/licenses/bravura-OFL.txt`.
+The derived data uses the name **Game Clef Glyphs**, not the reserved font name.
+
+To reproduce the contours without adding a project dependency:
+
+```sh
+uv run --locked --with fonttools==4.60.1 python - <<'PY'
+from io import BytesIO
+from urllib.request import urlopen
+from fontTools.pens.svgPathPen import SVGPathPen
+from fontTools.ttLib import TTFont
+
+url = (
+    "https://raw.githubusercontent.com/steinbergmedia/bravura/"
+    "37b194378b710cc40e406ab6c4b07608bb9548ae/redist/otf/Bravura.otf"
+)
+with urlopen(url, timeout=30) as response:
+    font = TTFont(BytesIO(response.read()))
+glyphs = font.getGlyphSet()
+for label, codepoint in (("treble", 0xE050), ("bass", 0xE062)):
+    pen = SVGPathPen(glyphs)
+    glyphs[font.getBestCmap()[codepoint]].draw(pen)
+    print(label, pen.getCommands())
+PY
+```
+
+FontTools serves only this extraction procedure.
+The application adds no font package or runtime dependency.
 
 ## First entry
 

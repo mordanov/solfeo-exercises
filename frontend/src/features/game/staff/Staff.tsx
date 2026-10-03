@@ -1,5 +1,10 @@
 import { staffPos } from "./staffPos";
-import { BASS_CLEF_PATH, TREBLE_CLEF_PATH } from "./clefPaths";
+import {
+  BASS_CLEF_PATH,
+  CLEF_UNITS_PER_SPACE,
+  TREBLE_CLEF_PATH,
+} from "./clefPaths";
+import { useTranslation } from "react-i18next";
 
 interface Note {
   name: string;
@@ -30,8 +35,12 @@ function posY(pos: number): number {
 }
 
 export default function Staff({ notes, clef }: StaffProps) {
+  const { t } = useTranslation();
   const staffWidth = FIRST_NOTE_X + notes.length * NOTE_X_GAP + 20;
   const viewHeight = 140;
+  const clefScale = LINE_SPACING / CLEF_UNITS_PER_SPACE;
+  // SMuFL glyph origins sit on G4 for treble and F3 for bass.
+  const clefY = lineY(clef === "treble" ? 1 : 3);
 
   const positions = notes.map((n) => staffPos(n.name, n.octave, clef));
 
@@ -81,7 +90,10 @@ export default function Staff({ notes, clef }: StaffProps) {
         display: "block",
         margin: "0 auto",
       }}
-      aria-label={`${clef} clef staff with ${notes.length} note${notes.length > 1 ? "s" : ""}`}
+      aria-label={t("game.staffLabel", {
+        clef: t(`game.clef.${clef}`),
+        count: notes.length,
+      })}
       role="img"
     >
       {/* Staff paper background */}
@@ -110,10 +122,8 @@ export default function Staff({ notes, clef }: StaffProps) {
       {/* Clef glyph */}
       <path
         d={clef === "treble" ? TREBLE_CLEF_PATH : BASS_CLEF_PATH}
-        fill="none"
-        stroke="#333"
-        strokeWidth={2}
-        transform={`translate(${CLEF_X}, ${STAFF_TOP - 20})`}
+        fill="#333"
+        transform={`translate(${CLEF_X}, ${clefY}) scale(${clefScale}, ${-clefScale})`}
       />
 
       {/* Notes */}
