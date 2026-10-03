@@ -260,3 +260,6 @@ class OmrJob(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )
+
+
+import app.game.models as _game_models  # noqa: E402, F401

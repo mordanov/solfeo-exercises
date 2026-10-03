@@ -1,0 +1,5 @@
+/Users/aleksandr/Local/solfeo-exercises/frontend/public/app-icon-512.png
+/Users/aleksandr/Local/solfeo-exercises/frontend/public/apple-touch-icon.png
+/Users/aleksandr/Local/solfeo-exercises/frontend/public/apple-touch-icon-ipad.png
+/Users/aleksandr/Local/solfeo-exercises/frontend/public/app-icon-192.png
+/Users/aleksandr/Local/solfeo-exercises/frontend/public/apple-touch-icon-ipad-152.png

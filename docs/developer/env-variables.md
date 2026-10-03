@@ -152,6 +152,15 @@ Only the OMR container needs executable temporary memory for JavaCPP native libr
 | `OMR_HEALTH_FILE` | `/tmp/omr-ready` | Current worker process readiness marker |
 | `OMR_HEALTH_SECONDS` | `600` | Maximum marker age |
 
+## Guess-the-note game
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `AVATAR_IMAGE_MODEL` | `dall-e-3` | OpenAI image model used for custom avatar generation |
+| `AVATAR_GEN_DAILY_LIMIT` | `3` | Maximum billable avatar generations per student per day |
+| `AVATAR_GEN_GRACE_MS` | `500` | Milliseconds the worker waits before marking a job failed |
+| `AVATAR_ROUND_EXPIRE_S` | `3600` | Seconds before an unfinished round expires |
+
 ## Container deployment settings
 
 | Variable | Default | Purpose |

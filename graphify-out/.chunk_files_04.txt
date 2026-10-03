@@ -1,0 +1,5 @@
+/Users/aleksandr/Local/solfeo-exercises/frontend/public/favicon.svg
+/Users/aleksandr/Local/solfeo-exercises/backend/tests/fixtures/omr/scale.png
+/Users/aleksandr/Local/solfeo-exercises/backend/tests/fixtures/omr/accidentals.png
+/Users/aleksandr/Local/solfeo-exercises/backend/tests/fixtures/omr/rhythm.png
+/Users/aleksandr/Local/solfeo-exercises/prototypes/omr/output/review-7.jpeg

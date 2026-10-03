@@ -1,0 +1,392 @@
+{
+  "nodes": [
+    {
+      "id": "samples_ejercicio_7_sheet",
+      "label": "Exercise 7 - Printed Score (Treble Clef, Common Time, 2 Staves)",
+      "file_type": "image",
+      "source_file": "prototypes/omr/samples/ejercicio_7.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_ejercicio_6_sheet",
+      "label": "Exercise 6 - Printed Score (Treble Clef, 2/4, Single Staff)",
+      "file_type": "image",
+      "source_file": "prototypes/omr/samples/ejercicio_6.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_ejercicio_1_sheet",
+      "label": "Exercise 1 - Printed Score (Treble Clef, 2/4, 2 Staves, Beginner)",
+      "file_type": "image",
+      "source_file": "prototypes/omr/samples/ejercicio_1.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_ejercicio_10_sheet",
+      "label": "Exercise 10 - Printed Score (Bass Clef, 2/4, 2 Staves)",
+      "file_type": "image",
+      "source_file": "prototypes/omr/samples/ejercicio_10.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_ejercicio_3_sheet",
+      "label": "Exercise 3 - Printed Score (Treble Clef, 2/4, 2 Staves, Syncopation/Rests)",
+      "file_type": "image",
+      "source_file": "prototypes/omr/samples/ejercicio_3.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_ejercicio_1_treble_clef",
+      "label": "Treble Clef (G Clef) - Notation Feature",
+      "file_type": "concept",
+      "source_file": "prototypes/omr/samples/ejercicio_1.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_ejercicio_10_bass_clef",
+      "label": "Bass Clef (F Clef) - Notation Feature",
+      "file_type": "concept",
+      "source_file": "prototypes/omr/samples/ejercicio_10.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_ejercicio_1_two_four_time",
+      "label": "2/4 Time Signature",
+      "file_type": "concept",
+      "source_file": "prototypes/omr/samples/ejercicio_1.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_ejercicio_7_common_time",
+      "label": "Common Time (4/4) Time Signature",
+      "file_type": "concept",
+      "source_file": "prototypes/omr/samples/ejercicio_7.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_ejercicio_1_printed_notation",
+      "label": "Printed (Typeset) Music Notation Style",
+      "file_type": "concept",
+      "source_file": "prototypes/omr/samples/ejercicio_1.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_ejercicio_3_eighth_rest_pickup",
+      "label": "Eighth Rest Anacrusis / Syncopated Rhythm Pattern",
+      "file_type": "concept",
+      "source_file": "prototypes/omr/samples/ejercicio_3.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_ejercicio_7_slurs_ties",
+      "label": "Slurs and Ties - Phrasing Marks",
+      "file_type": "concept",
+      "source_file": "prototypes/omr/samples/ejercicio_7.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_ejercicio_10_accidentals",
+      "label": "Accidentals (Flats) in Score",
+      "file_type": "concept",
+      "source_file": "prototypes/omr/samples/ejercicio_10.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "samples_ejercicio_7_sheet",
+      "target": "samples_ejercicio_7_common_time",
+      "relation": "has_time_signature",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_7.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_7_sheet",
+      "target": "samples_ejercicio_1_treble_clef",
+      "relation": "uses_clef",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_7.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_7_sheet",
+      "target": "samples_ejercicio_1_printed_notation",
+      "relation": "has_notation_style",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_7.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_7_sheet",
+      "target": "samples_ejercicio_7_slurs_ties",
+      "relation": "contains_feature",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_7.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_6_sheet",
+      "target": "samples_ejercicio_1_two_four_time",
+      "relation": "has_time_signature",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_6.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_6_sheet",
+      "target": "samples_ejercicio_1_treble_clef",
+      "relation": "uses_clef",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_6.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_6_sheet",
+      "target": "samples_ejercicio_1_printed_notation",
+      "relation": "has_notation_style",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_6.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_1_sheet",
+      "target": "samples_ejercicio_1_two_four_time",
+      "relation": "has_time_signature",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_1.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_1_sheet",
+      "target": "samples_ejercicio_1_treble_clef",
+      "relation": "uses_clef",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_1.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_1_sheet",
+      "target": "samples_ejercicio_1_printed_notation",
+      "relation": "has_notation_style",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_1.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_10_sheet",
+      "target": "samples_ejercicio_1_two_four_time",
+      "relation": "has_time_signature",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_10.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_10_sheet",
+      "target": "samples_ejercicio_10_bass_clef",
+      "relation": "uses_clef",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_10.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_10_sheet",
+      "target": "samples_ejercicio_1_printed_notation",
+      "relation": "has_notation_style",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_10.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_10_sheet",
+      "target": "samples_ejercicio_10_accidentals",
+      "relation": "contains_feature",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_10.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_3_sheet",
+      "target": "samples_ejercicio_1_two_four_time",
+      "relation": "has_time_signature",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_3.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_3_sheet",
+      "target": "samples_ejercicio_1_treble_clef",
+      "relation": "uses_clef",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_3.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_3_sheet",
+      "target": "samples_ejercicio_1_printed_notation",
+      "relation": "has_notation_style",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_3.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_3_sheet",
+      "target": "samples_ejercicio_3_eighth_rest_pickup",
+      "relation": "contains_feature",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_3.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_1_sheet",
+      "target": "samples_ejercicio_3_sheet",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "prototypes/omr/samples/ejercicio_1.jpeg",
+      "source_location": null,
+      "weight": 0.9
+    },
+    {
+      "source": "samples_ejercicio_1_sheet",
+      "target": "samples_ejercicio_6_sheet",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "prototypes/omr/samples/ejercicio_1.jpeg",
+      "source_location": null,
+      "weight": 0.9
+    },
+    {
+      "source": "samples_ejercicio_3_sheet",
+      "target": "samples_ejercicio_6_sheet",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "prototypes/omr/samples/ejercicio_3.jpeg",
+      "source_location": null,
+      "weight": 0.9
+    },
+    {
+      "source": "samples_ejercicio_7_sheet",
+      "target": "samples_ejercicio_6_sheet",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "prototypes/omr/samples/ejercicio_7.jpeg",
+      "source_location": null,
+      "weight": 0.8
+    },
+    {
+      "source": "samples_ejercicio_10_sheet",
+      "target": "samples_ejercicio_7_sheet",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "prototypes/omr/samples/ejercicio_10.jpeg",
+      "source_location": null,
+      "weight": 0.7
+    },
+    {
+      "source": "samples_ejercicio_10_bass_clef",
+      "target": "samples_ejercicio_1_treble_clef",
+      "relation": "contrasts_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "prototypes/omr/samples/ejercicio_10.jpeg",
+      "source_location": null,
+      "weight": 0.9
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

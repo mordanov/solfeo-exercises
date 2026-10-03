@@ -248,6 +248,18 @@ class Settings(BaseSettings):
         max_length=100,
         validation_alias="EMERGENCY_MANAGER_LAST_NAME",
     )
+    avatar_image_model: str = Field(
+        default="dall-e-3", validation_alias="AVATAR_IMAGE_MODEL"
+    )
+    avatar_gen_daily_limit: int = Field(
+        default=3, ge=1, validation_alias="AVATAR_GEN_DAILY_LIMIT"
+    )
+    avatar_gen_grace_ms: int = Field(
+        default=500, ge=0, validation_alias="AVATAR_GEN_GRACE_MS"
+    )
+    avatar_round_expire_s: int = Field(
+        default=3600, ge=60, validation_alias="AVATAR_ROUND_EXPIRE_S"
+    )
 
     @field_validator("auth_allowed_origins")
     @classmethod

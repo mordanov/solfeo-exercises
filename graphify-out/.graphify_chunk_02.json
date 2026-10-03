@@ -1,0 +1,475 @@
+{
+  "nodes": [
+    {
+      "id": "user_manager",
+      "label": "Manager Guide",
+      "file_type": "document",
+      "source_file": "docs/user/manager.md",
+      "source_location": null,
+      "source_url": "https://solfeo.miveralta.ru/",
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "user_pwa_prototype",
+      "label": "Android Share Prototype Guide (Superseded)",
+      "file_type": "document",
+      "source_file": "docs/user/pwa-prototype.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Superseded by Telegram bot on 2026-09-29 after PWA sharing failed on Android with 'No audio file was received'; existing deployment preserved until separate cleanup task"
+    },
+    {
+      "id": "user_student",
+      "label": "Student Guide",
+      "file_type": "document",
+      "source_file": "docs/user/student.md",
+      "source_location": null,
+      "source_url": "https://solfeo.miveralta.ru/",
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "user_telegram_prototype",
+      "label": "Telegram Audio Prototype Guide (Historical)",
+      "file_type": "document",
+      "source_file": "docs/user/telegram-prototype.md",
+      "source_location": null,
+      "source_url": "https://t.me/solfeo_exercises_bot",
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Prototype poller replaced by product worker in PHASE 4; files preserved; owner confirmed audio receipt and playback 2026-09-29 closing PHASE 0.5"
+    },
+    {
+      "id": "frontend_index",
+      "label": "Frontend App Entry Point",
+      "file_type": "code",
+      "source_file": "frontend/index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "guess_the_note_prompts_01_main_claude_code_prompt",
+      "label": "Guess the Note Game Spec Prompt",
+      "file_type": "document",
+      "source_file": "guess-the-note-prompts/01_main_claude_code_prompt.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "guess_the_note_prompts_02_avatar_generation_prompt",
+      "label": "Avatar Generation Image Prompt",
+      "file_type": "document",
+      "source_file": "guess-the-note-prompts/02_avatar_generation_prompt.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "files_compose",
+      "label": "Files Prototype Docker Compose",
+      "file_type": "code",
+      "source_file": "prototypes/files/compose.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "files_requirements",
+      "label": "Files Prototype Python Requirements (FastAPI/uvicorn)",
+      "file_type": "code",
+      "source_file": "prototypes/files/requirements.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "output_audiveris_version",
+      "label": "Audiveris Version Info (Root Output)",
+      "file_type": "document",
+      "source_file": "prototypes/omr/output/audiveris-version.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "20260928t201614z_d3f027d5_docker_version",
+      "label": "Docker Version Info (OMR Run d3f027d5)",
+      "file_type": "document",
+      "source_file": "prototypes/omr/output/20260928T201614Z-d3f027d5/docker-version.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-09-28T20:16:14Z",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "20260928t201957z_84f49a71_audiveris_version",
+      "label": "Audiveris Version Info (OMR Run 84f49a71)",
+      "file_type": "document",
+      "source_file": "prototypes/omr/output/20260928T201957Z-84f49a71/audiveris-version.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-09-28T20:19:57Z",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "20260928t201957z_84f49a71_docker_version",
+      "label": "Docker Version Info (OMR Run 84f49a71)",
+      "file_type": "document",
+      "source_file": "prototypes/omr/output/20260928T201957Z-84f49a71/docker-version.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-09-28T20:19:57Z",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "20260928t201957z_84f49a71_os_packages",
+      "label": "OS Packages List (OMR Run 84f49a71)",
+      "file_type": "document",
+      "source_file": "prototypes/omr/output/20260928T201957Z-84f49a71/os-packages.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-09-28T20:19:57Z",
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "pwa_compose",
+      "label": "PWA Prototype Docker Compose",
+      "file_type": "code",
+      "source_file": "prototypes/pwa/compose.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "pwa_index",
+      "label": "PWA Prototype HTML Entry Point",
+      "file_type": "code",
+      "source_file": "prototypes/pwa/index.html",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "telegram_compose",
+      "label": "Telegram Bot Prototype Docker Compose",
+      "file_type": "code",
+      "source_file": "prototypes/telegram/compose.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "telegram_requirements",
+      "label": "Telegram Bot Python Requirements (httpx/pydantic)",
+      "file_type": "code",
+      "source_file": "prototypes/telegram/requirements.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "solfeo_telegram_bot",
+      "label": "Solfeo Telegram Bot (@solfeo_exercises_bot)",
+      "file_type": "concept",
+      "source_file": "docs/user/telegram-prototype.md",
+      "source_location": null,
+      "source_url": "https://t.me/solfeo_exercises_bot",
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Selected audio import path replacing PWA sharing; stores audio as AAC m4a; 20MB/900s limits; unauthorized senders receive no response; product bot replaces prototype poller in PHASE 4"
+    },
+    {
+      "id": "audiveris_omr",
+      "label": "Audiveris OMR Engine (v5.11.0)",
+      "file_type": "concept",
+      "source_file": "prototypes/omr/output/audiveris-version.txt",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Chosen for optical music recognition; uses Tesseract OCR 5.5.2 on aarch64 Linux; worker retries staff detection once with faint-line threshold; approved scores enable spoken notes; rejected or failed scores show original image to students"
+    },
+    {
+      "id": "guess_the_note_game",
+      "label": "Guess the Note Game Module",
+      "file_type": "concept",
+      "source_file": "guess-the-note-prompts/01_main_claude_code_prompt.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Children's music note-recognition game (ages 6-9); server-authoritative 7-task rounds with timing, anti-cheat, progression (XP/levels/trophies), season-versioned stats, confusion heatmap; built on existing React+MUI+Python+PostgreSQL stack; cartoonish MUI theme required; OpenAI for AI avatar generation with moderation"
+    }
+  ],
+  "edges": [
+    {
+      "source": "user_pwa_prototype",
+      "target": "user_telegram_prototype",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/user/pwa-prototype.md",
+      "source_location": "line 13",
+      "weight": 1.0
+    },
+    {
+      "source": "user_telegram_prototype",
+      "target": "user_manager",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/user/telegram-prototype.md",
+      "source_location": "line 6",
+      "weight": 1.0
+    },
+    {
+      "source": "user_manager",
+      "target": "user_student",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/user/manager.md",
+      "source_location": "line 44",
+      "weight": 1.0
+    },
+    {
+      "source": "guess_the_note_prompts_01_main_claude_code_prompt",
+      "target": "guess_the_note_prompts_02_avatar_generation_prompt",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "guess-the-note-prompts/01_main_claude_code_prompt.md",
+      "source_location": "line 88",
+      "weight": 1.0
+    },
+    {
+      "source": "user_telegram_prototype",
+      "target": "solfeo_telegram_bot",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/user/telegram-prototype.md",
+      "source_location": "line 14",
+      "weight": 1.0
+    },
+    {
+      "source": "user_manager",
+      "target": "solfeo_telegram_bot",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/user/manager.md",
+      "source_location": "line 352",
+      "weight": 1.0
+    },
+    {
+      "source": "output_audiveris_version",
+      "target": "audiveris_omr",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "prototypes/omr/output/audiveris-version.txt",
+      "source_location": null,
+      "weight": 0.95
+    },
+    {
+      "source": "20260928t201957z_84f49a71_audiveris_version",
+      "target": "audiveris_omr",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "prototypes/omr/output/20260928T201957Z-84f49a71/audiveris-version.txt",
+      "source_location": null,
+      "weight": 0.95
+    },
+    {
+      "source": "user_manager",
+      "target": "audiveris_omr",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/user/manager.md",
+      "source_location": "line 74",
+      "weight": 0.85
+    },
+    {
+      "source": "files_compose",
+      "target": "files_requirements",
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "prototypes/files/compose.yaml",
+      "source_location": null,
+      "weight": 0.85
+    },
+    {
+      "source": "telegram_compose",
+      "target": "telegram_requirements",
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "prototypes/telegram/compose.yaml",
+      "source_location": null,
+      "weight": 0.85
+    },
+    {
+      "source": "pwa_compose",
+      "target": "pwa_index",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "prototypes/pwa/compose.yaml",
+      "source_location": null,
+      "weight": 0.85
+    },
+    {
+      "source": "output_audiveris_version",
+      "target": "20260928t201957z_84f49a71_audiveris_version",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "prototypes/omr/output/audiveris-version.txt",
+      "source_location": null,
+      "weight": 0.85
+    },
+    {
+      "source": "20260928t201614z_d3f027d5_docker_version",
+      "target": "20260928t201957z_84f49a71_docker_version",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "prototypes/omr/output/20260928T201614Z-d3f027d5/docker-version.txt",
+      "source_location": null,
+      "weight": 0.85
+    },
+    {
+      "source": "20260928t201957z_84f49a71_os_packages",
+      "target": "20260928t201957z_84f49a71_audiveris_version",
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "prototypes/omr/output/20260928T201957Z-84f49a71/os-packages.txt",
+      "source_location": null,
+      "weight": 0.85
+    },
+    {
+      "source": "20260928t201614z_d3f027d5_docker_version",
+      "target": "audiveris_omr",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "prototypes/omr/output/20260928T201614Z-d3f027d5/docker-version.txt",
+      "source_location": null,
+      "weight": 0.75
+    },
+    {
+      "source": "20260928t201957z_84f49a71_docker_version",
+      "target": "audiveris_omr",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "prototypes/omr/output/20260928T201957Z-84f49a71/docker-version.txt",
+      "source_location": null,
+      "weight": 0.75
+    },
+    {
+      "source": "pwa_index",
+      "target": "frontend_index",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "prototypes/pwa/index.html",
+      "source_location": null,
+      "weight": 0.75
+    },
+    {
+      "source": "user_pwa_prototype",
+      "target": "pwa_index",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/user/pwa-prototype.md",
+      "source_location": null,
+      "weight": 0.75
+    },
+    {
+      "source": "user_pwa_prototype",
+      "target": "pwa_compose",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/user/pwa-prototype.md",
+      "source_location": null,
+      "weight": 0.75
+    },
+    {
+      "source": "guess_the_note_prompts_01_main_claude_code_prompt",
+      "target": "guess_the_note_game",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "guess-the-note-prompts/01_main_claude_code_prompt.md",
+      "source_location": null,
+      "weight": 0.95
+    },
+    {
+      "source": "guess_the_note_prompts_02_avatar_generation_prompt",
+      "target": "guess_the_note_game",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "guess-the-note-prompts/02_avatar_generation_prompt.md",
+      "source_location": null,
+      "weight": 0.85
+    },
+    {
+      "source": "files_requirements",
+      "target": "telegram_requirements",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "prototypes/files/requirements.txt",
+      "source_location": null,
+      "weight": 0.75
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 0,
+  "output_tokens": 0
+}
