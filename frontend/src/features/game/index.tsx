@@ -55,6 +55,7 @@ export default function GameArea({ auth }: Props) {
     <GameTheme>
       {screen.name === "players" && (
         <PlayerSelect
+          auth={auth}
           onSelect={(id) => {
             window.history.pushState(null, "", `/game/setup/${id}`);
             setScreen({ name: "setup", playerId: id });

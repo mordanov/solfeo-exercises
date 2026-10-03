@@ -97,6 +97,7 @@ export const useCreatePlayer = () => {
       csrf: string;
       name: string;
       avatar_animal?: string;
+      account_id?: number;
     }) => gameFetch.post<Player>("/players", csrf, body),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["game", "players"] }),
   });

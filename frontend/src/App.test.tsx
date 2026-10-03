@@ -37,6 +37,30 @@ function renderApp() {
   );
 }
 
+it.each([
+  ["ru", "Играть в Угадай Ноту"],
+  ["en", "Play Guess the Note"],
+  ["es", "Jugar a Adivina la nota"],
+])(
+  "provides a localized circular game shortcut in %s",
+  async (language, hint) => {
+    await i18n.changeLanguage(language);
+    mockHealth(async () => new Response('{"status":"ok"}'));
+    renderApp();
+    const shortcut = screen.getByRole("link", { name: hint });
+    expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
+    expect(shortcut).toHaveAttribute("href", "/game");
+    expect(shortcut).toHaveAttribute("title", hint);
+    expect(shortcut.querySelector("img")).toHaveAttribute(
+      "src",
+      "/assets/game-badge.png",
+    );
+    expect(shortcut.querySelector("img")).toHaveAttribute("alt", "");
+    await userEvent.hover(shortcut);
+    expect(await screen.findByRole("tooltip")).toHaveTextContent(hint);
+  },
+);
+
 it("shows pending state rather than claiming the backend is healthy", () => {
   mockHealth(vi.fn(() => new Promise<Response>(() => {})));
   renderApp();

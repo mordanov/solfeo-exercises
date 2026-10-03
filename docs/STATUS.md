@@ -8,10 +8,71 @@ Prerequisites:
 Last updated: 2026-10-03 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a0523`.
 
 ## Current phase
-Game avatar artwork: a separate follow-up to the merged Guess the Note feature.
+Game avatar artwork, first-entry repair, and the header shortcut follow the merged Guess the Note feature.
 Branch `feat/game-avatar-artwork` starts from merge source `24c1cfc`.
 Accepted PHASE 7 remains closed.
 The earlier appearance and listening changes below remain historical session records.
+
+### Circular game shortcut
+The owner approves moving only the header branding to accommodate an upper-left badge.
+The supplied Unicorn artwork becomes a transparent 128 × 128 px public PNG.
+The original source remains unchanged.
+The circular 44 × 44 px link opens `/game` with a localized tooltip and accessible name in all 3 languages.
+The existing authentication gates and menu link remain unchanged.
+
+Absolute positioning keeps the new control outside the document flow.
+An inaccessible sizing copy preserves the original header dimensions.
+Below 900 px, compact branding text fits beside the badge without moving other controls.
+Desktop branding retains its previous text size.
+
+Chrome compares 24 before-and-after cases at 320, 390, 430, and 1280 px.
+The cases cover all 3 languages, standard Roboto, and large Serif text.
+Navigation, forms, panels, and the theme control retain their exact original coordinates.
+The cases show no measured horizontal overflow.
+Dark mode retains the same coordinates for navigation, forms, and panels.
+Actual keyboard Tab navigation shows the focus outline, and activating the badge opens `/game`.
+Real keyboard, mouse, and emulated mobile touch activation each reach the player-selection page.
+All 263 frontend tests, the production frontend build, documentation checks, and 6 quality hooks pass.
+The knowledge graph receives an AST-only update.
+No dependency, backend, migration, private configuration, push, or production changes occur.
+
+Remaining manual checks:
+1. Publish the frontend change.
+2. Tap the badge on a real phone or iPad and confirm the player-selection page.
+3. Check the localized tooltip and keyboard focus in Chrome and Safari.
+
+### Game first-entry repair
+The owner reports that `/game` shows only the player-selection heading.
+Profiles remain separate from accounts, but the interface previously offered no way to create the first profile.
+The previous avatar browser fixture supplied profiles in advance and did not cover this entry condition.
+
+The account menu now links to Guess the Note for both roles after any required password change.
+Managers create profiles and select an active owner account through the existing 50-account pagination.
+Creation starts an active season and uses Unicorn as the initial avatar.
+The existing chooser changes the avatar without resetting progress.
+Students see only assigned profiles; an empty list directs them to a manager.
+The repair retains manager-only creation and introduces no automatic profiles.
+
+Player loading, empty results, and request errors now have separate translated states.
+Account lookup and duplicate-name errors remain visible in the creation form.
+Missing or inactive owners create neither a player nor a season.
+Logout, session expiry, and account changes cancel and remove cached game data.
+
+Chrome verification starts with 2 accounts and no player profiles in a separate disposable database.
+The manager creates a profile for the student through the interface.
+The student then selects it through the menu and starts a real round.
+All 11 browser cases pass, including 320, 390, 430, and 1280 px layouts without measured overflow.
+New controls retain touch targets of at least 44 px.
+Regression tests cover ownership, CSRF, active accounts, empty states, errors, pagination, and logout cache removal.
+All 218 backend tests, 260 frontend tests, the production frontend build, and 6 quality hooks pass.
+The knowledge graph receives an AST-only update.
+No dependencies, migrations, private configuration, paid generation, push, or production changes occur.
+
+Remaining manual checks:
+1. Publish the paired backend and frontend changes.
+2. Create a profile for an existing student through the manager's Guess the Note page.
+3. Sign in as that student, select the profile, and click **Let's go!**.
+4. Check the creation dialog and navigation in Safari on a real phone or iPad.
 
 ### Game avatar artwork
 The owner supplies the original sheets and authorizes repeated artwork on 2026-10-03.

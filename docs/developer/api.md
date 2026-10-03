@@ -37,6 +37,25 @@ Students receive `FORBIDDEN` for current unapproved output.
 Deleted exercises return `EXERCISE_NOT_FOUND`.
 Worker failures expose stable `OMR_*` codes for translated UI errors.
 
+## Game profiles
+
+Game profiles remain separate from user accounts.
+The application does not create them during startup, account creation, or login.
+
+| Method | Path | Access and result |
+|---|---|---|
+| GET | `/api/game/players` | Manager sees all profiles; student sees only owned profiles |
+| POST | `/api/game/players` | Manager and CSRF; creates a player and an active season |
+
+Creation accepts `name`, optional `avatar_animal`, and optional positive `account_id`.
+An omitted or null `account_id` assigns the profile to the requesting manager.
+An explicit account must exist and be active.
+Missing or inactive accounts return `404` with `PLAYER_ACCOUNT_NOT_FOUND`.
+Duplicate names within the target account return `409` with `PLAYER_NAME_TAKEN`.
+Rejected requests create neither a player nor a season.
+Students receive `403` when they request creation.
+Starting another account's round returns `404`, without disclosing that profile.
+
 ## Game avatars
 
 Player responses include `avatar_animal`, `custom_avatar_id`, `xp`, and derived `avatar_level` from 1 to 10.

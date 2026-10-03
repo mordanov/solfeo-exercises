@@ -2,6 +2,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.game.models import CustomAvatar, Player, Season
+from app.models import User
 from app.services.auth import ServiceError
 
 
@@ -45,6 +46,9 @@ def create_player(
     if avatar_animal is not None and avatar_animal not in ANIMAL_IDS:
         raise ServiceError("INVALID_AVATAR_ANIMAL", 422)
     with session.begin():
+        account = session.get(User, account_id)
+        if account is None or not account.is_active:
+            raise ServiceError("PLAYER_ACCOUNT_NOT_FOUND", 404)
         existing = session.scalar(
             select(Player).where(Player.account_id == account_id, Player.name == name)
         )

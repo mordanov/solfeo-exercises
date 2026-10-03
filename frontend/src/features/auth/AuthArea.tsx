@@ -207,6 +207,7 @@ export function AuthArea() {
       await cache.cancelQueries({ queryKey: ["journal-options"] });
       await cache.cancelQueries({ queryKey: ["telegram"] });
       await cache.cancelQueries({ queryKey: ["omr"] });
+      await cache.cancelQueries({ queryKey: ["game"] });
       cache.setQueryData(["auth"], null);
       cache.removeQueries({ queryKey: ["users"] });
       cache.removeQueries({ queryKey: ["exercises"] });
@@ -215,6 +216,7 @@ export function AuthArea() {
       cache.removeQueries({ queryKey: ["journal-options"] });
       cache.removeQueries({ queryKey: ["telegram"] });
       cache.removeQueries({ queryKey: ["omr"] });
+      cache.removeQueries({ queryKey: ["game"] });
     };
     const listener = () => void expired();
     window.addEventListener("solfeo:unauthorized", listener);
@@ -229,6 +231,7 @@ export function AuthArea() {
     await cache.cancelQueries({ queryKey: ["journal-options"] });
     await cache.cancelQueries({ queryKey: ["telegram"] });
     await cache.cancelQueries({ queryKey: ["omr"] });
+    await cache.cancelQueries({ queryKey: ["game"] });
     cache.removeQueries({ queryKey: ["users"] });
     cache.removeQueries({ queryKey: ["exercises"] });
     cache.removeQueries({ queryKey: ["listening"] });
@@ -236,6 +239,7 @@ export function AuthArea() {
     cache.removeQueries({ queryKey: ["journal-options"] });
     cache.removeQueries({ queryKey: ["telegram"] });
     cache.removeQueries({ queryKey: ["omr"] });
+    cache.removeQueries({ queryKey: ["game"] });
     cache.setQueryData(["auth"], value);
   };
   const signOut = useMutation({
@@ -252,6 +256,7 @@ export function AuthArea() {
       await cache.cancelQueries({ queryKey: ["journal-options"] });
       await cache.cancelQueries({ queryKey: ["telegram"] });
       await cache.cancelQueries({ queryKey: ["omr"] });
+      await cache.cancelQueries({ queryKey: ["game"] });
       cache.setQueryData(["auth"], null);
       cache.removeQueries({ queryKey: ["users"] });
       cache.removeQueries({ queryKey: ["exercises"] });
@@ -260,6 +265,7 @@ export function AuthArea() {
       cache.removeQueries({ queryKey: ["journal-options"] });
       cache.removeQueries({ queryKey: ["telegram"] });
       cache.removeQueries({ queryKey: ["omr"] });
+      cache.removeQueries({ queryKey: ["game"] });
     },
   });
   if (query.isPending) return <p aria-live="polite">{t("auth.loading")}</p>;
@@ -329,6 +335,7 @@ export function AuthArea() {
               )}
             </Link>{" "}
             <Link href="/settings">{t("settings.title")}</Link>{" "}
+            <Link href="/game">{t("game.title")}</Link>
           </>
         )}
         <Button disabled={signOut.isPending} onClick={() => signOut.mutate()}>
