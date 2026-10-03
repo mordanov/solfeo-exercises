@@ -1,0 +1,486 @@
+{
+  "nodes": [
+    {
+      "id": "samples_ejercicio_2_exercise",
+      "label": "Ejercicio 2 - Solfège Exercise",
+      "file_type": "image",
+      "source_file": "prototypes/omr/samples/ejercicio_2.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_ejercicio_2_notation",
+      "label": "Ejercicio 2 - Musical Notation (Treble Clef, 2/4)",
+      "file_type": "image",
+      "source_file": "prototypes/omr/samples/ejercicio_2.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_ejercicio_4_exercise",
+      "label": "Ejercicio 4 - Solfège Exercise",
+      "file_type": "image",
+      "source_file": "prototypes/omr/samples/ejercicio_4.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_ejercicio_4_notation",
+      "label": "Ejercicio 4 - Musical Notation (Treble Clef, 3/4)",
+      "file_type": "image",
+      "source_file": "prototypes/omr/samples/ejercicio_4.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_ejercicio_5_exercise",
+      "label": "Ejercicio 5 - Solfège Exercise",
+      "file_type": "image",
+      "source_file": "prototypes/omr/samples/ejercicio_5.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_ejercicio_5_notation",
+      "label": "Ejercicio 5 - Musical Notation (Treble Clef, 3/4)",
+      "file_type": "image",
+      "source_file": "prototypes/omr/samples/ejercicio_5.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_ejercicio_8_exercise",
+      "label": "Ejercicio 8 - Solfège Exercise",
+      "file_type": "image",
+      "source_file": "prototypes/omr/samples/ejercicio_8.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_ejercicio_8_notation",
+      "label": "Ejercicio 8 - Musical Notation (Bass Clef, 4/4)",
+      "file_type": "image",
+      "source_file": "prototypes/omr/samples/ejercicio_8.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_ejercicio_9_exercise",
+      "label": "Ejercicio 9 - Solfège Exercise",
+      "file_type": "image",
+      "source_file": "prototypes/omr/samples/ejercicio_9.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_ejercicio_9_notation",
+      "label": "Ejercicio 9 - Musical Notation (Bass Clef, 2/4)",
+      "file_type": "image",
+      "source_file": "prototypes/omr/samples/ejercicio_9.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_treble_clef_group",
+      "label": "Treble Clef Exercises Group",
+      "file_type": "image",
+      "source_file": "prototypes/omr/samples/ejercicio_2.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_bass_clef_group",
+      "label": "Bass Clef Exercises Group",
+      "file_type": "image",
+      "source_file": "prototypes/omr/samples/ejercicio_8.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_time_sig_24_group",
+      "label": "2/4 Time Signature Exercises",
+      "file_type": "image",
+      "source_file": "prototypes/omr/samples/ejercicio_2.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_time_sig_34_group",
+      "label": "3/4 Time Signature Exercises",
+      "file_type": "image",
+      "source_file": "prototypes/omr/samples/ejercicio_4.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_time_sig_44_group",
+      "label": "4/4 Time Signature Exercises",
+      "file_type": "image",
+      "source_file": "prototypes/omr/samples/ejercicio_8.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_printed_notation",
+      "label": "Printed (Typeset) Music Notation Style",
+      "file_type": "image",
+      "source_file": "prototypes/omr/samples/ejercicio_2.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "samples_omr_sample_set",
+      "label": "OMR Sample Exercise Set",
+      "file_type": "image",
+      "source_file": "prototypes/omr/samples/ejercicio_2.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "samples_ejercicio_2_exercise",
+      "target": "samples_ejercicio_2_notation",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_2.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_2_notation",
+      "target": "samples_treble_clef_group",
+      "relation": "belongs_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_2.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_2_notation",
+      "target": "samples_time_sig_24_group",
+      "relation": "belongs_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_2.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_2_exercise",
+      "target": "samples_printed_notation",
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_2.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_2_exercise",
+      "target": "samples_omr_sample_set",
+      "relation": "part_of",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_2.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_4_exercise",
+      "target": "samples_ejercicio_4_notation",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_4.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_4_notation",
+      "target": "samples_treble_clef_group",
+      "relation": "belongs_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_4.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_4_notation",
+      "target": "samples_time_sig_34_group",
+      "relation": "belongs_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_4.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_4_exercise",
+      "target": "samples_printed_notation",
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_4.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_4_exercise",
+      "target": "samples_omr_sample_set",
+      "relation": "part_of",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_4.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_5_exercise",
+      "target": "samples_ejercicio_5_notation",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_5.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_5_notation",
+      "target": "samples_treble_clef_group",
+      "relation": "belongs_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_5.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_5_notation",
+      "target": "samples_time_sig_34_group",
+      "relation": "belongs_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_5.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_5_exercise",
+      "target": "samples_printed_notation",
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_5.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_5_exercise",
+      "target": "samples_omr_sample_set",
+      "relation": "part_of",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_5.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_4_exercise",
+      "target": "samples_ejercicio_5_exercise",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "prototypes/omr/samples/ejercicio_4.jpeg",
+      "source_location": null,
+      "weight": 0.9
+    },
+    {
+      "source": "samples_ejercicio_8_exercise",
+      "target": "samples_ejercicio_8_notation",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_8.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_8_notation",
+      "target": "samples_bass_clef_group",
+      "relation": "belongs_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_8.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_8_notation",
+      "target": "samples_time_sig_44_group",
+      "relation": "belongs_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_8.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_8_exercise",
+      "target": "samples_printed_notation",
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_8.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_8_exercise",
+      "target": "samples_omr_sample_set",
+      "relation": "part_of",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_8.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_9_exercise",
+      "target": "samples_ejercicio_9_notation",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_9.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_9_notation",
+      "target": "samples_bass_clef_group",
+      "relation": "belongs_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_9.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_9_notation",
+      "target": "samples_time_sig_24_group",
+      "relation": "belongs_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_9.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_9_exercise",
+      "target": "samples_printed_notation",
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_9.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_9_exercise",
+      "target": "samples_omr_sample_set",
+      "relation": "part_of",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/samples/ejercicio_9.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "samples_ejercicio_8_exercise",
+      "target": "samples_ejercicio_9_exercise",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "prototypes/omr/samples/ejercicio_8.jpeg",
+      "source_location": null,
+      "weight": 0.9
+    },
+    {
+      "source": "samples_ejercicio_2_exercise",
+      "target": "samples_ejercicio_9_exercise",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "prototypes/omr/samples/ejercicio_2.jpeg",
+      "source_location": null,
+      "weight": 0.8
+    },
+    {
+      "source": "samples_treble_clef_group",
+      "target": "samples_bass_clef_group",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "prototypes/omr/samples/ejercicio_2.jpeg",
+      "source_location": null,
+      "weight": 0.8
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

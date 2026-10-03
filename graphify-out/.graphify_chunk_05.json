@@ -1,0 +1,207 @@
+{
+  "nodes": [
+    {
+      "id": "output_review_9_bottom_score",
+      "label": "Review 9 Bottom Staff (Bass Clef Continuation)",
+      "file_type": "image",
+      "source_file": "prototypes/omr/output/review-9-bottom.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "properties": {
+        "clef": "bass",
+        "staves": 1,
+        "time_signature": null,
+        "note_content": "quarter notes with stems, partial staff showing bottom portion of exercise 9, slur/tie arc visible at top edge",
+        "notation_style": "printed",
+        "is_continuation": true,
+        "exercise_number": 9,
+        "description": "Bottom/continuation portion of exercise 9 in bass clef. Single staff visible with a bass clef symbol on the left. Contains approximately 4 quarter notes in the lower register with downward stems. A large slur or tie arc spans from the previous system above. Score is printed, clean engraving."
+      }
+    },
+    {
+      "id": "output_review_2_score",
+      "label": "Review Exercise 2 (Treble Clef, 2/4)",
+      "file_type": "image",
+      "source_file": "prototypes/omr/output/review-2.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "properties": {
+        "clef": "treble",
+        "staves": 2,
+        "time_signature": "2/4",
+        "note_content": "dotted notes, eighth notes, sixteenth notes with double beams, slurs over phrases, two full systems of melody",
+        "notation_style": "printed",
+        "is_continuation": false,
+        "exercise_number": 2,
+        "exercise_label_color": "cyan",
+        "description": "Full exercise 2 with cyan/blue exercise number label on the left. Treble clef in 2/4 time. Two staves (systems) shown, each a single melodic line. Contains dotted quarter notes, beamed eighth notes and sixteenth note groups, with slur/phrase markings spanning across barlines. Moderate rhythmic complexity. Printed engraving."
+      }
+    },
+    {
+      "id": "output_review_7_bottom_score",
+      "label": "Review 7 Bottom Staff (Treble Clef Continuation)",
+      "file_type": "image",
+      "source_file": "prototypes/omr/output/review-7-bottom.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "properties": {
+        "clef": "treble",
+        "staves": 1,
+        "time_signature": null,
+        "note_content": "beamed eighth and sixteenth note groups, dotted notes, rests, slur arcs, partial measure at right edge",
+        "notation_style": "printed",
+        "is_continuation": true,
+        "exercise_number": 7,
+        "description": "Bottom/continuation portion of exercise 7 in treble clef. Single staff with treble clef. Contains beamed groups of eighth and sixteenth notes, a dotted note, an eighth rest, and slur markings. A slur begins at the right edge indicating another system follows. Dense rhythmic content. Printed engraving."
+      }
+    },
+    {
+      "id": "output_review_9_score",
+      "label": "Review Exercise 9 (Bass Clef, 2/4)",
+      "file_type": "image",
+      "source_file": "prototypes/omr/output/review-9.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "properties": {
+        "clef": "bass",
+        "staves": 2,
+        "time_signature": "2/4",
+        "note_content": "eighth notes, eighth rests, beamed groups, dotted notes, slurs, two systems in bass clef",
+        "notation_style": "printed",
+        "is_continuation": false,
+        "exercise_number": 9,
+        "exercise_label_color": "cyan",
+        "description": "Full exercise 9 with cyan/blue exercise number label on the left. Bass clef in 2/4 time. Two staves (systems) shown, each a single melodic bass-clef line. Contains eighth rests, beamed eighth note pairs, dotted figures, and slur markings spanning measures. Lower register melodic content. Printed engraving."
+      }
+    },
+    {
+      "id": "output_review_8_score",
+      "label": "Review Exercise 8 (Bass Clef, 4/4)",
+      "file_type": "image",
+      "source_file": "prototypes/omr/output/review-8.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "properties": {
+        "clef": "bass",
+        "staves": 2,
+        "time_signature": "4/4",
+        "note_content": "dense beamed sixteenth and eighth note groups, dotted notes, rests, slurs, two full systems in bass clef",
+        "notation_style": "printed",
+        "is_continuation": false,
+        "exercise_number": 8,
+        "exercise_label_color": "cyan",
+        "description": "Full exercise 8 with cyan/blue exercise number label on the left. Bass clef in 4/4 time. Two staves (systems) shown, each a dense single-voice bass-clef melody. Contains beamed sixteenth note groups, dotted quarter notes, eighth rests, and multiple slur arcs across barlines. High rhythmic density with syncopated figures. Printed engraving."
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "output_review_9_score",
+      "target": "output_review_9_bottom_score",
+      "relation": "has_continuation",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/output/review-9.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "output_review_9_bottom_score",
+      "target": "output_review_9_score",
+      "relation": "is_continuation_of",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/output/review-9-bottom.jpeg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "output_review_2_score",
+      "target": "output_review_8_score",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "prototypes/omr/output/review-2.jpeg",
+      "source_location": null,
+      "weight": 0.7
+    },
+    {
+      "source": "output_review_8_score",
+      "target": "output_review_9_score",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "prototypes/omr/output/review-8.jpeg",
+      "source_location": null,
+      "weight": 0.8
+    },
+    {
+      "source": "output_review_9_score",
+      "target": "output_review_8_score",
+      "relation": "follows_in_sequence",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "prototypes/omr/output/review-9.jpeg",
+      "source_location": null,
+      "weight": 0.9
+    },
+    {
+      "source": "output_review_7_bottom_score",
+      "target": "output_review_8_score",
+      "relation": "follows_in_sequence",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "prototypes/omr/output/review-7-bottom.jpeg",
+      "source_location": null,
+      "weight": 0.9
+    },
+    {
+      "source": "output_review_2_score",
+      "target": "output_review_7_bottom_score",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "prototypes/omr/output/review-2.jpeg",
+      "source_location": null,
+      "weight": 0.6
+    },
+    {
+      "source": "output_review_8_score",
+      "target": "output_review_2_score",
+      "relation": "uses_different_clef_than",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/output/review-8.jpeg",
+      "source_location": null,
+      "weight": 0.8
+    },
+    {
+      "source": "output_review_9_score",
+      "target": "output_review_2_score",
+      "relation": "uses_same_time_signature_as",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "prototypes/omr/output/review-9.jpeg",
+      "source_location": null,
+      "weight": 0.9
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

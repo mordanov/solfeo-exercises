@@ -1,0 +1,124 @@
+{
+  "nodes": [
+    {
+      "id": "public_favicon_logo",
+      "label": "App Favicon Logo",
+      "file_type": "image",
+      "source_file": "frontend/public/favicon.svg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "omr_scale_score",
+      "label": "OMR Test Fixture: Ascending Scale",
+      "file_type": "image",
+      "source_file": "backend/tests/fixtures/omr/scale.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "omr_accidentals_score",
+      "label": "OMR Test Fixture: Accidentals",
+      "file_type": "image",
+      "source_file": "backend/tests/fixtures/omr/accidentals.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "omr_rhythm_score",
+      "label": "OMR Test Fixture: Rhythm Patterns",
+      "file_type": "image",
+      "source_file": "backend/tests/fixtures/omr/rhythm.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "output_review7_score",
+      "label": "OMR Prototype Input: Real Sheet Music Exercise 7",
+      "file_type": "image",
+      "source_file": "prototypes/omr/output/review-7.jpeg",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "omr_scale_score",
+      "target": "omr_accidentals_score",
+      "relation": "sibling_fixture",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/fixtures/omr/scale.png",
+      "source_location": "backend/tests/fixtures/omr/",
+      "weight": 1.0
+    },
+    {
+      "source": "omr_scale_score",
+      "target": "omr_rhythm_score",
+      "relation": "sibling_fixture",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/fixtures/omr/scale.png",
+      "source_location": "backend/tests/fixtures/omr/",
+      "weight": 1.0
+    },
+    {
+      "source": "omr_accidentals_score",
+      "target": "omr_rhythm_score",
+      "relation": "sibling_fixture",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/tests/fixtures/omr/accidentals.png",
+      "source_location": "backend/tests/fixtures/omr/",
+      "weight": 1.0
+    },
+    {
+      "source": "omr_scale_score",
+      "target": "output_review7_score",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "backend/tests/fixtures/omr/scale.png",
+      "source_location": null,
+      "weight": 0.85
+    },
+    {
+      "source": "omr_accidentals_score",
+      "target": "output_review7_score",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "backend/tests/fixtures/omr/accidentals.png",
+      "source_location": null,
+      "weight": 0.85
+    },
+    {
+      "source": "omr_rhythm_score",
+      "target": "output_review7_score",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "backend/tests/fixtures/omr/rhythm.png",
+      "source_location": null,
+      "weight": 0.85
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

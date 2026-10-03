@@ -1,0 +1,5 @@
+/Users/aleksandr/Local/solfeo-exercises/prototypes/pwa/public/favicon-16x16.png
+/Users/aleksandr/Local/solfeo-exercises/prototypes/pwa/public/icon-192x192.png
+/Users/aleksandr/Local/solfeo-exercises/prototypes/pwa/public/apple-touch-icon.png
+/Users/aleksandr/Local/solfeo-exercises/prototypes/pwa/public/icon-512x512.png
+/Users/aleksandr/Local/solfeo-exercises/prototypes/pwa/public/favicon.svg
