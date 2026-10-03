@@ -8,10 +8,41 @@ Prerequisites:
 Last updated: 2026-10-03 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a0523`.
 
 ## Current phase
-Game clef repair follows the merged Guess the Note artwork and navigation changes.
-Branch `fix/game-clef-glyphs` starts from merge source `71a8c9f`.
+Game note playback follows the standard clef repair on `fix/game-clef-glyphs`.
+This task starts from clef repair commit `1383015`.
 Accepted PHASE 7 remains closed.
 The earlier game, appearance, and listening entries below remain historical session records.
+
+### Game note playback
+The white round button below the staff plays all notes from the current game question.
+It preserves their written pitches, octaves, and order.
+The existing synthesizer produces tones without spoken names, downloads, or new dependencies.
+The button changes to a stop control during playback.
+Repeating after a partial answer still plays the complete question.
+Labels and errors use Russian, English, and Spanish translations.
+
+The user gesture creates or resumes the audio context, including Safari's interrupted state.
+Cancellation stops and disconnects active and scheduled sources.
+Answer selection, submission, timeout, page exit, and leaving the round cancel playback.
+Natural completion also releases the sources.
+Audio failures remain visible and permit another attempt.
+Listening does not enter answers, pause the timer, change scoring, or create journal rows.
+Staff engraving and existing answer-button tones remain unchanged.
+
+All 290 frontend tests, the production frontend build, documentation checks, and 6 quality hooks pass.
+Chrome verifies 32 cases using actual Web Audio nodes and trusted pointer events.
+The cases cover 320, 390, 768, and 1280 px, both themes, both clefs, and 1 or 4 notes.
+They include all 3 languages and confirm exact pitches, timing, source cleanup, button placement, and no horizontal overflow.
+Additional browser checks cover stop, replay, partial answers, page exit, keyboard activation, mute errors, and retry.
+A real timer expiration cancels active playback; the next question plays its own notes.
+The knowledge graph and its HTML viewer receive an AST-only refresh.
+No backend, migration, configuration, dependency, push, or production changes occur.
+
+Remaining manual checks:
+1. Publish the frontend change.
+2. Hear 1 and 4 notes in both clefs on a real phone or iPad in Chrome and Safari.
+3. Stop and repeat playback before selecting answers.
+4. Confirm unchanged timing and scoring, with no sound continuing after exit or timeout.
 
 ### Standard game clefs
 The owner reports distorted treble and bass clefs with 2 example screenshots.
