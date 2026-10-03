@@ -26,12 +26,12 @@ def create_player(
 
     if avatar_animal is not None and avatar_animal not in ANIMAL_IDS:
         raise ServiceError("INVALID_AVATAR_ANIMAL", 422)
-    existing = session.scalar(
-        select(Player).where(Player.account_id == account_id, Player.name == name)
-    )
-    if existing is not None:
-        raise ServiceError("PLAYER_NAME_TAKEN", 409)
     with session.begin():
+        existing = session.scalar(
+            select(Player).where(Player.account_id == account_id, Player.name == name)
+        )
+        if existing is not None:
+            raise ServiceError("PLAYER_NAME_TAKEN", 409)
         player = Player(account_id=account_id, name=name, avatar_animal=avatar_animal)
         session.add(player)
         session.flush()
@@ -51,10 +51,10 @@ def update_player(
 ) -> Player:
     from app.game.config import ANIMAL_IDS
 
-    player = session.get(Player, player_id)
-    if player is None:
-        raise ServiceError("PLAYER_NOT_FOUND", 404)
     with session.begin():
+        player = session.get(Player, player_id)
+        if player is None:
+            raise ServiceError("PLAYER_NOT_FOUND", 404)
         if name is not None:
             player.name = name
         if avatar_animal is not None:
