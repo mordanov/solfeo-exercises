@@ -277,6 +277,7 @@
   "errors.UNKNOWN": "The request failed. Try again.",
   "game.selectPlayer": "Who's playing?",
   "game.title": "Guess the Note",
+  "game.playHint": "Play Guess the Note",
   "game.players.create": "Create player",
   "game.players.name": "Player name",
   "game.players.account": "Account",

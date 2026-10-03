@@ -9,6 +9,34 @@ Prerequisites:
 
 ## First entry
 
+The upper-left circular Unicorn badge links to `/game` without bypassing authentication or a required password change.
+Its localized tooltip and accessible name use `game.playHint` in Russian, English, and Spanish.
+The 44 × 44 px target supports pointer and keyboard interaction.
+Only the header branding moves right.
+Below 900 px, smaller branding text fits beside the badge.
+An inaccessible sizing copy preserves the original header dimensions and the coordinates of all other controls.
+The existing account navigation remains unchanged.
+
+The supplied source stays unchanged in `guess-the-note-prompts/Rainbow Unicorn Music Badge.png`.
+The public copy is a 128 × 128 px PNG with transparent outer corners.
+It resides at `/assets/game-badge.png`, outside the leveled avatar catalog.
+Reproduce it with the existing Pillow dependency:
+
+```sh
+uv run --locked python - <<'PY'
+from PIL import Image, ImageDraw
+
+image = Image.open("guess-the-note-prompts/Rainbow Unicorn Music Badge.png").convert("RGBA")
+image = image.crop((72, 65, 1182, 1175))
+mask = Image.new("L", image.size, 0)
+ImageDraw.Draw(mask).ellipse((3, 3, 1106, 1106), fill=255)
+image.putalpha(mask)
+image.resize((128, 128), Image.Resampling.LANCZOS).save(
+    "frontend/public/assets/game-badge.png", optimize=True
+)
+PY
+```
+
 The account menu links to `/game` for both roles after any required password change.
 The player list distinguishes loading, request failures, and genuinely empty results.
 Only managers can open **Create player** and assign a profile to an active account.

@@ -1395,7 +1395,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L1",
       "id": "frontend_public_solfege_manifest_json",
-      "community": 301,
+      "community": 69,
       "norm_label": "manifest.json"
     },
     {
@@ -1404,7 +1404,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L2",
       "id": "solfege_manifest_version",
-      "community": 301,
+      "community": 69,
       "norm_label": "version"
     },
     {
@@ -1413,7 +1413,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L3",
       "id": "solfege_manifest_model",
-      "community": 301,
+      "community": 69,
       "norm_label": "model"
     },
     {
@@ -1422,7 +1422,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L4",
       "id": "solfege_manifest_voice",
-      "community": 301,
+      "community": 69,
       "norm_label": "voice"
     },
     {
@@ -1629,7 +1629,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L34",
       "id": "solfege_manifest_clips_en_letters_sharp_m4a",
-      "community": 302,
+      "community": 115,
       "norm_label": "en/letters/sharp.m4a"
     },
     {
@@ -1638,7 +1638,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L35",
       "id": "solfege_manifest_en_letters_sharp_m4a_fingerprint",
-      "community": 302,
+      "community": 115,
       "norm_label": "fingerprint"
     },
     {
@@ -1647,7 +1647,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L36",
       "id": "solfege_manifest_en_letters_sharp_m4a_sha256",
-      "community": 302,
+      "community": 115,
       "norm_label": "sha256"
     },
     {
@@ -2088,7 +2088,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L102",
       "id": "solfege_manifest_clips_ru_letters_e_m4a",
-      "community": 313,
+      "community": 224,
       "norm_label": "ru/letters/e.m4a"
     },
     {
@@ -2097,7 +2097,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L103",
       "id": "solfege_manifest_ru_letters_e_m4a_fingerprint",
-      "community": 313,
+      "community": 224,
       "norm_label": "fingerprint"
     },
     {
@@ -2106,7 +2106,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L104",
       "id": "solfege_manifest_ru_letters_e_m4a_sha256",
-      "community": 313,
+      "community": 224,
       "norm_label": "sha256"
     },
     {
@@ -4338,16 +4338,16 @@
       "source_file": "frontend/src/App.tsx",
       "source_location": "L1",
       "id": "frontend_src_app_tsx",
-      "community": 30,
+      "community": 13,
       "norm_label": "app.tsx"
     },
     {
       "label": "NotFound()",
       "file_type": "code",
       "source_file": "frontend/src/App.tsx",
-      "source_location": "L15",
+      "source_location": "L18",
       "id": "src_app_notfound",
-      "community": 30,
+      "community": 13,
       "norm_label": "notfound()"
     },
     {
@@ -4356,7 +4356,7 @@
       "source_file": "prototypes/pwa/src/App.tsx",
       "source_location": "L238",
       "id": "src_app_app",
-      "community": 18,
+      "community": 28,
       "norm_label": "app()"
     },
     {
@@ -4401,7 +4401,7 @@
       "source_file": "frontend/src/main.tsx",
       "source_location": "L1",
       "id": "frontend_src_main_tsx",
-      "community": 18,
+      "community": 28,
       "norm_label": "main.tsx"
     },
     {
@@ -4410,7 +4410,7 @@
       "source_file": "prototypes/pwa/src/main.tsx",
       "source_location": "L5",
       "id": "src_main_root",
-      "community": 18,
+      "community": 28,
       "norm_label": "root"
     },
     {
@@ -4419,7 +4419,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_app_test_tsx",
-      "community": 18,
+      "community": 28,
       "norm_label": "app.test.tsx"
     },
     {
@@ -4428,7 +4428,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L15",
       "id": "src_app_test_mockhealth",
-      "community": 18,
+      "community": 28,
       "norm_label": "mockhealth()"
     },
     {
@@ -4437,25 +4437,34 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L25",
       "id": "src_app_test_renderapp",
-      "community": 18,
+      "community": 28,
       "norm_label": "renderapp()"
+    },
+    {
+      "label": "shortcut",
+      "file_type": "code",
+      "source_file": "frontend/src/App.test.tsx",
+      "source_location": "L50",
+      "id": "src_app_test_shortcut",
+      "community": 28,
+      "norm_label": "shortcut"
     },
     {
       "label": "fetch",
       "file_type": "code",
       "source_file": "frontend/src/App.test.tsx",
-      "source_location": "L55",
+      "source_location": "L79",
       "id": "src_app_test_fetch",
-      "community": 18,
+      "community": 28,
       "norm_label": "fetch"
     },
     {
       "label": "health",
       "file_type": "code",
       "source_file": "frontend/src/App.test.tsx",
-      "source_location": "L158",
+      "source_location": "L182",
       "id": "src_app_test_health",
-      "community": 18,
+      "community": 28,
       "norm_label": "health"
     },
     {
@@ -4590,7 +4599,7 @@
       "source_file": "frontend/src/config.ts",
       "source_location": "L15",
       "id": "src_config_uploadtimeoutms",
-      "community": 13,
+      "community": 30,
       "norm_label": "uploadtimeoutms"
     },
     {
@@ -4617,7 +4626,7 @@
       "source_file": "frontend/src/configuration.ts",
       "source_location": "L1",
       "id": "src_configuration_language",
-      "community": 80,
+      "community": 7,
       "norm_label": "language"
     },
     {
@@ -4671,7 +4680,7 @@
       "source_file": "frontend/src/configuration.ts",
       "source_location": "L79",
       "id": "src_configuration_readuploadtimeout",
-      "community": 30,
+      "community": 18,
       "norm_label": "readuploadtimeout()"
     },
     {
@@ -4680,7 +4689,7 @@
       "source_file": "frontend/src/configuration.ts",
       "source_location": "L88",
       "id": "src_configuration_readheartbeat",
-      "community": 30,
+      "community": 18,
       "norm_label": "readheartbeat()"
     },
     {
@@ -4698,7 +4707,7 @@
       "source_file": "frontend/src/features/journal/Journal.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_journal_journal_tsx",
-      "community": 17,
+      "community": 18,
       "norm_label": "journal.tsx"
     },
     {
@@ -4707,7 +4716,7 @@
       "source_file": "frontend/src/features/journal/Journal.tsx",
       "source_location": "L18",
       "id": "journal_journal_journal",
-      "community": 30,
+      "community": 18,
       "norm_label": "journal()"
     },
     {
@@ -4770,7 +4779,7 @@
       "source_file": "frontend/src/features/settings/SettingsForm.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_settings_settingsform_tsx",
-      "community": 30,
+      "community": 13,
       "norm_label": "settingsform.tsx"
     },
     {
@@ -4779,7 +4788,7 @@
       "source_file": "frontend/src/features/settings/SettingsForm.tsx",
       "source_location": "L16",
       "id": "settings_settingsform_settingsform",
-      "community": 30,
+      "community": 25,
       "norm_label": "settingsform()"
     },
     {
@@ -4959,7 +4968,7 @@
       "source_file": "frontend/src/features/omr/Review.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_omr_review_tsx",
-      "community": 13,
+      "community": 17,
       "norm_label": "review.tsx"
     },
     {
@@ -4968,7 +4977,7 @@
       "source_file": "frontend/src/features/omr/Review.tsx",
       "source_location": "L11",
       "id": "omr_review_review",
-      "community": 13,
+      "community": 17,
       "norm_label": "review()"
     },
     {
@@ -4977,7 +4986,7 @@
       "source_file": "frontend/src/features/omr/Review.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_omr_review_test_tsx",
-      "community": 13,
+      "community": 17,
       "norm_label": "review.test.tsx"
     },
     {
@@ -4986,7 +4995,7 @@
       "source_file": "frontend/src/features/omr/Review.test.tsx",
       "source_location": "L17",
       "id": "omr_review_test_job",
-      "community": 13,
+      "community": 17,
       "norm_label": "job"
     },
     {
@@ -4995,7 +5004,7 @@
       "source_file": "frontend/src/features/omr/Review.test.tsx",
       "source_location": "L24",
       "id": "omr_review_test_exercise",
-      "community": 13,
+      "community": 17,
       "norm_label": "exercise"
     },
     {
@@ -5004,7 +5013,7 @@
       "source_file": "frontend/src/features/omr/Review.test.tsx",
       "source_location": "L39",
       "id": "omr_review_test_auth",
-      "community": 13,
+      "community": 17,
       "norm_label": "auth"
     },
     {
@@ -5013,7 +5022,7 @@
       "source_file": "frontend/src/features/omr/Review.test.tsx",
       "source_location": "L61",
       "id": "omr_review_test_mount",
-      "community": 13,
+      "community": 17,
       "norm_label": "mount()"
     },
     {
@@ -5022,7 +5031,7 @@
       "source_file": "frontend/src/features/omr/notes.ts",
       "source_location": "L1",
       "id": "frontend_src_features_omr_notes_ts",
-      "community": 80,
+      "community": 7,
       "norm_label": "notes.ts"
     },
     {
@@ -5031,7 +5040,7 @@
       "source_file": "frontend/src/features/omr/notes.ts",
       "source_location": "L4",
       "id": "omr_notes_accidentals",
-      "community": 80,
+      "community": 7,
       "norm_label": "accidentals"
     },
     {
@@ -5040,7 +5049,7 @@
       "source_file": "frontend/src/features/omr/notes.ts",
       "source_location": "L12",
       "id": "omr_notes_injectnotenames",
-      "community": 80,
+      "community": 7,
       "norm_label": "injectnotenames()"
     },
     {
@@ -5067,7 +5076,7 @@
       "source_file": "frontend/src/features/omr/notes.test.ts",
       "source_location": "L1",
       "id": "frontend_src_features_omr_notes_test_ts",
-      "community": 80,
+      "community": 7,
       "norm_label": "notes.test.ts"
     },
     {
@@ -5076,7 +5085,7 @@
       "source_file": "frontend/src/features/omr/notes.test.ts",
       "source_location": "L16",
       "id": "omr_notes_test_xml",
-      "community": 80,
+      "community": 7,
       "norm_label": "xml"
     },
     {
@@ -5292,7 +5301,7 @@
       "source_file": "frontend/src/features/listening/Listening.tsx",
       "source_location": "L153",
       "id": "listening_listening_listening",
-      "community": 26,
+      "community": 25,
       "norm_label": "listening()"
     },
     {
@@ -5481,7 +5490,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_auth_autharea_tsx",
-      "community": 30,
+      "community": 25,
       "norm_label": "autharea.tsx"
     },
     {
@@ -5490,7 +5499,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.tsx",
       "source_location": "L29",
       "id": "auth_autharea_loginform",
-      "community": 30,
+      "community": 25,
       "norm_label": "loginform()"
     },
     {
@@ -5499,7 +5508,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.tsx",
       "source_location": "L89",
       "id": "auth_autharea_passwordform",
-      "community": 30,
+      "community": 25,
       "norm_label": "passwordform()"
     },
     {
@@ -5508,7 +5517,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.tsx",
       "source_location": "L174",
       "id": "auth_autharea_autharea",
-      "community": 30,
+      "community": 6,
       "norm_label": "autharea()"
     },
     {
@@ -5931,7 +5940,7 @@
       "source_file": "frontend/src/features/game/setup/PlayerSelect.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_game_setup_playerselect_test_tsx",
-      "community": 18,
+      "community": 30,
       "norm_label": "playerselect.test.tsx"
     },
     {
@@ -5940,7 +5949,7 @@
       "source_file": "frontend/src/features/game/setup/PlayerSelect.test.tsx",
       "source_location": "L9",
       "id": "setup_playerselect_test_manager",
-      "community": 18,
+      "community": 30,
       "norm_label": "manager"
     },
     {
@@ -5949,7 +5958,7 @@
       "source_file": "frontend/src/features/game/setup/PlayerSelect.test.tsx",
       "source_location": "L22",
       "id": "setup_playerselect_test_student",
-      "community": 18,
+      "community": 30,
       "norm_label": "student"
     },
     {
@@ -5958,7 +5967,7 @@
       "source_file": "frontend/src/features/game/setup/PlayerSelect.test.tsx",
       "source_location": "L29",
       "id": "setup_playerselect_test_players",
-      "community": 18,
+      "community": 30,
       "norm_label": "players"
     },
     {
@@ -5967,7 +5976,7 @@
       "source_file": "frontend/src/features/game/setup/PlayerSelect.test.tsx",
       "source_location": "L34",
       "id": "setup_playerselect_test_fetchmock",
-      "community": 18,
+      "community": 30,
       "norm_label": "fetchmock"
     },
     {
@@ -5976,7 +5985,7 @@
       "source_file": "frontend/src/features/game/setup/PlayerSelect.test.tsx",
       "source_location": "L84",
       "id": "setup_playerselect_test_mount",
-      "community": 18,
+      "community": 30,
       "norm_label": "mount()"
     },
     {
@@ -5985,7 +5994,7 @@
       "source_file": "frontend/src/features/game/setup/PlayerSelect.test.tsx",
       "source_location": "L107",
       "id": "setup_playerselect_test_select",
-      "community": 18,
+      "community": 30,
       "norm_label": "select"
     },
     {
@@ -6750,7 +6759,7 @@
       "source_file": "frontend/src/features/exercises/Exercises.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_exercises_exercises_tsx",
-      "community": 13,
+      "community": 17,
       "norm_label": "exercises.tsx"
     },
     {
@@ -6759,7 +6768,7 @@
       "source_file": "frontend/src/features/exercises/Exercises.tsx",
       "source_location": "L27",
       "id": "exercises_exercises_exerciseform",
-      "community": 13,
+      "community": 17,
       "norm_label": "exerciseform()"
     },
     {
@@ -6768,7 +6777,7 @@
       "source_file": "frontend/src/features/exercises/Exercises.tsx",
       "source_location": "L189",
       "id": "exercises_exercises_preview",
-      "community": 13,
+      "community": 17,
       "norm_label": "preview()"
     },
     {
@@ -6777,7 +6786,7 @@
       "source_file": "frontend/src/features/exercises/Exercises.tsx",
       "source_location": "L235",
       "id": "exercises_exercises_exercises",
-      "community": 13,
+      "community": 17,
       "norm_label": "exercises()"
     },
     {
@@ -6804,7 +6813,7 @@
       "source_file": "frontend/src/features/spoken/sequence.test.ts",
       "source_location": "L1",
       "id": "frontend_src_features_spoken_sequence_test_ts",
-      "community": 224,
+      "community": 7,
       "norm_label": "sequence.test.ts"
     },
     {
@@ -6813,7 +6822,7 @@
       "source_file": "frontend/src/features/spoken/sequence.test.ts",
       "source_location": "L8",
       "id": "spoken_sequence_test_result",
-      "community": 224,
+      "community": 7,
       "norm_label": "result"
     },
     {
@@ -6822,7 +6831,7 @@
       "source_file": "frontend/src/features/spoken/sequence.test.ts",
       "source_location": "L29",
       "id": "spoken_sequence_test_events",
-      "community": 224,
+      "community": 7,
       "norm_label": "events"
     },
     {
@@ -6831,7 +6840,7 @@
       "source_file": "frontend/src/features/spoken/vocabulary.ts",
       "source_location": "L1",
       "id": "frontend_src_features_spoken_vocabulary_ts",
-      "community": 80,
+      "community": 7,
       "norm_label": "vocabulary.ts"
     },
     {
@@ -6840,7 +6849,7 @@
       "source_file": "frontend/src/features/spoken/vocabulary.ts",
       "source_location": "L5",
       "id": "spoken_vocabulary_step",
-      "community": 80,
+      "community": 7,
       "norm_label": "step"
     },
     {
@@ -6849,7 +6858,7 @@
       "source_file": "frontend/src/features/spoken/vocabulary.ts",
       "source_location": "L6",
       "id": "spoken_vocabulary_isstep",
-      "community": 80,
+      "community": 7,
       "norm_label": "isstep()"
     },
     {
@@ -6858,7 +6867,7 @@
       "source_file": "frontend/src/features/spoken/vocabulary.ts",
       "source_location": "L9",
       "id": "spoken_vocabulary_notename",
-      "community": 80,
+      "community": 7,
       "norm_label": "notename()"
     },
     {
@@ -7344,7 +7353,7 @@
       "source_file": "frontend/src/features/spoken/sequence.ts",
       "source_location": "L1",
       "id": "frontend_src_features_spoken_sequence_ts",
-      "community": 224,
+      "community": 7,
       "norm_label": "sequence.ts"
     },
     {
@@ -7353,7 +7362,7 @@
       "source_file": "frontend/src/features/spoken/sequence.ts",
       "source_location": "L4",
       "id": "spoken_sequence_pitch",
-      "community": 224,
+      "community": 7,
       "norm_label": "pitch"
     },
     {
@@ -7362,7 +7371,7 @@
       "source_file": "frontend/src/features/spoken/sequence.ts",
       "source_location": "L5",
       "id": "spoken_sequence_noteevent",
-      "community": 69,
+      "community": 7,
       "norm_label": "noteevent"
     },
     {
@@ -7371,7 +7380,7 @@
       "source_file": "frontend/src/features/spoken/sequence.ts",
       "source_location": "L11",
       "id": "spoken_sequence_invalid",
-      "community": 224,
+      "community": 7,
       "norm_label": "invalid()"
     },
     {
@@ -7380,7 +7389,7 @@
       "source_file": "frontend/src/features/spoken/sequence.ts",
       "source_location": "L14",
       "id": "spoken_sequence_positive",
-      "community": 224,
+      "community": 7,
       "norm_label": "positive()"
     },
     {
@@ -7389,7 +7398,7 @@
       "source_file": "frontend/src/features/spoken/sequence.ts",
       "source_location": "L21",
       "id": "spoken_sequence_parsesequence",
-      "community": 224,
+      "community": 7,
       "norm_label": "parsesequence()"
     },
     {
@@ -7452,7 +7461,7 @@
       "source_file": "frontend/src/features/spoken/player.test.ts",
       "source_location": "L66",
       "id": "spoken_player_test_range",
-      "community": 225,
+      "community": 194,
       "norm_label": "range"
     },
     {
@@ -7497,7 +7506,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L1",
       "id": "frontend_src_features_spoken_lifecycle_test_ts",
-      "community": 69,
+      "community": 7,
       "norm_label": "lifecycle.test.ts"
     },
     {
@@ -7506,7 +7515,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L5",
       "id": "spoken_lifecycle_test_note",
-      "community": 69,
+      "community": 7,
       "norm_label": "note"
     },
     {
@@ -7515,7 +7524,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L10",
       "id": "spoken_lifecycle_test_context",
-      "community": 69,
+      "community": 7,
       "norm_label": "context"
     },
     {
@@ -7524,7 +7533,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L20",
       "id": "spoken_lifecycle_test_context_constructor",
-      "community": 69,
+      "community": 7,
       "norm_label": ".constructor()"
     },
     {
@@ -7533,7 +7542,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L23",
       "id": "spoken_lifecycle_test_context_createbuffersource",
-      "community": 69,
+      "community": 7,
       "norm_label": ".createbuffersource()"
     },
     {
@@ -7542,7 +7551,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L55",
       "id": "spoken_lifecycle_test_position",
-      "community": 69,
+      "community": 7,
       "norm_label": "position"
     },
     {
@@ -7551,7 +7560,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L56",
       "id": "spoken_lifecycle_test_failed",
-      "community": 69,
+      "community": 7,
       "norm_label": "failed"
     },
     {
@@ -7560,7 +7569,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L57",
       "id": "spoken_lifecycle_test_ready",
-      "community": 69,
+      "community": 7,
       "norm_label": "ready"
     },
     {
@@ -7569,7 +7578,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L58",
       "id": "spoken_lifecycle_test_player",
-      "community": 69,
+      "community": 7,
       "norm_label": "player"
     },
     {
@@ -7578,7 +7587,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L59",
       "id": "spoken_lifecycle_test_pending",
-      "community": 69,
+      "community": 7,
       "norm_label": "pending"
     },
     {
@@ -7587,7 +7596,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L88",
       "id": "spoken_lifecycle_test_finish",
-      "community": 69,
+      "community": 7,
       "norm_label": "finish()"
     },
     {
@@ -7605,7 +7614,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L117",
       "id": "spoken_lifecycle_test_ended",
-      "community": 69,
+      "community": 7,
       "norm_label": "ended"
     },
     {
@@ -7614,7 +7623,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L131",
       "id": "spoken_lifecycle_test_decode",
-      "community": 69,
+      "community": 7,
       "norm_label": "decode"
     },
     {
@@ -7623,7 +7632,7 @@
       "source_file": "frontend/src/features/telegram/Telegram.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_telegram_telegram_tsx",
-      "community": 13,
+      "community": 17,
       "norm_label": "telegram.tsx"
     },
     {
@@ -7812,7 +7821,7 @@
       "source_file": "frontend/src/components/AccountUi.tsx",
       "source_location": "L16",
       "id": "components_accountui_languageoptions",
-      "community": 30,
+      "community": 13,
       "norm_label": "languageoptions()"
     },
     {
@@ -7821,7 +7830,7 @@
       "source_file": "frontend/src/components/InstallApp.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_components_installapp_test_tsx",
-      "community": 115,
+      "community": 28,
       "norm_label": "installapp.test.tsx"
     },
     {
@@ -7830,7 +7839,7 @@
       "source_file": "frontend/src/components/InstallApp.test.tsx",
       "source_location": "L6",
       "id": "components_installapp_test_device",
-      "community": 115,
+      "community": 28,
       "norm_label": "device()"
     },
     {
@@ -7839,7 +7848,7 @@
       "source_file": "frontend/src/components/InstallApp.test.tsx",
       "source_location": "L53",
       "id": "components_installapp_test_event",
-      "community": 115,
+      "community": 28,
       "norm_label": "event"
     },
     {
@@ -7848,7 +7857,7 @@
       "source_file": "frontend/src/components/InstallApp.test.tsx",
       "source_location": "L78",
       "id": "components_installapp_test_logging",
-      "community": 115,
+      "community": 28,
       "norm_label": "logging"
     },
     {
@@ -7857,7 +7866,7 @@
       "source_file": "frontend/src/components/InstallApp.test.tsx",
       "source_location": "L87",
       "id": "components_installapp_test_view",
-      "community": 115,
+      "community": 28,
       "norm_label": "view"
     },
     {
@@ -7866,7 +7875,7 @@
       "source_file": "frontend/src/components/InstallApp.test.tsx",
       "source_location": "L103",
       "id": "components_installapp_test_later",
-      "community": 115,
+      "community": 28,
       "norm_label": "later"
     },
     {
@@ -7956,7 +7965,7 @@
       "source_file": "frontend/src/components/InstallApp.tsx",
       "source_location": "L1",
       "id": "frontend_src_components_installapp_tsx",
-      "community": 115,
+      "community": 13,
       "norm_label": "installapp.tsx"
     },
     {
@@ -7965,7 +7974,7 @@
       "source_file": "frontend/src/components/InstallApp.tsx",
       "source_location": "L8",
       "id": "components_installapp_installprompt",
-      "community": 115,
+      "community": 13,
       "norm_label": "installprompt"
     },
     {
@@ -7974,7 +7983,7 @@
       "source_file": "frontend/src/components/InstallApp.tsx",
       "source_location": "L13",
       "id": "components_installapp_isinstallprompt",
-      "community": 115,
+      "community": 13,
       "norm_label": "isinstallprompt()"
     },
     {
@@ -7983,7 +7992,7 @@
       "source_file": "frontend/src/components/InstallApp.tsx",
       "source_location": "L22",
       "id": "components_installapp_installapp",
-      "community": 115,
+      "community": 13,
       "norm_label": "installapp()"
     },
     {
@@ -8100,7 +8109,7 @@
       "source_file": "frontend/src/components/Ui.tsx",
       "source_location": "L38",
       "id": "components_ui_form",
-      "community": 13,
+      "community": 17,
       "norm_label": "form()"
     },
     {
@@ -8118,7 +8127,7 @@
       "source_file": "frontend/src/components/Ui.tsx",
       "source_location": "L84",
       "id": "components_ui_input",
-      "community": 13,
+      "community": 17,
       "norm_label": "input()"
     },
     {
@@ -8127,7 +8136,7 @@
       "source_file": "frontend/src/components/Ui.tsx",
       "source_location": "L119",
       "id": "components_ui_select",
-      "community": 30,
+      "community": 13,
       "norm_label": "select()"
     },
     {
@@ -8136,7 +8145,7 @@
       "source_file": "frontend/src/components/Ui.tsx",
       "source_location": "L146",
       "id": "components_ui_textarea",
-      "community": 13,
+      "community": 17,
       "norm_label": "textarea()"
     },
     {
@@ -8145,7 +8154,7 @@
       "source_file": "frontend/src/api/exercises.ts",
       "source_location": "L1",
       "id": "frontend_src_api_exercises_ts",
-      "community": 13,
+      "community": 17,
       "norm_label": "exercises.ts"
     },
     {
@@ -8154,7 +8163,7 @@
       "source_file": "frontend/src/api/exercises.ts",
       "source_location": "L5",
       "id": "api_exercises_media",
-      "community": 13,
+      "community": 17,
       "norm_label": "media"
     },
     {
@@ -8163,7 +8172,7 @@
       "source_file": "frontend/src/api/exercises.ts",
       "source_location": "L11",
       "id": "api_exercises_exercise",
-      "community": 13,
+      "community": 17,
       "norm_label": "exercise"
     },
     {
@@ -8172,7 +8181,7 @@
       "source_file": "frontend/src/api/exercises.ts",
       "source_location": "L22",
       "id": "api_exercises_parsemedia",
-      "community": 13,
+      "community": 17,
       "norm_label": "parsemedia()"
     },
     {
@@ -8181,7 +8190,7 @@
       "source_file": "frontend/src/api/exercises.ts",
       "source_location": "L45",
       "id": "api_exercises_parseexercise",
-      "community": 26,
+      "community": 17,
       "norm_label": "parseexercise()"
     },
     {
@@ -8190,7 +8199,7 @@
       "source_file": "frontend/src/api/exercises.ts",
       "source_location": "L74",
       "id": "api_exercises_listexercises",
-      "community": 13,
+      "community": 17,
       "norm_label": "listexercises()"
     },
     {
@@ -8208,7 +8217,7 @@
       "source_file": "frontend/src/api/exercises.ts",
       "source_location": "L93",
       "id": "api_exercises_reorderexercises",
-      "community": 13,
+      "community": 17,
       "norm_label": "reorderexercises()"
     },
     {
@@ -8271,7 +8280,7 @@
       "source_file": "frontend/src/api/omr.test.ts",
       "source_location": "L1",
       "id": "frontend_src_api_omr_test_ts",
-      "community": 13,
+      "community": 17,
       "norm_label": "omr.test.ts"
     },
     {
@@ -8280,7 +8289,7 @@
       "source_file": "frontend/src/api/omr.test.ts",
       "source_location": "L5",
       "id": "api_omr_test_result",
-      "community": 13,
+      "community": 17,
       "norm_label": "result"
     },
     {
@@ -8424,7 +8433,7 @@
       "source_file": "frontend/src/api/omr.ts",
       "source_location": "L1",
       "id": "frontend_src_api_omr_ts",
-      "community": 13,
+      "community": 17,
       "norm_label": "omr.ts"
     },
     {
@@ -8433,7 +8442,7 @@
       "source_file": "frontend/src/api/omr.ts",
       "source_location": "L3",
       "id": "api_omr_omrstatus",
-      "community": 13,
+      "community": 17,
       "norm_label": "omrstatus"
     },
     {
@@ -8442,7 +8451,7 @@
       "source_file": "frontend/src/api/omr.ts",
       "source_location": "L11",
       "id": "api_omr_omr",
-      "community": 13,
+      "community": 17,
       "norm_label": "omr"
     },
     {
@@ -8451,7 +8460,7 @@
       "source_file": "frontend/src/api/omr.ts",
       "source_location": "L18",
       "id": "api_omr_isstatus",
-      "community": 13,
+      "community": 17,
       "norm_label": "isstatus()"
     },
     {
@@ -8460,7 +8469,7 @@
       "source_file": "frontend/src/api/omr.ts",
       "source_location": "L29",
       "id": "api_omr_parseomr",
-      "community": 13,
+      "community": 17,
       "norm_label": "parseomr()"
     },
     {
@@ -8469,7 +8478,7 @@
       "source_file": "frontend/src/api/omr.ts",
       "source_location": "L50",
       "id": "api_omr_fetchomr",
-      "community": 13,
+      "community": 17,
       "norm_label": "fetchomr()"
     },
     {
@@ -8478,7 +8487,7 @@
       "source_file": "frontend/src/api/omr.ts",
       "source_location": "L55",
       "id": "api_omr_rerunomr",
-      "community": 13,
+      "community": 17,
       "norm_label": "rerunomr()"
     },
     {
@@ -8487,7 +8496,7 @@
       "source_file": "frontend/src/api/omr.ts",
       "source_location": "L60",
       "id": "api_omr_reviewomr",
-      "community": 13,
+      "community": 17,
       "norm_label": "reviewomr()"
     },
     {
@@ -8658,7 +8667,7 @@
       "source_file": "backend/app/api/telegram.py",
       "source_location": "L59",
       "id": "api_telegram_status",
-      "community": 17,
+      "community": 52,
       "norm_label": "status()"
     },
     {
@@ -8739,7 +8748,7 @@
       "source_file": "backend/app/api/health.py",
       "source_location": "L9",
       "id": "api_health_healthresponse",
-      "community": 49,
+      "community": 92,
       "norm_label": "healthresponse"
     },
     {
@@ -8793,7 +8802,7 @@
       "source_file": "frontend/src/api/journal.ts",
       "source_location": "L1",
       "id": "frontend_src_api_journal_ts",
-      "community": 17,
+      "community": 18,
       "norm_label": "journal.ts"
     },
     {
@@ -8802,7 +8811,7 @@
       "source_file": "frontend/src/api/journal.ts",
       "source_location": "L3",
       "id": "api_journal_journalentry",
-      "community": 17,
+      "community": 18,
       "norm_label": "journalentry"
     },
     {
@@ -8811,7 +8820,7 @@
       "source_file": "frontend/src/api/journal.ts",
       "source_location": "L20",
       "id": "api_journal_journalfilters",
-      "community": 17,
+      "community": 18,
       "norm_label": "journalfilters"
     },
     {
@@ -8820,7 +8829,7 @@
       "source_file": "frontend/src/api/journal.ts",
       "source_location": "L26",
       "id": "api_journal_journaloption",
-      "community": 17,
+      "community": 18,
       "norm_label": "journaloption"
     },
     {
@@ -8829,7 +8838,7 @@
       "source_file": "frontend/src/api/journal.ts",
       "source_location": "L27",
       "id": "api_journal_text",
-      "community": 17,
+      "community": 18,
       "norm_label": "text()"
     },
     {
@@ -8838,7 +8847,7 @@
       "source_file": "frontend/src/api/journal.ts",
       "source_location": "L31",
       "id": "api_journal_number",
-      "community": 30,
+      "community": 18,
       "norm_label": "number()"
     },
     {
@@ -8847,7 +8856,7 @@
       "source_file": "frontend/src/api/journal.ts",
       "source_location": "L36",
       "id": "api_journal_boolean",
-      "community": 17,
+      "community": 18,
       "norm_label": "boolean()"
     },
     {
@@ -8856,7 +8865,7 @@
       "source_file": "frontend/src/api/journal.ts",
       "source_location": "L40",
       "id": "api_journal_date",
-      "community": 17,
+      "community": 18,
       "norm_label": "date()"
     },
     {
@@ -8865,7 +8874,7 @@
       "source_file": "frontend/src/api/journal.ts",
       "source_location": "L46",
       "id": "api_journal_parsejournal",
-      "community": 17,
+      "community": 18,
       "norm_label": "parsejournal()"
     },
     {
@@ -8874,7 +8883,7 @@
       "source_file": "frontend/src/api/journal.ts",
       "source_location": "L66",
       "id": "api_journal_listjournal",
-      "community": 17,
+      "community": 18,
       "norm_label": "listjournal()"
     },
     {
@@ -8883,7 +8892,7 @@
       "source_file": "frontend/src/api/journal.ts",
       "source_location": "L89",
       "id": "api_journal_journaloptions",
-      "community": 17,
+      "community": 18,
       "norm_label": "journaloptions()"
     },
     {
@@ -8892,7 +8901,7 @@
       "source_file": "frontend/src/api/journal.ts",
       "source_location": "L119",
       "id": "api_journal_dateboundary",
-      "community": 17,
+      "community": 18,
       "norm_label": "dateboundary()"
     },
     {
@@ -8919,7 +8928,7 @@
       "source_file": "frontend/src/api/auth.ts",
       "source_location": "L11",
       "id": "api_auth_notenaming",
-      "community": 80,
+      "community": 7,
       "norm_label": "notenaming"
     },
     {
@@ -8928,7 +8937,7 @@
       "source_file": "frontend/src/api/auth.ts",
       "source_location": "L12",
       "id": "api_auth_user",
-      "community": 13,
+      "community": 25,
       "norm_label": "user"
     },
     {
@@ -8937,7 +8946,7 @@
       "source_file": "frontend/src/api/auth.ts",
       "source_location": "L24",
       "id": "api_auth_auth",
-      "community": 13,
+      "community": 17,
       "norm_label": "auth"
     },
     {
@@ -9153,7 +9162,7 @@
       "source_file": "frontend/src/i18n/index.ts",
       "source_location": "L1",
       "id": "frontend_src_i18n_index_ts",
-      "community": 18,
+      "community": 30,
       "norm_label": "index.ts"
     },
     {
@@ -9162,7 +9171,7 @@
       "source_file": "prototypes/pwa/src/i18n/index.ts",
       "source_location": "L8",
       "id": "i18n_index_i18n",
-      "community": 18,
+      "community": 28,
       "norm_label": "i18n"
     },
     {
@@ -9981,7 +9990,7 @@
       "source_file": "frontend/src/i18n/locales/ru.json",
       "source_location": "L90",
       "id": "locales_ru_journal_filter",
-      "community": 17,
+      "community": 18,
       "norm_label": "journal.filter"
     },
     {
@@ -10359,7 +10368,7 @@
       "source_file": "frontend/src/i18n/locales/ru.json",
       "source_location": "L132",
       "id": "locales_ru_exercises_up",
-      "community": 13,
+      "community": 17,
       "norm_label": "exercises.up"
     },
     {
@@ -11686,10 +11695,19 @@
       "norm_label": "game.title"
     },
     {
-      "label": "game.players.create",
+      "label": "game.playHint",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
       "source_location": "L280",
+      "id": "locales_ru_game_playhint",
+      "community": 2,
+      "norm_label": "game.playhint"
+    },
+    {
+      "label": "game.players.create",
+      "file_type": "code",
+      "source_file": "frontend/src/i18n/locales/ru.json",
+      "source_location": "L281",
       "id": "locales_ru_game_players_create",
       "community": 2,
       "norm_label": "game.players.create"
@@ -11698,7 +11716,7 @@
       "label": "game.players.name",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L281",
+      "source_location": "L282",
       "id": "locales_ru_game_players_name",
       "community": 2,
       "norm_label": "game.players.name"
@@ -11707,7 +11725,7 @@
       "label": "game.players.account",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L282",
+      "source_location": "L283",
       "id": "locales_ru_game_players_account",
       "community": 2,
       "norm_label": "game.players.account"
@@ -11716,7 +11734,7 @@
       "label": "game.players.accountLabel",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L283",
+      "source_location": "L284",
       "id": "locales_ru_game_players_accountlabel",
       "community": 2,
       "norm_label": "game.players.accountlabel"
@@ -11725,7 +11743,7 @@
       "label": "game.players.emptyManager",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L284",
+      "source_location": "L285",
       "id": "locales_ru_game_players_emptymanager",
       "community": 2,
       "norm_label": "game.players.emptymanager"
@@ -11734,7 +11752,7 @@
       "label": "game.players.emptyStudent",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L285",
+      "source_location": "L286",
       "id": "locales_ru_game_players_emptystudent",
       "community": 2,
       "norm_label": "game.players.emptystudent"
@@ -11743,7 +11761,7 @@
       "label": "errors.PLAYER_ACCOUNT_NOT_FOUND",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L286",
+      "source_location": "L287",
       "id": "locales_ru_errors_player_account_not_found",
       "community": 2,
       "norm_label": "errors.player_account_not_found"
@@ -11752,7 +11770,7 @@
       "label": "errors.PLAYER_NAME_TAKEN",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L287",
+      "source_location": "L288",
       "id": "locales_ru_errors_player_name_taken",
       "community": 2,
       "norm_label": "errors.player_name_taken"
@@ -11761,7 +11779,7 @@
       "label": "game.newPlayer",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L288",
+      "source_location": "L289",
       "id": "locales_ru_game_newplayer",
       "community": 2,
       "norm_label": "game.newplayer"
@@ -11770,7 +11788,7 @@
       "label": "game.selectDifficulty",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L289",
+      "source_location": "L290",
       "id": "locales_ru_game_selectdifficulty",
       "community": 2,
       "norm_label": "game.selectdifficulty"
@@ -11779,7 +11797,7 @@
       "label": "game.difficulty.easy",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L290",
+      "source_location": "L291",
       "id": "locales_ru_game_difficulty_easy",
       "community": 2,
       "norm_label": "game.difficulty.easy"
@@ -11788,7 +11806,7 @@
       "label": "game.difficulty.medium",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L291",
+      "source_location": "L292",
       "id": "locales_ru_game_difficulty_medium",
       "community": 2,
       "norm_label": "game.difficulty.medium"
@@ -11797,7 +11815,7 @@
       "label": "game.difficulty.hard",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L292",
+      "source_location": "L293",
       "id": "locales_ru_game_difficulty_hard",
       "community": 2,
       "norm_label": "game.difficulty.hard"
@@ -11806,7 +11824,7 @@
       "label": "game.selectNoteCount",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L293",
+      "source_location": "L294",
       "id": "locales_ru_game_selectnotecount",
       "community": 2,
       "norm_label": "game.selectnotecount"
@@ -11815,7 +11833,7 @@
       "label": "game.noteCount",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L294",
+      "source_location": "L295",
       "id": "locales_ru_game_notecount",
       "community": 2,
       "norm_label": "game.notecount"
@@ -11824,7 +11842,7 @@
       "label": "game.noteCount_other",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L295",
+      "source_location": "L296",
       "id": "locales_ru_game_notecount_other",
       "community": 2,
       "norm_label": "game.notecount_other"
@@ -11833,7 +11851,7 @@
       "label": "game.startRound",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L296",
+      "source_location": "L297",
       "id": "locales_ru_game_startround",
       "community": 2,
       "norm_label": "game.startround"
@@ -11842,7 +11860,7 @@
       "label": "game.timer.hurry",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L297",
+      "source_location": "L298",
       "id": "locales_ru_game_timer_hurry",
       "community": 2,
       "norm_label": "game.timer.hurry"
@@ -11851,7 +11869,7 @@
       "label": "game.noteNames.solfege.C",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L298",
+      "source_location": "L299",
       "id": "locales_ru_game_notenames_solfege_c",
       "community": 2,
       "norm_label": "game.notenames.solfege.c"
@@ -11860,7 +11878,7 @@
       "label": "game.noteNames.solfege.D",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L299",
+      "source_location": "L300",
       "id": "locales_ru_game_notenames_solfege_d",
       "community": 2,
       "norm_label": "game.notenames.solfege.d"
@@ -11869,7 +11887,7 @@
       "label": "game.noteNames.solfege.E",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L300",
+      "source_location": "L301",
       "id": "locales_ru_game_notenames_solfege_e",
       "community": 2,
       "norm_label": "game.notenames.solfege.e"
@@ -11878,7 +11896,7 @@
       "label": "game.noteNames.solfege.F",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L301",
+      "source_location": "L302",
       "id": "locales_ru_game_notenames_solfege_f",
       "community": 2,
       "norm_label": "game.notenames.solfege.f"
@@ -11887,7 +11905,7 @@
       "label": "game.noteNames.solfege.G",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L302",
+      "source_location": "L303",
       "id": "locales_ru_game_notenames_solfege_g",
       "community": 2,
       "norm_label": "game.notenames.solfege.g"
@@ -11896,7 +11914,7 @@
       "label": "game.noteNames.solfege.A",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L303",
+      "source_location": "L304",
       "id": "locales_ru_game_notenames_solfege_a",
       "community": 2,
       "norm_label": "game.notenames.solfege.a"
@@ -11905,7 +11923,7 @@
       "label": "game.noteNames.solfege.B",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L304",
+      "source_location": "L305",
       "id": "locales_ru_game_notenames_solfege_b",
       "community": 2,
       "norm_label": "game.notenames.solfege.b"
@@ -11914,7 +11932,7 @@
       "label": "game.noteNames.letters.C",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L305",
+      "source_location": "L306",
       "id": "locales_ru_game_notenames_letters_c",
       "community": 2,
       "norm_label": "game.notenames.letters.c"
@@ -11923,7 +11941,7 @@
       "label": "game.noteNames.letters.D",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L306",
+      "source_location": "L307",
       "id": "locales_ru_game_notenames_letters_d",
       "community": 2,
       "norm_label": "game.notenames.letters.d"
@@ -11932,7 +11950,7 @@
       "label": "game.noteNames.letters.E",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L307",
+      "source_location": "L308",
       "id": "locales_ru_game_notenames_letters_e",
       "community": 2,
       "norm_label": "game.notenames.letters.e"
@@ -11941,7 +11959,7 @@
       "label": "game.noteNames.letters.F",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L308",
+      "source_location": "L309",
       "id": "locales_ru_game_notenames_letters_f",
       "community": 2,
       "norm_label": "game.notenames.letters.f"
@@ -11950,7 +11968,7 @@
       "label": "game.noteNames.letters.G",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L309",
+      "source_location": "L310",
       "id": "locales_ru_game_notenames_letters_g",
       "community": 2,
       "norm_label": "game.notenames.letters.g"
@@ -11959,7 +11977,7 @@
       "label": "game.noteNames.letters.A",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L310",
+      "source_location": "L311",
       "id": "locales_ru_game_notenames_letters_a",
       "community": 2,
       "norm_label": "game.notenames.letters.a"
@@ -11968,7 +11986,7 @@
       "label": "game.noteNames.letters.B",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L311",
+      "source_location": "L312",
       "id": "locales_ru_game_notenames_letters_b",
       "community": 2,
       "norm_label": "game.notenames.letters.b"
@@ -11977,7 +11995,7 @@
       "label": "game.correct",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L312",
+      "source_location": "L313",
       "id": "locales_ru_game_correct",
       "community": 2,
       "norm_label": "game.correct"
@@ -11986,7 +12004,7 @@
       "label": "game.wrong",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L313",
+      "source_location": "L314",
       "id": "locales_ru_game_wrong",
       "community": 2,
       "norm_label": "game.wrong"
@@ -11995,7 +12013,7 @@
       "label": "game.timeout",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L314",
+      "source_location": "L315",
       "id": "locales_ru_game_timeout",
       "community": 2,
       "norm_label": "game.timeout"
@@ -12004,7 +12022,7 @@
       "label": "game.result.win",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L315",
+      "source_location": "L316",
       "id": "locales_ru_game_result_win",
       "community": 2,
       "norm_label": "game.result.win"
@@ -12013,7 +12031,7 @@
       "label": "game.result.lose",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L316",
+      "source_location": "L317",
       "id": "locales_ru_game_result_lose",
       "community": 2,
       "norm_label": "game.result.lose"
@@ -12022,7 +12040,7 @@
       "label": "game.result.score",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L317",
+      "source_location": "L318",
       "id": "locales_ru_game_result_score",
       "community": 2,
       "norm_label": "game.result.score"
@@ -12031,7 +12049,7 @@
       "label": "game.result.correct",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L318",
+      "source_location": "L319",
       "id": "locales_ru_game_result_correct",
       "community": 2,
       "norm_label": "game.result.correct"
@@ -12040,7 +12058,7 @@
       "label": "game.result.xpGained",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L319",
+      "source_location": "L320",
       "id": "locales_ru_game_result_xpgained",
       "community": 2,
       "norm_label": "game.result.xpgained"
@@ -12049,7 +12067,7 @@
       "label": "game.result.levelUp",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L320",
+      "source_location": "L321",
       "id": "locales_ru_game_result_levelup",
       "community": 2,
       "norm_label": "game.result.levelup"
@@ -12058,7 +12076,7 @@
       "label": "game.result.newTrophy",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L321",
+      "source_location": "L322",
       "id": "locales_ru_game_result_newtrophy",
       "community": 2,
       "norm_label": "game.result.newtrophy"
@@ -12067,7 +12085,7 @@
       "label": "game.result.playAgain",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L322",
+      "source_location": "L323",
       "id": "locales_ru_game_result_playagain",
       "community": 2,
       "norm_label": "game.result.playagain"
@@ -12076,7 +12094,7 @@
       "label": "game.result.changePlayer",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L323",
+      "source_location": "L324",
       "id": "locales_ru_game_result_changeplayer",
       "community": 2,
       "norm_label": "game.result.changeplayer"
@@ -12085,7 +12103,7 @@
       "label": "game.result.practiceHint_prefix",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L324",
+      "source_location": "L325",
       "id": "locales_ru_game_result_practicehint_prefix",
       "community": 2,
       "norm_label": "game.result.practicehint_prefix"
@@ -12094,7 +12112,7 @@
       "label": "game.profile.title",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L325",
+      "source_location": "L326",
       "id": "locales_ru_game_profile_title",
       "community": 2,
       "norm_label": "game.profile.title"
@@ -12103,7 +12121,7 @@
       "label": "game.profile.trophies",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L326",
+      "source_location": "L327",
       "id": "locales_ru_game_profile_trophies",
       "community": 2,
       "norm_label": "game.profile.trophies"
@@ -12112,7 +12130,7 @@
       "label": "game.profile.noTrophies",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L327",
+      "source_location": "L328",
       "id": "locales_ru_game_profile_notrophies",
       "community": 2,
       "norm_label": "game.profile.notrophies"
@@ -12121,7 +12139,7 @@
       "label": "game.profile.stats",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L328",
+      "source_location": "L329",
       "id": "locales_ru_game_profile_stats",
       "community": 2,
       "norm_label": "game.profile.stats"
@@ -12130,7 +12148,7 @@
       "label": "game.profile.confusion",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L329",
+      "source_location": "L330",
       "id": "locales_ru_game_profile_confusion",
       "community": 2,
       "norm_label": "game.profile.confusion"
@@ -12139,7 +12157,7 @@
       "label": "game.profile.level",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L330",
+      "source_location": "L331",
       "id": "locales_ru_game_profile_level",
       "community": 2,
       "norm_label": "game.profile.level"
@@ -12148,7 +12166,7 @@
       "label": "game.profile.xpProgress",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L331",
+      "source_location": "L332",
       "id": "locales_ru_game_profile_xpprogress",
       "community": 2,
       "norm_label": "game.profile.xpprogress"
@@ -12157,7 +12175,7 @@
       "label": "game.admin.title",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L332",
+      "source_location": "L333",
       "id": "locales_ru_game_admin_title",
       "community": 2,
       "norm_label": "game.admin.title"
@@ -12166,7 +12184,7 @@
       "label": "game.admin.resetSeason",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L333",
+      "source_location": "L334",
       "id": "locales_ru_game_admin_resetseason",
       "community": 2,
       "norm_label": "game.admin.resetseason"
@@ -12175,7 +12193,7 @@
       "label": "game.admin.resetAll",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L334",
+      "source_location": "L335",
       "id": "locales_ru_game_admin_resetall",
       "community": 2,
       "norm_label": "game.admin.resetall"
@@ -12184,7 +12202,7 @@
       "label": "game.admin.confirmReset",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L335",
+      "source_location": "L336",
       "id": "locales_ru_game_admin_confirmreset",
       "community": 2,
       "norm_label": "game.admin.confirmreset"
@@ -12193,7 +12211,7 @@
       "label": "game.admin.seasonReset",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L336",
+      "source_location": "L337",
       "id": "locales_ru_game_admin_seasonreset",
       "community": 2,
       "norm_label": "game.admin.seasonreset"
@@ -12202,7 +12220,7 @@
       "label": "game.avatar.generate",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L337",
+      "source_location": "L338",
       "id": "locales_ru_game_avatar_generate",
       "community": 2,
       "norm_label": "game.avatar.generate"
@@ -12211,7 +12229,7 @@
       "label": "errors.AVATAR_GENERATION_UNAVAILABLE",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L338",
+      "source_location": "L339",
       "id": "locales_ru_errors_avatar_generation_unavailable",
       "community": 2,
       "norm_label": "errors.avatar_generation_unavailable"
@@ -12220,7 +12238,7 @@
       "label": "game.avatar.choose",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L339",
+      "source_location": "L340",
       "id": "locales_ru_game_avatar_choose",
       "community": 2,
       "norm_label": "game.avatar.choose"
@@ -12229,7 +12247,7 @@
       "label": "game.avatar.custom",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L340",
+      "source_location": "L341",
       "id": "locales_ru_game_avatar_custom",
       "community": 2,
       "norm_label": "game.avatar.custom"
@@ -12238,7 +12256,7 @@
       "label": "game.avatar.imageError",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L341",
+      "source_location": "L342",
       "id": "locales_ru_game_avatar_imageerror",
       "community": 2,
       "norm_label": "game.avatar.imageerror"
@@ -12247,7 +12265,7 @@
       "label": "game.avatar.imageAlt",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L342",
+      "source_location": "L343",
       "id": "locales_ru_game_avatar_imagealt",
       "community": 2,
       "norm_label": "game.avatar.imagealt"
@@ -12256,7 +12274,7 @@
       "label": "game.avatar.mood.neutral",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L343",
+      "source_location": "L344",
       "id": "locales_ru_game_avatar_mood_neutral",
       "community": 2,
       "norm_label": "game.avatar.mood.neutral"
@@ -12265,7 +12283,7 @@
       "label": "game.avatar.mood.happy",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L344",
+      "source_location": "L345",
       "id": "locales_ru_game_avatar_mood_happy",
       "community": 2,
       "norm_label": "game.avatar.mood.happy"
@@ -12274,7 +12292,7 @@
       "label": "game.avatar.mood.sad",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L345",
+      "source_location": "L346",
       "id": "locales_ru_game_avatar_mood_sad",
       "community": 2,
       "norm_label": "game.avatar.mood.sad"
@@ -12283,7 +12301,7 @@
       "label": "game.avatar.generationHint",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L346",
+      "source_location": "L347",
       "id": "locales_ru_game_avatar_generationhint",
       "community": 2,
       "norm_label": "game.avatar.generationhint"
@@ -12292,7 +12310,7 @@
       "label": "game.avatar.animal.unicorn",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L347",
+      "source_location": "L348",
       "id": "locales_ru_game_avatar_animal_unicorn",
       "community": 2,
       "norm_label": "game.avatar.animal.unicorn"
@@ -12301,7 +12319,7 @@
       "label": "game.avatar.animal.dragon",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L348",
+      "source_location": "L349",
       "id": "locales_ru_game_avatar_animal_dragon",
       "community": 2,
       "norm_label": "game.avatar.animal.dragon"
@@ -12310,7 +12328,7 @@
       "label": "game.avatar.animal.phoenix",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L349",
+      "source_location": "L350",
       "id": "locales_ru_game_avatar_animal_phoenix",
       "community": 2,
       "norm_label": "game.avatar.animal.phoenix"
@@ -12319,7 +12337,7 @@
       "label": "game.avatar.animal.griffin",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L350",
+      "source_location": "L351",
       "id": "locales_ru_game_avatar_animal_griffin",
       "community": 2,
       "norm_label": "game.avatar.animal.griffin"
@@ -12328,7 +12346,7 @@
       "label": "game.avatar.animal.sphinx_cat",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L351",
+      "source_location": "L352",
       "id": "locales_ru_game_avatar_animal_sphinx_cat",
       "community": 2,
       "norm_label": "game.avatar.animal.sphinx_cat"
@@ -12337,7 +12355,7 @@
       "label": "game.avatar.animal.kitsune_fox",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L352",
+      "source_location": "L353",
       "id": "locales_ru_game_avatar_animal_kitsune_fox",
       "community": 2,
       "norm_label": "game.avatar.animal.kitsune_fox"
@@ -12346,7 +12364,7 @@
       "label": "game.avatar.animal.pegasus",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L353",
+      "source_location": "L354",
       "id": "locales_ru_game_avatar_animal_pegasus",
       "community": 2,
       "norm_label": "game.avatar.animal.pegasus"
@@ -12355,7 +12373,7 @@
       "label": "game.avatar.animal.mermaid",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L354",
+      "source_location": "L355",
       "id": "locales_ru_game_avatar_animal_mermaid",
       "community": 2,
       "norm_label": "game.avatar.animal.mermaid"
@@ -12364,7 +12382,7 @@
       "label": "game.avatar.animal.lion",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L355",
+      "source_location": "L356",
       "id": "locales_ru_game_avatar_animal_lion",
       "community": 2,
       "norm_label": "game.avatar.animal.lion"
@@ -12373,7 +12391,7 @@
       "label": "game.avatar.animal.panda",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L356",
+      "source_location": "L357",
       "id": "locales_ru_game_avatar_animal_panda",
       "community": 2,
       "norm_label": "game.avatar.animal.panda"
@@ -12382,7 +12400,7 @@
       "label": "game.avatar.animal.rhino",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L357",
+      "source_location": "L358",
       "id": "locales_ru_game_avatar_animal_rhino",
       "community": 2,
       "norm_label": "game.avatar.animal.rhino"
@@ -12391,7 +12409,7 @@
       "label": "game.avatar.describe",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L358",
+      "source_location": "L359",
       "id": "locales_ru_game_avatar_describe",
       "community": 2,
       "norm_label": "game.avatar.describe"
@@ -12400,7 +12418,7 @@
       "label": "game.avatar.generating",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L359",
+      "source_location": "L360",
       "id": "locales_ru_game_avatar_generating",
       "community": 2,
       "norm_label": "game.avatar.generating"
@@ -12409,7 +12427,7 @@
       "label": "game.avatar.ready",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L360",
+      "source_location": "L361",
       "id": "locales_ru_game_avatar_ready",
       "community": 2,
       "norm_label": "game.avatar.ready"
@@ -12418,7 +12436,7 @@
       "label": "game.avatar.use",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L361",
+      "source_location": "L362",
       "id": "locales_ru_game_avatar_use",
       "community": 2,
       "norm_label": "game.avatar.use"
@@ -12427,7 +12445,7 @@
       "label": "game.avatar.discard",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L362",
+      "source_location": "L363",
       "id": "locales_ru_game_avatar_discard",
       "community": 2,
       "norm_label": "game.avatar.discard"
@@ -12436,7 +12454,7 @@
       "label": "game.avatar.quota",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L363",
+      "source_location": "L364",
       "id": "locales_ru_game_avatar_quota",
       "community": 2,
       "norm_label": "game.avatar.quota"
@@ -12445,7 +12463,7 @@
       "label": "game.avatar.quotaExhausted",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L364",
+      "source_location": "L365",
       "id": "locales_ru_game_avatar_quotaexhausted",
       "community": 2,
       "norm_label": "game.avatar.quotaexhausted"
@@ -12454,7 +12472,7 @@
       "label": "game.avatar.flagged",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L365",
+      "source_location": "L366",
       "id": "locales_ru_game_avatar_flagged",
       "community": 2,
       "norm_label": "game.avatar.flagged"
@@ -12463,7 +12481,7 @@
       "label": "game.avatar.error",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L366",
+      "source_location": "L367",
       "id": "locales_ru_game_avatar_error",
       "community": 2,
       "norm_label": "game.avatar.error"
@@ -12472,7 +12490,7 @@
       "label": "game.errors.roundNotActive",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L367",
+      "source_location": "L368",
       "id": "locales_ru_game_errors_roundnotactive",
       "community": 2,
       "norm_label": "game.errors.roundnotactive"
@@ -12481,7 +12499,7 @@
       "label": "game.errors.generic",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L368",
+      "source_location": "L369",
       "id": "locales_ru_game_errors_generic",
       "community": 2,
       "norm_label": "game.errors.generic"
@@ -14998,10 +15016,19 @@
       "norm_label": "game.title"
     },
     {
-      "label": "game.players.create",
+      "label": "game.playHint",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
       "source_location": "L280",
+      "id": "locales_en_game_playhint",
+      "community": 0,
+      "norm_label": "game.playhint"
+    },
+    {
+      "label": "game.players.create",
+      "file_type": "code",
+      "source_file": "frontend/src/i18n/locales/en.json",
+      "source_location": "L281",
       "id": "locales_en_game_players_create",
       "community": 0,
       "norm_label": "game.players.create"
@@ -15010,7 +15037,7 @@
       "label": "game.players.name",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L281",
+      "source_location": "L282",
       "id": "locales_en_game_players_name",
       "community": 0,
       "norm_label": "game.players.name"
@@ -15019,7 +15046,7 @@
       "label": "game.players.account",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L282",
+      "source_location": "L283",
       "id": "locales_en_game_players_account",
       "community": 0,
       "norm_label": "game.players.account"
@@ -15028,7 +15055,7 @@
       "label": "game.players.accountLabel",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L283",
+      "source_location": "L284",
       "id": "locales_en_game_players_accountlabel",
       "community": 0,
       "norm_label": "game.players.accountlabel"
@@ -15037,7 +15064,7 @@
       "label": "game.players.emptyManager",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L284",
+      "source_location": "L285",
       "id": "locales_en_game_players_emptymanager",
       "community": 0,
       "norm_label": "game.players.emptymanager"
@@ -15046,7 +15073,7 @@
       "label": "game.players.emptyStudent",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L285",
+      "source_location": "L286",
       "id": "locales_en_game_players_emptystudent",
       "community": 0,
       "norm_label": "game.players.emptystudent"
@@ -15055,7 +15082,7 @@
       "label": "errors.PLAYER_ACCOUNT_NOT_FOUND",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L286",
+      "source_location": "L287",
       "id": "locales_en_errors_player_account_not_found",
       "community": 0,
       "norm_label": "errors.player_account_not_found"
@@ -15064,7 +15091,7 @@
       "label": "errors.PLAYER_NAME_TAKEN",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L287",
+      "source_location": "L288",
       "id": "locales_en_errors_player_name_taken",
       "community": 0,
       "norm_label": "errors.player_name_taken"
@@ -15073,7 +15100,7 @@
       "label": "game.newPlayer",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L288",
+      "source_location": "L289",
       "id": "locales_en_game_newplayer",
       "community": 0,
       "norm_label": "game.newplayer"
@@ -15082,7 +15109,7 @@
       "label": "game.selectDifficulty",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L289",
+      "source_location": "L290",
       "id": "locales_en_game_selectdifficulty",
       "community": 0,
       "norm_label": "game.selectdifficulty"
@@ -15091,7 +15118,7 @@
       "label": "game.difficulty.easy",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L290",
+      "source_location": "L291",
       "id": "locales_en_game_difficulty_easy",
       "community": 0,
       "norm_label": "game.difficulty.easy"
@@ -15100,7 +15127,7 @@
       "label": "game.difficulty.medium",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L291",
+      "source_location": "L292",
       "id": "locales_en_game_difficulty_medium",
       "community": 0,
       "norm_label": "game.difficulty.medium"
@@ -15109,7 +15136,7 @@
       "label": "game.difficulty.hard",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L292",
+      "source_location": "L293",
       "id": "locales_en_game_difficulty_hard",
       "community": 0,
       "norm_label": "game.difficulty.hard"
@@ -15118,7 +15145,7 @@
       "label": "game.selectNoteCount",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L293",
+      "source_location": "L294",
       "id": "locales_en_game_selectnotecount",
       "community": 0,
       "norm_label": "game.selectnotecount"
@@ -15127,7 +15154,7 @@
       "label": "game.noteCount",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L294",
+      "source_location": "L295",
       "id": "locales_en_game_notecount",
       "community": 0,
       "norm_label": "game.notecount"
@@ -15136,7 +15163,7 @@
       "label": "game.noteCount_other",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L295",
+      "source_location": "L296",
       "id": "locales_en_game_notecount_other",
       "community": 0,
       "norm_label": "game.notecount_other"
@@ -15145,7 +15172,7 @@
       "label": "game.startRound",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L296",
+      "source_location": "L297",
       "id": "locales_en_game_startround",
       "community": 0,
       "norm_label": "game.startround"
@@ -15154,7 +15181,7 @@
       "label": "game.timer.hurry",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L297",
+      "source_location": "L298",
       "id": "locales_en_game_timer_hurry",
       "community": 0,
       "norm_label": "game.timer.hurry"
@@ -15163,7 +15190,7 @@
       "label": "game.noteNames.solfege.C",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L298",
+      "source_location": "L299",
       "id": "locales_en_game_notenames_solfege_c",
       "community": 0,
       "norm_label": "game.notenames.solfege.c"
@@ -15172,7 +15199,7 @@
       "label": "game.noteNames.solfege.D",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L299",
+      "source_location": "L300",
       "id": "locales_en_game_notenames_solfege_d",
       "community": 0,
       "norm_label": "game.notenames.solfege.d"
@@ -15181,7 +15208,7 @@
       "label": "game.noteNames.solfege.E",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L300",
+      "source_location": "L301",
       "id": "locales_en_game_notenames_solfege_e",
       "community": 0,
       "norm_label": "game.notenames.solfege.e"
@@ -15190,7 +15217,7 @@
       "label": "game.noteNames.solfege.F",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L301",
+      "source_location": "L302",
       "id": "locales_en_game_notenames_solfege_f",
       "community": 0,
       "norm_label": "game.notenames.solfege.f"
@@ -15199,7 +15226,7 @@
       "label": "game.noteNames.solfege.G",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L302",
+      "source_location": "L303",
       "id": "locales_en_game_notenames_solfege_g",
       "community": 0,
       "norm_label": "game.notenames.solfege.g"
@@ -15208,7 +15235,7 @@
       "label": "game.noteNames.solfege.A",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L303",
+      "source_location": "L304",
       "id": "locales_en_game_notenames_solfege_a",
       "community": 0,
       "norm_label": "game.notenames.solfege.a"
@@ -15217,7 +15244,7 @@
       "label": "game.noteNames.solfege.B",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L304",
+      "source_location": "L305",
       "id": "locales_en_game_notenames_solfege_b",
       "community": 0,
       "norm_label": "game.notenames.solfege.b"
@@ -15226,7 +15253,7 @@
       "label": "game.noteNames.letters.C",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L305",
+      "source_location": "L306",
       "id": "locales_en_game_notenames_letters_c",
       "community": 0,
       "norm_label": "game.notenames.letters.c"
@@ -15235,7 +15262,7 @@
       "label": "game.noteNames.letters.D",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L306",
+      "source_location": "L307",
       "id": "locales_en_game_notenames_letters_d",
       "community": 0,
       "norm_label": "game.notenames.letters.d"
@@ -15244,7 +15271,7 @@
       "label": "game.noteNames.letters.E",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L307",
+      "source_location": "L308",
       "id": "locales_en_game_notenames_letters_e",
       "community": 0,
       "norm_label": "game.notenames.letters.e"
@@ -15253,7 +15280,7 @@
       "label": "game.noteNames.letters.F",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L308",
+      "source_location": "L309",
       "id": "locales_en_game_notenames_letters_f",
       "community": 0,
       "norm_label": "game.notenames.letters.f"
@@ -15262,7 +15289,7 @@
       "label": "game.noteNames.letters.G",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L309",
+      "source_location": "L310",
       "id": "locales_en_game_notenames_letters_g",
       "community": 0,
       "norm_label": "game.notenames.letters.g"
@@ -15271,7 +15298,7 @@
       "label": "game.noteNames.letters.A",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L310",
+      "source_location": "L311",
       "id": "locales_en_game_notenames_letters_a",
       "community": 0,
       "norm_label": "game.notenames.letters.a"
@@ -15280,7 +15307,7 @@
       "label": "game.noteNames.letters.B",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L311",
+      "source_location": "L312",
       "id": "locales_en_game_notenames_letters_b",
       "community": 0,
       "norm_label": "game.notenames.letters.b"
@@ -15289,7 +15316,7 @@
       "label": "game.correct",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L312",
+      "source_location": "L313",
       "id": "locales_en_game_correct",
       "community": 0,
       "norm_label": "game.correct"
@@ -15298,7 +15325,7 @@
       "label": "game.wrong",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L313",
+      "source_location": "L314",
       "id": "locales_en_game_wrong",
       "community": 0,
       "norm_label": "game.wrong"
@@ -15307,7 +15334,7 @@
       "label": "game.timeout",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L314",
+      "source_location": "L315",
       "id": "locales_en_game_timeout",
       "community": 0,
       "norm_label": "game.timeout"
@@ -15316,7 +15343,7 @@
       "label": "game.result.win",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L315",
+      "source_location": "L316",
       "id": "locales_en_game_result_win",
       "community": 0,
       "norm_label": "game.result.win"
@@ -15325,7 +15352,7 @@
       "label": "game.result.lose",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L316",
+      "source_location": "L317",
       "id": "locales_en_game_result_lose",
       "community": 0,
       "norm_label": "game.result.lose"
@@ -15334,7 +15361,7 @@
       "label": "game.result.score",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L317",
+      "source_location": "L318",
       "id": "locales_en_game_result_score",
       "community": 0,
       "norm_label": "game.result.score"
@@ -15343,7 +15370,7 @@
       "label": "game.result.correct",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L318",
+      "source_location": "L319",
       "id": "locales_en_game_result_correct",
       "community": 0,
       "norm_label": "game.result.correct"
@@ -15352,7 +15379,7 @@
       "label": "game.result.xpGained",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L319",
+      "source_location": "L320",
       "id": "locales_en_game_result_xpgained",
       "community": 0,
       "norm_label": "game.result.xpgained"
@@ -15361,7 +15388,7 @@
       "label": "game.result.levelUp",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L320",
+      "source_location": "L321",
       "id": "locales_en_game_result_levelup",
       "community": 0,
       "norm_label": "game.result.levelup"
@@ -15370,7 +15397,7 @@
       "label": "game.result.newTrophy",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L321",
+      "source_location": "L322",
       "id": "locales_en_game_result_newtrophy",
       "community": 0,
       "norm_label": "game.result.newtrophy"
@@ -15379,7 +15406,7 @@
       "label": "game.result.playAgain",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L322",
+      "source_location": "L323",
       "id": "locales_en_game_result_playagain",
       "community": 0,
       "norm_label": "game.result.playagain"
@@ -15388,7 +15415,7 @@
       "label": "game.result.changePlayer",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L323",
+      "source_location": "L324",
       "id": "locales_en_game_result_changeplayer",
       "community": 0,
       "norm_label": "game.result.changeplayer"
@@ -15397,7 +15424,7 @@
       "label": "game.result.practiceHint_prefix",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L324",
+      "source_location": "L325",
       "id": "locales_en_game_result_practicehint_prefix",
       "community": 0,
       "norm_label": "game.result.practicehint_prefix"
@@ -15406,7 +15433,7 @@
       "label": "game.profile.title",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L325",
+      "source_location": "L326",
       "id": "locales_en_game_profile_title",
       "community": 0,
       "norm_label": "game.profile.title"
@@ -15415,7 +15442,7 @@
       "label": "game.profile.trophies",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L326",
+      "source_location": "L327",
       "id": "locales_en_game_profile_trophies",
       "community": 0,
       "norm_label": "game.profile.trophies"
@@ -15424,7 +15451,7 @@
       "label": "game.profile.noTrophies",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L327",
+      "source_location": "L328",
       "id": "locales_en_game_profile_notrophies",
       "community": 0,
       "norm_label": "game.profile.notrophies"
@@ -15433,7 +15460,7 @@
       "label": "game.profile.stats",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L328",
+      "source_location": "L329",
       "id": "locales_en_game_profile_stats",
       "community": 0,
       "norm_label": "game.profile.stats"
@@ -15442,7 +15469,7 @@
       "label": "game.profile.confusion",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L329",
+      "source_location": "L330",
       "id": "locales_en_game_profile_confusion",
       "community": 0,
       "norm_label": "game.profile.confusion"
@@ -15451,7 +15478,7 @@
       "label": "game.profile.level",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L330",
+      "source_location": "L331",
       "id": "locales_en_game_profile_level",
       "community": 0,
       "norm_label": "game.profile.level"
@@ -15460,7 +15487,7 @@
       "label": "game.profile.xpProgress",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L331",
+      "source_location": "L332",
       "id": "locales_en_game_profile_xpprogress",
       "community": 0,
       "norm_label": "game.profile.xpprogress"
@@ -15469,7 +15496,7 @@
       "label": "game.admin.title",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L332",
+      "source_location": "L333",
       "id": "locales_en_game_admin_title",
       "community": 0,
       "norm_label": "game.admin.title"
@@ -15478,7 +15505,7 @@
       "label": "game.admin.resetSeason",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L333",
+      "source_location": "L334",
       "id": "locales_en_game_admin_resetseason",
       "community": 0,
       "norm_label": "game.admin.resetseason"
@@ -15487,7 +15514,7 @@
       "label": "game.admin.resetAll",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L334",
+      "source_location": "L335",
       "id": "locales_en_game_admin_resetall",
       "community": 0,
       "norm_label": "game.admin.resetall"
@@ -15496,7 +15523,7 @@
       "label": "game.admin.confirmReset",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L335",
+      "source_location": "L336",
       "id": "locales_en_game_admin_confirmreset",
       "community": 0,
       "norm_label": "game.admin.confirmreset"
@@ -15505,7 +15532,7 @@
       "label": "game.admin.seasonReset",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L336",
+      "source_location": "L337",
       "id": "locales_en_game_admin_seasonreset",
       "community": 0,
       "norm_label": "game.admin.seasonreset"
@@ -15514,7 +15541,7 @@
       "label": "game.avatar.generate",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L337",
+      "source_location": "L338",
       "id": "locales_en_game_avatar_generate",
       "community": 0,
       "norm_label": "game.avatar.generate"
@@ -15523,7 +15550,7 @@
       "label": "errors.AVATAR_GENERATION_UNAVAILABLE",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L338",
+      "source_location": "L339",
       "id": "locales_en_errors_avatar_generation_unavailable",
       "community": 0,
       "norm_label": "errors.avatar_generation_unavailable"
@@ -15532,7 +15559,7 @@
       "label": "game.avatar.choose",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L339",
+      "source_location": "L340",
       "id": "locales_en_game_avatar_choose",
       "community": 0,
       "norm_label": "game.avatar.choose"
@@ -15541,7 +15568,7 @@
       "label": "game.avatar.custom",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L340",
+      "source_location": "L341",
       "id": "locales_en_game_avatar_custom",
       "community": 0,
       "norm_label": "game.avatar.custom"
@@ -15550,7 +15577,7 @@
       "label": "game.avatar.imageError",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L341",
+      "source_location": "L342",
       "id": "locales_en_game_avatar_imageerror",
       "community": 0,
       "norm_label": "game.avatar.imageerror"
@@ -15559,7 +15586,7 @@
       "label": "game.avatar.imageAlt",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L342",
+      "source_location": "L343",
       "id": "locales_en_game_avatar_imagealt",
       "community": 0,
       "norm_label": "game.avatar.imagealt"
@@ -15568,7 +15595,7 @@
       "label": "game.avatar.mood.neutral",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L343",
+      "source_location": "L344",
       "id": "locales_en_game_avatar_mood_neutral",
       "community": 0,
       "norm_label": "game.avatar.mood.neutral"
@@ -15577,7 +15604,7 @@
       "label": "game.avatar.mood.happy",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L344",
+      "source_location": "L345",
       "id": "locales_en_game_avatar_mood_happy",
       "community": 0,
       "norm_label": "game.avatar.mood.happy"
@@ -15586,7 +15613,7 @@
       "label": "game.avatar.mood.sad",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L345",
+      "source_location": "L346",
       "id": "locales_en_game_avatar_mood_sad",
       "community": 0,
       "norm_label": "game.avatar.mood.sad"
@@ -15595,7 +15622,7 @@
       "label": "game.avatar.generationHint",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L346",
+      "source_location": "L347",
       "id": "locales_en_game_avatar_generationhint",
       "community": 0,
       "norm_label": "game.avatar.generationhint"
@@ -15604,7 +15631,7 @@
       "label": "game.avatar.animal.unicorn",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L347",
+      "source_location": "L348",
       "id": "locales_en_game_avatar_animal_unicorn",
       "community": 0,
       "norm_label": "game.avatar.animal.unicorn"
@@ -15613,7 +15640,7 @@
       "label": "game.avatar.animal.dragon",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L348",
+      "source_location": "L349",
       "id": "locales_en_game_avatar_animal_dragon",
       "community": 0,
       "norm_label": "game.avatar.animal.dragon"
@@ -15622,7 +15649,7 @@
       "label": "game.avatar.animal.phoenix",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L349",
+      "source_location": "L350",
       "id": "locales_en_game_avatar_animal_phoenix",
       "community": 0,
       "norm_label": "game.avatar.animal.phoenix"
@@ -15631,7 +15658,7 @@
       "label": "game.avatar.animal.griffin",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L350",
+      "source_location": "L351",
       "id": "locales_en_game_avatar_animal_griffin",
       "community": 0,
       "norm_label": "game.avatar.animal.griffin"
@@ -15640,7 +15667,7 @@
       "label": "game.avatar.animal.sphinx_cat",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L351",
+      "source_location": "L352",
       "id": "locales_en_game_avatar_animal_sphinx_cat",
       "community": 0,
       "norm_label": "game.avatar.animal.sphinx_cat"
@@ -15649,7 +15676,7 @@
       "label": "game.avatar.animal.kitsune_fox",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L352",
+      "source_location": "L353",
       "id": "locales_en_game_avatar_animal_kitsune_fox",
       "community": 0,
       "norm_label": "game.avatar.animal.kitsune_fox"
@@ -15658,7 +15685,7 @@
       "label": "game.avatar.animal.pegasus",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L353",
+      "source_location": "L354",
       "id": "locales_en_game_avatar_animal_pegasus",
       "community": 0,
       "norm_label": "game.avatar.animal.pegasus"
@@ -15667,7 +15694,7 @@
       "label": "game.avatar.animal.mermaid",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L354",
+      "source_location": "L355",
       "id": "locales_en_game_avatar_animal_mermaid",
       "community": 0,
       "norm_label": "game.avatar.animal.mermaid"
@@ -15676,7 +15703,7 @@
       "label": "game.avatar.animal.lion",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L355",
+      "source_location": "L356",
       "id": "locales_en_game_avatar_animal_lion",
       "community": 0,
       "norm_label": "game.avatar.animal.lion"
@@ -15685,7 +15712,7 @@
       "label": "game.avatar.animal.panda",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L356",
+      "source_location": "L357",
       "id": "locales_en_game_avatar_animal_panda",
       "community": 0,
       "norm_label": "game.avatar.animal.panda"
@@ -15694,7 +15721,7 @@
       "label": "game.avatar.animal.rhino",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L357",
+      "source_location": "L358",
       "id": "locales_en_game_avatar_animal_rhino",
       "community": 0,
       "norm_label": "game.avatar.animal.rhino"
@@ -15703,7 +15730,7 @@
       "label": "game.avatar.describe",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L358",
+      "source_location": "L359",
       "id": "locales_en_game_avatar_describe",
       "community": 0,
       "norm_label": "game.avatar.describe"
@@ -15712,7 +15739,7 @@
       "label": "game.avatar.generating",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L359",
+      "source_location": "L360",
       "id": "locales_en_game_avatar_generating",
       "community": 0,
       "norm_label": "game.avatar.generating"
@@ -15721,7 +15748,7 @@
       "label": "game.avatar.ready",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L360",
+      "source_location": "L361",
       "id": "locales_en_game_avatar_ready",
       "community": 0,
       "norm_label": "game.avatar.ready"
@@ -15730,7 +15757,7 @@
       "label": "game.avatar.use",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L361",
+      "source_location": "L362",
       "id": "locales_en_game_avatar_use",
       "community": 0,
       "norm_label": "game.avatar.use"
@@ -15739,7 +15766,7 @@
       "label": "game.avatar.discard",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L362",
+      "source_location": "L363",
       "id": "locales_en_game_avatar_discard",
       "community": 0,
       "norm_label": "game.avatar.discard"
@@ -15748,7 +15775,7 @@
       "label": "game.avatar.quota",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L363",
+      "source_location": "L364",
       "id": "locales_en_game_avatar_quota",
       "community": 0,
       "norm_label": "game.avatar.quota"
@@ -15757,7 +15784,7 @@
       "label": "game.avatar.quotaExhausted",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L364",
+      "source_location": "L365",
       "id": "locales_en_game_avatar_quotaexhausted",
       "community": 0,
       "norm_label": "game.avatar.quotaexhausted"
@@ -15766,7 +15793,7 @@
       "label": "game.avatar.flagged",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L365",
+      "source_location": "L366",
       "id": "locales_en_game_avatar_flagged",
       "community": 0,
       "norm_label": "game.avatar.flagged"
@@ -15775,7 +15802,7 @@
       "label": "game.avatar.error",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L366",
+      "source_location": "L367",
       "id": "locales_en_game_avatar_error",
       "community": 0,
       "norm_label": "game.avatar.error"
@@ -15784,7 +15811,7 @@
       "label": "game.errors.roundNotActive",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L367",
+      "source_location": "L368",
       "id": "locales_en_game_errors_roundnotactive",
       "community": 0,
       "norm_label": "game.errors.roundnotactive"
@@ -15793,7 +15820,7 @@
       "label": "game.errors.generic",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L368",
+      "source_location": "L369",
       "id": "locales_en_game_errors_generic",
       "community": 0,
       "norm_label": "game.errors.generic"
@@ -18310,10 +18337,19 @@
       "norm_label": "game.title"
     },
     {
-      "label": "game.players.create",
+      "label": "game.playHint",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
       "source_location": "L280",
+      "id": "locales_es_game_playhint",
+      "community": 1,
+      "norm_label": "game.playhint"
+    },
+    {
+      "label": "game.players.create",
+      "file_type": "code",
+      "source_file": "frontend/src/i18n/locales/es.json",
+      "source_location": "L281",
       "id": "locales_es_game_players_create",
       "community": 1,
       "norm_label": "game.players.create"
@@ -18322,7 +18358,7 @@
       "label": "game.players.name",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L281",
+      "source_location": "L282",
       "id": "locales_es_game_players_name",
       "community": 1,
       "norm_label": "game.players.name"
@@ -18331,7 +18367,7 @@
       "label": "game.players.account",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L282",
+      "source_location": "L283",
       "id": "locales_es_game_players_account",
       "community": 1,
       "norm_label": "game.players.account"
@@ -18340,7 +18376,7 @@
       "label": "game.players.accountLabel",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L283",
+      "source_location": "L284",
       "id": "locales_es_game_players_accountlabel",
       "community": 1,
       "norm_label": "game.players.accountlabel"
@@ -18349,7 +18385,7 @@
       "label": "game.players.emptyManager",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L284",
+      "source_location": "L285",
       "id": "locales_es_game_players_emptymanager",
       "community": 1,
       "norm_label": "game.players.emptymanager"
@@ -18358,7 +18394,7 @@
       "label": "game.players.emptyStudent",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L285",
+      "source_location": "L286",
       "id": "locales_es_game_players_emptystudent",
       "community": 1,
       "norm_label": "game.players.emptystudent"
@@ -18367,7 +18403,7 @@
       "label": "errors.PLAYER_ACCOUNT_NOT_FOUND",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L286",
+      "source_location": "L287",
       "id": "locales_es_errors_player_account_not_found",
       "community": 1,
       "norm_label": "errors.player_account_not_found"
@@ -18376,7 +18412,7 @@
       "label": "errors.PLAYER_NAME_TAKEN",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L287",
+      "source_location": "L288",
       "id": "locales_es_errors_player_name_taken",
       "community": 1,
       "norm_label": "errors.player_name_taken"
@@ -18385,7 +18421,7 @@
       "label": "game.newPlayer",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L288",
+      "source_location": "L289",
       "id": "locales_es_game_newplayer",
       "community": 1,
       "norm_label": "game.newplayer"
@@ -18394,7 +18430,7 @@
       "label": "game.selectDifficulty",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L289",
+      "source_location": "L290",
       "id": "locales_es_game_selectdifficulty",
       "community": 1,
       "norm_label": "game.selectdifficulty"
@@ -18403,7 +18439,7 @@
       "label": "game.difficulty.easy",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L290",
+      "source_location": "L291",
       "id": "locales_es_game_difficulty_easy",
       "community": 1,
       "norm_label": "game.difficulty.easy"
@@ -18412,7 +18448,7 @@
       "label": "game.difficulty.medium",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L291",
+      "source_location": "L292",
       "id": "locales_es_game_difficulty_medium",
       "community": 1,
       "norm_label": "game.difficulty.medium"
@@ -18421,7 +18457,7 @@
       "label": "game.difficulty.hard",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L292",
+      "source_location": "L293",
       "id": "locales_es_game_difficulty_hard",
       "community": 1,
       "norm_label": "game.difficulty.hard"
@@ -18430,7 +18466,7 @@
       "label": "game.selectNoteCount",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L293",
+      "source_location": "L294",
       "id": "locales_es_game_selectnotecount",
       "community": 1,
       "norm_label": "game.selectnotecount"
@@ -18439,7 +18475,7 @@
       "label": "game.noteCount",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L294",
+      "source_location": "L295",
       "id": "locales_es_game_notecount",
       "community": 1,
       "norm_label": "game.notecount"
@@ -18448,7 +18484,7 @@
       "label": "game.noteCount_other",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L295",
+      "source_location": "L296",
       "id": "locales_es_game_notecount_other",
       "community": 1,
       "norm_label": "game.notecount_other"
@@ -18457,7 +18493,7 @@
       "label": "game.startRound",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L296",
+      "source_location": "L297",
       "id": "locales_es_game_startround",
       "community": 1,
       "norm_label": "game.startround"
@@ -18466,7 +18502,7 @@
       "label": "game.timer.hurry",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L297",
+      "source_location": "L298",
       "id": "locales_es_game_timer_hurry",
       "community": 1,
       "norm_label": "game.timer.hurry"
@@ -18475,7 +18511,7 @@
       "label": "game.noteNames.solfege.C",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L298",
+      "source_location": "L299",
       "id": "locales_es_game_notenames_solfege_c",
       "community": 1,
       "norm_label": "game.notenames.solfege.c"
@@ -18484,7 +18520,7 @@
       "label": "game.noteNames.solfege.D",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L299",
+      "source_location": "L300",
       "id": "locales_es_game_notenames_solfege_d",
       "community": 1,
       "norm_label": "game.notenames.solfege.d"
@@ -18493,7 +18529,7 @@
       "label": "game.noteNames.solfege.E",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L300",
+      "source_location": "L301",
       "id": "locales_es_game_notenames_solfege_e",
       "community": 1,
       "norm_label": "game.notenames.solfege.e"
@@ -18502,7 +18538,7 @@
       "label": "game.noteNames.solfege.F",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L301",
+      "source_location": "L302",
       "id": "locales_es_game_notenames_solfege_f",
       "community": 1,
       "norm_label": "game.notenames.solfege.f"
@@ -18511,7 +18547,7 @@
       "label": "game.noteNames.solfege.G",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L302",
+      "source_location": "L303",
       "id": "locales_es_game_notenames_solfege_g",
       "community": 1,
       "norm_label": "game.notenames.solfege.g"
@@ -18520,7 +18556,7 @@
       "label": "game.noteNames.solfege.A",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L303",
+      "source_location": "L304",
       "id": "locales_es_game_notenames_solfege_a",
       "community": 1,
       "norm_label": "game.notenames.solfege.a"
@@ -18529,7 +18565,7 @@
       "label": "game.noteNames.solfege.B",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L304",
+      "source_location": "L305",
       "id": "locales_es_game_notenames_solfege_b",
       "community": 1,
       "norm_label": "game.notenames.solfege.b"
@@ -18538,7 +18574,7 @@
       "label": "game.noteNames.letters.C",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L305",
+      "source_location": "L306",
       "id": "locales_es_game_notenames_letters_c",
       "community": 1,
       "norm_label": "game.notenames.letters.c"
@@ -18547,7 +18583,7 @@
       "label": "game.noteNames.letters.D",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L306",
+      "source_location": "L307",
       "id": "locales_es_game_notenames_letters_d",
       "community": 1,
       "norm_label": "game.notenames.letters.d"
@@ -18556,7 +18592,7 @@
       "label": "game.noteNames.letters.E",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L307",
+      "source_location": "L308",
       "id": "locales_es_game_notenames_letters_e",
       "community": 1,
       "norm_label": "game.notenames.letters.e"
@@ -18565,7 +18601,7 @@
       "label": "game.noteNames.letters.F",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L308",
+      "source_location": "L309",
       "id": "locales_es_game_notenames_letters_f",
       "community": 1,
       "norm_label": "game.notenames.letters.f"
@@ -18574,7 +18610,7 @@
       "label": "game.noteNames.letters.G",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L309",
+      "source_location": "L310",
       "id": "locales_es_game_notenames_letters_g",
       "community": 1,
       "norm_label": "game.notenames.letters.g"
@@ -18583,7 +18619,7 @@
       "label": "game.noteNames.letters.A",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L310",
+      "source_location": "L311",
       "id": "locales_es_game_notenames_letters_a",
       "community": 1,
       "norm_label": "game.notenames.letters.a"
@@ -18592,7 +18628,7 @@
       "label": "game.noteNames.letters.B",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L311",
+      "source_location": "L312",
       "id": "locales_es_game_notenames_letters_b",
       "community": 1,
       "norm_label": "game.notenames.letters.b"
@@ -18601,7 +18637,7 @@
       "label": "game.correct",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L312",
+      "source_location": "L313",
       "id": "locales_es_game_correct",
       "community": 1,
       "norm_label": "game.correct"
@@ -18610,7 +18646,7 @@
       "label": "game.wrong",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L313",
+      "source_location": "L314",
       "id": "locales_es_game_wrong",
       "community": 1,
       "norm_label": "game.wrong"
@@ -18619,7 +18655,7 @@
       "label": "game.timeout",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L314",
+      "source_location": "L315",
       "id": "locales_es_game_timeout",
       "community": 1,
       "norm_label": "game.timeout"
@@ -18628,7 +18664,7 @@
       "label": "game.result.win",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L315",
+      "source_location": "L316",
       "id": "locales_es_game_result_win",
       "community": 1,
       "norm_label": "game.result.win"
@@ -18637,7 +18673,7 @@
       "label": "game.result.lose",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L316",
+      "source_location": "L317",
       "id": "locales_es_game_result_lose",
       "community": 1,
       "norm_label": "game.result.lose"
@@ -18646,7 +18682,7 @@
       "label": "game.result.score",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L317",
+      "source_location": "L318",
       "id": "locales_es_game_result_score",
       "community": 1,
       "norm_label": "game.result.score"
@@ -18655,7 +18691,7 @@
       "label": "game.result.correct",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L318",
+      "source_location": "L319",
       "id": "locales_es_game_result_correct",
       "community": 1,
       "norm_label": "game.result.correct"
@@ -18664,7 +18700,7 @@
       "label": "game.result.xpGained",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L319",
+      "source_location": "L320",
       "id": "locales_es_game_result_xpgained",
       "community": 1,
       "norm_label": "game.result.xpgained"
@@ -18673,7 +18709,7 @@
       "label": "game.result.levelUp",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L320",
+      "source_location": "L321",
       "id": "locales_es_game_result_levelup",
       "community": 1,
       "norm_label": "game.result.levelup"
@@ -18682,7 +18718,7 @@
       "label": "game.result.newTrophy",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L321",
+      "source_location": "L322",
       "id": "locales_es_game_result_newtrophy",
       "community": 1,
       "norm_label": "game.result.newtrophy"
@@ -18691,7 +18727,7 @@
       "label": "game.result.playAgain",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L322",
+      "source_location": "L323",
       "id": "locales_es_game_result_playagain",
       "community": 1,
       "norm_label": "game.result.playagain"
@@ -18700,7 +18736,7 @@
       "label": "game.result.changePlayer",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L323",
+      "source_location": "L324",
       "id": "locales_es_game_result_changeplayer",
       "community": 1,
       "norm_label": "game.result.changeplayer"
@@ -18709,7 +18745,7 @@
       "label": "game.result.practiceHint_prefix",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L324",
+      "source_location": "L325",
       "id": "locales_es_game_result_practicehint_prefix",
       "community": 1,
       "norm_label": "game.result.practicehint_prefix"
@@ -18718,7 +18754,7 @@
       "label": "game.profile.title",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L325",
+      "source_location": "L326",
       "id": "locales_es_game_profile_title",
       "community": 1,
       "norm_label": "game.profile.title"
@@ -18727,7 +18763,7 @@
       "label": "game.profile.trophies",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L326",
+      "source_location": "L327",
       "id": "locales_es_game_profile_trophies",
       "community": 1,
       "norm_label": "game.profile.trophies"
@@ -18736,7 +18772,7 @@
       "label": "game.profile.noTrophies",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L327",
+      "source_location": "L328",
       "id": "locales_es_game_profile_notrophies",
       "community": 1,
       "norm_label": "game.profile.notrophies"
@@ -18745,7 +18781,7 @@
       "label": "game.profile.stats",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L328",
+      "source_location": "L329",
       "id": "locales_es_game_profile_stats",
       "community": 1,
       "norm_label": "game.profile.stats"
@@ -18754,7 +18790,7 @@
       "label": "game.profile.confusion",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L329",
+      "source_location": "L330",
       "id": "locales_es_game_profile_confusion",
       "community": 1,
       "norm_label": "game.profile.confusion"
@@ -18763,7 +18799,7 @@
       "label": "game.profile.level",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L330",
+      "source_location": "L331",
       "id": "locales_es_game_profile_level",
       "community": 1,
       "norm_label": "game.profile.level"
@@ -18772,7 +18808,7 @@
       "label": "game.profile.xpProgress",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L331",
+      "source_location": "L332",
       "id": "locales_es_game_profile_xpprogress",
       "community": 1,
       "norm_label": "game.profile.xpprogress"
@@ -18781,7 +18817,7 @@
       "label": "game.admin.title",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L332",
+      "source_location": "L333",
       "id": "locales_es_game_admin_title",
       "community": 1,
       "norm_label": "game.admin.title"
@@ -18790,7 +18826,7 @@
       "label": "game.admin.resetSeason",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L333",
+      "source_location": "L334",
       "id": "locales_es_game_admin_resetseason",
       "community": 1,
       "norm_label": "game.admin.resetseason"
@@ -18799,7 +18835,7 @@
       "label": "game.admin.resetAll",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L334",
+      "source_location": "L335",
       "id": "locales_es_game_admin_resetall",
       "community": 1,
       "norm_label": "game.admin.resetall"
@@ -18808,7 +18844,7 @@
       "label": "game.admin.confirmReset",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L335",
+      "source_location": "L336",
       "id": "locales_es_game_admin_confirmreset",
       "community": 1,
       "norm_label": "game.admin.confirmreset"
@@ -18817,7 +18853,7 @@
       "label": "game.admin.seasonReset",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L336",
+      "source_location": "L337",
       "id": "locales_es_game_admin_seasonreset",
       "community": 1,
       "norm_label": "game.admin.seasonreset"
@@ -18826,7 +18862,7 @@
       "label": "game.avatar.generate",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L337",
+      "source_location": "L338",
       "id": "locales_es_game_avatar_generate",
       "community": 1,
       "norm_label": "game.avatar.generate"
@@ -18835,7 +18871,7 @@
       "label": "errors.AVATAR_GENERATION_UNAVAILABLE",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L338",
+      "source_location": "L339",
       "id": "locales_es_errors_avatar_generation_unavailable",
       "community": 1,
       "norm_label": "errors.avatar_generation_unavailable"
@@ -18844,7 +18880,7 @@
       "label": "game.avatar.choose",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L339",
+      "source_location": "L340",
       "id": "locales_es_game_avatar_choose",
       "community": 1,
       "norm_label": "game.avatar.choose"
@@ -18853,7 +18889,7 @@
       "label": "game.avatar.custom",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L340",
+      "source_location": "L341",
       "id": "locales_es_game_avatar_custom",
       "community": 1,
       "norm_label": "game.avatar.custom"
@@ -18862,7 +18898,7 @@
       "label": "game.avatar.imageError",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L341",
+      "source_location": "L342",
       "id": "locales_es_game_avatar_imageerror",
       "community": 1,
       "norm_label": "game.avatar.imageerror"
@@ -18871,7 +18907,7 @@
       "label": "game.avatar.imageAlt",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L342",
+      "source_location": "L343",
       "id": "locales_es_game_avatar_imagealt",
       "community": 1,
       "norm_label": "game.avatar.imagealt"
@@ -18880,7 +18916,7 @@
       "label": "game.avatar.mood.neutral",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L343",
+      "source_location": "L344",
       "id": "locales_es_game_avatar_mood_neutral",
       "community": 1,
       "norm_label": "game.avatar.mood.neutral"
@@ -18889,7 +18925,7 @@
       "label": "game.avatar.mood.happy",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L344",
+      "source_location": "L345",
       "id": "locales_es_game_avatar_mood_happy",
       "community": 1,
       "norm_label": "game.avatar.mood.happy"
@@ -18898,7 +18934,7 @@
       "label": "game.avatar.mood.sad",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L345",
+      "source_location": "L346",
       "id": "locales_es_game_avatar_mood_sad",
       "community": 1,
       "norm_label": "game.avatar.mood.sad"
@@ -18907,7 +18943,7 @@
       "label": "game.avatar.generationHint",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L346",
+      "source_location": "L347",
       "id": "locales_es_game_avatar_generationhint",
       "community": 1,
       "norm_label": "game.avatar.generationhint"
@@ -18916,7 +18952,7 @@
       "label": "game.avatar.animal.unicorn",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L347",
+      "source_location": "L348",
       "id": "locales_es_game_avatar_animal_unicorn",
       "community": 1,
       "norm_label": "game.avatar.animal.unicorn"
@@ -18925,7 +18961,7 @@
       "label": "game.avatar.animal.dragon",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L348",
+      "source_location": "L349",
       "id": "locales_es_game_avatar_animal_dragon",
       "community": 1,
       "norm_label": "game.avatar.animal.dragon"
@@ -18934,7 +18970,7 @@
       "label": "game.avatar.animal.phoenix",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L349",
+      "source_location": "L350",
       "id": "locales_es_game_avatar_animal_phoenix",
       "community": 1,
       "norm_label": "game.avatar.animal.phoenix"
@@ -18943,7 +18979,7 @@
       "label": "game.avatar.animal.griffin",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L350",
+      "source_location": "L351",
       "id": "locales_es_game_avatar_animal_griffin",
       "community": 1,
       "norm_label": "game.avatar.animal.griffin"
@@ -18952,7 +18988,7 @@
       "label": "game.avatar.animal.sphinx_cat",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L351",
+      "source_location": "L352",
       "id": "locales_es_game_avatar_animal_sphinx_cat",
       "community": 1,
       "norm_label": "game.avatar.animal.sphinx_cat"
@@ -18961,7 +18997,7 @@
       "label": "game.avatar.animal.kitsune_fox",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L352",
+      "source_location": "L353",
       "id": "locales_es_game_avatar_animal_kitsune_fox",
       "community": 1,
       "norm_label": "game.avatar.animal.kitsune_fox"
@@ -18970,7 +19006,7 @@
       "label": "game.avatar.animal.pegasus",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L353",
+      "source_location": "L354",
       "id": "locales_es_game_avatar_animal_pegasus",
       "community": 1,
       "norm_label": "game.avatar.animal.pegasus"
@@ -18979,7 +19015,7 @@
       "label": "game.avatar.animal.mermaid",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L354",
+      "source_location": "L355",
       "id": "locales_es_game_avatar_animal_mermaid",
       "community": 1,
       "norm_label": "game.avatar.animal.mermaid"
@@ -18988,7 +19024,7 @@
       "label": "game.avatar.animal.lion",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L355",
+      "source_location": "L356",
       "id": "locales_es_game_avatar_animal_lion",
       "community": 1,
       "norm_label": "game.avatar.animal.lion"
@@ -18997,7 +19033,7 @@
       "label": "game.avatar.animal.panda",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L356",
+      "source_location": "L357",
       "id": "locales_es_game_avatar_animal_panda",
       "community": 1,
       "norm_label": "game.avatar.animal.panda"
@@ -19006,7 +19042,7 @@
       "label": "game.avatar.animal.rhino",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L357",
+      "source_location": "L358",
       "id": "locales_es_game_avatar_animal_rhino",
       "community": 1,
       "norm_label": "game.avatar.animal.rhino"
@@ -19015,7 +19051,7 @@
       "label": "game.avatar.describe",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L358",
+      "source_location": "L359",
       "id": "locales_es_game_avatar_describe",
       "community": 1,
       "norm_label": "game.avatar.describe"
@@ -19024,7 +19060,7 @@
       "label": "game.avatar.generating",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L359",
+      "source_location": "L360",
       "id": "locales_es_game_avatar_generating",
       "community": 1,
       "norm_label": "game.avatar.generating"
@@ -19033,7 +19069,7 @@
       "label": "game.avatar.ready",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L360",
+      "source_location": "L361",
       "id": "locales_es_game_avatar_ready",
       "community": 1,
       "norm_label": "game.avatar.ready"
@@ -19042,7 +19078,7 @@
       "label": "game.avatar.use",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L361",
+      "source_location": "L362",
       "id": "locales_es_game_avatar_use",
       "community": 1,
       "norm_label": "game.avatar.use"
@@ -19051,7 +19087,7 @@
       "label": "game.avatar.discard",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L362",
+      "source_location": "L363",
       "id": "locales_es_game_avatar_discard",
       "community": 1,
       "norm_label": "game.avatar.discard"
@@ -19060,7 +19096,7 @@
       "label": "game.avatar.quota",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L363",
+      "source_location": "L364",
       "id": "locales_es_game_avatar_quota",
       "community": 1,
       "norm_label": "game.avatar.quota"
@@ -19069,7 +19105,7 @@
       "label": "game.avatar.quotaExhausted",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L364",
+      "source_location": "L365",
       "id": "locales_es_game_avatar_quotaexhausted",
       "community": 1,
       "norm_label": "game.avatar.quotaexhausted"
@@ -19078,7 +19114,7 @@
       "label": "game.avatar.flagged",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L365",
+      "source_location": "L366",
       "id": "locales_es_game_avatar_flagged",
       "community": 1,
       "norm_label": "game.avatar.flagged"
@@ -19087,7 +19123,7 @@
       "label": "game.avatar.error",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L366",
+      "source_location": "L367",
       "id": "locales_es_game_avatar_error",
       "community": 1,
       "norm_label": "game.avatar.error"
@@ -19096,7 +19132,7 @@
       "label": "game.errors.roundNotActive",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L367",
+      "source_location": "L368",
       "id": "locales_es_game_errors_roundnotactive",
       "community": 1,
       "norm_label": "game.errors.roundnotactive"
@@ -19105,7 +19141,7 @@
       "label": "game.errors.generic",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L368",
+      "source_location": "L369",
       "id": "locales_es_game_errors_generic",
       "community": 1,
       "norm_label": "game.errors.generic"
@@ -19179,7 +19215,7 @@
       "source_file": "",
       "source_location": "",
       "id": "runtimeerror",
-      "community": 188,
+      "community": 192,
       "norm_label": "runtimeerror"
     },
     {
@@ -19746,7 +19782,7 @@
       "source_file": "deploy/tests/test_rollout.py",
       "source_location": "L241",
       "id": "tests_test_rollout_test_invalid_disk_configuration_fails_closed",
-      "community": 224,
+      "community": 4,
       "norm_label": "test_invalid_disk_configuration_fails_closed()"
     },
     {
@@ -20322,7 +20358,7 @@
       "source_file": "",
       "source_location": "",
       "id": "basesettings",
-      "community": 27,
+      "community": 117,
       "norm_label": "basesettings"
     },
     {
@@ -20727,7 +20763,7 @@
       "source_file": "backend/app/game/api/rounds.py",
       "source_location": "L27",
       "id": "api_rounds_create_round",
-      "community": 187,
+      "community": 83,
       "norm_label": "create_round()"
     },
     {
@@ -20952,7 +20988,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L41",
       "id": "api_avatars_generate_avatar",
-      "community": 227,
+      "community": 83,
       "norm_label": "generate_avatar()"
     },
     {
@@ -21132,7 +21168,7 @@
       "source_file": "backend/app/game/services/seasons.py",
       "source_location": "L1",
       "id": "backend_app_game_services_seasons_py",
-      "community": 187,
+      "community": 83,
       "norm_label": "seasons.py"
     },
     {
@@ -21141,7 +21177,7 @@
       "source_file": "backend/app/game/services/seasons.py",
       "source_location": "L10",
       "id": "services_seasons_list_seasons",
-      "community": 187,
+      "community": 83,
       "norm_label": "list_seasons()"
     },
     {
@@ -21150,7 +21186,7 @@
       "source_file": "backend/app/game/services/seasons.py",
       "source_location": "L18",
       "id": "services_seasons_reset_season",
-      "community": 187,
+      "community": 83,
       "norm_label": "reset_season()"
     },
     {
@@ -21168,7 +21204,7 @@
       "source_file": "backend/app/game/services/players.py",
       "source_location": "L1",
       "id": "backend_app_game_services_players_py",
-      "community": 187,
+      "community": 83,
       "norm_label": "players.py"
     },
     {
@@ -21177,7 +21213,7 @@
       "source_file": "backend/app/game/services/players.py",
       "source_location": "L9",
       "id": "services_players_get_or_403",
-      "community": 187,
+      "community": 83,
       "norm_label": "get_or_403()"
     },
     {
@@ -21186,7 +21222,7 @@
       "source_file": "backend/app/game/services/players.py",
       "source_location": "L16",
       "id": "services_players_list_players",
-      "community": 187,
+      "community": 83,
       "norm_label": "list_players()"
     },
     {
@@ -21195,7 +21231,7 @@
       "source_file": "backend/app/game/services/players.py",
       "source_location": "L23",
       "id": "services_players_choose_avatar",
-      "community": 187,
+      "community": 83,
       "norm_label": "choose_avatar()"
     },
     {
@@ -21204,7 +21240,7 @@
       "source_file": "backend/app/game/services/players.py",
       "source_location": "L41",
       "id": "services_players_create_player",
-      "community": 187,
+      "community": 83,
       "norm_label": "create_player()"
     },
     {
@@ -21213,7 +21249,7 @@
       "source_file": "backend/app/game/services/players.py",
       "source_location": "L66",
       "id": "services_players_update_player",
-      "community": 187,
+      "community": 83,
       "norm_label": "update_player()"
     },
     {
@@ -21546,7 +21582,7 @@
       "source_file": "backend/app/api/auth.py",
       "source_location": "L333",
       "id": "api_auth_reset_password",
-      "community": 20,
+      "community": 52,
       "norm_label": "reset_password()"
     },
     {
@@ -21591,7 +21627,7 @@
       "source_file": "backend/app/api/health.py",
       "source_location": "L1",
       "id": "backend_app_api_health_py",
-      "community": 49,
+      "community": 92,
       "norm_label": "health.py"
     },
     {
@@ -21600,7 +21636,7 @@
       "source_file": "backend/app/api/health.py",
       "source_location": "L14",
       "id": "api_health_health",
-      "community": 49,
+      "community": 92,
       "norm_label": "health()"
     },
     {
@@ -21663,7 +21699,7 @@
       "source_file": "",
       "source_location": "",
       "id": "input",
-      "community": 96,
+      "community": 52,
       "norm_label": "input"
     },
     {
@@ -21834,7 +21870,7 @@
       "source_file": "backend/app/api/listening.py",
       "source_location": "L35",
       "id": "api_listening_selectioninput",
-      "community": 96,
+      "community": 15,
       "norm_label": "selectioninput"
     },
     {
@@ -21852,7 +21888,7 @@
       "source_file": "backend/app/api/listening.py",
       "source_location": "L46",
       "id": "api_listening_eventinput",
-      "community": 96,
+      "community": 15,
       "norm_label": "eventinput"
     },
     {
@@ -21924,7 +21960,7 @@
       "source_file": "backend/app/api/listening.py",
       "source_location": "L116",
       "id": "api_listening_event",
-      "community": 15,
+      "community": 187,
       "norm_label": "event()"
     },
     {
@@ -21996,7 +22032,7 @@
       "source_file": "backend/app/api/exercises.py",
       "source_location": "L25",
       "id": "api_exercises_exerciseinput",
-      "community": 96,
+      "community": 52,
       "norm_label": "exerciseinput"
     },
     {
@@ -22050,7 +22086,7 @@
       "source_file": "backend/app/api/exercises.py",
       "source_location": "L70",
       "id": "api_exercises_orderinput",
-      "community": 96,
+      "community": 52,
       "norm_label": "orderinput"
     },
     {
@@ -22077,7 +22113,7 @@
       "source_file": "backend/app/api/exercises.py",
       "source_location": "L114",
       "id": "api_exercises_order",
-      "community": 96,
+      "community": 52,
       "norm_label": "order()"
     },
     {
@@ -22167,7 +22203,7 @@
       "source_file": "backend/app/services/auth.py",
       "source_location": "L20",
       "id": "services_auth_serviceerror",
-      "community": 187,
+      "community": 83,
       "norm_label": "serviceerror"
     },
     {
@@ -22365,7 +22401,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L1",
       "id": "backend_app_services_telegram_api_py",
-      "community": 35,
+      "community": 49,
       "norm_label": "telegram_api.py"
     },
     {
@@ -22374,7 +22410,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L13",
       "id": "services_telegram_api_apiresponse",
-      "community": 35,
+      "community": 49,
       "norm_label": "apiresponse"
     },
     {
@@ -22383,7 +22419,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L20",
       "id": "services_telegram_api_apifile",
-      "community": 35,
+      "community": 49,
       "norm_label": "apifile"
     },
     {
@@ -22392,7 +22428,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L25",
       "id": "services_telegram_api_botidentity",
-      "community": 35,
+      "community": 49,
       "norm_label": "botidentity"
     },
     {
@@ -22419,7 +22455,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L37",
       "id": "services_telegram_api_telegramapi_call",
-      "community": 187,
+      "community": 35,
       "norm_label": ".call()"
     },
     {
@@ -22428,7 +22464,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L60",
       "id": "services_telegram_api_telegramapi_verify",
-      "community": 187,
+      "community": 35,
       "norm_label": ".verify()"
     },
     {
@@ -22437,7 +22473,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L72",
       "id": "services_telegram_api_telegramapi_updates",
-      "community": 187,
+      "community": 35,
       "norm_label": ".updates()"
     },
     {
@@ -22455,7 +22491,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L89",
       "id": "services_telegram_api_telegramapi_download",
-      "community": 187,
+      "community": 35,
       "norm_label": ".download()"
     },
     {
@@ -22788,7 +22824,7 @@
       "source_file": "backend/app/services/listening.py",
       "source_location": "L1",
       "id": "backend_app_services_listening_py",
-      "community": 228,
+      "community": 68,
       "norm_label": "listening.py"
     },
     {
@@ -22797,7 +22833,7 @@
       "source_file": "backend/app/services/listening.py",
       "source_location": "L18",
       "id": "services_listening_progress_lock",
-      "community": 228,
+      "community": 68,
       "norm_label": "progress_lock()"
     },
     {
@@ -22806,7 +22842,7 @@
       "source_file": "backend/app/services/listening.py",
       "source_location": "L29",
       "id": "services_listening_active_ids",
-      "community": 228,
+      "community": 68,
       "norm_label": "active_ids()"
     },
     {
@@ -22815,7 +22851,7 @@
       "source_file": "backend/app/services/listening.py",
       "source_location": "L39",
       "id": "services_listening_current",
-      "community": 228,
+      "community": 68,
       "norm_label": "current()"
     },
     {
@@ -22824,7 +22860,7 @@
       "source_file": "backend/app/services/listening.py",
       "source_location": "L48",
       "id": "services_listening_choose",
-      "community": 228,
+      "community": 68,
       "norm_label": "choose()"
     },
     {
@@ -22833,7 +22869,7 @@
       "source_file": "backend/app/services/listening.py",
       "source_location": "L87",
       "id": "services_listening_record_event",
-      "community": 228,
+      "community": 68,
       "norm_label": "record_event()"
     },
     {
@@ -22842,7 +22878,7 @@
       "source_file": "backend/app/services/listening.py",
       "source_location": "L155",
       "id": "services_listening_journal",
-      "community": 228,
+      "community": 68,
       "norm_label": "journal()"
     },
     {
@@ -22851,7 +22887,7 @@
       "source_file": "backend/app/services/listening.py",
       "source_location": "L188",
       "id": "services_listening_journal_options",
-      "community": 228,
+      "community": 68,
       "norm_label": "journal_options()"
     },
     {
@@ -23958,7 +23994,7 @@
       "source_file": "backend/tests/test_exercises.py",
       "source_location": "L294",
       "id": "tests_test_exercises_test_duration_and_pixel_limits",
-      "community": 5,
+      "community": 187,
       "norm_label": "test_duration_and_pixel_limits()"
     },
     {
@@ -24777,7 +24813,7 @@
       "source_file": "backend/tests/game/test_avatar_art.py",
       "source_location": "L17",
       "id": "game_test_avatar_art_test_every_catalog_avatar_has_ten_transparent_stages",
-      "community": 246,
+      "community": 194,
       "norm_label": "test_every_catalog_avatar_has_ten_transparent_stages()"
     },
     {
@@ -25128,7 +25164,7 @@
       "source_file": "prototypes/omr/tests/test_omr.py",
       "source_location": "L186",
       "id": "tests_test_omr_test_main_records_runtime_version",
-      "community": 190,
+      "community": 194,
       "norm_label": "test_main_records_runtime_version()"
     },
     {
@@ -27909,7 +27945,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L35",
       "id": "telegram_bot_settings",
-      "community": 27,
+      "community": 117,
       "norm_label": "settings"
     },
     {
@@ -28125,7 +28161,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L269",
       "id": "telegram_bot_probe",
-      "community": 49,
+      "community": 27,
       "norm_label": "probe"
     },
     {
@@ -28134,7 +28170,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L274",
       "id": "telegram_bot_media_command",
-      "community": 49,
+      "community": 27,
       "norm_label": "media_command()"
     },
     {
@@ -28143,7 +28179,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L315",
       "id": "telegram_bot_convert_audio",
-      "community": 244,
+      "community": 27,
       "norm_label": "convert_audio()"
     },
     {
@@ -28224,7 +28260,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L574",
       "id": "telegram_bot_main",
-      "community": 27,
+      "community": 117,
       "norm_label": "main()"
     },
     {
@@ -28233,7 +28269,7 @@
       "source_file": "prototypes/telegram/tests/test_media.py",
       "source_location": "L1",
       "id": "prototypes_telegram_tests_test_media_py",
-      "community": 244,
+      "community": 27,
       "norm_label": "test_media.py"
     },
     {
@@ -28242,7 +28278,7 @@
       "source_file": "prototypes/telegram/tests/test_media.py",
       "source_location": "L10",
       "id": "tests_test_media_media_settings",
-      "community": 244,
+      "community": 27,
       "norm_label": "media_settings()"
     },
     {
@@ -28251,7 +28287,7 @@
       "source_file": "prototypes/telegram/tests/test_media.py",
       "source_location": "L25",
       "id": "tests_test_media_test_detects_and_converts_real_opus_without_trusting_extension",
-      "community": 244,
+      "community": 27,
       "norm_label": "test_detects_and_converts_real_opus_without_trusting_extension()"
     },
     {
@@ -28260,7 +28296,7 @@
       "source_file": "prototypes/telegram/tests/test_media.py",
       "source_location": "L55",
       "id": "tests_test_media_test_rejects_text_disguised_as_audio",
-      "community": 244,
+      "community": 27,
       "norm_label": "test_rejects_text_disguised_as_audio()"
     },
     {
@@ -28269,7 +28305,7 @@
       "source_file": "prototypes/telegram/tests/test_media.py",
       "source_location": "L64",
       "id": "tests_test_media_test_rejects_audio_over_duration_limit",
-      "community": 244,
+      "community": 27,
       "norm_label": "test_rejects_audio_over_duration_limit()"
     },
     {
@@ -29250,7 +29286,7 @@
       "source_file": "prototypes/pwa/output/diagnostics-https-browser.json",
       "source_location": "L2",
       "id": "output_diagnostics_https_browser_browser",
-      "community": 34,
+      "community": 80,
       "norm_label": "browser"
     },
     {
@@ -29259,7 +29295,7 @@
       "source_file": "prototypes/pwa/output/diagnostics-https-browser.json",
       "source_location": "L3",
       "id": "output_diagnostics_https_browser_browser_protocolversion",
-      "community": 34,
+      "community": 80,
       "norm_label": "protocolversion"
     },
     {
@@ -29268,7 +29304,7 @@
       "source_file": "prototypes/pwa/output/diagnostics-https-browser.json",
       "source_location": "L4",
       "id": "output_diagnostics_https_browser_browser_product",
-      "community": 34,
+      "community": 80,
       "norm_label": "product"
     },
     {
@@ -29277,7 +29313,7 @@
       "source_file": "prototypes/pwa/output/diagnostics-https-browser.json",
       "source_location": "L5",
       "id": "output_diagnostics_https_browser_browser_revision",
-      "community": 34,
+      "community": 80,
       "norm_label": "revision"
     },
     {
@@ -29286,7 +29322,7 @@
       "source_file": "prototypes/pwa/output/diagnostics-https-browser.json",
       "source_location": "L6",
       "id": "output_diagnostics_https_browser_browser_useragent",
-      "community": 34,
+      "community": 80,
       "norm_label": "useragent"
     },
     {
@@ -29295,7 +29331,7 @@
       "source_file": "prototypes/pwa/output/diagnostics-https-browser.json",
       "source_location": "L7",
       "id": "output_diagnostics_https_browser_browser_jsversion",
-      "community": 34,
+      "community": 80,
       "norm_label": "jsversion"
     },
     {
@@ -30447,7 +30483,7 @@
       "source_file": "prototypes/pwa/src/App.tsx",
       "source_location": "L1",
       "id": "prototypes_pwa_src_app_tsx",
-      "community": 92,
+      "community": 28,
       "norm_label": "app.tsx"
     },
     {
@@ -30456,7 +30492,7 @@
       "source_file": "prototypes/pwa/src/App.tsx",
       "source_location": "L16",
       "id": "src_app_receipt",
-      "community": 92,
+      "community": 28,
       "norm_label": "receipt()"
     },
     {
@@ -30465,7 +30501,7 @@
       "source_file": "prototypes/pwa/src/main.tsx",
       "source_location": "L1",
       "id": "prototypes_pwa_src_main_tsx",
-      "community": 18,
+      "community": 28,
       "norm_label": "main.tsx"
     },
     {
@@ -30483,7 +30519,7 @@
       "source_file": "prototypes/pwa/src/register.test.ts",
       "source_location": "L1",
       "id": "prototypes_pwa_src_register_test_ts",
-      "community": 92,
+      "community": 28,
       "norm_label": "register.test.ts"
     },
     {
@@ -30492,7 +30528,7 @@
       "source_file": "prototypes/pwa/src/register.test.ts",
       "source_location": "L6",
       "id": "src_register_test_workers",
-      "community": 92,
+      "community": 28,
       "norm_label": "workers"
     },
     {
@@ -30501,7 +30537,7 @@
       "source_file": "prototypes/pwa/src/register.test.ts",
       "source_location": "L47",
       "id": "src_register_test_ready",
-      "community": 92,
+      "community": 28,
       "norm_label": "ready"
     },
     {
@@ -30510,7 +30546,7 @@
       "source_file": "prototypes/pwa/src/register.test.ts",
       "source_location": "L58",
       "id": "src_register_test_assertion",
-      "community": 92,
+      "community": 28,
       "norm_label": "assertion"
     },
     {
@@ -30825,7 +30861,7 @@
       "source_file": "prototypes/pwa/src/register.ts",
       "source_location": "L1",
       "id": "prototypes_pwa_src_register_ts",
-      "community": 92,
+      "community": 28,
       "norm_label": "register.ts"
     },
     {
@@ -30834,7 +30870,7 @@
       "source_file": "prototypes/pwa/src/register.ts",
       "source_location": "L3",
       "id": "src_register_registerworker",
-      "community": 92,
+      "community": 28,
       "norm_label": "registerworker()"
     },
     {
@@ -30843,7 +30879,7 @@
       "source_file": "prototypes/pwa/src/config.ts",
       "source_location": "L1",
       "id": "prototypes_pwa_src_config_ts",
-      "community": 92,
+      "community": 28,
       "norm_label": "config.ts"
     },
     {
@@ -30852,7 +30888,7 @@
       "source_file": "prototypes/pwa/src/config.ts",
       "source_location": "L2",
       "id": "src_config_languages",
-      "community": 92,
+      "community": 28,
       "norm_label": "languages"
     },
     {
@@ -30861,7 +30897,7 @@
       "source_file": "prototypes/pwa/src/config.ts",
       "source_location": "L3",
       "id": "src_config_language",
-      "community": 92,
+      "community": 28,
       "norm_label": "language"
     },
     {
@@ -30870,7 +30906,7 @@
       "source_file": "prototypes/pwa/src/config.ts",
       "source_location": "L5",
       "id": "src_config_islanguage",
-      "community": 92,
+      "community": 28,
       "norm_label": "islanguage()"
     },
     {
@@ -30879,7 +30915,7 @@
       "source_file": "prototypes/pwa/src/config.ts",
       "source_location": "L9",
       "id": "src_config_positiveinteger",
-      "community": 92,
+      "community": 28,
       "norm_label": "positiveinteger()"
     },
     {
@@ -30888,7 +30924,7 @@
       "source_file": "prototypes/pwa/src/config.ts",
       "source_location": "L22",
       "id": "src_config_maxsharebytes",
-      "community": 92,
+      "community": 28,
       "norm_label": "maxsharebytes"
     },
     {
@@ -30897,7 +30933,7 @@
       "source_file": "prototypes/pwa/src/config.ts",
       "source_location": "L26",
       "id": "src_config_workertimeout",
-      "community": 92,
+      "community": 28,
       "norm_label": "workertimeout"
     },
     {
@@ -30906,7 +30942,7 @@
       "source_file": "prototypes/pwa/src/i18n/index.ts",
       "source_location": "L1",
       "id": "prototypes_pwa_src_i18n_index_ts",
-      "community": 92,
+      "community": 28,
       "norm_label": "index.ts"
     },
     {
@@ -35766,7 +35802,7 @@
       "source_file": "worker/generate_spoken.py",
       "source_location": "L55",
       "id": "worker_generate_spoken_vocabulary",
-      "community": 80,
+      "community": 7,
       "norm_label": "vocabulary()"
     },
     {
@@ -37012,10 +37048,19 @@
       "norm_label": "current phase"
     },
     {
-      "label": "Game first-entry repair",
+      "label": "Circular game shortcut",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
       "source_location": "L16",
+      "id": "docs_status_circular_game_shortcut",
+      "community": 111,
+      "norm_label": "circular game shortcut"
+    },
+    {
+      "label": "Game first-entry repair",
+      "file_type": "document",
+      "source_file": "docs/STATUS.md",
+      "source_location": "L43",
       "id": "docs_status_game_first_entry_repair",
       "community": 111,
       "norm_label": "game first-entry repair"
@@ -37024,7 +37069,7 @@
       "label": "Game avatar artwork",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L49",
+      "source_location": "L76",
       "id": "docs_status_game_avatar_artwork",
       "community": 111,
       "norm_label": "game avatar artwork"
@@ -37033,7 +37078,7 @@
       "label": "Appearance settings",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L101",
+      "source_location": "L128",
       "id": "docs_status_appearance_settings",
       "community": 22,
       "norm_label": "appearance settings"
@@ -37042,7 +37087,7 @@
       "label": "CI follow-up: run 37008189410",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L143",
+      "source_location": "L170",
       "id": "docs_status_ci_follow_up_run_37008189410",
       "community": 111,
       "norm_label": "ci follow-up: run 37008189410"
@@ -37051,7 +37096,7 @@
       "label": "Student original image and score",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L164",
+      "source_location": "L191",
       "id": "docs_status_student_original_image_and_score",
       "community": 111,
       "norm_label": "student original image and score"
@@ -37060,7 +37105,7 @@
       "label": "Material Design baseline",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L183",
+      "source_location": "L210",
       "id": "docs_status_material_design_baseline",
       "community": 111,
       "norm_label": "material design baseline"
@@ -37069,7 +37114,7 @@
       "label": "Responsive layout follow-up",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L193",
+      "source_location": "L220",
       "id": "docs_status_responsive_layout_follow_up",
       "community": 111,
       "norm_label": "responsive layout follow-up"
@@ -37078,7 +37123,7 @@
       "label": "Installation and usability follow-up",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L221",
+      "source_location": "L248",
       "id": "docs_status_installation_and_usability_follow_up",
       "community": 111,
       "norm_label": "installation and usability follow-up"
@@ -37087,7 +37132,7 @@
       "label": "Password policy follow-up",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L256",
+      "source_location": "L283",
       "id": "docs_status_password_policy_follow_up",
       "community": 111,
       "norm_label": "password policy follow-up"
@@ -37096,7 +37141,7 @@
       "label": "Previous PHASE 7 completion",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L268",
+      "source_location": "L295",
       "id": "docs_status_previous_phase_7_completion",
       "community": 111,
       "norm_label": "previous phase 7 completion"
@@ -37105,7 +37150,7 @@
       "label": "PHASE 7 implementation",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L276",
+      "source_location": "L303",
       "id": "docs_status_phase_7_implementation",
       "community": 111,
       "norm_label": "phase 7 implementation"
@@ -37114,7 +37159,7 @@
       "label": "PHASE 7 validation and deployment boundary",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L294",
+      "source_location": "L321",
       "id": "docs_status_phase_7_validation_and_deployment_boundary",
       "community": 111,
       "norm_label": "phase 7 validation and deployment boundary"
@@ -37123,7 +37168,7 @@
       "label": "Previous PHASE 6 acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L336",
+      "source_location": "L363",
       "id": "docs_status_previous_phase_6_acceptance",
       "community": 111,
       "norm_label": "previous phase 6 acceptance"
@@ -37132,7 +37177,7 @@
       "label": "PHASE 6 follow-up fixes after owner acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L347",
+      "source_location": "L374",
       "id": "docs_status_phase_6_follow_up_fixes_after_owner_acceptance",
       "community": 111,
       "norm_label": "phase 6 follow-up fixes after owner acceptance"
@@ -37141,7 +37186,7 @@
       "label": "Completed PHASE 7 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L395",
+      "source_location": "L422",
       "id": "docs_status_completed_phase_7_plan",
       "community": 111,
       "norm_label": "completed phase 7 plan"
@@ -37150,7 +37195,7 @@
       "label": "Separate Material Design feature",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L408",
+      "source_location": "L435",
       "id": "docs_status_separate_material_design_feature",
       "community": 111,
       "norm_label": "separate material design feature"
@@ -37159,7 +37204,7 @@
       "label": "Completed Material Design checklist",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L448",
+      "source_location": "L475",
       "id": "docs_status_completed_material_design_checklist",
       "community": 111,
       "norm_label": "completed material design checklist"
@@ -37168,7 +37213,7 @@
       "label": "Completed PHASE 6 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L461",
+      "source_location": "L488",
       "id": "docs_status_completed_phase_6_plan",
       "community": 111,
       "norm_label": "completed phase 6 plan"
@@ -37177,7 +37222,7 @@
       "label": "Completed PHASE 5 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L473",
+      "source_location": "L500",
       "id": "docs_status_completed_phase_5_plan",
       "community": 111,
       "norm_label": "completed phase 5 plan"
@@ -37186,7 +37231,7 @@
       "label": "Completed PHASE 4 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L482",
+      "source_location": "L509",
       "id": "docs_status_completed_phase_4_plan",
       "community": 111,
       "norm_label": "completed phase 4 plan"
@@ -37195,7 +37240,7 @@
       "label": "Completed PHASE 3 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L489",
+      "source_location": "L516",
       "id": "docs_status_completed_phase_3_plan",
       "community": 111,
       "norm_label": "completed phase 3 plan"
@@ -37204,7 +37249,7 @@
       "label": "Completed PHASE 2 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L499",
+      "source_location": "L526",
       "id": "docs_status_completed_phase_2_plan",
       "community": 111,
       "norm_label": "completed phase 2 plan"
@@ -37213,7 +37258,7 @@
       "label": "Completed PHASE 1 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L508",
+      "source_location": "L535",
       "id": "docs_status_completed_phase_1_plan",
       "community": 111,
       "norm_label": "completed phase 1 plan"
@@ -37222,7 +37267,7 @@
       "label": "Completed PHASE 0 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L519",
+      "source_location": "L546",
       "id": "docs_status_completed_phase_0_plan",
       "community": 111,
       "norm_label": "completed phase 0 plan"
@@ -37231,7 +37276,7 @@
       "label": "Completed PHASE 0.5 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L532",
+      "source_location": "L559",
       "id": "docs_status_completed_phase_0_5_plan",
       "community": 111,
       "norm_label": "completed phase 0.5 plan"
@@ -37240,7 +37285,7 @@
       "label": "Done",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L542",
+      "source_location": "L569",
       "id": "docs_status_done",
       "community": 111,
       "norm_label": "done"
@@ -37249,7 +37294,7 @@
       "label": "PHASE 0.5 deployment record",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L822",
+      "source_location": "L849",
       "id": "docs_status_phase_0_5_deployment_record",
       "community": 111,
       "norm_label": "phase 0.5 deployment record"
@@ -37258,7 +37303,7 @@
       "label": "Next step",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L850",
+      "source_location": "L877",
       "id": "docs_status_next_step",
       "community": 111,
       "norm_label": "next step"
@@ -37267,7 +37312,7 @@
       "label": "PHASE 0 boundaries",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L858",
+      "source_location": "L885",
       "id": "docs_status_phase_0_boundaries",
       "community": 111,
       "norm_label": "phase 0 boundaries"
@@ -37276,7 +37321,7 @@
       "label": "Acceptance details",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L869",
+      "source_location": "L896",
       "id": "docs_status_acceptance_details",
       "community": 111,
       "norm_label": "acceptance details"
@@ -37285,7 +37330,7 @@
       "label": "Final PHASE 1 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L874",
+      "source_location": "L901",
       "id": "docs_status_final_phase_1_manual_acceptance",
       "community": 111,
       "norm_label": "final phase 1 manual acceptance"
@@ -37294,7 +37339,7 @@
       "label": "Final PHASE 2 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L886",
+      "source_location": "L913",
       "id": "docs_status_final_phase_2_manual_acceptance",
       "community": 111,
       "norm_label": "final phase 2 manual acceptance"
@@ -37303,7 +37348,7 @@
       "label": "Final PHASE 3 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L896",
+      "source_location": "L923",
       "id": "docs_status_final_phase_3_manual_acceptance",
       "community": 111,
       "norm_label": "final phase 3 manual acceptance"
@@ -37312,7 +37357,7 @@
       "label": "Final PHASE 4 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L906",
+      "source_location": "L933",
       "id": "docs_status_final_phase_4_manual_acceptance",
       "community": 111,
       "norm_label": "final phase 4 manual acceptance"
@@ -37321,7 +37366,7 @@
       "label": "Final PHASE 5 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L916",
+      "source_location": "L943",
       "id": "docs_status_final_phase_5_manual_acceptance",
       "community": 111,
       "norm_label": "final phase 5 manual acceptance"
@@ -37330,7 +37375,7 @@
       "label": "Manual checks the owner must do",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L925",
+      "source_location": "L952",
       "id": "docs_status_manual_checks_the_owner_must_do",
       "community": 111,
       "norm_label": "manual checks the owner must do"
@@ -37339,7 +37384,7 @@
       "label": "Known issues",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L947",
+      "source_location": "L974",
       "id": "docs_status_known_issues",
       "community": 111,
       "norm_label": "known issues"
@@ -39208,10 +39253,19 @@
       "norm_label": "first entry"
     },
     {
+      "label": "code:sh (uv run --locked python - <<'PY')",
+      "file_type": "document",
+      "source_file": "docs/developer/game-avatars.md",
+      "source_location": "L25",
+      "id": "developer_game_avatars_codeblock_1",
+      "community": 264,
+      "norm_label": "code:sh (uv run --locked python - <<'py')"
+    },
+    {
       "label": "Built-in characters",
       "file_type": "document",
       "source_file": "docs/developer/game-avatars.md",
-      "source_location": "L21",
+      "source_location": "L49",
       "id": "developer_game_avatars_built_in_characters",
       "community": 264,
       "norm_label": "built-in characters"
@@ -39220,7 +39274,7 @@
       "label": "Progress and emotions",
       "file_type": "document",
       "source_file": "docs/developer/game-avatars.md",
-      "source_location": "L39",
+      "source_location": "L67",
       "id": "developer_game_avatars_progress_and_emotions",
       "community": 264,
       "norm_label": "progress and emotions"
@@ -39229,7 +39283,7 @@
       "label": "Source correspondence",
       "file_type": "document",
       "source_file": "docs/developer/game-avatars.md",
-      "source_location": "L58",
+      "source_location": "L86",
       "id": "developer_game_avatars_source_correspondence",
       "community": 264,
       "norm_label": "source correspondence"
@@ -39238,7 +39292,7 @@
       "label": "Custom creation",
       "file_type": "document",
       "source_file": "docs/developer/game-avatars.md",
-      "source_location": "L86",
+      "source_location": "L114",
       "id": "developer_game_avatars_custom_creation",
       "community": 264,
       "norm_label": "custom creation"
@@ -39670,7 +39724,7 @@
       "label": "Game avatar management",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L31",
+      "source_location": "L33",
       "id": "user_manager_game_avatar_management",
       "community": 189,
       "norm_label": "game avatar management"
@@ -39679,7 +39733,7 @@
       "label": "Change the visual theme",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L48",
+      "source_location": "L50",
       "id": "user_manager_change_the_visual_theme",
       "community": 189,
       "norm_label": "change the visual theme"
@@ -39688,7 +39742,7 @@
       "label": "Customize appearance",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L64",
+      "source_location": "L66",
       "id": "user_manager_customize_appearance",
       "community": 189,
       "norm_label": "customize appearance"
@@ -39697,7 +39751,7 @@
       "label": "Mobile layout checklist",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L84",
+      "source_location": "L86",
       "id": "user_manager_mobile_layout_checklist",
       "community": 189,
       "norm_label": "mobile layout checklist"
@@ -39706,7 +39760,7 @@
       "label": "Material Design visual checklist",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L98",
+      "source_location": "L100",
       "id": "user_manager_material_design_visual_checklist",
       "community": 189,
       "norm_label": "material design visual checklist"
@@ -39715,7 +39769,7 @@
       "label": "Review recognized notes",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L112",
+      "source_location": "L114",
       "id": "user_manager_review_recognized_notes",
       "community": 189,
       "norm_label": "review recognized notes"
@@ -39724,7 +39778,7 @@
       "label": "Final PHASE 5 manual checklist",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L141",
+      "source_location": "L143",
       "id": "user_manager_final_phase_5_manual_checklist",
       "community": 189,
       "norm_label": "final phase 5 manual checklist"
@@ -39733,7 +39787,7 @@
       "label": "Sign in to the application",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L154",
+      "source_location": "L156",
       "id": "user_manager_sign_in_to_the_application",
       "community": 189,
       "norm_label": "sign in to the application"
@@ -39742,7 +39796,7 @@
       "label": "Create and manage users",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L172",
+      "source_location": "L174",
       "id": "user_manager_create_and_manage_users",
       "community": 189,
       "norm_label": "create and manage users"
@@ -39751,7 +39805,7 @@
       "label": "Change your settings",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L206",
+      "source_location": "L208",
       "id": "user_manager_change_your_settings",
       "community": 189,
       "norm_label": "change your settings"
@@ -39760,7 +39814,7 @@
       "label": "Final PHASE 1 manual checklist",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L224",
+      "source_location": "L226",
       "id": "user_manager_final_phase_1_manual_checklist",
       "community": 189,
       "norm_label": "final phase 1 manual checklist"
@@ -39769,7 +39823,7 @@
       "label": "Manage exercises",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L247",
+      "source_location": "L249",
       "id": "user_manager_manage_exercises",
       "community": 189,
       "norm_label": "manage exercises"
@@ -39778,7 +39832,7 @@
       "label": "Final PHASE 2 manual checklist",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L295",
+      "source_location": "L297",
       "id": "user_manager_final_phase_2_manual_checklist",
       "community": 189,
       "norm_label": "final phase 2 manual checklist"
@@ -39787,7 +39841,7 @@
       "label": "Read the listening journal",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L312",
+      "source_location": "L314",
       "id": "user_manager_read_the_listening_journal",
       "community": 189,
       "norm_label": "read the listening journal"
@@ -39796,7 +39850,7 @@
       "label": "Final PHASE 3 manager checklist",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L336",
+      "source_location": "L338",
       "id": "user_manager_final_phase_3_manager_checklist",
       "community": 189,
       "norm_label": "final phase 3 manager checklist"
@@ -39805,7 +39859,7 @@
       "label": "Import audio from Telegram",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L349",
+      "source_location": "L351",
       "id": "user_manager_import_audio_from_telegram",
       "community": 189,
       "norm_label": "import audio from telegram"
@@ -39814,7 +39868,7 @@
       "label": "Final PHASE 4 manual checklist",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L388",
+      "source_location": "L390",
       "id": "user_manager_final_phase_4_manual_checklist",
       "community": 189,
       "norm_label": "final phase 4 manual checklist"
@@ -39823,7 +39877,7 @@
       "label": "Recover from an unknown page",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L404",
+      "source_location": "L406",
       "id": "user_manager_recover_from_an_unknown_page",
       "community": 189,
       "norm_label": "recover from an unknown page"
@@ -39832,7 +39886,7 @@
       "label": "Final PHASE 7 manual checklist",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L416",
+      "source_location": "L418",
       "id": "user_manager_final_phase_7_manual_checklist",
       "community": 189,
       "norm_label": "final phase 7 manual checklist"
@@ -39841,7 +39895,7 @@
       "label": "Check spoken notes",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L424",
+      "source_location": "L426",
       "id": "user_manager_check_spoken_notes",
       "community": 189,
       "norm_label": "check spoken notes"
@@ -39895,7 +39949,7 @@
       "label": "Choose a game avatar",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L23",
+      "source_location": "L25",
       "id": "user_student_choose_a_game_avatar",
       "community": 193,
       "norm_label": "choose a game avatar"
@@ -39904,7 +39958,7 @@
       "label": "Change the visual theme",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L52",
+      "source_location": "L54",
       "id": "user_student_change_the_visual_theme",
       "community": 193,
       "norm_label": "change the visual theme"
@@ -39913,7 +39967,7 @@
       "label": "Mobile layout checklist",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L62",
+      "source_location": "L64",
       "id": "user_student_mobile_layout_checklist",
       "community": 193,
       "norm_label": "mobile layout checklist"
@@ -39922,7 +39976,7 @@
       "label": "Material Design visual checklist",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L75",
+      "source_location": "L77",
       "id": "user_student_material_design_visual_checklist",
       "community": 193,
       "norm_label": "material design visual checklist"
@@ -39931,7 +39985,7 @@
       "label": "Sign in and change a temporary password",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L90",
+      "source_location": "L92",
       "id": "user_student_sign_in_and_change_a_temporary_password",
       "community": 193,
       "norm_label": "sign in and change a temporary password"
@@ -39940,7 +39994,7 @@
       "label": "Save your settings",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L106",
+      "source_location": "L108",
       "id": "user_student_save_your_settings",
       "community": 193,
       "norm_label": "save your settings"
@@ -39949,7 +40003,7 @@
       "label": "Customize appearance",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L122",
+      "source_location": "L124",
       "id": "user_student_customize_appearance",
       "community": 193,
       "norm_label": "customize appearance"
@@ -39958,7 +40012,7 @@
       "label": "Access and sign-out",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L150",
+      "source_location": "L152",
       "id": "user_student_access_and_sign_out",
       "community": 193,
       "norm_label": "access and sign-out"
@@ -39967,7 +40021,7 @@
       "label": "Final PHASE 1 manual check",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L177",
+      "source_location": "L179",
       "id": "user_student_final_phase_1_manual_check",
       "community": 193,
       "norm_label": "final phase 1 manual check"
@@ -39976,7 +40030,7 @@
       "label": "Listen to exercises",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L186",
+      "source_location": "L188",
       "id": "user_student_listen_to_exercises",
       "community": 193,
       "norm_label": "listen to exercises"
@@ -39985,7 +40039,7 @@
       "label": "Show note names",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L225",
+      "source_location": "L227",
       "id": "user_student_show_note_names",
       "community": 193,
       "norm_label": "show note names"
@@ -39994,7 +40048,7 @@
       "label": "Final PHASE 3 listening checklist",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L240",
+      "source_location": "L242",
       "id": "user_student_final_phase_3_listening_checklist",
       "community": 193,
       "norm_label": "final phase 3 listening checklist"
@@ -40003,7 +40057,7 @@
       "label": "Install the application on a mobile device",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L252",
+      "source_location": "L254",
       "id": "user_student_install_the_application_on_a_mobile_device",
       "community": 193,
       "norm_label": "install the application on a mobile device"
@@ -40012,7 +40066,7 @@
       "label": "Use spoken notes",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L270",
+      "source_location": "L272",
       "id": "user_student_use_spoken_notes",
       "community": 193,
       "norm_label": "use spoken notes"
@@ -40021,7 +40075,7 @@
       "label": "Final PHASE 6 manual checklist",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L304",
+      "source_location": "L306",
       "id": "user_student_final_phase_6_manual_checklist",
       "community": 193,
       "norm_label": "final phase 6 manual checklist"
@@ -40030,7 +40084,7 @@
       "label": "Recover from an unknown page",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L321",
+      "source_location": "L323",
       "id": "user_student_recover_from_an_unknown_page",
       "community": 193,
       "norm_label": "recover from an unknown page"
@@ -40039,7 +40093,7 @@
       "label": "Final PHASE 7 manual checklist",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L334",
+      "source_location": "L336",
       "id": "user_student_final_phase_7_manual_checklist",
       "community": 193,
       "norm_label": "final phase 7 manual checklist"
@@ -52384,6 +52438,16 @@
       "confidence_score": 1.0,
       "source": "frontend_src_app_test_tsx",
       "target": "src_app_test_renderapp"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/App.test.tsx",
+      "source_location": "L50",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "frontend_src_app_test_tsx",
+      "target": "src_app_test_shortcut"
     },
     {
       "relation": "contains",
@@ -70892,6 +70956,16 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_ru_json",
+      "target": "locales_ru_game_playhint"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/i18n/locales/ru.json",
+      "source_location": "L280",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "frontend_src_i18n_locales_ru_json",
       "target": "locales_ru_game_players_create"
     },
     {
@@ -74783,6 +74857,16 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_en_json",
+      "target": "locales_en_game_playhint"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/i18n/locales/en.json",
+      "source_location": "L280",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "frontend_src_i18n_locales_en_json",
       "target": "locales_en_game_players_create"
     },
     {
@@ -78504,6 +78588,16 @@
       "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_es_json",
       "target": "locales_es_game_title"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/i18n/locales/es.json",
+      "source_location": "L280",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "frontend_src_i18n_locales_es_json",
+      "target": "locales_es_game_playhint"
     },
     {
       "relation": "contains",
@@ -109242,6 +109336,16 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "docs_status_current_phase",
+      "target": "docs_status_circular_game_shortcut"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/STATUS.md",
+      "source_location": "L16",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "docs_status_current_phase",
       "target": "docs_status_game_first_entry_repair"
     },
     {
@@ -111343,6 +111447,16 @@
       "confidence_score": 1.0,
       "source": "developer_game_avatars_game_avatars",
       "target": "developer_game_avatars_custom_creation"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/developer/game-avatars.md",
+      "source_location": "L25",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "developer_game_avatars_first_entry",
+      "target": "developer_game_avatars_codeblock_1"
     },
     {
       "relation": "contains",
@@ -118166,5 +118280,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "4282a8e626b9244942eb15e08289a93abcfaa91f"
+  "built_at_commit": "1bd2ad0f16fb792f622d60e0df67a85cc154bef6"
 }

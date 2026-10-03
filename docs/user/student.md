@@ -9,7 +9,7 @@ Prerequisites:
 
 ## Start Guess the Note
 
-1. Click **Guess the Note** in the account menu.
+1. Click the round Unicorn badge at the upper left.
    The list shows profiles assigned to your account.
 2. Ask a manager to create a profile if the list is empty.
    Students cannot create profiles.
@@ -19,6 +19,8 @@ Prerequisites:
    The first round starts.
 
 A failed request shows an error and **Try again**, not the empty-profile message.
+The badge shows **Play Guess the Note** on hover or keyboard focus.
+The existing **Guess the Note** menu link remains available.
 
 ## Choose a game avatar
 

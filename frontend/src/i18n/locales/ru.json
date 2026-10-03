@@ -277,6 +277,7 @@
   "errors.UNKNOWN": "Запрос не выполнен. Попробуйте снова.",
   "game.selectPlayer": "Кто играет?",
   "game.title": "Угадай ноту",
+  "game.playHint": "Играть в Угадай Ноту",
   "game.players.create": "Создать игрока",
   "game.players.name": "Имя игрока",
   "game.players.account": "Учётная запись",

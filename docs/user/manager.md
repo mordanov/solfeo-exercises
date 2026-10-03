@@ -9,7 +9,7 @@ Prerequisites:
 
 ## Create a game profile
 
-1. Click **Guess the Note** in the account menu.
+1. Click the round Unicorn badge at the upper left.
    The player list opens.
 2. Click **Create player**.
    The form shows a name field and an account selector.
@@ -24,6 +24,8 @@ Prerequisites:
    The first round starts.
 
 Only managers create profiles.
+The badge shows **Play Guess the Note** on hover or keyboard focus.
+The existing **Guess the Note** menu link remains available.
 Each student sees profiles assigned to their account.
 The application does not create a profile automatically when an account signs in.
 A failed request shows an error and **Try again**, not an empty player list.

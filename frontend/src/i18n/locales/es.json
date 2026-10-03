@@ -277,6 +277,7 @@
   "errors.UNKNOWN": "La solicitud falló. Inténtelo de nuevo.",
   "game.selectPlayer": "¿Quién juega?",
   "game.title": "Adivina la nota",
+  "game.playHint": "Jugar a Adivina la nota",
   "game.players.create": "Crear jugador",
   "game.players.name": "Nombre del jugador",
   "game.players.account": "Cuenta",

@@ -380,8 +380,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/App.tsx": {
-    "mtime": 1791025290.4851618,
-    "ast_hash": "a130cc659f97391ffffd0bef7b346447",
+    "mtime": 1791052624.7372591,
+    "ast_hash": "92ca17bac538947903f556630c18894d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/appearance.test.tsx": {
@@ -395,8 +395,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/App.test.tsx": {
-    "mtime": 1791025290.4849732,
-    "ast_hash": "a33b9c26a86f34bb17a23ed904bd7f9e",
+    "mtime": 1791052377.3857718,
+    "ast_hash": "b71728c36d5d653a99eada001477e080",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/theme.test.tsx": {
@@ -825,18 +825,18 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/i18n/locales/ru.json": {
-    "mtime": 1791049716.9646714,
-    "ast_hash": "77c9cfb9bb7de610444c2bb272fd41dc",
+    "mtime": 1791052092.143106,
+    "ast_hash": "713eca389e0a813d0e698f63a51be114",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/i18n/locales/en.json": {
-    "mtime": 1791049716.9633508,
-    "ast_hash": "0986ff81afb2b9c8bb90760834805384",
+    "mtime": 1791052092.1444075,
+    "ast_hash": "58835ec5f2066e39346556c9a9fc392c",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/i18n/locales/es.json": {
-    "mtime": 1791049716.965812,
-    "ast_hash": "9ed196534fda3d6083a7b513e678515f",
+    "mtime": 1791052092.1456888,
+    "ast_hash": "c1cf7fe0ede9371991bf25d3e4cf22e3",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/deploy/release.py": {
@@ -1870,8 +1870,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/STATUS.md": {
-    "mtime": 1791050498.190126,
-    "ast_hash": "2ac0e8c312ff770ab270132c8c434762",
+    "mtime": 1791052525.680132,
+    "ast_hash": "eb981dfd75ea93a4ca6f10b397f38195",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/DECISIONS.md": {
@@ -1955,8 +1955,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/developer/game-avatars.md": {
-    "mtime": 1791049926.2992449,
-    "ast_hash": "251b588a9a5054f26aad2d218dc8ce26",
+    "mtime": 1791052377.3890622,
+    "ast_hash": "f3bd63f71f81aec365330d83dbb85f78",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/developer/data-model.md": {
@@ -1985,8 +1985,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/user/manager.md": {
-    "mtime": 1791049926.2958443,
-    "ast_hash": "6f1c08d63ec1f7cfe8ce8cc7f123c080",
+    "mtime": 1791052377.3870363,
+    "ast_hash": "7375bd8f8130375e7a9a44c84b782346",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/user/telegram-prototype.md": {
@@ -1995,8 +1995,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/user/student.md": {
-    "mtime": 1791049926.297026,
-    "ast_hash": "ff1dd5054733a4bd6a18d7b0da8cbc7d",
+    "mtime": 1791052377.3881161,
+    "ast_hash": "8d868f3c1769a5295694cbf1404051f0",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/user/pwa-prototype.md": {
@@ -7387,6 +7387,16 @@
   "/Users/aleksandr/Local/solfeo-exercises/backend/tests/game/test_player_creation.py": {
     "mtime": 1791050311.6314535,
     "ast_hash": "951faa69f6686c537ace3c162d841787",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/game-badge.png": {
+    "mtime": 1791052097.414861,
+    "ast_hash": "bca63bc2e20e1fbb7f6db82bb98ec840",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/guess-the-note-prompts/Rainbow Unicorn Music Badge.png": {
+    "mtime": 1791051154.93008,
+    "ast_hash": "cd4d7bfda77d736f777cebfc5919cc55",
     "semantic_hash": ""
   }
 }
