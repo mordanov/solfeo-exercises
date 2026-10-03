@@ -18,6 +18,7 @@ const gameTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
+          minHeight: 44,
           borderRadius: 999,
           fontWeight: 600,
           textTransform: "none",

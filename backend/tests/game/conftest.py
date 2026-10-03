@@ -5,9 +5,10 @@ import httpx
 import pytest
 from alembic import command
 from alembic.config import Config
-from sqlalchemy import delete
+from sqlalchemy import delete, update
 
 from app.database import Database
+from app.game.models import Player
 from app.models import Base
 from app.settings import Settings
 
@@ -34,12 +35,14 @@ def database(settings: Settings) -> Iterator[Database]:
         config = Config(str(Path(__file__).parents[2] / "alembic.ini"))
         config.attributes["connection"] = conn
         command.upgrade(config, "head")
+        conn.execute(update(Player).values(custom_avatar_id=None))
         for table in reversed(Base.metadata.sorted_tables):
             conn.execute(delete(table))
     try:
         yield db
     finally:
         with db.engine.begin() as conn:
+            conn.execute(update(Player).values(custom_avatar_id=None))
             for table in reversed(Base.metadata.sorted_tables):
                 conn.execute(delete(table))
         db.close()

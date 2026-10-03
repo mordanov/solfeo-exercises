@@ -31,6 +31,9 @@
 !frontend/public/manifest-es.webmanifest
 !frontend/public/solfege/
 !frontend/public/solfege/**
+!frontend/public/assets/
+!frontend/public/assets/avatars/
+!frontend/public/assets/avatars/**
 !deploy/
 !deploy/nginx.conf
 !deploy/nginx-start.sh

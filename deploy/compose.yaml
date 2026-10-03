@@ -49,6 +49,11 @@ x-backend: &backend
     DATABASE_MAX_OVERFLOW: ${DATABASE_MAX_OVERFLOW:-5}
     DATABASE_POOL_TIMEOUT_SECONDS: ${DATABASE_POOL_TIMEOUT_SECONDS:-10}
     DATABASE_CONNECT_TIMEOUT_SECONDS: ${DATABASE_CONNECT_TIMEOUT_SECONDS:-5}
+    OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    AVATAR_IMAGE_MODEL: ${AVATAR_IMAGE_MODEL:-dall-e-3}
+    AVATAR_GEN_DAILY_LIMIT: ${AVATAR_GEN_DAILY_LIMIT:-3}
+    AVATAR_GEN_GRACE_MS: ${AVATAR_GEN_GRACE_MS:-500}
+    AVATAR_ROUND_EXPIRE_S: ${AVATAR_ROUND_EXPIRE_S:-3600}
   read_only: true
   cap_drop: [ALL]
   security_opt: [no-new-privileges:true]
@@ -156,6 +161,17 @@ services:
       timeout: 3s
       retries: 10
       start_period: 10s
+
+  avatars:
+    <<: *backend
+    command: ["python", "-m", "worker.generate_avatar"]
+    restart: unless-stopped
+    volumes:
+      - media_data:/app/media
+    tmpfs: [/tmp]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
 
   frontend:
     environment:

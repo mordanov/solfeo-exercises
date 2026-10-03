@@ -6,9 +6,10 @@ import { gameFetch } from "./client";
 export interface Player {
   id: number;
   name: string;
-  avatar_animal?: string;
-  custom_avatar_id?: number;
+  avatar_animal: string | null;
+  custom_avatar_id: number | null;
   xp: number;
+  avatar_level: number;
 }
 
 export interface Note {
@@ -117,8 +118,9 @@ export const useStartRound = () =>
       gameFetch.post<{ round_id: number; task: Task }>("/rounds", csrf, body),
   });
 
-export const useSubmitTask = (roundId: number) =>
-  useMutation({
+export const useSubmitTask = (roundId: number) => {
+  const cache = useQueryClient();
+  return useMutation({
     mutationFn: ({
       csrf,
       ...body
@@ -129,6 +131,51 @@ export const useSubmitTask = (roundId: number) =>
       timed_out?: boolean;
     }) =>
       gameFetch.post<SubmitResponse>(`/rounds/${roundId}/submit`, csrf, body),
+    onSuccess: (data) => {
+      if (data.result) {
+        void cache.invalidateQueries({ queryKey: ["game", "players"] });
+        void cache.invalidateQueries({ queryKey: ["game", "player"] });
+      }
+    },
+  });
+};
+
+export const usePlayer = (playerId: number) =>
+  useQuery({
+    queryKey: ["game", "player", playerId],
+    queryFn: () => gameFetch.get<Player>(`/players/${playerId}`),
+  });
+
+export const useChooseAvatar = (playerId: number) => {
+  const cache = useQueryClient();
+  return useMutation({
+    mutationFn: ({ csrf, animal }: { csrf: string; animal: string }) =>
+      gameFetch.post<Player>(`/players/${playerId}/avatar`, csrf, {
+        avatar_animal: animal,
+      }),
+    onSuccess: (player) => {
+      cache.setQueryData(["game", "player", playerId], player);
+      void cache.invalidateQueries({ queryKey: ["game", "players"] });
+    },
+  });
+};
+
+export const useAcceptAvatar = (playerId: number) => {
+  const cache = useQueryClient();
+  return useMutation({
+    mutationFn: ({ csrf, jobId }: { csrf: string; jobId: number }) =>
+      gameFetch.post(`/avatars/${jobId}/use`, csrf),
+    onSuccess: () => {
+      void cache.invalidateQueries({ queryKey: ["game", "player", playerId] });
+      void cache.invalidateQueries({ queryKey: ["game", "players"] });
+    },
+  });
+};
+
+export const useDiscardAvatar = () =>
+  useMutation({
+    mutationFn: ({ csrf, jobId }: { csrf: string; jobId: number }) =>
+      gameFetch.delete(`/avatars/${jobId}`, csrf),
   });
 
 // ── Stats ──────────────────────────────────────────────────────────────────
@@ -173,6 +220,12 @@ export const useAvatarStatus = (jobId: number | null) =>
     enabled: jobId !== null,
     refetchInterval: (query) =>
       query.state.data?.status === "pending" ? 2000 : false,
+  });
+
+export const useAvatarJobs = (playerId: number) =>
+  useQuery({
+    queryKey: ["game", "avatar-jobs", playerId],
+    queryFn: () => gameFetch.get<AvatarJob[]>(`/avatars?player_id=${playerId}`),
   });
 
 // ── Seasons ────────────────────────────────────────────────────────────────

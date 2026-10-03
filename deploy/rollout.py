@@ -194,11 +194,13 @@ class Rollout:
                         "FILE_",
                         "TELEGRAM_",
                         "OMR_",
+                        "AVATAR_",
                         "DEPLOY_",
                         "DOCKER_LOG_",
                     )
                 )
                 or key == "DEFAULT_LANGUAGE"
+                or key == "OPENAI_API_KEY"
             ):
                 environment.pop(key)
         environment.pop("BACKEND_IMAGE", None)
@@ -379,6 +381,7 @@ class Rollout:
             "frontend",
             *(["telegram"] if "telegram" in services else []),
             *(["omr"] if "omr" in services else []),
+            *(["avatars"] if "avatars" in services else []),
         ]
 
     def deploy(self, artifact: Path, expected_sha: str, ci_run_id: int) -> None:

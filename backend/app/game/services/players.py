@@ -1,7 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.game.models import Player, Season
+from app.game.models import CustomAvatar, Player, Season
 from app.services.auth import ServiceError
 
 
@@ -17,6 +17,24 @@ def list_players(session: Session, account_id: int | None = None) -> list[Player
     if account_id is not None:
         q = q.where(Player.account_id == account_id)
     return list(session.scalars(q.order_by(Player.id)))
+
+
+def choose_avatar(
+    session: Session, player_id: int, animal: str, account_id: int | None
+) -> Player:
+    from app.game.config import ANIMAL_IDS
+
+    if animal not in ANIMAL_IDS:
+        raise ServiceError("INVALID_AVATAR_ANIMAL", 422)
+    with session.begin():
+        player = session.get(Player, player_id)
+        if player is None or (
+            account_id is not None and player.account_id != account_id
+        ):
+            raise ServiceError("PLAYER_NOT_FOUND", 404)
+        player.avatar_animal = animal
+        player.custom_avatar_id = None
+    return player
 
 
 def create_player(
@@ -61,7 +79,11 @@ def update_player(
             if avatar_animal not in ANIMAL_IDS:
                 raise ServiceError("INVALID_AVATAR_ANIMAL", 422)
             player.avatar_animal = avatar_animal
+            player.custom_avatar_id = None
         if custom_avatar_id is not None:
+            job = session.get(CustomAvatar, custom_avatar_id)
+            if job is None or job.player_id != player_id or job.status != "ready":
+                raise ServiceError("INVALID_CUSTOM_AVATAR", 422)
             player.custom_avatar_id = custom_avatar_id
         session.flush()
     return player

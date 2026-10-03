@@ -8,7 +8,7 @@ A child looks at the notes and listens to the audio.
 
 ## Roles
 - manager: manages exercises (add/edit/delete/reorder), manages users (create, reset password, deactivate), reads the listening journal.
-- student: can only listen to exercises (in order, or random) and change own settings.
+- student: listens to exercises, changes own settings, and plays Guess the Note with owned player profiles.
 
 ## Stack (fixed, do not change)
 - Backend: Python 3.12, FastAPI, SQLAlchemy 2.x (typed), Alembic, PostgreSQL, pytest, ruff, mypy (strict).
@@ -47,6 +47,17 @@ A child looks at the notes and listens to the audio.
 - Backend returns stable error codes (not translated text); frontend translates them.
 - Before login, use the first supported browser language, including regional variants; use English when none matches.
 - Saved account language takes priority after login.
+
+## Game avatar artwork
+
+- Provide 11 characters: unicorn, dragon, phoenix, griffin, sphinx cat, fox, pegasus, mermaid, lion, panda, and rhino.
+- Show the character's XP-based appearance through 10 avatar levels.
+- Use transparent owner-supplied artwork and preserve the original sheets.
+- Permit repeated source appearances where sheets contain fewer than 10 groups.
+- Show happy for 5–7 correct answers, neutral for 3–4, and sad for 0–2.
+- Use the question-mark choice for explicit custom generation with quota, preview, acceptance, and discard.
+- Preserve custom selection across reloads and serve generated images only after an authentication check.
+- Keep built-in selection available when the paid generation service is not configured.
 
 ## Mobile installation
 - Provide a favicon, dedicated iPad icons, and localized application manifests.

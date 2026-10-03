@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends
 from pydantic import BaseModel, Field
 
 from app.api.auth import Db, Manager, Member, require_csrf
+from app.game.config import LEVEL_THRESHOLDS
 from app.game.models import Player
 
 router = APIRouter(prefix="/api/game/players", tags=["game-players"])
@@ -26,6 +27,7 @@ def _player_out(player: Player) -> dict[str, object]:
         "avatar_animal": player.avatar_animal,
         "custom_avatar_id": player.custom_avatar_id,
         "xp": player.xp,
+        "avatar_level": sum(player.xp >= threshold for threshold in LEVEL_THRESHOLDS),
         "created_at": player.created_at.isoformat(),
     }
 
@@ -48,6 +50,21 @@ def create_player(
     from app.game.services.players import create_player as svc_create
 
     player = svc_create(session, identity.user.id, body.name, body.avatar_animal)
+    return _player_out(player)
+
+
+class AvatarChoiceBody(BaseModel):
+    avatar_animal: str
+
+
+@router.post("/{player_id}/avatar", dependencies=[Depends(require_csrf)])
+def choose_avatar(
+    player_id: int, body: AvatarChoiceBody, identity: Member, session: Db
+) -> dict[str, object]:
+    from app.game.services.players import choose_avatar as svc_choose
+
+    account_id = None if identity.user.role == "manager" else identity.user.id
+    player = svc_choose(session, player_id, body.avatar_animal, account_id)
     return _player_out(player)
 
 

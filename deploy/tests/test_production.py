@@ -51,9 +51,100 @@ def test_development_migration_uses_the_same_backend_image() -> None:
         services["telegram"]["environment"]["DATABASE_PASSWORD"] == "synthetic-password"
     )
     assert services["telegram"]["environment"]["TELEGRAM_TOKEN"] == ""
+    assert services["avatars"]["image"] == services["backend"]["image"]
+    assert services["avatars"]["command"] == ["python", "-m", "worker.generate_avatar"]
+    assert services["avatars"]["environment"]["OPENAI_API_KEY"] == ""
+    assert services["avatars"]["volumes"] == services["backend"]["volumes"]
     assert int(services["omr"]["mem_limit"]) == 1024 * 1024 * 1024
     assert services["omr"]["memswap_limit"] == services["omr"]["mem_limit"]
     assert services["omr"]["tmpfs"] == ["/tmp:size=256m,mode=1777,exec"]
+
+
+def test_avatar_publication_and_authenticated_generated_images(stand: "Stand") -> None:
+    from app.game.config import ANIMAL_IDS
+
+    address = stand.run("port", "frontend", "8080").stdout.strip()
+    with httpx.Client(base_url=f"http://{address}") as client:
+        for path in ("/game", "/game/setup/1", "/game/admin", "/game/result/1"):
+            assert client.get(path).status_code == 200
+        for animal in (*ANIMAL_IDS, "custom"):
+            path = f"/assets/avatars/selection/{animal}.png"
+            response = client.get(path)
+            assert response.status_code == 200
+            assert response.headers["content-type"] == "image/png"
+            assert (
+                response.content
+                == (ROOT / "frontend/public" / path.lstrip("/")).read_bytes()
+            )
+        for animal in ANIMAL_IDS:
+            for level in range(1, 11):
+                for state in ("neutral", "happy", "sad"):
+                    path = f"/assets/avatars/{animal}/{animal}_{level:02}_{state}.png"
+                    response = client.get(path)
+                    assert response.status_code == 200
+                    assert (
+                        response.content
+                        == (ROOT / "frontend/public" / path.lstrip("/")).read_bytes()
+                    )
+        login = client.post(
+            "/api/auth/login",
+            headers={"Origin": f"http://{address}"},
+            json={"username": "release-check", "password": stand.passwords[3]},
+        )
+        assert login.status_code == 200
+        job_id = int(
+            stand.python(
+                "backend",
+                """
+from pathlib import Path
+from PIL import Image
+from sqlalchemy import select
+from app.database import Database
+from app.models import User
+from app.settings import Settings
+from app.game.models import CustomAvatar, Player
+settings = Settings()
+database = Database(settings)
+with database.session() as session, session.begin():
+    user = session.scalar(select(User).where(User.username == "release-check"))
+    player = Player(
+        account_id=user.id, name="Private avatar", avatar_animal="panda", xp=0
+    )
+    session.add(player)
+    session.flush()
+    job = CustomAvatar(
+        account_id=user.id, player_id=player.id,
+        description="Synthetic test", status="ready"
+    )
+    session.add(job)
+    session.flush()
+    for state in ("base", "happy", "sad"):
+        path = (
+            settings.media_root / "avatars" / "custom" / str(job.id) / (state + ".png")
+        )
+        path.parent.mkdir(parents=True, exist_ok=True)
+        Image.new("RGBA", (32, 32), "red").save(path)
+        setattr(job, state + "_path", str(path.relative_to(settings.media_root)))
+    print(job.id)
+database.close()
+""",
+            ).strip()
+        )
+        url = f"/api/game/avatars/{job_id}/files/happy"
+        response = client.get(url)
+        assert response.status_code == 200
+        assert response.headers["content-type"] == "image/png"
+        assert set(response.headers["cache-control"].split(", ")) == {"no-store"}
+        assert response.content.startswith(b"\x89PNG")
+        assert client.head(url).status_code == 200
+        assert (
+            client.get(
+                f"/_protected_media/avatars/custom/{job_id}/happy.png"
+            ).status_code
+            == 404
+        )
+        client.cookies.clear()
+        assert client.get(url).status_code == 401
 
 
 def test_nginx_404_headers_logs_and_rotation(stand: "Stand") -> None:
@@ -210,6 +301,7 @@ def stand(tmp_path_factory: pytest.TempPathFactory) -> Iterator[Stand]:
         "EMERGENCY_MANAGER_PASSWORD": passwords[3],
         "LOGIN_NGINX_RATE_PER_SECOND": "1000",
         "LOGIN_NGINX_BURST": "1000",
+        "OPENAI_API_KEY": "",
     }
     environment = directory / ".env"
     environment.touch(mode=0o600)

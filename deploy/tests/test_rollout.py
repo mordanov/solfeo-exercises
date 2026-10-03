@@ -107,6 +107,24 @@ class FakeRollout(Rollout):
         self.calls.append("promote:" + release.name)
 
 
+def test_avatar_worker_participates_in_deployment_and_rollback(tmp_path: Path) -> None:
+    class AvatarRollout(FakeRollout):
+        def compose(self, release: Path, *args: str) -> str:
+            result = super().compose(release, *args)
+            return result + "avatars\n" if args == ("config", "--services") else result
+
+    rollout = AvatarRollout(tmp_path, "health")
+    previous = tmp_path / "releases" / ("b" * 64)
+    with pytest.raises(DeploymentError, match="ROLLED_BACK"):
+        rollout.activate(rollout.candidate, previous)
+    assert all("avatars" in call for call in rollout.calls if ":stop " in call)
+    assert all(
+        "avatars" in call
+        for call in rollout.calls
+        if ":up " in call and "--wait backend" in call
+    )
+
+
 @pytest.mark.parametrize("failure", ["candidate:run", "health"])
 def test_failed_release_restores_previous_without_downgrade(
     tmp_path: Path, failure: str

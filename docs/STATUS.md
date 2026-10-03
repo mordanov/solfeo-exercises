@@ -5,15 +5,69 @@ This document records progress and remaining checks for the current phase.
 Prerequisites:
 - Read `docs/PHASES.md` and `docs/DECISIONS.md`.
 
-Last updated: 2026-10-02 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a0523`.
+Last updated: 2026-10-03 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a0523`.
 
 ## Current phase
-Appearance settings: separate feature after the Material Design follow-ups.
-The owner accepts the proposal and requests `feat/appearance-settings` on 2026-10-02.
-The branch starts from source `c4ee4f1`; accepted PHASE 7 remains closed.
-Implementation and local verification are complete; production publication and owner device checks remain separate.
+Game avatar artwork: a separate follow-up to the merged Guess the Note feature.
+Branch `feat/game-avatar-artwork` starts from merge source `24c1cfc`.
+Accepted PHASE 7 remains closed.
+The earlier appearance and listening changes below remain historical session records.
+
+### Game avatar artwork
+The owner supplies the original sheets and authorizes repeated artwork on 2026-10-03.
+The catalog includes 11 characters, with the requested Lion, Panda, and Rhino additions.
+Extraction produces 330 level/emotion files and 12 selection choices.
+Both original-folder outputs and public copies use transparent PNGs.
+The 384 × 384 px canvases contain full character crops without circular clipping.
+The source sheets remain unchanged.
+
+The chooser saves a built-in character through a narrowly authorized, CSRF-protected endpoint.
+Students change only owned players; manager-only player editing retains its authorization boundary.
+All player views use the backend's derived level from existing XP thresholds.
+Completed rounds refresh player caches.
+Results show happy for 5–7 correct answers, neutral for 3–4, and sad for 0–2.
+The winning threshold and XP bonus do not change.
+
+The question-mark card opens explicit custom creation with quota, polling, preview, acceptance, discard, and errors.
+Recent jobs remain available when the chooser reopens.
+Selecting built-in artwork clears a generated selection.
+Private generated images require authentication and use nginx's internal media route.
+The existing generation worker now participates in development, production deployment, and rollback.
+An empty private credential keeps it idle and makes generation explicitly unavailable.
+No paid generation occurs during this work.
+
+The selection source lacks a unicorn portrait; its first neutral appearance supplies the extra choice.
+Five sheets repeat their final group across levels 9 and 10.
+Three 11-group sheets retain their final forms through the documented correspondence.
+Mermaid extraction follows the owner's left-to-right emotion pattern despite inconsistent original expressions.
+Some original figures overlap; extraction cannot recover hidden artwork.
+See `docs/developer/game-avatars.md` and `avatars/crops.json` for reproducibility and exact correspondence.
+
+Browser checks cover 42 combinations of width, language, theme, screen, and result.
+They use Chrome at 320, 390, 430, and 1280 px with synthetic authenticated profiles.
+Actual UI rounds produce 7, 4, and 2 correct answers and the corresponding avatar emotions.
+These checks confirm saved Lion/Panda/Rhino choices, XP-level refresh, loaded public images, and no measured overflow.
+Game controls use 44 px minimum heights; narrow setup buttons and result actions remain inside the viewport.
+The chooser reports an unconfigured generation service instead of claiming success.
+
+Docker verification compares all 342 published PNGs with their source copies.
+An actual nginx check confirms authenticated GET/HEAD, private PNG delivery, uncached responses, and anonymous rejection.
+Game page routes now return successful document responses instead of the old SPA fallback's status `404`.
+The knowledge graph receives an AST-only update.
+No dependency, migration, private environment file, push, or production service changes occur.
+All 217 backend tests, 251 frontend tests, 58 deployment checks, and 6 quality hooks pass.
+The final paired Docker images build successfully.
+
+Remaining manual checks:
+1. Inspect every character, level, and emotion against the original artwork.
+2. Check the chooser and result actions on real phones and an iPad in Chrome and Safari.
+3. Complete rounds near an XP threshold and confirm the saved avatar and increased level after reload.
+4. Configure the private generation service only if needed, then confirm a real preview, acceptance, and all 3 emotions.
+5. Publish the paired release before production acceptance.
 
 ### Appearance settings
+The owner accepts this separate proposal and requests `feat/appearance-settings` on 2026-10-02.
+That branch starts from source `c4ee4f1`.
 Settings includes independent light and dark schemes: Classic, Forest, Warm, and Plum.
 Each scheme coordinates buttons, their text, the page background, panels, ordinary text, and control outlines.
 Account preferences also select Roboto, System, or Serif and a base size of 16, 18, or 20 px.

@@ -105,6 +105,7 @@ export default function GameArea({ auth }: Props) {
       )}
       {screen.name === "result" && (
         <ResultScreen
+          playerId={screen.playerId}
           result={screen.result}
           onPlayAgain={() => {
             window.history.pushState(

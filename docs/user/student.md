@@ -7,6 +7,35 @@ Prerequisites:
 - Obtain your username and temporary password privately from a manager.
 - Open `https://solfeo.miveralta.ru/`.
 
+## Choose a game avatar
+
+1. Open **Guess the Note** and select a player.
+2. Click **Choose avatar** before starting a round.
+   The window shows 11 characters and the question mark.
+3. Click a character, including Lion, Panda, or Rhino.
+   The application saves the choice without changing XP.
+4. Complete game rounds.
+   The character appearance follows the player's XP level from 1 to 10.
+5. Inspect the result avatar.
+   It is happy for 5–7 correct answers, neutral for 3–4, and sad for 0–2.
+
+To create an original character:
+1. Click the question-mark card in the chooser.
+2. Enter a description.
+3. Click **Create avatar**.
+   The window shows the remaining quota and generation progress.
+4. Wait for the preview.
+5. Click **Use it** to save the generated character.
+   The selected character remains after a reload.
+6. Reopen the chooser if you close it during generation.
+   The existing job appears without another generation request.
+7. Click **Discard** to remove an unwanted result.
+
+Custom creation requires the operator's configured generation service.
+An unavailable service or a failed generation shows an error.
+The built-in characters remain available without that service.
+Some artwork repeats between levels because the original sheets contain different numbers of appearances.
+
 ## Change the visual theme
 
 1. Click **Use dark theme** or **Use light theme** above the account area.

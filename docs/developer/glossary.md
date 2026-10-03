@@ -70,3 +70,7 @@ Prerequisites:
 | Emotion | The style engine used by Material UI. |
 | Roboto | The application font, served from local assets. |
 | AST | Abstract syntax tree, which represents code structure for comparison. |
+| avatar | The character image associated with a game player. |
+| avatar level | A character appearance numbered from 1 to 10, derived from the player's total XP. |
+| XP | Experience points earned through correct game answers and round bonuses. |
+| sprite sheet | An original image containing multiple character appearances and emotions. |
