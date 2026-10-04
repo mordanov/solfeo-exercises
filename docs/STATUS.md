@@ -8,10 +8,59 @@ Prerequisites:
 Last updated: 2026-10-04 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a0523`.
 
 ## Current phase
-Note-only game rounds follow the merged sampled-piano task.
-This task merges main source `cf30486` into `feat/game-note-only-rounds`.
+Game statistics and season-reset controls follow the merged game features.
+This task uses `feat/game-statistics-reset` from main source `6455bf3`.
 Accepted PHASE 7 remains closed.
 Earlier game, appearance, and listening entries below remain historical session records.
+
+### Game statistics and season reset
+
+The owner reports missing statistics and progress-reset controls.
+Existing profile and manager screens have no visible entry from the player selector.
+The profile route is not parsed, and the old manager screen hides reset errors.
+The previous bulk action sends separate reset requests.
+The initial APIs omit wins, historical filters, missed notes, and actual trophies.
+
+The player selector now shows compact rounds and win rate, with a **Statistics** button.
+Managers also see **Player management**.
+Profiles show actual XP, level, trophies, and season history.
+Summary tables separate difficulty and note count and retain the combined matrix.
+Manager detail adds localized note analysis, a clef filter, latest-round confusions, and an accessible heatmap.
+Timeouts appear as missed notes.
+
+The API excludes unfinished and expired rounds.
+Ownership checks apply to statistics, history, and selected seasons.
+
+The reset retains the original season-based rule.
+It opens a new statistics season without removing history, XP, levels, trophies, or saved avatars.
+The owner does not confirm full progress deletion.
+Both single and bulk actions require explicit `RESET` confirmation.
+The dialog stays open on failure and cannot close during a pending request.
+Bulk reset uses the existing atomic endpoint.
+
+Player locks serialize resets, and season numbers remain monotonic.
+Successful resets refresh history, statistics, and mistake analysis.
+Completed rounds refresh profiles and statistics.
+Direct profile routes and browser navigation work.
+All new interface strings have Russian, English, and Spanish translations.
+No dependency, migration, paid generation, production reset, or deployment occurs.
+
+Verification includes 82 game tests, 4 documentation tests, and 324 frontend tests.
+The production frontend build and all 6 quality hooks pass.
+Real PostgreSQL checks cover ownership, preserved history and trophies, rejected resets, and concurrent resets with one active season.
+Chrome checks 36 cases across 3 languages, both naming settings, both roles, and widths of 320, 390, and 1280 px.
+Browser checks use synthetic API data; they do not reset production players.
+Checks verify exact weighted averages, bounded page width, visible counts, pending-dialog protection, error retry, and one bulk request.
+
+The knowledge graph receives an AST-only update.
+Disposable PostgreSQL and browser fixtures are removed after validation.
+The feature remains local until its own publication.
+
+Remaining manual checks:
+1. Publish the backend and frontend together through the verified release flow.
+2. Use disposable local profiles to check single and bulk resets, retained XP, and history.
+3. Open statistics in Chrome and Safari on a phone or iPad.
+4. Check both naming settings and all 3 interface languages.
 
 ### Main integration
 

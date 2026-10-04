@@ -7,9 +7,9 @@ from app.services.auth import ServiceError
 from app.settings import Settings
 
 
-def get_or_403(session: Session, player_id: int, account_id: int) -> Player:
+def get_or_403(session: Session, player_id: int, account_id: int | None) -> Player:
     player = session.get(Player, player_id)
-    if player is None or player.account_id != account_id:
+    if player is None or (account_id is not None and player.account_id != account_id):
         raise ServiceError("PLAYER_NOT_FOUND", 404)
     return player
 

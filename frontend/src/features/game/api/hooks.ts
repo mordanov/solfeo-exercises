@@ -11,6 +11,7 @@ export interface Player {
   custom_avatar_id: number | null;
   xp: number;
   avatar_level: number;
+  trophies?: number[];
 }
 
 export interface Note {
@@ -49,6 +50,9 @@ export interface StatsMatrix {
       rounds: number;
       total_correct: number;
       avg_score: number;
+      total_score: number;
+      wins: number;
+      win_rate: number;
     };
   };
 }
@@ -56,6 +60,12 @@ export interface StatsMatrix {
 export interface ConfusionData {
   heatmap: Record<string, Record<string, number>>;
   top_confusions: Array<{ expected: string; given: string; count: number }>;
+  round_top_confusions: Array<{
+    expected: string;
+    given: string;
+    count: number;
+  }>;
+  missed_notes: Array<{ name: string; count: number }>;
 }
 
 export interface QuotaData {
@@ -175,6 +185,8 @@ export const useSubmitTask = (roundId: number) => {
       if (data.result) {
         void cache.invalidateQueries({ queryKey: ["game", "players"] });
         void cache.invalidateQueries({ queryKey: ["game", "player"] });
+        void cache.invalidateQueries({ queryKey: ["game", "stats"] });
+        void cache.invalidateQueries({ queryKey: ["game", "confusion"] });
       }
     },
   });
@@ -235,17 +247,38 @@ export const useDiscardAvatar = () => {
 
 // ── Stats ──────────────────────────────────────────────────────────────────
 
-export const usePlayerStats = (playerId: number) =>
+export const usePlayerStats = (playerId: number, seasonId?: number) =>
   useQuery({
-    queryKey: ["game", "stats", playerId],
-    queryFn: () => gameFetch.get<StatsMatrix>(`/players/${playerId}/stats`),
+    queryKey: ["game", "stats", playerId, seasonId ?? "current"],
+    queryFn: ({ signal }) =>
+      gameFetch.get<StatsMatrix>(
+        `/players/${playerId}/stats${seasonId ? `?season_id=${seasonId}` : ""}`,
+        signal,
+      ),
   });
 
-export const usePlayerConfusion = (playerId: number) =>
+export const usePlayerConfusion = (
+  playerId: number,
+  seasonId?: number,
+  clef?: "treble" | "bass",
+) =>
   useQuery({
-    queryKey: ["game", "confusion", playerId],
-    queryFn: () =>
-      gameFetch.get<ConfusionData>(`/players/${playerId}/confusion`),
+    queryKey: [
+      "game",
+      "confusion",
+      playerId,
+      seasonId ?? "current",
+      clef ?? "all",
+    ],
+    queryFn: ({ signal }) => {
+      const params = new URLSearchParams();
+      if (seasonId) params.set("season_id", String(seasonId));
+      if (clef) params.set("clef", clef);
+      return gameFetch.get<ConfusionData>(
+        `/players/${playerId}/confusion${params.size ? `?${params}` : ""}`,
+        signal,
+      );
+    },
   });
 
 // ── Avatars ────────────────────────────────────────────────────────────────
@@ -307,7 +340,8 @@ export const useSavedAvatars = (playerId: number, offset: number) =>
 export const useSeasons = (playerId: number) =>
   useQuery({
     queryKey: ["game", "seasons", playerId],
-    queryFn: () => gameFetch.get<Season[]>(`/players/${playerId}/seasons`),
+    queryFn: ({ signal }) =>
+      gameFetch.get<Season[]>(`/players/${playerId}/seasons`, signal),
   });
 
 export const useResetSeason = () => {
@@ -322,12 +356,34 @@ export const useResetSeason = () => {
       playerId: number;
       confirmation: string;
     }) =>
-      gameFetch.post(`/players/${playerId}/seasons/reset`, csrf, {
+      gameFetch.post<Season>(`/players/${playerId}/seasons/reset`, csrf, {
         confirmation,
       }),
-    onSuccess: (_, { playerId }) => {
-      void qc.invalidateQueries({ queryKey: ["game", "seasons", playerId] });
-      void qc.invalidateQueries({ queryKey: ["game", "stats", playerId] });
-    },
+    onSuccess: (_, { playerId }) =>
+      Promise.all([
+        qc.invalidateQueries({ queryKey: ["game", "seasons", playerId] }),
+        qc.invalidateQueries({ queryKey: ["game", "stats", playerId] }),
+        qc.invalidateQueries({ queryKey: ["game", "confusion", playerId] }),
+      ]),
+  });
+};
+
+export const useResetAllSeasons = () => {
+  const cache = useQueryClient();
+  return useMutation({
+    mutationFn: ({
+      csrf,
+      confirmation,
+    }: {
+      csrf: string;
+      confirmation: string;
+    }) =>
+      gameFetch.post<Season[]>("/seasons/reset-all", csrf, { confirmation }),
+    onSuccess: () =>
+      Promise.all([
+        cache.invalidateQueries({ queryKey: ["game", "seasons"] }),
+        cache.invalidateQueries({ queryKey: ["game", "stats"] }),
+        cache.invalidateQueries({ queryKey: ["game", "confusion"] }),
+      ]),
   });
 };

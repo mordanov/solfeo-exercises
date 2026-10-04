@@ -4,6 +4,7 @@ from sqlalchemy import select
 
 from app.api.auth import Db, Manager, Member, require_csrf
 from app.game.models import Player, Season
+from app.game.services.players import get_or_403
 from app.services.auth import ServiceError
 
 router = APIRouter(tags=["game-seasons"])
@@ -31,6 +32,11 @@ def list_seasons(
 ) -> list[dict[str, object]]:
     from app.game.services.seasons import list_seasons as svc_list
 
+    get_or_403(
+        session,
+        player_id,
+        None if identity.user.role == "manager" else identity.user.id,
+    )
     seasons = svc_list(session, player_id)
     return [_season_out(s) for s in seasons]
 
@@ -68,6 +74,6 @@ def reset_all_seasons(
     from app.game.services.seasons import reset_season
 
     with session.begin():
-        players = list(session.scalars(select(Player)))
-        results = [reset_season(session, p.id) for p in players]
+        player_ids = list(session.scalars(select(Player.id).order_by(Player.id)))
+        results = [reset_season(session, player_id) for player_id in player_ids]
     return [_season_out(s) for s in results]

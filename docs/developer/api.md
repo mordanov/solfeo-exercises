@@ -82,6 +82,53 @@ Existing version 1 rounds retain strict octave grading without assistance bonuse
 Publish the backend and frontend together with migration `0010_round_rules`.
 Reload previously open game tabs after publication.
 
+## Game statistics and seasons
+
+The player selector links to `/game/profile/{id}`.
+Managers also see **Player management**, which opens `/game/admin`.
+Its detail route, `/game/admin/{id}`, includes profile statistics and mistake analysis.
+Direct links and browser navigation retain these routes.
+Students cannot render manager controls or read another account's statistics.
+
+| Method | Path | Access and result |
+|---|---|---|
+| GET | `/api/game/players/{id}` | Owner or manager; profile, XP, level, and actual all-time trophy thresholds |
+| GET | `/api/game/players/{id}/stats?season_id={season}` | Owner or manager; completed-round matrix by difficulty and note count |
+| GET | `/api/game/players/{id}/seasons` | Owner or manager; read-only season history |
+| GET | `/api/game/players/{id}/confusion?season_id={season}&clef=bass` | Manager; season heatmap, top confusions, latest-round confusions, and missed notes |
+| POST | `/api/game/players/{id}/seasons/reset` | Manager and CSRF; close the current season and create the next |
+| POST | `/api/game/seasons/reset-all` | Manager and CSRF; reset all players in one transaction |
+
+Omit `season_id` to use the current season.
+A positive supplied identifier must belong to the selected player.
+An unavailable season returns `404 SEASON_NOT_FOUND`.
+An unavailable or unowned player returns `404 PLAYER_NOT_FOUND`.
+The optional `clef` accepts `treble` or `bass`; omission includes both.
+Invalid query values return `422`.
+
+The matrix retains `rounds`, `total_correct`, and `avg_score`.
+Each cell also includes `total_score`, `wins`, and percentage `win_rate`.
+Wins require at least 5 correct answers, independent of assistance bonuses.
+The client uses score totals for exact weighted summaries across groups.
+Unfinished and expired rounds do not enter summaries or mistake analysis.
+SQL aggregates note positions; it does not load every attempt into application memory.
+`round_top_confusions` uses the latest completed round in the selected season.
+`missed_notes` counts expected notes from timeouts separately from wrong note names.
+
+Both reset bodies require `{"confirmation":"RESET"}`.
+Other text returns `400 CONFIRMATION_REQUIRED`.
+Resets lock player rows and preserve monotonically increasing season numbers.
+Bulk resets acquire locks in player-ID order.
+Neither reset removes rounds, attempts, XP, trophies, or saved avatars.
+
+An in-progress round retains its original season after a reset.
+Its eventual completion updates that season and all-time progress.
+
+The client refreshes seasons, statistics, and confusion caches after successful resets.
+A failed reset keeps its confirmation window open and shows the translated error.
+Completed rounds also invalidate profile and statistics caches.
+Publish the backend and frontend together; this change needs no new schema revision.
+
 ## Game avatars
 
 Player responses include `avatar_animal`, `custom_avatar_id`, `xp`, and derived `avatar_level` from 1 to 10.

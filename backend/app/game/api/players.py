@@ -2,10 +2,11 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, Query
 from pydantic import BaseModel, Field
+from sqlalchemy import select
 
 from app.api.auth import Configuration, Db, Manager, Member, require_csrf
 from app.game.config import LEVEL_THRESHOLDS
-from app.game.models import Player
+from app.game.models import Player, TrophyAwarded
 
 router = APIRouter(prefix="/api/game/players", tags=["game-players"])
 
@@ -118,7 +119,16 @@ def get_player(player_id: int, identity: Member, session: Db) -> dict[str, objec
             raise ServiceError("PLAYER_NOT_FOUND", 404)
     else:
         player = get_or_403(session, player_id, identity.user.id)
-    return _player_out(player)
+    return {
+        **_player_out(player),
+        "trophies": list(
+            session.scalars(
+                select(TrophyAwarded.threshold)
+                .where(TrophyAwarded.player_id == player_id)
+                .order_by(TrophyAwarded.threshold)
+            )
+        ),
+    }
 
 
 @router.patch("/{player_id}", dependencies=[Depends(require_csrf)])

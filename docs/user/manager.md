@@ -53,6 +53,51 @@ The difficulty changes the time limit, not the notes or scoring.
 The switches retain their choices between rounds until you leave the game area.
 Piano failures permit retry without consuming a round.
 
+## View game statistics
+
+1. Open **Guess the Note**.
+   Each card shows the current season's rounds and win rate.
+2. Click **Player management**.
+   The manager list shows statistics and reset controls for every player.
+3. Click **Statistics** beside a player.
+   The profile shows actual XP, level, trophies, and completed-round statistics.
+4. Select a **Season**.
+   The tables show rounds, wins, win rate, and average score for that season.
+5. Inspect the difficulty and note-count tables.
+   The combined matrix shows rounds, wins, win rate, and average score in each cell.
+6. Select a **Clef** under **Mistake analysis**.
+   Counts, the latest round's confusions, missed notes, and the heatmap use this filter.
+7. Click **Back to player management**.
+   The manager list opens.
+
+The heatmap uses expected notes as rows and entered notes as columns.
+Numbers identify counts without requiring color recognition.
+Note names follow your account's naming setting and interface language.
+Only completed rounds affect statistics and mistake analysis.
+
+## Reset game statistics
+
+**Caution:** A reset starts a new statistics season; it does not delete all-time progress.
+History, XP, levels, trophies, built-in selections, and saved custom avatars remain available.
+
+1. Open **Player management**.
+2. Click **Reset statistics** beside one player, or click **Reset all**.
+   A confirmation window identifies the target and explains the retained data.
+3. Enter `RESET`.
+   The confirmation button becomes available.
+4. Click the confirmation button.
+   The window remains open while the request runs.
+5. Wait for **Season reset**.
+   The window closes only after success.
+6. Open the player's **Statistics**.
+   The current season starts empty; previous seasons remain available.
+
+Click **Cancel** before submitting to keep the current season.
+A failed request keeps the window open and shows an error.
+Check the current season before retrying after a connection failure.
+The application sends one atomic request for **Reset all**.
+Students cannot access these controls or call reset endpoints.
+
 ## Listen to game notes
 
 1. Click the white round **Listen to notes** button below the staff during a round.
