@@ -42,6 +42,26 @@ The treble clef identifies G4 on the second line from the bottom.
 The bass clef identifies F3 on the fourth line from the bottom.
 Changing the interface font or theme does not change these symbols or note positions.
 
+## View game statistics
+
+1. Open **Guess the Note**.
+   Each card shows the current season's rounds and win rate.
+2. Click **Statistics** below your player card.
+   The profile shows XP, level, trophies, and the current season.
+3. Inspect rounds, wins, win rate, and average score.
+   The tables separate difficulty and note count, including their combined matrix.
+4. Select a previous **Season**.
+   The profile shows its saved results without changing your progress.
+5. Click **Back to players**.
+   The player list opens.
+
+Only completed rounds affect statistics.
+An unfinished or expired round does not count.
+Assistance bonuses affect average score, not the requirement for 5 correct answers to win.
+A manager can start a new statistics season.
+This operation preserves your history, XP, level, trophies, and saved avatars.
+Students cannot reset statistics or read another account's results.
+
 ## Listen to game notes
 
 1. Click the white round **Listen to notes** button below the staff.

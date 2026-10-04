@@ -74,6 +74,11 @@ Prerequisites:
 | player profile | A named game character owned by an account, with saved progress and an avatar. |
 | round | A group of 7 questions in Guess the Note. |
 | season | A numbered group of game rounds associated with one player profile. |
+| statistics reset | Closing the active season and opening a new season without removing history or all-time progress. |
+| win rate | The percentage of completed rounds with at least 5 correct answers. |
+| confusion | An expected note name replaced by another entered note name. |
+| heatmap | A table of confusion counts with expected notes as rows and entered notes as columns. |
+| missed note | An expected note in a game question that ends with a timeout. |
 | avatar level | A character appearance numbered from 1 to 10, derived from the player's total XP. |
 | XP | Experience points earned from correct game answers and a winning round, excluding assistance bonuses. |
 | assistance bonus | Points added once per completed game round for disabled hint or correct-answer options. |

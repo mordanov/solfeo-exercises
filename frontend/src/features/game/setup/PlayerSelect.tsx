@@ -1,8 +1,16 @@
-import { Box, Button, Card, CardActionArea, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardActionArea,
+  CardActions,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { usePlayers } from "../api/hooks";
+import { usePlayers, usePlayerStats } from "../api/hooks";
+import StatisticsSummary from "../profile/StatisticsSummary";
 import AvatarImage from "./AvatarImage";
 import CreatePlayerDialog from "./CreatePlayerDialog";
 import { type Auth } from "../../../api/auth";
@@ -11,9 +19,33 @@ import { ErrorMessage } from "../../../components/AccountUi";
 interface Props {
   auth: Auth;
   onSelect: (playerId: number) => void;
+  onProfile?: (playerId: number) => void;
+  onManage?: () => void;
 }
 
-export default function PlayerSelect({ auth, onSelect }: Props) {
+function PlayerSummary({ playerId }: { playerId: number }) {
+  const { t } = useTranslation();
+  const query = usePlayerStats(playerId);
+  if (query.isPending)
+    return <Typography role="status">{t("common.loading")}</Typography>;
+  if (query.isError)
+    return (
+      <>
+        <ErrorMessage error={query.error} />
+        <Button size="small" onClick={() => void query.refetch()}>
+          {t("common.retry")}
+        </Button>
+      </>
+    );
+  return <StatisticsSummary stats={query.data} compact />;
+}
+
+export default function PlayerSelect({
+  auth,
+  onSelect,
+  onProfile,
+  onManage,
+}: Props) {
   const { t } = useTranslation();
   const query = usePlayers();
   const players = query.data ?? [];
@@ -39,6 +71,9 @@ export default function PlayerSelect({ auth, onSelect }: Props) {
           <Button variant="contained" onClick={() => setCreating(true)}>
             {t("game.players.create")}
           </Button>
+          {onManage && (
+            <Button onClick={onManage}>{t("game.admin.manage")}</Button>
+          )}
         </Box>
       )}
       {creating && (
@@ -71,7 +106,7 @@ export default function PlayerSelect({ auth, onSelect }: Props) {
         }}
       >
         {players.map((p) => (
-          <Card key={p.id} sx={{ width: 140 }}>
+          <Card key={p.id} sx={{ width: 160, maxWidth: "100%" }}>
             <CardActionArea
               onClick={() => onSelect(p.id)}
               sx={{
@@ -102,6 +137,18 @@ export default function PlayerSelect({ auth, onSelect }: Props) {
                 {t("game.profile.level", { level: p.avatar_level })} · {p.xp} XP
               </Typography>
             </CardActionArea>
+            {onProfile && (
+              <>
+                <Box sx={{ px: 2 }}>
+                  <PlayerSummary playerId={p.id} />
+                </Box>
+                <CardActions sx={{ justifyContent: "center" }}>
+                  <Button onClick={() => onProfile(p.id)}>
+                    {t("game.profile.stats")}
+                  </Button>
+                </CardActions>
+              </>
+            )}
           </Card>
         ))}
       </Box>

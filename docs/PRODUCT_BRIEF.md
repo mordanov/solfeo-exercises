@@ -69,6 +69,15 @@ A child looks at the notes and listens to the audio.
 - Exclude occupied accounts and the emergency manager from profile creation.
 - Show the all-assigned popup when no eligible accounts remain.
 - Preserve existing profiles, progress, previous rounds, and manager-only creation.
+- Make each player's statistics accessible from the selection screen, with compact rounds and win rate.
+- Show rounds, wins, win rate, and average score by season, difficulty, note count, and the combined matrix.
+- Show actual all-time XP, avatar level, and earned trophies.
+- Permit students to read only their own profiles and past seasons.
+- Give managers visible access to all profiles, season history, and mistake analysis.
+- Show localized confusion counts, latest-round confusions, an accessible heatmap, and missed notes with a clef filter.
+- Let only managers reset statistics for one player or all players, after explicit confirmation.
+- Reset statistics by opening a new season; preserve history, XP, levels, trophies, and saved avatars.
+- Exclude unfinished and expired rounds from all statistics and mistake analysis.
 
 ## Game avatar artwork
 

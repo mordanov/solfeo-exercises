@@ -7,6 +7,15 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-10-04: The owner reports missing game statistics and reset controls.
+  Expose the existing profile and manager routes through visible game controls.
+  Retain the original season-based reset: close the active season and open a new one.
+  Do not remove history, XP, levels, trophies, or saved avatars.
+  The owner does not confirm a change to full progress deletion.
+  Use the existing atomic bulk endpoint instead of separate requests for every player.
+  Statistics use completed rounds; wins depend on correct answers, not assistance-adjusted scores.
+  Historical seasons remain read-only and ownership-protected.
+
 - 2026-10-04: The owner replaces octave selection with 7 note-name buttons.
   Treble questions use C4–A5; the owner explicitly confirms E2–C4 for bass.
   Grading compares names and their order, not octaves.

@@ -47,8 +47,23 @@ Upgrading from `0009_avatar_sheets` preserves active avatar jobs and saved metad
 | `telegram_state` | Bot identity, durable next offset, last successful heartbeat |
 | `omr_jobs` | Exercise/image versions, current-result flag, status, attempts, lease token, timing, errors, private score filename, reviewer |
 | `players` | Account ownership, name, built-in or custom selection, total XP |
+| `seasons` | Player, number, start/end times; a partial unique index permits one active season per player |
+| `rounds` | Player and season, difficulty, note count, immutable rules, status, scores, and timestamps |
+| `task_attempts` | Round and season, clef, expected/given notes, correctness, timeout, and response time |
+| `trophies_awarded` | Player and completed-round threshold; a unique index prevents duplicate awards |
 | `custom_avatars` | Creator/player references, description, status, asset version, phase, saved-image count, claim token, attempts, timing, errors |
 | `avatar_generation_log` | Creator, creation time, moderation flag, billable quota record |
+
+Game statistics use completed rounds only.
+The round index covers player, season, difficulty, and note count.
+The attempt index covers season and round.
+
+Statistics resets lock player rows, close current seasons, and create new seasons in one transaction.
+Season numbers continue from the largest recorded number, even without an active season.
+XP, trophies, rounds, attempts, and avatar selections remain unchanged.
+
+Historical seasons remain available through ownership-protected APIs.
+No new migration accompanies the statistics interface.
 
 New custom avatars use asset version 2 with 30 level/emotion files.
 The saved-image constraint permits values from 0 through 30.
