@@ -21,6 +21,7 @@ Revision `0005_telegram` adds account associations, hashed linking codes, durabl
 Revision `0006_omr` adds versioned OMR jobs and manager review.
 Revision `0007_appearance` adds account appearance preferences with predefined choices and database checks.
 Revision `0008_game` adds game profiles, seasons, rounds, attempts, trophies, and custom avatar jobs.
+Revision `0009_avatar_sheets` adds persistent avatar versions, progress, leases, and linked quota records.
 Revision `0010_round_rules` adds immutable assistance switches and the rules version to each round.
 Existing rows retain version 1, strict octave grading, and their recorded totals.
 New rounds use version 2, note-name grading, and one score bonus from the disabled switches.
@@ -28,9 +29,8 @@ The migration defaults alone do not upgrade existing or manually inserted rounds
 The round service sets the new version explicitly.
 Finalization locks the round and awards XP and the score bonus once.
 
-**Caution:** The separate avatar-sheet branch also follows `0008_game`.
-Reconcile its `0009_avatar_sheets` migration with this branch before publishing a combined release.
-This branch does not contain that avatar change.
+The migration chain runs `0008_game` → `0009_avatar_sheets` → `0010_round_rules`, with one head.
+Upgrading from `0009_avatar_sheets` preserves active avatar jobs and saved metadata.
 
 | Table | Contents and constraints |
 |---|---|
@@ -46,6 +46,18 @@ This branch does not contain that avatar change.
 | `telegram_updates` | Telegram update primary key, owner, file reference, status, attempts, errors, converted media, applied exercise |
 | `telegram_state` | Bot identity, durable next offset, last successful heartbeat |
 | `omr_jobs` | Exercise/image versions, current-result flag, status, attempts, lease token, timing, errors, private score filename, reviewer |
+| `players` | Account ownership, name, built-in or custom selection, total XP |
+| `custom_avatars` | Creator/player references, description, status, asset version, phase, saved-image count, claim token, attempts, timing, errors |
+| `avatar_generation_log` | Creator, creation time, moderation flag, billable quota record |
+
+New custom avatars use asset version 2 with 30 level/emotion files.
+The saved-image constraint permits values from 0 through 30.
+Each new job links its exact quota record through `generation_log_id`.
+Account and player row locks serialize generation creation and quota consumption.
+Worker claims use row locks with `SKIP LOCKED` and durable lease tokens.
+Files reside in persistent private media storage, not database image columns.
+Older ready avatars retain asset version 1 and 3 emotion files.
+Migration closes older pending jobs as interrupted without another paid request.
 
 A partial unique index permits one current OMR job per exercise.
 Each job references an immutable original image.
@@ -127,7 +139,7 @@ Do not remove the data volume.
    ```
 
 3. Repeat the revision command.
-   Alembic reports `0006_omr (head)`.
+   Alembic reports `0010_round_rules (head)`.
 4. Open the local health page.
    Its existing behavior remains unchanged.
 

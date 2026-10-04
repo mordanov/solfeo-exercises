@@ -6,9 +6,21 @@ import httpx
 import pytest
 from alembic import command
 from alembic.config import Config
+from alembic.script import ScriptDirectory
 from fastapi import Depends
 from pydantic import SecretStr, ValidationError
-from sqlalchemy import Connection, Engine, String, event, func, inspect, select, text
+from sqlalchemy import (
+    Connection,
+    Engine,
+    String,
+    delete,
+    event,
+    func,
+    insert,
+    inspect,
+    select,
+    text,
+)
 from sqlalchemy.exc import IntegrityError, OperationalError
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column
 from sqlalchemy.pool import QueuePool
@@ -16,7 +28,7 @@ from sqlalchemy.pool import QueuePool
 from app.api.dependencies import get_session
 from app.database import Database
 from app.main import create_app
-from app.models import Base
+from app.models import Base, User
 from app.settings import Settings
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -151,12 +163,16 @@ def test_migration_upgrade_repeat_downgrade_and_upgrade(database: Database) -> N
         )
 
 
+@pytest.mark.parametrize("previous_revision", ["0008_game", "0009_avatar_sheets"])
 def test_round_rules_migration_preserves_previous_release_rows(
     database: Database,
+    previous_revision: str,
 ) -> None:
+    from app.game.models import CustomAvatar
+
     with database.engine.begin() as connection:
         config = migration_config(connection)
-        command.downgrade(config, "0008_game")
+        command.downgrade(config, previous_revision)
         user_id = connection.scalar(
             text(
                 "INSERT INTO users (username, password_hash, "
@@ -180,6 +196,26 @@ def test_round_rules_migration_preserves_previous_release_rows(
             ),
             {"player_id": player_id},
         )
+        avatar_id: int | None = None
+        if previous_revision == "0009_avatar_sheets":
+            avatar_id = connection.scalar(
+                insert(CustomAvatar)
+                .values(
+                    account_id=user_id,
+                    player_id=player_id,
+                    description="Synthetic active job",
+                    status="pending",
+                    asset_version=2,
+                    phase="generating",
+                    completed_images=0,
+                    attempts=1,
+                    lease_token="synthetic-active-lease",
+                    locked_at=func.now(),
+                    base_path="avatars/custom/synthetic/sheet.png",
+                )
+                .returning(CustomAvatar.id)
+            )
+            assert avatar_id is not None
         for status in ("active", "completed"):
             connection.execute(
                 text(
@@ -208,6 +244,32 @@ def test_round_rules_migration_preserves_previous_release_rows(
             ("active", 3, 5, 1, True, False),
             ("completed", 3, 5, 1, True, False),
         ]
+        if avatar_id is not None:
+            avatar = (
+                connection.execute(
+                    select(
+                        CustomAvatar.status,
+                        CustomAvatar.asset_version,
+                        CustomAvatar.phase,
+                        CustomAvatar.completed_images,
+                        CustomAvatar.attempts,
+                        CustomAvatar.lease_token,
+                        CustomAvatar.base_path,
+                    ).where(CustomAvatar.id == avatar_id)
+                )
+                .tuples()
+                .one()
+            )
+            assert avatar == (
+                "pending",
+                2,
+                "generating",
+                0,
+                1,
+                "synthetic-active-lease",
+                "avatars/custom/synthetic/sheet.png",
+            )
+            connection.execute(delete(CustomAvatar).where(CustomAvatar.id == avatar_id))
         command.check(config)
         connection.execute(
             text("DELETE FROM rounds WHERE player_id = :player_id"),
@@ -223,6 +285,81 @@ def test_round_rules_migration_preserves_previous_release_rows(
         connection.execute(
             text("DELETE FROM users WHERE id = :user_id"), {"user_id": user_id}
         )
+
+
+def test_round_rules_is_the_single_head_after_avatar_sheets() -> None:
+    scripts = ScriptDirectory.from_config(Config(str(ROOT / "backend/alembic.ini")))
+    assert scripts.get_heads() == ["0010_round_rules"]
+    revision = scripts.get_revision("0010_round_rules")
+    assert revision is not None
+    assert revision.down_revision == "0009_avatar_sheets"
+
+
+def test_avatar_migration_preserves_ready_art_without_retrying_legacy_jobs(
+    database: Database,
+) -> None:
+    from app.game.models import CustomAvatar, Player
+
+    with database.engine.begin() as connection:
+        config = migration_config(connection)
+        command.downgrade(config, "0008_game")
+        account_id = connection.scalar(
+            insert(User)
+            .values(
+                username="synthetic-avatar-migration",
+                first_name="Migration",
+                last_name="Test",
+                role="manager",
+                password_hash="synthetic-unused-hash",
+            )
+            .returning(User.id)
+        )
+        player_id = connection.scalar(
+            insert(Player)
+            .values(account_id=account_id, name="Migration")
+            .returning(Player.id)
+        )
+        job_ids = [
+            connection.scalar(
+                text(
+                    "INSERT INTO custom_avatars "
+                    "(account_id, player_id, description, status, base_path) "
+                    "VALUES (:account, :player, 'Synthetic', :status, :path) "
+                    "RETURNING id"
+                ),
+                {
+                    "account": account_id,
+                    "player": player_id,
+                    "status": status,
+                    "path": "avatars/custom/synthetic/base.png",
+                },
+            )
+            for status in ("ready", "pending", "failed")
+        ]
+        command.upgrade(config, "head")
+        rows = list(
+            connection.execute(
+                select(
+                    CustomAvatar.status,
+                    CustomAvatar.asset_version,
+                    CustomAvatar.phase,
+                    CustomAvatar.completed_images,
+                    CustomAvatar.base_path,
+                    CustomAvatar.error_code,
+                )
+                .where(CustomAvatar.id.in_(job_ids))
+                .order_by(CustomAvatar.id)
+            )
+        )
+        assert rows[0][:4] == ("ready", 1, "complete", 3)
+        assert rows[0][4] == "avatars/custom/synthetic/base.png"
+        assert rows[1][:4] == ("failed", 1, "failed", 0)
+        assert rows[1][5] == "AVATAR_GENERATION_INTERRUPTED"
+        assert rows[2][:4] == ("failed", 1, "failed", 0)
+        command.check(config)
+        connection.execute(delete(CustomAvatar).where(CustomAvatar.id.in_(job_ids)))
+        connection.execute(delete(Player).where(Player.id == player_id))
+        connection.execute(delete(User).where(User.id == account_id))
 
 
 @pytest.mark.anyio

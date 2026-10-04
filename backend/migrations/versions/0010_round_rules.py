@@ -4,7 +4,7 @@ import sqlalchemy as sa
 from alembic import op
 
 revision = "0010_round_rules"
-down_revision = "0008_game"
+down_revision = "0009_avatar_sheets"
 branch_labels = None
 depends_on = None
 

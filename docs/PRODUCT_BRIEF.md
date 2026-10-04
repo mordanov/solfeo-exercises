@@ -78,6 +78,12 @@ A child looks at the notes and listens to the audio.
 - Permit repeated source appearances where sheets contain fewer than 10 groups.
 - Show happy for 5–7 correct answers, neutral for 3–4, and sad for 0–2.
 - Use the question-mark choice for explicit custom generation with quota, preview, acceptance, and discard.
+- Generate custom artwork through 1 image request for a sheet with 10 levels and 3 emotions.
+- Save the original sheet, all 30 frames, and a hash manifest in persistent private storage.
+- Show generation phases, actual saved-image counts, and an explicitly approximate remaining time.
+- Permit reopening pending jobs and reusing saved avatars without another paid image request.
+- Keep legacy 3-emotion avatars available without automatic regeneration.
+- Reject incomplete sheets explicitly; never repeat a paid image request automatically after interruption.
 - Preserve custom selection across reloads and serve generated images only after an authentication check.
 - Keep built-in selection available when the paid generation service is not configured.
 

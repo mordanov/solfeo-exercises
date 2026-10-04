@@ -81,10 +81,18 @@ A playback failure shows an error and permits another attempt.
    Cards show the saved appearance; results show the emotion associated with the correct-answer count.
 5. Use the question mark only when you want to generate an original character.
    The student guide explains preview, acceptance, and discard.
+6. Inspect the saved-image count and approximate remaining time.
+   The count stays at 0 while the service draws one sheet with 30 variants.
+   Local extraction then saves 10 levels with neutral, happy, and sad emotions.
+7. Select **Preview level** after completion to inspect all levels.
+8. Select a picture under **Saved avatars** to reuse a previous result.
+   Switching to a built-in character does not remove saved avatars.
 
 Managers bypass the daily generation quota.
 The private deployment configuration still needs `OPENAI_API_KEY`.
 Generation remains unavailable without that setting.
+The window explains missing configuration before enabling creation.
+Saved avatars remain available without provider credentials.
 The avatar worker starts with the normal application release.
 
 ## Change the visual theme

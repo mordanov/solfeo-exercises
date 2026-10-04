@@ -62,15 +62,29 @@ export interface QuotaData {
   used: number;
   limit: number | null;
   resets_at: string | null;
+  generation_available: boolean;
+  generation_reason: string | null;
+  image_count: number;
 }
 
 export interface AvatarJob {
   id: number;
   status: string;
-  base_path?: string;
-  happy_path?: string;
-  sad_path?: string;
-  error_code?: string;
+  phase:
+    | "queued"
+    | "moderating"
+    | "generating"
+    | "splitting"
+    | "complete"
+    | "failed";
+  asset_version: number;
+  completed_images: number;
+  total_images: number;
+  estimated_seconds_remaining: number | null;
+  base_path?: string | null;
+  happy_path?: string | null;
+  sad_path?: string | null;
+  error_code?: string | null;
 }
 
 export interface Season {
@@ -182,6 +196,9 @@ export const useChooseAvatar = (playerId: number) => {
     onSuccess: (player) => {
       cache.setQueryData(["game", "player", playerId], player);
       void cache.invalidateQueries({ queryKey: ["game", "players"] });
+      void cache.invalidateQueries({
+        queryKey: ["game", "avatar-jobs", playerId],
+      });
     },
   });
 };
@@ -194,15 +211,27 @@ export const useAcceptAvatar = (playerId: number) => {
     onSuccess: () => {
       void cache.invalidateQueries({ queryKey: ["game", "player", playerId] });
       void cache.invalidateQueries({ queryKey: ["game", "players"] });
+      void cache.invalidateQueries({
+        queryKey: ["game", "avatar-jobs", playerId],
+      });
     },
   });
 };
 
-export const useDiscardAvatar = () =>
-  useMutation({
+export const useDiscardAvatar = () => {
+  const cache = useQueryClient();
+  return useMutation({
     mutationFn: ({ csrf, jobId }: { csrf: string; jobId: number }) =>
       gameFetch.delete(`/avatars/${jobId}`, csrf),
+    onSuccess: () =>
+      Promise.all([
+        cache.invalidateQueries({ queryKey: ["game", "saved-avatars"] }),
+        cache.invalidateQueries({ queryKey: ["game", "avatar-jobs"] }),
+        cache.invalidateQueries({ queryKey: ["game", "players"] }),
+        cache.invalidateQueries({ queryKey: ["game", "player"] }),
+      ]),
   });
+};
 
 // ── Stats ──────────────────────────────────────────────────────────────────
 
@@ -227,8 +256,9 @@ export const useAvatarQuota = () =>
     queryFn: () => gameFetch.get<QuotaData>("/avatars/quota"),
   });
 
-export const useGenerateAvatar = () =>
-  useMutation({
+export const useGenerateAvatar = () => {
+  const cache = useQueryClient();
+  return useMutation({
     mutationFn: ({
       csrf,
       ...body
@@ -237,7 +267,15 @@ export const useGenerateAvatar = () =>
       player_id: number;
       description: string;
     }) => gameFetch.post<{ job_id: number }>("/avatars/generate", csrf, body),
+    onSuccess: (_, { player_id }) =>
+      Promise.all([
+        cache.invalidateQueries({ queryKey: ["game", "avatar-quota"] }),
+        cache.invalidateQueries({
+          queryKey: ["game", "avatar-jobs", player_id],
+        }),
+      ]),
   });
+};
 
 export const useAvatarStatus = (jobId: number | null) =>
   useQuery({
@@ -252,6 +290,16 @@ export const useAvatarJobs = (playerId: number) =>
   useQuery({
     queryKey: ["game", "avatar-jobs", playerId],
     queryFn: () => gameFetch.get<AvatarJob[]>(`/avatars?player_id=${playerId}`),
+  });
+
+export const useSavedAvatars = (playerId: number, offset: number) =>
+  useQuery({
+    queryKey: ["game", "saved-avatars", playerId, offset],
+    queryFn: ({ signal }) =>
+      gameFetch.get<{ jobs: AvatarJob[]; total: number }>(
+        `/avatars/saved?player_id=${playerId}&offset=${offset}`,
+        signal,
+      ),
   });
 
 // ── Seasons ────────────────────────────────────────────────────────────────

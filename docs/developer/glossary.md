@@ -78,6 +78,8 @@ Prerequisites:
 | XP | Experience points earned from correct game answers and a winning round, excluding assistance bonuses. |
 | assistance bonus | Points added once per completed game round for disabled hint or correct-answer options. |
 | rules version | The stored number that selects a round's grading and bonus rules. |
+| generation job | A durable request that tracks avatar creation, saved images, timing, and errors. |
+| hash manifest | A metadata file that records the source and generated file checksums. |
 | sprite sheet | An original image containing multiple character appearances and emotions. |
 | staff | The 5 horizontal lines that specify vertical note positions. |
 | clef | A symbol that identifies the pitch of a reference line on a staff. |

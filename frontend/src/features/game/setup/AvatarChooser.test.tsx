@@ -23,11 +23,36 @@ const player = {
 let jobStatus = "ready";
 let unavailable = false;
 let resumeJob = false;
+let savedJob = false;
+let generationAvailable = true;
+let completedImages = 0;
+const job = (id: number) => ({
+  id,
+  status: jobStatus,
+  phase: jobStatus === "ready" ? "complete" : "generating",
+  asset_version: 2,
+  completed_images: jobStatus === "ready" ? 30 : completedImages,
+  total_images: 30,
+  estimated_seconds_remaining: 90,
+  error_code: null,
+});
 const fetchMock = vi.fn(async (url: string, options?: RequestInit) => {
   if (url.endsWith("/quota"))
-    return Response.json({ used: 0, limit: 3, resets_at: null });
+    return Response.json({
+      used: 0,
+      limit: 3,
+      resets_at: null,
+      generation_available: generationAvailable,
+      generation_reason: null,
+      image_count: 30,
+    });
+  if (url.includes("/avatars/saved?"))
+    return Response.json({
+      jobs: savedJob ? [job(10)] : [],
+      total: savedJob ? 1 : 0,
+    });
   if (url.endsWith("/avatars?player_id=1"))
-    return Response.json(resumeJob ? [{ id: 9, status: jobStatus }] : []);
+    return Response.json(resumeJob ? [job(9)] : []);
   if (url.endsWith("/generate"))
     return unavailable
       ? Response.json(
@@ -35,8 +60,8 @@ const fetchMock = vi.fn(async (url: string, options?: RequestInit) => {
           { status: 503 },
         )
       : Response.json({ job_id: 9 });
-  if (url.endsWith("/9/status"))
-    return Response.json({ id: 9, status: jobStatus, error_code: null });
+  if (/\/(9|10)\/status$/.test(url))
+    return Response.json(job(url.includes("/10/") ? 10 : 9));
   if (url.endsWith("/1/avatar"))
     return Response.json({
       ...player,
@@ -49,8 +74,11 @@ const fetchMock = vi.fn(async (url: string, options?: RequestInit) => {
       next_task: null,
       result: { correct_count: 7 },
     });
-  if (url.endsWith("/9/use") || options?.method === "DELETE")
+  if (options?.method === "DELETE") {
+    savedJob = false;
     return Response.json({ ok: true });
+  }
+  if (/\/(9|10)\/use$/.test(url)) return Response.json({ ok: true });
   if (url.endsWith("/players")) return Response.json([player]);
   if (url.endsWith("/players/1")) return Response.json(player);
   throw new Error(`Unexpected game request: ${url}`);
@@ -67,6 +95,9 @@ beforeEach(async () => {
   jobStatus = "ready";
   unavailable = false;
   resumeJob = false;
+  savedJob = false;
+  generationAvailable = true;
+  completedImages = 0;
   vi.stubGlobal("fetch", fetchMock);
 });
 afterEach(() => {
@@ -125,11 +156,69 @@ it("opens custom creation from the question card without an automatic paid reque
       .getAllByRole("img")
       .some(
         (image) =>
-          image.getAttribute("src") === "/api/game/avatars/9/files/neutral",
+          image.getAttribute("src") ===
+          "/api/game/avatars/9/files/neutral?level=1",
       ),
   ).toBe(true);
   fireEvent.click(accept);
   await waitFor(() => expect(close).toHaveBeenCalledOnce());
+});
+it("explains disabled generation before a failed paid request", async () => {
+  generationAvailable = false;
+  mount(
+    <AvatarChooser playerId={1} csrf="synthetic-token" onClose={() => {}} />,
+  );
+  fireEvent.click(screen.getByRole("button", { name: "Create avatar" }));
+  fireEvent.change(screen.getByRole("textbox"), {
+    target: { value: "Original creature" },
+  });
+  expect(await screen.findByText(/not configured/i)).toBeInTheDocument();
+  expect(
+    screen.getAllByRole("button", { name: "Create avatar" })[1],
+  ).toBeDisabled();
+  expect(fetchMock.mock.calls.some(([url]) => url.endsWith("/generate"))).toBe(
+    false,
+  );
+});
+it("shows actual saved-frame progress and an explicitly approximate estimate", async () => {
+  resumeJob = true;
+  jobStatus = "pending";
+  completedImages = 8;
+  mount(
+    <AvatarChooser playerId={1} csrf="synthetic-token" onClose={() => {}} />,
+  );
+  expect(await screen.findByText("8 of 30 images saved")).toBeInTheDocument();
+  expect(screen.getByText(/Approximate time remaining/)).toBeInTheDocument();
+  expect(
+    screen.queryByRole("button", { name: "Use it" }),
+  ).not.toBeInTheDocument();
+});
+it("reuses a saved avatar and previews any level without a generation request", async () => {
+  savedJob = true;
+  mount(
+    <AvatarChooser playerId={1} csrf="synthetic-token" onClose={() => {}} />,
+  );
+  fireEvent.click(
+    await screen.findByRole("button", { name: "Saved avatar 10" }),
+  );
+  expect(await screen.findByRole("button", { name: "Use it" })).toBeEnabled();
+  fireEvent.change(screen.getByLabelText("Preview level"), {
+    target: { value: "10" },
+  });
+  for (const state of ["neutral", "happy", "sad"]) {
+    expect(
+      screen
+        .getAllByRole("img")
+        .some(
+          (image) =>
+            image.getAttribute("src") ===
+            `/api/game/avatars/10/files/${state}?level=10`,
+        ),
+    ).toBe(true);
+  }
+  expect(fetchMock.mock.calls.some(([url]) => url.endsWith("/generate"))).toBe(
+    false,
+  );
 });
 it("reports generation unavailability without closing the chooser", async () => {
   unavailable = true;
@@ -147,6 +236,26 @@ it("reports generation unavailability without closing the chooser", async () => 
   fireEvent.click(screen.getAllByRole("button", { name: "Create avatar" })[1]);
   expect(await screen.findByRole("alert")).toHaveTextContent("unavailable");
   expect(close).not.toHaveBeenCalled();
+});
+it("removes a discarded saved avatar from the gallery and refreshes the player", async () => {
+  savedJob = true;
+  const cache = mount(
+    <AvatarChooser playerId={1} csrf="synthetic-token" onClose={() => {}} />,
+  );
+  cache.setQueryData(["game", "player", 1], {
+    ...player,
+    custom_avatar_id: 10,
+  });
+  fireEvent.click(
+    await screen.findByRole("button", { name: "Saved avatar 10" }),
+  );
+  fireEvent.click(await screen.findByRole("button", { name: "Discard" }));
+  await waitFor(() =>
+    expect(
+      screen.queryByRole("button", { name: "Saved avatar 10" }),
+    ).not.toBeInTheDocument(),
+  );
+  expect(cache.getQueryState(["game", "player", 1])?.isInvalidated).toBe(true);
 });
 it("resumes a finished generation when the chooser reopens", async () => {
   resumeJob = true;
