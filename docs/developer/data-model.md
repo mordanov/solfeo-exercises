@@ -29,7 +29,10 @@ The migration defaults alone do not upgrade existing or manually inserted rounds
 The round service sets the new version explicitly.
 Finalization locks the round and awards XP and the score bonus once.
 
-The migration chain runs `0008_game` → `0009_avatar_sheets` → `0010_round_rules`, with one head.
+Revision `0011_game_rewards_review` adds durable submission replies, lifetime prizes, and manager approval metadata.
+It floors negative historical round totals at 0 without changing raw attempt scores or XP.
+It marks existing ready avatars approved without regenerating files.
+The migration chain runs `0008_game` → `0009_avatar_sheets` → `0010_round_rules` → `0011_game_rewards_review`, with one head.
 Upgrading from `0009_avatar_sheets` preserves active avatar jobs and saved metadata.
 
 | Table | Contents and constraints |
@@ -46,12 +49,13 @@ Upgrading from `0009_avatar_sheets` preserves active avatar jobs and saved metad
 | `telegram_updates` | Telegram update primary key, owner, file reference, status, attempts, errors, converted media, applied exercise |
 | `telegram_state` | Bot identity, durable next offset, last successful heartbeat |
 | `omr_jobs` | Exercise/image versions, current-result flag, status, attempts, lease token, timing, errors, private score filename, reviewer |
-| `players` | Account ownership, name, built-in or custom selection, total XP |
+| `players` | Account ownership, name, built-in or custom selection, total XP, waiting avatar review reference |
 | `seasons` | Player, number, start/end times; a partial unique index permits one active season per player |
 | `rounds` | Player and season, difficulty, note count, immutable rules, status, scores, and timestamps |
-| `task_attempts` | Round and season, clef, expected/given notes, correctness, timeout, and response time |
+| `task_attempts` | Round and season, clef, expected/given notes, correctness, timeout, response time, nullable JSON submission reply |
 | `trophies_awarded` | Player and completed-round threshold; a unique index prevents duplicate awards |
-| `custom_avatars` | Creator/player references, description, status, asset version, phase, saved-image count, claim token, attempts, timing, errors |
+| `achievements_awarded` | Player, prize code, award timestamp; a unique player/code index prevents duplicate awards |
+| `custom_avatars` | Creator/player references, description, status, asset version, progress, claim, attempts, timing, errors, review status, reviewer, review timestamp |
 | `avatar_generation_log` | Creator, creation time, moderation flag, billable quota record |
 
 Game statistics use completed rounds only.
@@ -61,9 +65,31 @@ The attempt index covers season and round.
 Statistics resets lock player rows, close current seasons, and create new seasons in one transaction.
 Season numbers continue from the largest recorded number, even without an active season.
 XP, trophies, rounds, attempts, and avatar selections remain unchanged.
+Lifetime prize records also remain unchanged.
 
 Historical seasons remain available through ownership-protected APIs.
 No new migration accompanies the statistics interface.
+
+Round finalization locks the player before changing XP and evaluating prizes.
+The final score is `max(0, sum(task_score) + assistance_bonus)`.
+Incorrect attempts retain their raw -1 score for analysis.
+Stored `submit_response` JSON preserves the original reply after another question or round completes.
+Historical attempts without stored replies remain compatible with the legacy fallback.
+Expected and entered arrays supply correctly matched positions; the schema adds no separate position-count column.
+Version 2 compares names; version 1 also compares octaves.
+Timeouts do not contribute correct positions.
+Prize evaluation uses completed rounds across seasons and configured calendar-day boundaries.
+The 20 prize codes and conditions appear in `docs/PRODUCT_BRIEF.md`.
+
+Avatar review status accepts `pending`, `approved`, or `rejected`.
+Generation readiness alone does not grant student image access.
+`reviewed_by` references the manager account; `reviewed_at` records the decision time.
+`players.avatar_review_job_id` identifies the waiting selection without exposing an unapproved custom image.
+Approval activates that selection; rejection leaves the question-mark fallback.
+Approval checks that `avatar_review_job_id` still identifies the reviewed job.
+A later explicit built-in choice remains unchanged.
+Migration approves existing ready rows, including legacy 3-image avatars.
+Downgrade removes the new records and metadata; it cannot restore previous negative round totals.
 
 New custom avatars use asset version 2 with 30 level/emotion files.
 The saved-image constraint permits values from 0 through 30.
@@ -154,7 +180,7 @@ Do not remove the data volume.
    ```
 
 3. Repeat the revision command.
-   Alembic reports `0010_round_rules (head)`.
+   Alembic reports `0011_game_rewards_review (head)`.
 4. Open the local health page.
    Its existing behavior remains unchanged.
 

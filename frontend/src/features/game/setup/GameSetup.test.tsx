@@ -7,6 +7,8 @@ import GameSetup from "./GameSetup";
 
 vi.mock("../audio/synth", () => ({ preparePiano: vi.fn() }));
 const fetchMock = vi.fn(async (url: string, options?: RequestInit) => {
+  if (url.endsWith("/achievements"))
+    return Response.json({ earned: [], catalog: [] });
   if (url === "/api/game/players/1")
     return Response.json({
       id: 1,

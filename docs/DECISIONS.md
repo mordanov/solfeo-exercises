@@ -7,6 +7,35 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-10-04: The owner approves game fixes, 20 lifetime prizes, and manager approval for generated avatars.
+  Work proceeds autonomously on `feat/game-rewards-moderation` after the owner reviews 20 proposals.
+  Floor each completed round total at 0 after adding its assistance bonus.
+  Preserve raw -1 scores for incorrect answers and existing XP rules.
+  Migration `0011_game_rewards_review` also floors historical negative totals.
+  Lock the player during XP updates and store each submission reply as JSON for durable retries.
+  Use server-issued question timestamps, deadlines, and feedback duration; account for the client clock difference.
+  Return structured note pairs or null for practice hints, never translated backend prose.
+
+  Award each prize once per profile across completed rounds from all seasons.
+  Retain prizes through resets and preserve the 20, 100, 200, and 500-round trophies.
+  Prizes add no XP and use encouraging copy without penalties or reminders for missed days.
+  Count individual correct positions from expected and entered arrays, including correct positions within an otherwise incorrect answer.
+  Do not add another database column for position counts.
+  Use `GAME_TIMEZONE`, default `UTC`, for generation quotas and calendar-day prizes.
+  Use `GAME_FEEDBACK_MS`, default `900`, for answer feedback.
+
+  Check both the description and generated image automatically before manager review.
+  Students cannot view generated images before approval.
+  Show a wordless hourglass for pending selection and the question-mark artwork after rejection.
+  Approval activates the waiting selection without another student action.
+  Activate it only when the player's waiting reference still identifies that job.
+  Preserve a later explicit built-in choice instead of replacing it after approval.
+  Managers inspect all 30 frames and approve or reject through a paginated queue.
+  Preserve existing ready avatars as approved to prevent disruption of earlier progress.
+  Package the new wordless hourglass while preserving the owner's original PNG outside the frontend.
+  Translate all interface messages into the selected language, including review controls and avatar states.
+  Validation uses synthetic provider replies, not paid calls, and changes no production configuration.
+
 - 2026-10-04: The owner reports missing game statistics and reset controls.
   Expose the existing profile and manager routes through visible game controls.
   Retain the original season-based reset: close the active season and open a new one.

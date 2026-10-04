@@ -73,6 +73,15 @@ The single-line difficulty explanation reports only the selected 13, 10, or 7 s 
 Difficulty does not change the pitch pool or scoring.
 Each disabled switch adds 1 point once per completed round; enabled switches add 0 points.
 The backend stores the switches and adds this bonus without changing XP, victory, or existing completed results.
+The final round total is `max(0, sum(task_score) + assistance_bonus)`.
+Migration `0011_game_rewards_review` floors historical negative totals; raw incorrect attempts remain -1.
+Player locks serialize XP awards across concurrent round completions.
+Stored JSON submission replies preserve the original response for repeated requests.
+Question fields `issued_at`, `deadline_at`, `server_time`, and `time_limit_ms` govern the timer.
+The frontend retains the initial server clock difference through later replies and submission retries.
+The next question starts after `GAME_FEEDBACK_MS`, default `900`, rather than before the feedback finishes.
+Practice hints contain a structured expected/entered pair or null.
+The frontend translates both the message and note names using the account settings.
 Version 1 rounds retain their previous octave grading and receive no assistance bonus.
 Enabled feedback shows the server's `correct_answers` beside the centered playback control, including incorrect answers and timeouts.
 The reserved feedback row prevents horizontal movement and keeps the staff at its fixed size.
@@ -203,6 +212,9 @@ Selection images reside in `avatars/selection/` and `frontend/public/assets/avat
 The original selection sheet contains 10 animals and the question mark.
 The unicorn choice uses its first neutral appearance because the sheet contains no unicorn portrait.
 The question mark opens custom creation; it does not select a random character.
+The pending-review image is the new wordless `under_moderation.png`.
+The packaged image resides in `/assets/avatars/selection/`; the owner's original PNG remains untouched outside the frontend.
+Rejected selections show `custom.png`, the question-mark choice.
 
 ## Progress and emotions
 
@@ -223,6 +235,24 @@ The existing XP bonus remains unchanged.
 A custom avatar uses its generated emotion images and the same numbered XP level.
 New custom generation creates 10 levels with 3 emotions each.
 Older custom avatars retain their 3 shared emotion images without paid regeneration.
+
+## Lifetime prizes
+
+The game awards 20 prizes from completed rounds across all seasons.
+Each profile receives each code once, with no extra XP.
+The existing trophies for 20, 100, 200, and 500 completed rounds remain separate.
+Statistics resets retain all prize records.
+`docs/PRODUCT_BRIEF.md` lists all codes and conditions.
+`GAME_TIMEZONE`, default `UTC`, defines calendar days for prizes and generation quotas.
+
+Individual-note prizes compare corresponding positions in the existing expected and entered arrays.
+Correct positions count even when another position makes the whole answer incorrect.
+Version 2 compares names; version 1 also compares octaves.
+Timeouts and unfinished rounds do not contribute.
+Consecutive-answer prizes count whole correct answers across completed rounds.
+Treble and bass prizes also count whole correct answers, not individual notes.
+The interface uses `game.prizes.codes.<code>` for localized names and `game.prizes.descriptions.<code>` for conditions.
+The copy welcomes breaks without guilt, lost-prize warnings, or daily penalties.
 
 ## Source correspondence
 
@@ -257,9 +287,9 @@ Docker includes only the public copies, not the original sheets.
 The chooser starts generation only after an explicit button click.
 It shows availability, quota, phase, saved-image count, approximate remaining time, previews, acceptance, discard, and explicit errors.
 Reopening the chooser retrieves recent jobs without starting another generation.
-Accepting a ready job persists its identifier on the player.
+Selecting an approved ready job persists its identifier on the player.
 Selecting a built-in character clears that identifier.
-The saved gallery retains ready jobs, including the previously selected avatar.
+The saved gallery retains approved ready jobs, including the previously selected avatar.
 Selecting a saved avatar requires no provider request.
 The preview supports levels 1–10 and all 3 emotions.
 Explicit discard removes its database record and active selection.
@@ -283,7 +313,8 @@ Each new job saves `sheet.png`, 30 transparent PNG frames, and `manifest.json` w
 Frames use `levels/avatar_<level>_<state>.png` with levels `01` through `10`.
 Atomic replacement and explicit synchronization publish files before the worker marks the job ready.
 Both selection endpoints reject incomplete version 2 sets.
-Authenticated file endpoints check ownership, job readiness, path containment, and file existence.
+Authenticated file endpoints check ownership, generation readiness, review approval, path containment, and file existence.
+Managers can inspect ready unapproved files; students cannot.
 They return `X-Accel-Redirect`; nginx serves the private PNG without public media URLs.
 Never include these files in a public avatar directory or browser cache.
 
@@ -291,14 +322,42 @@ Never include these files in a public avatar directory or browser cache.
 
 The default model is `gpt-image-1-mini` with low quality.
 One image request creates a transparent `1024x1536` sheet, not 30 separate images.
-A moderation request checks the description first.
+An automatic moderation request checks the description first.
+Automatic image moderation checks the generated sheet before local extraction and manager review.
 The prompt requires 5 columns, 6 rows, consistent identity, and empty gutters.
 Rows 1, 2, and 3 contain neutral, happy, and sad levels 1–5.
 Rows 4, 5, and 6 contain the same emotions for levels 6–10.
 The worker rejects empty cells or figures that touch cell boundaries.
 It fits each complete figure inside a transparent 384 × 384 px canvas.
 Geometry checks cannot prove correct character identity, expression, or artistic progression.
-Inspect all 30 images from a real provider before accepting visual quality.
+Inspect all 30 images before approving visual quality.
+
+### Manager approval
+
+Successful generation remains separate from permission to show the result to a student.
+The worker leaves ready results with review status `pending`.
+The player sees a wordless hourglass instead of an unapproved generated image.
+The backend omits unapproved image paths from status responses.
+Direct student frame requests also fail until approval.
+
+1. Open **Player management** as a manager.
+2. Open the avatar approval queue.
+   The queue shows ready pending results in pages of 12, oldest first.
+3. Inspect the description and all 30 level/emotion frames.
+4. Approve an acceptable result or reject an unsuitable result.
+   Approval activates the waiting player selection; rejection returns it to the question-mark artwork.
+
+Approval activates only when `players.avatar_review_job_id` still identifies that job.
+The decision does not replace a later explicit built-in choice.
+`GET /api/game/avatars/review?offset=0` returns the queue and its total.
+`POST /api/game/avatars/{id}/review` accepts `decision` with `approved` or `rejected`.
+The manager-only `review-sheet` route serves the generated original through protected storage.
+Review records include the manager and decision time.
+Repeating the same decision is safe; changing an existing decision returns a conflict.
+Review uses no image-generation request and consumes no extra quota.
+All controls, statuses, accessible labels, and errors follow the selected language.
+Migration `0011_game_rewards_review` marks existing ready avatars approved without another provider request.
+This includes legacy avatars, preserving earlier approved-looking selections and progress.
 
 During provider generation, the saved-image count stays at 0.
 The interface explains that all variants arrive together.
@@ -316,6 +375,7 @@ An expired claim reuses a saved sheet without another image request.
 An interrupted generation without a saved sheet fails explicitly; no automatic paid retry occurs.
 Lease checks prevent a late provider reply from replacing another worker's saved sheet.
 Moderation refunds only the linked quota record.
+Manager rejection does not repeat a paid request.
 
 Migration `0009_avatar_sheets` preserves older ready avatars as version 1.
 It closes legacy pending jobs as interrupted because their original worker records no durable request phase.

@@ -22,7 +22,9 @@ def anyio_backend() -> str:
 
 @pytest.fixture
 def settings() -> Settings:
-    result = Settings(auth_allowed_origins=[ORIGIN], session_cookie_secure=True)
+    result = Settings(
+        auth_allowed_origins=[ORIGIN], session_cookie_secure=True, game_feedback_ms=0
+    )
     if result.database_name != "solfeo_test":
         raise pytest.UsageError("Set DATABASE_NAME=solfeo_test")
     return result
@@ -35,14 +37,18 @@ def database(settings: Settings) -> Iterator[Database]:
         config = Config(str(Path(__file__).parents[2] / "alembic.ini"))
         config.attributes["connection"] = conn
         command.upgrade(config, "head")
-        conn.execute(update(Player).values(custom_avatar_id=None))
+        conn.execute(
+            update(Player).values(custom_avatar_id=None, avatar_review_job_id=None)
+        )
         for table in reversed(Base.metadata.sorted_tables):
             conn.execute(delete(table))
     try:
         yield db
     finally:
         with db.engine.begin() as conn:
-            conn.execute(update(Player).values(custom_avatar_id=None))
+            conn.execute(
+                update(Player).values(custom_avatar_id=None, avatar_review_job_id=None)
+            )
             for table in reversed(Base.metadata.sorted_tables):
                 conn.execute(delete(table))
         db.close()

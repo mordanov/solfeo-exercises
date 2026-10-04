@@ -40,6 +40,13 @@ class Player(Base):
         ),
         nullable=True,
     )
+    avatar_review_job_id: Mapped[int | None] = mapped_column(
+        BigInteger,
+        ForeignKey(
+            "custom_avatars.id", use_alter=True, name="fk_players_avatar_review_job"
+        ),
+        nullable=True,
+    )
     xp: Mapped[int] = mapped_column(Integer, nullable=False, server_default=text("0"))
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
@@ -158,6 +165,9 @@ class TaskAttempt(Base):
         DateTime(timezone=True), nullable=True
     )
     score: Mapped[int] = mapped_column(SmallInteger, nullable=False)
+    submit_response: Mapped[dict[str, object] | None] = mapped_column(
+        JSONB, nullable=True
+    )
 
     __table_args__ = (
         CheckConstraint("clef IN ('treble','bass')", name="ck_task_attempts_clef"),
@@ -238,6 +248,11 @@ class CustomAvatar(Base):
         ),
         nullable=True,
     )
+    review_status: Mapped[str] = mapped_column(
+        String(8), nullable=False, server_default=text("'pending'")
+    )
+    reviewed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    reviewed_by: Mapped[int | None] = mapped_column(BigInteger, ForeignKey("users.id"))
 
     __table_args__ = (
         CheckConstraint(
@@ -247,6 +262,24 @@ class CustomAvatar(Base):
             "completed_images BETWEEN 0 AND 30",
             name="ck_custom_avatars_completed_images",
         ),
+        CheckConstraint(
+            "review_status IN ('pending','approved','rejected')",
+            name="ck_custom_avatars_review_status",
+        ),
+    )
+
+
+class AchievementAwarded(Base):
+    __tablename__ = "achievements_awarded"
+
+    id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    player_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("players.id"))
+    code: Mapped[str] = mapped_column(String(40), nullable=False)
+    awarded_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+    __table_args__ = (
+        Index("uq_achievements_player_code", "player_id", "code", unique=True),
     )
 
 

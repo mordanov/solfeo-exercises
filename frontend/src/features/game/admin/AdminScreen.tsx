@@ -20,6 +20,7 @@ import {
 } from "../api/hooks";
 import { ErrorMessage } from "../../../components/AccountUi";
 import AvatarImage from "../setup/AvatarImage";
+import AvatarReviewQueue from "./AvatarReviewQueue";
 
 interface Props {
   csrf: string;
@@ -76,6 +77,7 @@ export default function AdminScreen({ csrf, onPlayerDetail, onBack }: Props) {
   return (
     <Box sx={{ p: { xs: 1, sm: 3 } }}>
       <Button onClick={onBack}>{t("game.stats.backPlayers")}</Button>
+      <AvatarReviewQueue csrf={csrf} />
       <Box
         sx={{
           display: "flex",
@@ -139,6 +141,7 @@ export default function AdminScreen({ csrf, onPlayerDetail, onBack }: Props) {
               size={48}
               stage={p.avatar_level}
               customAvatarId={p.custom_avatar_id}
+              reviewStatus={p.avatar_review_status}
             />
             <Box
               sx={{ flex: "1 1 140px", minWidth: 0, overflowWrap: "anywhere" }}

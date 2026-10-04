@@ -79,7 +79,20 @@ The existing submission response supplies authoritative `correct_answers` for op
 Submitted option changes or bonus amounts cannot affect stored settings or scoring.
 Submission locks the round before checking its status, preventing concurrent finalization and duplicate XP or bonus awards.
 Existing version 1 rounds retain strict octave grading without assistance bonuses.
-Publish the backend and frontend together with migration `0010_round_rules`.
+Completed totals use `max(0, sum(task_score) + assistance_bonus)`.
+Raw incorrect-answer scores remain -1.
+Player locks serialize XP updates when different rounds complete concurrently.
+Each new attempt stores its submission reply as JSON.
+Identical retries return the stored reply, including the original next question and final result.
+Each question includes `issued_at`, `deadline_at`, `server_time`, and `time_limit_ms`.
+The frontend retains the initial server clock difference instead of recalculating it from delayed or cached replies.
+Feedback uses `GAME_FEEDBACK_MS` rather than a separate client duration.
+Practice hints contain structured expected and entered note names, or null.
+The frontend localizes the pair using the selected language and note-naming setting.
+Final results include nullable `average_score` from previous completed rounds at the same difficulty and note count across seasons.
+The average excludes the current round; null means no matching history.
+The frontend formats this value in the selected language.
+Publish the backend and frontend together with migration `0011_game_rewards_review`.
 Reload previously open game tabs after publication.
 
 ## Game statistics and seasons
@@ -120,6 +133,7 @@ Other text returns `400 CONFIRMATION_REQUIRED`.
 Resets lock player rows and preserve monotonically increasing season numbers.
 Bulk resets acquire locks in player-ID order.
 Neither reset removes rounds, attempts, XP, trophies, or saved avatars.
+Lifetime prizes also survive both reset operations.
 
 An in-progress round retains its original season after a reset.
 Its eventual completion updates that season and all-time progress.
@@ -129,9 +143,22 @@ A failed reset keeps its confirmation window open and shows the translated error
 Completed rounds also invalidate profile and statistics caches.
 Publish the backend and frontend together; this change needs no new schema revision.
 
+## Lifetime game prizes
+
+`GET /api/game/players/{id}/achievements` requires ownership or manager access.
+It returns `earned` entries with `code` and `awarded_at`, plus a `catalog` containing stable prize codes.
+The profile response also includes earned `achievements` codes.
+Round completion returns `new_achievements` codes for the localized result view.
+The backend returns no translated prize names or descriptions.
+The frontend uses `game.prizes.codes.<code>` for names and `game.prizes.descriptions.<code>` for conditions.
+See `docs/PRODUCT_BRIEF.md` for all 20 conditions.
+Each prize is lifetime and adds no XP.
+Existing 20, 100, 200, and 500-round trophies remain separate.
+
 ## Game avatars
 
 Player responses include `avatar_animal`, `custom_avatar_id`, `xp`, and derived `avatar_level` from 1 to 10.
+They also include `avatar_review_job_id` and `avatar_review_status` for the waiting or rejected selection.
 Students access only their own players.
 Managers can choose avatars for any player without changing the existing player-management permissions.
 
@@ -144,15 +171,20 @@ Managers can choose avatars for any player without changing the existing player-
 | GET | `/api/game/avatars/quota` | Authenticated member; quota, generation availability, reason, and image count |
 | POST | `/api/game/avatars/generate` | Owner or manager, with CSRF; description and player ID; configured service required |
 | GET | `/api/game/avatars/{id}/status` | Job creator, player owner, or manager; status and durable progress |
-| POST | `/api/game/avatars/{id}/use` | Job creator, player owner, or manager, with CSRF; selects a complete ready job |
+| POST | `/api/game/avatars/{id}/use` | Job creator, player owner, or manager, with CSRF; selects a complete approved job |
 | DELETE | `/api/game/avatars/{id}` | Job creator, player owner, or manager, with CSRF; discards a nonpending job |
 | GET, HEAD | `/api/game/avatars/{id}/files/{state}` | Job creator, player owner, or manager; private PNG through nginx |
+| GET | `/api/game/avatars/review?offset=0` | Manager; `jobs` and `total`, 12 ready pending results per page |
+| POST | `/api/game/avatars/{id}/review` | Manager and CSRF; `{"decision":"approved"}` or `{"decision":"rejected"}` |
+| GET, HEAD | `/api/game/avatars/{id}/review-sheet` | Manager; protected original generated sheet |
 
 File states use `neutral`, `happy`, and `sad`.
 The optional `level` query accepts 1–10 and defaults to 1.
 Version 2 uses a separate file for each level and emotion; version 1 retains 3 shared emotion files.
-Responses include `asset_version`, `phase`, `completed_images`, `total_images`, and `estimated_seconds_remaining`.
-Phases are `queued`, `moderating`, `generating`, `splitting`, `complete`, and `failed`.
+Responses include `asset_version`, `review_status`, `phase`, image counts, and `estimated_seconds_remaining`.
+Review status is `pending`, `approved`, or `rejected`, independently of generation status.
+Automatic moderation checks both the description and generated image before manager review.
+The interface translates phases, states, errors, accessible names, and review actions in the selected language.
 The remaining time is approximate; `null` means unknown, overdue, or failed.
 Ready jobs report 0 remaining seconds.
 The quota response includes `generation_available`, `generation_reason`, and `image_count:30`.
@@ -162,6 +194,20 @@ Incomplete version 2 storage prevents selection with `409 AVATAR_ASSETS_MISSING`
 Invalid paths and missing files return `FILE_NOT_FOUND`.
 Unconfigured creation returns status `503` with `AVATAR_GENERATION_UNAVAILABLE`.
 Saved-avatar access does not require a configured provider.
+Student image requests before approval return `403 AVATAR_NOT_APPROVED`.
+Unapproved status responses omit private image paths.
+Managers can inspect all 10 levels and 3 emotions through the protected frame endpoints.
+The queue also includes `player_id`, `player_name`, `account_id`, `description`, and `created_at`.
+The queue lists the oldest jobs first.
+Repeated identical decisions return the existing result.
+A different decision after review returns `409 AVATAR_REVIEW_CONFLICT`.
+Invalid decision values return validation errors or `AVATAR_REVIEW_INVALID`.
+Approval activates the waiting player selection in the same transaction.
+It activates only when `players.avatar_review_job_id` still identifies that job.
+A later explicit built-in choice remains unchanged.
+Rejection removes the unapproved custom selection and retains the question-mark fallback.
+Neither decision makes another provider request.
+Migration marks existing ready avatars approved to retain earlier selections.
 See `game-avatars.md` for artwork correspondence, progression, and worker operation.
 
 ## Error responses

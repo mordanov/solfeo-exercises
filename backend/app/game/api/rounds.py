@@ -1,7 +1,8 @@
 from datetime import UTC, datetime
+from typing import Annotated, Literal, Self
 
 from fastapi import APIRouter, Depends
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 from sqlalchemy import select
 
 from app.api.auth import Configuration, Db, Member, require_csrf
@@ -19,10 +20,25 @@ class CreateRoundBody(BaseModel):
     show_correct_answer: bool = False
 
 
+class NoteAnswer(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    name: Literal["C", "D", "E", "F", "G", "A", "B"]
+    octave: Annotated[int, Field(strict=True, ge=2, le=5)]
+
+
 class SubmitTaskBody(BaseModel):
-    task_index: int
-    answers: list[dict[str, object]] | None = None
+    task_index: Annotated[int, Field(strict=True, ge=0, le=6)]
+    answers: Annotated[list[NoteAnswer], Field(min_length=1, max_length=4)] | None = (
+        None
+    )
     timed_out: bool = False
+
+    @model_validator(mode="after")
+    def require_answers(self) -> Self:
+        if not self.timed_out and self.answers is None:
+            raise ValueError("INVALID_ANSWERS")
+        return self
 
 
 @router.post("", dependencies=[Depends(require_csrf)])
@@ -34,6 +50,7 @@ def create_round(
 ) -> dict[str, object]:
     from app.game.services.players import get_or_403
     from app.game.services.rounds import create_round as svc_create
+    from app.game.services.rounds import task_payload
 
     if body.difficulty not in ("easy", "medium", "hard"):
         raise ServiceError("INVALID_DIFFICULTY", 422)
@@ -74,12 +91,13 @@ def create_round(
             )
         )
         if first_attempt is not None:
-            first_attempt.issued_at = datetime.now(UTC)
+            first_task = task_payload(first_attempt, rnd.difficulty, rnd.created_at)
+        else:
+            raise ServiceError("TASK_NOT_FOUND", 404)
 
-    first = tasks[0]
     return {
         "round_id": rnd.id,
-        "task": {"index": 0, "clef": first["clef"], "notes": first["notes"]},
+        "task": first_task,
     }
 
 
@@ -107,7 +125,9 @@ def submit_task(
             session,
             round_id,
             body.task_index,
-            body.answers,
+            [note.model_dump() for note in body.answers]
+            if body.answers is not None
+            else None,
             body.timed_out,
             datetime.now(UTC),
             settings,

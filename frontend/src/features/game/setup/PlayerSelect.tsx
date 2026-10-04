@@ -122,6 +122,7 @@ export default function PlayerSelect({
                 size={80}
                 stage={p.avatar_level}
                 customAvatarId={p.custom_avatar_id}
+                reviewStatus={p.avatar_review_status}
               />
               <Typography
                 variant="body1"

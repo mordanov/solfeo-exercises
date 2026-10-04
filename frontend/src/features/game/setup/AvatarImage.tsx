@@ -1,7 +1,8 @@
-import { Alert } from "@mui/material";
+import { Alert, Box, Typography } from "@mui/material";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { avatarSource, type AvatarMood } from "./avatars";
+import type { AvatarReviewStatus } from "../api/hooks";
 
 interface AvatarImageProps {
   animalId: string;
@@ -10,6 +11,7 @@ interface AvatarImageProps {
   size?: number;
   selection?: boolean;
   customAvatarId?: number | null;
+  reviewStatus?: AvatarReviewStatus;
 }
 
 export default function AvatarImage({
@@ -19,12 +21,20 @@ export default function AvatarImage({
   size = 80,
   selection = false,
   customAvatarId,
+  reviewStatus,
 }: AvatarImageProps) {
   const { t } = useTranslation();
   const [failedSource, setFailedSource] = useState<string | null>(null);
-  const src = selection
-    ? `/assets/avatars/selection/${animalId}.png`
-    : avatarSource(animalId, stage, mood, customAvatarId);
+  const blocked = reviewStatus === "pending" || reviewStatus === "rejected";
+  const caption =
+    reviewStatus === "pending"
+      ? t("game.avatar.awaitingReview")
+      : t("game.avatar.reviewRejected");
+  const src = blocked
+    ? `/assets/avatars/selection/${reviewStatus === "pending" ? "under_moderation" : "custom"}.png`
+    : selection
+      ? `/assets/avatars/selection/${animalId}.png`
+      : avatarSource(animalId, stage, mood, customAvatarId);
   const name = t(
     customAvatarId || animalId === "custom"
       ? "game.avatar.custom"
@@ -32,22 +42,34 @@ export default function AvatarImage({
   );
   if (failedSource === src)
     return <Alert severity="error">{t("game.avatar.imageError")}</Alert>;
-  return (
+  const image = (
     <img
       src={src}
       width={size}
       height={size}
       alt={
-        selection
-          ? name
-          : t("game.avatar.imageAlt", {
-              name,
-              level: stage,
-              mood: t(`game.avatar.mood.${mood}`),
-            })
+        blocked
+          ? caption
+          : selection
+            ? name
+            : t("game.avatar.imageAlt", {
+                name,
+                level: stage,
+                mood: t(`game.avatar.mood.${mood}`),
+              })
       }
       style={{ objectFit: "contain", maxWidth: "100%" }}
       onError={() => setFailedSource(src)}
     />
+  );
+  return blocked ? (
+    <Box sx={{ textAlign: "center" }}>
+      {image}
+      <Typography variant="caption" sx={{ display: "block" }}>
+        {caption}
+      </Typography>
+    </Box>
+  ) : (
+    image
   );
 }

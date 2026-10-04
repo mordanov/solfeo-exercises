@@ -10,7 +10,7 @@ import { beforeEach, afterEach, expect, it, vi } from "vitest";
 import { i18n } from "../../../i18n";
 import AvatarChooser from "./AvatarChooser";
 import ResultScreen from "../result/ResultScreen";
-import { useSubmitTask } from "../api/hooks";
+import { useSubmitTask, type AvatarReviewStatus } from "../api/hooks";
 
 const player = {
   id: 1,
@@ -26,6 +26,7 @@ let resumeJob = false;
 let savedJob = false;
 let generationAvailable = true;
 let completedImages = 0;
+let reviewStatus: AvatarReviewStatus | undefined;
 const job = (id: number) => ({
   id,
   status: jobStatus,
@@ -35,6 +36,7 @@ const job = (id: number) => ({
   total_images: 30,
   estimated_seconds_remaining: 90,
   error_code: null,
+  review_status: reviewStatus,
 });
 const fetchMock = vi.fn(async (url: string, options?: RequestInit) => {
   if (url.endsWith("/quota"))
@@ -98,6 +100,7 @@ beforeEach(async () => {
   savedJob = false;
   generationAvailable = true;
   completedImages = 0;
+  reviewStatus = undefined;
   vi.stubGlobal("fetch", fetchMock);
 });
 afterEach(() => {
@@ -220,6 +223,86 @@ it("reuses a saved avatar and previews any level without a generation request", 
     false,
   );
 });
+it("keeps a ready avatar private until the manager approves it", async () => {
+  resumeJob = true;
+  reviewStatus = "pending";
+  mount(
+    <AvatarChooser playerId={1} csrf="synthetic-token" onClose={() => {}} />,
+  );
+  expect(
+    await screen.findByText(i18n.t("game.avatar.awaitingReview")),
+  ).toBeInTheDocument();
+  expect(
+    screen.queryByRole("button", { name: "Use it" }),
+  ).not.toBeInTheDocument();
+  expect(
+    screen
+      .getAllByRole("img")
+      .some((image) =>
+        image.getAttribute("src")?.startsWith("/api/game/avatars/9/"),
+      ),
+  ).toBe(false);
+  expect(screen.getByRole("button", { name: "Discard" })).toBeEnabled();
+});
+
+it("lets a manager preview a pending avatar but not activate it before review", async () => {
+  resumeJob = true;
+  reviewStatus = "pending";
+  mount(
+    <AvatarChooser
+      playerId={1}
+      csrf="synthetic-token"
+      isManager
+      onClose={() => {}}
+    />,
+  );
+  expect(await screen.findByRole("button", { name: "Use it" })).toBeDisabled();
+  expect(
+    screen
+      .getAllByRole("img")
+      .some(
+        (image) =>
+          image.getAttribute("src") ===
+          "/api/game/avatars/9/files/neutral?level=1",
+      ),
+  ).toBe(true);
+});
+
+it("celebrates every new prize and localizes note hints without adding prize XP", async () => {
+  mount(
+    <ResultScreen
+      playerId={1}
+      noteNaming="solfege"
+      result={{
+        score: 12,
+        correct_count: 6,
+        is_win: true,
+        xp_gained: 12,
+        level_up: false,
+        new_trophy: null,
+        new_achievements: ["first_round", "first_win"],
+        practice_hint: { expected: "C", given: "D" },
+      }}
+      onPlayAgain={() => {}}
+      onChangePlayer={() => {}}
+    />,
+  );
+  expect(screen.getAllByRole("status")).toHaveLength(2);
+  expect(screen.getAllByRole("status")[0]).toHaveTextContent(
+    i18n.t("game.prizes.codes.first_round"),
+  );
+  expect(screen.getAllByRole("status")[1]).toHaveTextContent(
+    i18n.t("game.prizes.codes.first_win"),
+  );
+  expect(
+    screen.getByText(
+      i18n.t("game.result.practiceHint", { expected: "Do", given: "Re" }),
+    ),
+  ).toBeInTheDocument();
+  expect(
+    screen.getByText(i18n.t("game.result.xpGained", { xp: 12 })),
+  ).toBeInTheDocument();
+});
 it("reports generation unavailability without closing the chooser", async () => {
   unavailable = true;
   const close = vi.fn();
@@ -280,7 +363,7 @@ it.each([0, 1, 2, 3, 4, 5, 6, 7])(
           xp_gained: 1,
           level_up: false,
           new_trophy: null,
-          practice_hint: "",
+          practice_hint: null,
         }}
         onPlayAgain={() => {}}
         onChangePlayer={() => {}}

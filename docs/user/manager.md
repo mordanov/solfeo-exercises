@@ -48,6 +48,12 @@ The optional correct answer appears to the right of the centered playback contro
 The staff keeps the same size across clefs and note counts.
 Each disabled switch adds 1 point once per completed round, including a losing round.
 These points do not change XP or the requirement for 5 correct answers to win.
+Round totals cannot fall below 0, including earlier negative totals after migration.
+The game retains raw incorrect-answer scores for analysis.
+Repeated submissions do not grant extra XP.
+Server timing controls the first question, later questions, and short answer feedback.
+Result tips use the selected language and note-naming setting.
+Results show the previous average for the same difficulty and note count across seasons when matching completed rounds exist.
 Easy allows 13 s per question, Medium 10 s, and Hard 7 s.
 The difficulty changes the time limit, not the notes or scoring.
 The switches retain their choices between rounds until you leave the game area.
@@ -78,7 +84,7 @@ Only completed rounds affect statistics and mistake analysis.
 ## Reset game statistics
 
 **Caution:** A reset starts a new statistics season; it does not delete all-time progress.
-History, XP, levels, trophies, built-in selections, and saved custom avatars remain available.
+History, XP, levels, trophies, prizes, built-in selections, and saved custom avatars remain available.
 
 1. Open **Player management**.
 2. Click **Reset statistics** beside one player, or click **Reset all**.
@@ -97,6 +103,23 @@ A failed request keeps the window open and shows an error.
 Check the current season before retrying after a connection failure.
 The application sends one atomic request for **Reset all**.
 Students cannot access these controls or call reset endpoints.
+
+## Inspect game prizes
+
+1. Open a player's **Statistics**.
+   The profile shows earned prizes alongside all-time XP and trophies.
+2. Inspect the names and descriptions.
+   The interface explains each condition in the selected language.
+3. Open a previous season if needed.
+   Lifetime prizes remain available independently of the selected season.
+
+The game offers 20 lifetime prizes and awards each once per profile.
+Prizes add no XP and survive both single-player and bulk statistics resets.
+The 20, 100, 200, and 500-round trophies remain separate.
+Only completed rounds contribute, including correct individual notes within otherwise incorrect answers.
+Calendar-day prizes use the application's configured time zone.
+Breaks do not remove progress; the interface avoids warnings about lost streaks.
+See `docs/PRODUCT_BRIEF.md` for all 20 conditions.
 
 ## Listen to game notes
 
@@ -125,11 +148,11 @@ A playback failure shows an error and permits another attempt.
 4. Inspect the player cards and game results.
    Cards show the saved appearance; results show the emotion associated with the correct-answer count.
 5. Use the question mark only when you want to generate an original character.
-   The student guide explains preview, acceptance, and discard.
+   The student guide explains generation, approval, selection, and discard.
 6. Inspect the saved-image count and approximate remaining time.
    The count stays at 0 while the service draws one sheet with 30 variants.
    Local extraction then saves 10 levels with neutral, happy, and sad emotions.
-7. Select **Preview level** after completion to inspect all levels.
+7. Select **Preview level** after approval to inspect all levels.
 8. Select a picture under **Saved avatars** to reuse a previous result.
    Switching to a built-in character does not remove saved avatars.
 
@@ -139,6 +162,31 @@ Generation remains unavailable without that setting.
 The window explains missing configuration before enabling creation.
 Saved avatars remain available without provider credentials.
 The avatar worker starts with the normal application release.
+
+## Approve custom game avatars
+
+1. Open **Guess the Note**.
+2. Click **Player management**.
+3. Open the avatar approval queue.
+   The queue shows generated results that need a manager decision.
+4. Inspect the description.
+5. Inspect levels 1–10 and their neutral, happy, and sad images.
+   Review all 30 frames, not only the first image.
+   The **Original generated sheet** link opens the protected full image for comparison.
+6. Approve a suitable result or reject an unsuitable result.
+   Approval activates the waiting player selection automatically.
+   Rejection shows the question-mark artwork instead.
+7. Select **Next** to inspect another page when available.
+   The queue removes reviewed results.
+
+The application checks descriptions and generated images automatically before manager review.
+Students see an hourglass while review is pending.
+Students cannot retrieve or preview unapproved generated images.
+All review messages and actions follow your selected interface language.
+Review does not generate another image or consume extra quota.
+Approval does not replace a built-in character that the player selects after requesting generation.
+Existing ready avatars remain approved after migration, including older 3-image avatars.
+Check an approved character before asking a student to create another paid result.
 
 ## Change the visual theme
 

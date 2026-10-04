@@ -78,6 +78,46 @@ A child looks at the notes and listens to the audio.
 - Let only managers reset statistics for one player or all players, after explicit confirmation.
 - Reset statistics by opening a new season; preserve history, XP, levels, trophies, and saved avatars.
 - Exclude unfinished and expired rounds from all statistics and mistake analysis.
+- Floor the final round score at 0 after adding the assistance bonus; retain raw -1 scores for incorrect answers.
+- Serialize XP updates per player and return durable identical replies for repeated submissions.
+- Issue the first question and subsequent questions with authoritative timestamps and deadlines.
+- Account for the difference between server and client clocks when showing time remaining.
+- Configure feedback through `GAME_FEEDBACK_MS`, default `900`.
+- Return structured practice hints; translate note names and messages in the selected interface language.
+- Compare the result with previous completed rounds at the same difficulty and note count across seasons.
+- Omit the previous average when no matching completed round exists.
+
+### Lifetime game prizes
+
+- Provide 20 prizes, each awarded once per profile across completed rounds from all seasons.
+- Retain prizes through statistics resets; do not add XP for prizes.
+- Preserve the existing trophies for 20, 100, 200, and 500 completed rounds.
+- Use `GAME_TIMEZONE`, default `UTC`, for calendar-day conditions and generation quotas.
+- Count correctly matched individual positions from expected and entered arrays, including partially correct answers.
+- Use encouraging messages; never warn about losing a streak or punish a break.
+
+| Code | Condition |
+|---|---|
+| `first_round` | Complete 1 round |
+| `first_win` | Win with at least 5 correct answers |
+| `perfect_round` | Answer all 7 questions correctly in 1 round |
+| `correct_streak_10` | Answer 10 questions correctly in succession across completed rounds |
+| `notes_100` | Match 100 individual note positions in completed rounds |
+| `note_rainbow` | Match each of the 7 note names at least 10 times |
+| `treble_25` | Answer 25 treble-clef questions correctly |
+| `bass_25` | Answer 25 bass-clef questions correctly |
+| `both_clefs` | Win 1 round with correct answers in both clefs |
+| `duet` | Complete a perfect round with 2 notes per question |
+| `trio` | Complete a perfect round with 3 notes per question |
+| `quartet` | Complete a perfect round with 4 notes per question |
+| `all_difficulties` | Win on all 3 difficulties |
+| `independent_win` | Win with both assistance options disabled |
+| `days_streak_3` | Complete rounds on 3 consecutive calendar days |
+| `days_7` | Complete rounds on 7 different calendar days |
+| `level_2` | Reach level 2 at 30 XP |
+| `level_5` | Reach level 5 at 250 XP |
+| `wins_10` | Win 10 rounds |
+| `welcome_back` | Complete a round after a gap of at least 7 calendar days |
 
 ## Game avatar artwork
 
@@ -86,7 +126,7 @@ A child looks at the notes and listens to the audio.
 - Use transparent owner-supplied artwork and preserve the original sheets.
 - Permit repeated source appearances where sheets contain fewer than 10 groups.
 - Show happy for 5–7 correct answers, neutral for 3–4, and sad for 0–2.
-- Use the question-mark choice for explicit custom generation with quota, preview, acceptance, and discard.
+- Use the question-mark choice for explicit custom generation with quota, manager review, approved preview, selection, and discard.
 - Generate custom artwork through 1 image request for a sheet with 10 levels and 3 emotions.
 - Save the original sheet, all 30 frames, and a hash manifest in persistent private storage.
 - Show generation phases, actual saved-image counts, and an explicitly approximate remaining time.
@@ -95,6 +135,15 @@ A child looks at the notes and listens to the audio.
 - Reject incomplete sheets explicitly; never repeat a paid image request automatically after interruption.
 - Preserve custom selection across reloads and serve generated images only after an authentication check.
 - Keep built-in selection available when the paid generation service is not configured.
+- Automatically moderate both the description and generated image before placing the result in the manager queue.
+- Let managers inspect all 30 frames and approve or reject the result.
+- Deny student access to unapproved generated images, including direct protected-file requests.
+- Show the packaged wordless hourglass while approval is pending.
+- Activate the waiting avatar after approval without another student action.
+- Preserve a later explicit built-in choice instead of replacing it when an older pending avatar receives approval.
+- Show the question-mark artwork after rejection.
+- Preserve existing ready avatars as approved during migration without regeneration.
+- Preserve the owner's original artwork outside the frontend; package the new wordless icon as `under_moderation.png`.
 
 ## Mobile installation
 - Provide a favicon, dedicated iPad icons, and localized application manifests.

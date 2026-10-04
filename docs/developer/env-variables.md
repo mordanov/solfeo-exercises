@@ -156,6 +156,8 @@ Only the OMR container needs executable temporary memory for JavaCPP native libr
 
 | Variable | Default | Purpose |
 |---|---|---|
+| `GAME_TIMEZONE` | `UTC` | IANA time zone for game calendar-day prizes and daily generation quotas |
+| `GAME_FEEDBACK_MS` | `900` | Server-controlled answer-feedback duration in milliseconds |
 | `AVATAR_IMAGE_MODEL` | `gpt-image-1-mini` | Economical model for one sheet with 30 avatar variants |
 | `AVATAR_IMAGE_QUALITY` | `low` | GPT Image quality: low, medium, or high |
 | `AVATAR_GEN_TIMEOUT_SECONDS` | `180` | Image request timeout; expired claims add a 60 s margin |
@@ -172,6 +174,13 @@ The default creates one low-quality `1024x1536` transparent PNG through GPT Imag
 Explicit legacy DALL-E settings remain supported with a white background and local transparency extraction.
 Changing the default does not replace an existing private model setting.
 Provider access and billing remain operator prerequisites.
+`GAME_TIMEZONE` must identify a valid IANA time zone.
+The backend and worker use the same configured day boundaries.
+Changing the zone changes calendar-day grouping; it does not remove previously awarded prizes.
+`GAME_FEEDBACK_MS` controls when the next question becomes available.
+The frontend uses response timing fields instead of a separate hard-coded feedback duration.
+Manager approval needs no provider request or extra secret.
+Automatic description and image moderation use the existing private provider configuration.
 
 ## Container deployment settings
 

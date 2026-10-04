@@ -82,6 +82,13 @@ Prerequisites:
 | avatar level | A character appearance numbered from 1 to 10, derived from the player's total XP. |
 | XP | Experience points earned from correct game answers and a winning round, excluding assistance bonuses. |
 | assistance bonus | Points added once per completed game round for disabled hint or correct-answer options. |
+| round total | The final game points after assistance bonuses, with a minimum of 0. |
+| trophy | A lifetime award for reaching a completed-round milestone. |
+| prize | A lifetime award for a game achievement, kept across seasons without extra XP. |
+| prize shelf | The visible collection of earned and locked game prizes. |
+| avatar review | A manager's approval or rejection of a generated avatar before student use. |
+| moderation receipt | A saved successful image safety check tied to the sprite sheet's SHA-256 checksum. |
+| question deadline | The server timestamp that defines when the question's allotted time ends. |
 | rules version | The stored number that selects a round's grading and bonus rules. |
 | generation job | A durable request that tracks avatar creation, saved images, timing, and errors. |
 | hash manifest | A metadata file that records the source and generated file checksums. |
