@@ -36,21 +36,12 @@ function posY(pos: number): number {
 
 export default function Staff({ notes, clef }: StaffProps) {
   const { t } = useTranslation();
-  const staffWidth = FIRST_NOTE_X + notes.length * NOTE_X_GAP + 20;
+  const staffWidth = 234;
   const clefScale = LINE_SPACING / CLEF_UNITS_PER_SPACE;
   // SMuFL glyph origins sit on G4 for treble and F3 for bass.
   const clefY = lineY(clef === "treble" ? 1 : 3);
 
   const positions = notes.map((n) => staffPos(n.name, n.octave, clef));
-  const viewTop = Math.min(
-    0,
-    ...positions.map((pos) => posY(pos) - (pos < 4 ? 44 : 8)),
-  );
-  const viewBottom = Math.max(
-    140,
-    ...positions.map((pos) => posY(pos) + (pos >= 4 ? 44 : 8)),
-  );
-  const viewHeight = viewBottom - viewTop;
 
   function ledgerLines(pos: number, x: number) {
     const lines: React.ReactElement[] = [];
@@ -91,7 +82,7 @@ export default function Staff({ notes, clef }: StaffProps) {
 
   return (
     <svg
-      viewBox={`0 ${viewTop} ${staffWidth} ${viewHeight}`}
+      viewBox="0 0 234 140"
       style={{
         width: "100%",
         maxWidth: 480,
@@ -105,14 +96,7 @@ export default function Staff({ notes, clef }: StaffProps) {
       role="img"
     >
       {/* Staff paper background */}
-      <rect
-        x={0}
-        y={viewTop}
-        width={staffWidth}
-        height={viewHeight}
-        fill="#FFFDF5"
-        rx={8}
-      />
+      <rect x={0} y={0} width={staffWidth} height={140} fill="#FFFDF5" rx={8} />
 
       {/* 5 staff lines */}
       {[0, 1, 2, 3, 4].map((i) => (
@@ -137,7 +121,10 @@ export default function Staff({ notes, clef }: StaffProps) {
       {/* Notes */}
       {notes.map((_note, idx) => {
         const pos = positions[idx];
-        const x = FIRST_NOTE_X + idx * NOTE_X_GAP;
+        const x =
+          FIRST_NOTE_X +
+          ((4 - notes.length) * NOTE_X_GAP) / 2 +
+          idx * NOTE_X_GAP;
         const y = posY(pos);
         const stemUp = pos < 4; // below middle line → stem up
         return (

@@ -7,6 +7,7 @@ import { ErrorMessage } from "../../../components/AccountUi";
 
 interface RoundResult {
   score: number;
+  score_bonus?: number;
   correct_count: number;
   is_win: boolean;
   xp_gained: number;
@@ -71,6 +72,11 @@ export default function ResultScreen({
       <Typography variant="h5" sx={{ mb: 0.5 }}>
         {t("game.result.score", { score: result.score })}
       </Typography>
+      {result.score_bonus !== undefined && (
+        <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+          {t("game.result.assistanceBonus", { points: result.score_bonus })}
+        </Typography>
+      )}
       <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
         {t("game.result.correct", { count: result.correct_count })}
       </Typography>

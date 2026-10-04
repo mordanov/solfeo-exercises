@@ -50,21 +50,25 @@ A child looks at the notes and listens to the audio.
 
 ## Guess the Note
 
-- Use 14 natural pitches from C4 through B5, inclusive, in either clef.
-- Give each pitch its own answer button with a scientific octave number.
+- Use natural pitches C4–A5 in the treble clef and E2–C4 in the bass clef.
+- Show 7 answer buttons for C through B, without octave labels or octave grading.
 - Follow the account's letters or solfege setting and interface language for buttons and revealed answers.
 - Play the same sampled piano pitch from an answer button and the corresponding sound hint.
 - Use `soundfont-player` with one reduced, licensed Salamander Grand Piano V3 asset and 4 real velocity layers.
 - Do not load a complete SF2 or request an external soundfont in the browser.
 - Load the piano before starting the scored round; report loading failures and permit retry.
-- Offer independent setup switches for the sound hint and the correct answer after answering.
+- Offer independent setup switches for the sound hint and the correct answer.
 - Enable the hint and disable answer revelation by default.
 - Show the correct answer to the right of the staff during feedback when enabled.
-- Explain that difficulty changes only the 13, 10, or 7 s limit.
+- Show only the selected 13, 10, or 7 s limit in the difficulty hint.
+- Show +1 point beside each disabled switch and 0 points beside each enabled switch.
+- Add these points once per completed round, including losing rounds; preserve XP and the winning threshold.
+- Keep the staff frame fixed across clefs and note counts.
+- Show enabled answer feedback to the right of the centered playback control, never beside the staff.
 - Limit new profiles to one per active, non-emergency account.
 - Exclude occupied accounts and the emergency manager from profile creation.
 - Show the all-assigned popup when no eligible accounts remain.
-- Preserve existing profiles, progress, scoring, and manager-only creation.
+- Preserve existing profiles, progress, previous rounds, and manager-only creation.
 
 ## Game avatar artwork
 

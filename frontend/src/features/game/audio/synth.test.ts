@@ -26,7 +26,7 @@ const play = vi.fn<
   return node;
 });
 const buffers = Object.fromEntries(
-  [4, 5].flatMap((octave) =>
+  [2, 3, 4, 5].flatMap((octave) =>
     [..."CDEFGAB"].flatMap((name) =>
       [4, 8, 12, 16].map((layer) => [
         `${name}${octave}-v${layer}`,
@@ -61,14 +61,14 @@ it("schedules exact octave-specific samples with unchanged sample pitch", async 
   const { playNotes } = await import("./synth");
   const finished = playNotes(
     [
-      { name: "C", octave: 4 },
+      { name: "E", octave: 2 },
       { name: "B", octave: 5 },
     ],
     new AbortController().signal,
   );
   await scheduled(2);
   expect(play.mock.calls).toEqual([
-    ["C4-v8", 10, { duration: 0.5, gain: 0.8 }],
+    ["E2-v8", 10, { duration: 0.5, gain: 0.8 }],
     ["B5-v8", 10.75, { duration: 0.5, gain: 0.8 }],
   ]);
   nodes[1].source.dispatchEvent(new Event("ended"));
@@ -158,7 +158,7 @@ it("rejects invalid, out-of-range, empty and muted playback explicitly", async (
   const { playNotes } = await import("./synth");
   for (const notes of [
     [],
-    [{ name: "C", octave: 3 }],
+    [{ name: "C", octave: 1 }],
     [{ name: "C", octave: 6 }],
     [{ name: "H", octave: 4 }],
   ]) {

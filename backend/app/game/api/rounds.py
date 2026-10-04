@@ -15,6 +15,8 @@ class CreateRoundBody(BaseModel):
     player_id: int
     difficulty: str
     note_count: int
+    show_sound_hint: bool = True
+    show_correct_answer: bool = False
 
 
 class SubmitTaskBody(BaseModel):
@@ -63,6 +65,8 @@ def create_round(
             body.note_count,
             note_naming,
             settings,
+            show_sound_hint=body.show_sound_hint,
+            show_correct_answer=body.show_correct_answer,
         )
         first_attempt = session.scalar(
             select(TaskAttempt).where(

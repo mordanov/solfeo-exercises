@@ -20,8 +20,9 @@ Prerequisites:
    The new profile appears with level 1 and a Unicorn avatar.
 6. Select the profile.
 7. Choose the difficulty and number of notes.
-8. Set **Show the sound hint** and **Show the correct answer after answering**.
+8. Set **Show the sound hint** and **Show the correct answer**.
    The hint starts enabled; the correct answer starts hidden.
+   Each disabled switch shows **+1 point**; each enabled switch shows **0 points**.
 9. Click **Let's go!**.
    The piano loads before the first round starts.
 
@@ -40,9 +41,13 @@ Rounds use standard treble and bass clefs.
 The treble clef identifies G4 on the second line from the bottom.
 The bass clef identifies F3 on the fourth line from the bottom.
 The symbols retain their proportions across interface fonts, themes, and screen sizes.
-Both clefs use 14 natural notes from C4 through B5.
-Buttons include scientific octave numbers 4 and 5 and follow the account's note naming and interface language.
-The optional correct answer follows these same settings and appears to the staff's right during feedback.
+Treble questions use natural notes C4–A5; bass questions use E2–C4.
+The 7 buttons answer C through B without selecting an octave.
+Buttons and revealed answers follow the account's note naming and interface language.
+The optional correct answer appears to the right of the centered playback control during feedback.
+The staff keeps the same size across clefs and note counts.
+Each disabled switch adds 1 point once per completed round, including a losing round.
+These points do not change XP or the requirement for 5 correct answers to win.
 Easy allows 13 s per question, Medium 10 s, and Hard 7 s.
 The difficulty changes the time limit, not the notes or scoring.
 The switches retain their choices between rounds until you leave the game area.
@@ -56,6 +61,7 @@ Piano failures permit retry without consuming a round.
 3. Click **Listen to notes** again to repeat the notes.
 4. Select an answer with a colored note button.
    The answer stops the hint and plays the selected piano pitch.
+   Its octave matches the current question note, even when you choose the wrong name.
 
 The white button appears only when **Show the sound hint** is enabled.
 Listening plays sampled piano notes without spoken names or automatic answers.

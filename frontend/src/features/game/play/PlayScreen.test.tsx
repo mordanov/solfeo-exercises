@@ -96,10 +96,10 @@ it("can hide the sound hint without removing the answer controls", () => {
   expect(
     screen.queryByRole("button", { name: "Listen to notes" }),
   ).not.toBeInTheDocument();
-  expect(screen.getByRole("button", { name: "C4" })).toBeEnabled();
+  expect(screen.getByRole("button", { name: "C" })).toBeEnabled();
 });
 
-it("submits each selected octave and uses the same piano path for answers and hints", async () => {
+it("plays repeated note names in their written octaves and submits the chosen names", async () => {
   const mixed = [
     { name: "C", octave: 4 },
     { name: "C", octave: 5 },
@@ -109,13 +109,13 @@ it("submits each selected octave and uses the same piano path for answers and hi
   });
   await click("Listen to notes");
   const hintSignal = playbackSignal;
-  await click("C4");
+  await click("C");
   expect(hintSignal.aborted).toBe(true);
   expect(playNotes).toHaveBeenLastCalledWith(
     [mixed[0]],
     expect.any(AbortSignal),
   );
-  await click("C5");
+  await click("C");
   expect(playNotes).toHaveBeenLastCalledWith(
     [mixed[1]],
     expect.any(AbortSignal),
@@ -126,10 +126,10 @@ it("submits each selected octave and uses the same piano path for answers and hi
 });
 
 it.each([
-  ["en", "letters", "C4"],
-  ["en", "solfege", "Do4"],
-  ["ru", "solfege", "До4"],
-  ["es", "solfege", "Do4"],
+  ["en", "letters", "C"],
+  ["en", "solfege", "Do"],
+  ["ru", "solfege", "До"],
+  ["es", "solfege", "Do"],
 ] as const)(
   "labels both answers and the correct answer using %s/%s",
   async (language, naming, label) => {
@@ -139,16 +139,66 @@ it.each([
       7000,
       { noteNaming: naming, showCorrectAnswer: true },
     );
+
     await click(label);
     const section = screen.getByRole("region", {
       name: i18n.t("game.correctAnswer"),
     });
     expect(section).toHaveTextContent(label);
     expect(section).toHaveTextContent(
-      naming === "letters" ? "A5" : language === "ru" ? "Ля5" : "La5",
+      naming === "letters" ? "A" : language === "ru" ? "Ля" : "La",
+    );
+    expect(section).not.toHaveTextContent(/[245]/);
+    expect(section.parentElement).not.toContainElement(
+      screen.getByRole("img", { name: /.+/ }),
     );
   },
 );
+
+it("plays wrong bass choices in the current octave and restores that octave after backspace", async () => {
+  mount(
+    {
+      index: 0,
+      clef: "bass",
+      notes: [
+        { name: "E", octave: 2 },
+        { name: "G", octave: 3 },
+        { name: "C", octave: 4 },
+      ],
+    },
+    7000,
+    { noteNaming: "letters" },
+  );
+  await click("C");
+  expect(playNotes).toHaveBeenLastCalledWith(
+    [{ name: "C", octave: 2 }],
+    expect.any(AbortSignal),
+  );
+  await click("D");
+  expect(playNotes).toHaveBeenLastCalledWith(
+    [{ name: "D", octave: 3 }],
+    expect.any(AbortSignal),
+  );
+  await click("Remove last note");
+  await click("B");
+  expect(playNotes).toHaveBeenLastCalledWith(
+    [{ name: "B", octave: 3 }],
+    expect.any(AbortSignal),
+  );
+  expect(fetchMock).not.toHaveBeenCalled();
+  await click("C");
+  expect(playNotes).toHaveBeenLastCalledWith(
+    [{ name: "C", octave: 4 }],
+    expect.any(AbortSignal),
+  );
+  expect(
+    JSON.parse(String(fetchMock.mock.calls[0]?.[1]?.body)).answers,
+  ).toEqual([
+    { name: "C", octave: 2 },
+    { name: "B", octave: 3 },
+    { name: "C", octave: 4 },
+  ]);
+});
 
 it("plays the displayed notes without submitting or entering answers", async () => {
   mount();
@@ -156,7 +206,7 @@ it("plays the displayed notes without submitting or entering answers", async () 
   expect(playNotes).toHaveBeenCalledWith(notes, expect.any(AbortSignal));
   expect(fetchMock).not.toHaveBeenCalled();
   expect(screen.getByRole("button", { name: "Stop listening" })).toBeEnabled();
-  expect(screen.getByRole("button", { name: "Do4" })).toBeEnabled();
+  expect(screen.getByRole("button", { name: "Do" })).toBeEnabled();
   await act(async () => finish());
   expect(screen.getByRole("button", { name: "Listen to notes" })).toBeEnabled();
 });
@@ -177,7 +227,7 @@ it("stops on an answer without changing the answer behavior", async () => {
   mount({ index: 0, clef: "bass", notes: [{ name: "F", octave: 4 }] });
   await click("Listen to notes");
   const hintSignal = playbackSignal;
-  await click("Fa4");
+  await click("Fa");
   expect(hintSignal.aborted).toBe(true);
   expect(
     screen.getByRole("button", { name: "Listen to notes" }),
@@ -229,7 +279,7 @@ it("replays the whole task after a partial answer", async () => {
   mount();
   await click("Listen to notes");
   const hintSignal = playbackSignal;
-  await click("Do4");
+  await click("Do");
   expect(hintSignal.aborted).toBe(true);
   expect(fetchMock).not.toHaveBeenCalled();
   await click("Listen to notes");

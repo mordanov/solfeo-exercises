@@ -8,13 +8,25 @@ beforeEach(async () => {
   await i18n.changeLanguage("en");
 });
 
-it("keeps B5 and all upper ledger lines visible in bass clef", () => {
-  render(<Staff clef="bass" notes={[{ name: "B", octave: 5 }]} />);
-  const staff = screen.getByRole("img");
-  const viewBox = (staff.getAttribute("viewBox") ?? "").split(" ").map(Number);
-  expect(viewBox[1]).toBeLessThanOrEqual(-58);
-  expect(staff.querySelector("ellipse")).toHaveAttribute("cy", "-50");
-});
+it.each(["treble", "bass"] as const)(
+  "uses one fixed frame for every note count and range edge in %s",
+  (clef) => {
+    const lower =
+      clef === "treble" ? { name: "C", octave: 4 } : { name: "E", octave: 2 };
+    const upper =
+      clef === "treble" ? { name: "A", octave: 5 } : { name: "C", octave: 4 };
+    const { rerender } = render(<Staff clef={clef} notes={[lower]} />);
+    for (const notes of [
+      [lower],
+      [upper],
+      [lower, upper],
+      [lower, upper, lower, upper],
+    ]) {
+      rerender(<Staff clef={clef} notes={notes} />);
+      expect(screen.getByRole("img")).toHaveAttribute("viewBox", "0 0 234 140");
+    }
+  },
+);
 it.each([
   {
     clef: "treble" as const,
@@ -51,7 +63,7 @@ it.each([
       "cy",
       String(anchor),
     );
-    expect(staff).toHaveAttribute("viewBox", "0 0 126 140");
+    expect(staff).toHaveAttribute("viewBox", "0 0 234 140");
   },
 );
 

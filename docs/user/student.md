@@ -16,18 +16,22 @@ Prerequisites:
 3. Select a player.
 4. Choose the difficulty and number of notes.
    Easy allows 13 s per question, Medium 10 s, and Hard 7 s.
-5. Set **Show the sound hint** and **Show the correct answer after answering**.
+5. Set **Show the sound hint** and **Show the correct answer**.
    The hint starts enabled; the correct answer starts hidden.
+   Each disabled switch shows **+1 point**; each enabled switch shows **0 points**.
 6. Click **Let's go!**.
    The piano loads before the first round starts.
 
 The difficulty changes the time limit, not the available notes or scoring.
 The switches retain their choices between rounds until you leave the game area.
 An unavailable piano shows an error without consuming a round; click **Let's go!** to retry.
-The game uses 14 natural notes from C4 through B5 in both clefs.
-Buttons include scientific octave numbers 4 and 5 to distinguish pitches with the same name.
+Treble questions use natural notes C4–A5; bass questions use E2–C4.
+The 7 buttons answer C through B without selecting an octave.
 Buttons and shown answers follow **Note naming** and **Interface language** in Settings.
-When enabled, the correct answer appears to the staff's right during feedback.
+When enabled, the correct answer appears to the right of the centered playback control during feedback.
+The staff keeps the same size across clefs and note counts.
+Each disabled switch adds 1 point once per completed round, including a losing round.
+These points do not change XP or the requirement for 5 correct answers to win.
 
 A failed request shows an error and **Try again**, not the empty-profile message.
 The badge shows **Play Guess the Note** on hover or keyboard focus.
@@ -46,6 +50,7 @@ Changing the interface font or theme does not change these symbols or note posit
 3. Click **Listen to notes** again to repeat all shown notes.
 4. Select your answers with the colored note buttons.
    An answer stops the hint and plays the selected piano pitch.
+   Its octave matches the current question note, even when you choose the wrong name.
 
 The white button appears only when **Show the sound hint** is enabled.
 The game plays sampled piano notes, not spoken note names.

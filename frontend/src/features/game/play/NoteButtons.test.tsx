@@ -8,25 +8,32 @@ beforeEach(async () => {
 });
 
 it.each(["treble", "bass"] as const)(
-  "offers exactly fourteen octave-specific letter buttons in %s",
+  "offers exactly seven names and plays their current question octave in %s",
   (clef) => {
     const answer = vi.fn();
-    render(<NoteButtons clef={clef} noteNaming="letters" onAnswer={answer} />);
-    expect(screen.getAllByRole("button")).toHaveLength(14);
-    fireEvent.click(screen.getByRole("button", { name: "C4" }));
-    fireEvent.click(screen.getByRole("button", { name: "B5" }));
+    render(
+      <NoteButtons
+        clef={clef}
+        octave={2}
+        noteNaming="letters"
+        onAnswer={answer}
+      />,
+    );
+    expect(screen.getAllByRole("button")).toHaveLength(7);
+    fireEvent.click(screen.getByRole("button", { name: "C" }));
+    fireEvent.click(screen.getByRole("button", { name: "B" }));
     expect(answer.mock.calls).toEqual([
-      [{ name: "C", octave: 4 }],
-      [{ name: "B", octave: 5 }],
+      [{ name: "C", octave: 2 }],
+      [{ name: "B", octave: 2 }],
     ]);
   },
 );
 it.each([
-  ["en", "Do4", "Sol5"],
-  ["ru", "До4", "Соль5"],
-  ["es", "Do4", "Sol5"],
+  ["en", "Do", "Sol"],
+  ["ru", "До", "Соль"],
+  ["es", "Do", "Sol"],
 ])(
-  "uses localized solfege and octaves in %s",
+  "uses localized solfege without octave labels in %s",
   async (language, first, last) => {
     await i18n.changeLanguage(language);
     render(

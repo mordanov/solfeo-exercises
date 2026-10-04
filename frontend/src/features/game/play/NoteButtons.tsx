@@ -1,9 +1,8 @@
 import { Box, Button } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { GAME_NOTES, noteLabel } from "../notes";
+import { NOTE_NAMES, noteLabel } from "../notes";
 import type { Note } from "../api/hooks";
 
-const NOTE_NAMES = ["C", "D", "E", "F", "G", "A", "B"] as const;
 const RAINBOW = [
   "#FF6B6B",
   "#FF8E53",
@@ -16,6 +15,7 @@ const RAINBOW = [
 
 interface Props {
   clef: "treble" | "bass";
+  octave?: number;
   noteNaming: "solfege" | "letters";
   onAnswer: (note: Note) => void;
   disabled?: boolean;
@@ -23,6 +23,7 @@ interface Props {
 
 export default function NoteButtons({
   noteNaming,
+  octave = 4,
   onAnswer,
   disabled = false,
 }: Props) {
@@ -37,11 +38,11 @@ export default function NoteButtons({
         mt: 3,
       }}
     >
-      {GAME_NOTES.map((note) => {
-        const i = NOTE_NAMES.findIndex((name) => name === note.name);
+      {NOTE_NAMES.map((name, i) => {
+        const note = { name, octave };
         return (
           <Button
-            key={`${note.name}${note.octave}`}
+            key={name}
             variant="contained"
             disabled={disabled}
             onClick={() => onAnswer(note)}

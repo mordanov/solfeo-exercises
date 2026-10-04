@@ -68,10 +68,19 @@ The query excludes inactive accounts, the emergency manager, and accounts with a
 `offset` must be nonnegative; pages use a stable account-ID order.
 The frontend refreshes this query after creation, including rejected attempts caused by concurrent changes.
 
-Rounds use 14 natural pitches from C4 through B5 in either clef.
-Answers contain the actual selected `name` and `octave` for every note.
+Treble questions use natural pitches C4–A5; bass questions use E2–C4.
+Round creation accepts `show_sound_hint` and `show_correct_answer`, defaulting to `true` and `false`.
+The backend stores these immutable options with rules version 2.
+Each disabled option adds 1 point once at completion, including losing rounds.
+The final result includes `score_bonus`; XP and the winning threshold do not change.
+Answers retain `name` and `octave`; version 2 grading compares names and order only.
+The frontend plays each selected name in the current question note's written octave.
 The existing submission response supplies authoritative `correct_answers` for optional feedback.
-Sound-hint and answer-revelation choices affect only the interface; they do not change scoring or permissions.
+Submitted option changes or bonus amounts cannot affect stored settings or scoring.
+Submission locks the round before checking its status, preventing concurrent finalization and duplicate XP or bonus awards.
+Existing version 1 rounds retain strict octave grading without assistance bonuses.
+Publish the backend and frontend together with migration `0010_round_rules`.
+Reload previously open game tabs after publication.
 
 ## Game avatars
 

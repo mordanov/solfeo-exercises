@@ -72,7 +72,14 @@ export default function GameSetup({
     }
     if (!mounted.current) return;
     startRound.mutate(
-      { csrf, player_id: playerId, difficulty, note_count: noteCount },
+      {
+        csrf,
+        player_id: playerId,
+        difficulty,
+        note_count: noteCount,
+        show_sound_hint: options.showSoundHint,
+        show_correct_answer: options.showCorrectAnswer,
+      },
       {
         onSuccess: (data) =>
           onRoundStarted(
@@ -146,7 +153,7 @@ export default function GameSetup({
             }
           />
         }
-        label={t("game.options.soundHint")}
+        label={`${t("game.options.soundHint")} — ${t(options.showSoundHint ? "game.options.zeroPoints" : "game.options.onePoint")}`}
       />
       <FormControlLabel
         control={
@@ -158,8 +165,11 @@ export default function GameSetup({
             }
           />
         }
-        label={t("game.options.correctAnswer")}
+        label={`${t("game.options.correctAnswer")} — ${t(options.showCorrectAnswer ? "game.options.zeroPoints" : "game.options.onePoint")}`}
       />
+      <Typography variant="caption" sx={{ display: "block", mb: 2 }}>
+        {t("game.options.roundBonus")}
+      </Typography>
 
       <Typography variant="h5" sx={{ mb: 2, fontWeight: 700 }}>
         {t("game.selectNoteCount")}

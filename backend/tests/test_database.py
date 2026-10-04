@@ -6,6 +6,7 @@ import httpx
 import pytest
 from alembic import command
 from alembic.config import Config
+from alembic.script import ScriptDirectory
 from fastapi import Depends
 from pydantic import SecretStr, ValidationError
 from sqlalchemy import (
@@ -145,7 +146,7 @@ def test_migration_upgrade_repeat_downgrade_and_upgrade(database: Database) -> N
         command.upgrade(config, "head")
         assert (
             connection.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0009_avatar_sheets"
+            == "0010_round_rules"
         )
         assert set(inspect(connection).get_table_names()) == {
             "alembic_version",
@@ -158,8 +159,140 @@ def test_migration_upgrade_repeat_downgrade_and_upgrade(database: Database) -> N
         command.upgrade(config, "head")
         assert (
             connection.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0009_avatar_sheets"
+            == "0010_round_rules"
         )
+
+
+@pytest.mark.parametrize("previous_revision", ["0008_game", "0009_avatar_sheets"])
+def test_round_rules_migration_preserves_previous_release_rows(
+    database: Database,
+    previous_revision: str,
+) -> None:
+    from app.game.models import CustomAvatar
+
+    with database.engine.begin() as connection:
+        config = migration_config(connection)
+        command.downgrade(config, previous_revision)
+        user_id = connection.scalar(
+            text(
+                "INSERT INTO users (username, password_hash, "
+                "first_name, last_name, role) "
+                "VALUES ('legacy-round-migration', 'synthetic-hash', "
+                "'L', 'R', 'student') "
+                "RETURNING id"
+            )
+        )
+        player_id = connection.scalar(
+            text(
+                "INSERT INTO players (account_id, name) "
+                "VALUES (:account_id, 'Legacy') RETURNING id"
+            ),
+            {"account_id": user_id},
+        )
+        season_id = connection.scalar(
+            text(
+                "INSERT INTO seasons (player_id, number) "
+                "VALUES (:player_id, 1) RETURNING id"
+            ),
+            {"player_id": player_id},
+        )
+        avatar_id: int | None = None
+        if previous_revision == "0009_avatar_sheets":
+            avatar_id = connection.scalar(
+                insert(CustomAvatar)
+                .values(
+                    account_id=user_id,
+                    player_id=player_id,
+                    description="Synthetic active job",
+                    status="pending",
+                    asset_version=2,
+                    phase="generating",
+                    completed_images=0,
+                    attempts=1,
+                    lease_token="synthetic-active-lease",
+                    locked_at=func.now(),
+                    base_path="avatars/custom/synthetic/sheet.png",
+                )
+                .returning(CustomAvatar.id)
+            )
+            assert avatar_id is not None
+        for status in ("active", "completed"):
+            connection.execute(
+                text(
+                    "INSERT INTO rounds (player_id, season_id, difficulty, "
+                    "note_count, note_naming, "
+                    "status, score, correct_count, expires_at) "
+                    "VALUES (:player_id, :season_id, 'easy', 1, 'letters', :status, "
+                    "3, 5, now() + interval '1 day')"
+                ),
+                {"player_id": player_id, "season_id": season_id, "status": status},
+            )
+        command.upgrade(config, "head")
+        rows = (
+            connection.execute(
+                text(
+                    "SELECT status, score, correct_count, rules_version, "
+                    "show_sound_hint, show_correct_answer "
+                    "FROM rounds WHERE player_id = :player_id ORDER BY status"
+                ),
+                {"player_id": player_id},
+            )
+            .tuples()
+            .all()
+        )
+        assert rows == [
+            ("active", 3, 5, 1, True, False),
+            ("completed", 3, 5, 1, True, False),
+        ]
+        if avatar_id is not None:
+            avatar = (
+                connection.execute(
+                    select(
+                        CustomAvatar.status,
+                        CustomAvatar.asset_version,
+                        CustomAvatar.phase,
+                        CustomAvatar.completed_images,
+                        CustomAvatar.attempts,
+                        CustomAvatar.lease_token,
+                        CustomAvatar.base_path,
+                    ).where(CustomAvatar.id == avatar_id)
+                )
+                .tuples()
+                .one()
+            )
+            assert avatar == (
+                "pending",
+                2,
+                "generating",
+                0,
+                1,
+                "synthetic-active-lease",
+                "avatars/custom/synthetic/sheet.png",
+            )
+            connection.execute(delete(CustomAvatar).where(CustomAvatar.id == avatar_id))
+        command.check(config)
+        connection.execute(
+            text("DELETE FROM rounds WHERE player_id = :player_id"),
+            {"player_id": player_id},
+        )
+        connection.execute(
+            text("DELETE FROM seasons WHERE player_id = :player_id"),
+            {"player_id": player_id},
+        )
+        connection.execute(
+            text("DELETE FROM players WHERE id = :player_id"), {"player_id": player_id}
+        )
+        connection.execute(
+            text("DELETE FROM users WHERE id = :user_id"), {"user_id": user_id}
+        )
+
+
+def test_round_rules_is_the_single_head_after_avatar_sheets() -> None:
+    scripts = ScriptDirectory.from_config(Config(str(ROOT / "backend/alembic.ini")))
+    assert scripts.get_heads() == ["0010_round_rules"]
+    revision = scripts.get_revision("0010_round_rules")
+    assert revision is not None
+    assert revision.down_revision == "0009_avatar_sheets"
 
 
 def test_avatar_migration_preserves_ready_art_without_retrying_legacy_jobs(

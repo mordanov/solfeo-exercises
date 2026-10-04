@@ -18,6 +18,14 @@ SOURCE = (
 )
 LAYERS = (4, 8, 12, 16)
 ROOTS = {
+    36: "C2",
+    39: "D#2",
+    42: "F#2",
+    45: "A2",
+    48: "C3",
+    51: "D#3",
+    54: "F#3",
+    57: "A3",
     60: "C4",
     63: "D#4",
     66: "F#4",
@@ -28,10 +36,28 @@ ROOTS = {
     81: "A5",
     84: "C6",
 }
-TUNING_CENTS = {60: -6, 63: -3, 66: 0, 69: -4, 72: -8, 75: -8, 78: -5, 81: -7, 84: -8}
+TUNING_CENTS = {
+    36: -9,
+    39: -11,
+    42: -7,
+    45: -4,
+    48: 0,
+    51: -6,
+    54: -3,
+    57: -3,
+    60: -6,
+    63: -3,
+    66: 0,
+    69: -4,
+    72: -8,
+    75: -8,
+    78: -5,
+    81: -7,
+    84: -8,
+}
 PITCHES = [
     (f"{name}{octave}", 12 * (octave + 1) + offset)
-    for octave in (4, 5)
+    for octave in (2, 3, 4, 5)
     for name, offset in zip("CDEFGAB", (0, 2, 4, 5, 7, 9, 11), strict=True)
 ]
 
@@ -89,9 +115,9 @@ def build(source_dir: Path, public_dir: Path) -> None:
                 output.read_bytes()
             ).decode("ascii")
     encoded = (json.dumps(asset, indent=2) + "\n").encode("ascii")
-    if len(encoded) > 1_500_000:
-        raise ValueError("The reduced piano exceeds the 1.5 MB budget")
-    (public_dir / "salamander-c4-b5.json").write_bytes(encoded)
+    if len(encoded) > 2_500_000:
+        raise ValueError("The reduced piano exceeds the 2.5 MB budget")
+    (public_dir / "salamander-c2-b5.json").write_bytes(encoded)
     provenance = {
         "author": "Alexander Holm",
         "source": "Salamander Grand Piano V3",
@@ -99,7 +125,7 @@ def build(source_dir: Path, public_dir: Path) -> None:
         "revision": REVISION,
         "license": "CC BY 3.0",
         "license_url": "https://creativecommons.org/licenses/by/3.0/",
-        "changes": "C4–B5 natural notes; 4 velocity layers; pitch resampling; "
+        "changes": "C2–B5 natural notes; 4 velocity layers; pitch resampling; "
         "2.5 s samples; fade; mono 32 kHz AAC at 48 kbit/s.",
         "layers": LAYERS,
         "tuning": "Upstream Data/tune_ret.txt corrections",

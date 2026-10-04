@@ -7,6 +7,21 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-10-04: The owner replaces octave selection with 7 note-name buttons.
+  Treble questions use C4–A5; the owner explicitly confirms E2–C4 for bass.
+  Grading compares names and their order, not octaves.
+  Button audio follows the current question note's written octave, including wrong choices and repeated names.
+  The piano retains natural notes C2–B5 to support every button choice in those octaves.
+
+  Each disabled assistance option adds 1 point once per completed round, not per question.
+  Stored options determine the bonus; submissions cannot change them.
+  XP, the winning threshold, stars, emotions, and previous completed results remain unchanged.
+  Round rules use version 2; existing rounds retain version 1 and strict octave grading without assistance bonuses.
+  The staff uses one 234 × 140 frame.
+  Enabled feedback appears beside the centered playback control without moving it.
+  Difficulty hints contain only the selected question time.
+  This decision supersedes the previous shared-range and octave-button rules below.
+
 - 2026-10-04: The owner requests persistent custom avatars with 30 level and emotion variants.
   Use one generated sheet and local extraction instead of 30 separate image requests.
   Default to `gpt-image-1-mini`, low quality, and a transparent `1024x1536` PNG.

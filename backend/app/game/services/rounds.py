@@ -26,14 +26,17 @@ def time_limit_s(difficulty: str) -> int:
 
 
 def score_task(
-    expected: list[dict[str, object]], given: list[dict[str, object]] | None
+    expected: list[dict[str, object]],
+    given: list[dict[str, object]] | None,
+    *,
+    note_only: bool = False,
 ) -> int:
     if given is None:
         return -1
     if len(given) != len(expected):
         return -1
     for e, g in zip(expected, given, strict=True):
-        if e["name"] != g["name"] or e["octave"] != g["octave"]:
+        if e["name"] != g["name"] or (not note_only and e["octave"] != g["octave"]):
             return -1
     return 1
 
@@ -82,6 +85,9 @@ def create_round(
     note_count: int,
     note_naming: str,
     settings: Settings,
+    *,
+    show_sound_hint: bool = True,
+    show_correct_answer: bool = False,
 ) -> tuple[Round, list[dict[str, object]]]:
     now = datetime.now(UTC)
     tasks = generate_tasks(difficulty, note_count, note_naming)
@@ -91,6 +97,9 @@ def create_round(
         difficulty=difficulty,
         note_count=note_count,
         note_naming=note_naming,
+        show_sound_hint=show_sound_hint,
+        show_correct_answer=show_correct_answer,
+        rules_version=2,
         status="active",
         created_at=now,
         expires_at=now + timedelta(seconds=settings.avatar_round_expire_s),
@@ -123,7 +132,12 @@ def submit_task(
     submitted_at: datetime,
     settings: Settings,
 ) -> dict[str, object]:
-    rnd = session.get(Round, round_id)
+    rnd = session.scalar(
+        select(Round)
+        .where(Round.id == round_id)
+        .with_for_update()
+        .execution_options(populate_existing=True)
+    )
     if rnd is None or rnd.status != "active":
         raise ServiceError("ROUND_NOT_ACTIVE", 400)
     if submitted_at > rnd.expires_at:
@@ -161,6 +175,7 @@ def submit_task(
             score_task(
                 attempt.expected_notes,  # type: ignore[arg-type]
                 answers,
+                note_only=rnd.rules_version >= 2,
             )
             == 1
         )
@@ -226,7 +241,12 @@ def _finalize_round(session: Session, rnd: Round) -> dict[str, object] | None:
     if len(attempts) < TASKS_PER_ROUND or any(a.submitted_at is None for a in attempts):
         return None
 
-    score = sum(a.score for a in attempts)
+    score_bonus = (
+        int(not rnd.show_sound_hint) + int(not rnd.show_correct_answer)
+        if rnd.rules_version >= 2
+        else 0
+    )
+    score = sum(a.score for a in attempts) + score_bonus
     correct_count = sum(1 for a in attempts if a.is_correct)
     is_win = correct_count >= WIN_THRESHOLD
 
@@ -251,6 +271,7 @@ def _finalize_round(session: Session, rnd: Round) -> dict[str, object] | None:
 
     return {
         "score": score,
+        "score_bonus": score_bonus,
         "correct_count": correct_count,
         "is_win": is_win,
         "xp_gained": xp_gained,

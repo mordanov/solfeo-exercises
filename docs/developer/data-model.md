@@ -20,8 +20,17 @@ Revision `0004_listening` adds student progress and the listening journal.
 Revision `0005_telegram` adds account associations, hashed linking codes, durable imports, and bot state.
 Revision `0006_omr` adds versioned OMR jobs and manager review.
 Revision `0007_appearance` adds account appearance preferences with predefined choices and database checks.
-Revision `0008_game` adds players, rounds, seasons, statistics, trophies, and custom avatars.
+Revision `0008_game` adds game profiles, seasons, rounds, attempts, trophies, and custom avatar jobs.
 Revision `0009_avatar_sheets` adds persistent avatar versions, progress, leases, and linked quota records.
+Revision `0010_round_rules` adds immutable assistance switches and the rules version to each round.
+Existing rows retain version 1, strict octave grading, and their recorded totals.
+New rounds use version 2, note-name grading, and one score bonus from the disabled switches.
+The migration defaults alone do not upgrade existing or manually inserted rounds to version 2.
+The round service sets the new version explicitly.
+Finalization locks the round and awards XP and the score bonus once.
+
+The migration chain runs `0008_game` → `0009_avatar_sheets` → `0010_round_rules`, with one head.
+Upgrading from `0009_avatar_sheets` preserves active avatar jobs and saved metadata.
 
 | Table | Contents and constraints |
 |---|---|
@@ -130,7 +139,7 @@ Do not remove the data volume.
    ```
 
 3. Repeat the revision command.
-   Alembic reports `0009_avatar_sheets (head)`.
+   Alembic reports `0010_round_rules (head)`.
 4. Open the local health page.
    Its existing behavior remains unchanged.
 
