@@ -8,7 +8,18 @@ from alembic import command
 from alembic.config import Config
 from fastapi import Depends
 from pydantic import SecretStr, ValidationError
-from sqlalchemy import Connection, Engine, String, event, func, inspect, select, text
+from sqlalchemy import (
+    Connection,
+    Engine,
+    String,
+    delete,
+    event,
+    func,
+    insert,
+    inspect,
+    select,
+    text,
+)
 from sqlalchemy.exc import IntegrityError, OperationalError
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column
 from sqlalchemy.pool import QueuePool
@@ -16,7 +27,7 @@ from sqlalchemy.pool import QueuePool
 from app.api.dependencies import get_session
 from app.database import Database
 from app.main import create_app
-from app.models import Base
+from app.models import Base, User
 from app.settings import Settings
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -134,7 +145,7 @@ def test_migration_upgrade_repeat_downgrade_and_upgrade(database: Database) -> N
         command.upgrade(config, "head")
         assert (
             connection.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0008_game"
+            == "0009_avatar_sheets"
         )
         assert set(inspect(connection).get_table_names()) == {
             "alembic_version",
@@ -147,8 +158,75 @@ def test_migration_upgrade_repeat_downgrade_and_upgrade(database: Database) -> N
         command.upgrade(config, "head")
         assert (
             connection.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0008_game"
+            == "0009_avatar_sheets"
         )
+
+
+def test_avatar_migration_preserves_ready_art_without_retrying_legacy_jobs(
+    database: Database,
+) -> None:
+    from app.game.models import CustomAvatar, Player
+
+    with database.engine.begin() as connection:
+        config = migration_config(connection)
+        command.downgrade(config, "0008_game")
+        account_id = connection.scalar(
+            insert(User)
+            .values(
+                username="synthetic-avatar-migration",
+                first_name="Migration",
+                last_name="Test",
+                role="manager",
+                password_hash="synthetic-unused-hash",
+            )
+            .returning(User.id)
+        )
+        player_id = connection.scalar(
+            insert(Player)
+            .values(account_id=account_id, name="Migration")
+            .returning(Player.id)
+        )
+        job_ids = [
+            connection.scalar(
+                text(
+                    "INSERT INTO custom_avatars "
+                    "(account_id, player_id, description, status, base_path) "
+                    "VALUES (:account, :player, 'Synthetic', :status, :path) "
+                    "RETURNING id"
+                ),
+                {
+                    "account": account_id,
+                    "player": player_id,
+                    "status": status,
+                    "path": "avatars/custom/synthetic/base.png",
+                },
+            )
+            for status in ("ready", "pending", "failed")
+        ]
+        command.upgrade(config, "head")
+        rows = list(
+            connection.execute(
+                select(
+                    CustomAvatar.status,
+                    CustomAvatar.asset_version,
+                    CustomAvatar.phase,
+                    CustomAvatar.completed_images,
+                    CustomAvatar.base_path,
+                    CustomAvatar.error_code,
+                )
+                .where(CustomAvatar.id.in_(job_ids))
+                .order_by(CustomAvatar.id)
+            )
+        )
+        assert rows[0][:4] == ("ready", 1, "complete", 3)
+        assert rows[0][4] == "avatars/custom/synthetic/base.png"
+        assert rows[1][:4] == ("failed", 1, "failed", 0)
+        assert rows[1][5] == "AVATAR_GENERATION_INTERRUPTED"
+        assert rows[2][:4] == ("failed", 1, "failed", 0)
+        command.check(config)
+        connection.execute(delete(CustomAvatar).where(CustomAvatar.id.in_(job_ids)))
+        connection.execute(delete(Player).where(Player.id == player_id))
+        connection.execute(delete(User).where(User.id == account_id))
 
 
 @pytest.mark.anyio

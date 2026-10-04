@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from app.game.models import CustomAvatar, Player, Season
 from app.models import User
 from app.services.auth import ServiceError
+from app.settings import Settings
 
 
 def get_or_403(session: Session, player_id: int, account_id: int) -> Player:
@@ -84,6 +85,7 @@ def create_player(
 def update_player(
     session: Session,
     player_id: int,
+    settings: Settings,
     *,
     name: str | None = None,
     avatar_animal: str | None = None,
@@ -103,9 +105,12 @@ def update_player(
             player.avatar_animal = avatar_animal
             player.custom_avatar_id = None
         if custom_avatar_id is not None:
+            from app.game.services.avatars import validate_avatar_assets
+
             job = session.get(CustomAvatar, custom_avatar_id)
             if job is None or job.player_id != player_id or job.status != "ready":
                 raise ServiceError("INVALID_CUSTOM_AVATAR", 422)
+            validate_avatar_assets(job, settings)
             player.custom_avatar_id = custom_avatar_id
         session.flush()
     return player

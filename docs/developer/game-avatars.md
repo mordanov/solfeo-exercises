@@ -213,7 +213,8 @@ Changing an avatar preserves XP and the avatar level.
 The existing winning threshold remains 5 correct answers.
 The existing XP bonus remains unchanged.
 A custom avatar uses its generated emotion images and the same numbered XP level.
-Custom generation does not create 10 separate levels of artwork.
+New custom generation creates 10 levels with 3 emotions each.
+Older custom avatars retain their 3 shared emotion images without paid regeneration.
 
 ## Source correspondence
 
@@ -246,10 +247,15 @@ Docker includes only the public copies, not the original sheets.
 ## Custom creation
 
 The chooser starts generation only after an explicit button click.
-It shows quota, pending status, a ready preview, acceptance, discard, and explicit errors.
+It shows availability, quota, phase, saved-image count, approximate remaining time, previews, acceptance, discard, and explicit errors.
 Reopening the chooser retrieves recent jobs without starting another generation.
 Accepting a ready job persists its identifier on the player.
 Selecting a built-in character clears that identifier.
+The saved gallery retains ready jobs, including the previously selected avatar.
+Selecting a saved avatar requires no provider request.
+The preview supports levels 1–10 and all 3 emotions.
+Explicit discard removes its database record and active selection.
+It does not remove files or perform another generation.
 
 `avatars` runs the existing `worker.generate_avatar` process in development and production Compose.
 It uses the shared backend image, private database, and media volume.
@@ -258,13 +264,55 @@ The deployment script stops, starts, and restores this worker with the applicati
 
 **Caution:** Custom creation uses an external paid image service.
 Set `OPENAI_API_KEY` privately on the deployment host only when this feature is needed.
-The backend rejects unconfigured generation with `AVATAR_GENERATION_UNAVAILABLE`; the worker remains idle.
+The backend rejects unconfigured creation with status `503` and `AVATAR_GENERATION_UNAVAILABLE`.
+The quota endpoint reports this condition before the interface permits a request.
+The worker leaves new jobs queued without a key but can complete extraction from a saved sheet.
 Tests use synthetic jobs and mock external requests instead of generating billable images.
 
 Generated files remain under `MEDIA_ROOT/avatars/custom/<job_id>/`.
+The shared `media_data` volume preserves them across container restarts and releases.
+Each new job saves `sheet.png`, 30 transparent PNG frames, and `manifest.json` with source and frame hashes.
+Frames use `levels/avatar_<level>_<state>.png` with levels `01` through `10`.
+Atomic replacement and explicit synchronization publish files before the worker marks the job ready.
+Both selection endpoints reject incomplete version 2 sets.
 Authenticated file endpoints check ownership, job readiness, path containment, and file existence.
 They return `X-Accel-Redirect`; nginx serves the private PNG without public media URLs.
 Never include these files in a public avatar directory or browser cache.
+
+### One-sheet generation
+
+The default model is `gpt-image-1-mini` with low quality.
+One image request creates a transparent `1024x1536` sheet, not 30 separate images.
+A moderation request checks the description first.
+The prompt requires 5 columns, 6 rows, consistent identity, and empty gutters.
+Rows 1, 2, and 3 contain neutral, happy, and sad levels 1–5.
+Rows 4, 5, and 6 contain the same emotions for levels 6–10.
+The worker rejects empty cells or figures that touch cell boundaries.
+It fits each complete figure inside a transparent 384 × 384 px canvas.
+Geometry checks cannot prove correct character identity, expression, or artistic progression.
+Inspect all 30 images from a real provider before accepting visual quality.
+
+During provider generation, the saved-image count stays at 0.
+The interface explains that all variants arrive together.
+Local extraction advances the count only after each file reaches storage.
+The estimate uses up to 5 recent, uninterrupted successful jobs or the configured initial duration.
+An overdue estimate becomes unknown instead of reporting false completion.
+The player can close the window and return to the same job.
+
+Account and player locks serialize quota checks and creation.
+Identical pending requests reuse one job and one quota record.
+Different descriptions for a busy player return `AVATAR_JOB_BUSY`.
+The worker claims jobs with `FOR UPDATE SKIP LOCKED` and a durable lease token.
+An active claim prevents another worker from repeating the request.
+An expired claim reuses a saved sheet without another image request.
+An interrupted generation without a saved sheet fails explicitly; no automatic paid retry occurs.
+Lease checks prevent a late provider reply from replacing another worker's saved sheet.
+Moderation refunds only the linked quota record.
+
+Migration `0009_avatar_sheets` preserves older ready avatars as version 1.
+It closes legacy pending jobs as interrupted because their original worker records no durable request phase.
+This prevents an untracked paid retry during deployment.
+The migration does not regenerate existing avatars.
 
 Direct game page requests use the frontend document route, including setup reloads.
 The previous missing nginx routes returned status `404` even when the fallback loaded the application.

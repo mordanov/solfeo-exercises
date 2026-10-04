@@ -20,6 +20,8 @@ Revision `0004_listening` adds student progress and the listening journal.
 Revision `0005_telegram` adds account associations, hashed linking codes, durable imports, and bot state.
 Revision `0006_omr` adds versioned OMR jobs and manager review.
 Revision `0007_appearance` adds account appearance preferences with predefined choices and database checks.
+Revision `0008_game` adds players, rounds, seasons, statistics, trophies, and custom avatars.
+Revision `0009_avatar_sheets` adds persistent avatar versions, progress, leases, and linked quota records.
 
 | Table | Contents and constraints |
 |---|---|
@@ -35,6 +37,18 @@ Revision `0007_appearance` adds account appearance preferences with predefined c
 | `telegram_updates` | Telegram update primary key, owner, file reference, status, attempts, errors, converted media, applied exercise |
 | `telegram_state` | Bot identity, durable next offset, last successful heartbeat |
 | `omr_jobs` | Exercise/image versions, current-result flag, status, attempts, lease token, timing, errors, private score filename, reviewer |
+| `players` | Account ownership, name, built-in or custom selection, total XP |
+| `custom_avatars` | Creator/player references, description, status, asset version, phase, saved-image count, claim token, attempts, timing, errors |
+| `avatar_generation_log` | Creator, creation time, moderation flag, billable quota record |
+
+New custom avatars use asset version 2 with 30 level/emotion files.
+The saved-image constraint permits values from 0 through 30.
+Each new job links its exact quota record through `generation_log_id`.
+Account and player row locks serialize generation creation and quota consumption.
+Worker claims use row locks with `SKIP LOCKED` and durable lease tokens.
+Files reside in persistent private media storage, not database image columns.
+Older ready avatars retain asset version 1 and 3 emotion files.
+Migration closes older pending jobs as interrupted without another paid request.
 
 A partial unique index permits one current OMR job per exercise.
 Each job references an immutable original image.
@@ -116,7 +130,7 @@ Do not remove the data volume.
    ```
 
 3. Repeat the revision command.
-   Alembic reports `0006_omr (head)`.
+   Alembic reports `0009_avatar_sheets (head)`.
 4. Open the local health page.
    Its existing behavior remains unchanged.
 

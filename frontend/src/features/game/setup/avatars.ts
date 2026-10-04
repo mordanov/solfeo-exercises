@@ -23,6 +23,7 @@ export function avatarSource(
   mood: AvatarMood,
   customId?: number | null,
 ): string {
-  if (customId) return `/api/game/avatars/${customId}/files/${mood}`;
+  if (customId)
+    return `/api/game/avatars/${customId}/files/${mood}?level=${level}`;
   return `/assets/avatars/${animal}/${animal}_${String(level).padStart(2, "0")}_${mood}.png`;
 }

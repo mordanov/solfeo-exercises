@@ -84,16 +84,28 @@ Managers can choose avatars for any player without changing the existing player-
 | GET | `/api/game/avatars/catalog` | Authenticated member; all 11 built-in identifiers |
 | POST | `/api/game/players/{id}/avatar` | Owner or manager, with CSRF; body contains `avatar_animal`; clears custom selection |
 | GET | `/api/game/avatars?player_id={id}` | Owner or manager; up to 5 recent generation jobs, excluding the selected job |
+| GET | `/api/game/avatars/saved?player_id={id}&offset=0` | Owner or manager; `jobs` and `total`, 12 ready avatars per page |
+| GET | `/api/game/avatars/quota` | Authenticated member; quota, generation availability, reason, and image count |
 | POST | `/api/game/avatars/generate` | Owner or manager, with CSRF; description and player ID; configured service required |
-| GET | `/api/game/avatars/{id}/status` | Job creator or manager; pending, ready, or failed |
-| POST | `/api/game/avatars/{id}/use` | Job creator or manager, with CSRF; selects a ready job |
-| DELETE | `/api/game/avatars/{id}` | Job creator or manager, with CSRF; discards a job and clears its active selection |
+| GET | `/api/game/avatars/{id}/status` | Job creator, player owner, or manager; status and durable progress |
+| POST | `/api/game/avatars/{id}/use` | Job creator, player owner, or manager, with CSRF; selects a complete ready job |
+| DELETE | `/api/game/avatars/{id}` | Job creator, player owner, or manager, with CSRF; discards a nonpending job |
 | GET, HEAD | `/api/game/avatars/{id}/files/{state}` | Job creator, player owner, or manager; private PNG through nginx |
 
 File states use `neutral`, `happy`, and `sad`.
-The neutral state uses the generated base image.
+The optional `level` query accepts 1–10 and defaults to 1.
+Version 2 uses a separate file for each level and emotion; version 1 retains 3 shared emotion files.
+Responses include `asset_version`, `phase`, `completed_images`, `total_images`, and `estimated_seconds_remaining`.
+Phases are `queued`, `moderating`, `generating`, `splitting`, `complete`, and `failed`.
+The remaining time is approximate; `null` means unknown, overdue, or failed.
+Ready jobs report 0 remaining seconds.
+The quota response includes `generation_available`, `generation_reason`, and `image_count:30`.
+An identical pending description returns the existing `job_id` without consuming quota.
+Another pending description or a pending discard returns `409 AVATAR_JOB_BUSY`.
+Incomplete version 2 storage prevents selection with `409 AVATAR_ASSETS_MISSING`.
 Invalid paths and missing files return `FILE_NOT_FOUND`.
 Unconfigured creation returns status `503` with `AVATAR_GENERATION_UNAVAILABLE`.
+Saved-avatar access does not require a configured provider.
 See `game-avatars.md` for artwork correspondence, progression, and worker operation.
 
 ## Error responses

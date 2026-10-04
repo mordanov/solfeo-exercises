@@ -75,6 +75,9 @@ Prerequisites:
 | round | A group of 7 questions in Guess the Note. |
 | season | A numbered group of game rounds associated with one player profile. |
 | avatar level | A character appearance numbered from 1 to 10, derived from the player's total XP. |
+| sprite sheet | One image containing separate character appearances in a fixed grid. |
+| generation job | A durable request that tracks avatar creation, saved images, timing, and errors. |
+| hash manifest | A metadata file that records the source and generated file checksums. |
 | XP | Experience points earned through correct game answers and round bonuses. |
 | sprite sheet | An original image containing multiple character appearances and emotions. |
 | staff | The 5 horizontal lines that specify vertical note positions. |

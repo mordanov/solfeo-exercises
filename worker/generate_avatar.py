@@ -1,149 +1,395 @@
-#!/usr/bin/env python3
-"""Avatar generation worker.
+"""Generate one persistent sprite sheet and extract thirty custom-avatar frames."""
 
-Polls for pending custom avatar jobs and processes them with DALL-E.
-"""
+from __future__ import annotations
 
+import base64
+import hashlib
+import io
+import json
 import logging
+import os
 import sys
 import time
-from datetime import UTC, datetime
+from dataclasses import dataclass
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
+from uuid import uuid4
 
 import httpx
+from PIL import Image, ImageChops, ImageDraw, ImageOps
+from pydantic import BaseModel
 
 sys.path.insert(0, str(Path(__file__).parents[1] / "backend"))
 
-from sqlalchemy import select, text
+from sqlalchemy import or_, select
+from sqlalchemy.orm import Session
 
 from app.database import Database
-from app.game.config import AVATAR_WORKER_LOCK_ID
 from app.game.models import AvatarGenerationLog, CustomAvatar
 from app.logging import configure_logging
 from app.settings import Settings
 
-logger = logging.getLogger(__name__)
-
+logger = logging.getLogger("worker.generate_avatar")
+STATES = ("neutral", "happy", "sad")
 IMAGE_SYSTEM = (
-    "Cute, child-friendly, single magical creature, "
-    "consistent flat cartoon illustration style, "
-    "plain transparent background, no text, no real people, "
-    "no brands or characters from existing franchises. "
-    "Style: bold outlines, bright pastel colours."
+    "Create ONE sprite sheet of an original child-friendly magical creature: "
+    "exactly 30 complete, separate figures in a STRICT 5-column, 6-row grid. "
+    "Use identical equal-size cells and generous empty gutters; no part of a figure "
+    "may touch a cell edge. No text, labels, borders, real people, brands or existing "
+    "franchise characters. Bright pastel cartoon with clear outlines. "
+    "All figures must be recognizably the SAME character. "
+    "Columns 1-5 are levels 1-5 in rows 1-3, and levels 6-10 in rows 4-6. "
+    "Rows 1 and 4: neutral; rows 2 and 5: happy; rows 3 and 6: sad. "
+    "Levels grow from a small young creature to a majestic mature creature, "
+    "with increasing magical decorations; retain identity and colours."
 )
 
 
+class AvatarError(Exception):
+    def __init__(self, code: str) -> None:
+        self.code = code
+        super().__init__(code)
+
+
+class ImageEntry(BaseModel):
+    b64_json: str | None = None
+
+
+class ImageReply(BaseModel):
+    data: list[ImageEntry]
+
+
+class ModerationEntry(BaseModel):
+    flagged: bool
+
+
+class ModerationReply(BaseModel):
+    results: list[ModerationEntry]
+
+
+@dataclass(frozen=True)
+class Lease:
+    job_id: int
+    description: str
+    token: str
+
+
 def _openai_post(
-    settings: Settings, path: str, payload: dict[str, object], timeout: float = 60.0
+    settings: Settings, path: str, payload: dict[str, object], timeout: float = 60
 ) -> dict[str, object]:
-    url = f"https://api.openai.com/v1{path}"
     key = settings.openai_api_key.get_secret_value()
-    with httpx.Client(timeout=timeout) as client:
-        r = client.post(url, json=payload, headers={"Authorization": f"Bearer {key}"})
-    r.raise_for_status()
-    return r.json()  # type: ignore[no-any-return]
+    with httpx.Client(timeout=httpx.Timeout(timeout, connect=10)) as client:
+        response = client.post(
+            f"https://api.openai.com/v1{path}",
+            json=payload,
+            headers={"Authorization": f"Bearer {key}"},
+        )
+    response.raise_for_status()
+    if len(response.content) > settings.avatar_gen_max_image_bytes * 2:
+        raise AvatarError("AVATAR_IMAGE_TOO_LARGE")
+    raw: object = response.json()
+    if not isinstance(raw, dict):
+        raise AvatarError("AVATAR_PROVIDER_RESPONSE_INVALID")
+    return {str(key): value for key, value in raw.items()}
 
 
-def _moderate(settings: Settings, text_: str) -> bool:
-    result = _openai_post(settings, "/moderations", {"input": text_})
-    results = result.get("results", [])
-    return bool(results and isinstance(results, list) and results[0].get("flagged"))
-
-
-def _generate_image(settings: Settings, prompt: str) -> str:
-    result = _openai_post(
-        settings,
-        "/images/generations",
-        {
-            "model": settings.avatar_image_model,
-            "prompt": f"{IMAGE_SYSTEM}\n\n{prompt}",
-            "n": 1,
-            "size": "1024x1024",
-            "response_format": "url",
-        },
-        timeout=120.0,
+def _moderate(settings: Settings, description: str) -> bool:
+    reply = ModerationReply.model_validate(
+        _openai_post(
+            settings,
+            "/moderations",
+            {"input": description, "model": "omni-moderation-latest"},
+        )
     )
-    data = result.get("data", [])
-    if isinstance(data, list) and data:
-        entry = data[0]
-        if isinstance(entry, dict):
-            return str(entry["url"])
-    raise ValueError("AVATAR_IMAGE_MISSING")
+    if not reply.results:
+        raise AvatarError("AVATAR_PROVIDER_RESPONSE_INVALID")
+    return any(result.flagged for result in reply.results)
 
 
-def _download(url: str, dest: Path) -> None:
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    with httpx.Client(timeout=30.0) as client:
-        r = client.get(url)
-    r.raise_for_status()
-    dest.write_bytes(r.content)
+def _generate_sheet(settings: Settings, description: str) -> bytes:
+    legacy = settings.avatar_image_model.startswith("dall-e-")
+    payload: dict[str, object] = {
+        "model": settings.avatar_image_model,
+        "prompt": IMAGE_SYSTEM
+        + (
+            " Use a solid pure-white background."
+            if legacy
+            else " Use a transparent background."
+        )
+        + "\nCreature: "
+        + description,
+        "n": 1,
+        "size": "1024x1024" if legacy else "1024x1536",
+    }
+    if legacy:
+        payload["response_format"] = "b64_json"
+        if settings.avatar_image_model == "dall-e-3":
+            payload["quality"] = "standard"
+    else:
+        payload.update(
+            quality=settings.avatar_image_quality,
+            background="transparent",
+            output_format="png",
+        )
+    reply = ImageReply.model_validate(
+        _openai_post(
+            settings,
+            "/images/generations",
+            payload,
+            settings.avatar_gen_timeout_seconds,
+        )
+    )
+    if len(reply.data) != 1 or not reply.data[0].b64_json:
+        raise AvatarError("AVATAR_PROVIDER_RESPONSE_INVALID")
+    encoded = reply.data[0].b64_json
+    if len(encoded) > (settings.avatar_gen_max_image_bytes + 2) // 3 * 4:
+        raise AvatarError("AVATAR_IMAGE_TOO_LARGE")
+    data = base64.b64decode(encoded, validate=True)
+    if len(data) > settings.avatar_gen_max_image_bytes:
+        raise AvatarError("AVATAR_IMAGE_TOO_LARGE")
+    return data
+
+
+def _atomic_write(path: Path, data: bytes) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(f".{path.name}.{uuid4().hex}.tmp")
+    try:
+        with temporary.open("xb") as handle:
+            handle.write(data)
+            handle.flush()
+            os.fsync(handle.fileno())
+        temporary.replace(path)
+        directory = os.open(path.parent, os.O_RDONLY)
+        try:
+            os.fsync(directory)
+        finally:
+            os.close(directory)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
+def _claim(database: Database, settings: Settings) -> Lease | None:
+    now = datetime.now(UTC)
+    expired = now - timedelta(seconds=settings.avatar_gen_timeout_seconds + 60)
+    with database.session() as session, session.begin():
+        query = (
+            select(CustomAvatar)
+            .where(
+                CustomAvatar.status == "pending",
+                or_(CustomAvatar.locked_at.is_(None), CustomAvatar.locked_at < expired),
+            )
+            .order_by(CustomAvatar.id)
+            .with_for_update(skip_locked=True)
+            .limit(1)
+        )
+        if not settings.openai_api_key.get_secret_value():
+            query = query.where(CustomAvatar.phase != "queued")
+        job = session.scalar(query)
+        if job is None:
+            return None
+        token = str(uuid4())
+        job.lease_token = token
+        job.locked_at = now
+        job.started_at = job.started_at or now
+        job.attempts += 1
+        job.asset_version = 2
+        return Lease(job.id, job.description, token)
+
+
+def _leased_job(session: Session, lease: Lease) -> CustomAvatar:
+    job = session.scalar(
+        select(CustomAvatar)
+        .where(CustomAvatar.id == lease.job_id, CustomAvatar.lease_token == lease.token)
+        .with_for_update()
+    )
+    if job is None or job.status != "pending":
+        raise AvatarError("AVATAR_LEASE_LOST")
+    return job
+
+
+def _save_sheet(database: Database, lease: Lease, path: Path, data: bytes) -> None:
+    with database.session() as session, session.begin():
+        job = _leased_job(session, lease)
+        _atomic_write(path, data)
+        job.phase = "splitting"
+        job.locked_at = datetime.now(UTC)
+
+
+def _update(
+    database: Database,
+    lease: Lease,
+    phase: str,
+    *,
+    completed: int | None = None,
+    error: str | None = None,
+) -> None:
+    with database.session() as session, session.begin():
+        job = _leased_job(session, lease)
+        job.phase = phase
+        job.locked_at = datetime.now(UTC)
+        if completed is not None:
+            job.completed_images = completed
+        if error:
+            job.status = "failed"
+            job.error_code = error
+            job.completed_at = datetime.now(UTC)
+            if error == "MODERATION_FLAGGED" and job.generation_log_id is not None:
+                log = session.get(AvatarGenerationLog, job.generation_log_id)
+                if log:
+                    log.flagged = True
+                    log.billable = False
+        elif phase == "complete":
+            job.status = "ready"
+            job.completed_at = datetime.now(UTC)
+            prefix = f"avatars/custom/{job.id}/levels/avatar_01_"
+            job.base_path = prefix + "neutral.png"
+            job.happy_path = prefix + "happy.png"
+            job.sad_path = prefix + "sad.png"
+
+
+def _load_sheet(path: Path, settings: Settings) -> Image.Image:
+    if path.stat().st_size > settings.avatar_gen_max_image_bytes:
+        raise AvatarError("AVATAR_IMAGE_TOO_LARGE")
+    with Image.open(path) as source:
+        if source.format != "PNG" or source.size not in ((1024, 1536), (1024, 1024)):
+            raise AvatarError("AVATAR_SHEET_INVALID")
+        image = source.convert("RGBA")
+    if image.getchannel("A").getextrema()[0] == 255:
+        # Legacy DALL-E has no native transparency. Remove only edge-connected white.
+        red, green, blue = image.convert("RGB").split()
+        mask = ImageChops.darker(ImageChops.darker(red, green), blue).point(
+            lambda value: 255 if value >= 245 else 0
+        )
+        for point in (
+            (0, 0),
+            (image.width - 1, 0),
+            (0, image.height - 1),
+            (image.width - 1, image.height - 1),
+        ):
+            if mask.getpixel(point) == 255:
+                ImageDraw.floodfill(mask, point, 128)
+        pixels = bytearray(image.tobytes())
+        mask_bytes = mask.tobytes()
+        for index in range(image.width * image.height):
+            if mask_bytes[index] == 128:
+                pixels[index * 4 + 3] = 0
+        image = Image.frombytes("RGBA", image.size, bytes(pixels))
+    return image
+
+
+def _frames(image: Image.Image) -> list[tuple[int, str, bytes]]:
+    frames: list[tuple[int, str, bytes]] = []
+    for level in range(1, 11):
+        column = (level - 1) % 5
+        for state_index, state in enumerate(STATES):
+            row = (level - 1) // 5 * 3 + state_index
+            cell = image.crop(
+                (
+                    column * image.width // 5,
+                    row * image.height // 6,
+                    (column + 1) * image.width // 5,
+                    (row + 1) * image.height // 6,
+                )
+            )
+            bounds = cell.getchannel("A").getbbox()
+            if (
+                bounds is None
+                or min(bounds[:2]) < 2
+                or bounds[2] > cell.width - 2
+                or bounds[3] > cell.height - 2
+            ):
+                raise AvatarError("AVATAR_SHEET_INVALID")
+            cropped = cell.crop(bounds)
+            resized = ImageOps.contain(cropped, (360, 360), Image.Resampling.LANCZOS)
+            frame = Image.new("RGBA", (384, 384))
+            frame.alpha_composite(
+                resized, ((384 - resized.width) // 2, (384 - resized.height) // 2)
+            )
+            encoded = io.BytesIO()
+            frame.save(encoded, format="PNG")
+            frames.append((level, state, encoded.getvalue()))
+    return frames
 
 
 def process_one(database: Database, settings: Settings) -> bool:
-    with database.session() as session:
-        with session.begin():
-            job = session.scalar(
-                select(CustomAvatar)
-                .where(CustomAvatar.status == "pending")
-                .with_for_update(skip_locked=True)
-                .limit(1)
-            )
-            if job is None:
-                return False
-            job_id = job.id
-            description = job.description
-            account_id = job.account_id
-
+    lease = _claim(database, settings)
+    if lease is None:
+        return False
+    root = settings.media_root / "avatars" / "custom" / str(lease.job_id)
+    sheet = root / "sheet.png"
     try:
-        flagged = _moderate(settings, description)
-        if flagged:
-            with database.session() as session:
-                with session.begin():
-                    j = session.get(CustomAvatar, job_id)
-                    if j:
-                        j.status = "failed"
-                        j.error_code = "MODERATION_FLAGGED"
-                    log = session.scalar(
-                        select(AvatarGenerationLog)
-                        .where(AvatarGenerationLog.account_id == account_id)
-                        .order_by(AvatarGenerationLog.id.desc())
-                        .limit(1)
-                    )
-                    if log:
-                        log.flagged = True
-                        log.billable = False
-            return True
-
-        base_url = _generate_image(settings, description)
-        happy_url = _generate_image(settings, f"Happy version of: {description}")
-        sad_url = _generate_image(settings, f"Sad version of: {description}")
-
-        base_dir = Path(settings.media_root) / "avatars" / "custom" / str(job_id)
-        base_path = base_dir / "base.png"
-        happy_path = base_dir / "happy.png"
-        sad_path = base_dir / "sad.png"
-        _download(base_url, base_path)
-        _download(happy_url, happy_path)
-        _download(sad_url, sad_path)
-
         with database.session() as session:
-            with session.begin():
-                j = session.get(CustomAvatar, job_id)
-                if j:
-                    j.status = "ready"
-                    j.base_path = str(base_path.relative_to(settings.media_root))
-                    j.happy_path = str(happy_path.relative_to(settings.media_root))
-                    j.sad_path = str(sad_path.relative_to(settings.media_root))
-                    j.completed_at = datetime.now(UTC)
-
-    except Exception as exc:
-        logger.exception("Avatar job %s failed: %s", job_id, exc)
-        with database.session() as session:
-            with session.begin():
-                j = session.get(CustomAvatar, job_id)
-                if j:
-                    j.status = "failed"
-                    j.error_code = "AVATAR_GENERATION_FAILED"
+            job = session.get(CustomAvatar, lease.job_id)
+            assert job is not None
+            previous_phase = job.phase
+        if not sheet.is_file():
+            if previous_phase != "queued":
+                raise AvatarError("AVATAR_GENERATION_INTERRUPTED")
+            _update(database, lease, "moderating")
+            if _moderate(settings, lease.description):
+                raise AvatarError("MODERATION_FLAGGED")
+            _update(database, lease, "generating")
+            data = _generate_sheet(settings, lease.description)
+            _save_sheet(database, lease, sheet, data)
+        _update(database, lease, "splitting")
+        image = _load_sheet(sheet, settings)
+        frames = _frames(image)
+        persisted: set[tuple[int, str]] = set()
+        for level, state, data in frames:
+            path = root / f"levels/avatar_{level:02}_{state}.png"
+            if (
+                path.is_file()
+                and path.stat().st_size == len(data)
+                and path.read_bytes() == data
+            ):
+                persisted.add((level, state))
+        _update(database, lease, "splitting", completed=len(persisted))
+        manifest_frames: list[dict[str, object]] = []
+        for level, state, data in frames:
+            filename = f"levels/avatar_{level:02}_{state}.png"
+            if (level, state) not in persisted:
+                _atomic_write(root / filename, data)
+                persisted.add((level, state))
+                _update(database, lease, "splitting", completed=len(persisted))
+            manifest_frames.append(
+                {
+                    "level": level,
+                    "state": state,
+                    "file": filename,
+                    "sha256": hashlib.sha256(data).hexdigest(),
+                }
+            )
+        manifest = {
+            "version": 2,
+            "source_sha256": hashlib.sha256(sheet.read_bytes()).hexdigest(),
+            "frames": manifest_frames,
+        }
+        _atomic_write(
+            root / "manifest.json", (json.dumps(manifest, indent=2) + "\n").encode()
+        )
+        _update(database, lease, "complete", completed=30)
+        logger.info("AVATAR_JOB_READY", extra={"job_id": lease.job_id})
+    except Exception as error:
+        if isinstance(error, AvatarError):
+            code = error.code
+        elif isinstance(error, httpx.HTTPStatusError):
+            code = (
+                "AVATAR_PROVIDER_AUTH_ERROR"
+                if error.response.status_code in (401, 403)
+                else "AVATAR_PROVIDER_REQUEST_FAILED"
+            )
+        elif isinstance(error, httpx.TimeoutException):
+            code = "AVATAR_PROVIDER_TIMEOUT"
+        else:
+            code = "AVATAR_GENERATION_FAILED"
+        logger.exception("AVATAR_JOB_FAILED", extra={"job_id": lease.job_id})
+        if code != "AVATAR_LEASE_LOST":
+            try:
+                _update(database, lease, "failed", error=code)
+            except AvatarError as lost:
+                if lost.code != "AVATAR_LEASE_LOST":
+                    raise
+                logger.warning("AVATAR_LEASE_LOST", extra={"job_id": lease.job_id})
     return True
 
 
@@ -152,18 +398,15 @@ def main() -> None:
     configure_logging("debug" if settings.log_level == "trace" else settings.log_level)
     database = Database(settings)
     if not settings.openai_api_key.get_secret_value():
-        logger.info("Avatar generation disabled: OPENAI_API_KEY is not configured")
-    with database.session() as session:
-        session.execute(text(f"SELECT pg_advisory_lock({AVATAR_WORKER_LOCK_ID})"))
-    logger.info("Avatar worker started (lock %d)", AVATAR_WORKER_LOCK_ID)
+        logger.warning("AVATAR_GENERATION_UNCONFIGURED")
+    logger.info("AVATAR_WORKER_STARTED")
     try:
         while True:
             try:
-                if settings.openai_api_key.get_secret_value():
-                    process_one(database, settings)
+                process_one(database, settings)
             except Exception:
-                logger.exception("Unexpected error in worker loop")
-            time.sleep(2)
+                logger.exception("AVATAR_WORKER_ERROR")
+            time.sleep(settings.avatar_gen_poll_seconds)
     finally:
         database.close()
 
