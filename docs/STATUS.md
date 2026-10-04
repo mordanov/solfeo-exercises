@@ -9,9 +9,44 @@ Last updated: 2026-10-04 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a05
 
 ## Current phase
 Game statistics and season-reset controls follow the merged game features.
-This task uses `feat/game-statistics-reset` from main source `6455bf3`.
+This task merges main source `15530ef` into `feat/game-statistics-reset`.
 Accepted PHASE 7 remains closed.
 Earlier game, appearance, and listening entries below remain historical session records.
+
+### Failed release 37204983176
+
+The owner requests diagnosis and repair through `vps-docker`.
+Publication succeeds, but the deploy step fails.
+Container logs identify an HTTPS origin with insecure session cookies.
+Backend configuration validation correctly refuses startup.
+The observed backend is stopped; the frontend remains created but not running.
+PostgreSQL and unrelated VPS services remain running.
+The Actions log tools return no output; container logs establish the startup failure.
+
+The rollout now validates candidate backend settings before changing active services or applying migrations.
+It uses a disposable backend container without dependency startup or database access.
+Invalid settings preserve the existing services and release state.
+The Secure-cookie requirement remains unchanged.
+No private credentials are read, replaced, or logged.
+
+Production recovers independently during this investigation.
+The repeated run `37204983176` completes successfully for source `6455bf3`.
+The backend, frontend, OMR, and Telegram services report healthy.
+The avatar worker runs, and PostgreSQL remains healthy.
+The public health endpoint returns exactly `{"status":"ok"}`.
+The public frontend returns HTTP 200.
+This session does not change production configuration or repeat the deployment.
+Main includes the preflight change through PR 13.
+No speculative restart, unrelated Compose update, or push occurs.
+
+Verification includes 61 deployment tests and 4 documentation tests.
+A real disposable deployment rejects insecure HTTPS cookies without replacing healthy containers or changing the active release.
+All 6 configured quality checks pass.
+The AST graph is current.
+The disposable deployment fixtures remove their own containers, networks, and volumes.
+
+Manual verification: sign in through HTTPS, then open and start Guess the Note.
+The statistics branch preserves the preflight change during main integration.
 
 ### Game statistics and season reset
 
@@ -54,7 +89,9 @@ Checks verify exact weighted averages, bounded page width, visible counts, pendi
 
 The knowledge graph receives an AST-only update.
 Disposable PostgreSQL and browser fixtures are removed after validation.
-The feature remains local until its own publication.
+The feature branch receives main through a merge before publication.
+The merge preserves the deployment preflight and both feature records.
+The generated graph is rebuilt from the combined source.
 
 Remaining manual checks:
 1. Publish the backend and frontend together through the verified release flow.

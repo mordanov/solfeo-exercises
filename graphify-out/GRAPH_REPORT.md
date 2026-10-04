@@ -1,16 +1,16 @@
 # Graph Report - solfeo-exercises  (2026-10-04)
 
 ## Corpus Check
-- 439 files · ~5,412,909 words
+- 439 files · ~5,413,505 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 5525 nodes · 7933 edges · 365 communities (323 shown, 42 thin omitted)
+- 5529 nodes · 7939 edges · 367 communities (325 shown, 42 thin omitted)
 - Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 579 edges (avg confidence: 0.74)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `6455bf32`
+- Built from commit: `c7899b98`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -275,6 +275,7 @@
 - [[_COMMUNITY_Community 260|Community 260]]
 - [[_COMMUNITY_Community 261|Community 261]]
 - [[_COMMUNITY_Community 262|Community 262]]
+- [[_COMMUNITY_Community 263|Community 263]]
 - [[_COMMUNITY_Community 264|Community 264]]
 - [[_COMMUNITY_Community 265|Community 265]]
 - [[_COMMUNITY_Community 267|Community 267]]
@@ -326,6 +327,7 @@
 - [[_COMMUNITY_Community 316|Community 316]]
 - [[_COMMUNITY_Community 317|Community 317]]
 - [[_COMMUNITY_Community 318|Community 318]]
+- [[_COMMUNITY_Community 319|Community 319]]
 - [[_COMMUNITY_Community 320|Community 320]]
 - [[_COMMUNITY_Community 321|Community 321]]
 - [[_COMMUNITY_Community 322|Community 322]]
@@ -358,18 +360,18 @@
 10. `appearance.font` - 34 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `positiveInteger()` --calls--> `number()`  [INFERRED]
-  prototypes/pwa/src/config.ts → frontend/src/api/journal.ts
 - `test_vocabulary_has_every_language_naming_and_accidental()` --calls--> `vocabulary()`  [INFERRED]
   backend/tests/test_spoken_generation.py → worker/generate_spoken.py
 - `PWA Prototype HTML Entry Point` --semantically_similar_to--> `Frontend App Entry Point`  [INFERRED] [semantically similar]
   prototypes/pwa/index.html → frontend/index.html
+- `positiveInteger()` --calls--> `number()`  [INFERRED]
+  prototypes/pwa/src/config.ts → frontend/src/api/journal.ts
 - `main()` --calls--> `configure_logging()`  [INFERRED]
   worker/generate_avatar.py → backend/app/logging.py
 - `main()` --calls--> `configure_logging()`  [INFERRED]
   worker/telegram.py → backend/app/logging.py
 
-## Communities (365 total, 42 thin omitted)
+## Communities (367 total, 42 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.00
@@ -389,15 +391,15 @@ Nodes (66): /solfege/en/letters/A.m4a, /solfege/en/letters/B.m4a, /solfege/en/le
 
 ### Community 4 - "Community 4"
 Cohesion: 0.04
-Nodes (71): User, event, fetch, sendBeacon, cache, call, fetch, manager (+63 more)
+Nodes (77): User, event, fetch, sendBeacon, AuthArea(), cache, call, fetch (+69 more)
 
 ### Community 5 - "Community 5"
 Cohesion: 0.06
-Nodes (47): NoteNaming, fetchScore(), accidentals, injectNoteNames(), xml, Context, decode, ended (+39 more)
+Nodes (47): NoteNaming, accidentals, injectNoteNames(), xml, Context, decode, ended, failed (+39 more)
 
 ### Community 6 - "Community 6"
-Cohesion: 0.11
-Nodes (36): AdminPlayerDetail(), NOTE_NAMES, Props, Auth, listExercises(), reorderExercises(), fetchHealth(), HealthError (+28 more)
+Cohesion: 0.12
+Nodes (39): AdminPlayerDetail(), NOTE_NAMES, Props, ApiError, Auth, deleteExercise(), listExercises(), reorderExercises() (+31 more)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.04
@@ -412,16 +414,16 @@ Cohesion: 0.04
 Nodes (47): appTitle, clear, clearing, diagnostics.clear, diagnostics.empty, diagnostics.field, diagnostics.fields.audio, diagnostics.fields.other (+39 more)
 
 ### Community 10 - "Community 10"
-Cohesion: 0.23
-Nodes (12): Code, createCode(), date(), Import, importStatus(), LinkStatus, listImports(), parseImport() (+4 more)
+Cohesion: 0.17
+Nodes (17): CreateRoundBody, submit_task(), SubmitTaskBody, Database, Base, AvatarGenerationLog, CustomAvatar, Round (+9 more)
 
 ### Community 11 - "Community 11"
 Cohesion: 0.09
-Nodes (38): ApiError, record(), Exercise, Media, parseExercise(), parseMedia(), beaconListeningEvent(), currentExercise() (+30 more)
+Nodes (37): record(), Exercise, Media, parseExercise(), parseMedia(), beaconListeningEvent(), currentExercise(), ListeningEvent (+29 more)
 
 ### Community 12 - "Community 12"
 Cohesion: 0.04
-Nodes (46): Acceptance details, CI follow-up: run 37008189410, Circular game shortcut, Completed Material Design checklist, Completed PHASE 0.5 plan, Completed PHASE 0 plan, Completed PHASE 1 plan, Completed PHASE 2 plan (+38 more)
+Nodes (47): Acceptance details, CI follow-up: run 37008189410, Circular game shortcut, Completed Material Design checklist, Completed PHASE 0.5 plan, Completed PHASE 0 plan, Completed PHASE 1 plan, Completed PHASE 2 plan (+39 more)
 
 ### Community 13 - "Community 13"
 Cohesion: 0.07
@@ -436,16 +438,16 @@ Cohesion: 0.11
 Nodes (26): boolean(), date(), dateBoundary(), JournalEntry, JournalFilters, JournalOption, journalOptions(), listJournal() (+18 more)
 
 ### Community 16 - "Community 16"
-Cohesion: 0.18
-Nodes (20): protected_file(), require_student(), audio(), service_error(), ServiceError, journal(), duration(), prepare_media() (+12 more)
+Cohesion: 0.23
+Nodes (13): protected_file(), require_student(), audio(), service_error(), ServiceError, journal(), duration(), prepare_media() (+5 more)
 
 ### Community 17 - "Community 17"
-Cohesion: 0.13
-Nodes (25): create_user(), login(), settings(), test_appearance_defaults_from_environment(), test_appearance_preferences_persist_without_changing_other_settings(), test_appearance_rejects_invalid_preferences_atomically(), test_appearance_requires_authentication_and_csrf(), test_csrf_and_login_origin_are_required() (+17 more)
+Cohesion: 0.12
+Nodes (27): sync_emergency(), create_user(), login(), settings(), test_appearance_defaults_from_environment(), test_appearance_preferences_persist_without_changing_other_settings(), test_appearance_rejects_invalid_preferences_atomically(), test_appearance_requires_authentication_and_csrf() (+19 more)
 
 ### Community 18 - "Community 18"
-Cohesion: 0.13
-Nodes (16): errorCodes, number(), env, envDir, port, target, config, listeningHeartbeatMs (+8 more)
+Cohesion: 0.07
+Nodes (31): errorCodes, fetchHealth(), HealthError, HealthErrorCode, controller, fetch, pending, number() (+23 more)
 
 ### Community 19 - "Community 19"
 Cohesion: 0.06
@@ -464,8 +466,8 @@ Cohesion: 0.10
 Nodes (28): /api/audio, cache_control, content_type, status, /prototype-share/, cache_control, content_type, /prototype-share/health (+20 more)
 
 ### Community 23 - "Community 23"
-Cohesion: 0.14
-Nodes (21): auth_output(), AuthOutput, change_password(), ChangePasswordInput, create_user(), CreateUserInput, Input, LoginInput (+13 more)
+Cohesion: 0.12
+Nodes (25): auth_output(), AuthOutput, change_password(), changePassword(), ChangePasswordInput, create_user(), CreateUserInput, Input (+17 more)
 
 ### Community 24 - "Community 24"
 Cohesion: 0.07
@@ -477,23 +479,23 @@ Nodes (26): Android acceptance checklist, Cleanup and phase gate, code:sh (cd pr
 
 ### Community 26 - "Community 26"
 Cohesion: 0.12
-Nodes (15): verify_bundle(), Rollout, FakeRollout, Model Docker as an external system for rollback ordering tests., test_disk_measurement_rejects_malformed_endpoint_without_values(), test_disk_measurement_rejects_remote_daemons(), test_disk_measurement_rejects_remote_docker_host_override(), test_failed_release_restores_previous_without_downgrade() (+7 more)
+Nodes (16): verify_bundle(), Rollout, FakeRollout, Model Docker as an external system for rollback ordering tests., test_backend_settings_are_validated_before_stopping_services(), test_disk_measurement_rejects_malformed_endpoint_without_values(), test_disk_measurement_rejects_remote_daemons(), test_disk_measurement_rejects_remote_docker_host_override() (+8 more)
 
 ### Community 27 - "Community 27"
-Cohesion: 0.17
-Nodes (10): count_rows(), database(), Probe, ProbeBase, test_closing_session_does_not_commit(), test_database_error_rolls_back(), test_dependency_rolls_back_a_failed_request(), test_exception_rolls_back_and_does_not_poison_next_session() (+2 more)
+Cohesion: 0.15
+Nodes (13): count_rows(), database(), migration_config(), Probe, test_avatar_migration_preserves_ready_art_without_retrying_legacy_jobs(), test_closing_session_does_not_commit(), test_database_error_rolls_back(), test_dependency_rolls_back_a_failed_request() (+5 more)
 
 ### Community 28 - "Community 28"
 Cohesion: 0.60
 Nodes (4): build(), download(), main(), Build the licensed, reduced Salamander piano for Guess the Note.
 
 ### Community 29 - "Community 29"
-Cohesion: 0.10
-Nodes (29): BaseModel, BaseSettings, Attachment, Chat, Message, Sender, Update, ApiFile (+21 more)
+Cohesion: 0.12
+Nodes (23): health(), HealthResponse, BaseModel, Attachment, Chat, Message, Sender, Update (+15 more)
 
 ### Community 30 - "Community 30"
-Cohesion: 0.70
-Nodes (4): media_settings(), test_detects_and_converts_real_opus_without_trusting_extension(), test_rejects_audio_over_duration_limit(), test_rejects_text_disguised_as_audio()
+Cohesion: 0.67
+Nodes (5): convert_audio(), media_settings(), test_detects_and_converts_real_opus_without_trusting_extension(), test_rejects_audio_over_duration_limit(), test_rejects_text_disguised_as_audio()
 
 ### Community 31 - "Community 31"
 Cohesion: 0.13
@@ -513,31 +515,31 @@ Nodes (22): Check failure and recovery, code:sh (umask 077), code:sh (docker com
 
 ### Community 35 - "Community 35"
 Cohesion: 0.10
-Nodes (27): create_exercise(), test_common_audio_formats_convert(), test_crud_original_and_soft_delete(), test_media_limits_and_image_validation(), test_original_image_formats(), test_permissions_and_csrf(), test_reorder_requires_exact_current_set_and_is_persistent(), test_replacement_retains_original_and_rolls_back_bad_update() (+19 more)
+Nodes (27): create_exercise(), test_crud_original_and_soft_delete(), test_duration_and_pixel_limits(), test_media_limits_and_image_validation(), test_original_image_formats(), test_permissions_and_csrf(), test_reorder_requires_exact_current_set_and_is_persistent(), test_replacement_retains_original_and_rolls_back_bad_update() (+19 more)
 
 ### Community 36 - "Community 36"
-Cohesion: 0.12
-Nodes (27): AdminScreen(), Props, gameFetch, AvatarJob, ConfusionData, EligibleAccount, Player, QuotaData (+19 more)
+Cohesion: 0.16
+Nodes (20): gameFetch, AvatarJob, ConfusionData, EligibleAccount, QuotaData, RoundResult, Season, SubmitResponse (+12 more)
 
 ### Community 37 - "Community 37"
 Cohesion: 0.23
 Nodes (20): Bot, config(), test_config_errors_do_not_reveal_token(), test_denies_unauthorized_sources_without_api_calls(), test_does_not_advance_offset_when_reply_fails_and_does_not_resave(), test_does_not_follow_file_redirects(), test_downloads_authorized_attachments_and_replies_after_save(), test_invalid_media_does_not_leave_files_or_claim_success() (+12 more)
 
 ### Community 38 - "Community 38"
-Cohesion: 0.17
-Nodes (23): changePassword(), createUser(), fetchMe(), listUsers(), login(), logout(), NewUser, parseAuth() (+15 more)
+Cohesion: 0.11
+Nodes (26): createUser(), fetchMe(), listUsers(), login(), logout(), NewUser, parseAuth(), parseUser() (+18 more)
 
 ### Community 39 - "Community 39"
-Cohesion: 0.19
-Nodes (20): RuntimeError, test_invalid_or_oversized_provider_output(), test_missing_key_does_not_create_fake_clips(), test_network_failure_does_not_expose_provider_diagnostics(), test_partial_generation_resumes_without_rebuying_completed_clips(), test_provider_error_is_explicit_and_leaves_no_manifest(), test_real_aac_conversion_resumes_and_verifies_all_clips(), test_timings_cover_existing_aac_frames_without_rewriting_clips() (+12 more)
+Cohesion: 0.17
+Nodes (21): RuntimeError, test_committed_speech_assets(), test_invalid_or_oversized_provider_output(), test_missing_key_does_not_create_fake_clips(), test_network_failure_does_not_expose_provider_diagnostics(), test_partial_generation_resumes_without_rebuying_completed_clips(), test_provider_error_is_explicit_and_leaves_no_manifest(), test_real_aac_conversion_resumes_and_verifies_all_clips() (+13 more)
 
 ### Community 40 - "Community 40"
 Cohesion: 0.17
 Nodes (11): diagnostics.file, api_request_not_intercepted, clear_persisted_after_reload, diagnostics, failed_share_preserved_previous_file, installability_errors, manifest_errors, navigation_share_received (+3 more)
 
 ### Community 41 - "Community 41"
-Cohesion: 0.18
-Nodes (6): observer, renderer, resizeObservers, ScoreResizeObserver, user, view
+Cohesion: 0.21
+Nodes (7): BaseSettings, atomic_number(), BotError, durable_replace(), main(), Settings, Telegram
 
 ### Community 42 - "Community 42"
 Cohesion: 0.13
@@ -556,8 +558,8 @@ Cohesion: 0.09
 Nodes (21): Access and sign-out, Change the visual theme, Choose a game avatar, Customize appearance, Final PHASE 1 manual check, Final PHASE 3 listening checklist, Final PHASE 6 manual checklist, Final PHASE 7 manual checklist (+13 more)
 
 ### Community 46 - "Community 46"
-Cohesion: 0.14
-Nodes (14): Task, useStartRound(), gameTheme, Props, Screen, screenFromPath(), TIME_LIMIT_MS, DEFAULT_GAME_OPTIONS (+6 more)
+Cohesion: 0.17
+Nodes (13): Task, useStartRound(), gameTheme, Props, Screen, TIME_LIMIT_MS, DEFAULT_GAME_OPTIONS, DIFFICULTIES (+5 more)
 
 ### Community 47 - "Community 47"
 Cohesion: 0.15
@@ -565,7 +567,7 @@ Nodes (20): API Reference, System Architecture, FastAPI Backend Application, Mat
 
 ### Community 48 - "Community 48"
 Cohesion: 0.10
-Nodes (19): Appearance feature compatibility, code:sh (python3 /home/deploy/solfeo-production/incoming/rollout.py \), code:sh (cd ~/solfeo-production), code:sh (docker compose --env-file .env -f deploy/compose.yaml build ), Current boundary, Database roles, Failure and rollback, Final operational acceptance (+11 more)
+Nodes (20): Appearance feature compatibility, code:sh (python3 /home/deploy/solfeo-production/incoming/rollout.py \), code:sh (cd ~/solfeo-production), code:sh (docker compose --env-file .env -f deploy/compose.yaml build ), Current boundary, Database roles, Failure and rollback, Final operational acceptance (+12 more)
 
 ### Community 49 - "Community 49"
 Cohesion: 0.13
@@ -576,8 +578,8 @@ Cohesion: 0.10
 Nodes (19): api_request_not_intercepted, browser, jsVersion, product, protocolVersion, revision, userAgent, clear_persisted_after_reload (+11 more)
 
 ### Community 51 - "Community 51"
-Cohesion: 0.22
-Nodes (15): deleteExercise(), saveExercise(), delete_exercise(), get_exercise(), get_media(), lock(), new_exercise(), reorder() (+7 more)
+Cohesion: 0.23
+Nodes (14): saveExercise(), delete_exercise(), get_exercise(), get_media(), lock(), new_exercise(), reorder(), save_exercise() (+6 more)
 
 ### Community 52 - "Community 52"
 Cohesion: 0.16
@@ -624,8 +626,8 @@ Cohesion: 0.11
 Nodes (19): devDependencies, eslint, @eslint/js, eslint-plugin-react-hooks, globals, jsdom, prettier, @testing-library/jest-dom (+11 more)
 
 ### Community 63 - "Community 63"
-Cohesion: 0.22
-Nodes (18): administration_lock(), authenticate(), change_password(), create_user(), editable_user(), hash_password(), Identity, login() (+10 more)
+Cohesion: 0.24
+Nodes (16): administration_lock(), authenticate(), change_password(), create_user(), editable_user(), hash_password(), Identity, login() (+8 more)
 
 ### Community 64 - "Community 64"
 Cohesion: 0.11
@@ -652,24 +654,24 @@ Cohesion: 0.11
 Nodes (17): 0.1 Audience and visual style, 0. Working rules, 10. Admin features, 11. API/Data notes, 12. Accessibility & quality, 13. Tests, 14. Final output, 1. Domain concepts (+9 more)
 
 ### Community 70 - "Community 70"
-Cohesion: 0.17
-Nodes (12): App(), isLanguage(), Language, languages, maxShareBytes, positiveInteger(), workerTimeout, root (+4 more)
+Cohesion: 0.21
+Nodes (10): isLanguage(), Language, languages, maxShareBytes, workerTimeout, registerWorker(), assertion, ready (+2 more)
 
 ### Community 71 - "Community 71"
-Cohesion: 0.12
-Nodes (23): ErrorCode, handleShare(), isShareRequest(), parseError(), body, malformed, response, store (+15 more)
+Cohesion: 0.26
+Nodes (12): clearAttempt(), clearShare(), FieldName, openStorage(), readAttempt(), readShare(), saveAttempt(), saveShare() (+4 more)
 
 ### Community 72 - "Community 72"
 Cohesion: 0.11
 Nodes (17): compilerOptions, allowImportingTsExtensions, isolatedModules, jsx, lib, module, moduleResolution, noEmit (+9 more)
 
 ### Community 73 - "Community 73"
-Cohesion: 0.16
-Nodes (18): Classification, classify(), create_command(), main(), run_sample(), samples(), Settings, test_classification() (+10 more)
+Cohesion: 0.13
+Nodes (22): test_legacy_white_background_removal_preserves_magenta_and_enclosed_white(), test_concurrent_resets_leave_one_active_season(), Classification, classify(), create_command(), main(), run_sample(), samples() (+14 more)
 
 ### Community 74 - "Community 74"
-Cohesion: 0.12
-Nodes (16): Note, GAME_NOTES, NOTE_NAMES, noteLabel(), PIANO_NOTES, CLEF_OCTAVE, NOTE_NAMES, Props (+8 more)
+Cohesion: 0.11
+Nodes (15): Note, GAME_NOTES, NOTE_NAMES, noteLabel(), CLEF_OCTAVE, NOTE_NAMES, Props, RAINBOW (+7 more)
 
 ### Community 75 - "Community 75"
 Cohesion: 0.10
@@ -680,8 +682,8 @@ Cohesion: 0.11
 Nodes (17): Configuration, Exercises, Files, Game avatar artwork, Guess the Note, i18n, Listening journal, Mobile installation (+9 more)
 
 ### Community 77 - "Community 77"
-Cohesion: 0.15
-Nodes (23): delete(), applyImport(), retryImport(), logout(), apply_import(), create_code(), import_media(), linking_lock() (+15 more)
+Cohesion: 0.26
+Nodes (15): delete(), applyImport(), retryImport(), logout(), apply_import(), create_code(), import_media(), linking_lock() (+7 more)
 
 ### Community 78 - "Community 78"
 Cohesion: 0.22
@@ -700,12 +702,12 @@ Cohesion: 0.12
 Nodes (15): engines, node, npm, name, packageManager, private, scripts, build (+7 more)
 
 ### Community 82 - "Community 82"
-Cohesion: 0.09
-Nodes (33): reset_password(), StatusOutput, create(), detail(), ExerciseInput, ExerciseListOutput, listing(), MediaOutput (+25 more)
+Cohesion: 0.13
+Nodes (20): create(), detail(), ExerciseInput, ExerciseListOutput, listing(), MediaOutput, order(), OrderInput (+12 more)
 
 ### Community 83 - "Community 83"
-Cohesion: 0.23
-Nodes (11): StatsMatrix, usePlayerStats(), useSeasons(), DIFFICULTIES, NOTE_COUNTS, ProfileScreen(), Props, TROPHY_ICONS (+3 more)
+Cohesion: 0.27
+Nodes (9): StatsMatrix, useSeasons(), DIFFICULTIES, NOTE_COUNTS, ProfileScreen(), Props, TROPHY_ICONS, StatisticsSummary() (+1 more)
 
 ### Community 84 - "Community 84"
 Cohesion: 0.13
@@ -737,7 +739,7 @@ Nodes (14): command, credentials, downloaded_bytes, expected_status, headers, ca
 
 ### Community 91 - "Community 91"
 Cohesion: 0.15
-Nodes (11): build_release(), main(), Package the deployment files for a CI-approved pair of images., database(), path, test_appearance_migration_preserves_existing_accounts(), test_previous_piano_remains_unchanged_for_cached_clients(), test_reduced_piano_contains_four_layers_of_all_twenty_eight_answer_pitches() (+3 more)
+Nodes (11): build_release(), main(), Package the deployment files for a CI-approved pair of images., database(), path, database(), test_appearance_migration_preserves_existing_accounts(), test_previous_piano_remains_unchanged_for_cached_clients() (+3 more)
 
 ### Community 92 - "Community 92"
 Cohesion: 0.13
@@ -800,8 +802,8 @@ Cohesion: 0.03
 Nodes (69): source_sha256, A2v12.flac, A2v16.flac, A2v4.flac, A2v8.flac, A3v12.flac, A3v16.flac, A3v4.flac (+61 more)
 
 ### Community 107 - "Community 107"
-Cohesion: 0.23
-Nodes (12): test_legacy_white_background_removal_preserves_magenta_and_enclosed_white(), test_concurrent_resets_leave_one_active_season(), range, test_main_records_runtime_version(), extract(), Extract the owner's avatar artwork without image generation or network requests., Move a crop boundary to the nearest low-alpha gutter., Follow transparent gutters around overlapping wings instead of straight cuts. (+4 more)
+Cohesion: 0.33
+Nodes (8): extract(), Extract the owner's avatar artwork without image generation or network requests., Move a crop boundary to the nearest low-alpha gutter., Follow transparent gutters around overlapping wings instead of straight cuts., seam(), square(), trim(), valley()
 
 ### Community 108 - "Community 108"
 Cohesion: 0.15
@@ -860,8 +862,8 @@ Cohesion: 0.15
 Nodes (14): controller, data, exercise, expired, failed, pending, progress, timedOut (+6 more)
 
 ### Community 122 - "Community 122"
-Cohesion: 0.15
-Nodes (23): AvatarChoiceBody, choose_avatar(), create_player(), CreatePlayerBody, eligible_accounts(), EligibleAccountOut, EligibleAccountsOut, get_player() (+15 more)
+Cohesion: 0.25
+Nodes (15): AvatarChoiceBody, choose_avatar(), create_player(), CreatePlayerBody, eligible_accounts(), EligibleAccountOut, EligibleAccountsOut, get_player() (+7 more)
 
 ### Community 124 - "Community 124"
 Cohesion: 0.24
@@ -878,6 +880,10 @@ Nodes (10): code:bash (cd frontend && npm install @fontsource/fredoka), code:tsx
 ### Community 127 - "Community 127"
 Cohesion: 0.33
 Nodes (11): login(), profiles(), seed_rounds(), test_confusion_filters_completed_rounds_and_clef_and_tracks_timeouts(), test_history_stats_include_wins_not_bonus_threshold(), test_other_players_season_is_not_selectable(), test_profile_reports_actual_all_time_trophies(), test_rejected_bulk_resets_leave_seasons_unchanged() (+3 more)
+
+### Community 128 - "Community 128"
+Cohesion: 0.17
+Nodes (10): ErrorCode, handleShare(), isShareRequest(), parseError(), body, malformed, response, store (+2 more)
 
 ### Community 129 - "Community 129"
 Cohesion: 0.18
@@ -896,8 +902,8 @@ Cohesion: 0.33
 Nodes (9): command, elapsed_seconds, exit_code, exports, outcome, sample, sha256, started_at (+1 more)
 
 ### Community 134 - "Community 134"
-Cohesion: 0.20
-Nodes (10): getCtx(), isMuted(), playNote(), playNotes(), preparePiano(), unlockAudio(), fetchMock, { started } (+2 more)
+Cohesion: 0.11
+Nodes (16): getCtx(), isMuted(), playNote(), playNotes(), preparePiano(), unlockAudio(), PIANO_NOTES, fetchMock (+8 more)
 
 ### Community 135 - "Community 135"
 Cohesion: 0.22
@@ -964,8 +970,8 @@ Cohesion: 0.56
 Nodes (9): _create_player(), _login(), _make_manager(), _make_student(), test_list_seasons(), test_reset_creates_new_season(), test_student_cannot_reset_season(), test_wrong_confirmation_rejected() (+1 more)
 
 ### Community 151 - "Community 151"
-Cohesion: 0.10
-Nodes (31): avatar_file(), AvatarJobOut, AvatarQuotaOut, discard_avatar(), generate_avatar(), GenerateBody, GenerationOut, _job_out() (+23 more)
+Cohesion: 0.11
+Nodes (28): avatar_file(), AvatarJobOut, AvatarQuotaOut, discard_avatar(), generate_avatar(), GenerateBody, GenerationOut, _job_out() (+20 more)
 
 ### Community 152 - "Community 152"
 Cohesion: 0.20
@@ -1000,20 +1006,20 @@ Cohesion: 0.25
 Nodes (7): cpus, image, java_options, memory_mb, output_dir, samples_dir, timeout_seconds
 
 ### Community 160 - "Community 160"
-Cohesion: 0.22
-Nodes (5): fetchMock, mixed, notes, section, { unmount }
+Cohesion: 0.25
+Nodes (12): StatusOutput, AppliedOutput, apply(), ApplyInput, CodeOutput, ImportListOutput, ImportOutput, imports() (+4 more)
 
 ### Community 162 - "Community 162"
 Cohesion: 0.13
 Nodes (10): buffers, Context, controller, finished, Gain, { load }, nodes, Oscillator (+2 more)
 
 ### Community 163 - "Community 163"
-Cohesion: 0.22
-Nodes (8): sheet_bytes(), test_a_late_provider_reply_cannot_replace_the_new_workers_saved_sheet(), test_generation_payload_uses_one_image_not_thirty_requests(), test_incomplete_sheet_fails_explicitly_and_keeps_the_original(), test_missing_frame_prevents_selecting_an_incomplete_avatar(), test_partial_recovery_reports_existing_files_without_rewriting_them(), test_progress_saved_gallery_and_all_thirty_private_frames_survive_reuse(), test_restart_reuses_the_saved_sheet_without_another_paid_request()
+Cohesion: 0.18
+Nodes (11): avatar_job(), sheet_bytes(), test_a_late_provider_reply_cannot_replace_the_new_workers_saved_sheet(), test_generation_payload_uses_one_image_not_thirty_requests(), test_incomplete_sheet_fails_explicitly_and_keeps_the_original(), test_missing_frame_prevents_selecting_an_incomplete_avatar(), test_partial_recovery_reports_existing_files_without_rewriting_them(), test_progress_saved_gallery_and_all_thirty_private_frames_survive_reuse() (+3 more)
 
 ### Community 164 - "Community 164"
 Cohesion: 0.25
-Nodes (7): code:tsx (// frontend/src/features/game/result/ResultScreen.tsx), code:tsx (import ResultScreen from "./result/ResultScreen";), code:bash (git add frontend/src/features/game/result/ frontend/src/feat), Global Constraints, Guess the Note — Frontend Implementation Plan, Review Focus, Task 9: Result screen
+Nodes (7): code:ts (// frontend/src/features/game/audio/synth.ts), code:bash (cd frontend && npx tsc --noEmit), code:bash (git add frontend/src/features/game/audio/), Global Constraints, Guess the Note — Frontend Implementation Plan, Review Focus, Task 5: Web Audio synthesis
 
 ### Community 165 - "Community 165"
 Cohesion: 0.25
@@ -1092,8 +1098,8 @@ Cohesion: 0.50
 Nodes (3): model, version, voice
 
 ### Community 185 - "Community 185"
-Cohesion: 0.15
-Nodes (25): Database, Exception, AvatarGenerationLog, CustomAvatar, _atomic_write(), AvatarError, _claim(), _download() (+17 more)
+Cohesion: 0.26
+Nodes (17): Exception, _atomic_write(), AvatarError, _claim(), _download(), _frames(), _generate_image(), _generate_sheet() (+9 more)
 
 ### Community 186 - "Community 186"
 Cohesion: 0.29
@@ -1140,12 +1146,12 @@ Cohesion: 0.80
 Nodes (4): list_seasons(), reset_all_seasons(), reset_season(), _season_out()
 
 ### Community 197 - "Community 197"
-Cohesion: 0.12
-Nodes (12): player_confusion(), player_stats(), create_round(), submit_task(), choose_avatar(), create_player(), get_or_403(), update_player() (+4 more)
+Cohesion: 0.13
+Nodes (11): player_confusion(), player_stats(), create_round(), choose_avatar(), create_player(), get_or_403(), update_player(), reset_season() (+3 more)
 
 ### Community 198 - "Community 198"
-Cohesion: 0.24
-Nodes (14): require_csrf(), require_origin(), ExerciseOutput, current(), event(), EventOutput, journal(), JournalListOutput (+6 more)
+Cohesion: 0.29
+Nodes (12): ExerciseOutput, current(), event(), EventOutput, journal(), JournalListOutput, JournalOutput, OptionOutput (+4 more)
 
 ### Community 199 - "Community 199"
 Cohesion: 0.33
@@ -1288,8 +1294,8 @@ Cohesion: 0.40
 Nodes (5): code:python ("""guess the note game tables), code:bash (cd backend && DATABASE_NAME=solfeo_test alembic upgrade head), code:bash (cd backend && DATABASE_NAME=solfeo_test alembic downgrade 00), code:bash (git add backend/migrations/versions/0008_game_guess_the_note), Task 3: Alembic migration 0008
 
 ### Community 251 - "Community 251"
-Cohesion: 0.50
-Nodes (4): code:ts (// frontend/src/features/game/audio/synth.ts), code:bash (cd frontend && npx tsc --noEmit), code:bash (git add frontend/src/features/game/audio/), Task 5: Web Audio synthesis
+Cohesion: 0.24
+Nodes (10): AdminScreen(), Props, Player, usePlayers(), usePlayerStats(), useResetAllSeasons(), useResetSeason(), PlayerSelect() (+2 more)
 
 ### Community 259 - "Community 259"
 Cohesion: 0.40
@@ -1300,8 +1306,8 @@ Cohesion: 0.50
 Nodes (3): avatars, size, states
 
 ### Community 262 - "Community 262"
-Cohesion: 0.33
-Nodes (4): event, later, logging, view
+Cohesion: 0.35
+Nodes (10): active_exercise(), Claim, complete(), current(), fail(), owned_claim(), rerun(), review() (+2 more)
 
 ### Community 264 - "Community 264"
 Cohesion: 0.50
@@ -1495,6 +1501,10 @@ Nodes (3): es/solfege/F.m4a, fingerprint, sha256
 Cohesion: 0.67
 Nodes (3): es/solfege/flat.m4a, fingerprint, sha256
 
+### Community 319 - "Community 319"
+Cohesion: 0.50
+Nodes (4): code:tsx (// frontend/src/features/game/result/ResultScreen.tsx), code:tsx (import ResultScreen from "./result/ResultScreen";), code:bash (git add frontend/src/features/game/result/ frontend/src/feat), Task 9: Result screen
+
 ### Community 320 - "Community 320"
 Cohesion: 0.67
 Nodes (3): ru/letters/flat.m4a, fingerprint, sha256
@@ -1520,23 +1530,23 @@ Cohesion: 0.50
 Nodes (4): service_worker, caches, controller, scope
 
 ## Knowledge Gaps
-- **3309 isolated node(s):** `name`, `private`, `packageManager`, `workspaces`, `node` (+3304 more)
+- **3311 isolated node(s):** `name`, `private`, `packageManager`, `workspaces`, `node` (+3306 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **42 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `path` connect `Community 91` to `Community 39`, `Community 104`, `Community 73`, `Community 107`, `Community 77`, `Community 78`, `Community 16`, `Community 52`, `Community 53`, `Community 185`, `Community 123`, `Community 124`, `Community 29`?**
-  _High betweenness centrality (0.038) - this node is a cross-community bridge._
-- **Why does `range` connect `Community 107` to `Community 35`, `Community 163`, `Community 101`, `Community 5`, `Community 39`, `Community 73`, `Community 75`, `Community 176`, `Community 17`, `Community 53`, `Community 151`, `Community 185`, `Community 157`?**
-  _High betweenness centrality (0.034) - this node is a cross-community bridge._
-- **Why does `listening.mode` connect `Community 11` to `Community 2`, `Community 4`, `Community 5`, `Community 133`, `Community 6`, `Community 38`, `Community 198`, `Community 16`, `Community 82`?**
-  _High betweenness centrality (0.026) - this node is a cross-community bridge._
+- **Why does `path` connect `Community 91` to `Community 39`, `Community 104`, `Community 73`, `Community 41`, `Community 78`, `Community 16`, `Community 52`, `Community 53`, `Community 185`, `Community 123`, `Community 124`?**
+  _High betweenness centrality (0.039) - this node is a cross-community bridge._
+- **Why does `listening.mode` connect `Community 11` to `Community 2`, `Community 4`, `Community 133`, `Community 38`, `Community 6`, `Community 198`, `Community 16`, `Community 82`?**
+  _High betweenness centrality (0.028) - this node is a cross-community bridge._
+- **Why does `range` connect `Community 73` to `Community 35`, `Community 163`, `Community 101`, `Community 5`, `Community 39`, `Community 75`, `Community 107`, `Community 176`, `Community 17`, `Community 53`, `Community 151`, `Community 185`, `Community 157`?**
+  _High betweenness centrality (0.023) - this node is a cross-community bridge._
 - **Are the 61 inferred relationships involving `ServiceError` (e.g. with `Database` and `Settings`) actually correct?**
   _`ServiceError` has 61 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `name`, `private`, `packageManager` to the rest of the system?**
-  _3328 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _3330 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.004366812227074236 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
