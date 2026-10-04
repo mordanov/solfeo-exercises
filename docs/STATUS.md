@@ -5,15 +5,62 @@ This document records progress and remaining checks for the current phase.
 Prerequisites:
 - Read `docs/PHASES.md` and `docs/DECISIONS.md`.
 
-Last updated: 2026-10-03 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a0523`.
+Last updated: 2026-10-04 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a0523`.
 
 ## Current phase
-Game note playback follows the standard clef repair.
-This task starts from clef repair commit `1383015`.
-The owner merges the clef repair through PR #8 during implementation.
-The playback changes commit locally on `main`, after merge source `4c25556`.
+Game piano and setup follow the initial note-listening control.
+This task uses the existing `game-note-listening` branch from source `26f064e`.
 Accepted PHASE 7 remains closed.
-The earlier game, appearance, and listening entries below remain historical session records.
+Earlier game, appearance, and listening entries below remain historical session records.
+
+### Sampled piano and game setup
+
+The owner confirms 14 natural pitches from C4 through B5.
+Both clefs now share this range.
+The 14 answer buttons identify the selected name and scientific octave.
+Submission uses that actual octave instead of copying the question's octave.
+Button labels and revealed answers follow account note naming and interface language.
+The bass staff expands its viewport for high notes without moving clef anchors.
+
+Answer buttons and the sound hint now use the same sampled piano and velocity 64.
+The requested `soundfont-player` dependency loads one local Salamander Grand Piano V3 asset.
+Its 56 AAC samples retain 4 original velocity layers and occupy 1233535 bytes.
+The asset retains attribution, the complete CC BY 3.0 license, source hashes, and an export procedure.
+Offline export uses the upstream tuning corrections.
+Independent decoding verifies all 56 pitches within 6.29 cents of their expected frequencies.
+The browser does not load a full SF2 or an external soundfont.
+
+Setup offers independent sound-hint and correct-answer switches.
+Defaults retain the hint and hide the answer.
+The optional answer appears to the staff's right during feedback and uses the server's authoritative notes.
+Choices remain between rounds within the current game-area session.
+Difficulty explanations state the existing 13, 10, and 7 s limits.
+Piano loading completes before round creation; failed loading permits retry without consuming a round.
+Setup controls remain disabled during loading and round creation.
+
+Managers see only active, non-emergency accounts without an existing profile in the creation selector.
+A filtered, paginated endpoint returns these candidates and their total.
+An empty list shows the requested all-assigned popup instead of a creation form.
+The backend locks the owner account row and rejects concurrent duplicate creation or emergency ownership.
+Existing profiles, progress, manager-only creation, scoring, and XP rules remain unchanged.
+No migration, private configuration, push, deployment, or paid generation occurs.
+
+All 308 frontend tests, 221 backend tests, the production build, and 6 quality hooks pass.
+The runtime dependency audit reports no vulnerabilities.
+Chrome verifies 46 native piano cases and 8 lifecycle or error cases.
+Browser API fixtures remain synthetic; audio loading, AAC decoding, scheduling, and input events are real.
+Coverage includes 320, 390, 768, and 1280 px, both themes, both clefs, both naming settings, and all 3 languages.
+Every pitch in the 14-note range uses the same decoded buffer for its hint and answer.
+Additional checks confirm localized authoritative answers, one asset request, loading retry, keyboard input, cancellation, and a real timeout.
+A narrow-screen regression keeps partial-answer labels readable without wrapping or clipping their octave.
+The knowledge graph and its HTML viewer receive an AST-only refresh.
+
+Remaining manual checks:
+1. Publish the backend and frontend together.
+2. Compare hints and matching answer buttons for C4, C5, and B5 in Chrome and Safari on a real phone or iPad.
+3. Test both switches, incorrect answers, timeouts, and return after backgrounding the browser.
+4. Change account note naming and language; confirm matching button and revealed-answer labels.
+5. Confirm both clefs remain visible and create a profile using the filtered account selector.
 
 ### Game note playback
 The white round button below the staff plays all notes from the current game question.

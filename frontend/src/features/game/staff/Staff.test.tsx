@@ -8,6 +8,13 @@ beforeEach(async () => {
   await i18n.changeLanguage("en");
 });
 
+it("keeps B5 and all upper ledger lines visible in bass clef", () => {
+  render(<Staff clef="bass" notes={[{ name: "B", octave: 5 }]} />);
+  const staff = screen.getByRole("img");
+  const viewBox = (staff.getAttribute("viewBox") ?? "").split(" ").map(Number);
+  expect(viewBox[1]).toBeLessThanOrEqual(-58);
+  expect(staff.querySelector("ellipse")).toHaveAttribute("cy", "-50");
+});
 it.each([
   {
     clef: "treble" as const,

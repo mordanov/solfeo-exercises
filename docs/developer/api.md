@@ -45,16 +45,33 @@ The application does not create them during startup, account creation, or login.
 | Method | Path | Access and result |
 |---|---|---|
 | GET | `/api/game/players` | Manager sees all profiles; student sees only owned profiles |
+| GET | `/api/game/players/accounts?offset=0` | Manager only; eligible accounts, filtered total, 50 per page |
 | POST | `/api/game/players` | Manager and CSRF; creates a player and an active season |
 
 Creation accepts `name`, optional `avatar_animal`, and optional positive `account_id`.
 An omitted or null `account_id` assigns the profile to the requesting manager.
-An explicit account must exist and be active.
+An explicit account must exist, be active, and not be the emergency manager.
 Missing or inactive accounts return `404` with `PLAYER_ACCOUNT_NOT_FOUND`.
-Duplicate names within the target account return `409` with `PLAYER_NAME_TAKEN`.
+The emergency manager returns `422` with `PLAYER_EMERGENCY_ACCOUNT`.
+A second profile returns `409` with `PLAYER_ACCOUNT_TAKEN`.
+An identical existing profile name retains `409` with `PLAYER_NAME_TAKEN`.
+Creation locks the owner account row before checking existing profiles.
+Concurrent requests can create only one profile and one season.
+Existing profiles and progress remain unchanged.
 Rejected requests create neither a player nor a season.
 Students receive `403` when they request creation.
 Starting another account's round returns `404`, without disclosing that profile.
+
+The eligible-account response contains `users` and the filtered `total`.
+Each user contains only `id`, `username`, `first_name`, and `last_name`.
+The query excludes inactive accounts, the emergency manager, and accounts with any player profile.
+`offset` must be nonnegative; pages use a stable account-ID order.
+The frontend refreshes this query after creation, including rejected attempts caused by concurrent changes.
+
+Rounds use 14 natural pitches from C4 through B5 in either clef.
+Answers contain the actual selected `name` and `octave` for every note.
+The existing submission response supplies authoritative `correct_answers` for optional feedback.
+Sound-hint and answer-revelation choices affect only the interface; they do not change scoring or permissions.
 
 ## Game avatars
 

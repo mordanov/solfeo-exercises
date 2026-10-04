@@ -85,3 +85,7 @@ Prerequisites:
 | Web Audio | The browser API for generating, processing, and scheduling sound. |
 | audio context | The Web Audio object that provides an audio clock and connects sound sources to output. |
 | triangle tone | A synthesized musical sound with a triangle-shaped waveform. |
+| piano sample | A recording of one piano pitch that Web Audio plays without generating an oscillator tone. |
+| velocity layer | A separate recording made at one playing intensity, not an amplitude copy of another recording. |
+| piano asset | The single public JSON file that contains the reduced piano's encoded AAC samples. |
+| scientific octave | An octave number in which middle C is C4 and the next C is C5. |

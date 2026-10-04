@@ -7,6 +7,27 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-10-04: The owner selects 14 natural game pitches from C4 through B5.
+  Both clefs use the same pitches; changing the clef does not change their sound.
+  Separate answer buttons identify the pitch and scientific octave.
+  Buttons and revealed answers follow the account's note naming and interface language.
+  Answers submit the selected octave instead of copying the question's octave.
+
+  The owner requests `soundfont-player` and reduced Salamander Grand Piano V3 recordings.
+  The browser loads one local AAC piano asset with 4 real velocity layers.
+  Both answer buttons and hints use velocity 64 and the same decoded samples.
+  The asset retains attribution, the CC BY 3.0 license, and source hashes.
+  Offline export applies the upstream retuning corrections; no complete SF2 or external soundfont loads in the browser.
+  The requested player package is archived; the application pins version `0.12.0` and keeps loading failures explicit.
+
+  Setup offers independent sound-hint and correct-answer switches.
+  Defaults retain the hint and hide the answer; choices remain within the current game-area session.
+  Difficulty changes only the existing 13, 10, or 7 s limit.
+  Piano loading finishes before the scored round starts.
+  Managers create at most one new profile per active, non-emergency account.
+  The selector excludes occupied accounts and the emergency manager; existing profiles and their progress remain unchanged.
+  An empty selector shows the owner's requested all-assigned popup.
+
 - 2026-10-03: The game first-entry repair retains the approved manager-only profile creation policy.
   Managers assign profiles to active accounts through the existing creation endpoint.
   Students choose owned profiles; empty lists direct them to a manager.

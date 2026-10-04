@@ -1,4 +1,6 @@
-from fastapi import APIRouter, Depends
+from typing import Annotated
+
+from fastapi import APIRouter, Depends, Query
 from pydantic import BaseModel, Field
 
 from app.api.auth import Db, Manager, Member, require_csrf
@@ -18,6 +20,18 @@ class PatchPlayerBody(BaseModel):
     name: str | None = Field(default=None, min_length=1, max_length=20)
     avatar_animal: str | None = None
     custom_avatar_id: int | None = None
+
+
+class EligibleAccountOut(BaseModel):
+    id: int
+    username: str
+    first_name: str
+    last_name: str
+
+
+class EligibleAccountsOut(BaseModel):
+    users: list[EligibleAccountOut]
+    total: int
 
 
 def _player_out(player: Player) -> dict[str, object]:
@@ -53,6 +67,29 @@ def create_player(
     account_id = body.account_id if body.account_id is not None else identity.user.id
     player = svc_create(session, account_id, body.name, body.avatar_animal)
     return _player_out(player)
+
+
+@router.get("/accounts")
+def eligible_accounts(
+    identity: Manager,
+    session: Db,
+    offset: Annotated[int, Query(ge=0)] = 0,
+) -> EligibleAccountsOut:
+    from app.game.services.players import eligible_accounts as svc_accounts
+
+    users, total = svc_accounts(session, offset)
+    return EligibleAccountsOut(
+        users=[
+            EligibleAccountOut(
+                id=user.id,
+                username=user.username,
+                first_name=user.first_name,
+                last_name=user.last_name,
+            )
+            for user in users
+        ],
+        total=total,
+    )
 
 
 class AvatarChoiceBody(BaseModel):

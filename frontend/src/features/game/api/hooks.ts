@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { gameFetch } from "./client";
+import type { User } from "../../../api/auth";
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -81,6 +82,20 @@ export interface Season {
 
 // ── Players ────────────────────────────────────────────────────────────────
 
+export type EligibleAccount = Pick<
+  User,
+  "id" | "username" | "first_name" | "last_name"
+>;
+export const useEligibleAccounts = (offset: number) =>
+  useQuery({
+    queryKey: ["game", "eligible-accounts", offset],
+    queryFn: ({ signal }) =>
+      gameFetch.get<{ users: EligibleAccount[]; total: number }>(
+        `/players/accounts?offset=${offset}`,
+        signal,
+      ),
+  });
+
 export const usePlayers = () =>
   useQuery({
     queryKey: ["game", "players"],
@@ -99,7 +114,14 @@ export const useCreatePlayer = () => {
       avatar_animal?: string;
       account_id?: number;
     }) => gameFetch.post<Player>("/players", csrf, body),
-    onSuccess: () => qc.invalidateQueries({ queryKey: ["game", "players"] }),
+    onSuccess: () =>
+      Promise.all([
+        qc.invalidateQueries({ queryKey: ["game", "players"] }),
+        qc.invalidateQueries({ queryKey: ["game", "eligible-accounts"] }),
+      ]),
+    onError: () => {
+      void qc.invalidateQueries({ queryKey: ["game", "eligible-accounts"] });
+    },
   });
 };
 
