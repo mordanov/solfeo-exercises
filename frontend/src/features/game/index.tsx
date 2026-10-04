@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { type Auth } from "../../api/auth";
 import { type Task } from "./api/hooks";
-import { unlockAudio } from "./audio/synth";
+import { DEFAULT_GAME_OPTIONS, DIFFICULTIES, type GameOptions } from "./notes";
 import AdminPlayerDetail from "./admin/AdminPlayerDetail";
 import AdminScreen from "./admin/AdminScreen";
 import PlayScreen, { type RoundResult } from "./play/PlayScreen";
@@ -11,12 +11,6 @@ import ResultScreen from "./result/ResultScreen";
 import GameTheme from "./GameTheme";
 import GameSetup from "./setup/GameSetup";
 import PlayerSelect from "./setup/PlayerSelect";
-
-const TIME_LIMIT_MS: Record<string, number> = {
-  easy: 13000,
-  medium: 10000,
-  hard: 7000,
-};
 
 type Screen =
   | { name: "players" }
@@ -29,6 +23,7 @@ type Screen =
       difficulty: string;
       timeLimitMs: number;
       playerId: number;
+      options: GameOptions;
     }
   | { name: "result"; roundId: number; result: RoundResult; playerId: number }
   | { name: "profile"; playerId: number; xp: number }
@@ -40,6 +35,7 @@ interface Props {
 }
 
 export default function GameArea({ auth }: Props) {
+  const [options, setOptions] = useState(DEFAULT_GAME_OPTIONS);
   const [screen, setScreen] = useState<Screen>(() => {
     const path = window.location.pathname;
     const setup = path.match(/^\/game\/setup\/(\d+)/);
@@ -66,8 +62,15 @@ export default function GameArea({ auth }: Props) {
         <GameSetup
           playerId={screen.playerId}
           csrf={auth.csrf_token}
-          onRoundStarted={(roundId, firstTask, noteCount, difficulty) => {
-            unlockAudio();
+          initialOptions={options}
+          onRoundStarted={(
+            roundId,
+            firstTask,
+            noteCount,
+            difficulty,
+            roundOptions,
+          ) => {
+            setOptions(roundOptions);
             window.history.pushState(null, "", `/game/play/${roundId}`);
             setScreen({
               name: "play",
@@ -75,8 +78,11 @@ export default function GameArea({ auth }: Props) {
               firstTask,
               noteCount,
               difficulty,
-              timeLimitMs: TIME_LIMIT_MS[difficulty] ?? 10000,
+              timeLimitMs:
+                DIFFICULTIES.find((item) => item.name === difficulty)?.timeMs ??
+                10000,
               playerId: screen.playerId,
+              options: roundOptions,
             });
           }}
         />
@@ -88,6 +94,8 @@ export default function GameArea({ auth }: Props) {
           initialTask={screen.firstTask}
           noteCount={screen.noteCount}
           difficulty={screen.difficulty}
+          noteNaming={auth.user.note_naming}
+          {...screen.options}
           timeLimitMs={screen.timeLimitMs}
           onResult={(result) => {
             window.history.pushState(

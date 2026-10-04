@@ -9,21 +9,14 @@ import {
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { useSubmitTask } from "../api/hooks";
+import { useSubmitTask, type Note, type Task } from "../api/hooks";
 import { playNotes } from "../audio/synth";
+import { noteLabel } from "../notes";
+import { ErrorMessage } from "../../../components/AccountUi";
 import Staff from "../staff/Staff";
 import NoteButtons from "./NoteButtons";
 import Timer from "./Timer";
 
-interface Note {
-  name: string;
-  octave: number;
-}
-interface Task {
-  index: number;
-  clef: string;
-  notes: Note[];
-}
 export interface RoundResult {
   score: number;
   correct_count: number;
@@ -42,6 +35,8 @@ interface Props {
   noteCount: number;
   difficulty: string;
   timeLimitMs: number;
+  showSoundHint?: boolean;
+  showCorrectAnswer?: boolean;
   onResult: (result: RoundResult) => void;
 }
 
@@ -54,17 +49,22 @@ export default function PlayScreen({
   noteNaming = "solfege",
   noteCount,
   timeLimitMs,
+  showSoundHint = true,
+  showCorrectAnswer = false,
   onResult,
 }: Props) {
   const { t } = useTranslation();
   const [task, setTask] = useState<Task>(initialTask);
-  const [answers, setAnswers] = useState<string[]>([]);
+  const [answers, setAnswers] = useState<Note[]>([]);
+  const [correctAnswers, setCorrectAnswers] = useState<Note[]>([]);
   const [feedback, setFeedback] = useState<FeedbackState>("idle");
   const [timerKey, setTimerKey] = useState(0);
   const [listening, setListening] = useState(false);
   const [audioError, setAudioError] = useState(false);
   const playbackRef = useRef<AbortController | null>(null);
   const submittingRef = useRef(false);
+  const transitionRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const timedOutRef = useRef(false);
   const submitTask = useSubmitTask(roundId);
 
   const stopListening = useCallback(() => {
@@ -78,23 +78,20 @@ export default function PlayScreen({
     window.addEventListener("pagehide", stopListening);
     return () => {
       window.removeEventListener("pagehide", stopListening);
+      if (transitionRef.current !== null) clearTimeout(transitionRef.current);
       const playback = playbackRef.current;
       playbackRef.current = null;
       playback?.abort();
     };
   }, [stopListening]);
 
-  const handleListen = () => {
-    if (submittingRef.current || feedback !== "idle") return;
-    if (playbackRef.current) {
-      stopListening();
-      return;
-    }
+  const startPlayback = (notes: Note[], hint: boolean) => {
+    stopListening();
     const playback = new AbortController();
     playbackRef.current = playback;
     setAudioError(false);
-    setListening(true);
-    void playNotes(task.notes, playback.signal)
+    setListening(hint);
+    void playNotes(notes, playback.signal)
       .catch(() => {
         if (playbackRef.current === playback && !playback.signal.aborted) {
           setAudioError(true);
@@ -107,12 +104,18 @@ export default function PlayScreen({
         }
       });
   };
+  const handleListen = () => {
+    if (submittingRef.current || feedback !== "idle") return;
+    if (listening) stopListening();
+    else startPlayback(task.notes, true);
+  };
 
   const doSubmit = useCallback(
-    (givenAnswers: string[] | null, timedOut: boolean) => {
+    (givenAnswers: Note[] | null, timedOut: boolean) => {
       if (submittingRef.current) return;
       submittingRef.current = true;
-      stopListening();
+      if (timedOut) stopListening();
+      timedOutRef.current = timedOut;
       setAudioError(false);
 
       const body = timedOut
@@ -120,25 +123,24 @@ export default function PlayScreen({
         : {
             csrf,
             task_index: task.index,
-            answers:
-              givenAnswers?.map((name) => ({
-                name,
-                octave: task.notes[0].octave,
-              })) ?? null,
+            answers: givenAnswers,
           };
 
       submitTask.mutate(body, {
         onSuccess: (data) => {
+          setCorrectAnswers(data.correct_answers);
           setFeedback(
             timedOut ? "timeout" : data.is_correct ? "correct" : "wrong",
           );
-          setTimeout(() => {
+          transitionRef.current = setTimeout(() => {
+            stopListening();
             submittingRef.current = false;
             if (data.result) {
               onResult(data.result);
             } else if (data.next_task) {
               setTask(data.next_task);
               setAnswers([]);
+              setCorrectAnswers([]);
               setFeedback("idle");
               setTimerKey((k) => k + 1);
             }
@@ -149,14 +151,13 @@ export default function PlayScreen({
         },
       });
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [csrf, task.index, submitTask, onResult, stopListening],
   );
 
-  const handleAnswer = (name: string) => {
-    if (feedback !== "idle") return;
-    stopListening();
-    const next = [...answers, name];
+  const handleAnswer = (note: Note) => {
+    if (feedback !== "idle" || submittingRef.current) return;
+    startPlayback([note], false);
+    const next = [...answers, note];
     setAnswers(next);
     if (next.length === noteCount) {
       doSubmit(next, false);
@@ -202,79 +203,127 @@ export default function PlayScreen({
         </Alert>
       )}
 
-      <Box sx={{ background: "#FFFDF5", borderRadius: 3, p: 2, my: 2 }}>
-        <Staff notes={task.notes} clef={clef} />
+      <Box sx={{ display: "flex", alignItems: "center", gap: 1, my: 2 }}>
+        <Box
+          sx={{
+            background: "#FFFDF5",
+            borderRadius: 3,
+            p: 2,
+            flex: 1,
+            minWidth: 0,
+          }}
+        >
+          <Staff notes={task.notes} clef={clef} />
+        </Box>
+        {showCorrectAnswer && feedback !== "idle" && (
+          <Box
+            role="region"
+            aria-label={t("game.correctAnswer")}
+            sx={{ flex: "0 0 76px", textAlign: "center" }}
+          >
+            <Typography variant="caption">{t("game.correctAnswer")}</Typography>
+            {correctAnswers.map((note, index) => (
+              <Typography key={index} sx={{ fontWeight: 700 }}>
+                {noteLabel(note, noteNaming, t)}
+              </Typography>
+            ))}
+          </Box>
+        )}
       </Box>
 
-      <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
-        <Tooltip title={t(listening ? "game.stopListening" : "game.listen")}>
-          <span>
-            <IconButton
-              onClick={handleListen}
-              disabled={
-                isWaiting || submitTask.isPending || answers.length >= noteCount
-              }
-              aria-label={t(listening ? "game.stopListening" : "game.listen")}
-              sx={{
-                width: 56,
-                height: 56,
-                background: "#fff",
-                color: "#333",
-                border: "2px solid #ccc",
-                "&:hover": { background: "#f5f5f5" },
-                "&.Mui-focusVisible": {
-                  outline: "3px solid",
-                  outlineColor: "primary.main",
-                  outlineOffset: 3,
-                },
-              }}
-            >
-              <svg
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                focusable="false"
+      {showSoundHint && (
+        <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+          <Tooltip title={t(listening ? "game.stopListening" : "game.listen")}>
+            <span>
+              <IconButton
+                onClick={handleListen}
+                disabled={
+                  isWaiting ||
+                  submitTask.isPending ||
+                  answers.length >= noteCount
+                }
+                aria-label={t(listening ? "game.stopListening" : "game.listen")}
+                sx={{
+                  width: 56,
+                  height: 56,
+                  background: "#fff",
+                  color: "#333",
+                  border: "2px solid #ccc",
+                  "&:hover": { background: "#f5f5f5" },
+                  "&.Mui-focusVisible": {
+                    outline: "3px solid",
+                    outlineColor: "primary.main",
+                    outlineOffset: 3,
+                  },
+                }}
               >
-                {listening ? (
-                  <rect
-                    x="6"
-                    y="6"
-                    width="12"
-                    height="12"
-                    rx="1"
-                    fill="currentColor"
-                  />
-                ) : (
-                  <>
-                    <path d="M3 9H7L12 5V19L7 15H3Z" fill="currentColor" />
-                    <path
-                      d="M15 8Q19 12 15 16M18 5Q25 12 18 19"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  {listening ? (
+                    <rect
+                      x="6"
+                      y="6"
+                      width="12"
+                      height="12"
+                      rx="1"
+                      fill="currentColor"
                     />
-                  </>
-                )}
-              </svg>
-            </IconButton>
-          </span>
-        </Tooltip>
-      </Box>
+                  ) : (
+                    <>
+                      <path d="M3 9H7L12 5V19L7 15H3Z" fill="currentColor" />
+                      <path
+                        d="M15 8Q19 12 15 16M18 5Q25 12 18 19"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                      />
+                    </>
+                  )}
+                </svg>
+              </IconButton>
+            </span>
+          </Tooltip>
+        </Box>
+      )}
       {audioError && (
         <Alert severity="error" sx={{ mb: 2 }}>
           {t("game.audioError")}
         </Alert>
       )}
+      {submitTask.isError && (
+        <>
+          <ErrorMessage error={submitTask.error} />
+          <Button onClick={() => doSubmit(answers, timedOutRef.current)}>
+            {t("common.retry")}
+          </Button>
+        </>
+      )}
 
-      <Box sx={{ display: "flex", gap: 1, justifyContent: "center", mb: 1 }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 1,
+          justifyContent: "center",
+          mb: 1,
+        }}
+      >
         {Array.from({ length: noteCount }).map((_, i) => (
           <Box
             key={i}
             sx={{
-              width: 48,
+              minWidth: 48,
               height: 48,
+              px: 1,
+              flexShrink: 0,
+              whiteSpace: "nowrap",
+              color: "#1a1a1a",
               borderRadius: 2,
               border: "2px solid #ccc",
               background: answers[i] ? "#FFD93D" : "#fff",
@@ -285,17 +334,16 @@ export default function PlayScreen({
               fontSize: "1rem",
             }}
           >
-            {answers[i]
-              ? t(`game.noteNames.${noteNaming}.${answers[i]}` as const)
-              : ""}
+            {answers[i] ? noteLabel(answers[i], noteNaming, t) : ""}
           </Box>
         ))}
         {answers.length > 0 && !isWaiting && (
           <Button
             onClick={handleBackspace}
             variant="outlined"
+            disabled={submitTask.isPending}
             sx={{ minWidth: 48, minHeight: 48 }}
-            aria-label="Backspace"
+            aria-label={t("game.removeNote")}
           >
             ⌫
           </Button>
@@ -306,7 +354,9 @@ export default function PlayScreen({
         clef={clef}
         noteNaming={noteNaming}
         onAnswer={handleAnswer}
-        disabled={isWaiting || answers.length >= noteCount}
+        disabled={
+          isWaiting || submitTask.isPending || answers.length >= noteCount
+        }
       />
     </Box>
   );

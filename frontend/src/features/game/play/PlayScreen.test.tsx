@@ -7,7 +7,6 @@ import { playNotes } from "../audio/synth";
 import PlayScreen from "./PlayScreen";
 
 vi.mock("../audio/synth", () => ({
-  playNote: vi.fn(),
   playNotes: vi.fn(),
 }));
 
@@ -15,7 +14,7 @@ const notes = [
   { name: "C", octave: 4 },
   { name: "G", octave: 4 },
   { name: "A", octave: 5 },
-  { name: "F", octave: 3 },
+  { name: "F", octave: 4 },
 ];
 let finish: () => void;
 let fail: (error: Error) => void;
@@ -27,7 +26,7 @@ const fetchMock = vi.fn<
     is_correct: true,
     correct_answers: notes,
     score_delta: 1,
-    next_task: { index: 1, clef: "bass", notes: [{ name: "F", octave: 3 }] },
+    next_task: { index: 1, clef: "bass", notes: [{ name: "F", octave: 4 }] },
     result: null,
   }),
 );
@@ -55,6 +54,11 @@ afterEach(() => {
 function mount(
   task: Task = { index: 0, clef: "treble", notes },
   timeLimitMs = 7000,
+  options: {
+    noteNaming?: "solfege" | "letters";
+    showSoundHint?: boolean;
+    showCorrectAnswer?: boolean;
+  } = {},
 ) {
   return render(
     <QueryClientProvider
@@ -75,6 +79,7 @@ function mount(
         difficulty="hard"
         timeLimitMs={timeLimitMs}
         onResult={vi.fn()}
+        {...options}
       />
     </QueryClientProvider>,
   );
@@ -86,13 +91,72 @@ async function click(name: string) {
   });
 }
 
+it("can hide the sound hint without removing the answer controls", () => {
+  mount(undefined, 7000, { showSoundHint: false, noteNaming: "letters" });
+  expect(
+    screen.queryByRole("button", { name: "Listen to notes" }),
+  ).not.toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "C4" })).toBeEnabled();
+});
+
+it("submits each selected octave and uses the same piano path for answers and hints", async () => {
+  const mixed = [
+    { name: "C", octave: 4 },
+    { name: "C", octave: 5 },
+  ];
+  mount({ index: 0, clef: "bass", notes: mixed }, 7000, {
+    noteNaming: "letters",
+  });
+  await click("Listen to notes");
+  const hintSignal = playbackSignal;
+  await click("C4");
+  expect(hintSignal.aborted).toBe(true);
+  expect(playNotes).toHaveBeenLastCalledWith(
+    [mixed[0]],
+    expect.any(AbortSignal),
+  );
+  await click("C5");
+  expect(playNotes).toHaveBeenLastCalledWith(
+    [mixed[1]],
+    expect.any(AbortSignal),
+  );
+  expect(
+    JSON.parse(String(fetchMock.mock.calls[0]?.[1]?.body)).answers,
+  ).toEqual(mixed);
+});
+
+it.each([
+  ["en", "letters", "C4"],
+  ["en", "solfege", "Do4"],
+  ["ru", "solfege", "До4"],
+  ["es", "solfege", "Do4"],
+] as const)(
+  "labels both answers and the correct answer using %s/%s",
+  async (language, naming, label) => {
+    await i18n.changeLanguage(language);
+    mount(
+      { index: 0, clef: "treble", notes: [{ name: "C", octave: 4 }] },
+      7000,
+      { noteNaming: naming, showCorrectAnswer: true },
+    );
+    await click(label);
+    const section = screen.getByRole("region", {
+      name: i18n.t("game.correctAnswer"),
+    });
+    expect(section).toHaveTextContent(label);
+    expect(section).toHaveTextContent(
+      naming === "letters" ? "A5" : language === "ru" ? "Ля5" : "La5",
+    );
+  },
+);
+
 it("plays the displayed notes without submitting or entering answers", async () => {
   mount();
   await click("Listen to notes");
   expect(playNotes).toHaveBeenCalledWith(notes, expect.any(AbortSignal));
   expect(fetchMock).not.toHaveBeenCalled();
   expect(screen.getByRole("button", { name: "Stop listening" })).toBeEnabled();
-  expect(screen.getByRole("button", { name: "Do" })).toBeEnabled();
+  expect(screen.getByRole("button", { name: "Do4" })).toBeEnabled();
   await act(async () => finish());
   expect(screen.getByRole("button", { name: "Listen to notes" })).toBeEnabled();
 });
@@ -110,24 +174,25 @@ it("stops on another click and permits a fresh replay without overlap", async ()
 });
 
 it("stops on an answer without changing the answer behavior", async () => {
-  mount({ index: 0, clef: "bass", notes: [{ name: "F", octave: 3 }] });
+  mount({ index: 0, clef: "bass", notes: [{ name: "F", octave: 4 }] });
   await click("Listen to notes");
-  await click("Fa");
-  expect(playbackSignal.aborted).toBe(true);
+  const hintSignal = playbackSignal;
+  await click("Fa4");
+  expect(hintSignal.aborted).toBe(true);
   expect(
     screen.getByRole("button", { name: "Listen to notes" }),
   ).toBeDisabled();
   expect(fetchMock).toHaveBeenCalledOnce();
   expect(JSON.parse(String(fetchMock.mock.calls[0]?.[1]?.body))).toEqual({
     task_index: 0,
-    answers: [{ name: "F", octave: 3 }],
+    answers: [{ name: "F", octave: 4 }],
   });
   await act(async () => {
     await vi.advanceTimersByTimeAsync(900);
   });
   await click("Listen to notes");
   expect(playNotes).toHaveBeenLastCalledWith(
-    [{ name: "F", octave: 3 }],
+    [{ name: "F", octave: 4 }],
     expect.any(AbortSignal),
   );
 });
@@ -163,8 +228,9 @@ it("cancels playback when the page leaves, including the browser back cache", as
 it("replays the whole task after a partial answer", async () => {
   mount();
   await click("Listen to notes");
-  await click("Do");
-  expect(playbackSignal.aborted).toBe(true);
+  const hintSignal = playbackSignal;
+  await click("Do4");
+  expect(hintSignal.aborted).toBe(true);
   expect(fetchMock).not.toHaveBeenCalled();
   await click("Listen to notes");
   expect(playNotes).toHaveBeenLastCalledWith(notes, expect.any(AbortSignal));

@@ -12,18 +12,24 @@ Prerequisites:
 1. Click the round Unicorn badge at the upper left.
    The player list opens.
 2. Click **Create player**.
-   The form shows a name field and an account selector.
+   The form shows a name field and eligible accounts.
 3. Enter a player name.
-4. Select the student's account, or retain your own account.
+4. Select an eligible account.
    Use **Next** and **Previous** to find accounts beyond the first page.
 5. Click **Create player**.
    The new profile appears with level 1 and a Unicorn avatar.
 6. Select the profile.
 7. Choose the difficulty and number of notes.
-8. Click **Let's go!**.
-   The first round starts.
+8. Set **Show the sound hint** and **Show the correct answer after answering**.
+   The hint starts enabled; the correct answer starts hidden.
+9. Click **Let's go!**.
+   The piano loads before the first round starts.
 
 Only managers create profiles.
+The selector excludes inactive accounts, accounts with profiles, and the emergency manager.
+Each eligible account can receive one new profile.
+An empty selector shows **All players already have game accounts** instead of a form.
+Existing profiles and their progress remain unchanged.
 The badge shows **Play Guess the Note** on hover or keyboard focus.
 The existing **Guess the Note** menu link remains available.
 Each student sees profiles assigned to their account.
@@ -34,6 +40,13 @@ Rounds use standard treble and bass clefs.
 The treble clef identifies G4 on the second line from the bottom.
 The bass clef identifies F3 on the fourth line from the bottom.
 The symbols retain their proportions across interface fonts, themes, and screen sizes.
+Both clefs use 14 natural notes from C4 through B5.
+Buttons include scientific octave numbers 4 and 5 and follow the account's note naming and interface language.
+The optional correct answer follows these same settings and appears to the staff's right during feedback.
+Easy allows 13 s per question, Medium 10 s, and Hard 7 s.
+The difficulty changes the time limit, not the notes or scoring.
+The switches retain their choices between rounds until you leave the game area.
+Piano failures permit retry without consuming a round.
 
 ## Listen to game notes
 
@@ -42,9 +55,11 @@ The symbols retain their proportions across interface fonts, themes, and screen 
 2. Click **Stop listening** to stop early.
 3. Click **Listen to notes** again to repeat the notes.
 4. Select an answer with a colored note button.
-   The answer stops playback.
+   The answer stops the hint and plays the selected piano pitch.
 
-Listening plays tones without spoken names or automatic answers.
+The white button appears only when **Show the sound hint** is enabled.
+Listening plays sampled piano notes without spoken names or automatic answers.
+Matching answer buttons and hints use the same piano sound and octave.
 It does not pause the timer or change points.
 Playback stops when time expires or you leave the round.
 A playback failure shows an error and permits another attempt.

@@ -48,6 +48,24 @@ A child looks at the notes and listens to the audio.
 - Before login, use the first supported browser language, including regional variants; use English when none matches.
 - Saved account language takes priority after login.
 
+## Guess the Note
+
+- Use 14 natural pitches from C4 through B5, inclusive, in either clef.
+- Give each pitch its own answer button with a scientific octave number.
+- Follow the account's letters or solfege setting and interface language for buttons and revealed answers.
+- Play the same sampled piano pitch from an answer button and the corresponding sound hint.
+- Use `soundfont-player` with one reduced, licensed Salamander Grand Piano V3 asset and 4 real velocity layers.
+- Do not load a complete SF2 or request an external soundfont in the browser.
+- Load the piano before starting the scored round; report loading failures and permit retry.
+- Offer independent setup switches for the sound hint and the correct answer after answering.
+- Enable the hint and disable answer revelation by default.
+- Show the correct answer to the right of the staff during feedback when enabled.
+- Explain that difficulty changes only the 13, 10, or 7 s limit.
+- Limit new profiles to one per active, non-emergency account.
+- Exclude occupied accounts and the emergency manager from profile creation.
+- Show the all-assigned popup when no eligible accounts remain.
+- Preserve existing profiles, progress, scoring, and manager-only creation.
+
 ## Game avatar artwork
 
 - Provide 11 characters: unicorn, dragon, phoenix, griffin, sphinx cat, fox, pegasus, mermaid, lion, panda, and rhino.

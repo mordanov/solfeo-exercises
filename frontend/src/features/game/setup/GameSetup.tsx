@@ -1,42 +1,87 @@
-import { Box, Button, Typography } from "@mui/material";
-import { useState } from "react";
+import {
+  Alert,
+  Box,
+  Button,
+  FormControlLabel,
+  Link,
+  Switch,
+  Typography,
+} from "@mui/material";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { type Task, usePlayer, useStartRound } from "../api/hooks";
-import { unlockAudio } from "../audio/synth";
+import { preparePiano } from "../audio/synth";
+import { DEFAULT_GAME_OPTIONS, DIFFICULTIES, type GameOptions } from "../notes";
 import AvatarImage from "./AvatarImage";
 import AvatarChooser from "./AvatarChooser";
 import { ErrorMessage } from "../../../components/AccountUi";
 
-const DIFFICULTIES = ["easy", "medium", "hard"] as const;
 const NOTE_COUNTS = [1, 2, 3, 4] as const;
 
 interface Props {
   playerId: number;
   csrf: string;
+  initialOptions?: GameOptions;
   onRoundStarted: (
     roundId: number,
     firstTask: Task,
     noteCount: number,
     difficulty: string,
+    options: GameOptions,
   ) => void;
 }
 
-export default function GameSetup({ playerId, csrf, onRoundStarted }: Props) {
+export default function GameSetup({
+  playerId,
+  csrf,
+  initialOptions = DEFAULT_GAME_OPTIONS,
+  onRoundStarted,
+}: Props) {
   const { t } = useTranslation();
   const [difficulty, setDifficulty] = useState<string>("easy");
   const [noteCount, setNoteCount] = useState<number>(1);
   const startRound = useStartRound();
   const player = usePlayer(playerId);
   const [choosingAvatar, setChoosingAvatar] = useState(false);
+  const [options, setOptions] = useState(initialOptions);
+  const [audioBusy, setAudioBusy] = useState(false);
+  const [audioError, setAudioError] = useState(false);
+  const mounted = useRef(true);
+  const preparing = useRef(false);
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
 
-  const handleStart = () => {
-    unlockAudio();
+  const handleStart = async () => {
+    if (preparing.current || startRound.isPending) return;
+    preparing.current = true;
+    setAudioBusy(true);
+    setAudioError(false);
+    try {
+      await preparePiano();
+    } catch {
+      if (mounted.current) setAudioError(true);
+      return;
+    } finally {
+      preparing.current = false;
+      if (mounted.current) setAudioBusy(false);
+    }
+    if (!mounted.current) return;
     startRound.mutate(
       { csrf, player_id: playerId, difficulty, note_count: noteCount },
       {
         onSuccess: (data) =>
-          onRoundStarted(data.round_id, data.task, noteCount, difficulty),
+          onRoundStarted(
+            data.round_id,
+            data.task,
+            noteCount,
+            difficulty,
+            options,
+          ),
       },
     );
   };
@@ -72,10 +117,11 @@ export default function GameSetup({ playerId, csrf, onRoundStarted }: Props) {
         {t("game.selectDifficulty")}
       </Typography>
       <Box sx={{ display: "flex", gap: 1, mb: 3 }}>
-        {DIFFICULTIES.map((d) => (
+        {DIFFICULTIES.map(({ name: d }) => (
           <Button
             key={d}
             variant={difficulty === d ? "contained" : "outlined"}
+            disabled={audioBusy || startRound.isPending}
             onClick={() => setDifficulty(d)}
             sx={{ flex: 1, minWidth: 0 }}
           >
@@ -83,6 +129,37 @@ export default function GameSetup({ playerId, csrf, onRoundStarted }: Props) {
           </Button>
         ))}
       </Box>
+      <Typography sx={{ mb: 2 }} role="note">
+        {t("game.difficultyHint", {
+          seconds:
+            (DIFFICULTIES.find((item) => item.name === difficulty)?.timeMs ??
+              13000) / 1000,
+        })}
+      </Typography>
+      <FormControlLabel
+        control={
+          <Switch
+            disabled={audioBusy || startRound.isPending}
+            checked={options.showSoundHint}
+            onChange={(_event, checked) =>
+              setOptions((value) => ({ ...value, showSoundHint: checked }))
+            }
+          />
+        }
+        label={t("game.options.soundHint")}
+      />
+      <FormControlLabel
+        control={
+          <Switch
+            disabled={audioBusy || startRound.isPending}
+            checked={options.showCorrectAnswer}
+            onChange={(_event, checked) =>
+              setOptions((value) => ({ ...value, showCorrectAnswer: checked }))
+            }
+          />
+        }
+        label={t("game.options.correctAnswer")}
+      />
 
       <Typography variant="h5" sx={{ mb: 2, fontWeight: 700 }}>
         {t("game.selectNoteCount")}
@@ -92,6 +169,7 @@ export default function GameSetup({ playerId, csrf, onRoundStarted }: Props) {
           <Button
             key={n}
             variant={noteCount === n ? "contained" : "outlined"}
+            disabled={audioBusy || startRound.isPending}
             onClick={() => setNoteCount(n)}
             sx={{ flex: 1, minWidth: 0, minHeight: 64, fontSize: "1.4rem" }}
           >
@@ -105,11 +183,22 @@ export default function GameSetup({ playerId, csrf, onRoundStarted }: Props) {
         size="large"
         fullWidth
         onClick={handleStart}
-        disabled={startRound.isPending}
+        disabled={
+          audioBusy ||
+          startRound.isPending ||
+          player.isPending ||
+          player.isError
+        }
         sx={{ minHeight: 64, fontSize: "1.2rem" }}
       >
-        {t("game.startRound")}
+        {t(audioBusy ? "game.piano.loading" : "game.startRound")}
       </Button>
+      {audioError && <Alert severity="error">{t("game.audioError")}</Alert>}
+      <Typography variant="caption" sx={{ display: "block", mt: 1 }}>
+        <Link href="/assets/piano/LICENSE.txt" target="_blank" rel="noopener">
+          {t("game.piano.credit")}
+        </Link>
+      </Typography>
       {startRound.isError && <ErrorMessage error={startRound.error} />}
     </Box>
   );

@@ -32,7 +32,7 @@ let accountsFailed = false;
 let createFailed = false;
 let paginated = false;
 const fetchMock = vi.fn(async (url: string, options?: RequestInit) => {
-  if (url.startsWith("/api/users?")) {
+  if (url.startsWith("/api/game/players/accounts?")) {
     if (accountsFailed)
       return Response.json({ error: "SERVICE_UNAVAILABLE" }, { status: 503 });
     if (paginated)
@@ -49,7 +49,13 @@ const fetchMock = vi.fn(async (url: string, options?: RequestInit) => {
             ],
         total: 51,
       });
-    return Response.json({ users: [manager, student], total: 2 });
+    const users = [manager, student].filter(
+      (user) =>
+        !players.some(
+          (player) => "account_id" in player && player.account_id === user.id,
+        ),
+    );
+    return Response.json({ users, total: users.length });
   }
   if (url === "/api/game/players" && options?.method === "POST") {
     if (createFailed)
@@ -228,18 +234,44 @@ it("reports account lookup errors and retries without submitting", async () => {
   mount();
   fireEvent.click(await screen.findByRole("button", { name: "Create player" }));
   await screen.findByRole("alert");
-  fireEvent.change(screen.getByLabelText("Player name"), {
-    target: { value: "First player" },
-  });
-  expect(
-    screen.getAllByRole("button", { name: "Create player" }).at(-1),
-  ).toBeDisabled();
+  expect(screen.queryByLabelText("Player name")).not.toBeInTheDocument();
   expect(players).toEqual([]);
   accountsFailed = false;
   fireEvent.click(screen.getByRole("button", { name: "Try again" }));
   await screen.findByRole("option", { name: "Student Test (student)" });
+  fireEvent.change(screen.getByLabelText("Player name"), {
+    target: { value: "First player" },
+  });
   expect(screen.queryByRole("alert")).not.toBeInTheDocument();
   expect(
     screen.getAllByRole("button", { name: "Create player" }).at(-1),
   ).toBeEnabled();
+});
+
+it("shows the requested popup without a form when all accounts have profiles", async () => {
+  players = [
+    {
+      id: 4,
+      account_id: 1,
+      name: "Manager",
+      avatar_animal: "unicorn",
+      avatar_level: 1,
+      xp: 0,
+    },
+    {
+      id: 5,
+      account_id: 2,
+      name: "Student",
+      avatar_animal: "panda",
+      avatar_level: 1,
+      xp: 0,
+    },
+  ];
+  mount();
+  fireEvent.click(await screen.findByRole("button", { name: "Create player" }));
+  expect(
+    await screen.findByText("All players already have game accounts."),
+  ).toBeInTheDocument();
+  expect(screen.queryByLabelText("Account")).not.toBeInTheDocument();
+  expect(screen.queryByLabelText("Player name")).not.toBeInTheDocument();
 });

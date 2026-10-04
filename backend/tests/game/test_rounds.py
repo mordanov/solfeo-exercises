@@ -9,6 +9,12 @@ def test_generate_tasks_count() -> None:
     assert len(tasks) == TASKS_PER_ROUND
 
 
+def test_both_clefs_offer_exactly_the_same_fourteen_natural_pitches() -> None:
+    expected = [(name, octave) for octave in (4, 5) for name in "CDEFGAB"]
+    assert NOTE_RANGE["treble"] == expected
+    assert NOTE_RANGE["bass"] == expected
+
+
 def test_generate_tasks_clef_is_treble_or_bass() -> None:
     tasks = generate_tasks("easy", 1, "letters")
     assert all(t["clef"] in ("treble", "bass") for t in tasks)

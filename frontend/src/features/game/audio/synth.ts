@@ -1,132 +1,127 @@
-import { toMidi } from "../staff/staffPos";
+import Soundfont, { type Piano, type PlayingNote } from "soundfont-player";
+import { GAME_NOTES } from "../notes";
+import type { Note } from "../api/hooks";
 
+export const PIANO_ASSET = "/assets/piano/salamander-c4-b5.json";
 let ctx: AudioContext | null = null;
-const MUTE_KEY = "game_muted";
+let piano: Piano | null = null;
+let loading: Promise<void> | null = null;
 
 export function isMuted(): boolean {
   try {
-    return localStorage.getItem(MUTE_KEY) === "1";
+    return localStorage.getItem("game_muted") === "1";
   } catch {
     return false;
   }
 }
 
-export function setMuted(muted: boolean): void {
-  try {
-    localStorage.setItem(MUTE_KEY, muted ? "1" : "0");
-  } catch {
-    /* ignore */
+export function sampleKey(note: Note, velocity = 64): string {
+  if (
+    !GAME_NOTES.some(
+      (pitch) => pitch.name === note.name && pitch.octave === note.octave,
+    )
+  ) {
+    throw new Error("GAME_AUDIO_INVALID_NOTE");
   }
+  if (!Number.isInteger(velocity) || velocity < 1 || velocity > 127) {
+    throw new Error("GAME_AUDIO_INVALID_VELOCITY");
+  }
+  const layer =
+    velocity <= 43 ? 4 : velocity <= 64 ? 8 : velocity <= 96 ? 12 : 16;
+  return `${note.name}${note.octave}-v${layer}`;
 }
 
 function getCtx(): AudioContext {
-  if (!ctx) ctx = new AudioContext();
+  if (!ctx || ctx.state === "closed") {
+    ctx = new AudioContext();
+    piano = null;
+    loading = null;
+  }
   return ctx;
 }
 
-export function unlockAudio(): void {
-  try {
-    getCtx().resume();
-  } catch {
-    /* ignore */
+export async function preparePiano(): Promise<void> {
+  const ac = getCtx();
+  const resume = ac.state === "running" ? Promise.resolve() : ac.resume();
+  if (!loading) {
+    loading = Soundfont.instrument(ac, "salamander-c4-b5", {
+      nameToUrl: () => PIANO_ASSET,
+      map: (key) => key,
+      adsr: [0.005, 0.1, 0.9, 0.1],
+    })
+      .then((loaded) => {
+        for (const note of GAME_NOTES) {
+          for (const velocity of [40, 64, 96, 127]) {
+            const buffer = loaded.buffers[sampleKey(note, velocity)];
+            if (
+              !buffer ||
+              !Number.isFinite(buffer.duration) ||
+              buffer.duration <= 0
+            ) {
+              throw new Error("GAME_AUDIO_MISSING_SAMPLE");
+            }
+          }
+        }
+        piano = loaded;
+      })
+      .catch((error: unknown) => {
+        loading = null;
+        throw error;
+      });
   }
+  await Promise.all([resume, loading]);
+  if (ac.state !== "running") throw new Error("GAME_AUDIO_UNAVAILABLE");
 }
 
 export async function playNotes(
-  notes: readonly { name: string; octave: number }[],
+  notes: readonly Note[],
   signal: AbortSignal,
+  velocity = 64,
 ): Promise<void> {
   if (signal.aborted) return;
   if (isMuted()) throw new Error("GAME_AUDIO_MUTED");
   if (notes.length === 0) throw new Error("GAME_AUDIO_EMPTY");
-  const frequencies = notes.map(({ name, octave }) => {
-    const midi = toMidi(name, octave);
-    if (
-      !Number.isInteger(octave) ||
-      !Number.isFinite(midi) ||
-      midi < 0 ||
-      midi > 127
-    ) {
-      throw new Error("GAME_AUDIO_INVALID_NOTE");
-    }
-    return 440 * Math.pow(2, (midi - 69) / 12);
-  });
-  const ac = getCtx();
-  if (ac.state !== "running") await ac.resume();
+  const keys = notes.map((note) => sampleKey(note, velocity));
+  await preparePiano();
   if (signal.aborted) return;
-  if (ac.state !== "running") throw new Error("GAME_AUDIO_UNAVAILABLE");
+  const ac = getCtx();
+  const instrument = piano;
+  if (!instrument) throw new Error("GAME_AUDIO_UNAVAILABLE");
 
   return new Promise<void>((resolve, reject) => {
-    const oscillators: OscillatorNode[] = [];
-    const gains: GainNode[] = [];
-    const started = new Set<OscillatorNode>();
+    const nodes: PlayingNote[] = [];
     let settled = false;
-    const cleanup = (stop: boolean) => {
+    const finish = () => {
+      if (settled) return;
       settled = true;
       signal.removeEventListener("abort", cancel);
-      for (const oscillator of oscillators) {
-        oscillator.onended = null;
-        if (stop && started.has(oscillator)) oscillator.stop();
-        oscillator.disconnect();
-      }
-      for (const gain of gains) gain.disconnect();
+      resolve();
     };
     const cancel = () => {
       if (settled) return;
-      cleanup(true);
-      resolve();
+      for (const node of nodes) {
+        node.source.stop();
+      }
+      finish();
     };
     signal.addEventListener("abort", cancel, { once: true });
-    const startTime = ac.currentTime;
+    const start = ac.currentTime;
     try {
-      frequencies.forEach((frequency, index) => {
-        const oscillator = ac.createOscillator();
-        oscillators.push(oscillator);
-        const gain = ac.createGain();
-        gains.push(gain);
-        const start = startTime + index * 0.45;
-        oscillator.type = "triangle";
-        oscillator.frequency.value = frequency;
-        gain.gain.setValueAtTime(0.35, start);
-        gain.gain.exponentialRampToValueAtTime(0.001, start + 0.3);
-        oscillator.connect(gain);
-        gain.connect(ac.destination);
-        if (index === frequencies.length - 1) {
-          oscillator.onended = () => {
-            if (settled) return;
-            cleanup(false);
-            resolve();
-          };
-        }
-        oscillator.start(start);
-        started.add(oscillator);
-        oscillator.stop(start + 0.3);
+      keys.forEach((key, index) => {
+        const node = instrument.play(key, start + index * 0.75, {
+          duration: 0.5,
+          gain: 0.8,
+        });
+        if (!node) throw new Error("GAME_AUDIO_MISSING_SAMPLE");
+        nodes.push(node);
+        if (index === keys.length - 1)
+          node.source.addEventListener("ended", finish, { once: true });
       });
     } catch (error) {
-      cleanup(true);
+      for (const node of nodes) node.source.stop();
+      settled = true;
+      signal.removeEventListener("abort", cancel);
       reject(error);
     }
   });
-}
-
-export function playNote(name: string, octave: number): void {
-  if (isMuted()) return;
-  try {
-    const ac = getCtx();
-    if (ac.state === "suspended") void ac.resume();
-    const midi = toMidi(name, octave);
-    const freq = 440 * Math.pow(2, (midi - 69) / 12);
-    const osc = ac.createOscillator();
-    const gain = ac.createGain();
-    osc.type = "triangle";
-    osc.frequency.value = freq;
-    gain.gain.setValueAtTime(0.35, ac.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.3);
-    osc.connect(gain);
-    gain.connect(ac.destination);
-    osc.start(ac.currentTime);
-    osc.stop(ac.currentTime + 0.3);
-  } catch {
-    // Audio errors must never block input
-  }
 }

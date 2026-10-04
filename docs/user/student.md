@@ -15,8 +15,19 @@ Prerequisites:
    Students cannot create profiles.
 3. Select a player.
 4. Choose the difficulty and number of notes.
-5. Click **Let's go!**.
-   The first round starts.
+   Easy allows 13 s per question, Medium 10 s, and Hard 7 s.
+5. Set **Show the sound hint** and **Show the correct answer after answering**.
+   The hint starts enabled; the correct answer starts hidden.
+6. Click **Let's go!**.
+   The piano loads before the first round starts.
+
+The difficulty changes the time limit, not the available notes or scoring.
+The switches retain their choices between rounds until you leave the game area.
+An unavailable piano shows an error without consuming a round; click **Let's go!** to retry.
+The game uses 14 natural notes from C4 through B5 in both clefs.
+Buttons include scientific octave numbers 4 and 5 to distinguish pitches with the same name.
+Buttons and shown answers follow **Note naming** and **Interface language** in Settings.
+When enabled, the correct answer appears to the staff's right during feedback.
 
 A failed request shows an error and **Try again**, not the empty-profile message.
 The badge shows **Play Guess the Note** on hover or keyboard focus.
@@ -34,9 +45,11 @@ Changing the interface font or theme does not change these symbols or note posit
 2. Click **Stop listening** to stop early.
 3. Click **Listen to notes** again to repeat all shown notes.
 4. Select your answers with the colored note buttons.
-   An answer stops the current playback.
+   An answer stops the hint and plays the selected piano pitch.
 
-The game plays tones, not spoken note names.
+The white button appears only when **Show the sound hint** is enabled.
+The game plays sampled piano notes, not spoken note names.
+Matching answer buttons and hints use the same piano sound and octave.
 Listening does not enter answers, change points, or pause the timer.
 Playback stops when time expires or you leave the round.
 A playback failure shows an error and permits another attempt.

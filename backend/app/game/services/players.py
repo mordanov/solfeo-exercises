@@ -1,4 +1,4 @@
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from app.game.models import CustomAvatar, Player, Season
@@ -18,6 +18,17 @@ def list_players(session: Session, account_id: int | None = None) -> list[Player
     if account_id is not None:
         q = q.where(Player.account_id == account_id)
     return list(session.scalars(q.order_by(Player.id)))
+
+
+def eligible_accounts(session: Session, offset: int) -> tuple[list[User], int]:
+    query = select(User).where(
+        User.is_active.is_(True),
+        User.is_emergency.is_(False),
+        ~select(Player.id).where(Player.account_id == User.id).exists(),
+    )
+    total = session.scalar(select(func.count()).select_from(query.subquery())) or 0
+    users = list(session.scalars(query.order_by(User.id).offset(offset).limit(50)))
+    return users, total
 
 
 def choose_avatar(
@@ -46,14 +57,21 @@ def create_player(
     if avatar_animal is not None and avatar_animal not in ANIMAL_IDS:
         raise ServiceError("INVALID_AVATAR_ANIMAL", 422)
     with session.begin():
-        account = session.get(User, account_id)
+        account = session.scalar(
+            select(User).where(User.id == account_id).with_for_update()
+        )
         if account is None or not account.is_active:
             raise ServiceError("PLAYER_ACCOUNT_NOT_FOUND", 404)
+        if account.is_emergency:
+            raise ServiceError("PLAYER_EMERGENCY_ACCOUNT", 422)
         existing = session.scalar(
-            select(Player).where(Player.account_id == account_id, Player.name == name)
+            select(Player).where(Player.account_id == account_id).limit(1)
         )
         if existing is not None:
-            raise ServiceError("PLAYER_NAME_TAKEN", 409)
+            code = (
+                "PLAYER_NAME_TAKEN" if existing.name == name else "PLAYER_ACCOUNT_TAKEN"
+            )
+            raise ServiceError(code, 409)
         player = Player(account_id=account_id, name=name, avatar_animal=avatar_animal)
         session.add(player)
         session.flush()
