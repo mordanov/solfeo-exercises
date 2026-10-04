@@ -525,8 +525,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/result/ResultScreen.tsx": {
-    "mtime": 1791142305.9846718,
-    "ast_hash": "e2b7673c21f0fecaed06ca464317023a",
+    "mtime": 1791147014.461415,
+    "ast_hash": "d478797c49c739ac0096d6c15a2c59f8",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/setup/GameSetup.tsx": {
@@ -1870,8 +1870,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/STATUS.md": {
-    "mtime": 1791143677.704952,
-    "ast_hash": "bca59daf773e1dff8ef732016585b05a",
+    "mtime": 1791147725.3163347,
+    "ast_hash": "ac23d6b812b102facca42f9e106b5a37",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/DECISIONS.md": {
@@ -1955,8 +1955,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/developer/game-avatars.md": {
-    "mtime": 1791142164.0142403,
-    "ast_hash": "d0bc6239559bf4d3b78685c998e074ff",
+    "mtime": 1791147341.1567483,
+    "ast_hash": "6b4ea729e455d965c67b5656fa8fd77f",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/developer/data-model.md": {
@@ -1985,8 +1985,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/user/manager.md": {
-    "mtime": 1791142178.477317,
-    "ast_hash": "3b59af2b25f40ef490e246c0cb366f37",
+    "mtime": 1791147341.1595602,
+    "ast_hash": "c63d0922bed2e5a30462333d1813a606",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/user/telegram-prototype.md": {
@@ -1995,8 +1995,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/user/student.md": {
-    "mtime": 1791142112.4132378,
-    "ast_hash": "dde4d172347ef3b3ef56610c41c6984f",
+    "mtime": 1791147341.1580102,
+    "ast_hash": "e024cb0edbd88dbabb09a9eb19e39a0d",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/user/pwa-prototype.md": {
@@ -7515,13 +7515,13 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/profile/PrizeShelf.tsx": {
-    "mtime": 1791142311.030419,
-    "ast_hash": "0c3e33e1556ffbe7e4a690df18d53e7a",
+    "mtime": 1791147014.4604204,
+    "ast_hash": "f0575a5d1d99ccd506125ab068886f85",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/profile/PrizeShelf.test.tsx": {
-    "mtime": 1791142305.9893959,
-    "ast_hash": "df6d79630c96c0139b4847f7755029d9",
+    "mtime": 1791146942.1798096,
+    "ast_hash": "b479cc648670949e8559b72ff72e12e8",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/play/Timer.test.tsx": {
@@ -7572,6 +7572,131 @@
   "/Users/aleksandr/Local/solfeo-exercises/backend/tests/game/test_player_avatar_choices.py": {
     "mtime": 1791143528.0813491,
     "ast_hash": "f9b60b811e56436e17eb8ca5ffdcfbd2",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/result/ResultScreen.test.tsx": {
+    "mtime": 1791146942.180843,
+    "ast_hash": "75417401c0ae7b2ebe9631267d3bceb8",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/profile/PrizeImage.tsx": {
+    "mtime": 1791147014.4590862,
+    "ast_hash": "b72afd6b99c4fbbea0d13267cfcf5104",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/backend/tests/test_prize_art.py": {
+    "mtime": 1791146942.1784015,
+    "ast_hash": "073989357cc70e7e109bed35339bd943",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/scripts/build_prize_assets.py": {
+    "mtime": 1791147102.4399457,
+    "ast_hash": "004e9b081249d8c7c30474b4767b2d16",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/trophies.png": {
+    "mtime": 1791144766.3981395,
+    "ast_hash": "8e38a1853c116b7a5ae69ccc0c1cbbd4",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/prizes/level_2.png": {
+    "mtime": 1791147031.136212,
+    "ast_hash": "93908b6e992c7532113718d05be9f2ff",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/prizes/all_difficulties.png": {
+    "mtime": 1791147031.0405622,
+    "ast_hash": "748d99e1d84bf7d515ada1fa3ede96dc",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/prizes/level_5.png": {
+    "mtime": 1791147031.1556318,
+    "ast_hash": "9346dd77f5aaf8e4473282a94b3d28c0",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/prizes/bass_25.png": {
+    "mtime": 1791147030.9206328,
+    "ast_hash": "ca09897cfdf690a77d1b4c1246f90a8d",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/prizes/independent_win.png": {
+    "mtime": 1791147031.0637257,
+    "ast_hash": "3400ce84df9dddeb34ac3a59e2595d12",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/prizes/perfect_round.png": {
+    "mtime": 1791147030.8114362,
+    "ast_hash": "30a20c2662e1b691c379b2d7eb61c4cd",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/prizes/wins_10.png": {
+    "mtime": 1791147031.1774201,
+    "ast_hash": "515f41c09c879e89973724d40dca7930",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/prizes/trio.png": {
+    "mtime": 1791147030.9944,
+    "ast_hash": "fb54a45a770e9fb3bd8ee6e1c8060880",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/prizes/welcome_back.png": {
+    "mtime": 1791147031.197658,
+    "ast_hash": "0234943a7bcd87ca6ba6a8013e5e28d7",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/prizes/correct_streak_10.png": {
+    "mtime": 1791147030.83416,
+    "ast_hash": "99b60acc5f9c962d02e2053d0c48c515",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/prizes/days_streak_3.png": {
+    "mtime": 1791147031.084752,
+    "ast_hash": "8d3b4868d1473bd2535d5afe27ad3f15",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/prizes/duet.png": {
+    "mtime": 1791147030.967462,
+    "ast_hash": "cf131297cebcd62d1c1a19af7d9a0f63",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/prizes/quartet.png": {
+    "mtime": 1791147031.0208251,
+    "ast_hash": "69f8269ea7d69a7c81abff7cc0770769",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/prizes/both_clefs.png": {
+    "mtime": 1791147030.941706,
+    "ast_hash": "7bc2bbaedeb65f7fa77bad6ea85a0075",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/prizes/first_win.png": {
+    "mtime": 1791147030.7899606,
+    "ast_hash": "750bdb030b659f534be57e055aed253a",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/prizes/first_round.png": {
+    "mtime": 1791147030.7658875,
+    "ast_hash": "eb365f2112a44756a4914f72b2f6d803",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/prizes/treble_25.png": {
+    "mtime": 1791147030.8986955,
+    "ast_hash": "86346a7b0d432731f5e8549e15dcf169",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/prizes/days_7.png": {
+    "mtime": 1791147031.1131678,
+    "ast_hash": "8b99d2c7c3680bfbeeedad702ff21676",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/prizes/notes_100.png": {
+    "mtime": 1791147030.8537772,
+    "ast_hash": "027511eb0d6aed4d68d1dc1e17145dc3",
+    "semantic_hash": ""
+  },
+  "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/prizes/note_rainbow.png": {
+    "mtime": 1791147030.8769395,
+    "ast_hash": "02ea46badfe41780b75ff542c7f49ac4",
     "semantic_hash": ""
   }
 }

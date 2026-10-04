@@ -254,6 +254,30 @@ Treble and bass prizes also count whole correct answers, not individual notes.
 The interface uses `game.prizes.codes.<code>` for localized names and `game.prizes.descriptions.<code>` for conditions.
 The copy welcomes breaks without guilt, lost-prize warnings, or daily penalties.
 
+### Prize images
+
+The owner's original `trophies.png` contains the 20 prizes in a 5-column, 4-row layout.
+`scripts/build_prize_assets.py` maps each position to its stable prize code.
+The extractor follows connected visible pixels instead of assuming perfectly centered grid cells.
+It removes detached background specks without cutting another badge into the result.
+Each public PNG uses a transparent 256 × 256 px canvas with at least 8 px of padding.
+The original image remains unchanged.
+
+To reproduce the packaged images:
+
+```sh
+uv run --locked python scripts/build_prize_assets.py
+uv run --locked pytest backend/tests/test_prize_art.py
+```
+
+The script requires exactly 20 separate badges before it writes any files.
+It uses the existing Pillow dependency.
+Images live at `/assets/prizes/<code>.png`.
+`PrizeImage` supplies the shared renderer for the setup shelf, profile shelf, and new-prize announcements.
+Earned prizes use full color; locked prizes use grayscale and reduced opacity.
+Names, accessible image labels, and conditions retain the selected interface language.
+No image contains translated text, and no runtime image generation occurs.
+
 ## Source correspondence
 
 The owner permits repeated images when source counts differ.

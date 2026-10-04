@@ -114,6 +114,8 @@ Students cannot access these controls or call reset endpoints.
    Lifetime prizes remain available independently of the selected season.
 
 The game offers 20 lifetime prizes and awards each once per profile.
+Setup and profile shelves show colored earned prizes and gray, muted locked prizes.
+The round result shows a picture for each newly earned prize.
 Prizes add no XP and survive both single-player and bulk statistics resets.
 The 20, 100, 200, and 500-round trophies remain separate.
 Only completed rounds contribute, including correct individual notes within otherwise incorrect answers.

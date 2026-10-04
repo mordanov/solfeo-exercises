@@ -2,29 +2,7 @@ import { Box, Button, Chip, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { ErrorMessage } from "../../../components/AccountUi";
 import { useAchievements } from "../api/hooks";
-
-export const PRIZE_ICONS: Record<string, string> = {
-  first_round: "🌱",
-  first_win: "🎉",
-  perfect_round: "💎",
-  correct_streak_10: "🔥",
-  notes_100: "🎵",
-  note_rainbow: "🌈",
-  treble_25: "🐦",
-  bass_25: "🐻",
-  both_clefs: "🦋",
-  duet: "👯",
-  trio: "☘️",
-  quartet: "🍀",
-  all_difficulties: "🧭",
-  independent_win: "🚀",
-  days_streak_3: "🌻",
-  days_7: "📅",
-  level_2: "🌿",
-  level_5: "🌟",
-  wins_10: "👑",
-  welcome_back: "🏡",
-};
+import PrizeImage from "./PrizeImage";
 
 export default function PrizeShelf({ playerId }: { playerId: number }) {
   const { t } = useTranslation();
@@ -55,7 +33,8 @@ export default function PrizeShelf({ playerId }: { playerId: number }) {
                 key={code}
                 variant={earned.has(code) ? "filled" : "outlined"}
                 color={earned.has(code) ? "primary" : "default"}
-                label={`${PRIZE_ICONS[code] ?? "🏅"} ${t(`game.prizes.codes.${code}`)}`}
+                avatar={<PrizeImage code={code} earned={earned.has(code)} />}
+                label={t(`game.prizes.codes.${code}`)}
                 title={`${t(
                   earned.has(code)
                     ? "game.prizes.earned"
@@ -64,6 +43,14 @@ export default function PrizeShelf({ playerId }: { playerId: number }) {
                 sx={{
                   maxWidth: "100%",
                   height: "auto",
+                  "& .MuiChip-avatar": {
+                    width: 48,
+                    height: 48,
+                    borderRadius: 0,
+                    backgroundColor: "transparent",
+                    ml: 0.75,
+                    my: 0.75,
+                  },
                   "& .MuiChip-label": { whiteSpace: "normal", py: 0.5 },
                 }}
               />

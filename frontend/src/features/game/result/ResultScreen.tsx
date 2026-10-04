@@ -5,7 +5,7 @@ import AvatarImage from "../setup/AvatarImage";
 import { roundMood } from "../setup/avatars";
 import { ErrorMessage } from "../../../components/AccountUi";
 import { noteLabel } from "../notes";
-import { PRIZE_ICONS } from "../profile/PrizeShelf";
+import PrizeImage from "../profile/PrizeImage";
 
 interface Props {
   playerId: number;
@@ -102,11 +102,24 @@ export default function ResultScreen({
       )}
 
       {result.new_achievements?.map((code) => (
-        <Typography key={code} role="status" variant="h6" sx={{ mb: 1 }}>
-          {PRIZE_ICONS[code] ?? "🏅"}{" "}
-          {t("game.prizes.newPrize", {
-            name: t(`game.prizes.codes.${code}`),
-          })}
+        <Typography
+          key={code}
+          role="status"
+          variant="h6"
+          sx={{
+            mb: 1,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 1,
+          }}
+        >
+          <PrizeImage code={code} size={64} />
+          <Box component="span">
+            {t("game.prizes.newPrize", {
+              name: t(`game.prizes.codes.${code}`),
+            })}
+          </Box>
         </Typography>
       ))}
 

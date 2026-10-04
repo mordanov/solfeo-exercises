@@ -14,6 +14,25 @@ The shared branch is `feat/game-rewards-moderation`, based on current `main`.
 Accepted PHASE 7 remains closed.
 Earlier game, appearance, and listening entries below remain historical session records.
 
+### Packaged prize artwork
+
+The owner supplies `trophies.png` with all 20 prize illustrations.
+The source remains unchanged and supplies a reproducible extraction command.
+The extractor detects each complete badge instead of cutting imperfect grid positions.
+All 20 public PNGs use transparent 256 × 256 px canvases and consistent padding.
+Setup and profile shelves now use pictures instead of prize emoji.
+New-prize announcements use the same images.
+Locked prizes use grayscale; earned prizes retain full color.
+Names and descriptions remain localized in all 3 languages.
+Prizes, XP, levels, and award conditions remain unchanged.
+No runtime generation, migration, new dependency, or provider call occurs.
+Validation passes 345 frontend tests and 7 artwork/documentation tests.
+The production build and all 6 quality hooks pass.
+Native Chrome passes 37 checks across 3 languages, 2 themes, and widths of 320, 390, and 1280 px.
+Both shelves load all 20 PNGs; a completed round shows all 20 new-prize pictures.
+The checks confirm transparent images, uniform size, localized labels, gray locked prizes, and no horizontal page overflow.
+Remaining manual checks cover prize appearance in Safari and on physical phones and tablets.
+
 ### Game fixes, prizes, and avatar approval
 
 Implementation is complete on `feat/game-rewards-moderation`.
