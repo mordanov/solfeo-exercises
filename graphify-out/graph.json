@@ -153,7 +153,7 @@
       "source_file": "frontend/vite.config.test.ts",
       "source_location": "L1",
       "id": "frontend_vite_config_test_ts",
-      "community": 18,
+      "community": 5,
       "norm_label": "vite.config.test.ts"
     },
     {
@@ -162,7 +162,7 @@
       "source_file": "frontend/vite.config.test.ts",
       "source_location": "L9",
       "id": "frontend_vite_config_test_resolveconfiguration",
-      "community": 18,
+      "community": 5,
       "norm_label": "resolveconfiguration()"
     },
     {
@@ -747,7 +747,7 @@
       "source_file": "frontend/vite.config.ts",
       "source_location": "L1",
       "id": "frontend_vite_config_ts",
-      "community": 18,
+      "community": 5,
       "norm_label": "vite.config.ts"
     },
     {
@@ -756,7 +756,7 @@
       "source_file": "frontend/vite.config.ts",
       "source_location": "L10",
       "id": "frontend_vite_config_envdir",
-      "community": 18,
+      "community": 5,
       "norm_label": "envdir"
     },
     {
@@ -765,7 +765,7 @@
       "source_file": "frontend/vite.config.ts",
       "source_location": "L11",
       "id": "frontend_vite_config_env",
-      "community": 18,
+      "community": 5,
       "norm_label": "env"
     },
     {
@@ -774,7 +774,7 @@
       "source_file": "frontend/vite.config.ts",
       "source_location": "L14",
       "id": "frontend_vite_config_port",
-      "community": 18,
+      "community": 5,
       "norm_label": "port"
     },
     {
@@ -783,7 +783,7 @@
       "source_file": "frontend/vite.config.ts",
       "source_location": "L18",
       "id": "frontend_vite_config_target",
-      "community": 18,
+      "community": 5,
       "norm_label": "target"
     },
     {
@@ -5265,7 +5265,7 @@
       "source_file": "prototypes/pwa/src/App.tsx",
       "source_location": "L238",
       "id": "src_app_app",
-      "community": 262,
+      "community": 70,
       "norm_label": "app()"
     },
     {
@@ -5310,7 +5310,7 @@
       "source_file": "frontend/src/main.tsx",
       "source_location": "L1",
       "id": "frontend_src_main_tsx",
-      "community": 262,
+      "community": 4,
       "norm_label": "main.tsx"
     },
     {
@@ -5319,7 +5319,7 @@
       "source_file": "prototypes/pwa/src/main.tsx",
       "source_location": "L5",
       "id": "src_main_root",
-      "community": 262,
+      "community": 70,
       "norm_label": "root"
     },
     {
@@ -5328,7 +5328,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_app_test_tsx",
-      "community": 262,
+      "community": 4,
       "norm_label": "app.test.tsx"
     },
     {
@@ -5337,7 +5337,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L15",
       "id": "src_app_test_mockhealth",
-      "community": 262,
+      "community": 4,
       "norm_label": "mockhealth()"
     },
     {
@@ -5346,7 +5346,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L25",
       "id": "src_app_test_renderapp",
-      "community": 262,
+      "community": 4,
       "norm_label": "renderapp()"
     },
     {
@@ -5355,7 +5355,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L50",
       "id": "src_app_test_shortcut",
-      "community": 262,
+      "community": 4,
       "norm_label": "shortcut"
     },
     {
@@ -5364,7 +5364,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L79",
       "id": "src_app_test_fetch",
-      "community": 262,
+      "community": 4,
       "norm_label": "fetch"
     },
     {
@@ -5373,7 +5373,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L182",
       "id": "src_app_test_health",
-      "community": 262,
+      "community": 4,
       "norm_label": "health"
     },
     {
@@ -5481,7 +5481,7 @@
       "source_file": "frontend/src/config.ts",
       "source_location": "L1",
       "id": "frontend_src_config_ts",
-      "community": 18,
+      "community": 5,
       "norm_label": "config.ts"
     },
     {
@@ -5499,7 +5499,7 @@
       "source_file": "frontend/src/config.ts",
       "source_location": "L11",
       "id": "src_config_config",
-      "community": 18,
+      "community": 6,
       "norm_label": "config"
     },
     {
@@ -5508,7 +5508,7 @@
       "source_file": "frontend/src/config.ts",
       "source_location": "L15",
       "id": "src_config_uploadtimeoutms",
-      "community": 6,
+      "community": 5,
       "norm_label": "uploadtimeoutms"
     },
     {
@@ -5517,7 +5517,7 @@
       "source_file": "frontend/src/config.ts",
       "source_location": "L18",
       "id": "src_config_listeningheartbeatms",
-      "community": 18,
+      "community": 5,
       "norm_label": "listeningheartbeatms"
     },
     {
@@ -5526,7 +5526,7 @@
       "source_file": "frontend/src/configuration.ts",
       "source_location": "L1",
       "id": "frontend_src_configuration_ts",
-      "community": 18,
+      "community": 5,
       "norm_label": "configuration.ts"
     },
     {
@@ -5544,7 +5544,7 @@
       "source_file": "frontend/src/configuration.ts",
       "source_location": "L3",
       "id": "src_configuration_spokendefaults",
-      "community": 18,
+      "community": 5,
       "norm_label": "spokendefaults"
     },
     {
@@ -5553,7 +5553,7 @@
       "source_file": "frontend/src/configuration.ts",
       "source_location": "L12",
       "id": "src_configuration_readspokenconfiguration",
-      "community": 18,
+      "community": 5,
       "norm_label": "readspokenconfiguration()"
     },
     {
@@ -5562,7 +5562,7 @@
       "source_file": "frontend/src/configuration.ts",
       "source_location": "L46",
       "id": "src_configuration_islanguage",
-      "community": 18,
+      "community": 5,
       "norm_label": "islanguage()"
     },
     {
@@ -5571,7 +5571,7 @@
       "source_file": "frontend/src/configuration.ts",
       "source_location": "L50",
       "id": "src_configuration_browserlanguage",
-      "community": 18,
+      "community": 5,
       "norm_label": "browserlanguage()"
     },
     {
@@ -5580,7 +5580,7 @@
       "source_file": "frontend/src/configuration.ts",
       "source_location": "L61",
       "id": "src_configuration_readconfiguration",
-      "community": 18,
+      "community": 5,
       "norm_label": "readconfiguration()"
     },
     {
@@ -5589,7 +5589,7 @@
       "source_file": "frontend/src/configuration.ts",
       "source_location": "L79",
       "id": "src_configuration_readuploadtimeout",
-      "community": 18,
+      "community": 5,
       "norm_label": "readuploadtimeout()"
     },
     {
@@ -5598,7 +5598,7 @@
       "source_file": "frontend/src/configuration.ts",
       "source_location": "L88",
       "id": "src_configuration_readheartbeat",
-      "community": 18,
+      "community": 5,
       "norm_label": "readheartbeat()"
     },
     {
@@ -5877,7 +5877,7 @@
       "source_file": "frontend/src/features/omr/Review.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_omr_review_tsx",
-      "community": 6,
+      "community": 11,
       "norm_label": "review.tsx"
     },
     {
@@ -5886,7 +5886,7 @@
       "source_file": "frontend/src/features/omr/Review.tsx",
       "source_location": "L11",
       "id": "omr_review_review",
-      "community": 6,
+      "community": 10,
       "norm_label": "review()"
     },
     {
@@ -5895,7 +5895,7 @@
       "source_file": "frontend/src/features/omr/Review.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_omr_review_test_tsx",
-      "community": 6,
+      "community": 10,
       "norm_label": "review.test.tsx"
     },
     {
@@ -5904,7 +5904,7 @@
       "source_file": "frontend/src/features/omr/Review.test.tsx",
       "source_location": "L17",
       "id": "omr_review_test_job",
-      "community": 6,
+      "community": 10,
       "norm_label": "job"
     },
     {
@@ -5913,7 +5913,7 @@
       "source_file": "frontend/src/features/omr/Review.test.tsx",
       "source_location": "L24",
       "id": "omr_review_test_exercise",
-      "community": 6,
+      "community": 10,
       "norm_label": "exercise"
     },
     {
@@ -5922,7 +5922,7 @@
       "source_file": "frontend/src/features/omr/Review.test.tsx",
       "source_location": "L39",
       "id": "omr_review_test_auth",
-      "community": 6,
+      "community": 10,
       "norm_label": "auth"
     },
     {
@@ -5931,7 +5931,7 @@
       "source_file": "frontend/src/features/omr/Review.test.tsx",
       "source_location": "L61",
       "id": "omr_review_test_mount",
-      "community": 6,
+      "community": 10,
       "norm_label": "mount()"
     },
     {
@@ -6435,7 +6435,7 @@
       "source_file": "frontend/src/features/health/HealthStatus.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_health_healthstatus_tsx",
-      "community": 18,
+      "community": 6,
       "norm_label": "healthstatus.tsx"
     },
     {
@@ -6444,7 +6444,7 @@
       "source_file": "frontend/src/features/health/HealthStatus.tsx",
       "source_location": "L8",
       "id": "health_healthstatus_healthstatus",
-      "community": 18,
+      "community": 6,
       "norm_label": "healthstatus()"
     },
     {
@@ -6759,7 +6759,7 @@
       "source_file": "frontend/src/features/game/setup/PlayerSelect.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_game_setup_playerselect_tsx",
-      "community": 6,
+      "community": 11,
       "norm_label": "playerselect.tsx"
     },
     {
@@ -6768,7 +6768,7 @@
       "source_file": "frontend/src/features/game/setup/PlayerSelect.tsx",
       "source_location": "L11",
       "id": "setup_playerselect_props",
-      "community": 6,
+      "community": 11,
       "norm_label": "props"
     },
     {
@@ -6957,7 +6957,7 @@
       "source_file": "frontend/src/features/game/setup/PlayerSelect.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_game_setup_playerselect_test_tsx",
-      "community": 262,
+      "community": 4,
       "norm_label": "playerselect.test.tsx"
     },
     {
@@ -6966,7 +6966,7 @@
       "source_file": "frontend/src/features/game/setup/PlayerSelect.test.tsx",
       "source_location": "L9",
       "id": "setup_playerselect_test_manager",
-      "community": 262,
+      "community": 4,
       "norm_label": "manager"
     },
     {
@@ -6975,7 +6975,7 @@
       "source_file": "frontend/src/features/game/setup/PlayerSelect.test.tsx",
       "source_location": "L22",
       "id": "setup_playerselect_test_student",
-      "community": 262,
+      "community": 4,
       "norm_label": "student"
     },
     {
@@ -6984,7 +6984,7 @@
       "source_file": "frontend/src/features/game/setup/PlayerSelect.test.tsx",
       "source_location": "L29",
       "id": "setup_playerselect_test_players",
-      "community": 262,
+      "community": 4,
       "norm_label": "players"
     },
     {
@@ -6993,7 +6993,7 @@
       "source_file": "frontend/src/features/game/setup/PlayerSelect.test.tsx",
       "source_location": "L34",
       "id": "setup_playerselect_test_fetchmock",
-      "community": 262,
+      "community": 4,
       "norm_label": "fetchmock"
     },
     {
@@ -7002,7 +7002,7 @@
       "source_file": "frontend/src/features/game/setup/PlayerSelect.test.tsx",
       "source_location": "L90",
       "id": "setup_playerselect_test_mount",
-      "community": 262,
+      "community": 4,
       "norm_label": "mount()"
     },
     {
@@ -7011,7 +7011,7 @@
       "source_file": "frontend/src/features/game/setup/PlayerSelect.test.tsx",
       "source_location": "L113",
       "id": "setup_playerselect_test_select",
-      "community": 262,
+      "community": 4,
       "norm_label": "select"
     },
     {
@@ -7947,7 +7947,7 @@
       "source_file": "frontend/src/features/game/play/NoteButtons.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_game_play_notebuttons_test_tsx",
-      "community": 262,
+      "community": 4,
       "norm_label": "notebuttons.test.tsx"
     },
     {
@@ -7956,7 +7956,7 @@
       "source_file": "frontend/src/features/game/play/NoteButtons.test.tsx",
       "source_location": "L13",
       "id": "play_notebuttons_test_answer",
-      "community": 262,
+      "community": 4,
       "norm_label": "answer"
     },
     {
@@ -8055,7 +8055,7 @@
       "source_file": "frontend/src/features/exercises/Exercises.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_exercises_exercises_tsx",
-      "community": 6,
+      "community": 10,
       "norm_label": "exercises.tsx"
     },
     {
@@ -8064,7 +8064,7 @@
       "source_file": "frontend/src/features/exercises/Exercises.tsx",
       "source_location": "L27",
       "id": "exercises_exercises_exerciseform",
-      "community": 6,
+      "community": 10,
       "norm_label": "exerciseform()"
     },
     {
@@ -8073,7 +8073,7 @@
       "source_file": "frontend/src/features/exercises/Exercises.tsx",
       "source_location": "L189",
       "id": "exercises_exercises_preview",
-      "community": 6,
+      "community": 10,
       "norm_label": "preview()"
     },
     {
@@ -8082,7 +8082,7 @@
       "source_file": "frontend/src/features/exercises/Exercises.tsx",
       "source_location": "L235",
       "id": "exercises_exercises_exercises",
-      "community": 121,
+      "community": 10,
       "norm_label": "exercises()"
     },
     {
@@ -8100,7 +8100,7 @@
       "source_file": "frontend/src/features/spoken/Spoken.tsx",
       "source_location": "L20",
       "id": "spoken_spoken_spoken",
-      "community": 4,
+      "community": 5,
       "norm_label": "spoken()"
     },
     {
@@ -8937,7 +8937,7 @@
       "source_file": "frontend/src/features/telegram/Telegram.tsx",
       "source_location": "L22",
       "id": "telegram_telegram_importrow",
-      "community": 38,
+      "community": 10,
       "norm_label": "importrow()"
     },
     {
@@ -8946,7 +8946,7 @@
       "source_file": "frontend/src/features/telegram/Telegram.tsx",
       "source_location": "L158",
       "id": "telegram_telegram_telegram",
-      "community": 38,
+      "community": 6,
       "norm_label": "telegram()"
     },
     {
@@ -8955,7 +8955,7 @@
       "source_file": "frontend/src/features/telegram/Telegram.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_telegram_telegram_test_tsx",
-      "community": 38,
+      "community": 10,
       "norm_label": "telegram.test.tsx"
     },
     {
@@ -8964,7 +8964,7 @@
       "source_file": "frontend/src/features/telegram/Telegram.test.tsx",
       "source_location": "L13",
       "id": "telegram_telegram_test_auth",
-      "community": 38,
+      "community": 10,
       "norm_label": "auth"
     },
     {
@@ -8973,7 +8973,7 @@
       "source_file": "frontend/src/features/users/Users.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_users_users_test_tsx",
-      "community": 262,
+      "community": 4,
       "norm_label": "users.test.tsx"
     },
     {
@@ -8982,7 +8982,7 @@
       "source_file": "frontend/src/features/users/Users.test.tsx",
       "source_location": "L18",
       "id": "users_users_test_manager",
-      "community": 262,
+      "community": 4,
       "norm_label": "manager"
     },
     {
@@ -8991,7 +8991,7 @@
       "source_file": "frontend/src/features/users/Users.test.tsx",
       "source_location": "L31",
       "id": "users_users_test_rows",
-      "community": 262,
+      "community": 4,
       "norm_label": "rows"
     },
     {
@@ -9000,7 +9000,7 @@
       "source_file": "frontend/src/features/users/Users.test.tsx",
       "source_location": "L45",
       "id": "users_users_test_mount",
-      "community": 262,
+      "community": 4,
       "norm_label": "mount()"
     },
     {
@@ -9009,7 +9009,7 @@
       "source_file": "frontend/src/features/users/Users.test.tsx",
       "source_location": "L61",
       "id": "users_users_test_viewport",
-      "community": 262,
+      "community": 4,
       "norm_label": "viewport()"
     },
     {
@@ -9018,7 +9018,7 @@
       "source_file": "frontend/src/features/users/Users.test.tsx",
       "source_location": "L87",
       "id": "users_users_test_editor",
-      "community": 262,
+      "community": 4,
       "norm_label": "editor"
     },
     {
@@ -9063,7 +9063,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.tsx",
       "source_location": "L1",
       "id": "frontend_src_components_readonlygrid_tsx",
-      "community": 262,
+      "community": 15,
       "norm_label": "readonlygrid.tsx"
     },
     {
@@ -9072,7 +9072,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.tsx",
       "source_location": "L13",
       "id": "components_readonlygrid_readonlycolumn",
-      "community": 262,
+      "community": 15,
       "norm_label": "readonlycolumn"
     },
     {
@@ -9081,7 +9081,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.tsx",
       "source_location": "L21",
       "id": "components_readonlygrid_emptyoverlay",
-      "community": 262,
+      "community": 15,
       "norm_label": "emptyoverlay()"
     },
     {
@@ -9090,7 +9090,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.tsx",
       "source_location": "L25",
       "id": "components_readonlygrid_readonlygrid",
-      "community": 262,
+      "community": 15,
       "norm_label": "readonlygrid()"
     },
     {
@@ -9099,7 +9099,7 @@
       "source_file": "frontend/src/components/AccountUi.tsx",
       "source_location": "L1",
       "id": "frontend_src_components_accountui_tsx",
-      "community": 6,
+      "community": 11,
       "norm_label": "accountui.tsx"
     },
     {
@@ -9108,7 +9108,7 @@
       "source_file": "frontend/src/components/AccountUi.tsx",
       "source_location": "L5",
       "id": "components_accountui_errormessage",
-      "community": 6,
+      "community": 11,
       "norm_label": "errormessage()"
     },
     {
@@ -9297,7 +9297,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_components_readonlygrid_test_tsx",
-      "community": 262,
+      "community": 15,
       "norm_label": "readonlygrid.test.tsx"
     },
     {
@@ -9306,7 +9306,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.test.tsx",
       "source_location": "L11",
       "id": "components_readonlygrid_test_listeners",
-      "community": 262,
+      "community": 15,
       "norm_label": "listeners"
     },
     {
@@ -9315,7 +9315,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.test.tsx",
       "source_location": "L13",
       "id": "components_readonlygrid_test_matches",
-      "community": 262,
+      "community": 15,
       "norm_label": "matches()"
     },
     {
@@ -9324,7 +9324,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.test.tsx",
       "source_location": "L22",
       "id": "components_readonlygrid_test_action",
-      "community": 262,
+      "community": 15,
       "norm_label": "action"
     },
     {
@@ -9333,7 +9333,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.test.tsx",
       "source_location": "L23",
       "id": "components_readonlygrid_test_rows",
-      "community": 262,
+      "community": 15,
       "norm_label": "rows"
     },
     {
@@ -9342,7 +9342,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.test.tsx",
       "source_location": "L27",
       "id": "components_readonlygrid_test_columns",
-      "community": 262,
+      "community": 15,
       "norm_label": "columns"
     },
     {
@@ -9351,7 +9351,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.test.tsx",
       "source_location": "L49",
       "id": "components_readonlygrid_test_cards",
-      "community": 262,
+      "community": 15,
       "norm_label": "cards"
     },
     {
@@ -9360,7 +9360,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.test.tsx",
       "source_location": "L51",
       "id": "components_readonlygrid_test_records",
-      "community": 262,
+      "community": 15,
       "norm_label": "records"
     },
     {
@@ -9369,7 +9369,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.test.tsx",
       "source_location": "L65",
       "id": "components_readonlygrid_test_grid",
-      "community": 262,
+      "community": 15,
       "norm_label": "grid"
     },
     {
@@ -9441,7 +9441,7 @@
       "source_file": "frontend/src/components/Ui.tsx",
       "source_location": "L146",
       "id": "components_ui_textarea",
-      "community": 6,
+      "community": 10,
       "norm_label": "textarea()"
     },
     {
@@ -9450,7 +9450,7 @@
       "source_file": "frontend/src/api/exercises.ts",
       "source_location": "L1",
       "id": "frontend_src_api_exercises_ts",
-      "community": 6,
+      "community": 10,
       "norm_label": "exercises.ts"
     },
     {
@@ -9459,7 +9459,7 @@
       "source_file": "frontend/src/api/exercises.ts",
       "source_location": "L5",
       "id": "api_exercises_media",
-      "community": 6,
+      "community": 10,
       "norm_label": "media"
     },
     {
@@ -9468,7 +9468,7 @@
       "source_file": "frontend/src/api/exercises.ts",
       "source_location": "L11",
       "id": "api_exercises_exercise",
-      "community": 6,
+      "community": 11,
       "norm_label": "exercise"
     },
     {
@@ -9477,7 +9477,7 @@
       "source_file": "frontend/src/api/exercises.ts",
       "source_location": "L22",
       "id": "api_exercises_parsemedia",
-      "community": 6,
+      "community": 10,
       "norm_label": "parsemedia()"
     },
     {
@@ -9486,7 +9486,7 @@
       "source_file": "frontend/src/api/exercises.ts",
       "source_location": "L45",
       "id": "api_exercises_parseexercise",
-      "community": 6,
+      "community": 10,
       "norm_label": "parseexercise()"
     },
     {
@@ -9495,7 +9495,7 @@
       "source_file": "frontend/src/api/exercises.ts",
       "source_location": "L74",
       "id": "api_exercises_listexercises",
-      "community": 6,
+      "community": 10,
       "norm_label": "listexercises()"
     },
     {
@@ -9504,7 +9504,7 @@
       "source_file": "frontend/src/api/exercises.ts",
       "source_location": "L89",
       "id": "api_exercises_deleteexercise",
-      "community": 6,
+      "community": 51,
       "norm_label": "deleteexercise()"
     },
     {
@@ -9513,7 +9513,7 @@
       "source_file": "frontend/src/api/exercises.ts",
       "source_location": "L93",
       "id": "api_exercises_reorderexercises",
-      "community": 6,
+      "community": 10,
       "norm_label": "reorderexercises()"
     },
     {
@@ -9576,7 +9576,7 @@
       "source_file": "frontend/src/api/omr.test.ts",
       "source_location": "L1",
       "id": "frontend_src_api_omr_test_ts",
-      "community": 41,
+      "community": 10,
       "norm_label": "omr.test.ts"
     },
     {
@@ -9585,7 +9585,7 @@
       "source_file": "frontend/src/api/omr.test.ts",
       "source_location": "L5",
       "id": "api_omr_test_result",
-      "community": 41,
+      "community": 10,
       "norm_label": "result"
     },
     {
@@ -9729,7 +9729,7 @@
       "source_file": "frontend/src/api/omr.ts",
       "source_location": "L1",
       "id": "frontend_src_api_omr_ts",
-      "community": 41,
+      "community": 10,
       "norm_label": "omr.ts"
     },
     {
@@ -9738,7 +9738,7 @@
       "source_file": "frontend/src/api/omr.ts",
       "source_location": "L3",
       "id": "api_omr_omrstatus",
-      "community": 41,
+      "community": 10,
       "norm_label": "omrstatus"
     },
     {
@@ -9747,7 +9747,7 @@
       "source_file": "frontend/src/api/omr.ts",
       "source_location": "L11",
       "id": "api_omr_omr",
-      "community": 6,
+      "community": 10,
       "norm_label": "omr"
     },
     {
@@ -9756,7 +9756,7 @@
       "source_file": "frontend/src/api/omr.ts",
       "source_location": "L18",
       "id": "api_omr_isstatus",
-      "community": 41,
+      "community": 10,
       "norm_label": "isstatus()"
     },
     {
@@ -9765,7 +9765,7 @@
       "source_file": "frontend/src/api/omr.ts",
       "source_location": "L29",
       "id": "api_omr_parseomr",
-      "community": 41,
+      "community": 10,
       "norm_label": "parseomr()"
     },
     {
@@ -9774,7 +9774,7 @@
       "source_file": "frontend/src/api/omr.ts",
       "source_location": "L50",
       "id": "api_omr_fetchomr",
-      "community": 41,
+      "community": 10,
       "norm_label": "fetchomr()"
     },
     {
@@ -9783,7 +9783,7 @@
       "source_file": "frontend/src/api/omr.ts",
       "source_location": "L55",
       "id": "api_omr_rerunomr",
-      "community": 41,
+      "community": 10,
       "norm_label": "rerunomr()"
     },
     {
@@ -9792,7 +9792,7 @@
       "source_file": "frontend/src/api/omr.ts",
       "source_location": "L60",
       "id": "api_omr_reviewomr",
-      "community": 41,
+      "community": 10,
       "norm_label": "reviewomr()"
     },
     {
@@ -9801,7 +9801,7 @@
       "source_file": "frontend/src/api/omr.ts",
       "source_location": "L75",
       "id": "api_omr_fetchscore",
-      "community": 41,
+      "community": 10,
       "norm_label": "fetchscore()"
     },
     {
@@ -9882,7 +9882,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L1",
       "id": "frontend_src_api_telegram_ts",
-      "community": 38,
+      "community": 10,
       "norm_label": "telegram.ts"
     },
     {
@@ -9891,7 +9891,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L3",
       "id": "api_telegram_linkstatus",
-      "community": 38,
+      "community": 10,
       "norm_label": "linkstatus"
     },
     {
@@ -9900,7 +9900,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L8",
       "id": "api_telegram_code",
-      "community": 38,
+      "community": 10,
       "norm_label": "code"
     },
     {
@@ -9909,7 +9909,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L9",
       "id": "api_telegram_import",
-      "community": 38,
+      "community": 10,
       "norm_label": "import"
     },
     {
@@ -9927,7 +9927,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L24",
       "id": "api_telegram_positive",
-      "community": 38,
+      "community": 10,
       "norm_label": "positive()"
     },
     {
@@ -9936,7 +9936,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L27",
       "id": "api_telegram_date",
-      "community": 38,
+      "community": 10,
       "norm_label": "date()"
     },
     {
@@ -9945,7 +9945,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L30",
       "id": "api_telegram_importstatus",
-      "community": 38,
+      "community": 10,
       "norm_label": "importstatus()"
     },
     {
@@ -9954,7 +9954,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L39",
       "id": "api_telegram_parseimport",
-      "community": 38,
+      "community": 10,
       "norm_label": "parseimport()"
     },
     {
@@ -9963,7 +9963,7 @@
       "source_file": "backend/app/api/telegram.py",
       "source_location": "L59",
       "id": "api_telegram_status",
-      "community": 38,
+      "community": 10,
       "norm_label": "status()"
     },
     {
@@ -9972,7 +9972,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L77",
       "id": "api_telegram_createcode",
-      "community": 38,
+      "community": 10,
       "norm_label": "createcode()"
     },
     {
@@ -9990,7 +9990,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L91",
       "id": "api_telegram_listimports",
-      "community": 38,
+      "community": 10,
       "norm_label": "listimports()"
     },
     {
@@ -9999,7 +9999,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L112",
       "id": "api_telegram_applyimport",
-      "community": 77,
+      "community": 10,
       "norm_label": "applyimport()"
     },
     {
@@ -10017,7 +10017,7 @@
       "source_file": "frontend/src/api/health.ts",
       "source_location": "L1",
       "id": "frontend_src_api_health_ts",
-      "community": 18,
+      "community": 6,
       "norm_label": "health.ts"
     },
     {
@@ -10026,7 +10026,7 @@
       "source_file": "frontend/src/api/health.ts",
       "source_location": "L1",
       "id": "api_health_errorcodes",
-      "community": 18,
+      "community": 6,
       "norm_label": "errorcodes"
     },
     {
@@ -10035,7 +10035,7 @@
       "source_file": "frontend/src/api/health.ts",
       "source_location": "L8",
       "id": "api_health_healtherrorcode",
-      "community": 18,
+      "community": 6,
       "norm_label": "healtherrorcode"
     },
     {
@@ -10053,7 +10053,7 @@
       "source_file": "frontend/src/api/health.ts",
       "source_location": "L11",
       "id": "api_health_healtherror",
-      "community": 18,
+      "community": 6,
       "norm_label": "healtherror"
     },
     {
@@ -10062,7 +10062,7 @@
       "source_file": "frontend/src/api/health.ts",
       "source_location": "L12",
       "id": "api_health_healtherror_constructor",
-      "community": 18,
+      "community": 6,
       "norm_label": ".constructor()"
     },
     {
@@ -10071,7 +10071,7 @@
       "source_file": "frontend/src/api/health.ts",
       "source_location": "L18",
       "id": "api_health_fetchhealth",
-      "community": 18,
+      "community": 6,
       "norm_label": "fetchhealth()"
     },
     {
@@ -10080,7 +10080,7 @@
       "source_file": "frontend/src/api/telegram.test.ts",
       "source_location": "L1",
       "id": "frontend_src_api_telegram_test_ts",
-      "community": 38,
+      "community": 10,
       "norm_label": "telegram.test.ts"
     },
     {
@@ -10089,7 +10089,7 @@
       "source_file": "frontend/src/api/telegram.test.ts",
       "source_location": "L6",
       "id": "api_telegram_test_fetch",
-      "community": 38,
+      "community": 10,
       "norm_label": "fetch"
     },
     {
@@ -10143,7 +10143,7 @@
       "source_file": "frontend/src/api/journal.ts",
       "source_location": "L31",
       "id": "api_journal_number",
-      "community": 18,
+      "community": 5,
       "norm_label": "number()"
     },
     {
@@ -10242,7 +10242,7 @@
       "source_file": "frontend/src/api/auth.ts",
       "source_location": "L24",
       "id": "api_auth_auth",
-      "community": 6,
+      "community": 11,
       "norm_label": "auth"
     },
     {
@@ -10269,7 +10269,7 @@
       "source_file": "frontend/src/api/auth.ts",
       "source_location": "L33",
       "id": "api_auth_apierror",
-      "community": 6,
+      "community": 11,
       "norm_label": "apierror"
     },
     {
@@ -10278,7 +10278,7 @@
       "source_file": "frontend/src/api/auth.ts",
       "source_location": "L34",
       "id": "api_auth_apierror_constructor",
-      "community": 6,
+      "community": 11,
       "norm_label": ".constructor()"
     },
     {
@@ -10287,7 +10287,7 @@
       "source_file": "frontend/src/api/auth.ts",
       "source_location": "L43",
       "id": "api_auth_record",
-      "community": 38,
+      "community": 10,
       "norm_label": "record()"
     },
     {
@@ -10350,7 +10350,7 @@
       "source_file": "frontend/src/api/auth.ts",
       "source_location": "L187",
       "id": "api_auth_changepassword",
-      "community": 23,
+      "community": 38,
       "norm_label": "changepassword()"
     },
     {
@@ -10413,7 +10413,7 @@
       "source_file": "frontend/src/api/health.test.ts",
       "source_location": "L1",
       "id": "frontend_src_api_health_test_ts",
-      "community": 18,
+      "community": 6,
       "norm_label": "health.test.ts"
     },
     {
@@ -10422,7 +10422,7 @@
       "source_file": "frontend/src/api/health.test.ts",
       "source_location": "L5",
       "id": "api_health_test_fetch",
-      "community": 18,
+      "community": 6,
       "norm_label": "fetch"
     },
     {
@@ -10431,7 +10431,7 @@
       "source_file": "frontend/src/api/health.test.ts",
       "source_location": "L61",
       "id": "api_health_test_pending",
-      "community": 18,
+      "community": 6,
       "norm_label": "pending"
     },
     {
@@ -10440,7 +10440,7 @@
       "source_file": "frontend/src/api/health.test.ts",
       "source_location": "L74",
       "id": "api_health_test_controller",
-      "community": 18,
+      "community": 6,
       "norm_label": "controller"
     },
     {
@@ -10449,7 +10449,7 @@
       "source_file": "frontend/src/i18n/browserLanguage.test.ts",
       "source_location": "L1",
       "id": "frontend_src_i18n_browserlanguage_test_ts",
-      "community": 18,
+      "community": 5,
       "norm_label": "browserlanguage.test.ts"
     },
     {
@@ -10458,7 +10458,7 @@
       "source_file": "frontend/src/i18n/index.ts",
       "source_location": "L1",
       "id": "frontend_src_i18n_index_ts",
-      "community": 262,
+      "community": 4,
       "norm_label": "index.ts"
     },
     {
@@ -10467,7 +10467,7 @@
       "source_file": "prototypes/pwa/src/i18n/index.ts",
       "source_location": "L8",
       "id": "i18n_index_i18n",
-      "community": 262,
+      "community": 4,
       "norm_label": "i18n"
     },
     {
@@ -10476,7 +10476,7 @@
       "source_file": "frontend/src/i18n/locales.test.ts",
       "source_location": "L1",
       "id": "frontend_src_i18n_locales_test_ts",
-      "community": 18,
+      "community": 6,
       "norm_label": "locales.test.ts"
     },
     {
@@ -11916,7 +11916,7 @@
       "source_file": "frontend/src/i18n/locales/ru.json",
       "source_location": "L160",
       "id": "locales_ru_exercises_up",
-      "community": 6,
+      "community": 10,
       "norm_label": "exercises.up"
     },
     {
@@ -21958,7 +21958,7 @@
       "label": ".application_services()",
       "file_type": "code",
       "source_file": "deploy/rollout.py",
-      "source_location": "L375",
+      "source_location": "L386",
       "id": "deploy_rollout_rollout_application_services",
       "community": 53,
       "norm_label": ".application_services()"
@@ -21967,7 +21967,7 @@
       "label": ".deploy()",
       "file_type": "code",
       "source_file": "deploy/rollout.py",
-      "source_location": "L387",
+      "source_location": "L398",
       "id": "deploy_rollout_rollout_deploy",
       "community": 53,
       "norm_label": ".deploy()"
@@ -21976,7 +21976,7 @@
       "label": "main()",
       "file_type": "code",
       "source_file": "deploy/rollout.py",
-      "source_location": "L422",
+      "source_location": "L433",
       "id": "deploy_rollout_main",
       "community": 53,
       "norm_label": "main()"
@@ -22345,7 +22345,7 @@
       "label": "test_failed_release_restores_previous_without_downgrade()",
       "file_type": "code",
       "source_file": "deploy/tests/test_rollout.py",
-      "source_location": "L129",
+      "source_location": "L131",
       "id": "tests_test_rollout_test_failed_release_restores_previous_without_downgrade",
       "community": 26,
       "norm_label": "test_failed_release_restores_previous_without_downgrade()"
@@ -22354,7 +22354,7 @@
       "label": "test_incompatible_previous_schema_stays_stopped()",
       "file_type": "code",
       "source_file": "deploy/tests/test_rollout.py",
-      "source_location": "L143",
+      "source_location": "L145",
       "id": "tests_test_rollout_test_incompatible_previous_schema_stays_stopped",
       "community": 26,
       "norm_label": "test_incompatible_previous_schema_stays_stopped()"
@@ -22363,7 +22363,7 @@
       "label": "test_first_install_failure_preserves_database()",
       "file_type": "code",
       "source_file": "deploy/tests/test_rollout.py",
-      "source_location": "L156",
+      "source_location": "L158",
       "id": "tests_test_rollout_test_first_install_failure_preserves_database",
       "community": 26,
       "norm_label": "test_first_install_failure_preserves_database()"
@@ -22372,7 +22372,7 @@
       "label": "test_worker_rollout_preserves_order_and_rollback_without_host_memory_probe()",
       "file_type": "code",
       "source_file": "deploy/tests/test_rollout.py",
-      "source_location": "L164",
+      "source_location": "L166",
       "id": "tests_test_rollout_test_worker_rollout_preserves_order_and_rollback_without_host_memory_probe",
       "community": 26,
       "norm_label": "test_worker_rollout_preserves_order_and_rollback_without_host_memory_probe()"
@@ -22381,7 +22381,7 @@
       "label": "test_disk_guard_checks_exact_boundary_before_pull()",
       "file_type": "code",
       "source_file": "deploy/tests/test_rollout.py",
-      "source_location": "L205",
+      "source_location": "L209",
       "id": "tests_test_rollout_test_disk_guard_checks_exact_boundary_before_pull",
       "community": 26,
       "norm_label": "test_disk_guard_checks_exact_boundary_before_pull()"
@@ -22390,16 +22390,34 @@
       "label": "test_disk_reserve_is_rechecked_after_pull_before_service_changes()",
       "file_type": "code",
       "source_file": "deploy/tests/test_rollout.py",
-      "source_location": "L225",
+      "source_location": "L229",
       "id": "tests_test_rollout_test_disk_reserve_is_rechecked_after_pull_before_service_changes",
       "community": 26,
       "norm_label": "test_disk_reserve_is_rechecked_after_pull_before_service_changes()"
     },
     {
+      "label": "test_backend_settings_are_validated_before_stopping_services()",
+      "file_type": "code",
+      "source_file": "deploy/tests/test_rollout.py",
+      "source_location": "L244",
+      "id": "tests_test_rollout_test_backend_settings_are_validated_before_stopping_services",
+      "community": 26,
+      "norm_label": "test_backend_settings_are_validated_before_stopping_services()"
+    },
+    {
+      "label": "test_invalid_backend_settings_leave_running_release_untouched()",
+      "file_type": "code",
+      "source_file": "deploy/tests/test_rollout.py",
+      "source_location": "L263",
+      "id": "tests_test_rollout_test_invalid_backend_settings_leave_running_release_untouched",
+      "community": 26,
+      "norm_label": "test_invalid_backend_settings_leave_running_release_untouched()"
+    },
+    {
       "label": "test_invalid_disk_configuration_fails_closed()",
       "file_type": "code",
       "source_file": "deploy/tests/test_rollout.py",
-      "source_location": "L241",
+      "source_location": "L281",
       "id": "tests_test_rollout_test_invalid_disk_configuration_fails_closed",
       "community": 26,
       "norm_label": "test_invalid_disk_configuration_fails_closed()"
@@ -22408,7 +22426,7 @@
       "label": "test_disk_measurement_rejects_remote_daemons()",
       "file_type": "code",
       "source_file": "deploy/tests/test_rollout.py",
-      "source_location": "L260",
+      "source_location": "L300",
       "id": "tests_test_rollout_test_disk_measurement_rejects_remote_daemons",
       "community": 26,
       "norm_label": "test_disk_measurement_rejects_remote_daemons()"
@@ -22417,7 +22435,7 @@
       "label": "test_disk_measurement_rejects_remote_docker_host_override()",
       "file_type": "code",
       "source_file": "deploy/tests/test_rollout.py",
-      "source_location": "L281",
+      "source_location": "L321",
       "id": "tests_test_rollout_test_disk_measurement_rejects_remote_docker_host_override",
       "community": 26,
       "norm_label": "test_disk_measurement_rejects_remote_docker_host_override()"
@@ -22426,7 +22444,7 @@
       "label": "test_disk_measurement_rejects_malformed_endpoint_without_values()",
       "file_type": "code",
       "source_file": "deploy/tests/test_rollout.py",
-      "source_location": "L295",
+      "source_location": "L335",
       "id": "tests_test_rollout_test_disk_measurement_rejects_malformed_endpoint_without_values",
       "community": 26,
       "norm_label": "test_disk_measurement_rejects_malformed_endpoint_without_values()"
@@ -22435,7 +22453,7 @@
       "label": "test_state_promotion_is_atomic_and_retains_previous()",
       "file_type": "code",
       "source_file": "deploy/tests/test_rollout.py",
-      "source_location": "L306",
+      "source_location": "L346",
       "id": "tests_test_rollout_test_state_promotion_is_atomic_and_retains_previous",
       "community": 26,
       "norm_label": "test_state_promotion_is_atomic_and_retains_previous()"
@@ -22444,7 +22462,7 @@
       "label": "test_non_json_health_is_a_recoverable_deployment_failure()",
       "file_type": "code",
       "source_file": "deploy/tests/test_rollout.py",
-      "source_location": "L318",
+      "source_location": "L358",
       "id": "tests_test_rollout_test_non_json_health_is_a_recoverable_deployment_failure",
       "community": 26,
       "norm_label": "test_non_json_health_is_a_recoverable_deployment_failure()"
@@ -22950,7 +22968,7 @@
       "source_file": "backend/app/database.py",
       "source_location": "L1",
       "id": "backend_app_database_py",
-      "community": 319,
+      "community": 185,
       "norm_label": "database.py"
     },
     {
@@ -22977,7 +22995,7 @@
       "source_file": "backend/app/database.py",
       "source_location": "L24",
       "id": "app_database_session",
-      "community": 319,
+      "community": 185,
       "norm_label": "session()"
     },
     {
@@ -23031,7 +23049,7 @@
       "source_file": "",
       "source_location": "",
       "id": "basesettings",
-      "community": 182,
+      "community": 30,
       "norm_label": "basesettings"
     },
     {
@@ -23310,7 +23328,7 @@
       "source_file": "backend/app/game/models.py",
       "source_location": "L1",
       "id": "backend_app_game_models_py",
-      "community": 127,
+      "community": 122,
       "norm_label": "models.py"
     },
     {
@@ -23319,7 +23337,7 @@
       "source_file": "backend/app/game/models.py",
       "source_location": "L25",
       "id": "game_models_player",
-      "community": 127,
+      "community": 122,
       "norm_label": "player"
     },
     {
@@ -23328,7 +23346,7 @@
       "source_file": "",
       "source_location": "",
       "id": "base",
-      "community": 127,
+      "community": 122,
       "norm_label": "base"
     },
     {
@@ -23337,7 +23355,7 @@
       "source_file": "backend/app/game/models.py",
       "source_location": "L57",
       "id": "game_models_season",
-      "community": 127,
+      "community": 122,
       "norm_label": "season"
     },
     {
@@ -23346,7 +23364,7 @@
       "source_file": "backend/app/game/models.py",
       "source_location": "L82",
       "id": "game_models_round",
-      "community": 127,
+      "community": 122,
       "norm_label": "round"
     },
     {
@@ -23355,7 +23373,7 @@
       "source_file": "backend/app/game/models.py",
       "source_location": "L137",
       "id": "game_models_taskattempt",
-      "community": 127,
+      "community": 122,
       "norm_label": "taskattempt"
     },
     {
@@ -23364,7 +23382,7 @@
       "source_file": "backend/app/game/models.py",
       "source_location": "L169",
       "id": "game_models_trophyawarded",
-      "community": 127,
+      "community": 122,
       "norm_label": "trophyawarded"
     },
     {
@@ -23400,7 +23418,7 @@
       "source_file": "backend/app/game/api/rounds.py",
       "source_location": "L1",
       "id": "backend_app_game_api_rounds_py",
-      "community": 127,
+      "community": 122,
       "norm_label": "rounds.py"
     },
     {
@@ -23409,7 +23427,7 @@
       "source_file": "backend/app/game/api/rounds.py",
       "source_location": "L14",
       "id": "api_rounds_createroundbody",
-      "community": 127,
+      "community": 122,
       "norm_label": "createroundbody"
     },
     {
@@ -23427,7 +23445,7 @@
       "source_file": "backend/app/game/api/rounds.py",
       "source_location": "L22",
       "id": "api_rounds_submittaskbody",
-      "community": 127,
+      "community": 122,
       "norm_label": "submittaskbody"
     },
     {
@@ -23445,7 +23463,7 @@
       "source_file": "backend/app/game/api/rounds.py",
       "source_location": "L87",
       "id": "api_rounds_submit_task",
-      "community": 127,
+      "community": 122,
       "norm_label": "submit_task()"
     },
     {
@@ -23463,7 +23481,7 @@
       "source_file": "backend/app/game/api/seasons.py",
       "source_location": "L12",
       "id": "api_seasons_resetbody",
-      "community": 127,
+      "community": 122,
       "norm_label": "resetbody"
     },
     {
@@ -23859,7 +23877,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L80",
       "id": "services_rounds_create_round",
-      "community": 127,
+      "community": 122,
       "norm_label": "create_round()"
     },
     {
@@ -24165,7 +24183,7 @@
       "source_file": "backend/app/api/auth.py",
       "source_location": "L26",
       "id": "api_auth_input",
-      "community": 23,
+      "community": 82,
       "norm_label": "input"
     },
     {
@@ -24426,7 +24444,7 @@
       "source_file": "backend/app/api/auth.py",
       "source_location": "L333",
       "id": "api_auth_reset_password",
-      "community": 23,
+      "community": 83,
       "norm_label": "reset_password()"
     },
     {
@@ -24534,7 +24552,7 @@
       "source_file": "backend/app/api/telegram.py",
       "source_location": "L41",
       "id": "api_telegram_applyinput",
-      "community": 83,
+      "community": 82,
       "norm_label": "applyinput"
     },
     {
@@ -24624,7 +24642,7 @@
       "source_file": "backend/app/api/omr.py",
       "source_location": "L1",
       "id": "backend_app_api_omr_py",
-      "community": 82,
+      "community": 37,
       "norm_label": "omr.py"
     },
     {
@@ -24651,7 +24669,7 @@
       "source_file": "backend/app/api/omr.py",
       "source_location": "L27",
       "id": "api_omr_output",
-      "community": 82,
+      "community": 37,
       "norm_label": "output()"
     },
     {
@@ -24660,7 +24678,7 @@
       "source_file": "backend/app/api/omr.py",
       "source_location": "L38",
       "id": "api_omr_status",
-      "community": 82,
+      "community": 37,
       "norm_label": "status()"
     },
     {
@@ -24669,7 +24687,7 @@
       "source_file": "backend/app/api/omr.py",
       "source_location": "L44",
       "id": "api_omr_rerun",
-      "community": 82,
+      "community": 37,
       "norm_label": "rerun()"
     },
     {
@@ -24678,7 +24696,7 @@
       "source_file": "backend/app/api/omr.py",
       "source_location": "L50",
       "id": "api_omr_review",
-      "community": 82,
+      "community": 37,
       "norm_label": "review()"
     },
     {
@@ -24687,7 +24705,7 @@
       "source_file": "backend/app/api/omr.py",
       "source_location": "L60",
       "id": "api_omr_score",
-      "community": 82,
+      "community": 37,
       "norm_label": "score()"
     },
     {
@@ -24696,7 +24714,7 @@
       "source_file": "backend/app/api/listening.py",
       "source_location": "L1",
       "id": "backend_app_api_listening_py",
-      "community": 198,
+      "community": 82,
       "norm_label": "listening.py"
     },
     {
@@ -24723,7 +24741,7 @@
       "source_file": "backend/app/api/listening.py",
       "source_location": "L42",
       "id": "api_listening_selectionoutput",
-      "community": 198,
+      "community": 82,
       "norm_label": "selectionoutput"
     },
     {
@@ -24741,7 +24759,7 @@
       "source_file": "backend/app/api/listening.py",
       "source_location": "L56",
       "id": "api_listening_eventoutput",
-      "community": 198,
+      "community": 82,
       "norm_label": "eventoutput"
     },
     {
@@ -24750,7 +24768,7 @@
       "source_file": "backend/app/api/listening.py",
       "source_location": "L62",
       "id": "api_listening_journaloutput",
-      "community": 198,
+      "community": 82,
       "norm_label": "journaloutput"
     },
     {
@@ -24759,7 +24777,7 @@
       "source_file": "backend/app/api/listening.py",
       "source_location": "L80",
       "id": "api_listening_journallistoutput",
-      "community": 198,
+      "community": 82,
       "norm_label": "journallistoutput"
     },
     {
@@ -24768,7 +24786,7 @@
       "source_file": "backend/app/api/listening.py",
       "source_location": "L85",
       "id": "api_listening_optionoutput",
-      "community": 198,
+      "community": 82,
       "norm_label": "optionoutput"
     },
     {
@@ -24777,7 +24795,7 @@
       "source_file": "backend/app/api/listening.py",
       "source_location": "L91",
       "id": "api_listening_optionsoutput",
-      "community": 198,
+      "community": 82,
       "norm_label": "optionsoutput"
     },
     {
@@ -24786,7 +24804,7 @@
       "source_file": "backend/app/api/listening.py",
       "source_location": "L97",
       "id": "api_listening_current",
-      "community": 198,
+      "community": 82,
       "norm_label": "current()"
     },
     {
@@ -24795,7 +24813,7 @@
       "source_file": "backend/app/api/listening.py",
       "source_location": "L103",
       "id": "api_listening_select",
-      "community": 198,
+      "community": 82,
       "norm_label": "select()"
     },
     {
@@ -24804,7 +24822,7 @@
       "source_file": "backend/app/api/listening.py",
       "source_location": "L116",
       "id": "api_listening_event",
-      "community": 198,
+      "community": 82,
       "norm_label": "event()"
     },
     {
@@ -24813,7 +24831,7 @@
       "source_file": "backend/app/api/listening.py",
       "source_location": "L144",
       "id": "api_listening_journal",
-      "community": 198,
+      "community": 82,
       "norm_label": "journal()"
     },
     {
@@ -24822,7 +24840,7 @@
       "source_file": "backend/app/api/listening.py",
       "source_location": "L179",
       "id": "api_listening_options",
-      "community": 198,
+      "community": 82,
       "norm_label": "options()"
     },
     {
@@ -24831,7 +24849,7 @@
       "source_file": "backend/app/api/request_log.py",
       "source_location": "L1",
       "id": "backend_app_api_request_log_py",
-      "community": 128,
+      "community": 122,
       "norm_label": "request_log.py"
     },
     {
@@ -24840,7 +24858,7 @@
       "source_file": "backend/app/api/request_log.py",
       "source_location": "L9",
       "id": "api_request_log_requestlog",
-      "community": 128,
+      "community": 122,
       "norm_label": "requestlog"
     },
     {
@@ -24849,7 +24867,7 @@
       "source_file": "backend/app/api/request_log.py",
       "source_location": "L10",
       "id": "api_request_log_requestlog_init",
-      "community": 128,
+      "community": 122,
       "norm_label": ".__init__()"
     },
     {
@@ -24858,7 +24876,7 @@
       "source_file": "backend/app/api/request_log.py",
       "source_location": "L13",
       "id": "api_request_log_requestlog_call",
-      "community": 128,
+      "community": 122,
       "norm_label": ".__call__()"
     },
     {
@@ -24912,7 +24930,7 @@
       "source_file": "backend/app/api/exercises.py",
       "source_location": "L54",
       "id": "api_exercises_exerciseoutput",
-      "community": 198,
+      "community": 82,
       "norm_label": "exerciseoutput"
     },
     {
@@ -24957,7 +24975,7 @@
       "source_file": "backend/app/api/exercises.py",
       "source_location": "L114",
       "id": "api_exercises_order",
-      "community": 82,
+      "community": 83,
       "norm_label": "order()"
     },
     {
@@ -25245,7 +25263,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L1",
       "id": "backend_app_services_telegram_api_py",
-      "community": 29,
+      "community": 135,
       "norm_label": "telegram_api.py"
     },
     {
@@ -25254,7 +25272,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L13",
       "id": "services_telegram_api_apiresponse",
-      "community": 29,
+      "community": 135,
       "norm_label": "apiresponse"
     },
     {
@@ -25263,7 +25281,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L20",
       "id": "services_telegram_api_apifile",
-      "community": 29,
+      "community": 135,
       "norm_label": "apifile"
     },
     {
@@ -25272,7 +25290,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L25",
       "id": "services_telegram_api_botidentity",
-      "community": 29,
+      "community": 135,
       "norm_label": "botidentity"
     },
     {
@@ -25299,7 +25317,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L37",
       "id": "services_telegram_api_telegramapi_call",
-      "community": 135,
+      "community": 16,
       "norm_label": ".call()"
     },
     {
@@ -25308,7 +25326,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L60",
       "id": "services_telegram_api_telegramapi_verify",
-      "community": 135,
+      "community": 16,
       "norm_label": ".verify()"
     },
     {
@@ -25317,7 +25335,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L72",
       "id": "services_telegram_api_telegramapi_updates",
-      "community": 135,
+      "community": 16,
       "norm_label": ".updates()"
     },
     {
@@ -25335,7 +25353,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L89",
       "id": "services_telegram_api_telegramapi_download",
-      "community": 135,
+      "community": 16,
       "norm_label": ".download()"
     },
     {
@@ -25488,7 +25506,7 @@
       "source_file": "backend/app/services/telegram.py",
       "source_location": "L212",
       "id": "services_telegram_process_one",
-      "community": 105,
+      "community": 77,
       "norm_label": "process_one()"
     },
     {
@@ -25560,7 +25578,7 @@
       "source_file": "backend/app/services/omr.py",
       "source_location": "L1",
       "id": "backend_app_services_omr_py",
-      "community": 16,
+      "community": 18,
       "norm_label": "omr.py"
     },
     {
@@ -25569,7 +25587,7 @@
       "source_file": "backend/app/services/omr.py",
       "source_location": "L20",
       "id": "services_omr_claim",
-      "community": 16,
+      "community": 18,
       "norm_label": "claim"
     },
     {
@@ -25578,7 +25596,7 @@
       "source_file": "backend/app/services/omr.py",
       "source_location": "L28",
       "id": "services_omr_active_exercise",
-      "community": 16,
+      "community": 18,
       "norm_label": "active_exercise()"
     },
     {
@@ -25587,7 +25605,7 @@
       "source_file": "backend/app/services/omr.py",
       "source_location": "L40",
       "id": "services_omr_current",
-      "community": 16,
+      "community": 18,
       "norm_label": "current()"
     },
     {
@@ -25605,7 +25623,7 @@
       "source_file": "backend/app/services/omr.py",
       "source_location": "L73",
       "id": "services_omr_rerun",
-      "community": 16,
+      "community": 18,
       "norm_label": "rerun()"
     },
     {
@@ -25614,7 +25632,7 @@
       "source_file": "backend/app/services/omr.py",
       "source_location": "L139",
       "id": "services_omr_validate_musicxml",
-      "community": 16,
+      "community": 18,
       "norm_label": "validate_musicxml()"
     },
     {
@@ -25623,7 +25641,7 @@
       "source_file": "backend/app/services/omr.py",
       "source_location": "L171",
       "id": "services_omr_owned_claim",
-      "community": 16,
+      "community": 18,
       "norm_label": "owned_claim()"
     },
     {
@@ -25632,7 +25650,7 @@
       "source_file": "backend/app/services/omr.py",
       "source_location": "L199",
       "id": "services_omr_complete",
-      "community": 16,
+      "community": 18,
       "norm_label": "complete()"
     },
     {
@@ -25641,7 +25659,7 @@
       "source_file": "backend/app/services/omr.py",
       "source_location": "L217",
       "id": "services_omr_fail",
-      "community": 16,
+      "community": 18,
       "norm_label": "fail()"
     },
     {
@@ -25650,7 +25668,7 @@
       "source_file": "backend/app/services/omr.py",
       "source_location": "L237",
       "id": "services_omr_review",
-      "community": 16,
+      "community": 18,
       "norm_label": "review()"
     },
     {
@@ -25659,7 +25677,7 @@
       "source_file": "backend/app/services/omr.py",
       "source_location": "L256",
       "id": "services_omr_score_file",
-      "community": 16,
+      "community": 18,
       "norm_label": "score_file()"
     },
     {
@@ -26028,7 +26046,7 @@
       "source_file": "backend/tests/test_omr_engine.py",
       "source_location": "L56",
       "id": "tests_test_omr_engine_test_authored_score_fixtures_are_supported",
-      "community": 52,
+      "community": 18,
       "norm_label": "test_authored_score_fixtures_are_supported()"
     },
     {
@@ -26865,7 +26883,7 @@
       "source_file": "backend/tests/test_exercises.py",
       "source_location": "L294",
       "id": "tests_test_exercises_test_duration_and_pixel_limits",
-      "community": 51,
+      "community": 35,
       "norm_label": "test_duration_and_pixel_limits()"
     },
     {
@@ -26910,7 +26928,7 @@
       "source_file": "backend/tests/test_spoken_generation.py",
       "source_location": "L42",
       "id": "tests_test_spoken_generation_test_timings_cover_existing_aac_frames_without_rewriting_clips",
-      "community": 91,
+      "community": 39,
       "norm_label": "test_timings_cover_existing_aac_frames_without_rewriting_clips()"
     },
     {
@@ -26982,7 +27000,7 @@
       "source_file": "backend/tests/test_health.py",
       "source_location": "L1",
       "id": "backend_tests_test_health_py",
-      "community": 104,
+      "community": 127,
       "norm_label": "test_health.py"
     },
     {
@@ -26991,7 +27009,7 @@
       "source_file": "backend/tests/test_health.py",
       "source_location": "L19",
       "id": "tests_test_health_anyio_backend",
-      "community": 104,
+      "community": 127,
       "norm_label": "anyio_backend()"
     },
     {
@@ -27000,7 +27018,7 @@
       "source_file": "backend/tests/test_health.py",
       "source_location": "L24",
       "id": "tests_test_health_client",
-      "community": 104,
+      "community": 127,
       "norm_label": "client()"
     },
     {
@@ -27009,7 +27027,7 @@
       "source_file": "backend/tests/test_health.py",
       "source_location": "L39",
       "id": "tests_test_health_test_health_is_public_and_not_cached",
-      "community": 104,
+      "community": 127,
       "norm_label": "test_health_is_public_and_not_cached()"
     },
     {
@@ -27018,7 +27036,7 @@
       "source_file": "backend/tests/test_health.py",
       "source_location": "L48",
       "id": "tests_test_health_test_head_has_no_body",
-      "community": 104,
+      "community": 127,
       "norm_label": "test_head_has_no_body()"
     },
     {
@@ -27027,7 +27045,7 @@
       "source_file": "backend/tests/test_health.py",
       "source_location": "L56",
       "id": "tests_test_health_test_unknown_routes_return_codes",
-      "community": 104,
+      "community": 127,
       "norm_label": "test_unknown_routes_return_codes()"
     },
     {
@@ -27036,7 +27054,7 @@
       "source_file": "backend/tests/test_health.py",
       "source_location": "L64",
       "id": "tests_test_health_test_health_post_is_not_a_success",
-      "community": 104,
+      "community": 127,
       "norm_label": "test_health_post_is_not_a_success()"
     },
     {
@@ -27045,7 +27063,7 @@
       "source_file": "backend/tests/test_health.py",
       "source_location": "L71",
       "id": "tests_test_health_test_settings_read_dotenv",
-      "community": 104,
+      "community": 127,
       "norm_label": "test_settings_read_dotenv()"
     },
     {
@@ -27054,7 +27072,7 @@
       "source_file": "backend/tests/test_health.py",
       "source_location": "L82",
       "id": "tests_test_health_test_default_dotenv_path_is_the_repository_root",
-      "community": 104,
+      "community": 127,
       "norm_label": "test_default_dotenv_path_is_the_repository_root()"
     },
     {
@@ -27063,7 +27081,7 @@
       "source_file": "backend/tests/test_health.py",
       "source_location": "L89",
       "id": "tests_test_health_test_settings_reject_invalid_port",
-      "community": 104,
+      "community": 127,
       "norm_label": "test_settings_reject_invalid_port()"
     },
     {
@@ -27072,7 +27090,7 @@
       "source_file": "backend/tests/test_health.py",
       "source_location": "L106",
       "id": "tests_test_health_test_settings_reject_insecure_public_authentication",
-      "community": 104,
+      "community": 127,
       "norm_label": "test_settings_reject_insecure_public_authentication()"
     },
     {
@@ -27081,7 +27099,7 @@
       "source_file": "backend/tests/test_health.py",
       "source_location": "L125",
       "id": "tests_test_health_test_request_logs_exclude_query_and_unmatched_paths",
-      "community": 104,
+      "community": 127,
       "norm_label": "test_request_logs_exclude_query_and_unmatched_paths()"
     },
     {
@@ -31041,7 +31059,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L35",
       "id": "telegram_bot_settings",
-      "community": 182,
+      "community": 30,
       "norm_label": "settings"
     },
     {
@@ -31284,7 +31302,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L421",
       "id": "telegram_bot_durable_replace",
-      "community": 29,
+      "community": 30,
       "norm_label": "durable_replace()"
     },
     {
@@ -31293,7 +31311,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L430",
       "id": "telegram_bot_atomic_number",
-      "community": 29,
+      "community": 30,
       "norm_label": "atomic_number()"
     },
     {
@@ -31302,7 +31320,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L442",
       "id": "telegram_bot_bot",
-      "community": 37,
+      "community": 30,
       "norm_label": "bot"
     },
     {
@@ -31356,7 +31374,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L574",
       "id": "telegram_bot_main",
-      "community": 182,
+      "community": 30,
       "norm_label": "main()"
     },
     {
@@ -31410,7 +31428,7 @@
       "source_file": "prototypes/telegram/tests/test_bot.py",
       "source_location": "L1",
       "id": "prototypes_telegram_tests_test_bot_py",
-      "community": 37,
+      "community": 30,
       "norm_label": "test_bot.py"
     },
     {
@@ -31419,7 +31437,7 @@
       "source_file": "prototypes/telegram/tests/test_bot.py",
       "source_location": "L13",
       "id": "tests_test_bot_config",
-      "community": 37,
+      "community": 30,
       "norm_label": "config()"
     },
     {
@@ -31428,7 +31446,7 @@
       "source_file": "prototypes/telegram/tests/test_bot.py",
       "source_location": "L24",
       "id": "tests_test_bot_update",
-      "community": 37,
+      "community": 30,
       "norm_label": "update()"
     },
     {
@@ -31437,7 +31455,7 @@
       "source_file": "prototypes/telegram/tests/test_bot.py",
       "source_location": "L38",
       "id": "tests_test_bot_test_requires_token_and_nonempty_numeric_allowlist",
-      "community": 37,
+      "community": 30,
       "norm_label": "test_requires_token_and_nonempty_numeric_allowlist()"
     },
     {
@@ -31446,7 +31464,7 @@
       "source_file": "prototypes/telegram/tests/test_bot.py",
       "source_location": "L50",
       "id": "tests_test_bot_test_config_errors_do_not_reveal_token",
-      "community": 37,
+      "community": 30,
       "norm_label": "test_config_errors_do_not_reveal_token()"
     },
     {
@@ -31455,7 +31473,7 @@
       "source_file": "prototypes/telegram/tests/test_bot.py",
       "source_location": "L57",
       "id": "tests_test_bot_test_downloads_authorized_attachments_and_replies_after_save",
-      "community": 37,
+      "community": 30,
       "norm_label": "test_downloads_authorized_attachments_and_replies_after_save()"
     },
     {
@@ -31464,7 +31482,7 @@
       "source_file": "prototypes/telegram/tests/test_bot.py",
       "source_location": "L100",
       "id": "tests_test_bot_test_denies_unauthorized_sources_without_api_calls",
-      "community": 37,
+      "community": 30,
       "norm_label": "test_denies_unauthorized_sources_without_api_calls()"
     },
     {
@@ -31473,7 +31491,7 @@
       "source_file": "prototypes/telegram/tests/test_bot.py",
       "source_location": "L114",
       "id": "tests_test_bot_test_rejects_known_oversized_file_without_downloading",
-      "community": 37,
+      "community": 30,
       "norm_label": "test_rejects_known_oversized_file_without_downloading()"
     },
     {
@@ -31482,7 +31500,7 @@
       "source_file": "prototypes/telegram/tests/test_bot.py",
       "source_location": "L128",
       "id": "tests_test_bot_test_limits_actual_download_and_removes_partial_file",
-      "community": 37,
+      "community": 30,
       "norm_label": "test_limits_actual_download_and_removes_partial_file()"
     },
     {
@@ -31491,7 +31509,7 @@
       "source_file": "prototypes/telegram/tests/test_bot.py",
       "source_location": "L146",
       "id": "tests_test_bot_test_rejects_unsafe_telegram_file_paths",
-      "community": 37,
+      "community": 30,
       "norm_label": "test_rejects_unsafe_telegram_file_paths()"
     },
     {
@@ -31500,7 +31518,7 @@
       "source_file": "prototypes/telegram/tests/test_bot.py",
       "source_location": "L159",
       "id": "tests_test_bot_test_does_not_advance_offset_when_reply_fails_and_does_not_resave",
-      "community": 37,
+      "community": 30,
       "norm_label": "test_does_not_advance_offset_when_reply_fails_and_does_not_resave()"
     },
     {
@@ -31509,7 +31527,7 @@
       "source_file": "prototypes/telegram/tests/test_bot.py",
       "source_location": "L190",
       "id": "tests_test_bot_test_persists_offset_only_after_processing",
-      "community": 37,
+      "community": 30,
       "norm_label": "test_persists_offset_only_after_processing()"
     },
     {
@@ -31518,7 +31536,7 @@
       "source_file": "prototypes/telegram/tests/test_bot.py",
       "source_location": "L209",
       "id": "tests_test_bot_test_startup_checks_identity_and_refuses_existing_webhook",
-      "community": 37,
+      "community": 30,
       "norm_label": "test_startup_checks_identity_and_refuses_existing_webhook()"
     },
     {
@@ -31527,7 +31545,7 @@
       "source_file": "prototypes/telegram/tests/test_bot.py",
       "source_location": "L227",
       "id": "tests_test_bot_test_rate_limit_preserves_retry_after_without_exposing_api_body",
-      "community": 37,
+      "community": 30,
       "norm_label": "test_rate_limit_preserves_retry_after_without_exposing_api_body()"
     },
     {
@@ -31536,7 +31554,7 @@
       "source_file": "prototypes/telegram/tests/test_bot.py",
       "source_location": "L250",
       "id": "tests_test_bot_test_storage_capacity_rejects_without_downloading",
-      "community": 37,
+      "community": 30,
       "norm_label": "test_storage_capacity_rejects_without_downloading()"
     },
     {
@@ -31545,7 +31563,7 @@
       "source_file": "prototypes/telegram/tests/test_bot.py",
       "source_location": "L263",
       "id": "tests_test_bot_test_invalid_media_does_not_leave_files_or_claim_success",
-      "community": 37,
+      "community": 30,
       "norm_label": "test_invalid_media_does_not_leave_files_or_claim_success()"
     },
     {
@@ -31554,7 +31572,7 @@
       "source_file": "prototypes/telegram/tests/test_bot.py",
       "source_location": "L293",
       "id": "tests_test_bot_test_text_and_links_are_not_downloaded",
-      "community": 37,
+      "community": 30,
       "norm_label": "test_text_and_links_are_not_downloaded()"
     },
     {
@@ -31563,7 +31581,7 @@
       "source_file": "prototypes/telegram/tests/test_bot.py",
       "source_location": "L321",
       "id": "tests_test_bot_test_bot_texts_have_identical_nonempty_translation_keys",
-      "community": 37,
+      "community": 30,
       "norm_label": "test_bot_texts_have_identical_nonempty_translation_keys()"
     },
     {
@@ -31572,7 +31590,7 @@
       "source_file": "prototypes/telegram/tests/test_bot.py",
       "source_location": "L327",
       "id": "tests_test_bot_test_does_not_follow_file_redirects",
-      "community": 37,
+      "community": 30,
       "norm_label": "test_does_not_follow_file_redirects()"
     },
     {
@@ -31581,7 +31599,7 @@
       "source_file": "prototypes/telegram/tests/test_bot.py",
       "source_location": "L344",
       "id": "tests_test_bot_test_refuses_corrupt_offset_instead_of_replaying_messages",
-      "community": 37,
+      "community": 30,
       "norm_label": "test_refuses_corrupt_offset_instead_of_replaying_messages()"
     },
     {
@@ -31590,7 +31608,7 @@
       "source_file": "prototypes/telegram/tests/test_bot.py",
       "source_location": "L352",
       "id": "tests_test_bot_test_rejects_incomplete_download",
-      "community": 37,
+      "community": 30,
       "norm_label": "test_rejects_incomplete_download()"
     },
     {
@@ -33579,7 +33597,7 @@
       "source_file": "prototypes/pwa/src/App.tsx",
       "source_location": "L1",
       "id": "prototypes_pwa_src_app_tsx",
-      "community": 71,
+      "community": 70,
       "norm_label": "app.tsx"
     },
     {
@@ -33588,7 +33606,7 @@
       "source_file": "prototypes/pwa/src/App.tsx",
       "source_location": "L16",
       "id": "src_app_receipt",
-      "community": 71,
+      "community": 70,
       "norm_label": "receipt()"
     },
     {
@@ -33597,7 +33615,7 @@
       "source_file": "prototypes/pwa/src/main.tsx",
       "source_location": "L1",
       "id": "prototypes_pwa_src_main_tsx",
-      "community": 262,
+      "community": 70,
       "norm_label": "main.tsx"
     },
     {
@@ -33651,7 +33669,7 @@
       "source_file": "prototypes/pwa/src/sw.ts",
       "source_location": "L1",
       "id": "prototypes_pwa_src_sw_ts",
-      "community": 10,
+      "community": 71,
       "norm_label": "sw.ts"
     },
     {
@@ -33813,7 +33831,7 @@
       "source_file": "prototypes/pwa/src/share.ts",
       "source_location": "L29",
       "id": "src_share_issharerequest",
-      "community": 10,
+      "community": 71,
       "norm_label": "issharerequest()"
     },
     {
@@ -33822,7 +33840,7 @@
       "source_file": "prototypes/pwa/src/share.ts",
       "source_location": "L38",
       "id": "src_share_handleshare",
-      "community": 10,
+      "community": 71,
       "norm_label": "handleshare()"
     },
     {
@@ -33849,7 +33867,7 @@
       "source_file": "prototypes/pwa/src/share.test.ts",
       "source_location": "L1",
       "id": "prototypes_pwa_src_share_test_ts",
-      "community": 10,
+      "community": 71,
       "norm_label": "share.test.ts"
     },
     {
@@ -33858,7 +33876,7 @@
       "source_file": "prototypes/pwa/src/share.test.ts",
       "source_location": "L12",
       "id": "src_share_test_request",
-      "community": 10,
+      "community": 71,
       "norm_label": "request()"
     },
     {
@@ -33867,7 +33885,7 @@
       "source_file": "prototypes/pwa/src/share.test.ts",
       "source_location": "L21",
       "id": "src_share_test_audio",
-      "community": 10,
+      "community": 71,
       "norm_label": "audio()"
     },
     {
@@ -33876,7 +33894,7 @@
       "source_file": "prototypes/pwa/src/share.test.ts",
       "source_location": "L42",
       "id": "src_share_test_body",
-      "community": 10,
+      "community": 71,
       "norm_label": "body"
     },
     {
@@ -33885,7 +33903,7 @@
       "source_file": "prototypes/pwa/src/share.test.ts",
       "source_location": "L46",
       "id": "src_share_test_store",
-      "community": 10,
+      "community": 71,
       "norm_label": "store"
     },
     {
@@ -33894,7 +33912,7 @@
       "source_file": "prototypes/pwa/src/share.test.ts",
       "source_location": "L156",
       "id": "src_share_test_response",
-      "community": 10,
+      "community": 71,
       "norm_label": "response"
     },
     {
@@ -33903,7 +33921,7 @@
       "source_file": "prototypes/pwa/src/share.test.ts",
       "source_location": "L201",
       "id": "src_share_test_malformed",
-      "community": 10,
+      "community": 71,
       "norm_label": "malformed"
     },
     {
@@ -34020,7 +34038,7 @@
       "source_file": "prototypes/pwa/src/config.ts",
       "source_location": "L22",
       "id": "src_config_maxsharebytes",
-      "community": 71,
+      "community": 70,
       "norm_label": "maxsharebytes"
     },
     {
@@ -35208,7 +35226,7 @@
       "source_file": "prototypes/files/app.py",
       "source_location": "L1",
       "id": "prototypes_files_app_py",
-      "community": 182,
+      "community": 30,
       "norm_label": "app.py"
     },
     {
@@ -35217,7 +35235,7 @@
       "source_file": "prototypes/files/app.py",
       "source_location": "L13",
       "id": "files_app_settings",
-      "community": 182,
+      "community": 30,
       "norm_label": "settings"
     },
     {
@@ -35226,7 +35244,7 @@
       "source_file": "prototypes/files/app.py",
       "source_location": "L29",
       "id": "files_app_require_generated_password",
-      "community": 182,
+      "community": 30,
       "norm_label": "require_generated_password()"
     },
     {
@@ -35235,7 +35253,7 @@
       "source_file": "prototypes/files/app.py",
       "source_location": "L35",
       "id": "files_app_create_app",
-      "community": 182,
+      "community": 30,
       "norm_label": "create_app()"
     },
     {
@@ -40324,10 +40342,28 @@
       "norm_label": "current phase"
     },
     {
+      "label": "Failed release 37204983176",
+      "file_type": "document",
+      "source_file": "docs/STATUS.md",
+      "source_location": "L15",
+      "id": "docs_status_failed_release_37204983176",
+      "community": 12,
+      "norm_label": "failed release 37204983176"
+    },
+    {
+      "label": "Previous main integration",
+      "file_type": "document",
+      "source_file": "docs/STATUS.md",
+      "source_location": "L50",
+      "id": "docs_status_previous_main_integration",
+      "community": 12,
+      "norm_label": "previous main integration"
+    },
+    {
       "label": "Main integration",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L16",
+      "source_location": "L57",
       "id": "docs_status_main_integration",
       "community": 12,
       "norm_label": "main integration"
@@ -40336,7 +40372,7 @@
       "label": "Seven-note rounds and assistance bonuses",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L26",
+      "source_location": "L70",
       "id": "docs_status_seven_note_rounds_and_assistance_bonuses",
       "community": 12,
       "norm_label": "seven-note rounds and assistance bonuses"
@@ -40345,7 +40381,7 @@
       "label": "Persistent custom avatar generation",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L77",
+      "source_location": "L121",
       "id": "docs_status_persistent_custom_avatar_generation",
       "community": 12,
       "norm_label": "persistent custom avatar generation"
@@ -40354,7 +40390,7 @@
       "label": "Sampled piano and game setup",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L131",
+      "source_location": "L175",
       "id": "docs_status_sampled_piano_and_game_setup",
       "community": 12,
       "norm_label": "sampled piano and game setup"
@@ -40363,7 +40399,7 @@
       "label": "Game note playback",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L180",
+      "source_location": "L224",
       "id": "docs_status_game_note_playback",
       "community": 12,
       "norm_label": "game note playback"
@@ -40372,7 +40408,7 @@
       "label": "Standard game clefs",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L211",
+      "source_location": "L255",
       "id": "docs_status_standard_game_clefs",
       "community": 12,
       "norm_label": "standard game clefs"
@@ -40381,7 +40417,7 @@
       "label": "Circular game shortcut",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L237",
+      "source_location": "L281",
       "id": "docs_status_circular_game_shortcut",
       "community": 12,
       "norm_label": "circular game shortcut"
@@ -40390,7 +40426,7 @@
       "label": "Game first-entry repair",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L265",
+      "source_location": "L309",
       "id": "docs_status_game_first_entry_repair",
       "community": 12,
       "norm_label": "game first-entry repair"
@@ -40399,7 +40435,7 @@
       "label": "Game avatar artwork",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L298",
+      "source_location": "L342",
       "id": "docs_status_game_avatar_artwork",
       "community": 12,
       "norm_label": "game avatar artwork"
@@ -40408,7 +40444,7 @@
       "label": "Appearance settings",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L350",
+      "source_location": "L394",
       "id": "docs_status_appearance_settings",
       "community": 31,
       "norm_label": "appearance settings"
@@ -40417,7 +40453,7 @@
       "label": "CI follow-up: run 37008189410",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L392",
+      "source_location": "L436",
       "id": "docs_status_ci_follow_up_run_37008189410",
       "community": 12,
       "norm_label": "ci follow-up: run 37008189410"
@@ -40426,7 +40462,7 @@
       "label": "Student original image and score",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L413",
+      "source_location": "L457",
       "id": "docs_status_student_original_image_and_score",
       "community": 12,
       "norm_label": "student original image and score"
@@ -40435,7 +40471,7 @@
       "label": "Material Design baseline",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L432",
+      "source_location": "L476",
       "id": "docs_status_material_design_baseline",
       "community": 12,
       "norm_label": "material design baseline"
@@ -40444,7 +40480,7 @@
       "label": "Responsive layout follow-up",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L442",
+      "source_location": "L486",
       "id": "docs_status_responsive_layout_follow_up",
       "community": 12,
       "norm_label": "responsive layout follow-up"
@@ -40453,7 +40489,7 @@
       "label": "Installation and usability follow-up",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L470",
+      "source_location": "L514",
       "id": "docs_status_installation_and_usability_follow_up",
       "community": 12,
       "norm_label": "installation and usability follow-up"
@@ -40462,7 +40498,7 @@
       "label": "Password policy follow-up",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L505",
+      "source_location": "L549",
       "id": "docs_status_password_policy_follow_up",
       "community": 12,
       "norm_label": "password policy follow-up"
@@ -40471,7 +40507,7 @@
       "label": "Previous PHASE 7 completion",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L517",
+      "source_location": "L561",
       "id": "docs_status_previous_phase_7_completion",
       "community": 12,
       "norm_label": "previous phase 7 completion"
@@ -40480,7 +40516,7 @@
       "label": "PHASE 7 implementation",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L525",
+      "source_location": "L569",
       "id": "docs_status_phase_7_implementation",
       "community": 12,
       "norm_label": "phase 7 implementation"
@@ -40489,7 +40525,7 @@
       "label": "PHASE 7 validation and deployment boundary",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L543",
+      "source_location": "L587",
       "id": "docs_status_phase_7_validation_and_deployment_boundary",
       "community": 12,
       "norm_label": "phase 7 validation and deployment boundary"
@@ -40498,7 +40534,7 @@
       "label": "Previous PHASE 6 acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L585",
+      "source_location": "L629",
       "id": "docs_status_previous_phase_6_acceptance",
       "community": 12,
       "norm_label": "previous phase 6 acceptance"
@@ -40507,7 +40543,7 @@
       "label": "PHASE 6 follow-up fixes after owner acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L596",
+      "source_location": "L640",
       "id": "docs_status_phase_6_follow_up_fixes_after_owner_acceptance",
       "community": 12,
       "norm_label": "phase 6 follow-up fixes after owner acceptance"
@@ -40516,7 +40552,7 @@
       "label": "Completed PHASE 7 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L644",
+      "source_location": "L688",
       "id": "docs_status_completed_phase_7_plan",
       "community": 12,
       "norm_label": "completed phase 7 plan"
@@ -40525,7 +40561,7 @@
       "label": "Separate Material Design feature",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L657",
+      "source_location": "L701",
       "id": "docs_status_separate_material_design_feature",
       "community": 12,
       "norm_label": "separate material design feature"
@@ -40534,7 +40570,7 @@
       "label": "Completed Material Design checklist",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L697",
+      "source_location": "L741",
       "id": "docs_status_completed_material_design_checklist",
       "community": 12,
       "norm_label": "completed material design checklist"
@@ -40543,7 +40579,7 @@
       "label": "Completed PHASE 6 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L710",
+      "source_location": "L754",
       "id": "docs_status_completed_phase_6_plan",
       "community": 12,
       "norm_label": "completed phase 6 plan"
@@ -40552,7 +40588,7 @@
       "label": "Completed PHASE 5 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L722",
+      "source_location": "L766",
       "id": "docs_status_completed_phase_5_plan",
       "community": 12,
       "norm_label": "completed phase 5 plan"
@@ -40561,7 +40597,7 @@
       "label": "Completed PHASE 4 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L731",
+      "source_location": "L775",
       "id": "docs_status_completed_phase_4_plan",
       "community": 12,
       "norm_label": "completed phase 4 plan"
@@ -40570,7 +40606,7 @@
       "label": "Completed PHASE 3 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L738",
+      "source_location": "L782",
       "id": "docs_status_completed_phase_3_plan",
       "community": 12,
       "norm_label": "completed phase 3 plan"
@@ -40579,7 +40615,7 @@
       "label": "Completed PHASE 2 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L748",
+      "source_location": "L792",
       "id": "docs_status_completed_phase_2_plan",
       "community": 12,
       "norm_label": "completed phase 2 plan"
@@ -40588,7 +40624,7 @@
       "label": "Completed PHASE 1 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L757",
+      "source_location": "L801",
       "id": "docs_status_completed_phase_1_plan",
       "community": 12,
       "norm_label": "completed phase 1 plan"
@@ -40597,7 +40633,7 @@
       "label": "Completed PHASE 0 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L768",
+      "source_location": "L812",
       "id": "docs_status_completed_phase_0_plan",
       "community": 12,
       "norm_label": "completed phase 0 plan"
@@ -40606,7 +40642,7 @@
       "label": "Completed PHASE 0.5 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L781",
+      "source_location": "L825",
       "id": "docs_status_completed_phase_0_5_plan",
       "community": 12,
       "norm_label": "completed phase 0.5 plan"
@@ -40615,7 +40651,7 @@
       "label": "Done",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L791",
+      "source_location": "L835",
       "id": "docs_status_done",
       "community": 12,
       "norm_label": "done"
@@ -40624,7 +40660,7 @@
       "label": "PHASE 0.5 deployment record",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1071",
+      "source_location": "L1115",
       "id": "docs_status_phase_0_5_deployment_record",
       "community": 12,
       "norm_label": "phase 0.5 deployment record"
@@ -40633,7 +40669,7 @@
       "label": "Next step",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1099",
+      "source_location": "L1143",
       "id": "docs_status_next_step",
       "community": 12,
       "norm_label": "next step"
@@ -40642,7 +40678,7 @@
       "label": "PHASE 0 boundaries",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1107",
+      "source_location": "L1151",
       "id": "docs_status_phase_0_boundaries",
       "community": 12,
       "norm_label": "phase 0 boundaries"
@@ -40651,7 +40687,7 @@
       "label": "Acceptance details",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1118",
+      "source_location": "L1162",
       "id": "docs_status_acceptance_details",
       "community": 12,
       "norm_label": "acceptance details"
@@ -40660,7 +40696,7 @@
       "label": "Final PHASE 1 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1123",
+      "source_location": "L1167",
       "id": "docs_status_final_phase_1_manual_acceptance",
       "community": 12,
       "norm_label": "final phase 1 manual acceptance"
@@ -40669,7 +40705,7 @@
       "label": "Final PHASE 2 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1135",
+      "source_location": "L1179",
       "id": "docs_status_final_phase_2_manual_acceptance",
       "community": 12,
       "norm_label": "final phase 2 manual acceptance"
@@ -40678,7 +40714,7 @@
       "label": "Final PHASE 3 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1145",
+      "source_location": "L1189",
       "id": "docs_status_final_phase_3_manual_acceptance",
       "community": 12,
       "norm_label": "final phase 3 manual acceptance"
@@ -40687,7 +40723,7 @@
       "label": "Final PHASE 4 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1155",
+      "source_location": "L1199",
       "id": "docs_status_final_phase_4_manual_acceptance",
       "community": 12,
       "norm_label": "final phase 4 manual acceptance"
@@ -40696,7 +40732,7 @@
       "label": "Final PHASE 5 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1165",
+      "source_location": "L1209",
       "id": "docs_status_final_phase_5_manual_acceptance",
       "community": 12,
       "norm_label": "final phase 5 manual acceptance"
@@ -40705,7 +40741,7 @@
       "label": "Manual checks the owner must do",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1174",
+      "source_location": "L1218",
       "id": "docs_status_manual_checks_the_owner_must_do",
       "community": 12,
       "norm_label": "manual checks the owner must do"
@@ -40714,7 +40750,7 @@
       "label": "Known issues",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1196",
+      "source_location": "L1240",
       "id": "docs_status_known_issues",
       "community": 12,
       "norm_label": "known issues"
@@ -42349,10 +42385,19 @@
       "norm_label": "current boundary"
     },
     {
-      "label": "Appearance feature compatibility",
+      "label": "Runtime configuration preflight",
       "file_type": "document",
       "source_file": "docs/developer/deploy.md",
       "source_location": "L26",
+      "id": "developer_deploy_runtime_configuration_preflight",
+      "community": 48,
+      "norm_label": "runtime configuration preflight"
+    },
+    {
+      "label": "Appearance feature compatibility",
+      "file_type": "document",
+      "source_file": "docs/developer/deploy.md",
+      "source_location": "L42",
       "id": "developer_deploy_appearance_feature_compatibility",
       "community": 48,
       "norm_label": "appearance feature compatibility"
@@ -42361,7 +42406,7 @@
       "label": "Latest verified deployment",
       "file_type": "document",
       "source_file": "docs/developer/deploy.md",
-      "source_location": "L36",
+      "source_location": "L52",
       "id": "developer_deploy_latest_verified_deployment",
       "community": 48,
       "norm_label": "latest verified deployment"
@@ -42370,7 +42415,7 @@
       "label": "Game avatar worker",
       "file_type": "document",
       "source_file": "docs/developer/deploy.md",
-      "source_location": "L45",
+      "source_location": "L61",
       "id": "developer_deploy_game_avatar_worker",
       "community": 48,
       "norm_label": "game avatar worker"
@@ -42379,7 +42424,7 @@
       "label": "Storage capacity",
       "file_type": "document",
       "source_file": "docs/developer/deploy.md",
-      "source_location": "L59",
+      "source_location": "L75",
       "id": "developer_deploy_storage_capacity",
       "community": 48,
       "norm_label": "storage capacity"
@@ -42388,7 +42433,7 @@
       "label": "OMR capacity",
       "file_type": "document",
       "source_file": "docs/developer/deploy.md",
-      "source_location": "L80",
+      "source_location": "L96",
       "id": "developer_deploy_omr_capacity",
       "community": 48,
       "norm_label": "omr capacity"
@@ -42397,7 +42442,7 @@
       "label": "Recorded PHASE 5 release and former RAM refusal",
       "file_type": "document",
       "source_file": "docs/developer/deploy.md",
-      "source_location": "L97",
+      "source_location": "L113",
       "id": "developer_deploy_recorded_phase_5_release_and_former_ram_refusal",
       "community": 48,
       "norm_label": "recorded phase 5 release and former ram refusal"
@@ -42406,7 +42451,7 @@
       "label": "code:sh (python3 /home/deploy/solfeo-production/incoming/rollout.py \\)",
       "file_type": "document",
       "source_file": "docs/developer/deploy.md",
-      "source_location": "L114",
+      "source_location": "L130",
       "id": "developer_deploy_codeblock_1",
       "community": 48,
       "norm_label": "code:sh (python3 /home/deploy/solfeo-production/incoming/rollout.py \\)"
@@ -42415,7 +42460,7 @@
       "label": "Prepare configuration",
       "file_type": "document",
       "source_file": "docs/developer/deploy.md",
-      "source_location": "L129",
+      "source_location": "L145",
       "id": "developer_deploy_prepare_configuration",
       "community": 48,
       "norm_label": "prepare configuration"
@@ -42424,7 +42469,7 @@
       "label": "Database roles",
       "file_type": "document",
       "source_file": "docs/developer/deploy.md",
-      "source_location": "L159",
+      "source_location": "L175",
       "id": "developer_deploy_database_roles",
       "community": 48,
       "norm_label": "database roles"
@@ -42433,7 +42478,7 @@
       "label": "Targeted deployment",
       "file_type": "document",
       "source_file": "docs/developer/deploy.md",
-      "source_location": "L186",
+      "source_location": "L202",
       "id": "developer_deploy_targeted_deployment",
       "community": 48,
       "norm_label": "targeted deployment"
@@ -42442,7 +42487,7 @@
       "label": "Failure and rollback",
       "file_type": "document",
       "source_file": "docs/developer/deploy.md",
-      "source_location": "L219",
+      "source_location": "L235",
       "id": "developer_deploy_failure_and_rollback",
       "community": 48,
       "norm_label": "failure and rollback"
@@ -42451,7 +42496,7 @@
       "label": "Operator inspection",
       "file_type": "document",
       "source_file": "docs/developer/deploy.md",
-      "source_location": "L246",
+      "source_location": "L262",
       "id": "developer_deploy_operator_inspection",
       "community": 48,
       "norm_label": "operator inspection"
@@ -42460,7 +42505,7 @@
       "label": "code:sh (cd ~/solfeo-production)",
       "file_type": "document",
       "source_file": "docs/developer/deploy.md",
-      "source_location": "L251",
+      "source_location": "L267",
       "id": "developer_deploy_codeblock_2",
       "community": 48,
       "norm_label": "code:sh (cd ~/solfeo-production)"
@@ -42469,7 +42514,7 @@
       "label": "TLS and VPS integration",
       "file_type": "document",
       "source_file": "docs/developer/deploy.md",
-      "source_location": "L273",
+      "source_location": "L289",
       "id": "developer_deploy_tls_and_vps_integration",
       "community": 48,
       "norm_label": "tls and vps integration"
@@ -42478,7 +42523,7 @@
       "label": "Reproduce the isolated checks",
       "file_type": "document",
       "source_file": "docs/developer/deploy.md",
-      "source_location": "L315",
+      "source_location": "L331",
       "id": "developer_deploy_reproduce_the_isolated_checks",
       "community": 48,
       "norm_label": "reproduce the isolated checks"
@@ -42487,7 +42532,7 @@
       "label": "code:sh (docker compose --env-file .env -f deploy/compose.yaml build )",
       "file_type": "document",
       "source_file": "docs/developer/deploy.md",
-      "source_location": "L320",
+      "source_location": "L336",
       "id": "developer_deploy_codeblock_3",
       "community": 48,
       "norm_label": "code:sh (docker compose --env-file .env -f deploy/compose.yaml build )"
@@ -42496,7 +42541,7 @@
       "label": "Final operational acceptance",
       "file_type": "document",
       "source_file": "docs/developer/deploy.md",
-      "source_location": "L333",
+      "source_location": "L349",
       "id": "developer_deploy_final_operational_acceptance",
       "community": 48,
       "norm_label": "final operational acceptance"
@@ -54806,9 +54851,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_tuning_cents",
-      "target": "piano_provenance_tuning_cents_36",
-      "confidence_score": 1.0
+      "target": "piano_provenance_tuning_cents_36"
     },
     {
       "relation": "contains",
@@ -54816,9 +54861,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L13",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_tuning_cents",
-      "target": "piano_provenance_tuning_cents_39",
-      "confidence_score": 1.0
+      "target": "piano_provenance_tuning_cents_39"
     },
     {
       "relation": "contains",
@@ -54826,9 +54871,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L14",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_tuning_cents",
-      "target": "piano_provenance_tuning_cents_42",
-      "confidence_score": 1.0
+      "target": "piano_provenance_tuning_cents_42"
     },
     {
       "relation": "contains",
@@ -54836,9 +54881,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_tuning_cents",
-      "target": "piano_provenance_tuning_cents_45",
-      "confidence_score": 1.0
+      "target": "piano_provenance_tuning_cents_45"
     },
     {
       "relation": "contains",
@@ -54846,9 +54891,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_tuning_cents",
-      "target": "piano_provenance_tuning_cents_48",
-      "confidence_score": 1.0
+      "target": "piano_provenance_tuning_cents_48"
     },
     {
       "relation": "contains",
@@ -54856,9 +54901,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_tuning_cents",
-      "target": "piano_provenance_tuning_cents_51",
-      "confidence_score": 1.0
+      "target": "piano_provenance_tuning_cents_51"
     },
     {
       "relation": "contains",
@@ -54866,9 +54911,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L18",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_tuning_cents",
-      "target": "piano_provenance_tuning_cents_54",
-      "confidence_score": 1.0
+      "target": "piano_provenance_tuning_cents_54"
     },
     {
       "relation": "contains",
@@ -54876,9 +54921,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_tuning_cents",
-      "target": "piano_provenance_tuning_cents_57",
-      "confidence_score": 1.0
+      "target": "piano_provenance_tuning_cents_57"
     },
     {
       "relation": "contains",
@@ -54976,9 +55021,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L63",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_c2v4_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_c2v4_flac"
     },
     {
       "relation": "contains",
@@ -54986,9 +55031,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L64",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_c2v8_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_c2v8_flac"
     },
     {
       "relation": "contains",
@@ -54996,9 +55041,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L65",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_c2v12_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_c2v12_flac"
     },
     {
       "relation": "contains",
@@ -55006,9 +55051,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L66",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_c2v16_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_c2v16_flac"
     },
     {
       "relation": "contains",
@@ -55016,9 +55061,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L67",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_d_2v4_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_d_2v4_flac"
     },
     {
       "relation": "contains",
@@ -55026,9 +55071,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L68",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_d_2v8_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_d_2v8_flac"
     },
     {
       "relation": "contains",
@@ -55036,9 +55081,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L69",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_d_2v12_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_d_2v12_flac"
     },
     {
       "relation": "contains",
@@ -55046,9 +55091,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L70",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_d_2v16_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_d_2v16_flac"
     },
     {
       "relation": "contains",
@@ -55056,9 +55101,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L71",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_f_2v4_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_f_2v4_flac"
     },
     {
       "relation": "contains",
@@ -55066,9 +55111,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L72",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_f_2v8_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_f_2v8_flac"
     },
     {
       "relation": "contains",
@@ -55076,9 +55121,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L73",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_f_2v12_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_f_2v12_flac"
     },
     {
       "relation": "contains",
@@ -55086,9 +55131,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L74",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_f_2v16_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_f_2v16_flac"
     },
     {
       "relation": "contains",
@@ -55096,9 +55141,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L75",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_a2v4_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_a2v4_flac"
     },
     {
       "relation": "contains",
@@ -55106,9 +55151,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L76",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_a2v8_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_a2v8_flac"
     },
     {
       "relation": "contains",
@@ -55116,9 +55161,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L77",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_a2v12_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_a2v12_flac"
     },
     {
       "relation": "contains",
@@ -55126,9 +55171,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L78",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_a2v16_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_a2v16_flac"
     },
     {
       "relation": "contains",
@@ -55136,9 +55181,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L79",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_c3v4_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_c3v4_flac"
     },
     {
       "relation": "contains",
@@ -55146,9 +55191,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L80",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_c3v8_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_c3v8_flac"
     },
     {
       "relation": "contains",
@@ -55156,9 +55201,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L81",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_c3v12_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_c3v12_flac"
     },
     {
       "relation": "contains",
@@ -55166,9 +55211,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L82",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_c3v16_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_c3v16_flac"
     },
     {
       "relation": "contains",
@@ -55176,9 +55221,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L83",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_d_3v4_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_d_3v4_flac"
     },
     {
       "relation": "contains",
@@ -55186,9 +55231,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L84",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_d_3v8_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_d_3v8_flac"
     },
     {
       "relation": "contains",
@@ -55196,9 +55241,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L85",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_d_3v12_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_d_3v12_flac"
     },
     {
       "relation": "contains",
@@ -55206,9 +55251,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L86",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_d_3v16_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_d_3v16_flac"
     },
     {
       "relation": "contains",
@@ -55216,9 +55261,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L87",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_f_3v4_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_f_3v4_flac"
     },
     {
       "relation": "contains",
@@ -55226,9 +55271,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L88",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_f_3v8_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_f_3v8_flac"
     },
     {
       "relation": "contains",
@@ -55236,9 +55281,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L89",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_f_3v12_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_f_3v12_flac"
     },
     {
       "relation": "contains",
@@ -55246,9 +55291,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L90",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_f_3v16_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_f_3v16_flac"
     },
     {
       "relation": "contains",
@@ -55256,9 +55301,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L91",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_a3v4_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_a3v4_flac"
     },
     {
       "relation": "contains",
@@ -55266,9 +55311,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L92",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_a3v8_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_a3v8_flac"
     },
     {
       "relation": "contains",
@@ -55276,9 +55321,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L93",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_a3v12_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_a3v12_flac"
     },
     {
       "relation": "contains",
@@ -55286,9 +55331,9 @@
       "source_file": "frontend/public/assets/piano/provenance.json",
       "source_location": "L94",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "piano_provenance_source_sha256",
-      "target": "piano_provenance_source_sha256_a3v16_flac",
-      "confidence_score": 1.0
+      "target": "piano_provenance_source_sha256_a3v16_flac"
     },
     {
       "relation": "contains",
@@ -61975,9 +62020,9 @@
       "source_file": "frontend/src/features/game/notes.ts",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_src_features_game_notes_ts",
-      "target": "game_notes_note_names",
-      "confidence_score": 1.0
+      "target": "game_notes_note_names"
     },
     {
       "relation": "contains",
@@ -61985,9 +62030,9 @@
       "source_file": "frontend/src/features/game/notes.ts",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_src_features_game_notes_ts",
-      "target": "game_notes_piano_notes",
-      "confidence_score": 1.0
+      "target": "game_notes_piano_notes"
     },
     {
       "relation": "contains",
@@ -62090,9 +62135,9 @@
       "source_file": "frontend/src/features/game/play/NoteButtons.tsx",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_src_features_game_play_notebuttons_tsx",
-      "target": "game_notes_note_names",
-      "confidence_score": 1.0
+      "target": "game_notes_note_names"
     },
     {
       "relation": "imports",
@@ -62101,9 +62146,9 @@
       "source_file": "frontend/src/features/game/audio/synth.ts",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_src_features_game_audio_synth_ts",
-      "target": "game_notes_piano_notes",
-      "confidence_score": 1.0
+      "target": "game_notes_piano_notes"
     },
     {
       "relation": "imports",
@@ -77199,9 +77244,9 @@
       "source_file": "frontend/src/i18n/locales/ru.json",
       "source_location": "L318",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_ru_json",
-      "target": "locales_ru_game_options_zeropoints",
-      "confidence_score": 1.0
+      "target": "locales_ru_game_options_zeropoints"
     },
     {
       "relation": "contains",
@@ -77209,9 +77254,9 @@
       "source_file": "frontend/src/i18n/locales/ru.json",
       "source_location": "L319",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_ru_json",
-      "target": "locales_ru_game_options_onepoint",
-      "confidence_score": 1.0
+      "target": "locales_ru_game_options_onepoint"
     },
     {
       "relation": "contains",
@@ -77219,9 +77264,9 @@
       "source_file": "frontend/src/i18n/locales/ru.json",
       "source_location": "L320",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_ru_json",
-      "target": "locales_ru_game_options_roundbonus",
-      "confidence_score": 1.0
+      "target": "locales_ru_game_options_roundbonus"
     },
     {
       "relation": "contains",
@@ -77229,9 +77274,9 @@
       "source_file": "frontend/src/i18n/locales/ru.json",
       "source_location": "L321",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_ru_json",
-      "target": "locales_ru_game_result_assistancebonus",
-      "confidence_score": 1.0
+      "target": "locales_ru_game_result_assistancebonus"
     },
     {
       "relation": "contains",
@@ -81590,9 +81635,9 @@
       "source_file": "frontend/src/i18n/locales/en.json",
       "source_location": "L318",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_en_json",
-      "target": "locales_en_game_options_zeropoints",
-      "confidence_score": 1.0
+      "target": "locales_en_game_options_zeropoints"
     },
     {
       "relation": "contains",
@@ -81600,9 +81645,9 @@
       "source_file": "frontend/src/i18n/locales/en.json",
       "source_location": "L319",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_en_json",
-      "target": "locales_en_game_options_onepoint",
-      "confidence_score": 1.0
+      "target": "locales_en_game_options_onepoint"
     },
     {
       "relation": "contains",
@@ -81610,9 +81655,9 @@
       "source_file": "frontend/src/i18n/locales/en.json",
       "source_location": "L320",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_en_json",
-      "target": "locales_en_game_options_roundbonus",
-      "confidence_score": 1.0
+      "target": "locales_en_game_options_roundbonus"
     },
     {
       "relation": "contains",
@@ -81620,9 +81665,9 @@
       "source_file": "frontend/src/i18n/locales/en.json",
       "source_location": "L321",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_en_json",
-      "target": "locales_en_game_result_assistancebonus",
-      "confidence_score": 1.0
+      "target": "locales_en_game_result_assistancebonus"
     },
     {
       "relation": "contains",
@@ -85820,9 +85865,9 @@
       "source_file": "frontend/src/i18n/locales/es.json",
       "source_location": "L318",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_es_json",
-      "target": "locales_es_game_options_zeropoints",
-      "confidence_score": 1.0
+      "target": "locales_es_game_options_zeropoints"
     },
     {
       "relation": "contains",
@@ -85830,9 +85875,9 @@
       "source_file": "frontend/src/i18n/locales/es.json",
       "source_location": "L319",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_es_json",
-      "target": "locales_es_game_options_onepoint",
-      "confidence_score": 1.0
+      "target": "locales_es_game_options_onepoint"
     },
     {
       "relation": "contains",
@@ -85840,9 +85885,9 @@
       "source_file": "frontend/src/i18n/locales/es.json",
       "source_location": "L320",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_es_json",
-      "target": "locales_es_game_options_roundbonus",
-      "confidence_score": 1.0
+      "target": "locales_es_game_options_roundbonus"
     },
     {
       "relation": "contains",
@@ -85850,9 +85895,9 @@
       "source_file": "frontend/src/i18n/locales/es.json",
       "source_location": "L321",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_es_json",
-      "target": "locales_es_game_result_assistancebonus",
-      "confidence_score": 1.0
+      "target": "locales_es_game_result_assistancebonus"
     },
     {
       "relation": "contains",
@@ -88235,6 +88280,26 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "deploy/tests/test_rollout.py",
+      "source_location": "L244",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "deploy_tests_test_rollout_py",
+      "target": "tests_test_rollout_test_backend_settings_are_validated_before_stopping_services"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/tests/test_rollout.py",
+      "source_location": "L263",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "deploy_tests_test_rollout_py",
+      "target": "tests_test_rollout_test_invalid_backend_settings_leave_running_release_untouched"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/tests/test_rollout.py",
       "source_location": "L223",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -88371,6 +88436,28 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "tests_test_rollout_test_first_install_failure_preserves_database",
+      "target": "tests_test_rollout_fakerollout"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/tests/test_rollout.py",
+      "source_location": "L247",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tests_test_rollout_test_backend_settings_are_validated_before_stopping_services",
+      "target": "tests_test_rollout_fakerollout"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "deploy/tests/test_rollout.py",
+      "source_location": "L266",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "tests_test_rollout_test_invalid_backend_settings_leave_running_release_untouched",
       "target": "tests_test_rollout_fakerollout"
     },
     {
@@ -88815,9 +88902,9 @@
       "source_file": "backend/migrations/versions/0010_round_rules.py",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_migrations_versions_0010_round_rules_py",
-      "target": "versions_0010_round_rules_upgrade",
-      "confidence_score": 1.0
+      "target": "versions_0010_round_rules_upgrade"
     },
     {
       "relation": "contains",
@@ -88825,9 +88912,9 @@
       "source_file": "backend/migrations/versions/0010_round_rules.py",
       "source_location": "L36",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_migrations_versions_0010_round_rules_py",
-      "target": "versions_0010_round_rules_downgrade",
-      "confidence_score": 1.0
+      "target": "versions_0010_round_rules_downgrade"
     },
     {
       "relation": "contains",
@@ -98633,9 +98720,9 @@
       "source_file": "backend/tests/test_database.py",
       "source_location": "L167",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_tests_test_database_py",
-      "target": "tests_test_database_test_round_rules_migration_preserves_previous_release_rows",
-      "confidence_score": 1.0
+      "target": "tests_test_database_test_round_rules_migration_preserves_previous_release_rows"
     },
     {
       "relation": "contains",
@@ -98643,9 +98730,9 @@
       "source_file": "backend/tests/test_database.py",
       "source_location": "L290",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_tests_test_database_py",
-      "target": "tests_test_database_test_round_rules_is_the_single_head_after_avatar_sheets",
-      "confidence_score": 1.0
+      "target": "tests_test_database_test_round_rules_is_the_single_head_after_avatar_sheets"
     },
     {
       "relation": "contains",
@@ -98865,9 +98952,9 @@
       "source_file": "backend/tests/test_database.py",
       "source_location": "L174",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "tests_test_database_test_round_rules_migration_preserves_previous_release_rows",
-      "target": "tests_test_database_migration_config",
-      "confidence_score": 1.0
+      "target": "tests_test_database_migration_config"
     },
     {
       "relation": "calls",
@@ -100330,9 +100417,9 @@
       "source_file": "backend/tests/test_game_piano_asset.py",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_tests_test_game_piano_asset_py",
-      "target": "tests_test_game_piano_asset_test_reduced_piano_contains_four_layers_of_all_twenty_eight_answer_pitches",
-      "confidence_score": 1.0
+      "target": "tests_test_game_piano_asset_test_reduced_piano_contains_four_layers_of_all_twenty_eight_answer_pitches"
     },
     {
       "relation": "contains",
@@ -100340,9 +100427,9 @@
       "source_file": "backend/tests/test_game_piano_asset.py",
       "source_location": "L33",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_tests_test_game_piano_asset_py",
-      "target": "tests_test_game_piano_asset_test_previous_piano_remains_unchanged_for_cached_clients",
-      "confidence_score": 1.0
+      "target": "tests_test_game_piano_asset_test_previous_piano_remains_unchanged_for_cached_clients"
     },
     {
       "relation": "contains",
@@ -101294,9 +101381,9 @@
       "source_file": "backend/tests/game/test_scoring.py",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_tests_game_test_scoring_py",
-      "target": "game_test_scoring_test_note_only_rules_ignore_octaves_but_preserve_names_and_order",
-      "confidence_score": 1.0
+      "target": "game_test_scoring_test_note_only_rules_ignore_octaves_but_preserve_names_and_order"
     },
     {
       "relation": "contains",
@@ -101304,9 +101391,9 @@
       "source_file": "backend/tests/game/test_scoring.py",
       "source_location": "L34",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_tests_game_test_scoring_py",
-      "target": "game_test_scoring_test_legacy_rules_still_require_the_written_octave",
-      "confidence_score": 1.0
+      "target": "game_test_scoring_test_legacy_rules_still_require_the_written_octave"
     },
     {
       "relation": "contains",
@@ -101324,9 +101411,9 @@
       "source_file": "backend/tests/game/test_rounds.py",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_tests_game_test_rounds_py",
-      "target": "game_test_rounds_test_each_clef_has_exactly_thirteen_pitches_matching_the_reference_staff",
-      "confidence_score": 1.0
+      "target": "game_test_rounds_test_each_clef_has_exactly_thirteen_pitches_matching_the_reference_staff"
     },
     {
       "relation": "contains",
@@ -101578,9 +101665,9 @@
       "source_file": "backend/tests/game/test_integration.py",
       "source_location": "L169",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_tests_game_test_integration_py",
-      "target": "game_test_integration_test_round_bonus_is_authoritative_once_and_does_not_change_xp",
-      "confidence_score": 1.0
+      "target": "game_test_integration_test_round_bonus_is_authoritative_once_and_does_not_change_xp"
     },
     {
       "relation": "rationale_for",
@@ -101621,9 +101708,9 @@
       "source_file": "backend/tests/game/test_integration.py",
       "source_location": "L182",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_test_integration_test_round_bonus_is_authoritative_once_and_does_not_change_xp",
-      "target": "game_test_integration_login",
-      "confidence_score": 1.0
+      "target": "game_test_integration_login"
     },
     {
       "relation": "calls",
@@ -101643,9 +101730,9 @@
       "source_file": "backend/tests/game/test_integration.py",
       "source_location": "L181",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_test_integration_test_round_bonus_is_authoritative_once_and_does_not_change_xp",
-      "target": "game_test_integration_make_manager",
-      "confidence_score": 1.0
+      "target": "game_test_integration_make_manager"
     },
     {
       "relation": "calls",
@@ -101664,9 +101751,9 @@
       "source_file": "backend/tests/game/test_integration.py",
       "source_location": "L120",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_test_integration_rationale_120",
-      "target": "game_test_integration_test_idempotent_submit",
-      "confidence_score": 1.0
+      "target": "game_test_integration_test_idempotent_submit"
     },
     {
       "relation": "rationale_for",
@@ -118659,11 +118746,31 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "docs/STATUS.md",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "docs_status_current_phase",
+      "target": "docs_status_failed_release_37204983176"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/STATUS.md",
+      "source_location": "L41",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "docs_status_current_phase",
+      "target": "docs_status_previous_main_integration"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/STATUS.md",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_status_current_phase",
-      "target": "docs_status_main_integration",
-      "confidence_score": 1.0
+      "target": "docs_status_main_integration"
     },
     {
       "relation": "contains",
@@ -118671,9 +118778,9 @@
       "source_file": "docs/STATUS.md",
       "source_location": "L26",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_status_current_phase",
-      "target": "docs_status_seven_note_rounds_and_assistance_bonuses",
-      "confidence_score": 1.0
+      "target": "docs_status_seven_note_rounds_and_assistance_bonuses"
     },
     {
       "relation": "contains",
@@ -120644,6 +120751,16 @@
       "confidence_score": 1.0,
       "source": "developer_deploy_production_deployment",
       "target": "developer_deploy_final_operational_acceptance"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/developer/deploy.md",
+      "source_location": "L26",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "developer_deploy_current_boundary",
+      "target": "developer_deploy_runtime_configuration_preflight"
     },
     {
       "relation": "contains",
@@ -127767,5 +127884,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "0041af8bd3df359987e898c2766afdf3050cf510"
+  "built_at_commit": "6455bf328d99dd18ddeec5309a2881d84ce6fca5"
 }

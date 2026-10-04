@@ -324,6 +324,17 @@ class Rollout:
         require_disk_space(configuration, self.disk_free())
         self.compose(candidate, "pull")
         require_disk_space(configuration, self.disk_free(), pulled=True)
+        self.compose(
+            candidate,
+            "run",
+            "--rm",
+            "--no-deps",
+            "-T",
+            "backend",
+            "python",
+            "-c",
+            "from app.settings import Settings; Settings()",
+        )
         self.compose(candidate, "up", "-d", "--no-deps", "--wait", "postgres")
         self.compose(candidate, "stop", *reversed(services))
         try:

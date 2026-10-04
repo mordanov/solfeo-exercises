@@ -23,6 +23,22 @@ The separate publication workflow supplies verified product images and a version
 The shared nginx routes the existing TLS hostname to the product frontend.
 Do not invoke the shared infrastructure's general deployment.
 
+### Runtime configuration preflight
+
+After image pulls, the rollout validates the backend configuration in a disposable candidate container.
+It uses the candidate image's `Settings` class and the exact production environment.
+It does not start dependencies, connect to PostgreSQL, synchronize the emergency manager, or call image providers.
+A failure occurs before PostgreSQL startup, application stops, migrations, or release promotion.
+The current services and release state remain unchanged.
+Detailed errors remain in the private `last-error.log`, not CI output.
+
+**Caution:** HTTPS origins require `SESSION_COOKIE_SECURE=true`.
+An explicit development value of `false` also prevents compatible rollback from starting the backend.
+
+1. Set `SESSION_COOKIE_SECURE=true` in the private `~/solfeo-production/.env.production`.
+2. Repeat the failed deployment jobs through the verified publication run.
+3. Confirm the backend and workers become healthy and the public health endpoint returns `{"status":"ok"}`.
+
 ### Appearance feature compatibility
 
 **Caution:** Publish the appearance backend and frontend together through the normal verified release.
