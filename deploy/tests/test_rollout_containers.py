@@ -188,6 +188,22 @@ def test_real_deployment_and_failed_update_rollback(
     assert rollout.compose(initial, "ps", "-q").splitlines() == before
     rollout.verify(initial)
 
+    config = rollout.root / ".env.production"
+    valid_settings = config.read_text()
+    try:
+        config.write_text(valid_settings + "SESSION_COOKIE_SECURE=false\n")
+        with pytest.raises(DeploymentError, match="COMPOSE_FAILED:run:"):
+            rollout.deploy(publish(rollout.root, 6), SHA, 6)
+    finally:
+        config.write_text(valid_settings)
+    assert (
+        "HTTPS origins require Secure session cookies"
+        in (rollout.root / "last-error.log").read_text()
+    )
+    assert rollout.state()["current"] == first
+    assert rollout.compose(initial, "ps", "-q").splitlines() == before
+    rollout.verify(initial)
+
     for run_id, failure in ((2, "migration"), (3, "health")):
         rollout.failure = failure
         with pytest.raises(DeploymentError, match="DEPLOY_FAILED_ROLLED_BACK"):

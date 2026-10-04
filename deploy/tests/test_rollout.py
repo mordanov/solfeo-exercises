@@ -125,7 +125,9 @@ def test_avatar_worker_participates_in_deployment_and_rollback(tmp_path: Path) -
     )
 
 
-@pytest.mark.parametrize("failure", ["candidate:run", "health"])
+@pytest.mark.parametrize(
+    "failure", ["candidate:run --rm --no-deps -T migrate", "health"]
+)
 def test_failed_release_restores_previous_without_downgrade(
     tmp_path: Path, failure: str
 ) -> None:
@@ -192,7 +194,9 @@ def test_worker_rollout_preserves_order_and_rollback_without_host_memory_probe(
     assert len(stops) == 2 and all("telegram" in call for call in stops)
     assert all("omr" in call for call in stops)
     assert rollout.calls.index(stops[0]) < next(
-        index for index, call in enumerate(rollout.calls) if "candidate:run" in call
+        index
+        for index, call in enumerate(rollout.calls)
+        if "candidate:run --rm --no-deps -T migrate" in call
     )
     assert any("candidate:up" in call and "telegram" in call for call in rollout.calls)
     assert all(
@@ -235,6 +239,42 @@ def test_disk_reserve_is_rechecked_after_pull_before_service_changes(
         rollout.activate(rollout.candidate, None)
     assert any(":pull" in call for call in rollout.calls)
     assert not any(":up" in call or ":stop" in call for call in rollout.calls)
+
+
+def test_backend_settings_are_validated_before_stopping_services(
+    tmp_path: Path,
+) -> None:
+    rollout = FakeRollout(tmp_path)
+    rollout.activate(rollout.candidate, None)
+    validation = next(
+        call
+        for call in rollout.calls
+        if "run --rm --no-deps -T backend python -c" in call
+    )
+    assert "from app.settings import Settings; Settings()" in validation
+    assert rollout.calls.index(validation) < next(
+        index
+        for index, call in enumerate(rollout.calls)
+        if ":up" in call or ":stop" in call
+    )
+
+
+@pytest.mark.parametrize("has_previous", [True, False])
+def test_invalid_backend_settings_leave_running_release_untouched(
+    tmp_path: Path, has_previous: bool
+) -> None:
+    rollout = FakeRollout(tmp_path, "candidate:run --rm --no-deps -T backend")
+    previous = tmp_path / "previous" if has_previous else None
+    with pytest.raises(DeploymentError, match="SYNTHETIC_FAILURE"):
+        rollout.activate(rollout.candidate, previous)
+    assert not any(
+        ":up" in call
+        or ":stop" in call
+        or "-T migrate" in call
+        or "promote:" in call
+        or call.startswith("previous:run")
+        for call in rollout.calls
+    )
 
 
 @pytest.mark.parametrize("value", ["", "0", "-1", "many", "1.5"])
