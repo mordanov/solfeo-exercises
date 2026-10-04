@@ -249,7 +249,22 @@ class Settings(BaseSettings):
         validation_alias="EMERGENCY_MANAGER_LAST_NAME",
     )
     avatar_image_model: str = Field(
-        default="dall-e-3", validation_alias="AVATAR_IMAGE_MODEL"
+        default="gpt-image-1-mini", validation_alias="AVATAR_IMAGE_MODEL"
+    )
+    avatar_image_quality: Literal["low", "medium", "high"] = Field(
+        default="low", validation_alias="AVATAR_IMAGE_QUALITY"
+    )
+    avatar_gen_timeout_seconds: int = Field(
+        default=180, ge=30, le=600, validation_alias="AVATAR_GEN_TIMEOUT_SECONDS"
+    )
+    avatar_gen_estimated_seconds: int = Field(
+        default=120, ge=1, validation_alias="AVATAR_GEN_ESTIMATED_SECONDS"
+    )
+    avatar_gen_max_image_bytes: int = Field(
+        default=16777216, ge=1024, validation_alias="AVATAR_GEN_MAX_IMAGE_BYTES"
+    )
+    avatar_gen_poll_seconds: float = Field(
+        default=2, ge=0.1, validation_alias="AVATAR_GEN_POLL_SECONDS"
     )
     avatar_gen_daily_limit: int = Field(
         default=3, ge=1, validation_alias="AVATAR_GEN_DAILY_LIMIT"

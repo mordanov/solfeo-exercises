@@ -203,10 +203,40 @@ class CustomAvatar(Base):
         DateTime(timezone=True), nullable=True
     )
     error_code: Mapped[str | None] = mapped_column(String(50), nullable=True)
+    asset_version: Mapped[int] = mapped_column(
+        Integer, nullable=False, server_default=text("1")
+    )
+    phase: Mapped[str] = mapped_column(
+        String(16), nullable=False, server_default=text("'queued'")
+    )
+    completed_images: Mapped[int] = mapped_column(
+        Integer, nullable=False, server_default=text("0")
+    )
+    attempts: Mapped[int] = mapped_column(
+        Integer, nullable=False, server_default=text("0")
+    )
+    started_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True), nullable=True
+    )
+    locked_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True), nullable=True
+    )
+    lease_token: Mapped[str | None] = mapped_column(String(36), nullable=True)
+    generation_log_id: Mapped[int | None] = mapped_column(
+        BigInteger,
+        ForeignKey(
+            "avatar_generation_log.id", name="fk_custom_avatars_generation_log_id"
+        ),
+        nullable=True,
+    )
 
     __table_args__ = (
         CheckConstraint(
             "status IN ('pending','ready','failed')", name="ck_custom_avatars_status"
+        ),
+        CheckConstraint(
+            "completed_images BETWEEN 0 AND 30",
+            name="ck_custom_avatars_completed_images",
         ),
     )
 

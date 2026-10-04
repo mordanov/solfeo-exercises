@@ -72,15 +72,30 @@ To create an original character:
 3. Click **Create avatar**.
    The window shows the remaining quota and generation progress.
 4. Wait for the preview.
-5. Click **Use it** to save the generated character.
+   The window shows the phase, saved images out of 30, and an approximate remaining time.
+   The counter stays at 0 while the service draws all variants together.
+   It increases when the application cuts and saves the images.
+   A longer wait shows an unknown estimate instead of false completion.
+5. Select **Preview level** to inspect levels 1–10 and all 3 emotions.
+6. Click **Use it** to save the generated character.
    The selected character remains after a reload.
-6. Reopen the chooser if you close it during generation.
+7. Reopen the chooser if you close it during generation.
    The existing job appears without another generation request.
-7. Click **Discard** to remove an unwanted result.
+8. Click **Discard** to remove an unwanted result.
+
+To reuse a generated character:
+1. Open **Choose avatar**.
+2. Select a picture under **Saved avatars**.
+3. Inspect its levels and emotions.
+4. Click **Use it**.
+   The character returns without another generation request or quota charge.
+
+Selecting a built-in character does not remove saved avatars.
+Older generated avatars show a notice because they share 3 emotion images across all levels.
 
 Custom creation requires the operator's configured generation service.
 An unavailable service or a failed generation shows an error.
-The built-in characters remain available without that service.
+The built-in and saved characters remain available without that service.
 Some artwork repeats between levels because the original sheets contain different numbers of appearances.
 
 ## Change the visual theme

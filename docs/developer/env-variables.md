@@ -156,10 +156,22 @@ Only the OMR container needs executable temporary memory for JavaCPP native libr
 
 | Variable | Default | Purpose |
 |---|---|---|
-| `AVATAR_IMAGE_MODEL` | `dall-e-3` | OpenAI image model used for custom avatar generation |
+| `AVATAR_IMAGE_MODEL` | `gpt-image-1-mini` | Economical model for one sheet with 30 avatar variants |
+| `AVATAR_IMAGE_QUALITY` | `low` | GPT Image quality: low, medium, or high |
+| `AVATAR_GEN_TIMEOUT_SECONDS` | `180` | Image request timeout; expired claims add a 60 s margin |
+| `AVATAR_GEN_ESTIMATED_SECONDS` | `120` | Initial approximate duration before recent successful jobs supply an estimate |
+| `AVATAR_GEN_MAX_IMAGE_BYTES` | `16777216` | Maximum decoded PNG bytes; encoded replies have a bounded size |
+| `AVATAR_GEN_POLL_SECONDS` | `2` | Delay between avatar worker cycles |
 | `AVATAR_GEN_DAILY_LIMIT` | `3` | Maximum billable avatar generations per student per day |
 | `AVATAR_GEN_GRACE_MS` | `500` | Extra milliseconds allowed when the game checks a timed answer |
 | `AVATAR_ROUND_EXPIRE_S` | `3600` | Seconds before an unfinished round expires |
+
+The backend and avatar worker need the same private `OPENAI_API_KEY`.
+An empty key disables new requests, not access to saved avatars.
+The default creates one low-quality `1024x1536` transparent PNG through GPT Image.
+Explicit legacy DALL-E settings remain supported with a white background and local transparency extraction.
+Changing the default does not replace an existing private model setting.
+Provider access and billing remain operator prerequisites.
 
 ## Container deployment settings
 

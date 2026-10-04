@@ -7,6 +7,19 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-10-04: The owner requests persistent custom avatars with 30 level and emotion variants.
+  Use one generated sheet and local extraction instead of 30 separate image requests.
+  Default to `gpt-image-1-mini`, low quality, and a transparent `1024x1536` PNG.
+  Retain explicit legacy DALL-E model settings and older ready avatars without paid regeneration.
+  Store the original sheet, all 30 frames, and their hashes in the shared private media volume.
+  Expose actual saved-image progress, approximate time, and a reusable saved gallery.
+  Identical pending requests reuse the same job; durable claims prevent duplicate worker requests.
+  Saved-sheet recovery requires no provider call or credential.
+  Interrupted unsaved requests fail explicitly instead of automatically repeating a paid request.
+  Close legacy pending jobs during migration because the old worker cannot prove their paid request state.
+  Keep private credentials and production configuration unchanged during implementation.
+  Synthetic tests do not establish real-provider artistic quality or production activation.
+
 - 2026-10-04: The owner selects 14 natural game pitches from C4 through B5.
   Both clefs use the same pitches; changing the clef does not change their sound.
   Separate answer buttons identify the pitch and scientific octave.

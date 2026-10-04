@@ -8,10 +8,64 @@ Prerequisites:
 Last updated: 2026-10-04 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a0523`.
 
 ## Current phase
-Game piano and setup follow the initial note-listening control.
-This task uses the existing `game-note-listening` branch from source `26f064e`.
+Persistent custom avatar generation follows the completed sampled piano task.
+This task uses `feat/avatar-generation-sheets` from source `6c637e1`.
 Accepted PHASE 7 remains closed.
 Earlier game, appearance, and listening entries below remain historical session records.
+
+### Persistent custom avatar generation
+
+The owner requests 30 saved appearances, honest progress, reuse, and economical generation on a separate branch.
+The previous worker generates only 3 emotion images.
+The existing API returns status `503` when `OPENAI_API_KEY` is empty.
+Read-only VPS inspection confirms that the production avatar worker runs.
+This session does not inspect private environment values or confirm production key presence.
+The interface now reports missing configuration before permitting creation.
+Saved and built-in avatars remain available without provider credentials.
+
+One image request now creates a sprite sheet with 5 columns and 6 rows.
+The default uses `gpt-image-1-mini`, low quality, and a transparent `1024x1536` PNG.
+The worker extracts 10 levels with neutral, happy, and sad emotions.
+Explicit legacy DALL-E settings retain white-background extraction without erasing magenta or enclosed white artwork.
+Each job permanently saves its original sheet, 30 transparent PNG frames, and a hash manifest in shared private media storage.
+Authenticated level-specific routes retain ownership checks, nginx delivery, and no-store responses.
+Both selection endpoints reject incomplete version 2 sets.
+
+The chooser shows phases, actual saved-image counts, and explicitly approximate remaining time.
+The count stays at 0 during the single provider image request.
+The interface explains this limitation rather than inventing intermediate AI progress.
+An overdue estimate becomes unknown.
+The progress area becomes visible automatically, including after reopening a cached job on a phone.
+Ready previews show every level and all 3 emotions.
+The paginated saved gallery preserves previous choices after switching to built-in characters.
+Selection requires no new image request.
+
+Account and player locks serialize quota checks and creation.
+Identical pending requests reuse one job and one quota record.
+Durable worker claims prevent duplicate processing.
+Recovery reuses a saved sheet and valid frames, including when the key becomes unavailable.
+A late provider reply cannot replace a new worker's sheet.
+Interrupted requests without a saved image fail explicitly without automatic paid retries.
+Moderation refunds only the linked quota record.
+Migration `0009_avatar_sheets` preserves older ready avatars and closes untracked legacy pending jobs without regeneration.
+
+All 293 Python tests, including deployment checks, and 312 frontend tests pass.
+Empty and previous-release migrations, repeated upgrades, downgrades, and model comparison pass.
+The production frontend build passes.
+All 6 repository quality hooks and documentation checks pass.
+Chrome verifies 100 cases using synthetic APIs and existing local artwork.
+These cover all 3 languages, both themes, 4 viewport widths, visible progress, polling, reopening, reuse, pagination, and legacy previews.
+Synthetic geometry checks do not establish real-provider artistic quality.
+No new dependency, paid generation, push, deployment, or private configuration change occurs.
+The code knowledge graph receives an AST-only refresh.
+
+Remaining manual checks:
+1. Publish the backend, frontend, migration, and avatar worker together.
+2. Configure a private `OPENAI_API_KEY` with model access in both the backend and avatar worker.
+3. Select the intended model and quality explicitly if the existing environment retains a legacy override.
+4. Generate one real avatar and inspect all 10 levels and 3 emotions for consistent identity and correct expressions.
+5. Close and reopen generation in Chrome and Safari; confirm understandable progress and approximate time.
+6. Restart the application, switch to a built-in character, and reuse the saved avatar without another generation request.
 
 ### Sampled piano and game setup
 

@@ -1,12 +1,26 @@
-from typing import Literal
+from typing import Annotated, Literal
 from urllib.parse import quote
 
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends, Query, Response
 from pydantic import BaseModel, Field
 
 from app.api.auth import Configuration, Db, Member, require_csrf
 from app.game.config import ANIMAL_IDS
-from app.services.auth import ServiceError
+from app.game.models import CustomAvatar
+from app.game.services.avatars import (
+    authorized_job,
+    avatar_path,
+    generation_estimate,
+    list_avatar_jobs,
+    quota_usage,
+    remaining_seconds,
+)
+from app.game.services.avatars import (
+    discard_avatar as discard_job,
+)
+from app.game.services.avatars import (
+    use_avatar as use_job,
+)
 
 router = APIRouter(prefix="/api/game/avatars", tags=["game-avatars"])
 
@@ -37,112 +51,139 @@ class GenerateBody(BaseModel):
     description: str = Field(min_length=1, max_length=1000)
 
 
+class GenerationOut(BaseModel):
+    job_id: int
+
+
+class MutationOut(BaseModel):
+    ok: bool
+
+
 @router.post("/generate", dependencies=[Depends(require_csrf)])
 def generate_avatar(
     body: GenerateBody, identity: Member, session: Db, settings: Configuration
-) -> dict[str, object]:
-    from app.game.services.avatars import check_daily_quota, start_avatar_job
-    from app.game.services.players import get_or_403
+) -> GenerationOut:
+    from app.game.services.avatars import start_avatar_job
 
-    if not settings.openai_api_key.get_secret_value():
-        raise ServiceError("AVATAR_GENERATION_UNAVAILABLE", 503)
     with session.begin():
         account_id = identity.user.id
-        if identity.user.role == "manager":
-            from app.game.models import Player
-
-            if session.get(Player, body.player_id) is None:
-                raise ServiceError("PLAYER_NOT_FOUND", 404)
-        else:
-            get_or_403(session, body.player_id, account_id)
-        is_manager = identity.user.role == "manager"
-        if not is_manager:
-            remaining = check_daily_quota(
-                session, account_id, settings.avatar_gen_daily_limit
-            )
-            if remaining <= 0:
-                raise ServiceError("AVATAR_QUOTA_EXCEEDED", 429)
         job = start_avatar_job(
             session, account_id, body.player_id, body.description, settings
         )
         job_id = job.id
-    return {"job_id": job_id}
+    return GenerationOut(job_id=job_id)
 
 
-def _job_out(job: object) -> dict[str, object]:
-    from app.game.models import CustomAvatar
+class AvatarJobOut(BaseModel):
+    id: int
+    status: str
+    phase: str
+    asset_version: int
+    completed_images: int
+    total_images: int
+    estimated_seconds_remaining: int | None
+    base_path: str | None
+    happy_path: str | None
+    sad_path: str | None
+    error_code: str | None
 
-    assert isinstance(job, CustomAvatar)
-    return {
-        "id": job.id,
-        "status": job.status,
-        "base_path": job.base_path,
-        "happy_path": job.happy_path,
-        "sad_path": job.sad_path,
-        "error_code": job.error_code,
-    }
+
+class SavedAvatarsOut(BaseModel):
+    jobs: list[AvatarJobOut]
+    total: int
+
+
+class AvatarQuotaOut(BaseModel):
+    used: int
+    limit: int | None
+    resets_at: str | None
+    generation_available: bool
+    generation_reason: str | None
+    image_count: int = 30
+
+
+def _job_out(job: CustomAvatar, estimate: int) -> AvatarJobOut:
+    ready = job.status == "ready"
+    total = 30 if job.asset_version == 2 else 3
+    return AvatarJobOut(
+        id=job.id,
+        status=job.status,
+        phase="complete" if ready else job.phase,
+        asset_version=job.asset_version,
+        completed_images=3
+        if ready and job.asset_version == 1
+        else job.completed_images,
+        total_images=total,
+        estimated_seconds_remaining=remaining_seconds(job, estimate),
+        base_path=job.base_path,
+        happy_path=job.happy_path,
+        sad_path=job.sad_path,
+        error_code=job.error_code,
+    )
+
+
+@router.get("/saved")
+def saved_avatars(
+    player_id: int,
+    identity: Member,
+    session: Db,
+    settings: Configuration,
+    offset: Annotated[int, Query(ge=0)] = 0,
+) -> SavedAvatarsOut:
+    with session.begin():
+        jobs, total = list_avatar_jobs(
+            session,
+            player_id,
+            identity.user.id,
+            identity.user.role == "manager",
+            saved=True,
+            offset=offset,
+        )
+        estimate = generation_estimate(session, settings)
+        return SavedAvatarsOut(
+            jobs=[_job_out(job, estimate) for job in jobs], total=total
+        )
 
 
 @router.get("")
 def recent_jobs(
-    player_id: int, identity: Member, session: Db
-) -> list[dict[str, object]]:
-    from sqlalchemy import select
-
-    from app.game.models import CustomAvatar, Player
-
+    player_id: int, identity: Member, session: Db, settings: Configuration
+) -> list[AvatarJobOut]:
     with session.begin():
-        player = session.get(Player, player_id)
-        if player is None or (
-            identity.user.role != "manager" and player.account_id != identity.user.id
-        ):
-            raise ServiceError("PLAYER_NOT_FOUND", 404)
-        query = (
-            select(CustomAvatar)
-            .where(
-                CustomAvatar.player_id == player_id,
-                CustomAvatar.status.in_(("pending", "ready", "failed")),
-            )
-            .order_by(CustomAvatar.id.desc())
-            .limit(5)
+        jobs, _ = list_avatar_jobs(
+            session,
+            player_id,
+            identity.user.id,
+            identity.user.role == "manager",
         )
-        if player.custom_avatar_id is not None:
-            query = query.where(CustomAvatar.id != player.custom_avatar_id)
-        if identity.user.role != "manager":
-            query = query.where(CustomAvatar.account_id == identity.user.id)
-        return [_job_out(job) for job in session.scalars(query)]
+        estimate = generation_estimate(session, settings)
+        return [_job_out(job, estimate) for job in jobs]
 
 
 @router.get("/{job_id}/status")
-def job_status(job_id: int, identity: Member, session: Db) -> dict[str, object]:
-    from app.game.models import CustomAvatar
-
+def job_status(
+    job_id: int, identity: Member, session: Db, settings: Configuration
+) -> AvatarJobOut:
     with session.begin():
-        job = session.get(CustomAvatar, job_id)
-        if job is None or (
-            identity.user.role != "manager" and job.account_id != identity.user.id
-        ):
-            raise ServiceError("JOB_NOT_FOUND", 404)
-    return _job_out(job)
+        job = authorized_job(
+            session, job_id, identity.user.id, identity.user.role == "manager"
+        )
+        return _job_out(job, generation_estimate(session, settings))
 
 
 @router.post("/{job_id}/use", dependencies=[Depends(require_csrf)])
-def use_avatar(job_id: int, identity: Member, session: Db) -> dict[str, object]:
-    from app.game.models import CustomAvatar, Player
-
+def use_avatar(
+    job_id: int, identity: Member, session: Db, settings: Configuration
+) -> MutationOut:
     with session.begin():
-        job = session.get(CustomAvatar, job_id)
-        if job is None or (
-            identity.user.role != "manager" and job.account_id != identity.user.id
-        ):
-            raise ServiceError("JOB_NOT_FOUND", 404)
-        if job.status != "ready":
-            raise ServiceError("JOB_NOT_READY", 400)
-        player = session.get(Player, job.player_id)
-        if player is None:
-            raise ServiceError("PLAYER_NOT_FOUND", 404)
-        player.custom_avatar_id = job.id
-    return {"ok": True}
+        use_job(
+            session,
+            job_id,
+            identity.user.id,
+            identity.user.role == "manager",
+            settings,
+        )
+    return MutationOut(ok=True)
 
 
 @router.api_route("/{job_id}/files/{state}", methods=["GET", "HEAD"])
@@ -153,85 +194,42 @@ def avatar_file(
     session: Db,
     settings: Configuration,
     response: Response,
+    level: Annotated[int, Query(ge=1, le=10)] = 1,
 ) -> Response:
-    from app.game.models import CustomAvatar, Player
-
     with session.begin():
-        job = session.get(CustomAvatar, job_id)
-        player = session.get(Player, job.player_id) if job else None
-        if (
-            job is None
-            or player is None
-            or (
-                identity.user.role != "manager"
-                and identity.user.id not in (job.account_id, player.account_id)
-            )
-        ):
-            raise ServiceError("JOB_NOT_FOUND", 404)
-        if job.status != "ready":
-            raise ServiceError("JOB_NOT_READY", 400)
-        filename = {
-            "neutral": job.base_path,
-            "happy": job.happy_path,
-            "sad": job.sad_path,
-        }[state]
-    if not filename:
-        raise ServiceError("FILE_NOT_FOUND", 404)
+        job = authorized_job(
+            session, job_id, identity.user.id, identity.user.role == "manager"
+        )
+        path = avatar_path(job, state, level, settings)
     root = settings.media_root.resolve()
-    path = (root / filename).resolve()
-    job_root = root / "avatars" / "custom" / str(job_id)
-    if (
-        not path.is_relative_to(root)
-        or not path.is_relative_to(job_root)
-        or not path.is_file()
-    ):
-        raise ServiceError("FILE_NOT_FOUND", 404)
     response.headers["X-Accel-Redirect"] = "/_protected_media/" + quote(
         path.relative_to(root).as_posix()
     )
     response.headers["Content-Type"] = "image/png"
     response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["Cache-Control"] = "no-store"
     response.status_code = 200
     return response
 
 
 @router.delete("/{job_id}", dependencies=[Depends(require_csrf)])
-def discard_avatar(job_id: int, identity: Member, session: Db) -> dict[str, object]:
-    from app.game.models import CustomAvatar, Player
-
+def discard_avatar(job_id: int, identity: Member, session: Db) -> MutationOut:
     with session.begin():
-        job = session.get(CustomAvatar, job_id)
-        if job is None or (
-            identity.user.role != "manager" and job.account_id != identity.user.id
-        ):
-            raise ServiceError("JOB_NOT_FOUND", 404)
-        player = session.get(Player, job.player_id)
-        if player is not None and player.custom_avatar_id == job.id:
-            player.custom_avatar_id = None
-            session.flush()
-        session.delete(job)
-    return {"ok": True}
+        discard_job(session, job_id, identity.user.id, identity.user.role == "manager")
+    return MutationOut(ok=True)
 
 
 @router.get("/quota")
-def quota(identity: Member, session: Db, settings: Configuration) -> dict[str, object]:
-    from datetime import UTC, datetime, timedelta
-
-    from app.game.services.avatars import check_daily_quota
-
-    if identity.user.role == "manager":
-        return {"used": 0, "limit": None, "resets_at": None}
+def quota(identity: Member, session: Db, settings: Configuration) -> AvatarQuotaOut:
+    available = bool(settings.openai_api_key.get_secret_value())
     with session.begin():
-        remaining = check_daily_quota(
-            session, identity.user.id, settings.avatar_gen_daily_limit
+        used, limit, resets_at = quota_usage(
+            session, identity.user.id, identity.user.role == "manager", settings
         )
-    used = settings.avatar_gen_daily_limit - remaining
-    now = datetime.now(UTC)
-    resets_at = (now + timedelta(days=1)).replace(
-        hour=0, minute=0, second=0, microsecond=0
+    return AvatarQuotaOut(
+        used=used,
+        limit=limit,
+        resets_at=resets_at.isoformat() if resets_at else None,
+        generation_available=available,
+        generation_reason=None if available else "AVATAR_GENERATION_UNAVAILABLE",
     )
-    return {
-        "used": used,
-        "limit": settings.avatar_gen_daily_limit,
-        "resets_at": resets_at.isoformat(),
-    }

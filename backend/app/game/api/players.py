@@ -3,7 +3,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, Query
 from pydantic import BaseModel, Field
 
-from app.api.auth import Db, Manager, Member, require_csrf
+from app.api.auth import Configuration, Db, Manager, Member, require_csrf
 from app.game.config import LEVEL_THRESHOLDS
 from app.game.models import Player
 
@@ -123,13 +123,18 @@ def get_player(player_id: int, identity: Member, session: Db) -> dict[str, objec
 
 @router.patch("/{player_id}", dependencies=[Depends(require_csrf)])
 def patch_player(
-    player_id: int, body: PatchPlayerBody, identity: Manager, session: Db
+    player_id: int,
+    body: PatchPlayerBody,
+    identity: Manager,
+    session: Db,
+    settings: Configuration,
 ) -> dict[str, object]:
     from app.game.services.players import update_player
 
     player = update_player(
         session,
         player_id,
+        settings,
         name=body.name,
         avatar_animal=body.avatar_animal,
         custom_avatar_id=body.custom_avatar_id,

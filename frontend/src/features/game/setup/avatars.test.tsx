@@ -37,6 +37,6 @@ it("renders the selected stage and emotion without clipping the character", asyn
 });
 it("uses authorized URLs for generated avatars", () => {
   expect(avatarSource("dragon", 10, "sad", 42)).toBe(
-    "/api/game/avatars/42/files/sad",
+    "/api/game/avatars/42/files/sad?level=10",
   );
 });
