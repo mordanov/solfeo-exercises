@@ -262,6 +262,9 @@ The extractor follows connected visible pixels instead of assuming perfectly cen
 It removes detached background specks without cutting another badge into the result.
 Each public PNG uses a transparent 256 × 256 px canvas with at least 8 px of padding.
 The original image remains unchanged.
+Reproduction tests compare decoded RGBA pixels, dimensions, and PNG format instead of compressed file bytes.
+Different platform encoders can produce different PNG bytes for identical pixels.
+The source checksum still verifies byte-for-byte preservation.
 
 To reproduce the packaged images:
 

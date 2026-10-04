@@ -1870,8 +1870,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/STATUS.md": {
-    "mtime": 1791147725.3163347,
-    "ast_hash": "ac23d6b812b102facca42f9e106b5a37",
+    "mtime": 1791150726.109965,
+    "ast_hash": "bf4565c34f83aaa2bfe763e12fd90185",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/DECISIONS.md": {
@@ -1955,8 +1955,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/developer/game-avatars.md": {
-    "mtime": 1791147341.1567483,
-    "ast_hash": "6b4ea729e455d965c67b5656fa8fd77f",
+    "mtime": 1791150726.1076741,
+    "ast_hash": "2cec3b9ca78dceeaa7298003ed019a35",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/developer/data-model.md": {
@@ -7585,8 +7585,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/backend/tests/test_prize_art.py": {
-    "mtime": 1791146942.1784015,
-    "ast_hash": "073989357cc70e7e109bed35339bd943",
+    "mtime": 1791150726.1062984,
+    "ast_hash": "bcf56e3956b74a56da35731a140badcd",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/scripts/build_prize_assets.py": {

@@ -3,6 +3,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
 from PIL import Image
 
 from app.game.services.achievements import ACHIEVEMENT_CODES
@@ -12,13 +13,41 @@ ASSETS = ROOT / "frontend/public/assets/prizes"
 SOURCE = ROOT / "trophies.png"
 
 
+def assert_same_pixels(actual_path: Path, expected_path: Path) -> None:
+    with Image.open(actual_path) as actual, Image.open(expected_path) as expected:
+        assert actual.format == expected.format == "PNG"
+        assert actual.mode == expected.mode == "RGBA"
+        assert actual.size == expected.size
+        same_pixels = actual.tobytes() == expected.tobytes()
+        assert same_pixels, f"Pixels differ in {actual_path.name}"
+
+
+def test_same_pixels_allow_different_png_compression(tmp_path: Path) -> None:
+    original = ASSETS / "first_round.png"
+    reencoded = tmp_path / original.name
+    with Image.open(original) as image:
+        image.save(reencoded, compress_level=0)
+    assert reencoded.read_bytes() != original.read_bytes()
+    assert_same_pixels(reencoded, original)
+
+
+def test_different_pixels_are_rejected(tmp_path: Path) -> None:
+    original = ASSETS / "first_round.png"
+    changed = tmp_path / original.name
+    with Image.open(original) as image:
+        image.putpixel((128, 128), (1, 2, 3, 255))
+        image.save(changed)
+    with pytest.raises(AssertionError, match="Pixels differ"):
+        assert_same_pixels(changed, original)
+
+
 def test_all_twenty_prizes_have_distinct_transparent_artwork() -> None:
     assert {path.stem for path in ASSETS.glob("*.png")} == set(ACHIEVEMENT_CODES)
     hashes: set[str] = set()
     for code in ACHIEVEMENT_CODES:
         path = ASSETS / f"{code}.png"
-        hashes.add(hashlib.sha256(path.read_bytes()).hexdigest())
         with Image.open(path) as image:
+            hashes.add(hashlib.sha256(image.tobytes()).hexdigest())
             assert image.format == "PNG"
             assert image.mode == "RGBA"
             assert image.size == (256, 256)
@@ -56,9 +85,7 @@ def test_prize_extraction_reproduces_assets_without_changing_the_source(
     )
     assert hashlib.sha256(SOURCE.read_bytes()).hexdigest() == before
     for code in ACHIEVEMENT_CODES:
-        assert (tmp_path / f"{code}.png").read_bytes() == (
-            ASSETS / f"{code}.png"
-        ).read_bytes()
+        assert_same_pixels(tmp_path / f"{code}.png", ASSETS / f"{code}.png")
 
 
 def test_invalid_sheet_does_not_write_partial_assets(tmp_path: Path) -> None:

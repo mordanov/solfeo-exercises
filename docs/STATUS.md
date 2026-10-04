@@ -33,6 +33,15 @@ Both shelves load all 20 PNGs; a completed round shows all 20 new-prize pictures
 The checks confirm transparent images, uniform size, localized labels, gray locked prizes, and no horizontal page overflow.
 Remaining manual checks cover prize appearance in Safari and on physical phones and tablets.
 
+### Prize extraction CI repair
+
+Run `37234852133` fails only the prize reproduction test; the other 332 backend tests pass.
+The comparison differs inside PNG compression data, not the file header or dimensions.
+The reproduction test now compares exact decoded RGBA pixels, format, and dimensions.
+It retains byte-for-byte verification of the original source.
+Regression tests accept different lossless encodings and reject a changed color pixel with unchanged alpha.
+The test remains enabled without skips, pixel tolerances, or an extraction change.
+
 ### Game fixes, prizes, and avatar approval
 
 Implementation is complete on `feat/game-rewards-moderation`.
