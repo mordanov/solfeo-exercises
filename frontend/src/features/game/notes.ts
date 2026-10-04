@@ -2,8 +2,9 @@ import type { TFunction } from "i18next";
 import type { NoteNaming } from "../../api/auth";
 import type { Note } from "./api/hooks";
 
-export const GAME_NOTES: readonly Note[] = [4, 5].flatMap((octave) =>
-  [..."CDEFGAB"].map((name) => ({ name, octave })),
+export const NOTE_NAMES = ["C", "D", "E", "F", "G", "A", "B"] as const;
+export const PIANO_NOTES: readonly Note[] = [2, 3, 4, 5].flatMap((octave) =>
+  NOTE_NAMES.map((name) => ({ name, octave })),
 );
 export const DIFFICULTIES = [
   { name: "easy", timeMs: 13000 },
@@ -24,8 +25,5 @@ export function noteLabel(
   naming: NoteNaming,
   t: TFunction,
 ): string {
-  return t("game.noteLabel", {
-    name: t(`game.noteNames.${naming}.${note.name}`),
-    octave: note.octave,
-  });
+  return t(`game.noteNames.${naming}.${note.name}`);
 }

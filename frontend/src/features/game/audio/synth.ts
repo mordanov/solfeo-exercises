@@ -1,8 +1,8 @@
 import Soundfont, { type Piano, type PlayingNote } from "soundfont-player";
-import { GAME_NOTES } from "../notes";
+import { PIANO_NOTES } from "../notes";
 import type { Note } from "../api/hooks";
 
-export const PIANO_ASSET = "/assets/piano/salamander-c4-b5.json";
+export const PIANO_ASSET = "/assets/piano/salamander-c2-b5.json";
 let ctx: AudioContext | null = null;
 let piano: Piano | null = null;
 let loading: Promise<void> | null = null;
@@ -17,7 +17,7 @@ export function isMuted(): boolean {
 
 export function sampleKey(note: Note, velocity = 64): string {
   if (
-    !GAME_NOTES.some(
+    !PIANO_NOTES.some(
       (pitch) => pitch.name === note.name && pitch.octave === note.octave,
     )
   ) {
@@ -44,13 +44,13 @@ export async function preparePiano(): Promise<void> {
   const ac = getCtx();
   const resume = ac.state === "running" ? Promise.resolve() : ac.resume();
   if (!loading) {
-    loading = Soundfont.instrument(ac, "salamander-c4-b5", {
+    loading = Soundfont.instrument(ac, "salamander-c2-b5", {
       nameToUrl: () => PIANO_ASSET,
       map: (key) => key,
       adsr: [0.005, 0.1, 0.9, 0.1],
     })
       .then((loaded) => {
-        for (const note of GAME_NOTES) {
+        for (const note of PIANO_NOTES) {
           for (const velocity of [40, 64, 96, 127]) {
             const buffer = loaded.buffers[sampleKey(note, velocity)];
             if (

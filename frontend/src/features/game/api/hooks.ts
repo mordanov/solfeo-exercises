@@ -34,6 +34,7 @@ export interface SubmitResponse {
 
 export interface RoundResult {
   score: number;
+  score_bonus?: number;
   correct_count: number;
   is_win: boolean;
   xp_gained: number;
@@ -137,6 +138,8 @@ export const useStartRound = () =>
       player_id: number;
       difficulty: string;
       note_count: number;
+      show_sound_hint: boolean;
+      show_correct_answer: boolean;
     }) =>
       gameFetch.post<{ round_id: number; task: Task }>("/rounds", csrf, body),
   });

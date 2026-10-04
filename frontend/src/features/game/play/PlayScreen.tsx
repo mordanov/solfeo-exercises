@@ -19,6 +19,7 @@ import Timer from "./Timer";
 
 export interface RoundResult {
   score: number;
+  score_bonus?: number;
   correct_count: number;
   is_win: boolean;
   xp_gained: number;
@@ -190,18 +191,20 @@ export default function PlayScreen({
         paused={isWaiting}
       />
 
-      {feedback !== "idle" && (
-        <Alert
-          severity={feedback === "correct" ? "success" : "error"}
-          sx={{ mb: 1 }}
-        >
-          {feedback === "correct"
-            ? t("game.correct")
-            : feedback === "timeout"
-              ? t("game.timeout")
-              : t("game.wrong")}
-        </Alert>
-      )}
+      <Box sx={{ minHeight: 56 }}>
+        {feedback !== "idle" && (
+          <Alert
+            severity={feedback === "correct" ? "success" : "error"}
+            sx={{ mb: 1 }}
+          >
+            {feedback === "correct"
+              ? t("game.correct")
+              : feedback === "timeout"
+                ? t("game.timeout")
+                : t("game.wrong")}
+          </Alert>
+        )}
+      </Box>
 
       <Box sx={{ display: "flex", alignItems: "center", gap: 1, my: 2 }}>
         <Box
@@ -215,24 +218,19 @@ export default function PlayScreen({
         >
           <Staff notes={task.notes} clef={clef} />
         </Box>
-        {showCorrectAnswer && feedback !== "idle" && (
-          <Box
-            role="region"
-            aria-label={t("game.correctAnswer")}
-            sx={{ flex: "0 0 76px", textAlign: "center" }}
-          >
-            <Typography variant="caption">{t("game.correctAnswer")}</Typography>
-            {correctAnswers.map((note, index) => (
-              <Typography key={index} sx={{ fontWeight: 700 }}>
-                {noteLabel(note, noteNaming, t)}
-              </Typography>
-            ))}
-          </Box>
-        )}
       </Box>
 
-      {showSoundHint && (
-        <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+      <Box
+        sx={{
+          position: "relative",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: 128,
+          mb: 2,
+        }}
+      >
+        {showSoundHint && (
           <Tooltip title={t(listening ? "game.stopListening" : "game.listen")}>
             <span>
               <IconButton
@@ -289,8 +287,30 @@ export default function PlayScreen({
               </IconButton>
             </span>
           </Tooltip>
-        </Box>
-      )}
+        )}
+        {showCorrectAnswer && feedback !== "idle" && (
+          <Box
+            role="region"
+            aria-label={t("game.correctAnswer")}
+            sx={{
+              position: "absolute",
+              left: "calc(50% + 36px)",
+              right: 0,
+              top: "50%",
+              transform: "translateY(-50%)",
+              textAlign: "center",
+              overflowWrap: "anywhere",
+            }}
+          >
+            <Typography variant="caption">{t("game.correctAnswer")}</Typography>
+            <Typography sx={{ fontWeight: 700 }}>
+              {correctAnswers
+                .map((note) => noteLabel(note, noteNaming, t))
+                .join(" · ")}
+            </Typography>
+          </Box>
+        )}
+      </Box>
       {audioError && (
         <Alert severity="error" sx={{ mb: 2 }}>
           {t("game.audioError")}
@@ -352,6 +372,7 @@ export default function PlayScreen({
 
       <NoteButtons
         clef={clef}
+        octave={task.notes[Math.min(answers.length, noteCount - 1)].octave}
         noteNaming={noteNaming}
         onAnswer={handleAnswer}
         disabled={

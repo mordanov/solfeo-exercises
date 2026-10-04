@@ -50,13 +50,11 @@ function mount() {
 it("explains difficulty and passes both independent options into the round", async () => {
   const { started } = mount();
   await screen.findByText("Piano player");
-  expect(screen.getByRole("note")).toHaveTextContent("13 seconds");
+  expect(screen.getByRole("note").textContent).toBe("13 seconds per question");
   fireEvent.click(screen.getByRole("button", { name: "Hard" }));
-  expect(screen.getByRole("note")).toHaveTextContent("7 seconds");
-  fireEvent.click(screen.getByLabelText("Show the sound hint"));
-  fireEvent.click(
-    screen.getByLabelText("Show the correct answer after answering"),
-  );
+  expect(screen.getByRole("note").textContent).toBe("7 seconds per question");
+  fireEvent.click(screen.getByLabelText(/Show the sound hint/));
+  fireEvent.click(screen.getByLabelText(/Show the correct answer/));
   fireEvent.click(screen.getByRole("button", { name: "Let's go!" }));
   await waitFor(() => expect(started).toHaveBeenCalledOnce());
   expect(started.mock.calls[0][4]).toEqual({
@@ -64,6 +62,35 @@ it("explains difficulty and passes both independent options into the round", asy
     showCorrectAnswer: true,
   });
   expect(preparePiano).toHaveBeenCalledOnce();
+  expect(
+    JSON.parse(
+      String(
+        fetchMock.mock.calls.find(([url]) => url === "/api/game/rounds")?.[1]
+          ?.body,
+      ),
+    ),
+  ).toMatchObject({
+    show_sound_hint: false,
+    show_correct_answer: true,
+  });
+});
+it("shows zero or one point independently for each switch", async () => {
+  mount();
+  await screen.findByText("Piano player");
+  expect(screen.getByLabelText(/Show the sound hint/)).toHaveAccessibleName(
+    "Show the sound hint — 0 points",
+  );
+  expect(screen.getByLabelText(/Show the correct answer/)).toHaveAccessibleName(
+    "Show the correct answer — +1 point",
+  );
+  fireEvent.click(screen.getByLabelText(/Show the sound hint/));
+  fireEvent.click(screen.getByLabelText(/Show the correct answer/));
+  expect(screen.getByLabelText(/Show the sound hint/)).toHaveAccessibleName(
+    "Show the sound hint — +1 point",
+  );
+  expect(screen.getByLabelText(/Show the correct answer/)).toHaveAccessibleName(
+    "Show the correct answer — 0 points",
+  );
 });
 it("does not start the scored round while piano loading is pending", async () => {
   let ready: () => void = () => {};
@@ -81,10 +108,8 @@ it("does not start the scored round while piano loading is pending", async () =>
   ).toBeDisabled();
   expect(screen.getByRole("button", { name: "Hard" })).toBeDisabled();
   expect(screen.getByRole("button", { name: "4" })).toBeDisabled();
-  expect(screen.getByLabelText("Show the sound hint")).toBeDisabled();
-  expect(
-    screen.getByLabelText("Show the correct answer after answering"),
-  ).toBeDisabled();
+  expect(screen.getByLabelText(/Show the sound hint/)).toBeDisabled();
+  expect(screen.getByLabelText(/Show the correct answer/)).toBeDisabled();
   expect(
     fetchMock.mock.calls.some(([, options]) => options?.method === "POST"),
   ).toBe(false);

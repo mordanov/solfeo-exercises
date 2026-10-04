@@ -134,7 +134,7 @@ def test_migration_upgrade_repeat_downgrade_and_upgrade(database: Database) -> N
         command.upgrade(config, "head")
         assert (
             connection.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0008_game"
+            == "0010_round_rules"
         )
         assert set(inspect(connection).get_table_names()) == {
             "alembic_version",
@@ -147,7 +147,81 @@ def test_migration_upgrade_repeat_downgrade_and_upgrade(database: Database) -> N
         command.upgrade(config, "head")
         assert (
             connection.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0008_game"
+            == "0010_round_rules"
+        )
+
+
+def test_round_rules_migration_preserves_previous_release_rows(
+    database: Database,
+) -> None:
+    with database.engine.begin() as connection:
+        config = migration_config(connection)
+        command.downgrade(config, "0008_game")
+        user_id = connection.scalar(
+            text(
+                "INSERT INTO users (username, password_hash, "
+                "first_name, last_name, role) "
+                "VALUES ('legacy-round-migration', 'synthetic-hash', "
+                "'L', 'R', 'student') "
+                "RETURNING id"
+            )
+        )
+        player_id = connection.scalar(
+            text(
+                "INSERT INTO players (account_id, name) "
+                "VALUES (:account_id, 'Legacy') RETURNING id"
+            ),
+            {"account_id": user_id},
+        )
+        season_id = connection.scalar(
+            text(
+                "INSERT INTO seasons (player_id, number) "
+                "VALUES (:player_id, 1) RETURNING id"
+            ),
+            {"player_id": player_id},
+        )
+        for status in ("active", "completed"):
+            connection.execute(
+                text(
+                    "INSERT INTO rounds (player_id, season_id, difficulty, "
+                    "note_count, note_naming, "
+                    "status, score, correct_count, expires_at) "
+                    "VALUES (:player_id, :season_id, 'easy', 1, 'letters', :status, "
+                    "3, 5, now() + interval '1 day')"
+                ),
+                {"player_id": player_id, "season_id": season_id, "status": status},
+            )
+        command.upgrade(config, "head")
+        rows = (
+            connection.execute(
+                text(
+                    "SELECT status, score, correct_count, rules_version, "
+                    "show_sound_hint, show_correct_answer "
+                    "FROM rounds WHERE player_id = :player_id ORDER BY status"
+                ),
+                {"player_id": player_id},
+            )
+            .tuples()
+            .all()
+        )
+        assert rows == [
+            ("active", 3, 5, 1, True, False),
+            ("completed", 3, 5, 1, True, False),
+        ]
+        command.check(config)
+        connection.execute(
+            text("DELETE FROM rounds WHERE player_id = :player_id"),
+            {"player_id": player_id},
+        )
+        connection.execute(
+            text("DELETE FROM seasons WHERE player_id = :player_id"),
+            {"player_id": player_id},
+        )
+        connection.execute(
+            text("DELETE FROM players WHERE id = :player_id"), {"player_id": player_id}
+        )
+        connection.execute(
+            text("DELETE FROM users WHERE id = :user_id"), {"user_id": user_id}
         )
 
 

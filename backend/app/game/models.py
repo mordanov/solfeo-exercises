@@ -92,6 +92,15 @@ class Round(Base):
     difficulty: Mapped[str] = mapped_column(String(6), nullable=False)
     note_count: Mapped[int] = mapped_column(SmallInteger, nullable=False)
     note_naming: Mapped[str] = mapped_column(String(7), nullable=False)
+    show_sound_hint: Mapped[bool] = mapped_column(
+        Boolean, nullable=False, server_default=text("true")
+    )
+    show_correct_answer: Mapped[bool] = mapped_column(
+        Boolean, nullable=False, server_default=text("false")
+    )
+    rules_version: Mapped[int] = mapped_column(
+        SmallInteger, nullable=False, server_default=text("1")
+    )
     status: Mapped[str] = mapped_column(
         String(9), nullable=False, server_default=text("'active'")
     )

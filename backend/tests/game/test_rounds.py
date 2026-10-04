@@ -9,10 +9,15 @@ def test_generate_tasks_count() -> None:
     assert len(tasks) == TASKS_PER_ROUND
 
 
-def test_both_clefs_offer_exactly_the_same_fourteen_natural_pitches() -> None:
-    expected = [(name, octave) for octave in (4, 5) for name in "CDEFGAB"]
-    assert NOTE_RANGE["treble"] == expected
-    assert NOTE_RANGE["bass"] == expected
+def test_each_clef_has_exactly_thirteen_pitches_matching_the_reference_staff() -> None:
+    assert (
+        NOTE_RANGE["treble"]
+        == [(name, octave) for octave in (4, 5) for name in "CDEFGAB"][:-1]
+    )
+    assert (
+        NOTE_RANGE["bass"]
+        == [(name, octave) for octave in (2, 3, 4) for name in "CDEFGAB"][2:15]
+    )
 
 
 def test_generate_tasks_clef_is_treble_or_bass() -> None:

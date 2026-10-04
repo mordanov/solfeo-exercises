@@ -8,10 +8,63 @@ Prerequisites:
 Last updated: 2026-10-04 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a0523`.
 
 ## Current phase
-Game piano and setup follow the initial note-listening control.
-This task uses the existing `game-note-listening` branch from source `26f064e`.
+Note-only game rounds follow the merged sampled-piano task.
+This task uses `feat/game-note-only-rounds` from main source `d33aaad`.
 Accepted PHASE 7 remains closed.
 Earlier game, appearance, and listening entries below remain historical session records.
+
+### Seven-note rounds and assistance bonuses
+
+The owner confirms E2–C4 for bass and a one-time bonus per round.
+Treble questions use C4–A5; both clefs have 13 natural pitches.
+The 7 answer buttons select names C through B without octave labels.
+Buttons, selected answers, and revealed answers follow account naming and interface language.
+Button audio uses the current question note's octave, including wrong choices, repeated names, and backspace.
+
+The sampled piano expands to natural C2–B5 so every answer button works in octaves 2–5.
+One local asset contains 112 AAC samples across 4 real velocity layers and occupies 2464963 bytes.
+The builder retains upstream tuning, attribution, the license, and 68 source hashes.
+Independent decoding verifies all 112 samples within 11.45 cents of their intended frequencies.
+The previous C4–B5 asset remains unchanged for cached application code.
+The new application requests only the new piano asset and adds no dependency.
+
+Setup shows only the selected 13, 10, or 7 s limit.
+The renamed correct-answer switch and sound-hint switch each show +1 point when disabled or 0 points when enabled.
+Each disabled option adds 1 point once per completed round, including losing rounds.
+The result states the total assistance bonus.
+XP, victory, stars, emotions, and existing completed results remain unchanged.
+The backend stores immutable options and rules version 2.
+Migration `0010_round_rules` preserves version 1 for previous rows, with strict octave grading and no assistance bonus.
+Submitted fake bonuses or option changes cannot change the result.
+A round lock prevents simultaneous final submissions from awarding XP or bonuses twice.
+
+The staff uses one 234 × 140 frame for all clefs and 1–4 notes.
+Shorter note groups remain centered.
+Correct answers appear only to the right of the centered playback control, including when the control is hidden.
+Reserved feedback space preserves the staff size and playback control coordinates.
+All 3 interface languages receive the revised labels and explanations.
+
+The complete backend and deployment suite passes 298 tests.
+The additional legacy-asset test and final targeted rerun also pass.
+All 311 frontend tests, the production build, and all 6 quality hooks pass.
+Chrome verifies 53 native audio and layout cases without mocking AAC decoding or scheduling.
+Coverage includes 320, 390, and 1280 px, both themes and clefs, all note counts, languages, and naming settings.
+Checks compare actual staff dimensions and button coordinates before and after feedback.
+They also verify all assistance combinations, wrong bass choices, repeated C4/C5 answers, and one asset request.
+Upgrade, repeat, downgrade, previous-release rows, and model parity pass on disposable PostgreSQL.
+The knowledge graph receives an AST-only refresh.
+No production change, push, deployment, private configuration inspection, or paid generation occurs.
+
+**Caution:** The separate avatar-sheet branch also follows migration `0008_game`.
+Reconcile that branch with `0010_round_rules` before publishing both features together.
+This task does not include the unmerged avatar-generation repair.
+
+Remaining manual checks:
+1. Publish the backend and frontend together and apply `0010_round_rules`.
+2. Compare bass E2–C4 and treble C4–A5 hint and answer sounds in Chrome and Safari on a real phone or iPad.
+3. Confirm 7 labels under both naming settings and switch between Russian, English, and Spanish.
+4. Check both switches and verify a round bonus of 0, 1, or 2 exactly once, without extra XP.
+5. Confirm fixed staff dimensions and centered playback during correct, incorrect, and timeout feedback.
 
 ### Sampled piano and game setup
 

@@ -1,7 +1,7 @@
 Salamander Grand Piano V3
 Author: Alexander Holm
 Source: https://github.com/sfzinstruments/SalamanderGrandPiano/tree/3382bf9496bba2486f5ab0de55a264d1dfc38404
-Changes: C4–B5 natural notes; 4 velocity layers; pitch resampling; 2.5 s samples; fade; mono 32 kHz AAC at 48 kbit/s.
+Changes: C2–B5 natural notes; 4 velocity layers; pitch resampling; 2.5 s samples; fade; mono 32 kHz AAC at 48 kbit/s.
 License: Creative Commons Attribution 3.0 Unported
 
 Creative Commons Legal Code

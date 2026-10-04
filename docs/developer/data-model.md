@@ -20,6 +20,17 @@ Revision `0004_listening` adds student progress and the listening journal.
 Revision `0005_telegram` adds account associations, hashed linking codes, durable imports, and bot state.
 Revision `0006_omr` adds versioned OMR jobs and manager review.
 Revision `0007_appearance` adds account appearance preferences with predefined choices and database checks.
+Revision `0008_game` adds game profiles, seasons, rounds, attempts, trophies, and custom avatar jobs.
+Revision `0010_round_rules` adds immutable assistance switches and the rules version to each round.
+Existing rows retain version 1, strict octave grading, and their recorded totals.
+New rounds use version 2, note-name grading, and one score bonus from the disabled switches.
+The migration defaults alone do not upgrade existing or manually inserted rounds to version 2.
+The round service sets the new version explicitly.
+Finalization locks the round and awards XP and the score bonus once.
+
+**Caution:** The separate avatar-sheet branch also follows `0008_game`.
+Reconcile its `0009_avatar_sheets` migration with this branch before publishing a combined release.
+This branch does not contain that avatar change.
 
 | Table | Contents and constraints |
 |---|---|

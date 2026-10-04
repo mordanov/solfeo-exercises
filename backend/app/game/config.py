@@ -19,8 +19,10 @@ LEVEL_PREFIXES_RU = [
     "божественный",
 ]
 TROPHY_THRESHOLDS = [20, 100, 200, 500]
-GAME_PITCHES = [(name, octave) for octave in (4, 5) for name in "CDEFGAB"]
-NOTE_RANGE = {"treble": GAME_PITCHES, "bass": GAME_PITCHES}
+NOTE_RANGE = {
+    "treble": [(name, octave) for octave in (4, 5) for name in "CDEFGAB"][:-1],
+    "bass": [(name, octave) for octave in (2, 3, 4) for name in "CDEFGAB"][2:15],
+}
 ANIMAL_IDS = [
     "unicorn",
     "dragon",

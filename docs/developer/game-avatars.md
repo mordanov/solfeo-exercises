@@ -22,8 +22,9 @@ No runtime font download, system-font fallback, or image-loading delay affects t
 Interface font settings cannot distort the outlines.
 
 Existing staff lines, note heads, stems, ledger lines, and paper retain their native coordinates.
-The SVG viewport expands vertically when C4–B5 notes or stems require additional space.
-This keeps the highest bass notes and ledger lines visible without changing clef anchors.
+The SVG uses a fixed `0 0 234 140` viewport for all 1–4 note groups in either clef.
+Both question ranges fit without changing clef anchors.
+Shorter groups remain centered in the 4-note area.
 Accessible labels describe the clef and note count in all 3 interface languages.
 Tests lock the original outline fingerprints and verify both reference lines and unchanged note geometry.
 
@@ -59,32 +60,39 @@ The application adds no font package or runtime dependency.
 
 ## Note playback
 
-Both clefs use the same 14 natural pitches from C4 through B5.
-The 14 answer buttons pass the selected name and octave to the round API.
-They no longer substitute the question's octave or use a fixed clef reference octave.
+Treble questions use 13 natural pitches C4–A5; bass questions use 13 natural pitches E2–C4.
+The 7 answer buttons select names C through B without octave grading.
+Button audio uses the current question note's written octave, including repeated names and wrong choices.
 `notes.ts` supplies shared pitch labels, setup options, and difficulty timings.
-Labels use account note naming and interface language, including scientific octave numbers 4 and 5.
+Labels use account note naming and interface language without octave suffixes.
 
 Setup offers independent sound-hint and correct-answer switches.
 The hint defaults to enabled; the correct answer defaults to hidden.
 Choices remain between rounds within the current game-area session, not across reloads.
-The difficulty explanation reports the existing 13, 10, or 7 s limit.
+The single-line difficulty explanation reports only the selected 13, 10, or 7 s limit.
 Difficulty does not change the pitch pool or scoring.
-Enabled answer feedback shows the server's `correct_answers` to the staff's right, including incorrect answers and timeouts.
+Each disabled switch adds 1 point once per completed round; enabled switches add 0 points.
+The backend stores the switches and adds this bonus without changing XP, victory, or existing completed results.
+Version 1 rounds retain their previous octave grading and receive no assistance bonus.
+Enabled feedback shows the server's `correct_answers` beside the centered playback control, including incorrect answers and timeouts.
+The reserved feedback row prevents horizontal movement and keeps the staff at its fixed size.
 
 The white 56 × 56 px button below the staff appears only when the sound hint is enabled.
 Hints and answer buttons use the same `playNotes` path and velocity 64.
-`soundfont-player` `0.12.0` loads `/assets/piano/salamander-c4-b5.json` once per audio context.
+`soundfont-player` `0.12.0` loads `/assets/piano/salamander-c2-b5.json` once per audio context.
+The release retains `salamander-c4-b5.json` unchanged for previously cached application code; the new application requests only the new asset.
 An explicit local URL and identity key mapping prevent external soundfont downloads and preserve octave-specific velocity keys.
 The application adds this requested dependency because oscillator tones cannot provide the requested recorded piano sound.
 The package is archived; its locked runtime dependencies currently have no reported npm audit vulnerabilities.
 
-The piano asset contains 56 AAC samples: 14 pitches and recorded velocity layers 4, 8, 12, and 16.
+The piano asset contains 112 AAC samples: 28 pitches and recorded velocity layers 4, 8, 12, and 16.
+Natural C2–B5 pitches cover every possible answer button in each question octave.
 Velocity boundaries select layers at 43, 64, and 96.
 These layers contain different recordings, not copies with changed amplitude.
 The browser uses the already tuned samples at playback rate 1.
 No full SF2, speech clips, or external runtime piano resource is required.
-The JSON asset contains 1233535 bytes, within the tested 1500000-byte limit.
+The JSON asset contains 2464963 bytes, within the tested 2500000-byte limit.
+Independent AAC decoding verifies all 112 samples within 11.45 cents of their intended frequencies.
 
 The start gesture creates or resumes the audio context, including Safari's interrupted state.
 All samples load and decode before the round request starts its timer.
@@ -111,10 +119,10 @@ The asset derives from Alexander Holm's Salamander Grand Piano V3 under CC BY 3.
 The source revision is `sfzinstruments/SalamanderGrandPiano@3382bf9496bba2486f5ab0de55a264d1dfc38404`.
 Export retains 4 original velocity layers and applies the upstream `Data/tune_ret.txt` corrections.
 Nearest minor-third recordings supply pitches through offline resampling.
-The offline C6 root supplies B5; the browser asset contains only C4–B5 natural pitches.
+The offline C6 root supplies B5; the browser asset contains only C2–B5 natural pitches.
 Each sample contains 2.5 s of mono 32 kHz AAC at 48 kbit/s, with a final 0.2 s fade.
 
-`provenance.json` records the source, license, changes, tuning, 36 source hashes, final size, and asset hash.
+`provenance.json` records the source, license, changes, tuning, 68 source hashes, final size, and asset hash.
 `LICENSE.txt` includes attribution and the complete CC BY 3.0 license.
 Setup links to this notice; `/licenses/soundfont-player-MIT.txt` retains the player license.
 
@@ -130,7 +138,7 @@ npm exec --workspace frontend -- prettier --write public/assets/piano/provenance
 uv run --locked pytest backend/tests/test_game_piano_asset.py -q
 ```
 
-The builder downloads only 36 required FLAC recordings, not the complete library.
+The builder downloads only 68 required FLAC recordings, not the complete library.
 It caches the source recordings for retries and records their SHA-256 values.
 Formatting provenance does not change the hashed piano asset.
 Use a fresh source directory if the pinned revision changes.
