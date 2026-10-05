@@ -1,23 +1,15 @@
 import { Box, Button, Chip, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { usePlayer } from "../api/hooks";
+import { usePlayer, type RoundResult } from "../api/hooks";
 import AvatarImage from "../setup/AvatarImage";
 import { roundMood } from "../setup/avatars";
 import { ErrorMessage } from "../../../components/AccountUi";
-
-interface RoundResult {
-  score: number;
-  score_bonus?: number;
-  correct_count: number;
-  is_win: boolean;
-  xp_gained: number;
-  level_up: boolean;
-  new_trophy: number | null;
-  practice_hint: string;
-}
+import { noteLabel } from "../notes";
+import PrizeImage from "../profile/PrizeImage";
 
 interface Props {
   playerId: number;
+  noteNaming?: "letters" | "solfege";
   result: RoundResult;
   onPlayAgain: () => void;
   onChangePlayer: () => void;
@@ -38,11 +30,12 @@ function Stars({ correct }: { correct: number }) {
 
 export default function ResultScreen({
   playerId,
+  noteNaming = "letters",
   result,
   onPlayAgain,
   onChangePlayer,
 }: Props) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const player = usePlayer(playerId);
 
   return (
@@ -56,11 +49,21 @@ export default function ResultScreen({
             stage={player.data.avatar_level}
             mood={roundMood(result.correct_count)}
             customAvatarId={player.data.custom_avatar_id}
+            reviewStatus={player.data.avatar_review_status}
             size={192}
           />
           <Typography>
             {t("game.profile.level", { level: player.data.avatar_level })}
           </Typography>
+          {result.average_score != null && (
+            <Typography>
+              {t("game.result.averageScore", {
+                score: new Intl.NumberFormat(i18n.resolvedLanguage, {
+                  maximumFractionDigits: 1,
+                }).format(result.average_score),
+              })}
+            </Typography>
+          )}
         </>
       )}
       <Typography variant="h3" sx={{ fontWeight: 800, mb: 1 }}>
@@ -98,14 +101,49 @@ export default function ResultScreen({
         </Typography>
       )}
 
-      <Typography
-        variant="body2"
-        color="text.secondary"
-        sx={{ mb: 3, fontStyle: "italic" }}
-      >
-        {t("game.result.practiceHint_prefix")}
-        {result.practice_hint}
-      </Typography>
+      {result.new_achievements?.map((code) => (
+        <Typography
+          key={code}
+          role="status"
+          variant="h6"
+          sx={{
+            mb: 1,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 1,
+          }}
+        >
+          <PrizeImage code={code} size={64} />
+          <Box component="span">
+            {t("game.prizes.newPrize", {
+              name: t(`game.prizes.codes.${code}`),
+            })}
+          </Box>
+        </Typography>
+      ))}
+
+      {typeof result.practice_hint === "object" &&
+        result.practice_hint !== null && (
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ mb: 3, fontStyle: "italic" }}
+          >
+            {t("game.result.practiceHint", {
+              expected: noteLabel(
+                { name: result.practice_hint.expected, octave: 4 },
+                noteNaming,
+                t,
+              ),
+              given: noteLabel(
+                { name: result.practice_hint.given, octave: 4 },
+                noteNaming,
+                t,
+              ),
+            })}
+          </Typography>
+        )}
 
       <Box
         sx={{

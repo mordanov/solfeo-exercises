@@ -3,6 +3,7 @@ from __future__ import annotations
 import math
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
@@ -13,8 +14,20 @@ from app.services.auth import ServiceError
 from app.settings import Settings
 
 
-def check_daily_quota(session: Session, account_id: int, limit: int) -> int:
-    today = datetime.now(UTC).replace(hour=0, minute=0, second=0, microsecond=0)
+def _quota_day(timezone: str | ZoneInfo) -> tuple[datetime, datetime]:
+    zone = ZoneInfo(timezone) if isinstance(timezone, str) else timezone
+    today = (
+        datetime.now(UTC)
+        .astimezone(zone)
+        .replace(hour=0, minute=0, second=0, microsecond=0)
+    )
+    return today.astimezone(UTC), (today + timedelta(days=1)).astimezone(UTC)
+
+
+def check_daily_quota(
+    session: Session, account_id: int, limit: int, timezone: str | ZoneInfo = "UTC"
+) -> int:
+    today, tomorrow = _quota_day(timezone)
     used = (
         session.scalar(
             select(func.count())
@@ -23,6 +36,7 @@ def check_daily_quota(session: Session, account_id: int, limit: int) -> int:
                 AvatarGenerationLog.account_id == account_id,
                 AvatarGenerationLog.billable == True,  # noqa: E712
                 AvatarGenerationLog.created_at >= today,
+                AvatarGenerationLog.created_at < tomorrow,
             )
         )
         or 0
@@ -36,10 +50,8 @@ def quota_usage(
     if manager:
         return 0, None, None
     limit = settings.avatar_gen_daily_limit
-    used = limit - check_daily_quota(session, account_id, limit)
-    resets_at = (datetime.now(UTC) + timedelta(days=1)).replace(
-        hour=0, minute=0, second=0, microsecond=0
-    )
+    used = limit - check_daily_quota(session, account_id, limit, settings.game_timezone)
+    _, resets_at = _quota_day(settings.game_timezone)
     return used, limit, resets_at
 
 
@@ -79,7 +91,10 @@ def start_avatar_job(
         raise ServiceError("AVATAR_GENERATION_UNAVAILABLE", 503)
     if (
         account.role != "manager"
-        and check_daily_quota(session, account_id, settings.avatar_gen_daily_limit) <= 0
+        and check_daily_quota(
+            session, account_id, settings.avatar_gen_daily_limit, settings.game_timezone
+        )
+        <= 0
     ):
         raise ServiceError("AVATAR_QUOTA_EXCEEDED", 429)
     log = AvatarGenerationLog(account_id=account_id, billable=True)
@@ -92,10 +107,13 @@ def start_avatar_job(
         status="pending",
         asset_version=2,
         phase="queued",
+        review_status="pending",
         generation_log_id=log.id,
     )
     session.add(job)
     session.flush()
+    player.avatar_review_job_id = job.id
+    player.custom_avatar_id = None
     return job
 
 
@@ -167,9 +185,18 @@ def validate_avatar_assets(job: CustomAvatar, settings: Settings) -> None:
         raise ServiceError("AVATAR_ASSETS_MISSING", 409)
 
 
-def avatar_path(job: CustomAvatar, state: str, level: int, settings: Settings) -> Path:
+def avatar_path(
+    job: CustomAvatar,
+    state: str,
+    level: int,
+    settings: Settings,
+    *,
+    manager: bool = False,
+) -> Path:
     if job.status != "ready":
         raise ServiceError("JOB_NOT_READY", 400)
+    if not manager and job.review_status != "approved":
+        raise ServiceError("AVATAR_NOT_APPROVED", 403)
     filename = {
         "neutral": job.base_path,
         "happy": job.happy_path,
@@ -185,6 +212,86 @@ def avatar_path(job: CustomAvatar, state: str, level: int, settings: Settings) -
     if not path.is_relative_to(job_root) or not path.is_file():
         raise ServiceError("FILE_NOT_FOUND", 404)
     return path
+
+
+def review_sheet_path(job: CustomAvatar, settings: Settings) -> Path:
+    if job.status != "ready":
+        raise ServiceError("JOB_NOT_READY", 400)
+    root = settings.media_root.resolve()
+    job_root = root / "avatars" / "custom" / str(job.id)
+    path = (job_root / "sheet.png").resolve()
+    if not path.is_relative_to(job_root) or not path.is_file():
+        raise ServiceError("FILE_NOT_FOUND", 404)
+    return path
+
+
+def list_review_jobs(
+    session: Session, offset: int = 0
+) -> tuple[list[tuple[CustomAvatar, str]], int]:
+    query = (
+        select(CustomAvatar, Player.name)
+        .join(Player, CustomAvatar.player_id == Player.id)
+        .where(CustomAvatar.status == "ready", CustomAvatar.review_status == "pending")
+    )
+    total = session.scalar(select(func.count()).select_from(query.subquery())) or 0
+    rows = session.execute(query.order_by(CustomAvatar.id).offset(offset).limit(12))
+    return [(job, name) for job, name in rows], total
+
+
+def _lock_job_and_player(
+    session: Session, job: CustomAvatar
+) -> tuple[CustomAvatar, Player]:
+    # Match generation's player-first order so review and selection cannot deadlock.
+    player = session.scalar(
+        select(Player)
+        .where(Player.id == job.player_id)
+        .with_for_update()
+        .execution_options(populate_existing=True)
+    )
+    locked_job = session.scalar(
+        select(CustomAvatar)
+        .where(CustomAvatar.id == job.id)
+        .with_for_update()
+        .execution_options(populate_existing=True)
+    )
+    if player is None or locked_job is None:
+        raise ServiceError("JOB_NOT_FOUND", 404)
+    return locked_job, player
+
+
+def review_avatar(
+    session: Session,
+    job_id: int,
+    manager_id: int,
+    decision: str,
+    settings: Settings,
+) -> CustomAvatar:
+    manager = session.get(User, manager_id)
+    if manager is None or manager.role != "manager" or not manager.is_active:
+        raise ServiceError("FORBIDDEN", 403)
+    if decision not in ("approved", "rejected"):
+        raise ServiceError("AVATAR_REVIEW_INVALID", 422)
+    job = authorized_job(session, job_id, manager_id, True)
+    job, player = _lock_job_and_player(session, job)
+    if job.status != "ready":
+        raise ServiceError("JOB_NOT_READY", 400)
+    if job.review_status == decision:
+        return job
+    if job.review_status != "pending":
+        raise ServiceError("AVATAR_REVIEW_CONFLICT", 409)
+    if decision == "approved":
+        validate_avatar_assets(job, settings)
+    job.review_status = decision
+    job.reviewed_at = datetime.now(UTC)
+    job.reviewed_by = manager_id
+    job.phase = "complete" if decision == "approved" else "rejected"
+    if player.avatar_review_job_id == job.id:
+        player.custom_avatar_id = job.id if decision == "approved" else None
+        if decision == "approved":
+            player.avatar_review_job_id = None
+    elif decision == "rejected" and player.custom_avatar_id == job.id:
+        player.custom_avatar_id = None
+    return job
 
 
 def list_avatar_jobs(
@@ -215,23 +322,26 @@ def use_avatar(
     session: Session, job_id: int, account_id: int, manager: bool, settings: Settings
 ) -> None:
     job = authorized_job(session, job_id, account_id, manager)
+    job, player = _lock_job_and_player(session, job)
     if job.status != "ready":
         raise ServiceError("JOB_NOT_READY", 400)
+    if job.review_status != "approved":
+        raise ServiceError("AVATAR_NOT_APPROVED", 403)
     validate_avatar_assets(job, settings)
-    player = session.get(Player, job.player_id)
-    if player is None:
-        raise ServiceError("PLAYER_NOT_FOUND", 404)
     player.custom_avatar_id = job.id
+    player.avatar_review_job_id = None
 
 
 def discard_avatar(
     session: Session, job_id: int, account_id: int, manager: bool
 ) -> None:
     job = authorized_job(session, job_id, account_id, manager)
+    job, player = _lock_job_and_player(session, job)
     if job.status == "pending":
         raise ServiceError("AVATAR_JOB_BUSY", 409)
-    player = session.get(Player, job.player_id)
-    if player is not None and player.custom_avatar_id == job.id:
+    if player.custom_avatar_id == job.id:
         player.custom_avatar_id = None
-        session.flush()
+    if player.avatar_review_job_id == job.id:
+        player.avatar_review_job_id = None
+    session.flush()
     session.delete(job)

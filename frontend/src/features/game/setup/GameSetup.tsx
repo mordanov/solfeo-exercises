@@ -16,12 +16,14 @@ import { DEFAULT_GAME_OPTIONS, DIFFICULTIES, type GameOptions } from "../notes";
 import AvatarImage from "./AvatarImage";
 import AvatarChooser from "./AvatarChooser";
 import { ErrorMessage } from "../../../components/AccountUi";
+import PrizeShelf from "../profile/PrizeShelf";
 
 const NOTE_COUNTS = [1, 2, 3, 4] as const;
 
 interface Props {
   playerId: number;
   csrf: string;
+  isManager?: boolean;
   initialOptions?: GameOptions;
   onRoundStarted: (
     roundId: number,
@@ -35,6 +37,7 @@ interface Props {
 export default function GameSetup({
   playerId,
   csrf,
+  isManager = false,
   initialOptions = DEFAULT_GAME_OPTIONS,
   onRoundStarted,
 }: Props) {
@@ -101,6 +104,7 @@ export default function GameSetup({
           <AvatarImage
             animalId={player.data.avatar_animal ?? "unicorn"}
             customAvatarId={player.data.custom_avatar_id}
+            reviewStatus={player.data.avatar_review_status}
             stage={player.data.avatar_level}
             size={144}
           />
@@ -117,9 +121,11 @@ export default function GameSetup({
         <AvatarChooser
           playerId={playerId}
           csrf={csrf}
+          isManager={isManager}
           onClose={() => setChoosingAvatar(false)}
         />
       )}
+      <PrizeShelf playerId={playerId} />
       <Typography variant="h5" sx={{ mb: 2, fontWeight: 700 }}>
         {t("game.selectDifficulty")}
       </Typography>

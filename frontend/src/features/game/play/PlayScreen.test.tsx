@@ -91,6 +91,165 @@ async function click(name: string) {
   });
 }
 
+it("accounts for server clock skew and expires using the absolute deadline", async () => {
+  const serverNow = Date.now() + 60000;
+  mount({
+    index: 0,
+    clef: "treble",
+    notes: [{ name: "C", octave: 4 }],
+    server_time: new Date(serverNow).toISOString(),
+    issued_at: new Date(serverNow - 2000).toISOString(),
+    deadline_at: new Date(serverNow + 1000).toISOString(),
+    time_limit_ms: 3000,
+  });
+  await act(async () => vi.advanceTimersByTimeAsync(1100));
+  expect(fetchMock).toHaveBeenCalledOnce();
+  expect(JSON.parse(String(fetchMock.mock.calls[0]?.[1]?.body))).toMatchObject({
+    task_index: 0,
+    timed_out: true,
+  });
+});
+
+it("aligns the next task with its issued time instead of granting extra network time", async () => {
+  const serverNow = Date.now() + 60000;
+  fetchMock.mockImplementationOnce(async () =>
+    Response.json({
+      is_correct: true,
+      correct_answers: [{ name: "C", octave: 4 }],
+      score_delta: 1,
+      next_task: {
+        index: 1,
+        clef: "treble",
+        notes: [{ name: "D", octave: 4 }],
+        server_time: new Date(serverNow).toISOString(),
+        issued_at: new Date(serverNow + 500).toISOString(),
+        deadline_at: new Date(serverNow + 1500).toISOString(),
+        time_limit_ms: 1000,
+      },
+      result: null,
+    }),
+  );
+  mount(
+    {
+      index: 0,
+      clef: "treble",
+      notes: [{ name: "C", octave: 4 }],
+      server_time: new Date(serverNow).toISOString(),
+    },
+    7000,
+    {
+      noteNaming: "letters",
+    },
+  );
+  await click("C");
+  await act(async () => vi.advanceTimersByTimeAsync(550));
+  expect(screen.getByRole("button", { name: "D" })).toBeEnabled();
+  await act(async () => vi.advanceTimersByTimeAsync(1000));
+  expect(fetchMock).toHaveBeenCalledTimes(2);
+  expect(JSON.parse(String(fetchMock.mock.calls[1]?.[1]?.body))).toMatchObject({
+    task_index: 1,
+    timed_out: true,
+  });
+});
+
+it("does not extend a cached next-task deadline when its response arrives late", async () => {
+  const serverNow = Date.now() + 60000;
+  fetchMock.mockImplementationOnce(
+    () =>
+      new Promise<Response>((resolve) => {
+        setTimeout(
+          () =>
+            resolve(
+              Response.json({
+                is_correct: true,
+                correct_answers: [{ name: "C", octave: 4 }],
+                score_delta: 1,
+                next_task: {
+                  index: 1,
+                  clef: "treble",
+                  notes: [{ name: "D", octave: 4 }],
+                  server_time: new Date(serverNow).toISOString(),
+                  issued_at: new Date(serverNow + 900).toISOString(),
+                  deadline_at: new Date(serverNow + 1900).toISOString(),
+                  time_limit_ms: 1000,
+                },
+                result: null,
+              }),
+            ),
+          2000,
+        );
+      }),
+  );
+  mount(
+    {
+      index: 0,
+      clef: "treble",
+      notes: [{ name: "C", octave: 4 }],
+      server_time: new Date(serverNow).toISOString(),
+      deadline_at: new Date(serverNow + 7000).toISOString(),
+      time_limit_ms: 7000,
+    },
+    7000,
+    { noteNaming: "letters" },
+  );
+  await click("C");
+  await act(async () => vi.advanceTimersByTimeAsync(2100));
+  await act(async () => vi.advanceTimersByTimeAsync(50));
+  expect(fetchMock).toHaveBeenCalledTimes(2);
+  expect(JSON.parse(String(fetchMock.mock.calls[1]?.[1]?.body))).toMatchObject({
+    task_index: 1,
+    timed_out: true,
+  });
+});
+
+it("shows server-authoritative timeout feedback for an answer that arrived too late", async () => {
+  fetchMock.mockImplementationOnce(async () =>
+    Response.json({
+      is_correct: false,
+      timed_out: true,
+      correct_answers: [{ name: "C", octave: 4 }],
+      score_delta: -1,
+      next_task: {
+        index: 1,
+        clef: "treble",
+        notes: [{ name: "D", octave: 4 }],
+      },
+      result: null,
+    }),
+  );
+  mount({ index: 0, clef: "treble", notes: [{ name: "C", octave: 4 }] }, 7000, {
+    noteNaming: "letters",
+  });
+  await click("C");
+  expect(screen.getByRole("alert")).toHaveTextContent(i18n.t("game.timeout"));
+  expect(screen.getByRole("alert")).not.toHaveTextContent(i18n.t("game.wrong"));
+});
+
+it("preserves a cached accepted answer even when the client submits a timeout", async () => {
+  fetchMock.mockImplementationOnce(async () =>
+    Response.json({
+      is_correct: true,
+      timed_out: false,
+      correct_answers: [{ name: "C", octave: 4 }],
+      score_delta: 1,
+      next_task: {
+        index: 1,
+        clef: "treble",
+        notes: [{ name: "D", octave: 4 }],
+      },
+      result: null,
+    }),
+  );
+  mount({ index: 0, clef: "treble", notes: [{ name: "C", octave: 4 }] }, 1000, {
+    noteNaming: "letters",
+  });
+  await act(async () => vi.advanceTimersByTimeAsync(1100));
+  expect(screen.getByRole("alert")).toHaveTextContent(i18n.t("game.correct"));
+  expect(screen.getByRole("alert")).not.toHaveTextContent(
+    i18n.t("game.timeout"),
+  );
+});
+
 it("can hide the sound hint without removing the answer controls", () => {
   mount(undefined, 7000, { showSoundHint: false, noteNaming: "letters" });
   expect(
@@ -135,7 +294,11 @@ it.each([
   async (language, naming, label) => {
     await i18n.changeLanguage(language);
     mount(
-      { index: 0, clef: "treble", notes: [{ name: "C", octave: 4 }] },
+      {
+        index: 0,
+        clef: "treble",
+        notes: [{ name: "C", octave: 4 }],
+      },
       7000,
       { noteNaming: naming, showCorrectAnswer: true },
     );

@@ -146,7 +146,7 @@ def test_migration_upgrade_repeat_downgrade_and_upgrade(database: Database) -> N
         command.upgrade(config, "head")
         assert (
             connection.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0010_round_rules"
+            == "0011_game_rewards_review"
         )
         assert set(inspect(connection).get_table_names()) == {
             "alembic_version",
@@ -159,7 +159,7 @@ def test_migration_upgrade_repeat_downgrade_and_upgrade(database: Database) -> N
         command.upgrade(config, "head")
         assert (
             connection.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0010_round_rules"
+            == "0011_game_rewards_review"
         )
 
 
@@ -289,10 +289,95 @@ def test_round_rules_migration_preserves_previous_release_rows(
 
 def test_round_rules_is_the_single_head_after_avatar_sheets() -> None:
     scripts = ScriptDirectory.from_config(Config(str(ROOT / "backend/alembic.ini")))
-    assert scripts.get_heads() == ["0010_round_rules"]
+    assert scripts.get_heads() == ["0011_game_rewards_review"]
+    latest = scripts.get_revision("0011_game_rewards_review")
+    assert latest is not None
+    assert latest.down_revision == "0010_round_rules"
     revision = scripts.get_revision("0010_round_rules")
     assert revision is not None
     assert revision.down_revision == "0009_avatar_sheets"
+
+
+def test_rewards_migration_preserves_xp_and_existing_art_and_floors_scores(
+    database: Database,
+) -> None:
+    with database.engine.begin() as connection:
+        config = migration_config(connection)
+        command.downgrade(config, "0010_round_rules")
+        user_id = connection.scalar(
+            text(
+                "INSERT INTO users (username,password_hash,first_name,last_name,role) "
+                "VALUES ('rewards-migration','synthetic-hash',"
+                "'Prize','Owner','student') "
+                "RETURNING id"
+            )
+        )
+        player_id = connection.scalar(
+            text(
+                "INSERT INTO players(account_id,name,xp) "
+                "VALUES (:account,'Prize',145) RETURNING id"
+            ),
+            {"account": user_id},
+        )
+        season_id = connection.scalar(
+            text(
+                "INSERT INTO seasons(player_id,number) VALUES (:player,1) RETURNING id"
+            ),
+            {"player": player_id},
+        )
+        connection.execute(
+            text(
+                "INSERT INTO rounds(player_id,season_id,difficulty,"
+                "note_count,note_naming,"
+                "status,score,correct_count,expires_at) "
+                "VALUES (:player,:season,'easy',1,'letters','completed',-5,1,now())"
+            ),
+            {"player": player_id, "season": season_id},
+        )
+        for state in ("ready", "pending"):
+            connection.execute(
+                text(
+                    "INSERT INTO custom_avatars"
+                    "(account_id,player_id,description,status) "
+                    "VALUES (:account,:player,'Synthetic',:state)"
+                ),
+                {"account": user_id, "player": player_id, "state": state},
+            )
+        command.upgrade(config, "head")
+        assert (
+            connection.scalar(
+                text("SELECT xp FROM players WHERE id=:id"), {"id": player_id}
+            )
+            == 145
+        )
+        assert (
+            connection.scalar(
+                text("SELECT score FROM rounds WHERE player_id=:id"), {"id": player_id}
+            )
+            == 0
+        )
+        statuses: dict[str, str] = {
+            str(state): str(review)
+            for state, review in connection.execute(
+                text(
+                    "SELECT status,review_status FROM custom_avatars "
+                    "WHERE player_id=:id"
+                ),
+                {"id": player_id},
+            ).all()
+        }
+        assert statuses == {"ready": "approved", "pending": "pending"}
+        connection.execute(
+            text("DELETE FROM custom_avatars WHERE player_id=:id"), {"id": player_id}
+        )
+        connection.execute(
+            text("DELETE FROM rounds WHERE player_id=:id"), {"id": player_id}
+        )
+        connection.execute(
+            text("DELETE FROM seasons WHERE player_id=:id"), {"id": player_id}
+        )
+        connection.execute(text("DELETE FROM players WHERE id=:id"), {"id": player_id})
+        connection.execute(text("DELETE FROM users WHERE id=:id"), {"id": user_id})
 
 
 def test_avatar_migration_preserves_ready_art_without_retrying_legacy_jobs(

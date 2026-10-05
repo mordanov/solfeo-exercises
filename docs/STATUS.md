@@ -8,10 +8,96 @@ Prerequisites:
 Last updated: 2026-10-04 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a0523`.
 
 ## Current phase
-Game statistics and season-reset controls follow the merged game features.
-This task merges main source `15530ef` into `feat/game-statistics-reset`.
+Game fixes, lifetime prizes, and manager approval for custom avatars follow the merged game features.
+The owner approves autonomous implementation after reviewing 20 proposals.
+The shared branch is `feat/game-rewards-moderation`, based on current `main`.
 Accepted PHASE 7 remains closed.
 Earlier game, appearance, and listening entries below remain historical session records.
+
+### Packaged prize artwork
+
+The owner supplies `trophies.png` with all 20 prize illustrations.
+The source remains unchanged and supplies a reproducible extraction command.
+The extractor detects each complete badge instead of cutting imperfect grid positions.
+All 20 public PNGs use transparent 256 × 256 px canvases and consistent padding.
+Setup and profile shelves now use pictures instead of prize emoji.
+New-prize announcements use the same images.
+Locked prizes use grayscale; earned prizes retain full color.
+Names and descriptions remain localized in all 3 languages.
+Prizes, XP, levels, and award conditions remain unchanged.
+No runtime generation, migration, new dependency, or provider call occurs.
+Validation passes 345 frontend tests and 7 artwork/documentation tests.
+The production build and all 6 quality hooks pass.
+Native Chrome passes 37 checks across 3 languages, 2 themes, and widths of 320, 390, and 1280 px.
+Both shelves load all 20 PNGs; a completed round shows all 20 new-prize pictures.
+The checks confirm transparent images, uniform size, localized labels, gray locked prizes, and no horizontal page overflow.
+Remaining manual checks cover prize appearance in Safari and on physical phones and tablets.
+
+### Prize extraction CI repair
+
+Run `37234852133` fails only the prize reproduction test; the other 332 backend tests pass.
+The comparison differs inside PNG compression data, not the file header or dimensions.
+The reproduction test now compares exact decoded RGBA pixels, format, and dimensions.
+It retains byte-for-byte verification of the original source.
+Regression tests accept different lossless encodings and reject a changed color pixel with unchanged alpha.
+The test remains enabled without skips, pixel tolerances, or an extraction change.
+
+### Game fixes, prizes, and avatar approval
+
+Implementation is complete on `feat/game-rewards-moderation`.
+
+Round totals cannot fall below 0; individual incorrect answers retain their raw score of -1.
+Migration `0011_game_rewards_review` floors historical negative totals without changing XP.
+Player locks serialize XP awards, and stored JSON replies make repeated submissions stable.
+Server timestamps govern the first question, subsequent questions, and feedback.
+The interface accounts for its clock difference from the server.
+Structured practice hints use localized note names instead of backend prose.
+
+The game adds 20 lifetime prizes, separate from the existing completed-round trophies.
+Each profile earns each prize once, without extra XP.
+Season resets retain prizes, trophies, XP, and avatars.
+Completed rounds supply prize progress across seasons.
+Existing expected and entered arrays supply individual-note counts without another position column.
+`GAME_TIMEZONE` defaults to `UTC` for calendar-day prizes and generation quotas.
+`GAME_FEEDBACK_MS` defaults to `900`.
+All new interface messages use Russian, English, and Spanish.
+The copy welcomes breaks without warnings about losing a streak.
+
+Custom creation requires automatic checks of the description and generated image, then manager approval.
+Pending selection shows the new wordless hourglass artwork.
+Approval activates the waiting selection; rejection shows the question-mark choice.
+Approval preserves a later explicit built-in choice when the waiting reference no longer identifies that job.
+Explicit saved-avatar selection also clears the waiting reference.
+Selection locks refresh cached players after concurrent approval.
+Students cannot retrieve unapproved generated images.
+Managers can inspect all 30 frames and approve or reject each queued result.
+Migration preserves existing ready avatars as approved without paid regeneration.
+The packaged hourglass does not replace the owner's original PNG.
+
+The full backend suite passes 329 tests.
+An additional ownership regression passes with the 3 existing achievement tests.
+All 337 frontend tests pass.
+The production build and all 6 quality hooks pass.
+Native Chrome checks cover 18 student cases and 6 manager decisions at 320 px.
+These checks use synthetic responses in all 3 languages and both naming settings.
+Each manager preview retrieves 30 unique frames before approval or rejection.
+The badge generator passes separate type and formatting checks and reproduces the packaged image exactly.
+Real provider image quality and Safari remain manual checks.
+The knowledge graph receives an AST-only update.
+No paid provider call, push, deployment, or production change occurs.
+
+Local tests use a disposable PostgreSQL database in memory because the shared Docker disk is full.
+The session removes only its own database fixture and browser processes.
+
+Remaining manual checks:
+1. Deploy the backend, frontend, and worker together with migration `0011_game_rewards_review`.
+2. Check nonnegative results, stable retries, and first-question timing in Chrome and Safari.
+3. Check prizes across seasons, both naming settings, and all 3 interface languages.
+4. Generate only an explicitly authorized avatar through the configured provider.
+5. Inspect all 30 images as a manager before approval.
+6. Check student image denial before approval and automatic activation after approval.
+7. Reject a disposable result and check the question-mark fallback.
+8. Check existing ready avatars after migration without another provider request.
 
 ### Failed release 37204983176
 

@@ -13,6 +13,7 @@ import time
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
+from typing import Literal
 from uuid import uuid4
 
 import httpx
@@ -67,6 +68,12 @@ class ModerationReply(BaseModel):
     results: list[ModerationEntry]
 
 
+class ImageModerationProof(BaseModel):
+    model: Literal["omni-moderation-latest"]
+    source_sha256: str
+    flagged: Literal[False]
+
+
 @dataclass(frozen=True)
 class Lease:
     job_id: int
@@ -93,17 +100,33 @@ def _openai_post(
     return {str(key): value for key, value in raw.items()}
 
 
-def _moderate(settings: Settings, description: str) -> bool:
+def _moderate(settings: Settings, description: str, image: bytes | None = None) -> bool:
+    moderation_input: object = description
+    if image is not None:
+        moderation_input = [
+            {"type": "text", "text": description},
+            {
+                "type": "image_url",
+                "image_url": {
+                    "url": "data:image/png;base64,"
+                    + base64.b64encode(image).decode("ascii")
+                },
+            },
+        ]
     reply = ModerationReply.model_validate(
         _openai_post(
             settings,
             "/moderations",
-            {"input": description, "model": "omni-moderation-latest"},
+            {"input": moderation_input, "model": "omni-moderation-latest"},
         )
     )
     if not reply.results:
         raise AvatarError("AVATAR_PROVIDER_RESPONSE_INVALID")
     return any(result.flagged for result in reply.results)
+
+
+def _moderate_image(settings: Settings, description: str, image: bytes) -> bool:
+    return _moderate(settings, description, image)
 
 
 def _generate_sheet(settings: Settings, description: str) -> bytes:
@@ -211,6 +234,27 @@ def _save_sheet(database: Database, lease: Lease, path: Path, data: bytes) -> No
     with database.session() as session, session.begin():
         job = _leased_job(session, lease)
         _atomic_write(path, data)
+        job.phase = "image_moderating"
+        job.locked_at = datetime.now(UTC)
+
+
+def _has_image_moderation(path: Path, digest: str) -> bool:
+    try:
+        proof = ImageModerationProof.model_validate_json(path.read_bytes())
+    except (OSError, ValueError):
+        return False
+    return proof.source_sha256 == digest
+
+
+def _save_image_moderation(
+    database: Database, lease: Lease, path: Path, digest: str
+) -> None:
+    with database.session() as session, session.begin():
+        job = _leased_job(session, lease)
+        proof = ImageModerationProof(
+            model="omni-moderation-latest", source_sha256=digest, flagged=False
+        )
+        _atomic_write(path, (proof.model_dump_json() + "\n").encode())
         job.phase = "splitting"
         job.locked_at = datetime.now(UTC)
 
@@ -233,13 +277,14 @@ def _update(
             job.status = "failed"
             job.error_code = error
             job.completed_at = datetime.now(UTC)
-            if error == "MODERATION_FLAGGED" and job.generation_log_id is not None:
+            if job.generation_log_id is not None:
                 log = session.get(AvatarGenerationLog, job.generation_log_id)
                 if log:
-                    log.flagged = True
+                    log.flagged = error == "MODERATION_FLAGGED"
                     log.billable = False
-        elif phase == "complete":
+        elif phase == "review":
             job.status = "ready"
+            job.review_status = "pending"
             job.completed_at = datetime.now(UTC)
             prefix = f"avatars/custom/{job.id}/levels/avatar_01_"
             job.base_path = prefix + "neutral.png"
@@ -331,6 +376,17 @@ def process_one(database: Database, settings: Settings) -> bool:
             _update(database, lease, "generating")
             data = _generate_sheet(settings, lease.description)
             _save_sheet(database, lease, sheet, data)
+        if sheet.stat().st_size > settings.avatar_gen_max_image_bytes:
+            raise AvatarError("AVATAR_IMAGE_TOO_LARGE")
+        sheet_data = sheet.read_bytes()
+        digest = hashlib.sha256(sheet_data).hexdigest()
+        proof_path = root / "moderation.json"
+        # Old workers persisted sheets without moderation; phase alone is not proof.
+        if not _has_image_moderation(proof_path, digest):
+            _update(database, lease, "image_moderating")
+            if _moderate_image(settings, lease.description, sheet_data):
+                raise AvatarError("MODERATION_FLAGGED")
+            _save_image_moderation(database, lease, proof_path, digest)
         _update(database, lease, "splitting")
         image = _load_sheet(sheet, settings)
         frames = _frames(image)
@@ -361,13 +417,13 @@ def process_one(database: Database, settings: Settings) -> bool:
             )
         manifest = {
             "version": 2,
-            "source_sha256": hashlib.sha256(sheet.read_bytes()).hexdigest(),
+            "source_sha256": digest,
             "frames": manifest_frames,
         }
         _atomic_write(
             root / "manifest.json", (json.dumps(manifest, indent=2) + "\n").encode()
         )
-        _update(database, lease, "complete", completed=30)
+        _update(database, lease, "review", completed=30)
         logger.info("AVATAR_JOB_READY", extra={"job_id": lease.job_id})
     except Exception as error:
         if isinstance(error, AvatarError):

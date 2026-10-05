@@ -1,10 +1,11 @@
+from pathlib import Path
 from typing import Annotated, Literal
 from urllib.parse import quote
 
 from fastapi import APIRouter, Depends, Query, Response
 from pydantic import BaseModel, Field
 
-from app.api.auth import Configuration, Db, Member, require_csrf
+from app.api.auth import Configuration, Db, Manager, Member, require_csrf
 from app.game.config import ANIMAL_IDS
 from app.game.models import CustomAvatar
 from app.game.services.avatars import (
@@ -12,8 +13,11 @@ from app.game.services.avatars import (
     avatar_path,
     generation_estimate,
     list_avatar_jobs,
+    list_review_jobs,
     quota_usage,
     remaining_seconds,
+    review_avatar,
+    review_sheet_path,
 )
 from app.game.services.avatars import (
     discard_avatar as discard_job,
@@ -77,6 +81,7 @@ def generate_avatar(
 class AvatarJobOut(BaseModel):
     id: int
     status: str
+    review_status: str
     phase: str
     asset_version: int
     completed_images: int
@@ -93,6 +98,23 @@ class SavedAvatarsOut(BaseModel):
     total: int
 
 
+class ReviewBody(BaseModel):
+    decision: Literal["approved", "rejected"]
+
+
+class ReviewJobOut(AvatarJobOut):
+    player_id: int
+    player_name: str
+    account_id: int
+    description: str
+    created_at: str
+
+
+class ReviewQueueOut(BaseModel):
+    jobs: list[ReviewJobOut]
+    total: int
+
+
 class AvatarQuotaOut(BaseModel):
     used: int
     limit: int | None
@@ -104,22 +126,77 @@ class AvatarQuotaOut(BaseModel):
 
 def _job_out(job: CustomAvatar, estimate: int) -> AvatarJobOut:
     ready = job.status == "ready"
+    approved = job.review_status == "approved"
     total = 30 if job.asset_version == 2 else 3
     return AvatarJobOut(
         id=job.id,
         status=job.status,
-        phase="complete" if ready else job.phase,
+        review_status=job.review_status,
+        phase="complete" if ready and approved else job.phase,
         asset_version=job.asset_version,
         completed_images=3
         if ready and job.asset_version == 1
         else job.completed_images,
         total_images=total,
         estimated_seconds_remaining=remaining_seconds(job, estimate),
-        base_path=job.base_path,
-        happy_path=job.happy_path,
-        sad_path=job.sad_path,
+        base_path=job.base_path if approved else None,
+        happy_path=job.happy_path if approved else None,
+        sad_path=job.sad_path if approved else None,
         error_code=job.error_code,
     )
+
+
+@router.get("/review")
+def review_queue(
+    identity: Manager,
+    session: Db,
+    settings: Configuration,
+    offset: Annotated[int, Query(ge=0)] = 0,
+) -> ReviewQueueOut:
+    with session.begin():
+        jobs, total = list_review_jobs(session, offset)
+        estimate = generation_estimate(session, settings)
+        return ReviewQueueOut(
+            jobs=[
+                ReviewJobOut(
+                    **_job_out(job, estimate).model_dump(),
+                    player_id=job.player_id,
+                    player_name=player_name,
+                    account_id=job.account_id,
+                    description=job.description,
+                    created_at=job.created_at.isoformat(),
+                )
+                for job, player_name in jobs
+            ],
+            total=total,
+        )
+
+
+@router.post("/{job_id}/review", dependencies=[Depends(require_csrf)])
+def decide_review(
+    job_id: int,
+    body: ReviewBody,
+    identity: Manager,
+    session: Db,
+    settings: Configuration,
+) -> AvatarJobOut:
+    with session.begin():
+        job = review_avatar(session, job_id, identity.user.id, body.decision, settings)
+        return _job_out(job, generation_estimate(session, settings))
+
+
+@router.api_route("/{job_id}/review-sheet", methods=["GET", "HEAD"])
+def review_sheet(
+    job_id: int,
+    identity: Manager,
+    session: Db,
+    settings: Configuration,
+    response: Response,
+) -> Response:
+    with session.begin():
+        job = authorized_job(session, job_id, identity.user.id, True)
+        path = review_sheet_path(job, settings)
+    return _protected_image(path, settings, response)
 
 
 @router.get("/saved")
@@ -200,7 +277,15 @@ def avatar_file(
         job = authorized_job(
             session, job_id, identity.user.id, identity.user.role == "manager"
         )
-        path = avatar_path(job, state, level, settings)
+        path = avatar_path(
+            job, state, level, settings, manager=identity.user.role == "manager"
+        )
+    return _protected_image(path, settings, response)
+
+
+def _protected_image(
+    path: Path, settings: Configuration, response: Response
+) -> Response:
     root = settings.media_root.resolve()
     response.headers["X-Accel-Redirect"] = "/_protected_media/" + quote(
         path.relative_to(root).as_posix()

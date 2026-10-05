@@ -102,6 +102,7 @@ export default function GameArea({ auth }: Props) {
         <GameSetup
           playerId={screen.playerId}
           csrf={auth.csrf_token}
+          isManager={auth.user.role === "manager"}
           initialOptions={options}
           onRoundStarted={(
             roundId,
@@ -129,6 +130,7 @@ export default function GameArea({ auth }: Props) {
       )}
       {screen.name === "play" && (
         <PlayScreen
+          playerId={screen.playerId}
           roundId={screen.roundId}
           csrf={auth.csrf_token}
           initialTask={screen.firstTask}
@@ -154,6 +156,7 @@ export default function GameArea({ auth }: Props) {
       )}
       {screen.name === "result" && (
         <ResultScreen
+          noteNaming={auth.user.note_naming}
           playerId={screen.playerId}
           result={screen.result}
           onPlayAgain={() => {

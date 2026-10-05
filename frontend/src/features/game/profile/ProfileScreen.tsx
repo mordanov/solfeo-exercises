@@ -26,6 +26,7 @@ import type { NoteNaming } from "../../../api/auth";
 import { DIFFICULTIES } from "../notes";
 import AdminPlayerDetail from "../admin/AdminPlayerDetail";
 import StatisticsSummary, { statisticsTotals } from "./StatisticsSummary";
+import PrizeShelf from "./PrizeShelf";
 
 const TROPHY_ICONS: Record<number, string> = {
   20: "🥉",
@@ -118,6 +119,7 @@ export default function ProfileScreen({
                 animalId={player.data.avatar_animal ?? "unicorn"}
                 stage={player.data.avatar_level}
                 customAvatarId={player.data.custom_avatar_id}
+                reviewStatus={player.data.avatar_review_status}
                 size={144}
               />
               <Typography>
@@ -128,6 +130,7 @@ export default function ProfileScreen({
               </Typography>
             </Box>
           )}
+          <PrizeShelf playerId={playerId} />
           <Typography variant="h5" sx={{ fontWeight: 700, mb: 2 }}>
             {t("game.profile.stats")}
           </Typography>

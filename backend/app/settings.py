@@ -3,6 +3,7 @@ from ipaddress import ip_address
 from pathlib import Path
 from typing import Literal, Self
 from urllib.parse import urlsplit
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from pydantic import Field, SecretStr, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -275,6 +276,19 @@ class Settings(BaseSettings):
     avatar_round_expire_s: int = Field(
         default=3600, ge=60, validation_alias="AVATAR_ROUND_EXPIRE_S"
     )
+    game_timezone: str = Field(default="UTC", validation_alias="GAME_TIMEZONE")
+    game_feedback_ms: int = Field(
+        default=900, ge=0, le=3000, validation_alias="GAME_FEEDBACK_MS"
+    )
+
+    @field_validator("game_timezone")
+    @classmethod
+    def validate_game_timezone(cls, value: str) -> str:
+        try:
+            ZoneInfo(value)
+        except ZoneInfoNotFoundError as error:
+            raise ValueError("GAME_TIMEZONE must be an IANA timezone") from error
+        return value
 
     @field_validator("auth_allowed_origins")
     @classmethod

@@ -40,3 +40,31 @@ it("uses authorized URLs for generated avatars", () => {
     "/api/game/avatars/42/files/sad?level=10",
   );
 });
+
+it("never renders a pending custom avatar", () => {
+  render(
+    <AvatarImage
+      animalId="custom"
+      customAvatarId={42}
+      reviewStatus="pending"
+    />,
+  );
+  expect(screen.getByRole("img")).toHaveAttribute(
+    "src",
+    "/assets/avatars/selection/under_moderation.png",
+  );
+});
+
+it("uses the custom selection placeholder for a rejected avatar", () => {
+  render(
+    <AvatarImage
+      animalId="custom"
+      customAvatarId={42}
+      reviewStatus="rejected"
+    />,
+  );
+  expect(screen.getByRole("img")).toHaveAttribute(
+    "src",
+    "/assets/avatars/selection/custom.png",
+  );
+});

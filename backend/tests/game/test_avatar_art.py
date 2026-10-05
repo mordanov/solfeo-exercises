@@ -128,6 +128,7 @@ async def test_ready_custom_avatar_can_be_used_and_served_privately(
             player_id=player_id,
             description="Synthetic",
             status="ready",
+            review_status="approved",
         )
         session.add(job)
         session.flush()

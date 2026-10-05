@@ -12,6 +12,9 @@ export interface Player {
   xp: number;
   avatar_level: number;
   trophies?: number[];
+  achievements?: string[];
+  avatar_review_status?: AvatarReviewStatus;
+  avatar_review_job_id?: number | null;
 }
 
 export interface Note {
@@ -23,10 +26,15 @@ export interface Task {
   index: number;
   clef: string;
   notes: Note[];
+  server_time?: string;
+  issued_at?: string;
+  deadline_at?: string;
+  time_limit_ms?: number;
 }
 
 export interface SubmitResponse {
   is_correct: boolean;
+  timed_out?: boolean;
   correct_answers: Note[];
   score_delta: number;
   next_task: Task | null;
@@ -41,7 +49,9 @@ export interface RoundResult {
   xp_gained: number;
   level_up: boolean;
   new_trophy: number | null;
-  practice_hint: string;
+  practice_hint: { expected: string; given: string } | null;
+  new_achievements?: string[];
+  average_score?: number | null;
 }
 
 export interface StatsMatrix {
@@ -77,6 +87,8 @@ export interface QuotaData {
   image_count: number;
 }
 
+export type AvatarReviewStatus = "pending" | "approved" | "rejected" | null;
+
 export interface AvatarJob {
   id: number;
   status: string;
@@ -85,6 +97,7 @@ export interface AvatarJob {
     | "moderating"
     | "generating"
     | "splitting"
+    | "review"
     | "complete"
     | "failed";
   asset_version: number;
@@ -95,6 +108,7 @@ export interface AvatarJob {
   happy_path?: string | null;
   sad_path?: string | null;
   error_code?: string | null;
+  review_status?: AvatarReviewStatus;
 }
 
 export interface Season {
@@ -125,6 +139,12 @@ export const usePlayers = () =>
   useQuery({
     queryKey: ["game", "players"],
     queryFn: () => gameFetch.get<Player[]>("/players"),
+    refetchInterval: (query) =>
+      query.state.data?.some(
+        (player) => player.avatar_review_status === "pending",
+      )
+        ? 2000
+        : false,
   });
 
 export const useCreatePlayer = () => {
@@ -187,6 +207,7 @@ export const useSubmitTask = (roundId: number) => {
         void cache.invalidateQueries({ queryKey: ["game", "player"] });
         void cache.invalidateQueries({ queryKey: ["game", "stats"] });
         void cache.invalidateQueries({ queryKey: ["game", "confusion"] });
+        void cache.invalidateQueries({ queryKey: ["game", "achievements"] });
       }
     },
   });
@@ -196,6 +217,18 @@ export const usePlayer = (playerId: number) =>
   useQuery({
     queryKey: ["game", "player", playerId],
     queryFn: () => gameFetch.get<Player>(`/players/${playerId}`),
+    refetchInterval: (query) =>
+      query.state.data?.avatar_review_status === "pending" ? 2000 : false,
+  });
+
+export const useAchievements = (playerId: number) =>
+  useQuery({
+    queryKey: ["game", "achievements", playerId],
+    queryFn: () =>
+      gameFetch.get<{
+        earned: Array<{ code: string; awarded_at: string }>;
+        catalog: Array<{ code: string }>;
+      }>(`/players/${playerId}/achievements`),
   });
 
 export const useChooseAvatar = (playerId: number) => {
@@ -316,14 +349,63 @@ export const useAvatarStatus = (jobId: number | null) =>
     queryFn: () => gameFetch.get<AvatarJob>(`/avatars/${jobId}/status`),
     enabled: jobId !== null,
     refetchInterval: (query) =>
-      query.state.data?.status === "pending" ? 2000 : false,
+      query.state.data?.status === "pending" ||
+      query.state.data?.review_status === "pending"
+        ? 2000
+        : false,
   });
 
 export const useAvatarJobs = (playerId: number) =>
   useQuery({
     queryKey: ["game", "avatar-jobs", playerId],
     queryFn: () => gameFetch.get<AvatarJob[]>(`/avatars?player_id=${playerId}`),
+    refetchInterval: (query) =>
+      query.state.data?.some(
+        (job) => job.status === "pending" || job.review_status === "pending",
+      )
+        ? 2000
+        : false,
   });
+
+export interface AvatarReviewJob extends AvatarJob {
+  player_id: number;
+  player_name: string;
+}
+
+export const useAvatarReviews = (offset: number) =>
+  useQuery({
+    queryKey: ["game", "avatar-reviews", offset],
+    queryFn: () =>
+      gameFetch.get<{ jobs: AvatarReviewJob[]; total: number }>(
+        `/avatars/review?offset=${offset}`,
+      ),
+    refetchInterval: 5000,
+  });
+
+export const useReviewAvatar = () => {
+  const cache = useQueryClient();
+  return useMutation({
+    mutationFn: ({
+      csrf,
+      jobId,
+      decision,
+    }: {
+      csrf: string;
+      jobId: number;
+      decision: "approved" | "rejected";
+    }) =>
+      gameFetch.post<AvatarJob>(`/avatars/${jobId}/review`, csrf, { decision }),
+    onSuccess: () =>
+      Promise.all([
+        cache.invalidateQueries({ queryKey: ["game", "avatar-reviews"] }),
+        cache.invalidateQueries({ queryKey: ["game", "avatar-status"] }),
+        cache.invalidateQueries({ queryKey: ["game", "avatar-jobs"] }),
+        cache.invalidateQueries({ queryKey: ["game", "saved-avatars"] }),
+        cache.invalidateQueries({ queryKey: ["game", "players"] }),
+        cache.invalidateQueries({ queryKey: ["game", "player"] }),
+      ]),
+  });
+};
 
 export const useSavedAvatars = (playerId: number, offset: number) =>
   useQuery({

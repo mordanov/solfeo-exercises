@@ -40,13 +40,19 @@ def choose_avatar(
     if animal not in ANIMAL_IDS:
         raise ServiceError("INVALID_AVATAR_ANIMAL", 422)
     with session.begin():
-        player = session.get(Player, player_id)
+        player = session.scalar(
+            select(Player)
+            .where(Player.id == player_id)
+            .with_for_update()
+            .execution_options(populate_existing=True)
+        )
         if player is None or (
             account_id is not None and player.account_id != account_id
         ):
             raise ServiceError("PLAYER_NOT_FOUND", 404)
         player.avatar_animal = animal
         player.custom_avatar_id = None
+        player.avatar_review_job_id = None
     return player
 
 
@@ -94,7 +100,12 @@ def update_player(
     from app.game.config import ANIMAL_IDS
 
     with session.begin():
-        player = session.get(Player, player_id)
+        player = session.scalar(
+            select(Player)
+            .where(Player.id == player_id)
+            .with_for_update()
+            .execution_options(populate_existing=True)
+        )
         if player is None:
             raise ServiceError("PLAYER_NOT_FOUND", 404)
         if name is not None:
@@ -104,13 +115,20 @@ def update_player(
                 raise ServiceError("INVALID_AVATAR_ANIMAL", 422)
             player.avatar_animal = avatar_animal
             player.custom_avatar_id = None
+            player.avatar_review_job_id = None
         if custom_avatar_id is not None:
             from app.game.services.avatars import validate_avatar_assets
 
             job = session.get(CustomAvatar, custom_avatar_id)
-            if job is None or job.player_id != player_id or job.status != "ready":
+            if (
+                job is None
+                or job.player_id != player_id
+                or job.status != "ready"
+                or job.review_status != "approved"
+            ):
                 raise ServiceError("INVALID_CUSTOM_AVATAR", 422)
             validate_avatar_assets(job, settings)
             player.custom_avatar_id = custom_avatar_id
+            player.avatar_review_job_id = None
         session.flush()
     return player

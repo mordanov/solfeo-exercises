@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { ErrorMessage } from "../../../components/AccountUi";
 import {
@@ -30,10 +31,12 @@ export default function AvatarChooser({
   playerId,
   csrf,
   onClose,
+  isManager = false,
 }: {
   playerId: number;
   csrf: string;
   onClose: () => void;
+  isManager?: boolean;
 }) {
   const { t, i18n } = useTranslation();
   const [custom, setCustom] = useState(false);
@@ -51,6 +54,7 @@ export default function AvatarChooser({
   const jobId =
     newJobId === undefined ? (jobs.data?.[0]?.id ?? null) : newJobId;
   const status = useAvatarStatus(jobId);
+  const cache = useQueryClient();
   const customPanel = useRef<HTMLDivElement>(null);
   const revealCustomPanel = useCallback(() => {
     if (custom || jobId !== null)
@@ -59,8 +63,22 @@ export default function AvatarChooser({
   useEffect(revealCustomPanel, [revealCustomPanel, status.isSuccess]);
   const refetchSaved = saved.refetch;
   useEffect(() => {
-    if (status.data?.status === "ready") void refetchSaved();
-  }, [status.data?.status, refetchSaved]);
+    if (status.data?.status === "ready") {
+      void refetchSaved();
+      if (status.data.review_status !== undefined) {
+        void cache.invalidateQueries({
+          queryKey: ["game", "player", playerId],
+        });
+        void cache.invalidateQueries({ queryKey: ["game", "players"] });
+      }
+    }
+  }, [
+    status.data?.status,
+    status.data?.review_status,
+    refetchSaved,
+    cache,
+    playerId,
+  ]);
   useEffect(() => {
     if (saved.data && savedOffset > 0 && savedOffset >= saved.data.total)
       setSavedOffset(0);
@@ -154,6 +172,7 @@ export default function AvatarChooser({
                   <AvatarImage
                     animalId="custom"
                     customAvatarId={job.id}
+                    reviewStatus={isManager ? undefined : job.review_status}
                     size={72}
                   />
                 </Button>
@@ -295,66 +314,83 @@ export default function AvatarChooser({
                 })}
               </Alert>
             )}
-            {status.data?.status === "ready" && (
-              <>
-                <Typography>{t("game.avatar.ready")}</Typography>
-                <Typography>
-                  {t("game.avatar.progress", {
-                    count: number.format(status.data.completed_images),
-                    total: number.format(status.data.total_images),
-                  })}
-                </Typography>
-                {status.data.asset_version === 1 && (
-                  <Alert severity="info">{t("game.avatar.legacy")}</Alert>
-                )}
-                <TextField
-                  select
-                  label={t("game.avatar.previewLevel")}
-                  value={previewLevel}
-                  onChange={(event) =>
-                    setPreviewLevel(Number(event.target.value))
-                  }
-                  slotProps={{ select: { native: true } }}
-                  fullWidth
-                  sx={{ my: 1 }}
-                >
-                  {Array.from({ length: 10 }, (_, index) => (
-                    <option key={index} value={index + 1}>
-                      {t("game.profile.level", { level: index + 1 })}
-                    </option>
-                  ))}
-                </TextField>
-                <Box
-                  sx={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-                    gap: 1,
-                  }}
-                >
-                  {(["neutral", "happy", "sad"] as const).map((mood) => (
-                    <Box key={mood} sx={{ textAlign: "center" }}>
-                      <AvatarImage
-                        animalId="custom"
-                        customAvatarId={jobId}
-                        stage={previewLevel}
-                        mood={mood}
-                        size={144}
-                      />
-                      <Typography>{t(`game.avatar.mood.${mood}`)}</Typography>
-                    </Box>
-                  ))}
-                </Box>
-                <Button
-                  disabled={busy}
-                  onClick={() => {
-                    if (jobId !== null)
-                      accept.mutate({ csrf, jobId }, { onSuccess: onClose });
-                  }}
-                >
-                  {t("game.avatar.use")}
-                </Button>
-              </>
-            )}
+            {status.data?.status === "ready" &&
+              status.data.review_status === "pending" && (
+                <Alert severity="info">{t("game.avatar.awaitingReview")}</Alert>
+              )}
+            {status.data?.status === "ready" &&
+              status.data.review_status === "rejected" && (
+                <Alert severity="warning">
+                  {t("game.avatar.reviewRejected")}
+                </Alert>
+              )}
+            {status.data?.status === "ready" &&
+              (isManager ||
+                status.data.review_status === undefined ||
+                status.data.review_status === "approved") && (
+                <>
+                  <Typography>{t("game.avatar.ready")}</Typography>
+                  <Typography>
+                    {t("game.avatar.progress", {
+                      count: number.format(status.data.completed_images),
+                      total: number.format(status.data.total_images),
+                    })}
+                  </Typography>
+                  {status.data.asset_version === 1 && (
+                    <Alert severity="info">{t("game.avatar.legacy")}</Alert>
+                  )}
+                  <TextField
+                    select
+                    label={t("game.avatar.previewLevel")}
+                    value={previewLevel}
+                    onChange={(event) =>
+                      setPreviewLevel(Number(event.target.value))
+                    }
+                    slotProps={{ select: { native: true } }}
+                    fullWidth
+                    sx={{ my: 1 }}
+                  >
+                    {Array.from({ length: 10 }, (_, index) => (
+                      <option key={index} value={index + 1}>
+                        {t("game.profile.level", { level: index + 1 })}
+                      </option>
+                    ))}
+                  </TextField>
+                  <Box
+                    sx={{
+                      display: "grid",
+                      gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+                      gap: 1,
+                    }}
+                  >
+                    {(["neutral", "happy", "sad"] as const).map((mood) => (
+                      <Box key={mood} sx={{ textAlign: "center" }}>
+                        <AvatarImage
+                          animalId="custom"
+                          customAvatarId={jobId}
+                          stage={previewLevel}
+                          mood={mood}
+                          size={144}
+                        />
+                        <Typography>{t(`game.avatar.mood.${mood}`)}</Typography>
+                      </Box>
+                    ))}
+                  </Box>
+                  <Button
+                    disabled={
+                      busy ||
+                      status.data.review_status === "pending" ||
+                      status.data.review_status === "rejected"
+                    }
+                    onClick={() => {
+                      if (jobId !== null)
+                        accept.mutate({ csrf, jobId }, { onSuccess: onClose });
+                    }}
+                  >
+                    {t("game.avatar.use")}
+                  </Button>
+                </>
+              )}
             {jobId && status.data && status.data.status !== "pending" && (
               <Button
                 disabled={busy}

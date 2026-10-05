@@ -9,27 +9,21 @@ import {
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { useSubmitTask, type Note, type Task } from "../api/hooks";
+import { useSubmitTask, usePlayer, type Note, type Task } from "../api/hooks";
 import { playNotes } from "../audio/synth";
 import { noteLabel } from "../notes";
 import { ErrorMessage } from "../../../components/AccountUi";
 import Staff from "../staff/Staff";
 import NoteButtons from "./NoteButtons";
 import Timer from "./Timer";
+import AvatarImage from "../setup/AvatarImage";
 
-export interface RoundResult {
-  score: number;
-  score_bonus?: number;
-  correct_count: number;
-  is_win: boolean;
-  xp_gained: number;
-  level_up: boolean;
-  new_trophy: number | null;
-  practice_hint: string;
-}
+export type { RoundResult } from "../api/hooks";
+import type { RoundResult } from "../api/hooks";
 
 interface Props {
   roundId: number;
+  playerId?: number;
   csrf: string;
   initialTask: Task;
   noteNaming?: "solfege" | "letters";
@@ -43,8 +37,38 @@ interface Props {
 
 type FeedbackState = "idle" | "correct" | "wrong" | "timeout";
 
+function Mascot({
+  playerId,
+  feedback,
+}: {
+  playerId: number;
+  feedback: FeedbackState;
+}) {
+  const player = usePlayer(playerId);
+  if (!player.data) return null;
+  return (
+    <Box sx={{ textAlign: "center" }}>
+      <AvatarImage
+        animalId={player.data.avatar_animal ?? "unicorn"}
+        customAvatarId={player.data.custom_avatar_id}
+        reviewStatus={player.data.avatar_review_status}
+        stage={player.data.avatar_level}
+        mood={
+          feedback === "correct"
+            ? "happy"
+            : feedback === "wrong" || feedback === "timeout"
+              ? "sad"
+              : "neutral"
+        }
+        size={96}
+      />
+    </Box>
+  );
+}
+
 export default function PlayScreen({
   roundId,
+  playerId,
   csrf,
   initialTask,
   noteNaming = "solfege",
@@ -56,6 +80,11 @@ export default function PlayScreen({
 }: Props) {
   const { t } = useTranslation();
   const [task, setTask] = useState<Task>(initialTask);
+  const [clockSkew] = useState(() =>
+    initialTask.server_time
+      ? Date.parse(initialTask.server_time) - Date.now()
+      : 0,
+  );
   const [answers, setAnswers] = useState<Note[]>([]);
   const [correctAnswers, setCorrectAnswers] = useState<Note[]>([]);
   const [feedback, setFeedback] = useState<FeedbackState>("idle");
@@ -131,8 +160,19 @@ export default function PlayScreen({
         onSuccess: (data) => {
           setCorrectAnswers(data.correct_answers);
           setFeedback(
-            timedOut ? "timeout" : data.is_correct ? "correct" : "wrong",
+            (data.timed_out ?? timedOut)
+              ? "timeout"
+              : data.is_correct
+                ? "correct"
+                : "wrong",
           );
+          // Cached replies preserve server_time, so recalibration would extend deadlines.
+          const feedbackMs = data.next_task?.issued_at
+            ? Math.max(
+                0,
+                Date.parse(data.next_task.issued_at) - clockSkew - Date.now(),
+              )
+            : 900;
           transitionRef.current = setTimeout(() => {
             stopListening();
             submittingRef.current = false;
@@ -145,14 +185,14 @@ export default function PlayScreen({
               setFeedback("idle");
               setTimerKey((k) => k + 1);
             }
-          }, 900);
+          }, feedbackMs);
         },
         onError: () => {
           submittingRef.current = false;
         },
       });
     },
-    [csrf, task.index, submitTask, onResult, stopListening],
+    [csrf, task.index, submitTask, onResult, stopListening, clockSkew],
   );
 
   const handleAnswer = (note: Note) => {
@@ -186,10 +226,18 @@ export default function PlayScreen({
 
       <Timer
         key={timerKey}
-        totalMs={timeLimitMs}
+        totalMs={task.time_limit_ms ?? timeLimitMs}
+        deadlineMs={
+          task.deadline_at
+            ? Date.parse(task.deadline_at) - clockSkew
+            : undefined
+        }
         onExpire={handleTimeout}
         paused={isWaiting}
       />
+      {playerId !== undefined && (
+        <Mascot playerId={playerId} feedback={feedback} />
+      )}
 
       <Box sx={{ minHeight: 56 }}>
         {feedback !== "idle" && (

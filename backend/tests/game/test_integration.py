@@ -90,7 +90,7 @@ async def test_full_round(
             ]
             timed_out = False
         elif i == 5:
-            answers = [{"name": "X", "octave": 0}]
+            answers = [{"name": "D" if note["name"] == "C" else "C", "octave": 4}]
             timed_out = False
         else:
             answers = None
@@ -206,7 +206,9 @@ async def test_round_bonus_is_authoritative_once_and_does_not_change_xp(
             "task_index": index,
             "answers": [
                 {
-                    "name": note["name"] if all_correct else "X",
+                    "name": note["name"]
+                    if all_correct
+                    else ("D" if note["name"] == "C" else "C"),
                     "octave": 5 if note["octave"] != 5 else 4,
                 }
                 for note in task["notes"]
@@ -220,7 +222,7 @@ async def test_round_bonus_is_authoritative_once_and_does_not_change_xp(
                 client.post(f"/api/game/rounds/{round_id}/submit", json=body),
                 client.post(f"/api/game/rounds/{round_id}/submit", json=body),
             )
-            assert sorted(item.status_code for item in simultaneous) == [200, 400]
+            assert sorted(item.status_code for item in simultaneous) == [200, 200]
             response = next(item for item in simultaneous if item.status_code == 200)
         else:
             response = await client.post(
@@ -237,7 +239,7 @@ async def test_round_bonus_is_authoritative_once_and_does_not_change_xp(
         if index < 6:
             task = response.json()["next_task"]
     result = response.json()["result"]
-    expected_score = (7 if graded_correct else -7) + effective_bonus
+    expected_score = max(0, (7 if graded_correct else -7) + effective_bonus)
     assert result["score"] == expected_score
     assert result["score_bonus"] == effective_bonus
     assert result["correct_count"] == (7 if graded_correct else 0)
@@ -253,7 +255,8 @@ async def test_round_bonus_is_authoritative_once_and_does_not_change_xp(
     repeated = await client.post(
         f"/api/game/rounds/{round_id}/submit", json={"task_index": 6, "timed_out": True}
     )
-    assert repeated.status_code == 400
+    assert repeated.status_code == 200
+    assert repeated.json()["result"] == result
     with database.session() as session:
         stored = session.get(Round, round_id)
         assert stored is not None and stored.score == expected_score

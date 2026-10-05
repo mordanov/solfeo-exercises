@@ -5,51 +5,43 @@ interface Props {
   totalMs: number;
   onExpire: () => void;
   paused?: boolean;
+  deadlineMs?: number;
 }
 
-export default function Timer({ totalMs, onExpire, paused = false }: Props) {
-  const startRef = useRef(Date.now());
-  const pausedAtRef = useRef<number | null>(null);
-  const [remaining, setRemaining] = useState(totalMs);
+export default function Timer({
+  totalMs,
+  onExpire,
+  paused = false,
+  deadlineMs,
+}: Props) {
+  const fallbackDeadline = useRef(Date.now() + totalMs);
+  const deadline = deadlineMs ?? fallbackDeadline.current;
+  const [remaining, setRemaining] = useState(() =>
+    Math.max(0, deadline - Date.now()),
+  );
   const expiredRef = useRef(false);
 
   useEffect(() => {
-    if (paused) {
-      pausedAtRef.current = Date.now();
-      return;
-    }
-    if (pausedAtRef.current !== null) {
-      startRef.current += Date.now() - pausedAtRef.current;
-      pausedAtRef.current = null;
-    }
+    if (paused) return;
 
     const tick = () => {
-      const elapsed = Date.now() - startRef.current;
-      const left = Math.max(0, totalMs - elapsed);
+      const left = Math.max(0, deadline - Date.now());
       setRemaining(left);
       if (left <= 0 && !expiredRef.current) {
         expiredRef.current = true;
         onExpire();
       }
     };
+    tick();
     const id = setInterval(tick, 50);
-    return () => clearInterval(id);
-  }, [paused, totalMs, onExpire]);
-
-  useEffect(() => {
-    const handler = () => {
-      if (document.hidden) {
-        pausedAtRef.current = Date.now();
-      } else if (pausedAtRef.current !== null) {
-        startRef.current += Date.now() - pausedAtRef.current;
-        pausedAtRef.current = null;
-      }
+    document.addEventListener("visibilitychange", tick);
+    return () => {
+      clearInterval(id);
+      document.removeEventListener("visibilitychange", tick);
     };
-    document.addEventListener("visibilitychange", handler);
-    return () => document.removeEventListener("visibilitychange", handler);
-  }, []);
+  }, [paused, deadline, onExpire]);
 
-  const pct = (remaining / totalMs) * 100;
+  const pct = Math.min(100, (remaining / totalMs) * 100);
   const hurry = remaining < 2000;
 
   return (

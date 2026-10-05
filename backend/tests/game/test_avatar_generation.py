@@ -24,6 +24,7 @@ def no_external_requests(monkeypatch: pytest.MonkeyPatch) -> None:
         raise AssertionError("Tests must not contact the image provider")
 
     monkeypatch.setattr(generate_avatar, "_openai_post", forbidden)
+    monkeypatch.setattr(generate_avatar, "_moderate_image", lambda *_: False)
 
 
 def sheet_bytes(empty_cell: bool = False) -> bytes:
@@ -89,7 +90,7 @@ def test_one_request_creates_and_persists_all_thirty_frames(
         assert job is not None
         assert job.status == "ready"
         assert job.completed_images == 30
-        assert job.phase == "complete"
+        assert job.phase == "review"
         assert job.asset_version == 2
     root = settings.media_root / "avatars" / "custom" / str(avatar_job)
     assert (root / "sheet.png").is_file()
@@ -216,6 +217,11 @@ async def test_progress_saved_gallery_and_all_thirty_private_frames_survive_reus
         stored = session.get(CustomAvatar, avatar_job)
         assert stored is not None
         player_id = stored.player_id
+    assert (
+        await client.post(
+            f"/api/game/avatars/{avatar_job}/review", json={"decision": "approved"}
+        )
+    ).status_code == 200
     assert (await client.post(f"/api/game/avatars/{avatar_job}/use")).status_code == 200
     await client.post(
         f"/api/game/players/{player_id}/avatar", json={"avatar_animal": "lion"}
@@ -319,6 +325,10 @@ async def test_missing_frame_prevents_selecting_an_incomplete_avatar(
     monkeypatch.setattr(generate_avatar, "_moderate", lambda *_: False)
     monkeypatch.setattr(generate_avatar, "_generate_sheet", lambda *_: sheet_bytes())
     assert generate_avatar.process_one(database, settings)
+    with database.session() as session, session.begin():
+        job = session.get(CustomAvatar, avatar_job)
+        assert job is not None
+        job.review_status = "approved"
     path = settings.media_root / f"avatars/custom/{avatar_job}/levels/avatar_10_sad.png"
     path.unlink()
     login = await client.post(

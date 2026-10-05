@@ -32,6 +32,11 @@ When enabled, the correct answer appears to the right of the centered playback c
 The staff keeps the same size across clefs and note counts.
 Each disabled switch adds 1 point once per completed round, including a losing round.
 These points do not change XP or the requirement for 5 correct answers to win.
+The total score cannot fall below 0.
+The timer follows the server clock, including the first question.
+Short feedback appears before the next question starts.
+Result tips use your selected language and note names.
+The result shows your previous average for the same difficulty and note count when matching completed rounds exist.
 
 A failed request shows an error and **Try again**, not the empty-profile message.
 The badge shows **Play Guess the Note** on hover or keyboard focus.
@@ -59,8 +64,30 @@ Only completed rounds affect statistics.
 An unfinished or expired round does not count.
 Assistance bonuses affect average score, not the requirement for 5 correct answers to win.
 A manager can start a new statistics season.
-This operation preserves your history, XP, level, trophies, and saved avatars.
+This operation preserves your history, XP, level, trophies, prizes, and saved avatars.
 Students cannot reset statistics or read another account's results.
+
+## Collect game prizes
+
+1. Complete a round.
+   The result shows any new prizes.
+2. Open your **Statistics**.
+   The profile shows your earned prizes.
+3. Inspect the prize names and descriptions.
+   Each description explains its condition in your selected language.
+4. Continue playing at your own pace.
+   Each prize remains yours after a statistics reset.
+
+There are 20 lifetime prizes, separate from trophies for 20, 100, 200, and 500 completed rounds.
+The setup and profile shelves show a picture for every prize.
+Earned prizes show full color; locked prizes show gray, muted pictures.
+New-prize messages show the same pictures after a round.
+You earn each prize once; prizes do not add XP.
+Some prizes count individual correct notes, including correct notes in an otherwise incorrect answer.
+Others celebrate a perfect round, different clefs, different difficulties, or your avatar level.
+Calendar-day prizes use the application's configured time zone.
+Breaks do not remove prizes or XP.
+Returning after at least 7 calendar days can earn **Welcome back**.
 
 ## Listen to game notes
 
@@ -96,27 +123,34 @@ To create an original character:
 2. Enter a description.
 3. Click **Create avatar**.
    The window shows the remaining quota and generation progress.
-4. Wait for the preview.
+4. Wait for generation and manager approval.
    The window shows the phase, saved images out of 30, and an approximate remaining time.
    The counter stays at 0 while the service draws all variants together.
    It increases when the application cuts and saves the images.
    A longer wait shows an unknown estimate instead of false completion.
-5. Select **Preview level** to inspect levels 1–10 and all 3 emotions.
-6. Click **Use it** to save the generated character.
-   The selected character remains after a reload.
+5. Check the pending selection.
+   An hourglass appears while the manager checks the result.
+   You cannot preview generated images before approval.
+6. Wait for the manager's decision.
+   Approval activates your character automatically.
+   Rejection shows the question mark; you can choose a built-in character instead.
 7. Reopen the chooser if you close it during generation.
    The existing job appears without another generation request.
 8. Click **Discard** to remove an unwanted result.
 
 To reuse a generated character:
 1. Open **Choose avatar**.
-2. Select a picture under **Saved avatars**.
+2. Select an approved picture under **Saved avatars**.
 3. Inspect its levels and emotions.
 4. Click **Use it**.
    The character returns without another generation request or quota charge.
 
 Selecting a built-in character does not remove saved avatars.
 Older generated avatars show a notice because they share 3 emotion images across all levels.
+Existing ready avatars remain approved without another generation request.
+If you choose a built-in character before approval, the manager's later decision does not replace that choice.
+The application automatically checks descriptions and generated images before manager review.
+All avatar messages and accessible labels follow your selected interface language.
 
 Custom creation requires the operator's configured generation service.
 An unavailable service or a failed generation shows an error.
