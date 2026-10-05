@@ -16,6 +16,22 @@ This endpoint checks the FastAPI process only.
 It does not establish database readiness, bot operation, or worker health.
 The frontend validates both the HTTP status and the JSON body.
 
+## Account roles and permissions
+
+User creation, role changes, and account responses support `manager`, `student`, and `player`.
+The player role differs from a player profile.
+Players retain login, password changes, settings, themes, and owned game resources.
+The game opens at `/`, `/login`, and `/game` for player accounts.
+The backend returns `403` with `FORBIDDEN` for player requests to exercise, file, score, listening, journal, or manager endpoints.
+Protected file rejection includes `HEAD` and range requests without an `X-Accel-Redirect` header.
+Foreign game profiles and rounds retain their ownership checks and nondisclosing `404` responses.
+Changing an account role revokes its login sessions.
+The user must sign in again with the new permissions.
+
+`Member` requires authentication and a completed mandatory password change.
+`ExerciseMember` also restricts the role to student or manager.
+`Manager` and listening `Student` dependencies retain their explicit role checks.
+
 ## OMR and scores
 
 Exercise responses include `omr`: `job_id`, `image_id`, `status`, `attempts`, and `last_error`.
@@ -24,7 +40,7 @@ The manager review panel resides on `/manager/exercises`; it does not introduce 
 
 | Method | Path | Access and result |
 |---|---|---|
-| GET | `/api/exercises/{id}/omr` | Authenticated member; current image recognition state |
+| GET | `/api/exercises/{id}/omr` | Student or manager; current image recognition state |
 | POST | `/api/exercises/{id}/omr/rerun` | Manager and CSRF; enqueue a new version, or return the existing active job |
 | POST | `/api/exercises/{id}/omr/review` | Manager and CSRF; body contains `job_id` and `action` (`approve` or `reject`) |
 | GET, HEAD | `/api/exercises/{id}/score?version={job_id}` | Manager review output, or current approved output for a student |
@@ -44,7 +60,7 @@ The application does not create them during startup, account creation, or login.
 
 | Method | Path | Access and result |
 |---|---|---|
-| GET | `/api/game/players` | Manager sees all profiles; student sees only owned profiles |
+| GET | `/api/game/players` | Manager sees all profiles; student or player sees only owned profiles |
 | GET | `/api/game/players/accounts?offset=0` | Manager only; eligible accounts, filtered total, 50 per page |
 | POST | `/api/game/players` | Manager and CSRF; creates a player and an active season |
 
@@ -59,7 +75,7 @@ Creation locks the owner account row before checking existing profiles.
 Concurrent requests can create only one profile and one season.
 Existing profiles and progress remain unchanged.
 Rejected requests create neither a player nor a season.
-Students receive `403` when they request creation.
+Students and players receive `403` when they request creation.
 Starting another account's round returns `404`, without disclosing that profile.
 
 The eligible-account response contains `users` and the filtered `total`.
@@ -101,7 +117,7 @@ The player selector links to `/game/profile/{id}`.
 Managers also see **Player management**, which opens `/game/admin`.
 Its detail route, `/game/admin/{id}`, includes profile statistics and mistake analysis.
 Direct links and browser navigation retain these routes.
-Students cannot render manager controls or read another account's statistics.
+Students and players cannot render manager controls or read another account's statistics.
 
 | Method | Path | Access and result |
 |---|---|---|
@@ -159,7 +175,7 @@ Existing 20, 100, 200, and 500-round trophies remain separate.
 
 Player responses include `avatar_animal`, `custom_avatar_id`, `xp`, and derived `avatar_level` from 1 to 10.
 They also include `avatar_review_job_id` and `avatar_review_status` for the waiting or rejected selection.
-Students access only their own players.
+Students and players access only their own profiles.
 Managers can choose avatars for any player without changing the existing player-management permissions.
 
 | Method | Path | Access and result |
@@ -194,7 +210,7 @@ Incomplete version 2 storage prevents selection with `409 AVATAR_ASSETS_MISSING`
 Invalid paths and missing files return `FILE_NOT_FOUND`.
 Unconfigured creation returns status `503` with `AVATAR_GENERATION_UNAVAILABLE`.
 Saved-avatar access does not require a configured provider.
-Student image requests before approval return `403 AVATAR_NOT_APPROVED`.
+Student and player image requests before approval return `403 AVATAR_NOT_APPROVED`.
 Unapproved status responses omit private image paths.
 Managers can inspect all 10 levels and 3 emotions through the protected frame endpoints.
 The queue also includes `player_id`, `player_name`, `account_id`, `description`, and `created_at`.
@@ -245,7 +261,7 @@ JSON inputs reject unknown fields; validation errors do not echo passwords or re
 | `GET /api/auth/me` | Active session | Returns `user` and `csrf_token`; renews the sliding expiry |
 | `POST /api/auth/logout` | Active session, CSRF | Revokes this session and expires its cookie |
 | `PUT /api/auth/password` | Active session, CSRF | `current_password`, `new_password`; revokes all sessions and creates a replacement session |
-| `PATCH /api/settings` | Student or manager, CSRF | Nonempty partial language, note-naming, or appearance update; returns the complete updated user |
+| `PATCH /api/settings` | Student, player, or manager, CSRF | Nonempty partial language, note-naming, or appearance update; returns the complete updated user |
 | `GET /api/users` | Manager | `offset` and `limit`; returns `users` and `total` |
 | `POST /api/users` | Manager, CSRF | Creates a user; returns the user with status 201 |
 | `PATCH /api/users/{id}` | Manager, CSRF | Updates supplied `first_name`, `last_name`, `role`, or `is_active` |

@@ -206,6 +206,7 @@
   "student.title": "Student area",
   "student.empty": "Your account and settings are ready. The student listening module arrives in the next phase.",
   "roles.student": "Student",
+  "roles.player": "Player",
   "roles.manager": "Manager",
   "users.title": "Users",
   "users.create": "Create user",

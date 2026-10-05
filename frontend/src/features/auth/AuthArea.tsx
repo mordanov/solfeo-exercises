@@ -283,6 +283,8 @@ export function AuthArea() {
   const managerPath =
     path === "/manager/users" ||
     ((path === "/" || path === "/login") && auth.user.role === "manager");
+  const playerHome =
+    (path === "/" || path === "/login") && auth.user.role === "player";
   return (
     <Box component="section">
       <p>
@@ -325,15 +327,19 @@ export function AuthArea() {
                 <Link href="/manager/telegram">{t("telegram.title")}</Link>
               </>
             )}
-            <Link
-              href={
-                auth.user.role === "manager" ? "/manager/users" : "/student"
-              }
-            >
-              {t(
-                auth.user.role === "manager" ? "users.title" : "student.title",
-              )}
-            </Link>{" "}
+            {auth.user.role !== "player" && (
+              <Link
+                href={
+                  auth.user.role === "manager" ? "/manager/users" : "/student"
+                }
+              >
+                {t(
+                  auth.user.role === "manager"
+                    ? "users.title"
+                    : "student.title",
+                )}
+              </Link>
+            )}{" "}
             <Link href="/settings">{t("settings.title")}</Link>{" "}
             <Link href="/game">{t("game.title")}</Link>
           </>
@@ -381,6 +387,8 @@ export function AuthArea() {
         ) : (
           <ErrorMessage error={new ApiError("FORBIDDEN")} />
         )
+      ) : playerHome ? (
+        <GameArea auth={auth} />
       ) : path === "/" || path === "/student" || path === "/login" ? (
         auth.user.role === "student" ? (
           <Listening auth={auth} />

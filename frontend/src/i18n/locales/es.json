@@ -206,6 +206,7 @@
   "student.title": "Área del estudiante",
   "student.empty": "Tu cuenta y tus ajustes están disponibles. El módulo de escucha para estudiantes llegará en la próxima fase.",
   "roles.student": "Estudiante",
+  "roles.player": "Jugador",
   "roles.manager": "Gestor",
   "users.title": "Usuarios",
   "users.create": "Crear usuario",

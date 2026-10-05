@@ -7,7 +7,7 @@ import {
   type Appearance,
 } from "../appearance";
 
-export type Role = "manager" | "student";
+export type Role = "manager" | "student" | "player";
 export type NoteNaming = "letters" | "solfege";
 export type User = Appearance & {
   id: number;
@@ -44,6 +44,10 @@ export function record(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
 }
 
+export function isRole(value: unknown): value is Role {
+  return value === "manager" || value === "student" || value === "player";
+}
+
 export function parseUser(value: unknown): User {
   if (
     !record(value) ||
@@ -53,7 +57,7 @@ export function parseUser(value: unknown): User {
     typeof value.username !== "string" ||
     typeof value.first_name !== "string" ||
     typeof value.last_name !== "string" ||
-    (value.role !== "manager" && value.role !== "student") ||
+    !isRole(value.role) ||
     typeof value.is_active !== "boolean" ||
     typeof value.is_emergency !== "boolean" ||
     typeof value.must_change_password !== "boolean" ||

@@ -36,6 +36,9 @@ it("parses only complete supported appearance preferences", () => {
       "INVALID_RESPONSE",
     );
 });
+it("accepts the game-only account role", () => {
+  expect(parseUser({ ...validUser, role: "player" }).role).toBe("player");
+});
 it("saves appearance alone without overwriting language or naming", async () => {
   const fetch = vi
     .fn()

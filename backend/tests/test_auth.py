@@ -114,7 +114,7 @@ async def create_user(
     return int(response.json()["id"])
 
 
-@pytest.mark.parametrize("role", ["manager", "student"])
+@pytest.mark.parametrize("role", ["manager", "student", "player"])
 async def test_appearance_preferences_persist_without_changing_other_settings(
     client: httpx.AsyncClient, role: str
 ) -> None:
@@ -141,6 +141,157 @@ async def test_appearance_preferences_persist_without_changing_other_settings(
     assert response.json()["user"]["ui_language"] == "es"
     assert (await client.patch("/api/settings", json=APPEARANCE)).status_code == 200
     assert (await client.get("/api/auth/me")).json()["user"]["ui_language"] == "es"
+
+
+async def test_player_role_game_access_and_exercise_boundaries(
+    client: httpx.AsyncClient,
+    settings: Settings,
+) -> None:
+    settings.game_feedback_ms = 0
+    await login(client)
+    account_id = await create_user(client, "game-only", "player")
+    other_id = await create_user(client, "other-student")
+    eligible = await client.get("/api/game/players/accounts")
+    assert account_id in [user["id"] for user in eligible.json()["users"]]
+    profile = await client.post(
+        "/api/game/players",
+        json={
+            "account_id": account_id,
+            "name": "Game only",
+        },
+    )
+    assert profile.status_code == 200, profile.text
+    profile_id = profile.json()["id"]
+    other = await client.post(
+        "/api/game/players",
+        json={
+            "account_id": other_id,
+            "name": "Other",
+        },
+    )
+    assert other.status_code == 200, other.text
+    client.cookies.clear()
+    response = await login(client, "game-only")
+    assert response.status_code == 200, response.text
+    assert response.json()["user"]["role"] == "player"
+    profiles = await client.get("/api/game/players")
+    assert [row["id"] for row in profiles.json()] == [profile_id]
+    assert (await client.get(f"/api/game/players/{profile_id}")).status_code == 200
+    achievements = await client.get(f"/api/game/players/{profile_id}/achievements")
+    assert achievements.status_code == 200
+    foreign_profile = await client.get(f"/api/game/players/{other.json()['id']}")
+    assert foreign_profile.status_code == 404
+    started = await client.post(
+        "/api/game/rounds",
+        json={
+            "player_id": profile_id,
+            "difficulty": "easy",
+            "note_count": 1,
+        },
+    )
+    assert started.status_code == 200, started.text
+    round_id = started.json()["round_id"]
+    task = started.json()["task"]
+    for index in range(7):
+        submitted = await client.post(
+            f"/api/game/rounds/{round_id}/submit",
+            json={
+                "task_index": index,
+                "answers": task["notes"],
+            },
+        )
+        assert submitted.status_code == 200, submitted.text
+        task = submitted.json()["next_task"]
+    assert submitted.json()["result"]["score"] >= 0
+    assert submitted.json()["result"]["correct_count"] == 7
+    assert submitted.json()["result"]["is_win"] is True
+    updated = await client.get(f"/api/game/players/{profile_id}")
+    assert updated.json()["xp"] > 0
+    foreign_round = await client.post(
+        "/api/game/rounds",
+        json={
+            "player_id": other.json()["id"],
+            "difficulty": "easy",
+            "note_count": 1,
+        },
+    )
+    assert foreign_round.status_code == 404
+    for path in [
+        "/api/exercises",
+        "/api/exercises/999",
+        "/api/exercises/999/files/image",
+        "/api/exercises/999/files/audio",
+        "/api/exercises/999/omr",
+        "/api/exercises/999/score?version=00000000-0000-0000-0000-000000000001",
+        "/api/listening/current",
+        "/api/journal",
+        "/api/journal/options",
+        "/api/users",
+        "/api/game/players/accounts",
+    ]:
+        denied = await client.get(path)
+        assert denied.status_code == 403, (path, denied.text)
+        assert denied.json()["error"] == "FORBIDDEN"
+        assert "X-Accel-Redirect" not in denied.headers
+    for kind in ("image", "audio"):
+        denied = await client.head(
+            f"/api/exercises/999/files/{kind}", headers={"Range": "bytes=0-1"}
+        )
+        assert denied.status_code == 403
+        assert "X-Accel-Redirect" not in denied.headers
+    assert (
+        await client.post(
+            "/api/game/players",
+            json={
+                "name": "Not allowed",
+                "account_id": account_id,
+            },
+        )
+    ).status_code == 403
+    assert (
+        await client.post(
+            "/api/listening/select",
+            json={
+                "mode": "sequential",
+            },
+        )
+    ).status_code == 403
+    denied_event = await client.post(
+        "/api/listening/events",
+        json={
+            "session_id": "00000000-0000-0000-0000-000000000002",
+            "exercise_id": 999,
+            "event": "end",
+            "position_seconds": 0,
+            "csrf_token": client.headers["X-CSRF-Token"],
+        },
+    )
+    assert denied_event.status_code == 403
+    assert denied_event.json()["error"] == "FORBIDDEN"
+
+
+async def test_changing_student_to_player_revokes_session_and_exercise_access(
+    client: httpx.AsyncClient,
+) -> None:
+    await login(client)
+    account_id = await create_user(client)
+    manager_cookies = httpx.Cookies(client.cookies)
+    manager_csrf = client.headers["X-CSRF-Token"]
+    client.cookies.clear()
+    await login(client, "student")
+    previous_cookies = httpx.Cookies(client.cookies)
+    client.cookies.clear()
+    client.cookies.update(manager_cookies)
+    client.headers["X-CSRF-Token"] = manager_csrf
+    changed = await client.patch(f"/api/users/{account_id}", json={"role": "player"})
+    assert changed.status_code == 200, changed.text
+    assert changed.json()["role"] == "player"
+    client.cookies.clear()
+    client.cookies.update(previous_cookies)
+    assert (await client.get("/api/auth/me")).status_code == 401
+    client.cookies.clear()
+    assert (await login(client, "student")).json()["user"]["role"] == "player"
+    assert (await client.get("/api/exercises")).status_code == 403
 
 
 @pytest.mark.parametrize(

@@ -7,9 +7,9 @@ from pydantic import BaseModel, Field, field_validator
 from app.api.auth import (
     Configuration,
     Db,
+    ExerciseMember,
     Input,
     Manager,
-    Member,
     StatusOutput,
     require_csrf,
 )
@@ -99,7 +99,7 @@ def output(row: Exercise, session: Db) -> ExerciseOutput:
 
 @router.get("")
 def listing(
-    _member: Member,
+    _member: ExerciseMember,
     session: Db,
     offset: Annotated[int, Query(ge=0)] = 0,
     limit: Annotated[int, Query(ge=1, le=10000)] = 10000,
@@ -156,7 +156,7 @@ def update(
 
 
 @router.get("/{identifier}")
-def detail(identifier: int, _member: Member, session: Db) -> ExerciseOutput:
+def detail(identifier: int, _member: ExerciseMember, session: Db) -> ExerciseOutput:
     return output(exercises.get_exercise(session, identifier), session)
 
 
@@ -170,7 +170,7 @@ def delete(identifier: int, _manager: Manager, session: Db) -> StatusOutput:
 def protected_file(
     identifier: int,
     kind: Literal["image", "audio"],
-    _member: Member,
+    _member: ExerciseMember,
     session: Db,
     settings: Configuration,
     response: Response,

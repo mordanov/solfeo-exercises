@@ -32,8 +32,15 @@ Finalization locks the round and awards XP and the score bonus once.
 Revision `0011_game_rewards_review` adds durable submission replies, lifetime prizes, and manager approval metadata.
 It floors negative historical round totals at 0 without changing raw attempt scores or XP.
 It marks existing ready avatars approved without regenerating files.
-The migration chain runs `0008_game` → `0009_avatar_sheets` → `0010_round_rules` → `0011_game_rewards_review`, with one head.
+The migration chain runs `0008_game` → `0009_avatar_sheets` → `0010_round_rules` → `0011_game_rewards_review` → `0012_player_role`, with one head.
 Upgrading from `0009_avatar_sheets` preserves active avatar jobs and saved metadata.
+
+Revision `0012_player_role` adds `player` to the `users` role constraint.
+It changes no existing role, profile, or progress record.
+The account role differs from the owned game profile.
+Downgrade returns `PLAYER_ACCOUNTS_PREVENT_DOWNGRADE` while any player account exists.
+Reassign these roles explicitly before returning to an older release.
+Changing a player account to student grants exercise access.
 
 | Table | Contents and constraints |
 |---|---|

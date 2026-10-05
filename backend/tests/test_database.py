@@ -146,7 +146,7 @@ def test_migration_upgrade_repeat_downgrade_and_upgrade(database: Database) -> N
         command.upgrade(config, "head")
         assert (
             connection.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0011_game_rewards_review"
+            == "0012_player_role"
         )
         assert set(inspect(connection).get_table_names()) == {
             "alembic_version",
@@ -159,7 +159,7 @@ def test_migration_upgrade_repeat_downgrade_and_upgrade(database: Database) -> N
         command.upgrade(config, "head")
         assert (
             connection.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0011_game_rewards_review"
+            == "0012_player_role"
         )
 
 
@@ -287,15 +287,73 @@ def test_round_rules_migration_preserves_previous_release_rows(
         )
 
 
-def test_round_rules_is_the_single_head_after_avatar_sheets() -> None:
+def test_player_role_is_the_single_head_after_game_rewards() -> None:
     scripts = ScriptDirectory.from_config(Config(str(ROOT / "backend/alembic.ini")))
-    assert scripts.get_heads() == ["0011_game_rewards_review"]
+    assert scripts.get_heads() == ["0012_player_role"]
+    player_role = scripts.get_revision("0012_player_role")
+    assert player_role is not None
+    assert player_role.down_revision == "0011_game_rewards_review"
     latest = scripts.get_revision("0011_game_rewards_review")
     assert latest is not None
     assert latest.down_revision == "0010_round_rules"
     revision = scripts.get_revision("0010_round_rules")
     assert revision is not None
     assert revision.down_revision == "0009_avatar_sheets"
+
+
+def test_player_role_migration_preserves_users_and_rejects_unsafe_downgrade(
+    database: Database,
+) -> None:
+    with database.engine.begin() as connection:
+        config = migration_config(connection)
+        command.upgrade(config, "head")
+        command.downgrade(config, "0011_game_rewards_review")
+        user_ids: list[int] = []
+        for role in ("manager", "student"):
+            user_ids.append(
+                connection.scalar(
+                    text(
+                        "INSERT INTO users (username, password_hash, "
+                        "first_name, last_name, role) "
+                        "VALUES (:username, 'synthetic-hash', "
+                        "'First', 'Last', :role) RETURNING id"
+                    ),
+                    {"username": f"legacy-role-{role}", "role": role},
+                )
+            )
+        command.upgrade(config, "head")
+        assert list(
+            connection.scalars(
+                text("SELECT role FROM users WHERE id = ANY(:ids) ORDER BY id"),
+                {"ids": user_ids},
+            )
+        ) == ["manager", "student"]
+        player_id = connection.scalar(
+            text(
+                "INSERT INTO users (username, password_hash, first_name, "
+                "last_name, role) "
+                "VALUES ('migration-player-role', 'synthetic-hash', "
+                "'First', 'Last', 'player') RETURNING id"
+            )
+        )
+        with pytest.raises(RuntimeError, match="PLAYER_ACCOUNTS_PREVENT_DOWNGRADE"):
+            command.downgrade(config, "0011_game_rewards_review")
+        assert (
+            connection.scalar(text("SELECT version_num FROM alembic_version"))
+            == "0012_player_role"
+        )
+        assert (
+            connection.scalar(
+                text("SELECT role FROM users WHERE id = :id"), {"id": player_id}
+            )
+            == "player"
+        )
+        connection.execute(text("DELETE FROM users WHERE id = :id"), {"id": player_id})
+        command.downgrade(config, "0011_game_rewards_review")
+        command.upgrade(config, "head")
+        connection.execute(
+            text("DELETE FROM users WHERE id = ANY(:ids)"), {"ids": user_ids}
+        )
 
 
 def test_rewards_migration_preserves_xp_and_existing_art_and_floors_scores(

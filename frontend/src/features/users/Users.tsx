@@ -6,6 +6,7 @@ import {
   listUsers,
   updateUser,
   resetPassword,
+  isRole,
   type Auth,
   type Role,
   type User,
@@ -24,6 +25,7 @@ function RoleOptions() {
   return (
     <>
       <option value="student">{t("roles.student")}</option>
+      <option value="player">{t("roles.player")}</option>
       <option value="manager">{t("roles.manager")}</option>
     </>
   );
@@ -93,11 +95,7 @@ function UserEditor({
           <Select
             value={role}
             onChange={(event) => {
-              if (
-                event.target.value === "manager" ||
-                event.target.value === "student"
-              )
-                setRole(event.target.value);
+              if (isRole(event.target.value)) setRole(event.target.value);
             }}
           >
             <RoleOptions />
@@ -352,11 +350,7 @@ export function Users({ auth }: { auth: Auth }) {
               <Select
                 value={role}
                 onChange={(event) => {
-                  if (
-                    event.target.value === "manager" ||
-                    event.target.value === "student"
-                  )
-                    setRole(event.target.value);
+                  if (isRole(event.target.value)) setRole(event.target.value);
                 }}
               >
                 <RoleOptions />

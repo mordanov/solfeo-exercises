@@ -34,7 +34,7 @@ class Base(DeclarativeBase):
 class User(Base):
     __tablename__ = "users"
     __table_args__ = (
-        CheckConstraint("role IN ('manager', 'student')", name="role"),
+        CheckConstraint("role IN ('manager', 'student', 'player')", name="role"),
         CheckConstraint("ui_language IN ('ru', 'en', 'es')", name="ui_language"),
         CheckConstraint("note_naming IN ('letters', 'solfege')", name="note_naming"),
         CheckConstraint(

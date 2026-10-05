@@ -37,7 +37,7 @@ class UserOutput(BaseModel):
     username: str
     first_name: str
     last_name: str
-    role: Literal["manager", "student"]
+    role: Literal["manager", "student", "player"]
     is_active: bool
     is_emergency: bool
     must_change_password: bool
@@ -72,7 +72,7 @@ class StatusOutput(BaseModel):
 class CreateUserInput(LoginInput):
     first_name: str = Field(min_length=1, max_length=100)
     last_name: str = Field(min_length=1, max_length=100)
-    role: Literal["manager", "student"]
+    role: Literal["manager", "student", "player"]
     must_change_password: bool = True
 
     @field_validator("first_name", "last_name")
@@ -86,7 +86,7 @@ class CreateUserInput(LoginInput):
 class UpdateUserInput(Input):
     first_name: str | None = Field(default=None, min_length=1, max_length=100)
     last_name: str | None = Field(default=None, min_length=1, max_length=100)
-    role: Literal["manager", "student"] | None = None
+    role: Literal["manager", "student", "player"] | None = None
     is_active: bool | None = None
 
     @field_validator("first_name", "last_name")
@@ -174,13 +174,22 @@ def require_identity(
 Current = Annotated[auth.Identity, Depends(require_identity)]
 
 
-def require_student_or_manager(identity: Current) -> auth.Identity:
+def require_member(identity: Current) -> auth.Identity:
     if identity.user.must_change_password:
         raise auth.ServiceError("PASSWORD_CHANGE_REQUIRED", 403)
     return identity
 
 
-Member = Annotated[auth.Identity, Depends(require_student_or_manager)]
+Member = Annotated[auth.Identity, Depends(require_member)]
+
+
+def require_student_or_manager(identity: Member) -> auth.Identity:
+    if identity.user.role not in {"student", "manager"}:
+        raise auth.ServiceError("FORBIDDEN", 403)
+    return identity
+
+
+ExerciseMember = Annotated[auth.Identity, Depends(require_student_or_manager)]
 
 
 def require_manager(identity: Member) -> auth.Identity:

@@ -22,6 +22,7 @@ const manager = {
   note_naming: "letters",
 };
 const student = { ...manager, id: 2, username: "student", role: "student" };
+const player = { ...student, id: 3, username: "player", role: "player" };
 const auth = (user = manager) => ({ user, csrf_token: "test-csrf" });
 const json = (value: unknown, status = 200) =>
   new Response(JSON.stringify(value), { status });
@@ -53,7 +54,7 @@ function mount(cache?: QueryClient) {
   );
 }
 
-it.each([manager, student])(
+it.each([manager, student, player])(
   "links to the game for $role accounts",
   async (user) => {
     window.history.replaceState({}, "", "/game");
@@ -69,6 +70,82 @@ it.each([manager, student])(
     ).toHaveAttribute("href", "/game");
   },
 );
+
+it.each(["/", "/login", "/game"])(
+  "opens only the game for player accounts at %s",
+  async (path) => {
+    window.history.replaceState({}, "", path);
+    const fetch = vi.fn(async (url: string) =>
+      url === "/api/auth/me" ? json(auth(player)) : json([]),
+    );
+    vi.stubGlobal("fetch", fetch);
+    mount();
+    expect(
+      await screen.findByRole("link", { name: "Settings" }),
+    ).toHaveAttribute("href", "/settings");
+    expect(
+      await screen.findByText(i18n.t("game.selectPlayer")),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("link", { name: "Exercises" }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("link", { name: i18n.t("student.title") }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("link", { name: "Users" }),
+    ).not.toBeInTheDocument();
+    expect(
+      fetch.mock.calls.some(
+        ([url]) =>
+          url.startsWith("/api/exercises") ||
+          url.startsWith("/api/listening") ||
+          url.startsWith("/api/users"),
+      ),
+    ).toBe(false);
+  },
+);
+
+it.each([
+  "/student",
+  "/manager/users",
+  "/manager/exercises",
+  "/manager/journal",
+  "/manager/telegram",
+  "/game/admin",
+  "/game/admin/3",
+])(
+  "denies player access to %s without loading protected data",
+  async (path) => {
+    window.history.replaceState({}, "", path);
+    const fetch = vi.fn(async () => json(auth(player)));
+    vi.stubGlobal("fetch", fetch);
+    mount();
+    expect(await screen.findByRole("alert")).toHaveTextContent(
+      i18n.t("errors.FORBIDDEN"),
+    );
+    expect(fetch).toHaveBeenCalledTimes(1);
+  },
+);
+
+it("keeps settings and appearance controls for player accounts", async () => {
+  window.history.replaceState({}, "", "/settings");
+  vi.stubGlobal(
+    "fetch",
+    vi.fn(async () => json(auth(player))),
+  );
+  mount();
+  expect(
+    await screen.findByRole("heading", { name: "Settings" }),
+  ).toBeInTheDocument();
+  expect(screen.getByLabelText("Language")).toBeInTheDocument();
+  expect(
+    screen.getByRole("heading", { name: "Appearance" }),
+  ).toBeInTheDocument();
+  expect(
+    screen.getByRole("heading", { name: "Change password" }),
+  ).toBeInTheDocument();
+});
 
 it("clears cached game profiles when signing out", async () => {
   window.history.replaceState({}, "", "/game");
