@@ -276,7 +276,9 @@ uv run --locked pytest backend/tests/test_prize_art.py
 The script requires exactly 20 separate badges before it writes any files.
 It uses the existing Pillow dependency.
 Images live at `/assets/prizes/<code>.png`.
-`PrizeImage` supplies the shared renderer for the setup shelf, profile shelf, and new-prize announcements.
+`PrizeImage` supplies the shared renderer for the result shelf, profile shelf, and new-prize announcements.
+Round preparation does not render the shelf or request its achievement catalog.
+The result shows the full collection below replay controls, even without new awards.
 Earned prizes use full color; locked prizes use grayscale and reduced opacity.
 Names, accessible image labels, and conditions retain the selected interface language.
 No image contains translated text, and no runtime image generation occurs.

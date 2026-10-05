@@ -79,7 +79,8 @@ Students cannot reset statistics or read another account's results.
    Each prize remains yours after a statistics reset.
 
 There are 20 lifetime prizes, separate from trophies for 20, 100, 200, and 500 completed rounds.
-The setup and profile shelves show a picture for every prize.
+The result and profile shelves show a picture for every prize.
+Round preparation does not show the prize shelf.
 Earned prizes show full color; locked prizes show gray, muted pictures.
 New-prize messages show the same pictures after a round.
 You earn each prize once; prizes do not add XP.
