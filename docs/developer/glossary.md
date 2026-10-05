@@ -37,6 +37,7 @@ Prerequisites:
 | DML | Data operations such as selecting, inserting, updating, and deleting table rows. |
 | release bundle | An archive with verified image references, deployment files, source provenance, and file hashes. |
 | login session | A persistent authenticated session, distinct from a listening session or database session. |
+| player role | A game-only account role with account settings and appearance access, but no exercise access. |
 | CSRF | Cross-site request forgery; origin and session-token checks reject unauthorized browser mutations. |
 | color scheme | A predefined set of compatible colors for buttons, text, backgrounds, panels, and control states. |
 | scrypt | A memory-hard password hashing algorithm with a random salt for each password. |

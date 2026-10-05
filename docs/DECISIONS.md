@@ -7,6 +7,16 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-10-05: The owner adds the game-only `player` account role.
+  Allow owned Guess the Note profiles, rounds, statistics, prizes, and existing avatar actions.
+  Keep password changes, language, note naming, and appearance settings.
+  Deny exercise metadata, original files, audio, scores, listening actions, and all manager functions.
+  Enforce these restrictions on the server and in navigation.
+  Open the game after login; reject direct student and manager routes.
+  Managers create game profiles explicitly; account creation does not create them.
+  Migration `0012_player_role` preserves existing accounts and game progress.
+  Refuse downgrade while player accounts exist instead of silently granting exercise access.
+
 - 2026-10-05: The owner moves the prize collection from round preparation to the round result.
   Show the full collection after every round, including rounds without new awards.
   Keep new-prize announcements and place replay controls before the collection.

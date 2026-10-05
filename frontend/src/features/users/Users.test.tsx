@@ -11,6 +11,7 @@ import { Users } from "./Users";
 vi.mock("../../api/auth", async (original) => ({
   ...(await original<typeof api>()),
   listUsers: vi.fn(),
+  createUser: vi.fn(),
   updateUser: vi.fn(),
   resetPassword: vi.fn(),
 }));
@@ -66,6 +67,44 @@ function viewport(mobile: boolean) {
     removeEventListener: vi.fn(),
   }));
 }
+
+it.each([
+  ["en", "Player"],
+  ["ru", "Игрок"],
+  ["es", "Jugador"],
+])(
+  "supports the player role in both manager selectors (%s)",
+  async (language, label) => {
+    await i18n.changeLanguage(language);
+    viewport(false);
+    mount();
+    await screen.findByRole("grid", { name: i18n.t("users.title") });
+    const creationRole = screen.getByLabelText(i18n.t("users.role"));
+    await userEvent.selectOptions(creationRole, "player");
+    expect(creationRole).toHaveValue("player");
+    expect(screen.getByRole("option", { name: label })).toHaveValue("player");
+    await userEvent.click(
+      screen.getByRole("button", {
+        name: i18n.t("users.editUser", { username: "student50" }),
+      }),
+    );
+    const editor = screen.getByRole("region", {
+      name: i18n.t("users.editUser", { username: "student50" }),
+    });
+    const editingRole = within(editor).getByLabelText(i18n.t("users.role"));
+    await userEvent.selectOptions(editingRole, "player");
+    await userEvent.click(
+      within(editor).getByRole("button", { name: i18n.t("users.save") }),
+    );
+    await waitFor(() =>
+      expect(api.updateUser).toHaveBeenCalledWith("csrf", 51, {
+        first_name: "First",
+        last_name: "Last",
+        role: "player",
+      }),
+    );
+  },
+);
 
 it.each([false, true])(
   "keeps every server-page row, pagination and inline editing (mobile=%s)",

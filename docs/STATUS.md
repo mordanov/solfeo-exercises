@@ -11,9 +11,32 @@ Last updated: 2026-10-05 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a05
 Game fixes, lifetime prizes, and manager approval for custom avatars follow the merged game features.
 The owner approves autonomous implementation after reviewing 20 proposals.
 The merged game improvements remain on `main`.
-The current branch is `feat/game-post-round-prizes`.
+The current branch is `feat/game-only-player-role`.
 Accepted PHASE 7 remains closed.
 Earlier game, appearance, and listening entries below remain historical session records.
+
+### Game-only player role
+
+The owner adds the `player` role for Guess the Note without exercise access.
+Managers can create accounts and change existing accounts to this role.
+Role labels support Russian, English, and Spanish.
+Players open the game after login and retain settings, password changes, and appearance.
+They use owned game profiles, rounds, statistics, prizes, and existing avatar actions.
+Managers still create game profiles explicitly.
+The server rejects exercise metadata, audio, images, scores, listening actions, and manager functions.
+Rejection also covers protected `HEAD` and range requests without file redirects.
+Direct student and manager URLs show a permission error without requesting protected data.
+Role changes revoke existing login sessions.
+Migration `0012_player_role` preserves accounts, profiles, and progress.
+It refuses downgrade while player accounts exist instead of granting exercise access.
+Validation passes 339 backend tests and 365 frontend tests.
+Backend coverage includes a complete 7-question player round, ownership, settings, session revocation, and migration compatibility.
+The production build and all 6 quality hooks pass.
+
+After publication, create a Player account and assign its game profile.
+Check game entry, a completed round, settings, themes, and forbidden direct exercise links.
+Repeat the check in Safari and on a physical phone.
+Check an existing student and manager for unchanged access.
 
 ### Post-round prize collection
 

@@ -182,7 +182,7 @@ image.resize((128, 128), Image.Resampling.LANCZOS).save(
 PY
 ```
 
-The account menu links to `/game` for both roles after any required password change.
+The account menu links to `/game` for all 3 roles after any required password change.
 The player list distinguishes loading, request failures, and genuinely empty results.
 Only managers can open **Create player** and assign a profile to an eligible active account.
 `GET /api/game/players/accounts` excludes occupied accounts and the emergency manager before pagination.
@@ -192,7 +192,7 @@ Creation locks the owner account row and rejects emergency owners or a second pr
 Existing profiles and progress remain unchanged.
 The default avatar is Unicorn; the existing chooser changes it after creation.
 Creation also adds the active season required to start a round.
-Students without profiles receive guidance to contact a manager.
+Students and players without profiles receive guidance to contact a manager.
 Logout, session expiry, and account changes cancel and remove cached game data.
 
 ## Built-in characters
@@ -343,7 +343,7 @@ Frames use `levels/avatar_<level>_<state>.png` with levels `01` through `10`.
 Atomic replacement and explicit synchronization publish files before the worker marks the job ready.
 Both selection endpoints reject incomplete version 2 sets.
 Authenticated file endpoints check ownership, generation readiness, review approval, path containment, and file existence.
-Managers can inspect ready unapproved files; students cannot.
+Managers can inspect ready unapproved files; students and players cannot.
 They return `X-Accel-Redirect`; nginx serves the private PNG without public media URLs.
 Never include these files in a public avatar directory or browser cache.
 
@@ -363,11 +363,11 @@ Inspect all 30 images before approving visual quality.
 
 ### Manager approval
 
-Successful generation remains separate from permission to show the result to a student.
+Successful generation remains separate from permission to show the result to a student or player.
 The worker leaves ready results with review status `pending`.
 The player sees a wordless hourglass instead of an unapproved generated image.
 The backend omits unapproved image paths from status responses.
-Direct student frame requests also fail until approval.
+Direct student and player frame requests also fail until approval.
 
 1. Open **Player management** as a manager.
 2. Open the avatar approval queue.

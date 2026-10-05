@@ -7,6 +7,16 @@ Prerequisites:
 - Obtain your username and temporary password privately from a manager.
 - Open `https://solfeo.miveralta.ru/`.
 
+## Game-only player accounts
+
+The **Player** role opens Guess the Note after login.
+It permits your assigned game profile, statistics, prizes, and existing avatar options.
+Settings, password changes, language, note naming, and appearance remain available.
+Exercises, exercise files, and manager pages remain unavailable, including through direct links.
+Ask a manager to assign a profile if your player list is empty.
+The game and settings procedures below also apply to player accounts.
+The listening procedures apply only to student accounts.
+
 ## Start Guess the Note
 
 1. Click the round Unicorn badge at the upper left.

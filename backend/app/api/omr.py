@@ -4,7 +4,7 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, Response
 from pydantic import BaseModel
 
-from app.api.auth import Configuration, Db, Input, Manager, Member, require_csrf
+from app.api.auth import Configuration, Db, ExerciseMember, Input, Manager, require_csrf
 from app.models import OmrJob
 from app.services import omr
 
@@ -35,7 +35,7 @@ def output(job: OmrJob | None, image_id: str | None) -> OmrOutput:
 
 
 @router.get("/{identifier}/omr")
-def status(identifier: int, _member: Member, session: Db) -> OmrOutput:
+def status(identifier: int, _member: ExerciseMember, session: Db) -> OmrOutput:
     exercise = omr.active_exercise(session, identifier)
     return output(omr.current(session, exercise), exercise.image_id)
 
@@ -60,7 +60,7 @@ def review(
 def score(
     identifier: int,
     version: UUID,
-    member: Member,
+    member: ExerciseMember,
     session: Db,
     settings: Configuration,
     response: Response,

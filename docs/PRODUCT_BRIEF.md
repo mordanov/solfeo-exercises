@@ -9,6 +9,9 @@ A child looks at the notes and listens to the audio.
 ## Roles
 - manager: manages exercises (add/edit/delete/reorder), manages users (create, reset password, deactivate), reads the listening journal.
 - student: listens to exercises, changes own settings, and plays Guess the Note with owned player profiles.
+- player: plays Guess the Note with an owned profile and changes account settings and appearance.
+  Players cannot access exercises, protected exercise files, scores, the listening journal, or manager functions.
+  Managers create their game profiles, as for students.
 
 ## Stack (fixed, do not change)
 - Backend: Python 3.12, FastAPI, SQLAlchemy 2.x (typed), Alembic, PostgreSQL, pytest, ruff, mypy (strict).
@@ -28,7 +31,7 @@ A child looks at the notes and listens to the audio.
   This is the first-user mechanism AND the disaster-recovery mechanism.
 
 ## Users and auth
-- User: username (unique login), first_name, last_name, role (manager|student), password, is_active, is_emergency, settings.
+- User: username (unique login), first_name, last_name, role (manager|student|player), password, is_active, is_emergency, settings.
 - No email. Simple username+password. Hash passwords with a standard library scheme (bcrypt via passlib, or hashlib.scrypt). Never store plaintext. No Argon2.
 - Session: httpOnly, Secure, SameSite=Lax cookie with a server-side session token, sliding expiry, long lifetime (env-configurable, default 90 days).
   The web application retains its session on mobile browsers.

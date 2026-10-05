@@ -7,6 +7,24 @@ Prerequisites:
 - Obtain manager credentials privately from the operator.
 - Open `https://solfeo.miveralta.ru/`, or use the local stand from `docs/developer/setup.md`.
 
+## Create a game-only account
+
+Use the **Player** account role for game-only access.
+This role permits the game, settings, and appearance, but denies exercises and manager functions.
+The account role does not create a game profile.
+
+1. Open **Users**.
+2. Enter the new account details.
+3. Select **Player** under **Role**.
+4. Click **Create user**.
+   The account appears in the user list.
+5. Create its game profile with the procedure below.
+   The account then sees its assigned profile after login.
+
+To change an existing account, click **Edit**, select **Player**, then click **Save user**.
+The application signs that account out.
+The new restrictions apply after its next login.
+
 ## Create a game profile
 
 1. Click the round Unicorn badge at the upper left.
@@ -33,7 +51,7 @@ An empty selector shows **All players already have game accounts** instead of a 
 Existing profiles and their progress remain unchanged.
 The badge shows **Play Guess the Note** on hover or keyboard focus.
 The existing **Guess the Note** menu link remains available.
-Each student sees profiles assigned to their account.
+Each student or player sees profiles assigned to their account.
 The application does not create a profile automatically when an account signs in.
 A failed request shows an error and **Try again**, not an empty player list.
 
