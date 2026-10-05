@@ -6,6 +6,7 @@ import { roundMood } from "../setup/avatars";
 import { ErrorMessage } from "../../../components/AccountUi";
 import { noteLabel } from "../notes";
 import PrizeImage from "../profile/PrizeImage";
+import PrizeShelf from "../profile/PrizeShelf";
 
 interface Props {
   playerId: number;
@@ -170,6 +171,7 @@ export default function ResultScreen({
           {t("game.result.changePlayer")}
         </Button>
       </Box>
+      <PrizeShelf playerId={playerId} />
     </Box>
   );
 }

@@ -5,14 +5,28 @@ This document records progress and remaining checks for the current phase.
 Prerequisites:
 - Read `docs/PHASES.md` and `docs/DECISIONS.md`.
 
-Last updated: 2026-10-04 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a0523`.
+Last updated: 2026-10-05 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a0523`.
 
 ## Current phase
 Game fixes, lifetime prizes, and manager approval for custom avatars follow the merged game features.
 The owner approves autonomous implementation after reviewing 20 proposals.
-The shared branch is `feat/game-rewards-moderation`, based on current `main`.
+The merged game improvements remain on `main`.
+The current branch is `feat/game-post-round-prizes`.
 Accepted PHASE 7 remains closed.
 Earlier game, appearance, and listening entries below remain historical session records.
+
+### Post-round prize collection
+
+The owner removes the prize shelf from round preparation.
+Preparation no longer requests the achievement catalog.
+Every round result shows the complete collection below replay controls.
+New awards retain their separate announcements.
+Player statistics retain the optional collection.
+Prize images, conditions, stored awards, XP, and levels remain unchanged.
+Validation passes 349 frontend tests and 4 documentation tests.
+The production build and all 6 quality hooks pass.
+Regression tests cover preparation without prize requests and result collections without new awards in all 3 languages.
+After publication, check preparation, results, and replay on a phone and in Safari.
 
 ### Packaged prize artwork
 

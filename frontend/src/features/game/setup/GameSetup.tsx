@@ -16,7 +16,6 @@ import { DEFAULT_GAME_OPTIONS, DIFFICULTIES, type GameOptions } from "../notes";
 import AvatarImage from "./AvatarImage";
 import AvatarChooser from "./AvatarChooser";
 import { ErrorMessage } from "../../../components/AccountUi";
-import PrizeShelf from "../profile/PrizeShelf";
 
 const NOTE_COUNTS = [1, 2, 3, 4] as const;
 
@@ -125,7 +124,6 @@ export default function GameSetup({
           onClose={() => setChoosingAvatar(false)}
         />
       )}
-      <PrizeShelf playerId={playerId} />
       <Typography variant="h5" sx={{ mb: 2, fontWeight: 700 }}>
         {t("game.selectDifficulty")}
       </Typography>

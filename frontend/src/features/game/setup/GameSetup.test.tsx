@@ -49,6 +49,16 @@ function mount() {
   );
   return { ...result, started };
 }
+it("keeps prizes and their request out of round preparation", async () => {
+  mount();
+  await screen.findByText("Piano player");
+  expect(
+    screen.queryByRole("region", { name: i18n.t("game.prizes.title") }),
+  ).not.toBeInTheDocument();
+  expect(
+    fetchMock.mock.calls.some(([url]) => url.endsWith("/achievements")),
+  ).toBe(false);
+});
 it("explains difficulty and passes both independent options into the round", async () => {
   const { started } = mount();
   await screen.findByText("Piano player");

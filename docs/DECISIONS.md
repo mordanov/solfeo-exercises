@@ -7,6 +7,12 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-10-05: The owner moves the prize collection from round preparation to the round result.
+  Show the full collection after every round, including rounds without new awards.
+  Keep new-prize announcements and place replay controls before the collection.
+  Preserve the optional collection in player statistics.
+  Prize rules and saved awards remain unchanged.
+
 - 2026-10-04: The owner approves game fixes, 20 lifetime prizes, and manager approval for generated avatars.
   Work proceeds autonomously on `feat/game-rewards-moderation` after the owner reviews 20 proposals.
   Floor each completed round total at 0 after adding its assistance bonus.

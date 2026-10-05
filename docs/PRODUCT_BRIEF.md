@@ -90,6 +90,8 @@ A child looks at the notes and listens to the audio.
 ### Lifetime game prizes
 
 - Provide 20 prizes, each awarded once per profile across completed rounds from all seasons.
+- Show the collection after each round, not during round preparation.
+- Keep the collection available in player statistics.
 - Retain prizes through statistics resets; do not add XP for prizes.
 - Preserve the existing trophies for 20, 100, 200, and 500 completed rounds.
 - Use `GAME_TIMEZONE`, default `UTC`, for calendar-day conditions and generation quotas.

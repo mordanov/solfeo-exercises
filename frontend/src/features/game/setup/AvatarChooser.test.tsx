@@ -39,6 +39,8 @@ const job = (id: number) => ({
   review_status: reviewStatus,
 });
 const fetchMock = vi.fn(async (url: string, options?: RequestInit) => {
+  if (url.endsWith("/achievements"))
+    return Response.json({ earned: [], catalog: [] });
   if (url.endsWith("/quota"))
     return Response.json({
       used: 0,
@@ -287,7 +289,7 @@ it("celebrates every new prize and localizes note hints without adding prize XP"
       onChangePlayer={() => {}}
     />,
   );
-  expect(screen.getAllByRole("status")).toHaveLength(2);
+  await waitFor(() => expect(screen.getAllByRole("status")).toHaveLength(2));
   expect(screen.getAllByRole("status")[0]).toHaveTextContent(
     i18n.t("game.prizes.codes.first_round"),
   );
