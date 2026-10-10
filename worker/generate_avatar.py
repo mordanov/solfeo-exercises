@@ -34,6 +34,7 @@ logger = logging.getLogger("worker.generate_avatar")
 STATES = ("neutral", "happy", "sad")
 PORTRAIT_SIZE = 256
 SHEET_ATTEMPTS = 2
+SHEET_LAYOUT_MARKER = "separator-grid-v1\n"
 PORTRAIT_SYSTEM = (
     "Create ONE close-up face portrait icon of an original child-friendly magical "
     "creature: only the head and face, centered, filling a perfect circle with a "
@@ -47,13 +48,19 @@ IMAGE_SYSTEM = (
     "Create ONE sprite sheet of an original child-friendly magical creature: "
     "exactly 30 complete, separate figures in a STRICT 5-column, 6-row grid. "
     "Use identical equal-size cells and generous empty gutters; no part of a figure "
-    "may touch a cell edge. No text, labels, borders, real people, brands or existing "
-    "franchise characters. Bright pastel cartoon with clear outlines. "
+    "may touch a cell edge. Draw exactly 4 thin, straight, continuous cyan divider "
+    "lines vertically and 5 matching horizontal lines between cells. "
+    "Use no outer border, labels, or other cyan lines. No text, real people, brands, "
+    "or existing franchise characters. Bright pastel cartoon with clear outlines. "
     "All figures must be recognizably the SAME character. "
     "Columns 1-5 are levels 1-5 in rows 1-3, and levels 6-10 in rows 4-6. "
     "Rows 1 and 4: neutral; rows 2 and 5: happy; rows 3 and 6: sad. "
-    "Levels grow from a small young creature to a majestic mature creature, "
-    "with increasing magical decorations; retain identity and colours."
+    "All characters must stay the same overall size with the same body proportions. "
+    "Do not grow or shrink the body by level. Show level progression through "
+    "increasingly distinct magical ornaments, accessories, and details instead. "
+    "Level 1 has the simplest design; each level adds or evolves visible adornments "
+    "without repeating another level's design; level 10 has the richest details. "
+    "Retain identity, colours, and the correct emotion for every row."
 )
 
 
@@ -287,6 +294,7 @@ def _leased_job(session: Session, lease: Lease) -> CustomAvatar:
 def _save_sheet(database: Database, lease: Lease, path: Path, data: bytes) -> None:
     with database.session() as session, session.begin():
         job = _leased_job(session, lease)
+        _atomic_write(path.parent / "sheet-layout.txt", SHEET_LAYOUT_MARKER.encode())
         _atomic_write(path, data)
         job.phase = "image_moderating"
         job.locked_at = datetime.now(UTC)
@@ -389,7 +397,10 @@ def _generate_usable_sheet(settings: Settings, description: str) -> bytes:
     for attempt in range(SHEET_ATTEMPTS):
         data = _generate_sheet(settings, description)
         try:
-            _figures(_decode_sheet(io.BytesIO(data), settings))
+            _figures(
+                _decode_sheet(io.BytesIO(data), settings),
+                require_separator_lines=True,
+            )
         except AvatarError as error:
             if error.code != "AVATAR_SHEET_INVALID" or attempt == SHEET_ATTEMPTS - 1:
                 return data
@@ -399,7 +410,73 @@ def _generate_usable_sheet(settings: Settings, description: str) -> bytes:
     raise AssertionError("unreachable")
 
 
-def _figures(image: Image.Image) -> list[tuple[int, str, Image.Image]]:
+def _separator_bands(image: Image.Image, *, vertical: bool) -> list[tuple[int, int]]:
+    red, green, blue, alpha = image.convert("RGBA").split()
+    cyan = ImageChops.darker(
+        ImageChops.darker(
+            red.point(lambda value: 255 if value <= 100 else 0),
+            green.point(lambda value: 255 if value >= 180 else 0),
+        ),
+        ImageChops.darker(
+            blue.point(lambda value: 255 if value >= 180 else 0),
+            alpha.point(lambda value: 255 if value >= MIN_VISIBLE_ALPHA else 0),
+        ),
+    )
+    projection_size = (image.width, 1) if vertical else (1, image.height)
+    projection = cyan.resize(projection_size, Image.Resampling.BOX)
+    extent = image.width if vertical else image.height
+    positions: list[int] = []
+    for coordinate in range(extent):
+        value = projection.getpixel((coordinate, 0) if vertical else (0, coordinate))
+        if isinstance(value, int) and value >= 180:
+            positions.append(coordinate)
+    bands: list[tuple[int, int]] = []
+    for position in positions:
+        if bands and position == bands[-1][1] + 1:
+            bands[-1] = (bands[-1][0], position)
+        else:
+            bands.append((position, position))
+    return bands
+
+
+def _grid_bounds(
+    extent: int, count: int, bands: list[tuple[int, int]]
+) -> list[tuple[int, int]]:
+    if len(bands) != count - 1:
+        raise AvatarError("AVATAR_SHEET_INVALID", "grid=separators")
+    maximum_band = max(8, extent // count // 20)
+    if any(end - start + 1 > maximum_band for start, end in bands):
+        raise AvatarError("AVATAR_SHEET_INVALID", "grid=separators")
+    bounds = [
+        (0, bands[0][0]),
+        *[
+            (previous[1] + 1, following[0])
+            for previous, following in zip(bands, bands[1:], strict=False)
+        ],
+        (bands[-1][1] + 1, extent),
+    ]
+    if any(end - start < extent // count // 2 for start, end in bounds):
+        raise AvatarError("AVATAR_SHEET_INVALID", "grid=separators")
+    return bounds
+
+
+def _figures(
+    image: Image.Image, *, require_separator_lines: bool = False
+) -> list[tuple[int, str, Image.Image]]:
+    vertical_bands = _separator_bands(image, vertical=True)
+    horizontal_bands = _separator_bands(image, vertical=False)
+    if not vertical_bands and not horizontal_bands and not require_separator_lines:
+        column_bounds = [
+            (index * image.width // 5, (index + 1) * image.width // 5)
+            for index in range(5)
+        ]
+        row_bounds = [
+            (index * image.height // 6, (index + 1) * image.height // 6)
+            for index in range(6)
+        ]
+    else:
+        column_bounds = _grid_bounds(image.width, 5, vertical_bands)
+        row_bounds = _grid_bounds(image.height, 6, horizontal_bands)
     figures: list[tuple[int, str, Image.Image]] = []
     for level in range(1, 11):
         column = (level - 1) % 5
@@ -407,10 +484,10 @@ def _figures(image: Image.Image) -> list[tuple[int, str, Image.Image]]:
             row = (level - 1) // 5 * 3 + state_index
             cell = image.crop(
                 (
-                    column * image.width // 5,
-                    row * image.height // 6,
-                    (column + 1) * image.width // 5,
-                    (row + 1) * image.height // 6,
+                    column_bounds[column][0],
+                    row_bounds[row][0],
+                    column_bounds[column][1],
+                    row_bounds[row][1],
                 )
             )
             bounds = (
@@ -430,9 +507,13 @@ def _figures(image: Image.Image) -> list[tuple[int, str, Image.Image]]:
     return figures
 
 
-def _frames(image: Image.Image) -> list[tuple[int, str, bytes]]:
+def _frames(
+    image: Image.Image, *, require_separator_lines: bool = False
+) -> list[tuple[int, str, bytes]]:
     frames: list[tuple[int, str, bytes]] = []
-    for level, state, cropped in _figures(image):
+    for level, state, cropped in _figures(
+        image, require_separator_lines=require_separator_lines
+    ):
         resized = ImageOps.contain(cropped, (360, 360), Image.Resampling.LANCZOS)
         frame = Image.new("RGBA", (384, 384))
         frame.alpha_composite(
@@ -477,7 +558,13 @@ def process_one(database: Database, settings: Settings) -> bool:
             _save_image_moderation(database, lease, proof_path, digest)
         _update(database, lease, "splitting")
         image = _load_sheet(sheet, settings)
-        frames = _frames(image)
+        layout_marker = root / "sheet-layout.txt"
+        requires_separator_lines = False
+        if layout_marker.is_file():
+            if layout_marker.read_text() != SHEET_LAYOUT_MARKER:
+                raise AvatarError("AVATAR_SHEET_INVALID", "grid=metadata")
+            requires_separator_lines = True
+        frames = _frames(image, require_separator_lines=requires_separator_lines)
         persisted: set[tuple[int, str]] = set()
         for level, state, data in frames:
             path = root / f"levels/avatar_{level:02}_{state}.png"

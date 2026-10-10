@@ -5,7 +5,7 @@ This document records progress and remaining checks for the current phase.
 Prerequisites:
 - Read `docs/PHASES.md` and `docs/DECISIONS.md`.
 
-Last updated: 2026-10-10 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a0523`.
+Last updated: 2026-10-10 by Copilot, session `61fe8212-2c67-4bc5-a715-02be5593ee0e`.
 
 ## Current phase
 Game fixes, lifetime prizes, and manager approval for custom avatars follow the merged game features.
@@ -14,6 +14,18 @@ The merged game improvements remain on `main`.
 The current branch is `feat/game-only-player-role`.
 Accepted PHASE 7 remains closed.
 Earlier game, appearance, and listening entries below remain historical session records.
+
+### Custom avatar image quality
+
+The generation prompt keeps body size and proportions consistent across all levels.
+It shows level progression through increasingly distinct ornaments, accessories, and details.
+New sheets require 4 vertical and 5 horizontal cyan separators.
+The worker segments cells from separator positions and removes the lines from each crop.
+A persisted layout marker enforces strict segmentation after worker restarts.
+Saved sheets without the marker retain the legacy equal-cell fallback.
+The prompt preserves the existing level and emotion mapping.
+Avatar moderation test fixtures now include the required separator lines.
+All 353 backend tests pass locally, and all 5 jobs pass in CI run `38065767340`.
 
 ### Avatar generation incident investigation
 

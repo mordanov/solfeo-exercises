@@ -1,3 +1,4 @@
+import base64
 import hashlib
 import io
 import json
@@ -27,7 +28,11 @@ def no_external_requests(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(generate_avatar, "_moderate_image", lambda *_: False)
 
 
-def sheet_bytes(empty_cell: bool = False, edge_touch: bool = False) -> bytes:
+def sheet_bytes(
+    empty_cell: bool = False,
+    edge_touch: bool = False,
+    separators: bool = True,
+) -> bytes:
     image = Image.new("RGBA", (1024, 1536))
     draw = ImageDraw.Draw(image)
     for row in range(6):
@@ -43,9 +48,62 @@ def sheet_bytes(empty_cell: bool = False, edge_touch: bool = False) -> bytes:
     if edge_touch:
         # Faint antialiasing residue far from the figure must not count as artwork.
         image.putpixel((1, 1), (255, 255, 255, 4))
+    if separators:
+        for column in range(1, 5):
+            x = column * image.width // 5
+            draw.rectangle((x - 2, 0, x + 1, image.height - 1), fill=(0, 255, 255))
+        for row in range(1, 6):
+            y = row * image.height // 6
+            draw.rectangle((0, y - 2, image.width - 1, y + 1), fill=(0, 255, 255))
     output = io.BytesIO()
     image.save(output, format="PNG")
     return output.getvalue()
+
+
+def irregular_separator_sheet() -> Image.Image:
+    image = Image.new("RGBA", (1024, 1536))
+    draw = ImageDraw.Draw(image)
+    x_bands = ((148, 152), (368, 372), (558, 562), (788, 792))
+    y_bands = ((228, 232), (478, 482), (758, 762), (998, 1002), (1268, 1272))
+    x_cells = [
+        (0, x_bands[0][0]),
+        *(
+            (end + 1, next_start)
+            for (_, end), (next_start, _) in zip(x_bands, x_bands[1:], strict=False)
+        ),
+        (x_bands[-1][1] + 1, image.width),
+    ]
+    y_cells = [
+        (0, y_bands[0][0]),
+        *(
+            (end + 1, next_start)
+            for (_, end), (next_start, _) in zip(y_bands, y_bands[1:], strict=False)
+        ),
+        (y_bands[-1][1] + 1, image.height),
+    ]
+
+    for level in range(1, 11):
+        column = (level - 1) % 5
+        for state_index, _state in enumerate(generate_avatar.STATES):
+            row = (level - 1) // 5 * 3 + state_index
+            left, right = x_cells[column]
+            top, bottom = y_cells[row]
+            width, height = right - left, bottom - top
+            draw.rectangle(
+                (
+                    left + width // 5,
+                    top + height // 5,
+                    right - width // 5,
+                    bottom - height // 5,
+                ),
+                fill=(row * 35, column * 40, 180, 255),
+            )
+
+    for start, end in x_bands:
+        draw.rectangle((start, 0, end, image.height - 1), fill=(0, 255, 255, 255))
+    for start, end in y_bands:
+        draw.rectangle((0, start, image.width - 1, end), fill=(0, 255, 255, 255))
+    return image
 
 
 @pytest.fixture
@@ -73,6 +131,74 @@ def avatar_job(database: Database, settings: Settings, tmp_path: Path) -> int:
             return job.id
 
 
+def test_irregular_separator_lines_define_cells_and_are_removed_from_frames() -> None:
+    image = irregular_separator_sheet()
+    figures = generate_avatar._figures(image)
+
+    assert len(figures) == 30
+    for level, state, figure in figures:
+        column = (level - 1) % 5
+        row = (level - 1) // 5 * 3 + generate_avatar.STATES.index(state)
+        assert figure.getpixel((figure.width // 2, figure.height // 2)) == (
+            row * 35,
+            column * 40,
+            180,
+            255,
+        )
+        colors = figure.getcolors(figure.width * figure.height)
+        assert colors is not None
+        assert all(color != (0, 255, 255, 255) for _, color in colors)
+
+
+def test_new_sheet_validation_requires_all_separator_lines() -> None:
+    with Image.open(io.BytesIO(sheet_bytes(separators=False))) as image:
+        with pytest.raises(generate_avatar.AvatarError) as error:
+            generate_avatar._figures(image, require_separator_lines=True)
+
+    assert error.value.code == "AVATAR_SHEET_INVALID"
+    assert error.value.cell == "grid=separators"
+
+
+def test_incomplete_separator_grid_is_rejected() -> None:
+    with Image.open(io.BytesIO(sheet_bytes(separators=False))) as source:
+        image = source.convert("RGBA")
+    draw = ImageDraw.Draw(image)
+    for column in range(1, 5):
+        x = column * image.width // 5
+        draw.rectangle((x - 2, 0, x + 1, image.height - 1), fill=(0, 255, 255))
+
+    with pytest.raises(generate_avatar.AvatarError) as error:
+        generate_avatar._figures(image)
+
+    assert error.value.cell == "grid=separators"
+
+
+def test_sheet_prompt_requires_equal_size_characters_and_cyan_separators(
+    settings: Settings, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    payloads: list[dict[str, object]] = []
+    encoded = base64.b64encode(sheet_bytes()).decode("ascii")
+
+    def generate(
+        _settings: Settings,
+        _path: str,
+        payload: dict[str, object],
+        _timeout: float = 60,
+    ) -> dict[str, object]:
+        payloads.append(payload)
+        return {"data": [{"b64_json": encoded}]}
+
+    monkeypatch.setattr(generate_avatar, "_openai_post", generate)
+    generate_avatar._generate_sheet(settings, "rainbow creature")
+
+    prompt = str(payloads[0]["prompt"]).lower()
+    assert "same overall size" in prompt
+    assert "cyan divider lines" in prompt
+    assert "do not grow" in prompt
+    assert "level 1 has the simplest design" in prompt
+    assert "level 10 has the richest details" in prompt
+
+
 def test_one_request_creates_and_persists_all_thirty_frames(
     database: Database,
     settings: Settings,
@@ -98,6 +224,7 @@ def test_one_request_creates_and_persists_all_thirty_frames(
         assert job.asset_version == 2
     root = settings.media_root / "avatars" / "custom" / str(avatar_job)
     assert (root / "sheet.png").is_file()
+    assert (root / "sheet-layout.txt").read_text() == "separator-grid-v1\n"
     manifest = json.loads((root / "manifest.json").read_text())
     assert len(manifest["frames"]) == 30
     for frame in manifest["frames"]:
@@ -124,7 +251,7 @@ def test_restart_reuses_the_saved_sheet_without_another_paid_request(
 ) -> None:
     root = settings.media_root / "avatars" / "custom" / str(avatar_job)
     root.mkdir(parents=True)
-    (root / "sheet.png").write_bytes(sheet_bytes())
+    (root / "sheet.png").write_bytes(sheet_bytes(separators=False))
     with database.session() as session, session.begin():
         job = session.get(CustomAvatar, avatar_job)
         assert job is not None
@@ -145,6 +272,34 @@ def test_restart_reuses_the_saved_sheet_without_another_paid_request(
         assert job is not None and job.status == "ready"
         assert job.completed_images == 30
         assert job.attempts == 1
+
+
+def test_restart_enforces_separator_lines_for_marked_new_sheets(
+    database: Database,
+    settings: Settings,
+    avatar_job: int,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = settings.media_root / "avatars" / "custom" / str(avatar_job)
+    root.mkdir(parents=True)
+    (root / "sheet.png").write_bytes(sheet_bytes(separators=False))
+    (root / "sheet-layout.txt").write_text(generate_avatar.SHEET_LAYOUT_MARKER)
+    with database.session() as session, session.begin():
+        job = session.get(CustomAvatar, avatar_job)
+        assert job is not None
+        job.phase = "splitting"
+        job.locked_at = datetime.now(UTC) - timedelta(hours=1)
+        job.started_at = job.locked_at
+        job.lease_token = "interrupted-worker"
+
+    monkeypatch.setattr(generate_avatar, "_moderate", lambda *_: False)
+    settings.openai_api_key = SecretStr("")
+    assert generate_avatar.process_one(database, settings)
+
+    with database.session() as session:
+        job = session.get(CustomAvatar, avatar_job)
+        assert job is not None and job.status == "failed"
+        assert job.error_code == "AVATAR_SHEET_INVALID"
 
 
 def test_incomplete_sheet_fails_explicitly_and_keeps_the_original(

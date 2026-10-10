@@ -354,6 +354,14 @@ One image request creates a transparent `1024x1536` sheet, not 30 separate image
 An automatic moderation request checks the description first.
 Automatic image moderation checks the generated sheet before local extraction and manager review.
 The prompt requires 5 columns, 6 rows, consistent identity, and empty gutters.
+It requests 4 vertical and 5 horizontal cyan divider lines between the cells.
+The worker detects these bands and excludes them from each frame crop.
+New sheets fail validation when either set of separators is missing or malformed.
+A `sheet-layout.txt` marker keeps strict segmentation active after a worker restart.
+Saved sheets without this marker retain equal-cell fallback for recovery.
+Every figure keeps the same body size and proportions across all 10 levels.
+Each level adds or evolves visible adornments without repeating another level's design.
+Level 1 has the simplest design; level 10 has the richest details.
 Rows 1, 2, and 3 contain neutral, happy, and sad levels 1–5.
 Rows 4, 5, and 6 contain the same emotions for levels 6–10.
 The worker rejects cells with visible pixels under 2% of their area.
