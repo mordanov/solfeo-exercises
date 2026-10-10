@@ -173,7 +173,7 @@ def test_incomplete_separator_grid_is_rejected() -> None:
     assert error.value.cell == "grid=separators"
 
 
-def test_sheet_prompt_requires_equal_size_characters_and_cyan_separators(
+def test_sheet_prompt_matches_all_growth_stages_and_mood_rows(
     settings: Settings, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     payloads: list[dict[str, object]] = []
@@ -192,11 +192,25 @@ def test_sheet_prompt_requires_equal_size_characters_and_cyan_separators(
     generate_avatar._generate_sheet(settings, "rainbow creature")
 
     prompt = str(payloads[0]["prompt"]).lower()
-    assert "same overall size" in prompt
+    assert "identical equal-size cells" in prompt
+    assert "same camera distance" in prompt
+    assert "2 heads tall" in prompt
+    assert "5 heads tall" in prompt
+    assert "6 to 7 heads tall" in prompt
+    assert "do not grow or shrink" not in prompt
+    assert "newborn baby" in prompt
+    assert "divine titan" in prompt
     assert "cyan divider lines" in prompt
-    assert "do not grow" in prompt
-    assert "level 1 has the simplest design" in prompt
-    assert "level 10 has the richest details" in prompt
+    for level in range(1, 11):
+        assert f"level {level} is" in prompt
+    assert "rows 1 and 4: neutral" in prompt
+    assert "rows 2 and 5: happy" in prompt
+    assert "rows 3 and 6: sad" in prompt
+    assert "neutral: calm, friendly default face" in prompt
+    assert "happy: big joyful expression" in prompt
+    assert "sad: gentle disappointed expression" in prompt
+    assert "one small cartoon tear at most" in prompt
+    assert "change only the face and slight posture" in prompt
 
 
 def test_one_request_creates_and_persists_all_thirty_frames(
@@ -542,7 +556,12 @@ async def test_progress_saved_gallery_and_all_thirty_private_frames_survive_reus
             f"/api/game/avatars/{avatar_job}/review", json={"decision": "approved"}
         )
     ).status_code == 200
-    assert (await client.post(f"/api/game/avatars/{avatar_job}/use")).status_code == 200
+    assert (
+        await client.post(
+            f"/api/game/avatars/{avatar_job}/use",
+            json={"player_id": player_id},
+        )
+    ).status_code == 200
     await client.post(
         f"/api/game/players/{player_id}/avatar", json={"avatar_animal": "lion"}
     )
@@ -551,7 +570,12 @@ async def test_progress_saved_gallery_and_all_thirty_private_frames_survive_reus
     assert quota["generation_available"] is False
     saved = (await client.get(f"/api/game/avatars/saved?player_id={player_id}")).json()
     assert saved["total"] == 1 and saved["jobs"][0]["completed_images"] == 30
-    assert (await client.post(f"/api/game/avatars/{avatar_job}/use")).status_code == 200
+    assert (
+        await client.post(
+            f"/api/game/avatars/{avatar_job}/use",
+            json={"player_id": player_id},
+        )
+    ).status_code == 200
     for level in range(1, 11):
         for state in ("neutral", "happy", "sad"):
             response = await client.head(
@@ -651,18 +675,20 @@ async def test_missing_frame_prevents_selecting_an_incomplete_avatar(
         job.review_status = "approved"
     path = settings.media_root / f"avatars/custom/{avatar_job}/levels/avatar_10_sad.png"
     path.unlink()
+    with database.session() as session:
+        job = session.get(CustomAvatar, avatar_job)
+        assert job is not None
+        player_id = job.player_id
     login = await client.post(
         "/api/auth/login",
         json={"username": "sheet-owner", "password": "synthetic-avatar-password"},
     )
     client.headers["X-CSRF-Token"] = login.json()["csrf_token"]
-    response = await client.post(f"/api/game/avatars/{avatar_job}/use")
+    response = await client.post(
+        f"/api/game/avatars/{avatar_job}/use", json={"player_id": player_id}
+    )
     assert response.status_code == 409
     assert response.json()["error"] == "AVATAR_ASSETS_MISSING"
-    with database.session() as session:
-        job = session.get(CustomAvatar, avatar_job)
-        assert job is not None
-        player_id = job.player_id
     response = await client.patch(
         f"/api/game/players/{player_id}", json={"custom_avatar_id": avatar_job}
     )

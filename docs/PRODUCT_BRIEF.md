@@ -133,9 +133,15 @@ A child looks at the notes and listens to the audio.
 - Show happy for 5–7 correct answers, neutral for 3–4, and sad for 0–2.
 - Use the question-mark choice for explicit custom generation with quota, manager review, approved preview, selection, and discard.
 - Generate custom artwork through 1 image request for a sheet with 10 levels and 3 emotions.
+- Show 10 distinct growth stages while keeping cell size and camera framing consistent.
+- Apply neutral, happy, and sad expressions to every level without changing its outfit.
 - Save the original sheet, all 30 frames, and a hash manifest in persistent private storage.
 - Show generation phases, actual saved-image counts, and an explicitly approximate remaining time.
 - Permit reopening pending jobs and reusing saved avatars without another paid image request.
+- Make every ready approved custom avatar available to every player profile for preview and selection.
+- Keep pending and rejected avatars private to their owner and managers.
+- Let users delete saved custom avatars they can manage; never allow deletion of built-in avatars.
+- Prevent deletion while another player profile uses the avatar.
 - Keep legacy 3-emotion avatars available without automatic regeneration.
 - Reject incomplete sheets explicitly; never repeat a paid image request automatically after interruption.
 - Preserve custom selection across reloads and serve generated images only after an authentication check.

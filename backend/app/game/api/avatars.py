@@ -11,6 +11,7 @@ from app.game.models import CustomAvatar
 from app.game.services.avatars import (
     authorized_job,
     avatar_path,
+    can_discard_avatar,
     generation_estimate,
     list_avatar_jobs,
     list_review_jobs,
@@ -63,6 +64,10 @@ class MutationOut(BaseModel):
     ok: bool
 
 
+class UseAvatarBody(BaseModel):
+    player_id: int
+
+
 @router.post("/generate", dependencies=[Depends(require_csrf)])
 def generate_avatar(
     body: GenerateBody, identity: Member, session: Db, settings: Configuration
@@ -91,6 +96,7 @@ class AvatarJobOut(BaseModel):
     happy_path: str | None
     sad_path: str | None
     error_code: str | None
+    can_discard: bool
 
 
 class SavedAvatarsOut(BaseModel):
@@ -124,7 +130,9 @@ class AvatarQuotaOut(BaseModel):
     image_count: int = 30
 
 
-def _job_out(job: CustomAvatar, estimate: int) -> AvatarJobOut:
+def _job_out(
+    job: CustomAvatar, estimate: int, *, can_discard: bool = False
+) -> AvatarJobOut:
     ready = job.status == "ready"
     approved = job.review_status == "approved"
     total = 30 if job.asset_version == 2 else 3
@@ -143,6 +151,7 @@ def _job_out(job: CustomAvatar, estimate: int) -> AvatarJobOut:
         happy_path=job.happy_path if approved else None,
         sad_path=job.sad_path if approved else None,
         error_code=job.error_code,
+        can_discard=can_discard,
     )
 
 
@@ -159,7 +168,7 @@ def review_queue(
         return ReviewQueueOut(
             jobs=[
                 ReviewJobOut(
-                    **_job_out(job, estimate).model_dump(),
+                    **_job_out(job, estimate, can_discard=True).model_dump(),
                     player_id=job.player_id,
                     player_name=player_name,
                     account_id=job.account_id,
@@ -182,7 +191,7 @@ def decide_review(
 ) -> AvatarJobOut:
     with session.begin():
         job = review_avatar(session, job_id, identity.user.id, body.decision, settings)
-        return _job_out(job, generation_estimate(session, settings))
+        return _job_out(job, generation_estimate(session, settings), can_discard=True)
 
 
 @router.api_route("/{job_id}/review-sheet", methods=["GET", "HEAD"])
@@ -218,7 +227,19 @@ def saved_avatars(
         )
         estimate = generation_estimate(session, settings)
         return SavedAvatarsOut(
-            jobs=[_job_out(job, estimate) for job in jobs], total=total
+            jobs=[
+                _job_out(
+                    job,
+                    estimate,
+                    can_discard=(
+                        identity.user.role == "manager"
+                        or job.account_id == identity.user.id
+                        or job.player_id == player_id
+                    ),
+                )
+                for job in jobs
+            ],
+            total=total,
         )
 
 
@@ -234,7 +255,18 @@ def recent_jobs(
             identity.user.role == "manager",
         )
         estimate = generation_estimate(session, settings)
-        return [_job_out(job, estimate) for job in jobs]
+        return [
+            _job_out(
+                job,
+                estimate,
+                can_discard=(
+                    identity.user.role == "manager"
+                    or job.account_id == identity.user.id
+                    or job.player_id == player_id
+                ),
+            )
+            for job in jobs
+        ]
 
 
 @router.get("/{job_id}/status")
@@ -245,17 +277,28 @@ def job_status(
         job = authorized_job(
             session, job_id, identity.user.id, identity.user.role == "manager"
         )
-        return _job_out(job, generation_estimate(session, settings))
+        return _job_out(
+            job,
+            generation_estimate(session, settings),
+            can_discard=can_discard_avatar(
+                session, job, identity.user.id, identity.user.role == "manager"
+            ),
+        )
 
 
 @router.post("/{job_id}/use", dependencies=[Depends(require_csrf)])
 def use_avatar(
-    job_id: int, identity: Member, session: Db, settings: Configuration
+    job_id: int,
+    body: UseAvatarBody,
+    identity: Member,
+    session: Db,
+    settings: Configuration,
 ) -> MutationOut:
     with session.begin():
         use_job(
             session,
             job_id,
+            body.player_id,
             identity.user.id,
             identity.user.role == "manager",
             settings,

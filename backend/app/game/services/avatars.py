@@ -5,7 +5,7 @@ from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from sqlalchemy import func, select
+from sqlalchemy import func, or_, select
 from sqlalchemy.orm import Session
 
 from app.game.models import AvatarGenerationLog, CustomAvatar, Player
@@ -122,13 +122,35 @@ def authorized_job(
 ) -> CustomAvatar:
     job = session.get(CustomAvatar, job_id)
     player = session.get(Player, job.player_id) if job else None
+    shared = (
+        job is not None and job.status == "ready" and job.review_status == "approved"
+    )
     if (
         job is None
         or player is None
-        or (not manager and account_id not in (job.account_id, player.account_id))
+        or (
+            not manager
+            and account_id not in (job.account_id, player.account_id)
+            and not shared
+        )
     ):
         raise ServiceError("JOB_NOT_FOUND", 404)
     return job
+
+
+def can_discard_avatar(
+    session: Session, job: CustomAvatar, account_id: int, manager: bool
+) -> bool:
+    if manager or job.account_id == account_id:
+        return True
+    return (
+        session.scalar(
+            select(Player.id).where(
+                Player.id == job.player_id, Player.account_id == account_id
+            )
+        )
+        is not None
+    )
 
 
 def generation_estimate(session: Session, settings: Settings) -> int:
@@ -312,7 +334,13 @@ def list_avatar_jobs(
         raise ServiceError("PLAYER_NOT_FOUND", 404)
     query = select(CustomAvatar).where(CustomAvatar.player_id == player_id)
     if saved:
-        query = query.where(CustomAvatar.status == "ready")
+        query = select(CustomAvatar).where(
+            CustomAvatar.status == "ready",
+            or_(
+                CustomAvatar.review_status == "approved",
+                CustomAvatar.player_id == player_id,
+            ),
+        )
     elif player.custom_avatar_id is not None:
         query = query.where(CustomAvatar.id != player.custom_avatar_id)
     total = session.scalar(select(func.count()).select_from(query.subquery())) or 0
@@ -323,10 +351,30 @@ def list_avatar_jobs(
 
 
 def use_avatar(
-    session: Session, job_id: int, account_id: int, manager: bool, settings: Settings
+    session: Session,
+    job_id: int,
+    player_id: int,
+    account_id: int,
+    manager: bool,
+    settings: Settings,
 ) -> None:
-    job = authorized_job(session, job_id, account_id, manager)
-    job, player = _lock_job_and_player(session, job)
+    authorized = authorized_job(session, job_id, account_id, manager)
+    player = session.scalar(
+        select(Player)
+        .where(Player.id == player_id)
+        .with_for_update()
+        .execution_options(populate_existing=True)
+    )
+    job = session.scalar(
+        select(CustomAvatar)
+        .where(CustomAvatar.id == authorized.id)
+        .with_for_update()
+        .execution_options(populate_existing=True)
+    )
+    if player is None or (not manager and player.account_id != account_id):
+        raise ServiceError("PLAYER_NOT_FOUND", 404)
+    if job is None:
+        raise ServiceError("JOB_NOT_FOUND", 404)
     if job.status != "ready":
         raise ServiceError("JOB_NOT_READY", 400)
     if job.review_status != "approved":
@@ -340,9 +388,18 @@ def discard_avatar(
     session: Session, job_id: int, account_id: int, manager: bool
 ) -> None:
     job = authorized_job(session, job_id, account_id, manager)
+    if not can_discard_avatar(session, job, account_id, manager):
+        raise ServiceError("JOB_NOT_FOUND", 404)
     job, player = _lock_job_and_player(session, job)
     if job.status == "pending":
         raise ServiceError("AVATAR_JOB_BUSY", 409)
+    another_player_uses_avatar = session.scalar(
+        select(Player.id)
+        .where(Player.custom_avatar_id == job.id, Player.id != player.id)
+        .limit(1)
+    )
+    if another_player_uses_avatar is not None:
+        raise ServiceError("AVATAR_IN_USE", 409)
     if player.custom_avatar_id == job.id:
         player.custom_avatar_id = None
     if player.avatar_review_job_id == job.id:

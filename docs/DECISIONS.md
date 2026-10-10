@@ -7,6 +7,18 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-10-10: The owner requests shared access to created and approved custom avatars.
+  Show ready approved avatars in every player's gallery and permit preview and explicit selection.
+  Keep pending and rejected avatars private to their creator and managers.
+  Preserve each player's current choice when another player selects a shared avatar.
+  Reject deletion while another player profile uses the avatar.
+  Let users delete saved custom avatars they can manage; built-in avatars remain permanent.
+
+- 2026-10-10: The owner asks the custom-avatar prompt to follow 10 age and growth stages.
+  Keep equal grid cells and camera framing while body proportions mature from baby to heroic form.
+  Repeat each level's outfit and proportions across neutral, happy, and sad expressions.
+  Let emotion variants change only the face and slight posture.
+
 - 2026-10-05: The owner adds the game-only `player` account role.
   Allow owned Guess the Note profiles, rounds, statistics, prizes, and existing avatar actions.
   Keep password changes, language, note naming, and appearance settings.

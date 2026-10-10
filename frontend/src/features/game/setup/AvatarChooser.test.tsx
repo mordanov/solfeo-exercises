@@ -27,6 +27,7 @@ let savedJob = false;
 let generationAvailable = true;
 let completedImages = 0;
 let reviewStatus: AvatarReviewStatus | undefined;
+let canDiscard = true;
 const job = (id: number) => ({
   id,
   status: jobStatus,
@@ -37,6 +38,7 @@ const job = (id: number) => ({
   estimated_seconds_remaining: 90,
   error_code: null,
   review_status: reviewStatus,
+  can_discard: canDiscard,
 });
 const fetchMock = vi.fn(async (url: string, options?: RequestInit) => {
   if (url.endsWith("/achievements"))
@@ -103,6 +105,7 @@ beforeEach(async () => {
   generationAvailable = true;
   completedImages = 0;
   reviewStatus = undefined;
+  canDiscard = true;
   vi.stubGlobal("fetch", fetchMock);
 });
 afterEach(() => {
@@ -224,6 +227,78 @@ it("reuses a saved avatar and previews any level without a generation request", 
   expect(fetchMock.mock.calls.some(([url]) => url.endsWith("/generate"))).toBe(
     false,
   );
+  fireEvent.click(await screen.findByRole("button", { name: "Use it" }));
+  await waitFor(() =>
+    expect(fetchMock).toHaveBeenCalledWith(
+      "/api/game/avatars/10/use",
+      expect.objectContaining({
+        method: "POST",
+        body: JSON.stringify({ player_id: 1 }),
+      }),
+    ),
+  );
+});
+it("does not offer deletion for an approved avatar owned by another account", async () => {
+  savedJob = true;
+  canDiscard = false;
+  mount(
+    <AvatarChooser playerId={1} csrf="synthetic-token" onClose={() => {}} />,
+  );
+  fireEvent.click(
+    await screen.findByRole("button", { name: "Saved avatar 10" }),
+  );
+  expect(await screen.findByRole("button", { name: "Use it" })).toBeEnabled();
+  expect(
+    screen.queryByRole("button", { name: "Delete avatar" }),
+  ).not.toBeInTheDocument();
+  expect(
+    screen.queryByRole("button", { name: "Delete avatar" }),
+  ).not.toBeInTheDocument();
+  expect(
+    screen.queryByRole("button", { name: "Delete saved avatar 10" }),
+  ).not.toBeInTheDocument();
+  expect(
+    screen.getByText("Approved avatars are available to every player."),
+  ).toBeInTheDocument();
+});
+it("deletes an owned saved avatar directly from the gallery", async () => {
+  savedJob = true;
+  mount(
+    <AvatarChooser playerId={1} csrf="synthetic-token" onClose={() => {}} />,
+  );
+  fireEvent.click(
+    await screen.findByRole("button", { name: "Saved avatar 10" }),
+  );
+  expect(await screen.findByRole("button", { name: "Use it" })).toBeEnabled();
+  fireEvent.click(
+    screen.getByRole("button", { name: "Delete saved avatar 10" }),
+  );
+  await waitFor(() =>
+    expect(
+      screen.queryByRole("button", { name: "Saved avatar 10" }),
+    ).not.toBeInTheDocument(),
+  );
+  expect(
+    screen.queryByRole("button", { name: "Use it" }),
+  ).not.toBeInTheDocument();
+  expect(fetchMock).toHaveBeenCalledWith(
+    "/api/game/avatars/10",
+    expect.objectContaining({ method: "DELETE" }),
+  );
+});
+it("does not offer deletion for built-in avatars", async () => {
+  mount(
+    <AvatarChooser playerId={1} csrf="synthetic-token" onClose={() => {}} />,
+  );
+  expect(
+    await screen.findByRole("button", { name: "Lion" }),
+  ).toBeInTheDocument();
+  expect(
+    screen.queryByRole("button", { name: /delete/i }),
+  ).not.toBeInTheDocument();
+  expect(
+    fetchMock.mock.calls.some(([, options]) => options?.method === "DELETE"),
+  ).toBe(false);
 });
 it("keeps a ready avatar private until the manager approves it", async () => {
   resumeJob = true;
@@ -244,7 +319,7 @@ it("keeps a ready avatar private until the manager approves it", async () => {
         image.getAttribute("src")?.startsWith("/api/game/avatars/9/"),
       ),
   ).toBe(false);
-  expect(screen.getByRole("button", { name: "Discard" })).toBeEnabled();
+  expect(screen.getByRole("button", { name: "Delete avatar" })).toBeEnabled();
 });
 
 it("lets a manager preview a pending avatar but not activate it before review", async () => {
@@ -322,7 +397,7 @@ it("reports generation unavailability without closing the chooser", async () => 
   expect(await screen.findByRole("alert")).toHaveTextContent("unavailable");
   expect(close).not.toHaveBeenCalled();
 });
-it("removes a discarded saved avatar from the gallery and refreshes the player", async () => {
+it("removes a deleted saved avatar from the gallery and refreshes the player", async () => {
   savedJob = true;
   const cache = mount(
     <AvatarChooser playerId={1} csrf="synthetic-token" onClose={() => {}} />,
@@ -334,12 +409,13 @@ it("removes a discarded saved avatar from the gallery and refreshes the player",
   fireEvent.click(
     await screen.findByRole("button", { name: "Saved avatar 10" }),
   );
-  fireEvent.click(await screen.findByRole("button", { name: "Discard" }));
+  fireEvent.click(await screen.findByRole("button", { name: "Delete avatar" }));
   await waitFor(() =>
     expect(
       screen.queryByRole("button", { name: "Saved avatar 10" }),
     ).not.toBeInTheDocument(),
   );
+  expect(screen.queryByRole("textbox")).not.toBeInTheDocument();
   expect(cache.getQueryState(["game", "player", 1])?.isInvalidated).toBe(true);
 });
 it("resumes a finished generation when the chooser reopens", async () => {

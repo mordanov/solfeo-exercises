@@ -8,24 +8,43 @@ Prerequisites:
 Last updated: 2026-10-10 by Copilot, session `61fe8212-2c67-4bc5-a715-02be5593ee0e`.
 
 ## Current phase
-Game fixes, lifetime prizes, and manager approval for custom avatars follow the merged game features.
-The owner approves autonomous implementation after reviewing 20 proposals.
-The merged game improvements remain on `main`.
-The current branch is `feat/game-only-player-role`.
+Shared access to approved custom avatars extends the existing game features.
+The current branch is `feat/avatar-improvements`.
 Accepted PHASE 7 remains closed.
 Earlier game, appearance, and listening entries below remain historical session records.
 
+### Shared custom avatars
+
+Every player profile can preview and select ready approved avatars from the shared gallery.
+Pending and rejected avatars remain private to their creator and managers.
+Selection identifies the target profile and leaves the creator's selection unchanged.
+Protected frame access remains authenticated and approval-gated.
+The chooser offers deletion for saved custom avatars the current account can manage.
+Built-in avatars have no delete action.
+Deletion returns `AVATAR_IN_USE` while another profile selects the avatar.
+The full backend suite passes: 354 tests, with emergency-manager variables blank.
+Ruff, formatting, and mypy pass. The frontend suite passes 369 tests on Node 22, and lint, formatting, type checking, and build pass.
+
+Remaining manual checks:
+1. Approve one generated avatar and sign in as a different player account.
+2. Preview the shared avatar, select it, and confirm the original player keeps the same avatar.
+3. Confirm the second player cannot see or retrieve another profile's pending avatar.
+4. Delete a saved custom avatar and confirm built-in avatars have no delete action.
+5. Confirm deletion fails while another profile uses the approved avatar.
+
 ### Custom avatar image quality
 
-The generation prompt keeps body size and proportions consistent across all levels.
-It shows level progression through increasingly distinct ornaments, accessories, and details.
+The generation prompt keeps cell size and camera framing consistent across all levels.
+Body proportions mature from a baby to a heroic adult, with distinct details at each level.
 New sheets require 4 vertical and 5 horizontal cyan separators.
 The worker segments cells from separator positions and removes the lines from each crop.
 A persisted layout marker enforces strict segmentation after worker restarts.
 Saved sheets without the marker retain the legacy equal-cell fallback.
 The prompt preserves the existing level and emotion mapping.
 Avatar moderation test fixtures now include the required separator lines.
-All 353 backend tests pass locally, and all 5 jobs pass in CI run `38065767340`.
+The earlier separator implementation passed all 5 jobs in CI run `38065767340`.
+The avatar prompt now specifies all 10 growth stages and each mood expression.
+Cell dimensions and camera framing stay fixed while body proportions mature by level.
 
 ### Avatar generation incident investigation
 

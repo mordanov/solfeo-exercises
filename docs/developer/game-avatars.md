@@ -314,15 +314,20 @@ Docker includes only the public copies, not the original sheets.
 ## Custom creation
 
 The chooser starts generation only after an explicit button click.
-It shows availability, quota, phase, saved-image count, approximate remaining time, previews, acceptance, discard, and explicit errors.
+It shows availability, quota, phase, saved-image count, approximate remaining time, previews, acceptance, deletion, and explicit errors.
 Reopening the chooser retrieves recent jobs without starting another generation.
 Selecting an approved ready job persists its identifier on the player.
 Selecting a built-in character clears that identifier.
-The saved gallery retains approved ready jobs, including the previously selected avatar.
-Selecting a saved avatar requires no provider request.
+The saved gallery includes approved ready jobs from every player profile.
+It also includes the requested profile's own ready jobs, including pending review results.
+Pending and rejected jobs from other profiles remain private.
+Any player can preview and select an approved avatar without another provider request.
+The chooser shows deletion only for saved custom avatars the account can manage.
+Built-in avatars do not use the custom-avatar deletion endpoint.
 The preview supports levels 1–10 and all 3 emotions.
-Explicit discard removes its database record and active selection.
-It does not remove files or perform another generation.
+Deletion removes the database record and the creator's selection.
+The system rejects deletion while another profile selects that avatar.
+Deletion does not remove files or perform another generation.
 
 `avatars` runs the existing `worker.generate_avatar` process in development and production Compose.
 It uses the shared backend image, private database, and media volume.
@@ -342,9 +347,11 @@ Each new job saves `sheet.png`, 30 transparent PNG frames, and `manifest.json` w
 Frames use `levels/avatar_<level>_<state>.png` with levels `01` through `10`.
 Atomic replacement and explicit synchronization publish files before the worker marks the job ready.
 Both selection endpoints reject incomplete version 2 sets.
-Authenticated file endpoints check ownership, generation readiness, review approval, path containment, and file existence.
+Authenticated file endpoints check ownership or approval, generation readiness, path containment, and file existence.
 Managers can inspect ready unapproved files; students and players cannot.
 They return `X-Accel-Redirect`; nginx serves the private PNG without public media URLs.
+Any authenticated member can retrieve frames only for ready approved avatars.
+Pending and rejected images remain private to the creator and managers.
 Never include these files in a public avatar directory or browser cache.
 
 ### One-sheet generation
@@ -359,11 +366,16 @@ The worker detects these bands and excludes them from each frame crop.
 New sheets fail validation when either set of separators is missing or malformed.
 A `sheet-layout.txt` marker keeps strict segmentation active after a worker restart.
 Saved sheets without this marker retain equal-cell fallback for recovery.
-Every figure keeps the same body size and proportions across all 10 levels.
-Each level adds or evolves visible adornments without repeating another level's design.
-Level 1 has the simplest design; level 10 has the richest details.
+The prompt keeps equal cell dimensions, camera distance, and full-body framing.
+Body proportions grow through 10 distinct stages, from a baby near 2 heads tall to a titan near 6–7 heads tall.
+Each stage adds age-specific clothing, features, and accessories while preserving the same individual and species.
 Rows 1, 2, and 3 contain neutral, happy, and sad levels 1–5.
 Rows 4, 5, and 6 contain the same emotions for levels 6–10.
+Each level repeats its body proportions and outfit across its 3 emotion variants.
+Neutral is calm and friendly, or serious and focused for strong forms.
+Happy adds a joyful smile, sparkling eyes, and small sparkles; strong forms use a confident grin.
+Sad adds gentle disappointment, drooping eyes, and at most 1 small tear.
+The prompt changes only the face and slight posture between a level's mood variants.
 The worker rejects cells with visible pixels under 2% of their area.
 It accepts figures that touch cell edges and crops them to visible bounds.
 Pixels with alpha below 32 are ignored as antialiasing residue.

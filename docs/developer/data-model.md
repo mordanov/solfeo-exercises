@@ -90,6 +90,8 @@ The 20 prize codes and conditions appear in `docs/PRODUCT_BRIEF.md`.
 
 Avatar review status accepts `pending`, `approved`, or `rejected`.
 Generation readiness alone does not grant student image access.
+The job's account and player fields record its creator and do not restrict approved-avatar reuse.
+Every authenticated player can select a ready approved avatar for an owned profile.
 `reviewed_by` references the manager account; `reviewed_at` records the decision time.
 `players.avatar_review_job_id` identifies the waiting selection without exposing an unapproved custom image.
 Approval activates that selection; rejection leaves the question-mark fallback.

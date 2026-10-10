@@ -109,6 +109,7 @@ export interface AvatarJob {
   sad_path?: string | null;
   error_code?: string | null;
   review_status?: AvatarReviewStatus;
+  can_discard: boolean;
 }
 
 export interface Season {
@@ -252,7 +253,7 @@ export const useAcceptAvatar = (playerId: number) => {
   const cache = useQueryClient();
   return useMutation({
     mutationFn: ({ csrf, jobId }: { csrf: string; jobId: number }) =>
-      gameFetch.post(`/avatars/${jobId}/use`, csrf),
+      gameFetch.post(`/avatars/${jobId}/use`, csrf, { player_id: playerId }),
     onSuccess: () => {
       void cache.invalidateQueries({ queryKey: ["game", "player", playerId] });
       void cache.invalidateQueries({ queryKey: ["game", "players"] });
