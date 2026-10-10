@@ -40,6 +40,26 @@ def test_request_logging_only_accepts_known_structured_fields() -> None:
     assert "password" not in data
 
 
+def test_worker_failures_log_error_code_and_cell_but_not_other_extras() -> None:
+    record = logging.LogRecord(
+        "worker.generate_avatar",
+        logging.ERROR,
+        __file__,
+        1,
+        "AVATAR_JOB_FAILED",
+        (),
+        None,
+    )
+    record.job_id = 1
+    record.error_code = "AVATAR_SHEET_INVALID"
+    record.cell = "level=3 state=sad"
+    record.description = "private description"
+    data = json.loads(JsonFormatter().format(record))
+    assert data["error_code"] == "AVATAR_SHEET_INVALID"
+    assert data["cell"] == "level=3 state=sad"
+    assert "description" not in data
+
+
 def test_exception_logs_keep_type_and_location_without_values() -> None:
     output = StringIO()
     handler = logging.StreamHandler(output)

@@ -27,7 +27,7 @@ def no_external_requests(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(generate_avatar, "_moderate_image", lambda *_: False)
 
 
-def sheet_bytes(empty_cell: bool = False) -> bytes:
+def sheet_bytes(empty_cell: bool = False, edge_touch: bool = False) -> bytes:
     image = Image.new("RGBA", (1024, 1536))
     draw = ImageDraw.Draw(image)
     for row in range(6):
@@ -35,10 +35,14 @@ def sheet_bytes(empty_cell: bool = False) -> bytes:
             if empty_cell and row == 5 and column == 4:
                 continue
             x, y = column * 1024 // 5, row * 256
+            left = 0 if edge_touch and row == 2 and column == 1 else 32
             draw.rectangle(
-                (x + 32, y + 32, x + 160, y + 224),
+                (x + left, y + 32, x + 160, y + 224),
                 fill=(row * 40, column * 45, 180, 255),
             )
+    if edge_touch:
+        # Faint antialiasing residue far from the figure must not count as artwork.
+        image.putpixel((1, 1), (255, 255, 255, 4))
     output = io.BytesIO()
     image.save(output, format="PNG")
     return output.getvalue()
@@ -161,6 +165,68 @@ def test_incomplete_sheet_fails_explicitly_and_keeps_the_original(
     assert (
         settings.media_root / "avatars" / "custom" / str(avatar_job) / "sheet.png"
     ).is_file()
+
+
+def test_figure_touching_its_cell_edge_does_not_reject_the_whole_sheet(
+    database: Database,
+    settings: Settings,
+    avatar_job: int,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(generate_avatar, "_moderate", lambda *_: False)
+    monkeypatch.setattr(
+        generate_avatar, "_generate_sheet", lambda *_: sheet_bytes(edge_touch=True)
+    )
+    assert generate_avatar.process_one(database, settings)
+    with database.session() as session:
+        job = session.get(CustomAvatar, avatar_job)
+        assert job is not None and job.status == "ready"
+        assert job.completed_images == 30
+
+
+def test_invalid_sheet_is_regenerated_once_and_then_accepted(
+    database: Database,
+    settings: Settings,
+    avatar_job: int,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    sheets = [sheet_bytes(empty_cell=True), sheet_bytes()]
+    requests: list[str] = []
+
+    def generate(_settings: Settings, description: str) -> bytes:
+        requests.append(description)
+        return sheets[len(requests) - 1]
+
+    monkeypatch.setattr(generate_avatar, "_moderate", lambda *_: False)
+    monkeypatch.setattr(generate_avatar, "_generate_sheet", generate)
+    assert generate_avatar.process_one(database, settings)
+    assert len(requests) == 2
+    with database.session() as session:
+        job = session.get(CustomAvatar, avatar_job)
+        assert job is not None and job.status == "ready"
+        assert job.attempts == 1
+
+
+def test_a_sheet_that_stays_invalid_is_requested_only_twice(
+    database: Database,
+    settings: Settings,
+    avatar_job: int,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    requests: list[str] = []
+
+    def generate(_settings: Settings, description: str) -> bytes:
+        requests.append(description)
+        return sheet_bytes(empty_cell=True)
+
+    monkeypatch.setattr(generate_avatar, "_moderate", lambda *_: False)
+    monkeypatch.setattr(generate_avatar, "_generate_sheet", generate)
+    assert generate_avatar.process_one(database, settings)
+    assert len(requests) == 2
+    with database.session() as session:
+        job = session.get(CustomAvatar, avatar_job)
+        assert job is not None and job.status == "failed"
+        assert job.error_code == "AVATAR_SHEET_INVALID"
 
 
 def test_active_claim_is_not_processed_twice(

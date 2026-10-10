@@ -356,7 +356,11 @@ Automatic image moderation checks the generated sheet before local extraction an
 The prompt requires 5 columns, 6 rows, consistent identity, and empty gutters.
 Rows 1, 2, and 3 contain neutral, happy, and sad levels 1–5.
 Rows 4, 5, and 6 contain the same emotions for levels 6–10.
-The worker rejects empty cells or figures that touch cell boundaries.
+The worker rejects empty cells (visible pixels cover under 2% of the cell); figures that merely touch a cell boundary are accepted and cropped to their visible bounds.
+Pixels with alpha below 32 are ignored as antialiasing residue.
+An invalid sheet is regenerated once automatically; this second request happens in the same job and does not consume extra quota.
+If the second sheet is also invalid, the job fails with `AVATAR_SHEET_INVALID` and keeps `sheet.png`.
+The failure log carries `error_code` and the failing `cell` (`level=N state=...`).
 It fits each complete figure inside a transparent 384 × 384 px canvas.
 Geometry checks cannot prove correct character identity, expression, or artistic progression.
 Inspect all 30 images before approving visual quality.

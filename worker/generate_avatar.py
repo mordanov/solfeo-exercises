@@ -13,7 +13,7 @@ import time
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
-from typing import Literal
+from typing import IO, Literal
 from uuid import uuid4
 
 import httpx
@@ -32,6 +32,9 @@ from app.settings import Settings
 
 logger = logging.getLogger("worker.generate_avatar")
 STATES = ("neutral", "happy", "sad")
+SHEET_ATTEMPTS = 2
+MIN_VISIBLE_ALPHA = 32
+MIN_FIGURE_AREA = 0.02
 IMAGE_SYSTEM = (
     "Create ONE sprite sheet of an original child-friendly magical creature: "
     "exactly 30 complete, separate figures in a STRICT 5-column, 6-row grid. "
@@ -47,8 +50,9 @@ IMAGE_SYSTEM = (
 
 
 class AvatarError(Exception):
-    def __init__(self, code: str) -> None:
+    def __init__(self, code: str, cell: str = "") -> None:
         self.code = code
+        self.cell = cell
         super().__init__(code)
 
 
@@ -292,13 +296,14 @@ def _update(
             job.sad_path = prefix + "sad.png"
 
 
-def _load_sheet(path: Path, settings: Settings) -> Image.Image:
-    if path.stat().st_size > settings.avatar_gen_max_image_bytes:
-        raise AvatarError("AVATAR_IMAGE_TOO_LARGE")
-    with Image.open(path) as source:
-        if source.format != "PNG" or source.size not in ((1024, 1536), (1024, 1024)):
+def _decode_sheet(source: Path | IO[bytes], settings: Settings) -> Image.Image:
+    with Image.open(source) as source_image:
+        if source_image.format != "PNG" or source_image.size not in (
+            (1024, 1536),
+            (1024, 1024),
+        ):
             raise AvatarError("AVATAR_SHEET_INVALID")
-        image = source.convert("RGBA")
+        image = source_image.convert("RGBA")
     if image.getchannel("A").getextrema()[0] == 255:
         # Legacy DALL-E has no native transparency. Remove only edge-connected white.
         red, green, blue = image.convert("RGB").split()
@@ -322,8 +327,30 @@ def _load_sheet(path: Path, settings: Settings) -> Image.Image:
     return image
 
 
-def _frames(image: Image.Image) -> list[tuple[int, str, bytes]]:
-    frames: list[tuple[int, str, bytes]] = []
+def _load_sheet(path: Path, settings: Settings) -> Image.Image:
+    if path.stat().st_size > settings.avatar_gen_max_image_bytes:
+        raise AvatarError("AVATAR_IMAGE_TOO_LARGE")
+    return _decode_sheet(path, settings)
+
+
+def _generate_usable_sheet(settings: Settings, description: str) -> bytes:
+    # The provider sometimes ignores the grid. One extra request is worth it;
+    # a second invalid sheet is returned so the saved original explains the failure.
+    for attempt in range(SHEET_ATTEMPTS):
+        data = _generate_sheet(settings, description)
+        try:
+            _figures(_decode_sheet(io.BytesIO(data), settings))
+        except AvatarError as error:
+            if error.code != "AVATAR_SHEET_INVALID" or attempt == SHEET_ATTEMPTS - 1:
+                return data
+            logger.warning("AVATAR_SHEET_REGENERATED", extra={"cell": error.cell})
+        else:
+            return data
+    raise AssertionError("unreachable")
+
+
+def _figures(image: Image.Image) -> list[tuple[int, str, Image.Image]]:
+    figures: list[tuple[int, str, Image.Image]] = []
     for level in range(1, 11):
         column = (level - 1) % 5
         for state_index, state in enumerate(STATES):
@@ -336,23 +363,34 @@ def _frames(image: Image.Image) -> list[tuple[int, str, bytes]]:
                     (row + 1) * image.height // 6,
                 )
             )
-            bounds = cell.getchannel("A").getbbox()
+            bounds = (
+                cell.getchannel("A")
+                .point(lambda value: 255 if value >= MIN_VISIBLE_ALPHA else 0)
+                .getbbox()
+            )
             if (
                 bounds is None
-                or min(bounds[:2]) < 2
-                or bounds[2] > cell.width - 2
-                or bounds[3] > cell.height - 2
+                or (bounds[2] - bounds[0]) * (bounds[3] - bounds[1])
+                < cell.width * cell.height * MIN_FIGURE_AREA
             ):
-                raise AvatarError("AVATAR_SHEET_INVALID")
-            cropped = cell.crop(bounds)
-            resized = ImageOps.contain(cropped, (360, 360), Image.Resampling.LANCZOS)
-            frame = Image.new("RGBA", (384, 384))
-            frame.alpha_composite(
-                resized, ((384 - resized.width) // 2, (384 - resized.height) // 2)
-            )
-            encoded = io.BytesIO()
-            frame.save(encoded, format="PNG")
-            frames.append((level, state, encoded.getvalue()))
+                raise AvatarError(
+                    "AVATAR_SHEET_INVALID", f"level={level} state={state}"
+                )
+            figures.append((level, state, cell.crop(bounds)))
+    return figures
+
+
+def _frames(image: Image.Image) -> list[tuple[int, str, bytes]]:
+    frames: list[tuple[int, str, bytes]] = []
+    for level, state, cropped in _figures(image):
+        resized = ImageOps.contain(cropped, (360, 360), Image.Resampling.LANCZOS)
+        frame = Image.new("RGBA", (384, 384))
+        frame.alpha_composite(
+            resized, ((384 - resized.width) // 2, (384 - resized.height) // 2)
+        )
+        encoded = io.BytesIO()
+        frame.save(encoded, format="PNG")
+        frames.append((level, state, encoded.getvalue()))
     return frames
 
 
@@ -374,7 +412,7 @@ def process_one(database: Database, settings: Settings) -> bool:
             if _moderate(settings, lease.description):
                 raise AvatarError("MODERATION_FLAGGED")
             _update(database, lease, "generating")
-            data = _generate_sheet(settings, lease.description)
+            data = _generate_usable_sheet(settings, lease.description)
             _save_sheet(database, lease, sheet, data)
         if sheet.stat().st_size > settings.avatar_gen_max_image_bytes:
             raise AvatarError("AVATAR_IMAGE_TOO_LARGE")
@@ -438,7 +476,14 @@ def process_one(database: Database, settings: Settings) -> bool:
             code = "AVATAR_PROVIDER_TIMEOUT"
         else:
             code = "AVATAR_GENERATION_FAILED"
-        logger.exception("AVATAR_JOB_FAILED", extra={"job_id": lease.job_id})
+        logger.exception(
+            "AVATAR_JOB_FAILED",
+            extra={
+                "job_id": lease.job_id,
+                "error_code": code,
+                "cell": error.cell if isinstance(error, AvatarError) else "",
+            },
+        )
         if code != "AVATAR_LEASE_LOST":
             try:
                 _update(database, lease, "failed", error=code)
