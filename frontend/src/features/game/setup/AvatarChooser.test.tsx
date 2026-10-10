@@ -252,9 +252,6 @@ it("does not offer deletion for an approved avatar owned by another account", as
     screen.queryByRole("button", { name: "Delete avatar" }),
   ).not.toBeInTheDocument();
   expect(
-    screen.queryByRole("button", { name: "Delete avatar" }),
-  ).not.toBeInTheDocument();
-  expect(
     screen.queryByRole("button", { name: "Delete saved avatar 10" }),
   ).not.toBeInTheDocument();
   expect(

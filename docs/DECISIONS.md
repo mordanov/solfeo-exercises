@@ -12,7 +12,8 @@ Format: date, decision, reason. Do not reverse a decision without asking the own
   Keep pending and rejected avatars private to their creator and managers.
   Preserve each player's current choice when another player selects a shared avatar.
   Reject deletion while another player profile uses the avatar.
-  Let users delete saved custom avatars they can manage; built-in avatars remain permanent.
+  Allow deletion only by the avatar creator or a manager.
+  Profile ownership alone does not grant deletion; built-in avatars remain permanent.
 
 - 2026-10-10: The owner asks the custom-avatar prompt to follow 10 age and growth stages.
   Keep equal grid cells and camera framing while body proportions mature from baby to heroic form.

@@ -140,7 +140,9 @@ A child looks at the notes and listens to the audio.
 - Permit reopening pending jobs and reusing saved avatars without another paid image request.
 - Make every ready approved custom avatar available to every player profile for preview and selection.
 - Keep pending and rejected avatars private to their owner and managers.
-- Let users delete saved custom avatars they can manage; never allow deletion of built-in avatars.
+- Allow only avatar creators and managers to delete saved custom avatars.
+- Do not grant deletion permission from player-profile ownership alone.
+- Never allow deletion of built-in avatars.
 - Prevent deletion while another player profile uses the avatar.
 - Keep legacy 3-emotion avatars available without automatic regeneration.
 - Reject incomplete sheets explicitly; never repeat a paid image request automatically after interruption.

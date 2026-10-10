@@ -5265,7 +5265,7 @@
       "source_file": "prototypes/pwa/src/App.tsx",
       "source_location": "L238",
       "id": "src_app_app",
-      "community": 4,
+      "community": 27,
       "norm_label": "app()"
     },
     {
@@ -5310,7 +5310,7 @@
       "source_file": "frontend/src/main.tsx",
       "source_location": "L1",
       "id": "frontend_src_main_tsx",
-      "community": 4,
+      "community": 27,
       "norm_label": "main.tsx"
     },
     {
@@ -5319,7 +5319,7 @@
       "source_file": "prototypes/pwa/src/main.tsx",
       "source_location": "L5",
       "id": "src_main_root",
-      "community": 4,
+      "community": 27,
       "norm_label": "root"
     },
     {
@@ -5328,7 +5328,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_app_test_tsx",
-      "community": 4,
+      "community": 27,
       "norm_label": "app.test.tsx"
     },
     {
@@ -5337,7 +5337,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L15",
       "id": "src_app_test_mockhealth",
-      "community": 4,
+      "community": 27,
       "norm_label": "mockhealth()"
     },
     {
@@ -5346,7 +5346,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L25",
       "id": "src_app_test_renderapp",
-      "community": 4,
+      "community": 27,
       "norm_label": "renderapp()"
     },
     {
@@ -5355,7 +5355,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L50",
       "id": "src_app_test_shortcut",
-      "community": 4,
+      "community": 27,
       "norm_label": "shortcut"
     },
     {
@@ -5364,7 +5364,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L79",
       "id": "src_app_test_fetch",
-      "community": 4,
+      "community": 27,
       "norm_label": "fetch"
     },
     {
@@ -5373,7 +5373,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L182",
       "id": "src_app_test_health",
-      "community": 4,
+      "community": 27,
       "norm_label": "health"
     },
     {
@@ -6192,7 +6192,7 @@
       "source_file": "frontend/src/features/listening/Listening.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_listening_listening_tsx",
-      "community": 11,
+      "community": 6,
       "norm_label": "listening.tsx"
     },
     {
@@ -6210,7 +6210,7 @@
       "source_file": "frontend/src/features/listening/Listening.tsx",
       "source_location": "L153",
       "id": "listening_listening_listening",
-      "community": 11,
+      "community": 6,
       "norm_label": "listening()"
     },
     {
@@ -6309,7 +6309,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_auth_autharea_test_tsx",
-      "community": 27,
+      "community": 4,
       "norm_label": "autharea.test.tsx"
     },
     {
@@ -6318,7 +6318,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.test.tsx",
       "source_location": "L11",
       "id": "auth_autharea_test_manager",
-      "community": 27,
+      "community": 4,
       "norm_label": "manager"
     },
     {
@@ -6327,7 +6327,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.test.tsx",
       "source_location": "L24",
       "id": "auth_autharea_test_student",
-      "community": 27,
+      "community": 4,
       "norm_label": "student"
     },
     {
@@ -6336,7 +6336,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.test.tsx",
       "source_location": "L25",
       "id": "auth_autharea_test_player",
-      "community": 27,
+      "community": 4,
       "norm_label": "player"
     },
     {
@@ -6345,7 +6345,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.test.tsx",
       "source_location": "L26",
       "id": "auth_autharea_test_auth",
-      "community": 27,
+      "community": 4,
       "norm_label": "auth()"
     },
     {
@@ -6354,7 +6354,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.test.tsx",
       "source_location": "L27",
       "id": "auth_autharea_test_json",
-      "community": 27,
+      "community": 4,
       "norm_label": "json()"
     },
     {
@@ -6363,7 +6363,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.test.tsx",
       "source_location": "L35",
       "id": "auth_autharea_test_mount",
-      "community": 27,
+      "community": 4,
       "norm_label": "mount()"
     },
     {
@@ -6372,7 +6372,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.test.tsx",
       "source_location": "L78",
       "id": "auth_autharea_test_fetch",
-      "community": 27,
+      "community": 4,
       "norm_label": "fetch"
     },
     {
@@ -6381,7 +6381,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.test.tsx",
       "source_location": "L152",
       "id": "auth_autharea_test_cache",
-      "community": 27,
+      "community": 4,
       "norm_label": "cache"
     },
     {
@@ -6390,7 +6390,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.test.tsx",
       "source_location": "L186",
       "id": "auth_autharea_test_call",
-      "community": 27,
+      "community": 4,
       "norm_label": "call"
     },
     {
@@ -6399,7 +6399,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.test.tsx",
       "source_location": "L322",
       "id": "auth_autharea_test_users",
-      "community": 27,
+      "community": 4,
       "norm_label": "users"
     },
     {
@@ -6435,7 +6435,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.tsx",
       "source_location": "L174",
       "id": "auth_autharea_autharea",
-      "community": 6,
+      "community": 4,
       "norm_label": "autharea()"
     },
     {
@@ -7099,7 +7099,7 @@
       "label": "cache",
       "file_type": "code",
       "source_file": "frontend/src/features/game/setup/AvatarChooser.test.tsx",
-      "source_location": "L402",
+      "source_location": "L399",
       "id": "setup_avatarchooser_test_cache",
       "community": 262,
       "norm_label": "cache"
@@ -7108,7 +7108,7 @@
       "label": "Submit()",
       "file_type": "code",
       "source_file": "frontend/src/features/game/setup/AvatarChooser.test.tsx",
-      "source_location": "L457",
+      "source_location": "L454",
       "id": "setup_avatarchooser_test_submit",
       "community": 262,
       "norm_label": "submit()"
@@ -9846,7 +9846,7 @@
       "source_file": "frontend/src/api/exercises.ts",
       "source_location": "L11",
       "id": "api_exercises_exercise",
-      "community": 11,
+      "community": 6,
       "norm_label": "exercise"
     },
     {
@@ -10422,7 +10422,7 @@
       "source_file": "backend/app/api/health.py",
       "source_location": "L9",
       "id": "api_health_healthresponse",
-      "community": 367,
+      "community": 105,
       "norm_label": "healthresponse"
     },
     {
@@ -10647,7 +10647,7 @@
       "source_file": "frontend/src/api/auth.ts",
       "source_location": "L33",
       "id": "api_auth_apierror",
-      "community": 5,
+      "community": 6,
       "norm_label": "apierror"
     },
     {
@@ -10656,7 +10656,7 @@
       "source_file": "frontend/src/api/auth.ts",
       "source_location": "L34",
       "id": "api_auth_apierror_constructor",
-      "community": 5,
+      "community": 6,
       "norm_label": ".constructor()"
     },
     {
@@ -25650,7 +25650,7 @@
       "source_file": "backend/app/database.py",
       "source_location": "L1",
       "id": "backend_app_database_py",
-      "community": 157,
+      "community": 367,
       "norm_label": "database.py"
     },
     {
@@ -25659,7 +25659,7 @@
       "source_file": "backend/app/database.py",
       "source_location": "L10",
       "id": "app_database_database",
-      "community": 157,
+      "community": 367,
       "norm_label": "database"
     },
     {
@@ -25668,7 +25668,7 @@
       "source_file": "backend/app/database.py",
       "source_location": "L11",
       "id": "app_database_database_init",
-      "community": 157,
+      "community": 367,
       "norm_label": ".__init__()"
     },
     {
@@ -25677,7 +25677,7 @@
       "source_file": "backend/app/database.py",
       "source_location": "L24",
       "id": "app_database_session",
-      "community": 157,
+      "community": 367,
       "norm_label": "session()"
     },
     {
@@ -25686,7 +25686,7 @@
       "source_file": "backend/app/database.py",
       "source_location": "L28",
       "id": "app_database_database_close",
-      "community": 157,
+      "community": 367,
       "norm_label": ".close()"
     },
     {
@@ -25722,7 +25722,7 @@
       "source_file": "backend/app/settings.py",
       "source_location": "L15",
       "id": "app_settings_settings",
-      "community": 157,
+      "community": 367,
       "norm_label": "settings"
     },
     {
@@ -25731,7 +25731,7 @@
       "source_file": "",
       "source_location": "",
       "id": "basesettings",
-      "community": 372,
+      "community": 105,
       "norm_label": "basesettings"
     },
     {
@@ -25830,7 +25830,7 @@
       "source_file": "backend/app/main.py",
       "source_location": "L43",
       "id": "app_main_service_error",
-      "community": 198,
+      "community": 38,
       "norm_label": "service_error()"
     },
     {
@@ -26055,7 +26055,7 @@
       "source_file": "backend/app/game/models.py",
       "source_location": "L89",
       "id": "game_models_round",
-      "community": 105,
+      "community": 10,
       "norm_label": "round"
     },
     {
@@ -26064,7 +26064,7 @@
       "source_file": "backend/app/game/models.py",
       "source_location": "L144",
       "id": "game_models_taskattempt",
-      "community": 105,
+      "community": 10,
       "norm_label": "taskattempt"
     },
     {
@@ -26082,7 +26082,7 @@
       "source_file": "backend/app/game/models.py",
       "source_location": "L201",
       "id": "game_models_customavatar",
-      "community": 157,
+      "community": 367,
       "norm_label": "customavatar"
     },
     {
@@ -26100,7 +26100,7 @@
       "source_file": "backend/app/game/models.py",
       "source_location": "L286",
       "id": "game_models_avatargenerationlog",
-      "community": 157,
+      "community": 367,
       "norm_label": "avatargenerationlog"
     },
     {
@@ -26118,7 +26118,7 @@
       "source_file": "backend/app/game/api/rounds.py",
       "source_location": "L1",
       "id": "backend_app_game_api_rounds_py",
-      "community": 105,
+      "community": 10,
       "norm_label": "rounds.py"
     },
     {
@@ -26127,7 +26127,7 @@
       "source_file": "backend/app/game/api/rounds.py",
       "source_location": "L15",
       "id": "api_rounds_createroundbody",
-      "community": 105,
+      "community": 10,
       "norm_label": "createroundbody"
     },
     {
@@ -26136,7 +26136,7 @@
       "source_file": "",
       "source_location": "",
       "id": "basemodel",
-      "community": 367,
+      "community": 105,
       "norm_label": "basemodel"
     },
     {
@@ -26145,7 +26145,7 @@
       "source_file": "backend/app/game/api/rounds.py",
       "source_location": "L23",
       "id": "api_rounds_noteanswer",
-      "community": 105,
+      "community": 10,
       "norm_label": "noteanswer"
     },
     {
@@ -26154,7 +26154,7 @@
       "source_file": "backend/app/game/api/rounds.py",
       "source_location": "L30",
       "id": "api_rounds_submittaskbody",
-      "community": 105,
+      "community": 10,
       "norm_label": "submittaskbody"
     },
     {
@@ -26163,7 +26163,7 @@
       "source_file": "backend/app/game/api/rounds.py",
       "source_location": "L38",
       "id": "api_rounds_require_answers",
-      "community": 105,
+      "community": 10,
       "norm_label": "require_answers()"
     },
     {
@@ -26181,7 +26181,7 @@
       "source_file": "backend/app/game/api/rounds.py",
       "source_location": "L105",
       "id": "api_rounds_submit_task",
-      "community": 105,
+      "community": 10,
       "norm_label": "submit_task()"
     },
     {
@@ -26406,7 +26406,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L1",
       "id": "backend_app_game_api_avatars_py",
-      "community": 124,
+      "community": 367,
       "norm_label": "avatars.py"
     },
     {
@@ -26415,7 +26415,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L48",
       "id": "api_avatars_catalog",
-      "community": 124,
+      "community": 367,
       "norm_label": "catalog()"
     },
     {
@@ -26424,7 +26424,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L54",
       "id": "api_avatars_generatebody",
-      "community": 124,
+      "community": 367,
       "norm_label": "generatebody"
     },
     {
@@ -26433,7 +26433,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L59",
       "id": "api_avatars_generationout",
-      "community": 124,
+      "community": 367,
       "norm_label": "generationout"
     },
     {
@@ -26442,7 +26442,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L63",
       "id": "api_avatars_mutationout",
-      "community": 124,
+      "community": 367,
       "norm_label": "mutationout"
     },
     {
@@ -26451,7 +26451,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L67",
       "id": "api_avatars_useavatarbody",
-      "community": 124,
+      "community": 367,
       "norm_label": "useavatarbody"
     },
     {
@@ -26460,7 +26460,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L72",
       "id": "api_avatars_generate_avatar",
-      "community": 124,
+      "community": 367,
       "norm_label": "generate_avatar()"
     },
     {
@@ -26469,7 +26469,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L86",
       "id": "api_avatars_avatarjobout",
-      "community": 124,
+      "community": 367,
       "norm_label": "avatarjobout"
     },
     {
@@ -26478,7 +26478,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L102",
       "id": "api_avatars_savedavatarsout",
-      "community": 124,
+      "community": 367,
       "norm_label": "savedavatarsout"
     },
     {
@@ -26487,7 +26487,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L107",
       "id": "api_avatars_reviewbody",
-      "community": 124,
+      "community": 367,
       "norm_label": "reviewbody"
     },
     {
@@ -26496,7 +26496,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L111",
       "id": "api_avatars_reviewjobout",
-      "community": 124,
+      "community": 367,
       "norm_label": "reviewjobout"
     },
     {
@@ -26505,7 +26505,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L119",
       "id": "api_avatars_reviewqueueout",
-      "community": 124,
+      "community": 367,
       "norm_label": "reviewqueueout"
     },
     {
@@ -26514,7 +26514,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L124",
       "id": "api_avatars_avatarquotaout",
-      "community": 124,
+      "community": 367,
       "norm_label": "avatarquotaout"
     },
     {
@@ -26523,7 +26523,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L133",
       "id": "api_avatars_job_out",
-      "community": 124,
+      "community": 367,
       "norm_label": "_job_out()"
     },
     {
@@ -26532,7 +26532,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L159",
       "id": "api_avatars_review_queue",
-      "community": 124,
+      "community": 367,
       "norm_label": "review_queue()"
     },
     {
@@ -26541,7 +26541,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L185",
       "id": "api_avatars_decide_review",
-      "community": 124,
+      "community": 367,
       "norm_label": "decide_review()"
     },
     {
@@ -26550,7 +26550,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L198",
       "id": "api_avatars_review_sheet",
-      "community": 124,
+      "community": 367,
       "norm_label": "review_sheet()"
     },
     {
@@ -26559,70 +26559,70 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L212",
       "id": "api_avatars_saved_avatars",
-      "community": 124,
+      "community": 367,
       "norm_label": "saved_avatars()"
     },
     {
       "label": "recent_jobs()",
       "file_type": "code",
       "source_file": "backend/app/game/api/avatars.py",
-      "source_location": "L247",
+      "source_location": "L245",
       "id": "api_avatars_recent_jobs",
-      "community": 124,
+      "community": 367,
       "norm_label": "recent_jobs()"
     },
     {
       "label": "job_status()",
       "file_type": "code",
       "source_file": "backend/app/game/api/avatars.py",
-      "source_location": "L273",
+      "source_location": "L269",
       "id": "api_avatars_job_status",
-      "community": 124,
+      "community": 367,
       "norm_label": "job_status()"
     },
     {
       "label": "use_avatar()",
       "file_type": "code",
       "source_file": "backend/app/game/api/avatars.py",
-      "source_location": "L290",
+      "source_location": "L286",
       "id": "api_avatars_use_avatar",
-      "community": 124,
+      "community": 367,
       "norm_label": "use_avatar()"
     },
     {
       "label": "avatar_file()",
       "file_type": "code",
       "source_file": "backend/app/game/api/avatars.py",
-      "source_location": "L310",
+      "source_location": "L306",
       "id": "api_avatars_avatar_file",
-      "community": 124,
+      "community": 367,
       "norm_label": "avatar_file()"
     },
     {
       "label": "_protected_image()",
       "file_type": "code",
       "source_file": "backend/app/game/api/avatars.py",
-      "source_location": "L329",
+      "source_location": "L325",
       "id": "api_avatars_protected_image",
-      "community": 124,
+      "community": 367,
       "norm_label": "_protected_image()"
     },
     {
       "label": "discard_avatar()",
       "file_type": "code",
       "source_file": "backend/app/game/api/avatars.py",
-      "source_location": "L344",
+      "source_location": "L340",
       "id": "api_avatars_discard_avatar",
-      "community": 124,
+      "community": 367,
       "norm_label": "discard_avatar()"
     },
     {
       "label": "quota()",
       "file_type": "code",
       "source_file": "backend/app/game/api/avatars.py",
-      "source_location": "L351",
+      "source_location": "L347",
       "id": "api_avatars_quota",
-      "community": 124,
+      "community": 367,
       "norm_label": "quota()"
     },
     {
@@ -26631,7 +26631,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L1",
       "id": "backend_app_game_services_rounds_py",
-      "community": 160,
+      "community": 75,
       "norm_label": "rounds.py"
     },
     {
@@ -26640,7 +26640,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L23",
       "id": "services_rounds_time_limit_s",
-      "community": 160,
+      "community": 75,
       "norm_label": "time_limit_s()"
     },
     {
@@ -26649,7 +26649,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L29",
       "id": "services_rounds_score_task",
-      "community": 308,
+      "community": 75,
       "norm_label": "score_task()"
     },
     {
@@ -26658,7 +26658,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L47",
       "id": "services_rounds_validate_notes",
-      "community": 160,
+      "community": 75,
       "norm_label": "_validate_notes()"
     },
     {
@@ -26667,7 +26667,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L62",
       "id": "services_rounds_task_payload",
-      "community": 160,
+      "community": 75,
       "norm_label": "task_payload()"
     },
     {
@@ -26676,7 +26676,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L81",
       "id": "services_rounds_check_timeout",
-      "community": 160,
+      "community": 75,
       "norm_label": "check_timeout()"
     },
     {
@@ -26694,7 +26694,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L117",
       "id": "services_rounds_create_round",
-      "community": 105,
+      "community": 10,
       "norm_label": "create_round()"
     },
     {
@@ -26703,7 +26703,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L168",
       "id": "services_rounds_submit_task",
-      "community": 160,
+      "community": 75,
       "norm_label": "submit_task()"
     },
     {
@@ -26712,7 +26712,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L266",
       "id": "services_rounds_build_submit_response",
-      "community": 160,
+      "community": 75,
       "norm_label": "_build_submit_response()"
     },
     {
@@ -26721,7 +26721,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L305",
       "id": "services_rounds_finalize_round",
-      "community": 160,
+      "community": 75,
       "norm_label": "_finalize_round()"
     },
     {
@@ -26739,7 +26739,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L397",
       "id": "services_rounds_check_trophy",
-      "community": 160,
+      "community": 75,
       "norm_label": "_check_trophy()"
     },
     {
@@ -26748,7 +26748,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L424",
       "id": "services_rounds_practice_hint",
-      "community": 160,
+      "community": 75,
       "norm_label": "_practice_hint()"
     },
     {
@@ -26892,7 +26892,7 @@
       "source_file": "backend/app/game/services/achievements.py",
       "source_location": "L1",
       "id": "backend_app_game_services_achievements_py",
-      "community": 105,
+      "community": 10,
       "norm_label": "achievements.py"
     },
     {
@@ -26901,7 +26901,7 @@
       "source_file": "backend/app/game/services/achievements.py",
       "source_location": "L34",
       "id": "services_achievements_evaluate_achievements",
-      "community": 105,
+      "community": 10,
       "norm_label": "evaluate_achievements()"
     },
     {
@@ -26910,7 +26910,7 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L1",
       "id": "backend_app_game_services_avatars_py",
-      "community": 124,
+      "community": 367,
       "norm_label": "avatars.py"
     },
     {
@@ -26919,7 +26919,7 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L17",
       "id": "services_avatars_quota_day",
-      "community": 124,
+      "community": 367,
       "norm_label": "_quota_day()"
     },
     {
@@ -26928,7 +26928,7 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L27",
       "id": "services_avatars_check_daily_quota",
-      "community": 124,
+      "community": 367,
       "norm_label": "check_daily_quota()"
     },
     {
@@ -26937,7 +26937,7 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L47",
       "id": "services_avatars_quota_usage",
-      "community": 124,
+      "community": 367,
       "norm_label": "quota_usage()"
     },
     {
@@ -26946,7 +26946,7 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L58",
       "id": "services_avatars_start_avatar_job",
-      "community": 51,
+      "community": 124,
       "norm_label": "start_avatar_job()"
     },
     {
@@ -26955,7 +26955,7 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L120",
       "id": "services_avatars_authorized_job",
-      "community": 124,
+      "community": 367,
       "norm_label": "authorized_job()"
     },
     {
@@ -26964,32 +26964,32 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L141",
       "id": "services_avatars_can_discard_avatar",
-      "community": 124,
+      "community": 367,
       "norm_label": "can_discard_avatar()"
     },
     {
       "label": "generation_estimate()",
       "file_type": "code",
       "source_file": "backend/app/game/services/avatars.py",
-      "source_location": "L156",
+      "source_location": "L145",
       "id": "services_avatars_generation_estimate",
-      "community": 124,
+      "community": 367,
       "norm_label": "generation_estimate()"
     },
     {
       "label": "remaining_seconds()",
       "file_type": "code",
       "source_file": "backend/app/game/services/avatars.py",
-      "source_location": "L185",
+      "source_location": "L174",
       "id": "services_avatars_remaining_seconds",
-      "community": 124,
+      "community": 367,
       "norm_label": "remaining_seconds()"
     },
     {
       "label": "validate_avatar_assets()",
       "file_type": "code",
       "source_file": "backend/app/game/services/avatars.py",
-      "source_location": "L193",
+      "source_location": "L182",
       "id": "services_avatars_validate_avatar_assets",
       "community": 83,
       "norm_label": "validate_avatar_assets()"
@@ -26998,72 +26998,72 @@
       "label": "avatar_path()",
       "file_type": "code",
       "source_file": "backend/app/game/services/avatars.py",
-      "source_location": "L210",
+      "source_location": "L199",
       "id": "services_avatars_avatar_path",
-      "community": 124,
+      "community": 367,
       "norm_label": "avatar_path()"
     },
     {
       "label": "review_sheet_path()",
       "file_type": "code",
       "source_file": "backend/app/game/services/avatars.py",
-      "source_location": "L243",
+      "source_location": "L232",
       "id": "services_avatars_review_sheet_path",
-      "community": 124,
+      "community": 367,
       "norm_label": "review_sheet_path()"
     },
     {
       "label": "list_review_jobs()",
       "file_type": "code",
       "source_file": "backend/app/game/services/avatars.py",
-      "source_location": "L254",
+      "source_location": "L243",
       "id": "services_avatars_list_review_jobs",
-      "community": 124,
+      "community": 367,
       "norm_label": "list_review_jobs()"
     },
     {
       "label": "_lock_job_and_player()",
       "file_type": "code",
       "source_file": "backend/app/game/services/avatars.py",
-      "source_location": "L267",
+      "source_location": "L256",
       "id": "services_avatars_lock_job_and_player",
-      "community": 124,
+      "community": 367,
       "norm_label": "_lock_job_and_player()"
     },
     {
       "label": "review_avatar()",
       "file_type": "code",
       "source_file": "backend/app/game/services/avatars.py",
-      "source_location": "L288",
+      "source_location": "L277",
       "id": "services_avatars_review_avatar",
-      "community": 51,
+      "community": 124,
       "norm_label": "review_avatar()"
     },
     {
       "label": "list_avatar_jobs()",
       "file_type": "code",
       "source_file": "backend/app/game/services/avatars.py",
-      "source_location": "L323",
+      "source_location": "L312",
       "id": "services_avatars_list_avatar_jobs",
-      "community": 124,
+      "community": 367,
       "norm_label": "list_avatar_jobs()"
     },
     {
       "label": "use_avatar()",
       "file_type": "code",
       "source_file": "backend/app/game/services/avatars.py",
-      "source_location": "L353",
+      "source_location": "L342",
       "id": "services_avatars_use_avatar",
-      "community": 124,
+      "community": 367,
       "norm_label": "use_avatar()"
     },
     {
       "label": "discard_avatar()",
       "file_type": "code",
       "source_file": "backend/app/game/services/avatars.py",
-      "source_location": "L387",
+      "source_location": "L376",
       "id": "services_avatars_discard_avatar",
-      "community": 124,
+      "community": 367,
       "norm_label": "discard_avatar()"
     },
     {
@@ -27396,7 +27396,7 @@
       "source_file": "backend/app/api/health.py",
       "source_location": "L1",
       "id": "backend_app_api_health_py",
-      "community": 367,
+      "community": 105,
       "norm_label": "health.py"
     },
     {
@@ -27405,7 +27405,7 @@
       "source_file": "backend/app/api/health.py",
       "source_location": "L14",
       "id": "api_health_health",
-      "community": 367,
+      "community": 105,
       "norm_label": "health()"
     },
     {
@@ -27522,7 +27522,7 @@
       "source_file": "backend/app/api/telegram.py",
       "source_location": "L124",
       "id": "api_telegram_audio",
-      "community": 198,
+      "community": 38,
       "norm_label": "audio()"
     },
     {
@@ -27630,7 +27630,7 @@
       "source_file": "backend/app/api/listening.py",
       "source_location": "L26",
       "id": "api_listening_require_student",
-      "community": 198,
+      "community": 38,
       "norm_label": "require_student()"
     },
     {
@@ -27756,7 +27756,7 @@
       "source_file": "backend/app/api/request_log.py",
       "source_location": "L1",
       "id": "backend_app_api_request_log_py",
-      "community": 379,
+      "community": 10,
       "norm_label": "request_log.py"
     },
     {
@@ -27765,7 +27765,7 @@
       "source_file": "backend/app/api/request_log.py",
       "source_location": "L9",
       "id": "api_request_log_requestlog",
-      "community": 379,
+      "community": 10,
       "norm_label": "requestlog"
     },
     {
@@ -27774,7 +27774,7 @@
       "source_file": "backend/app/api/request_log.py",
       "source_location": "L10",
       "id": "api_request_log_requestlog_init",
-      "community": 379,
+      "community": 10,
       "norm_label": ".__init__()"
     },
     {
@@ -27783,7 +27783,7 @@
       "source_file": "backend/app/api/request_log.py",
       "source_location": "L13",
       "id": "api_request_log_requestlog_call",
-      "community": 379,
+      "community": 10,
       "norm_label": ".__call__()"
     },
     {
@@ -27936,7 +27936,7 @@
       "source_file": "backend/app/api/exercises.py",
       "source_location": "L170",
       "id": "api_exercises_protected_file",
-      "community": 198,
+      "community": 38,
       "norm_label": "protected_file()"
     },
     {
@@ -27972,7 +27972,7 @@
       "source_file": "backend/app/services/auth.py",
       "source_location": "L20",
       "id": "services_auth_serviceerror",
-      "community": 198,
+      "community": 38,
       "norm_label": "serviceerror"
     },
     {
@@ -27990,7 +27990,7 @@
       "source_file": "backend/app/services/auth.py",
       "source_location": "L21",
       "id": "services_auth_serviceerror_init",
-      "community": 198,
+      "community": 38,
       "norm_label": ".__init__()"
     },
     {
@@ -28224,7 +28224,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L37",
       "id": "services_telegram_api_telegramapi_call",
-      "community": 198,
+      "community": 38,
       "norm_label": ".call()"
     },
     {
@@ -28233,7 +28233,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L60",
       "id": "services_telegram_api_telegramapi_verify",
-      "community": 198,
+      "community": 38,
       "norm_label": ".verify()"
     },
     {
@@ -28242,7 +28242,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L72",
       "id": "services_telegram_api_telegramapi_updates",
-      "community": 198,
+      "community": 38,
       "norm_label": ".updates()"
     },
     {
@@ -28260,7 +28260,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L89",
       "id": "services_telegram_api_telegramapi_download",
-      "community": 198,
+      "community": 38,
       "norm_label": ".download()"
     },
     {
@@ -28314,7 +28314,7 @@
       "source_file": "backend/app/services/telegram.py",
       "source_location": "L29",
       "id": "services_telegram_sender",
-      "community": 367,
+      "community": 105,
       "norm_label": "sender"
     },
     {
@@ -28323,7 +28323,7 @@
       "source_file": "backend/app/services/telegram.py",
       "source_location": "L34",
       "id": "services_telegram_chat",
-      "community": 367,
+      "community": 105,
       "norm_label": "chat"
     },
     {
@@ -28332,7 +28332,7 @@
       "source_file": "backend/app/services/telegram.py",
       "source_location": "L39",
       "id": "services_telegram_attachment",
-      "community": 367,
+      "community": 105,
       "norm_label": "attachment"
     },
     {
@@ -28341,7 +28341,7 @@
       "source_file": "backend/app/services/telegram.py",
       "source_location": "L46",
       "id": "services_telegram_message",
-      "community": 367,
+      "community": 105,
       "norm_label": "message"
     },
     {
@@ -28350,7 +28350,7 @@
       "source_file": "backend/app/services/telegram.py",
       "source_location": "L57",
       "id": "services_telegram_update",
-      "community": 367,
+      "community": 105,
       "norm_label": "update"
     },
     {
@@ -28521,7 +28521,7 @@
       "source_file": "backend/app/services/omr.py",
       "source_location": "L54",
       "id": "services_omr_enqueue",
-      "community": 38,
+      "community": 198,
       "norm_label": "enqueue()"
     },
     {
@@ -28647,7 +28647,7 @@
       "source_file": "backend/app/services/listening.py",
       "source_location": "L155",
       "id": "services_listening_journal",
-      "community": 198,
+      "community": 38,
       "norm_label": "journal()"
     },
     {
@@ -28953,7 +28953,7 @@
       "source_file": "backend/tests/test_omr_engine.py",
       "source_location": "L56",
       "id": "tests_test_omr_engine_test_authored_score_fixtures_are_supported",
-      "community": 52,
+      "community": 198,
       "norm_label": "test_authored_score_fixtures_are_supported()"
     },
     {
@@ -29007,7 +29007,7 @@
       "source_file": "backend/tests/test_database.py",
       "source_location": "L42",
       "id": "tests_test_database_probebase",
-      "community": 157,
+      "community": 367,
       "norm_label": "probebase"
     },
     {
@@ -29511,7 +29511,7 @@
       "source_file": "backend/tests/test_auth.py",
       "source_location": "L368",
       "id": "tests_test_auth_test_emergency_appearance_defaults_do_not_replace_saved_preferences",
-      "community": 77,
+      "community": 17,
       "norm_label": "test_emergency_appearance_defaults_do_not_replace_saved_preferences()"
     },
     {
@@ -30339,7 +30339,7 @@
       "source_file": "backend/tests/game/test_achievements.py",
       "source_location": "L1",
       "id": "backend_tests_game_test_achievements_py",
-      "community": 105,
+      "community": 10,
       "norm_label": "test_achievements.py"
     },
     {
@@ -30348,7 +30348,7 @@
       "source_file": "backend/tests/game/test_achievements.py",
       "source_location": "L16",
       "id": "game_test_achievements_test_achievement_collection_requires_authentication_and_ownership",
-      "community": 105,
+      "community": 10,
       "norm_label": "test_achievement_collection_requires_authentication_and_ownership()"
     },
     {
@@ -30357,7 +30357,7 @@
       "source_file": "backend/tests/game/test_achievements.py",
       "source_location": "L64",
       "id": "game_test_achievements_test_achievement_catalog_has_twenty_distinct_rewards",
-      "community": 105,
+      "community": 10,
       "norm_label": "test_achievement_catalog_has_twenty_distinct_rewards()"
     },
     {
@@ -30366,7 +30366,7 @@
       "source_file": "backend/tests/game/test_achievements.py",
       "source_location": "L68",
       "id": "game_test_achievements_test_rewards_count_positions_days_and_streaks_and_survive_reset",
-      "community": 105,
+      "community": 10,
       "norm_label": "test_rewards_count_positions_days_and_streaks_and_survive_reset()"
     },
     {
@@ -30375,7 +30375,7 @@
       "source_file": "backend/tests/game/test_achievements.py",
       "source_location": "L149",
       "id": "game_test_achievements_test_correct_positions_count_without_partial_task_xp_and_ignore_active_rounds",
-      "community": 105,
+      "community": 10,
       "norm_label": "test_correct_positions_count_without_partial_task_xp_and_ignore_active_rounds()"
     },
     {
@@ -30825,7 +30825,7 @@
       "source_file": "backend/tests/game/test_scoring.py",
       "source_location": "L1",
       "id": "backend_tests_game_test_scoring_py",
-      "community": 308,
+      "community": 75,
       "norm_label": "test_scoring.py"
     },
     {
@@ -30834,7 +30834,7 @@
       "source_file": "backend/tests/game/test_scoring.py",
       "source_location": "L4",
       "id": "game_test_scoring_test_all_correct",
-      "community": 308,
+      "community": 75,
       "norm_label": "test_all_correct()"
     },
     {
@@ -30843,7 +30843,7 @@
       "source_file": "backend/tests/game/test_scoring.py",
       "source_location": "L10",
       "id": "game_test_scoring_test_wrong_answer",
-      "community": 308,
+      "community": 75,
       "norm_label": "test_wrong_answer()"
     },
     {
@@ -30852,7 +30852,7 @@
       "source_file": "backend/tests/game/test_scoring.py",
       "source_location": "L16",
       "id": "game_test_scoring_test_timeout",
-      "community": 308,
+      "community": 75,
       "norm_label": "test_timeout()"
     },
     {
@@ -30861,7 +30861,7 @@
       "source_file": "backend/tests/game/test_scoring.py",
       "source_location": "L20",
       "id": "game_test_scoring_test_wrong_order",
-      "community": 308,
+      "community": 75,
       "norm_label": "test_wrong_order()"
     },
     {
@@ -30870,7 +30870,7 @@
       "source_file": "backend/tests/game/test_scoring.py",
       "source_location": "L26",
       "id": "game_test_scoring_test_note_only_rules_ignore_octaves_but_preserve_names_and_order",
-      "community": 308,
+      "community": 75,
       "norm_label": "test_note_only_rules_ignore_octaves_but_preserve_names_and_order()"
     },
     {
@@ -30879,7 +30879,7 @@
       "source_file": "backend/tests/game/test_scoring.py",
       "source_location": "L34",
       "id": "game_test_scoring_test_legacy_rules_still_require_the_written_octave",
-      "community": 308,
+      "community": 75,
       "norm_label": "test_legacy_rules_still_require_the_written_octave()"
     },
     {
@@ -31176,7 +31176,7 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L1",
       "id": "backend_tests_game_test_avatar_approval_py",
-      "community": 51,
+      "community": 124,
       "norm_label": "test_avatar_approval.py"
     },
     {
@@ -31185,7 +31185,7 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L34",
       "id": "game_test_avatar_approval_review_job",
-      "community": 51,
+      "community": 124,
       "norm_label": "review_job()"
     },
     {
@@ -31194,7 +31194,7 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L79",
       "id": "game_test_avatar_approval_make_ready",
-      "community": 51,
+      "community": 124,
       "norm_label": "make_ready()"
     },
     {
@@ -31203,160 +31203,178 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L101",
       "id": "game_test_avatar_approval_test_approved_avatar_is_shared_but_unapproved_avatar_stays_private",
-      "community": 51,
+      "community": 124,
       "norm_label": "test_approved_avatar_is_shared_but_unapproved_avatar_stays_private()"
+    },
+    {
+      "label": "test_profile_owner_cannot_delete_avatar_created_by_manager()",
+      "file_type": "code",
+      "source_file": "backend/tests/game/test_avatar_approval.py",
+      "source_location": "L197",
+      "id": "game_test_avatar_approval_test_profile_owner_cannot_delete_avatar_created_by_manager",
+      "community": 124,
+      "norm_label": "test_profile_owner_cannot_delete_avatar_created_by_manager()"
+    },
+    {
+      "label": "test_manager_can_delete_avatar_created_by_another_account()",
+      "file_type": "code",
+      "source_file": "backend/tests/game/test_avatar_approval.py",
+      "source_location": "L264",
+      "id": "game_test_avatar_approval_test_manager_can_delete_avatar_created_by_another_account",
+      "community": 124,
+      "norm_label": "test_manager_can_delete_avatar_created_by_another_account()"
     },
     {
       "label": "synthetic_sheet()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L196",
+      "source_location": "L287",
       "id": "game_test_avatar_approval_synthetic_sheet",
-      "community": 51,
+      "community": 124,
       "norm_label": "synthetic_sheet()"
     },
     {
       "label": "test_portrait_file_follows_the_same_approval_rule_and_ignores_level()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L214",
+      "source_location": "L305",
       "id": "game_test_avatar_approval_test_portrait_file_follows_the_same_approval_rule_and_ignores_level",
-      "community": 124,
+      "community": 367,
       "norm_label": "test_portrait_file_follows_the_same_approval_rule_and_ignores_level()"
     },
     {
       "label": "test_pending_job_hides_paths_even_after_generation()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L236",
+      "source_location": "L327",
       "id": "game_test_avatar_approval_test_pending_job_hides_paths_even_after_generation",
-      "community": 51,
+      "community": 367,
       "norm_label": "test_pending_job_hides_paths_even_after_generation()"
     },
     {
       "label": "test_image_moderation_sends_text_and_image()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L258",
+      "source_location": "L349",
       "id": "game_test_avatar_approval_test_image_moderation_sends_text_and_image",
-      "community": 51,
+      "community": 124,
       "norm_label": "test_image_moderation_sends_text_and_image()"
     },
     {
       "label": "test_generation_marks_pending_selection()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L292",
+      "source_location": "L383",
       "id": "game_test_avatar_approval_test_generation_marks_pending_selection",
-      "community": 51,
+      "community": 124,
       "norm_label": "test_generation_marks_pending_selection()"
     },
     {
       "label": "test_review_is_idempotent_and_opposite_decision_conflicts()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L303",
+      "source_location": "L394",
       "id": "game_test_avatar_approval_test_review_is_idempotent_and_opposite_decision_conflicts",
-      "community": 51,
+      "community": 124,
       "norm_label": "test_review_is_idempotent_and_opposite_decision_conflicts()"
     },
     {
       "label": "test_approval_does_not_override_later_builtin_selection()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L333",
+      "source_location": "L424",
       "id": "game_test_avatar_approval_test_approval_does_not_override_later_builtin_selection",
-      "community": 51,
+      "community": 124,
       "norm_label": "test_approval_does_not_override_later_builtin_selection()"
     },
     {
       "label": "test_concurrent_opposite_reviews_cannot_overwrite_each_other()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L348",
+      "source_location": "L439",
       "id": "game_test_avatar_approval_test_concurrent_opposite_reviews_cannot_overwrite_each_other",
-      "community": 51,
+      "community": 124,
       "norm_label": "test_concurrent_opposite_reviews_cannot_overwrite_each_other()"
     },
     {
       "label": "test_review_queue_paginates_only_ready_pending_jobs()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L375",
+      "source_location": "L466",
       "id": "game_test_avatar_approval_test_review_queue_paginates_only_ready_pending_jobs",
-      "community": 51,
+      "community": 367,
       "norm_label": "test_review_queue_paginates_only_ready_pending_jobs()"
     },
     {
       "label": "test_all_worker_failures_release_quota_atomically()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L427",
+      "source_location": "L518",
       "id": "game_test_avatar_approval_test_all_worker_failures_release_quota_atomically",
-      "community": 51,
+      "community": 124,
       "norm_label": "test_all_worker_failures_release_quota_atomically()"
     },
     {
       "label": "test_worker_moderates_image_before_extraction_and_waits_for_review()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L448",
+      "source_location": "L539",
       "id": "game_test_avatar_approval_test_worker_moderates_image_before_extraction_and_waits_for_review",
-      "community": 51,
+      "community": 124,
       "norm_label": "test_worker_moderates_image_before_extraction_and_waits_for_review()"
     },
     {
       "label": "test_provider_error_process_releases_quota()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L500",
+      "source_location": "L591",
       "id": "game_test_avatar_approval_test_provider_error_process_releases_quota",
-      "community": 51,
+      "community": 124,
       "norm_label": "test_provider_error_process_releases_quota()"
     },
     {
       "label": "test_saved_sheet_recovery_requires_verified_image_moderation()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L522",
+      "source_location": "L613",
       "id": "game_test_avatar_approval_test_saved_sheet_recovery_requires_verified_image_moderation",
-      "community": 51,
+      "community": 124,
       "norm_label": "test_saved_sheet_recovery_requires_verified_image_moderation()"
     },
     {
       "label": "test_incomplete_or_flagged_moderation_proof_is_not_trusted()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L595",
+      "source_location": "L686",
       "id": "game_test_avatar_approval_test_incomplete_or_flagged_moderation_proof_is_not_trusted",
-      "community": 51,
+      "community": 124,
       "norm_label": "test_incomplete_or_flagged_moderation_proof_is_not_trusted()"
     },
     {
       "label": "test_timezone_reset_handles_daylight_saving()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L604",
+      "source_location": "L695",
       "id": "game_test_avatar_approval_test_timezone_reset_handles_daylight_saving",
-      "community": 51,
+      "community": 124,
       "norm_label": "test_timezone_reset_handles_daylight_saving()"
     },
     {
       "label": "test_daily_quota_uses_local_calendar_day()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L620",
+      "source_location": "L711",
       "id": "game_test_avatar_approval_test_daily_quota_uses_local_calendar_day",
-      "community": 124,
+      "community": 367,
       "norm_label": "test_daily_quota_uses_local_calendar_day()"
     },
     {
       "label": "test_manager_queue_review_and_student_file_permissions()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L652",
+      "source_location": "L743",
       "id": "game_test_avatar_approval_test_manager_queue_review_and_student_file_permissions",
-      "community": 51,
+      "community": 124,
       "norm_label": "test_manager_queue_review_and_student_file_permissions()"
     },
     {
@@ -31482,7 +31500,7 @@
       "source_file": "backend/tests/game/test_avatar_generation.py",
       "source_location": "L110",
       "id": "game_test_avatar_generation_avatar_job",
-      "community": 51,
+      "community": 124,
       "norm_label": "avatar_job()"
     },
     {
@@ -31671,7 +31689,7 @@
       "source_file": "backend/tests/game/test_avatar_generation.py",
       "source_location": "L640",
       "id": "game_test_avatar_generation_test_repeated_requests_reuse_a_pending_job_without_consuming_quota",
-      "community": 51,
+      "community": 124,
       "norm_label": "test_repeated_requests_reuse_a_pending_job_without_consuming_quota()"
     },
     {
@@ -31716,7 +31734,7 @@
       "source_file": "backend/tests/game/test_avatars.py",
       "source_location": "L1",
       "id": "backend_tests_game_test_avatars_py",
-      "community": 124,
+      "community": 367,
       "norm_label": "test_avatars.py"
     },
     {
@@ -31725,7 +31743,7 @@
       "source_file": "backend/tests/game/test_avatars.py",
       "source_location": "L10",
       "id": "game_test_avatars_test_check_daily_quota_empty",
-      "community": 124,
+      "community": 367,
       "norm_label": "test_check_daily_quota_empty()"
     },
     {
@@ -31734,7 +31752,7 @@
       "source_file": "backend/tests/game/test_avatars.py",
       "source_location": "L29",
       "id": "game_test_avatars_test_check_daily_quota_decrements",
-      "community": 124,
+      "community": 367,
       "norm_label": "test_check_daily_quota_decrements()"
     },
     {
@@ -31743,7 +31761,7 @@
       "source_file": "backend/tests/game/test_avatars.py",
       "source_location": "L51",
       "id": "game_test_avatars_test_non_billable_does_not_count",
-      "community": 124,
+      "community": 367,
       "norm_label": "test_non_billable_does_not_count()"
     },
     {
@@ -34713,7 +34731,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L1",
       "id": "prototypes_telegram_bot_py",
-      "community": 367,
+      "community": 105,
       "norm_label": "bot.py"
     },
     {
@@ -34722,7 +34740,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L35",
       "id": "telegram_bot_settings",
-      "community": 372,
+      "community": 105,
       "norm_label": "settings"
     },
     {
@@ -34731,7 +34749,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L63",
       "id": "telegram_bot_valid_token",
-      "community": 367,
+      "community": 105,
       "norm_label": "valid_token()"
     },
     {
@@ -34758,7 +34776,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L79",
       "id": "telegram_bot_attachment",
-      "community": 367,
+      "community": 105,
       "norm_label": "attachment"
     },
     {
@@ -34767,7 +34785,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L84",
       "id": "telegram_bot_user",
-      "community": 367,
+      "community": 105,
       "norm_label": "user"
     },
     {
@@ -34776,7 +34794,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L88",
       "id": "telegram_bot_chat",
-      "community": 367,
+      "community": 105,
       "norm_label": "chat"
     },
     {
@@ -34785,7 +34803,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L93",
       "id": "telegram_bot_message",
-      "community": 367,
+      "community": 105,
       "norm_label": "message"
     },
     {
@@ -34794,7 +34812,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L102",
       "id": "telegram_bot_update",
-      "community": 367,
+      "community": 105,
       "norm_label": "update"
     },
     {
@@ -34803,7 +34821,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L107",
       "id": "telegram_bot_apifile",
-      "community": 367,
+      "community": 105,
       "norm_label": "apifile"
     },
     {
@@ -34812,7 +34830,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L112",
       "id": "telegram_bot_retryparameters",
-      "community": 367,
+      "community": 105,
       "norm_label": "retryparameters"
     },
     {
@@ -34821,7 +34839,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L116",
       "id": "telegram_bot_envelope",
-      "community": 367,
+      "community": 105,
       "norm_label": "envelope"
     },
     {
@@ -34830,7 +34848,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L123",
       "id": "telegram_bot_identity",
-      "community": 367,
+      "community": 105,
       "norm_label": "identity"
     },
     {
@@ -34839,7 +34857,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L128",
       "id": "telegram_bot_webhook",
-      "community": 367,
+      "community": 105,
       "norm_label": "webhook"
     },
     {
@@ -34911,7 +34929,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L255",
       "id": "telegram_bot_disposition",
-      "community": 367,
+      "community": 105,
       "norm_label": "disposition"
     },
     {
@@ -34920,7 +34938,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L259",
       "id": "telegram_bot_stream",
-      "community": 367,
+      "community": 105,
       "norm_label": "stream"
     },
     {
@@ -34929,7 +34947,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L265",
       "id": "telegram_bot_format",
-      "community": 367,
+      "community": 105,
       "norm_label": "format"
     },
     {
@@ -35037,7 +35055,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L574",
       "id": "telegram_bot_main",
-      "community": 372,
+      "community": 105,
       "norm_label": "main()"
     },
     {
@@ -37278,7 +37296,7 @@
       "source_file": "prototypes/pwa/src/main.tsx",
       "source_location": "L1",
       "id": "prototypes_pwa_src_main_tsx",
-      "community": 4,
+      "community": 27,
       "norm_label": "main.tsx"
     },
     {
@@ -38889,7 +38907,7 @@
       "source_file": "prototypes/files/app.py",
       "source_location": "L1",
       "id": "prototypes_files_app_py",
-      "community": 372,
+      "community": 105,
       "norm_label": "app.py"
     },
     {
@@ -38898,7 +38916,7 @@
       "source_file": "prototypes/files/app.py",
       "source_location": "L13",
       "id": "files_app_settings",
-      "community": 372,
+      "community": 105,
       "norm_label": "settings"
     },
     {
@@ -38907,7 +38925,7 @@
       "source_file": "prototypes/files/app.py",
       "source_location": "L29",
       "id": "files_app_require_generated_password",
-      "community": 372,
+      "community": 105,
       "norm_label": "require_generated_password()"
     },
     {
@@ -38916,7 +38934,7 @@
       "source_file": "prototypes/files/app.py",
       "source_location": "L35",
       "id": "files_app_create_app",
-      "community": 372,
+      "community": 105,
       "norm_label": "create_app()"
     },
     {
@@ -42579,7 +42597,7 @@
       "source_file": "worker/generate_avatar.py",
       "source_location": "L108",
       "id": "worker_generate_avatar_imageentry",
-      "community": 157,
+      "community": 367,
       "norm_label": "imageentry"
     },
     {
@@ -42588,7 +42606,7 @@
       "source_file": "worker/generate_avatar.py",
       "source_location": "L112",
       "id": "worker_generate_avatar_imagereply",
-      "community": 157,
+      "community": 367,
       "norm_label": "imagereply"
     },
     {
@@ -42597,7 +42615,7 @@
       "source_file": "worker/generate_avatar.py",
       "source_location": "L116",
       "id": "worker_generate_avatar_moderationentry",
-      "community": 157,
+      "community": 367,
       "norm_label": "moderationentry"
     },
     {
@@ -42606,7 +42624,7 @@
       "source_file": "worker/generate_avatar.py",
       "source_location": "L120",
       "id": "worker_generate_avatar_moderationreply",
-      "community": 157,
+      "community": 367,
       "norm_label": "moderationreply"
     },
     {
@@ -42615,7 +42633,7 @@
       "source_file": "worker/generate_avatar.py",
       "source_location": "L124",
       "id": "worker_generate_avatar_imagemoderationproof",
-      "community": 157,
+      "community": 367,
       "norm_label": "imagemoderationproof"
     },
     {
@@ -42624,7 +42642,7 @@
       "source_file": "worker/generate_avatar.py",
       "source_location": "L131",
       "id": "worker_generate_avatar_lease",
-      "community": 157,
+      "community": 367,
       "norm_label": "lease"
     },
     {
@@ -42966,7 +42984,7 @@
       "source_file": "worker/telegram.py",
       "source_location": "L1",
       "id": "worker_telegram_py",
-      "community": 198,
+      "community": 184,
       "norm_label": "telegram.py"
     },
     {
@@ -42975,7 +42993,7 @@
       "source_file": "worker/telegram.py",
       "source_location": "L81",
       "id": "worker_telegram_healthy",
-      "community": 198,
+      "community": 184,
       "norm_label": "healthy()"
     },
     {
@@ -42984,7 +43002,7 @@
       "source_file": "worker/telegram.py",
       "source_location": "L95",
       "id": "worker_telegram_cycle",
-      "community": 198,
+      "community": 184,
       "norm_label": "cycle()"
     },
     {
@@ -42993,7 +43011,7 @@
       "source_file": "worker/telegram.py",
       "source_location": "L150",
       "id": "worker_telegram_main",
-      "community": 198,
+      "community": 184,
       "norm_label": "main()"
     },
     {
@@ -43990,7 +44008,7 @@
       "label": "Mobile installation",
       "file_type": "document",
       "source_file": "docs/PRODUCT_BRIEF.md",
-      "source_location": "L159",
+      "source_location": "L161",
       "id": "docs_product_brief_mobile_installation",
       "community": 76,
       "norm_label": "mobile installation"
@@ -43999,7 +44017,7 @@
       "label": "Exercises",
       "file_type": "document",
       "source_file": "docs/PRODUCT_BRIEF.md",
-      "source_location": "L166",
+      "source_location": "L168",
       "id": "docs_product_brief_exercises",
       "community": 76,
       "norm_label": "exercises"
@@ -44008,7 +44026,7 @@
       "label": "Files",
       "file_type": "document",
       "source_file": "docs/PRODUCT_BRIEF.md",
-      "source_location": "L172",
+      "source_location": "L174",
       "id": "docs_product_brief_files",
       "community": 76,
       "norm_label": "files"
@@ -44017,7 +44035,7 @@
       "label": "Listening journal",
       "file_type": "document",
       "source_file": "docs/PRODUCT_BRIEF.md",
-      "source_location": "L178",
+      "source_location": "L180",
       "id": "docs_product_brief_listening_journal",
       "community": 76,
       "norm_label": "listening journal"
@@ -44026,7 +44044,7 @@
       "label": "OMR (part of MVP)",
       "file_type": "document",
       "source_file": "docs/PRODUCT_BRIEF.md",
-      "source_location": "L184",
+      "source_location": "L186",
       "id": "docs_product_brief_omr_part_of_mvp",
       "community": 76,
       "norm_label": "omr (part of mvp)"
@@ -44035,7 +44053,7 @@
       "label": "Photo quality requirements",
       "file_type": "document",
       "source_file": "docs/PRODUCT_BRIEF.md",
-      "source_location": "L195",
+      "source_location": "L197",
       "id": "docs_product_brief_photo_quality_requirements",
       "community": 76,
       "norm_label": "photo quality requirements"
@@ -44044,7 +44062,7 @@
       "label": "Spoken notes",
       "file_type": "document",
       "source_file": "docs/PRODUCT_BRIEF.md",
-      "source_location": "L205",
+      "source_location": "L207",
       "id": "docs_product_brief_spoken_notes",
       "community": 76,
       "norm_label": "spoken notes"
@@ -44053,7 +44071,7 @@
       "label": "Telegram audio import",
       "file_type": "document",
       "source_file": "docs/PRODUCT_BRIEF.md",
-      "source_location": "L214",
+      "source_location": "L216",
       "id": "docs_product_brief_telegram_audio_import",
       "community": 76,
       "norm_label": "telegram audio import"
@@ -44215,7 +44233,7 @@
       "label": "Custom avatar image quality",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L35",
+      "source_location": "L37",
       "id": "docs_status_custom_avatar_image_quality",
       "community": 12,
       "norm_label": "custom avatar image quality"
@@ -44224,7 +44242,7 @@
       "label": "Avatar generation incident investigation",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L49",
+      "source_location": "L51",
       "id": "docs_status_avatar_generation_incident_investigation",
       "community": 12,
       "norm_label": "avatar generation incident investigation"
@@ -44233,7 +44251,7 @@
       "label": "Game-only player role",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L72",
+      "source_location": "L74",
       "id": "docs_status_game_only_player_role",
       "community": 12,
       "norm_label": "game-only player role"
@@ -44242,7 +44260,7 @@
       "label": "Post-round prize collection",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L95",
+      "source_location": "L97",
       "id": "docs_status_post_round_prize_collection",
       "community": 12,
       "norm_label": "post-round prize collection"
@@ -44251,7 +44269,7 @@
       "label": "Packaged prize artwork",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L108",
+      "source_location": "L110",
       "id": "docs_status_packaged_prize_artwork",
       "community": 12,
       "norm_label": "packaged prize artwork"
@@ -44260,7 +44278,7 @@
       "label": "Prize extraction CI repair",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L127",
+      "source_location": "L129",
       "id": "docs_status_prize_extraction_ci_repair",
       "community": 12,
       "norm_label": "prize extraction ci repair"
@@ -44269,7 +44287,7 @@
       "label": "Game fixes, prizes, and avatar approval",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L136",
+      "source_location": "L138",
       "id": "docs_status_game_fixes_prizes_and_avatar_approval",
       "community": 12,
       "norm_label": "game fixes, prizes, and avatar approval"
@@ -44278,7 +44296,7 @@
       "label": "Failed release 37204983176",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L193",
+      "source_location": "L195",
       "id": "docs_status_failed_release_37204983176",
       "community": 12,
       "norm_label": "failed release 37204983176"
@@ -44287,7 +44305,7 @@
       "label": "Game statistics and season reset",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L228",
+      "source_location": "L230",
       "id": "docs_status_game_statistics_and_season_reset",
       "community": 12,
       "norm_label": "game statistics and season reset"
@@ -44296,7 +44314,7 @@
       "label": "Main integration",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L279",
+      "source_location": "L281",
       "id": "docs_status_main_integration",
       "community": 12,
       "norm_label": "main integration"
@@ -44305,7 +44323,7 @@
       "label": "Seven-note rounds and assistance bonuses",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L292",
+      "source_location": "L294",
       "id": "docs_status_seven_note_rounds_and_assistance_bonuses",
       "community": 12,
       "norm_label": "seven-note rounds and assistance bonuses"
@@ -44314,7 +44332,7 @@
       "label": "Persistent custom avatar generation",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L343",
+      "source_location": "L345",
       "id": "docs_status_persistent_custom_avatar_generation",
       "community": 12,
       "norm_label": "persistent custom avatar generation"
@@ -44323,7 +44341,7 @@
       "label": "Sampled piano and game setup",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L397",
+      "source_location": "L399",
       "id": "docs_status_sampled_piano_and_game_setup",
       "community": 12,
       "norm_label": "sampled piano and game setup"
@@ -44332,7 +44350,7 @@
       "label": "Game note playback",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L446",
+      "source_location": "L448",
       "id": "docs_status_game_note_playback",
       "community": 12,
       "norm_label": "game note playback"
@@ -44341,7 +44359,7 @@
       "label": "Standard game clefs",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L477",
+      "source_location": "L479",
       "id": "docs_status_standard_game_clefs",
       "community": 12,
       "norm_label": "standard game clefs"
@@ -44350,7 +44368,7 @@
       "label": "Circular game shortcut",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L503",
+      "source_location": "L505",
       "id": "docs_status_circular_game_shortcut",
       "community": 12,
       "norm_label": "circular game shortcut"
@@ -44359,7 +44377,7 @@
       "label": "Game first-entry repair",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L531",
+      "source_location": "L533",
       "id": "docs_status_game_first_entry_repair",
       "community": 12,
       "norm_label": "game first-entry repair"
@@ -44368,7 +44386,7 @@
       "label": "Game avatar artwork",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L564",
+      "source_location": "L566",
       "id": "docs_status_game_avatar_artwork",
       "community": 12,
       "norm_label": "game avatar artwork"
@@ -44377,7 +44395,7 @@
       "label": "Appearance settings",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L616",
+      "source_location": "L618",
       "id": "docs_status_appearance_settings",
       "community": 31,
       "norm_label": "appearance settings"
@@ -44386,7 +44404,7 @@
       "label": "CI follow-up: run 37008189410",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L658",
+      "source_location": "L660",
       "id": "docs_status_ci_follow_up_run_37008189410",
       "community": 12,
       "norm_label": "ci follow-up: run 37008189410"
@@ -44395,7 +44413,7 @@
       "label": "Student original image and score",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L679",
+      "source_location": "L681",
       "id": "docs_status_student_original_image_and_score",
       "community": 12,
       "norm_label": "student original image and score"
@@ -44404,7 +44422,7 @@
       "label": "Material Design baseline",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L698",
+      "source_location": "L700",
       "id": "docs_status_material_design_baseline",
       "community": 12,
       "norm_label": "material design baseline"
@@ -44413,7 +44431,7 @@
       "label": "Responsive layout follow-up",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L708",
+      "source_location": "L710",
       "id": "docs_status_responsive_layout_follow_up",
       "community": 12,
       "norm_label": "responsive layout follow-up"
@@ -44422,7 +44440,7 @@
       "label": "Installation and usability follow-up",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L736",
+      "source_location": "L738",
       "id": "docs_status_installation_and_usability_follow_up",
       "community": 12,
       "norm_label": "installation and usability follow-up"
@@ -44431,7 +44449,7 @@
       "label": "Password policy follow-up",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L771",
+      "source_location": "L773",
       "id": "docs_status_password_policy_follow_up",
       "community": 12,
       "norm_label": "password policy follow-up"
@@ -44440,7 +44458,7 @@
       "label": "Previous PHASE 7 completion",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L783",
+      "source_location": "L785",
       "id": "docs_status_previous_phase_7_completion",
       "community": 12,
       "norm_label": "previous phase 7 completion"
@@ -44449,7 +44467,7 @@
       "label": "PHASE 7 implementation",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L791",
+      "source_location": "L793",
       "id": "docs_status_phase_7_implementation",
       "community": 12,
       "norm_label": "phase 7 implementation"
@@ -44458,7 +44476,7 @@
       "label": "PHASE 7 validation and deployment boundary",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L809",
+      "source_location": "L811",
       "id": "docs_status_phase_7_validation_and_deployment_boundary",
       "community": 12,
       "norm_label": "phase 7 validation and deployment boundary"
@@ -44467,7 +44485,7 @@
       "label": "Previous PHASE 6 acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L851",
+      "source_location": "L853",
       "id": "docs_status_previous_phase_6_acceptance",
       "community": 12,
       "norm_label": "previous phase 6 acceptance"
@@ -44476,7 +44494,7 @@
       "label": "PHASE 6 follow-up fixes after owner acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L862",
+      "source_location": "L864",
       "id": "docs_status_phase_6_follow_up_fixes_after_owner_acceptance",
       "community": 12,
       "norm_label": "phase 6 follow-up fixes after owner acceptance"
@@ -44485,7 +44503,7 @@
       "label": "Completed PHASE 7 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L910",
+      "source_location": "L912",
       "id": "docs_status_completed_phase_7_plan",
       "community": 29,
       "norm_label": "completed phase 7 plan"
@@ -44494,7 +44512,7 @@
       "label": "Separate Material Design feature",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L923",
+      "source_location": "L925",
       "id": "docs_status_separate_material_design_feature",
       "community": 365,
       "norm_label": "separate material design feature"
@@ -44503,7 +44521,7 @@
       "label": "Completed Material Design checklist",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L963",
+      "source_location": "L965",
       "id": "docs_status_completed_material_design_checklist",
       "community": 365,
       "norm_label": "completed material design checklist"
@@ -44512,7 +44530,7 @@
       "label": "Completed PHASE 6 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L976",
+      "source_location": "L978",
       "id": "docs_status_completed_phase_6_plan",
       "community": 29,
       "norm_label": "completed phase 6 plan"
@@ -44521,7 +44539,7 @@
       "label": "Completed PHASE 5 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L988",
+      "source_location": "L990",
       "id": "docs_status_completed_phase_5_plan",
       "community": 29,
       "norm_label": "completed phase 5 plan"
@@ -44530,7 +44548,7 @@
       "label": "Completed PHASE 4 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L997",
+      "source_location": "L999",
       "id": "docs_status_completed_phase_4_plan",
       "community": 29,
       "norm_label": "completed phase 4 plan"
@@ -44539,7 +44557,7 @@
       "label": "Completed PHASE 3 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1004",
+      "source_location": "L1006",
       "id": "docs_status_completed_phase_3_plan",
       "community": 29,
       "norm_label": "completed phase 3 plan"
@@ -44548,7 +44566,7 @@
       "label": "Completed PHASE 2 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1014",
+      "source_location": "L1016",
       "id": "docs_status_completed_phase_2_plan",
       "community": 29,
       "norm_label": "completed phase 2 plan"
@@ -44557,7 +44575,7 @@
       "label": "Completed PHASE 1 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1023",
+      "source_location": "L1025",
       "id": "docs_status_completed_phase_1_plan",
       "community": 29,
       "norm_label": "completed phase 1 plan"
@@ -44566,7 +44584,7 @@
       "label": "Completed PHASE 0 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1034",
+      "source_location": "L1036",
       "id": "docs_status_completed_phase_0_plan",
       "community": 29,
       "norm_label": "completed phase 0 plan"
@@ -44575,7 +44593,7 @@
       "label": "Completed PHASE 0.5 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1047",
+      "source_location": "L1049",
       "id": "docs_status_completed_phase_0_5_plan",
       "community": 29,
       "norm_label": "completed phase 0.5 plan"
@@ -44584,7 +44602,7 @@
       "label": "Done",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1057",
+      "source_location": "L1059",
       "id": "docs_status_done",
       "community": 29,
       "norm_label": "done"
@@ -44593,7 +44611,7 @@
       "label": "PHASE 0.5 deployment record",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1338",
+      "source_location": "L1340",
       "id": "docs_status_phase_0_5_deployment_record",
       "community": 29,
       "norm_label": "phase 0.5 deployment record"
@@ -44602,7 +44620,7 @@
       "label": "Next step",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1366",
+      "source_location": "L1368",
       "id": "docs_status_next_step",
       "community": 29,
       "norm_label": "next step"
@@ -44611,7 +44629,7 @@
       "label": "PHASE 0 boundaries",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1374",
+      "source_location": "L1376",
       "id": "docs_status_phase_0_boundaries",
       "community": 29,
       "norm_label": "phase 0 boundaries"
@@ -44620,7 +44638,7 @@
       "label": "Acceptance details",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1385",
+      "source_location": "L1387",
       "id": "docs_status_acceptance_details",
       "community": 29,
       "norm_label": "acceptance details"
@@ -44629,7 +44647,7 @@
       "label": "Final PHASE 1 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1390",
+      "source_location": "L1392",
       "id": "docs_status_final_phase_1_manual_acceptance",
       "community": 29,
       "norm_label": "final phase 1 manual acceptance"
@@ -44638,7 +44656,7 @@
       "label": "Final PHASE 2 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1402",
+      "source_location": "L1404",
       "id": "docs_status_final_phase_2_manual_acceptance",
       "community": 29,
       "norm_label": "final phase 2 manual acceptance"
@@ -44647,7 +44665,7 @@
       "label": "Final PHASE 3 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1412",
+      "source_location": "L1414",
       "id": "docs_status_final_phase_3_manual_acceptance",
       "community": 29,
       "norm_label": "final phase 3 manual acceptance"
@@ -44656,7 +44674,7 @@
       "label": "Final PHASE 4 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1422",
+      "source_location": "L1424",
       "id": "docs_status_final_phase_4_manual_acceptance",
       "community": 29,
       "norm_label": "final phase 4 manual acceptance"
@@ -44665,7 +44683,7 @@
       "label": "Final PHASE 5 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1432",
+      "source_location": "L1434",
       "id": "docs_status_final_phase_5_manual_acceptance",
       "community": 29,
       "norm_label": "final phase 5 manual acceptance"
@@ -44674,7 +44692,7 @@
       "label": "Manual checks the owner must do",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1441",
+      "source_location": "L1443",
       "id": "docs_status_manual_checks_the_owner_must_do",
       "community": 29,
       "norm_label": "manual checks the owner must do"
@@ -44683,7 +44701,7 @@
       "label": "Known issues",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1464",
+      "source_location": "L1466",
       "id": "docs_status_known_issues",
       "community": 29,
       "norm_label": "known issues"
@@ -45340,7 +45358,7 @@
       "label": "Error responses",
       "file_type": "document",
       "source_file": "docs/developer/api.md",
-      "source_location": "L236",
+      "source_location": "L237",
       "id": "developer_api_error_responses",
       "community": 125,
       "norm_label": "error responses"
@@ -45349,7 +45367,7 @@
       "label": "Authentication and authorization",
       "file_type": "document",
       "source_file": "docs/developer/api.md",
-      "source_location": "L257",
+      "source_location": "L258",
       "id": "developer_api_authentication_and_authorization",
       "community": 125,
       "norm_label": "authentication and authorization"
@@ -45358,7 +45376,7 @@
       "label": "code:json ({)",
       "file_type": "document",
       "source_file": "docs/developer/api.md",
-      "source_location": "L286",
+      "source_location": "L287",
       "id": "developer_api_codeblock_1",
       "community": 125,
       "norm_label": "code:json ({)"
@@ -45367,7 +45385,7 @@
       "label": "Exercises and files",
       "file_type": "document",
       "source_file": "docs/developer/api.md",
-      "source_location": "L318",
+      "source_location": "L319",
       "id": "developer_api_exercises_and_files",
       "community": 125,
       "norm_label": "exercises and files"
@@ -45376,7 +45394,7 @@
       "label": "Student listening and manager journal",
       "file_type": "document",
       "source_file": "docs/developer/api.md",
-      "source_location": "L355",
+      "source_location": "L356",
       "id": "developer_api_student_listening_and_manager_journal",
       "community": 125,
       "norm_label": "student listening and manager journal"
@@ -45385,7 +45403,7 @@
       "label": "Manager Telegram imports",
       "file_type": "document",
       "source_file": "docs/developer/api.md",
-      "source_location": "L382",
+      "source_location": "L383",
       "id": "developer_api_manager_telegram_imports",
       "community": 125,
       "norm_label": "manager telegram imports"
@@ -46708,7 +46726,7 @@
       "label": "One-sheet generation",
       "file_type": "document",
       "source_file": "docs/developer/game-avatars.md",
-      "source_location": "L357",
+      "source_location": "L358",
       "id": "developer_game_avatars_one_sheet_generation",
       "community": 130,
       "norm_label": "one-sheet generation"
@@ -46717,7 +46735,7 @@
       "label": "Face icon (portrait)",
       "file_type": "document",
       "source_file": "docs/developer/game-avatars.md",
-      "source_location": "L386",
+      "source_location": "L387",
       "id": "developer_game_avatars_face_icon_portrait",
       "community": 130,
       "norm_label": "face icon (portrait)"
@@ -46726,7 +46744,7 @@
       "label": "Manager approval",
       "file_type": "document",
       "source_file": "docs/developer/game-avatars.md",
-      "source_location": "L401",
+      "source_location": "L402",
       "id": "developer_game_avatars_manager_approval",
       "community": 130,
       "norm_label": "manager approval"
@@ -102173,6 +102191,17 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "backend/app/game/api/avatars.py",
+      "source_location": "L234",
+      "weight": 1.0,
+      "source": "api_avatars_saved_avatars",
+      "target": "services_avatars_can_discard_avatar"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L149",
       "weight": 1.0,
       "source": "api_avatars_recent_jobs",
@@ -102188,6 +102217,17 @@
       "weight": 1.0,
       "source": "api_avatars_recent_jobs",
       "target": "services_avatars_generation_estimate"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/app/game/api/avatars.py",
+      "source_location": "L260",
+      "weight": 1.0,
+      "source": "api_avatars_recent_jobs",
+      "target": "services_avatars_can_discard_avatar"
     },
     {
       "relation": "calls",
@@ -103417,6 +103457,17 @@
       "context": "call",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
+      "source_file": "backend/tests/game/test_avatar_approval.py",
+      "source_location": "L221",
+      "weight": 1.0,
+      "source": "game_test_avatar_approval_test_profile_owner_cannot_delete_avatar_created_by_manager",
+      "target": "services_avatars_start_avatar_job"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
       "source_file": "backend/tests/game/test_avatar_generation.py",
       "source_location": "L65",
       "weight": 1.0,
@@ -103630,6 +103681,28 @@
       "source_location": "L110",
       "weight": 1.0,
       "source": "game_test_avatar_approval_test_approved_avatar_is_shared_but_unapproved_avatar_stays_private",
+      "target": "services_avatars_review_avatar"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/tests/game/test_avatar_approval.py",
+      "source_location": "L227",
+      "weight": 1.0,
+      "source": "game_test_avatar_approval_test_profile_owner_cannot_delete_avatar_created_by_manager",
+      "target": "services_avatars_review_avatar"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/tests/game/test_avatar_approval.py",
+      "source_location": "L273",
+      "weight": 1.0,
+      "source": "game_test_avatar_approval_test_manager_can_delete_avatar_created_by_another_account",
       "target": "services_avatars_review_avatar"
     },
     {
@@ -112472,6 +112545,26 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/game/test_avatar_approval.py",
+      "source_location": "L197",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "backend_tests_game_test_avatar_approval_py",
+      "target": "game_test_avatar_approval_test_profile_owner_cannot_delete_avatar_created_by_manager"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/game/test_avatar_approval.py",
+      "source_location": "L264",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "backend_tests_game_test_avatar_approval_py",
+      "target": "game_test_avatar_approval_test_manager_can_delete_avatar_created_by_another_account"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L99",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -112647,6 +112740,28 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "game_test_avatar_approval_test_approved_avatar_is_shared_but_unapproved_avatar_stays_private",
+      "target": "game_test_avatar_approval_make_ready"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/game/test_avatar_approval.py",
+      "source_location": "L225",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "game_test_avatar_approval_test_profile_owner_cannot_delete_avatar_created_by_manager",
+      "target": "game_test_avatar_approval_make_ready"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/game/test_avatar_approval.py",
+      "source_location": "L271",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "game_test_avatar_approval_test_manager_can_delete_avatar_created_by_another_account",
       "target": "game_test_avatar_approval_make_ready"
     },
     {
@@ -140032,5 +140147,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "3756b89a3288398be7c7c6a224f5e25aa32f3b2c"
+  "built_at_commit": "6281cf3e7b0b97bbd9c89912f22b1680a5a6352c"
 }

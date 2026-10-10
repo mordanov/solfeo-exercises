@@ -138,19 +138,8 @@ def authorized_job(
     return job
 
 
-def can_discard_avatar(
-    session: Session, job: CustomAvatar, account_id: int, manager: bool
-) -> bool:
-    if manager or job.account_id == account_id:
-        return True
-    return (
-        session.scalar(
-            select(Player.id).where(
-                Player.id == job.player_id, Player.account_id == account_id
-            )
-        )
-        is not None
-    )
+def can_discard_avatar(job: CustomAvatar, account_id: int, manager: bool) -> bool:
+    return manager or job.account_id == account_id
 
 
 def generation_estimate(session: Session, settings: Settings) -> int:
@@ -388,7 +377,7 @@ def discard_avatar(
     session: Session, job_id: int, account_id: int, manager: bool
 ) -> None:
     job = authorized_job(session, job_id, account_id, manager)
-    if not can_discard_avatar(session, job, account_id, manager):
+    if not can_discard_avatar(job, account_id, manager):
         raise ServiceError("JOB_NOT_FOUND", 404)
     job, player = _lock_job_and_player(session, job)
     if job.status == "pending":

@@ -193,6 +193,97 @@ async def test_approved_avatar_is_shared_but_unapproved_avatar_stays_private(
         assert session.get(CustomAvatar, job_id) is not None
 
 
+@pytest.mark.anyio
+async def test_profile_owner_cannot_delete_avatar_created_by_manager(
+    client: httpx.AsyncClient,
+    database: Database,
+    settings: Settings,
+    review_job: tuple[int, int, int],
+) -> None:
+    _, _, manager_id = review_job
+    with database.session() as session:
+        profile_owner = create_user(
+            session,
+            settings,
+            username="avatar-profile-owner",
+            password="synthetic-avatar-password",
+            first_name="Profile",
+            last_name="Owner",
+            role="student",
+            must_change_password=False,
+        )
+        with session.begin():
+            player = Player(
+                account_id=profile_owner.id, name="Profile", avatar_animal="panda"
+            )
+            session.add(player)
+            session.flush()
+            job = start_avatar_job(
+                session, manager_id, player.id, "Manager-created avatar", settings
+            )
+            player_id, job_id = player.id, job.id
+    make_ready(database, job_id, settings)
+    with database.session() as session, session.begin():
+        review_avatar(session, job_id, manager_id, "approved", settings)
+
+    login = await client.post(
+        "/api/auth/login",
+        json={
+            "username": "avatar-profile-owner",
+            "password": "synthetic-avatar-password",
+        },
+    )
+    assert login.status_code == 200
+    client.headers["X-CSRF-Token"] = login.json()["csrf_token"]
+    saved = await client.get(f"/api/game/avatars/saved?player_id={player_id}")
+    assert saved.status_code == 200
+    assert saved.json()["jobs"][0]["can_discard"] is False
+    status = await client.get(f"/api/game/avatars/{job_id}/status")
+    assert status.status_code == 200
+    assert status.json()["can_discard"] is False
+    deletion = await client.delete(f"/api/game/avatars/{job_id}")
+    assert deletion.status_code == 404
+    assert deletion.json()["error"] == "JOB_NOT_FOUND"
+    with database.session() as session:
+        assert session.get(CustomAvatar, job_id) is not None
+
+    client.cookies.clear()
+    manager_login = await client.post(
+        "/api/auth/login",
+        json={"username": "review-manager", "password": "synthetic-password"},
+    )
+    assert manager_login.status_code == 200
+    client.headers["X-CSRF-Token"] = manager_login.json()["csrf_token"]
+    manager_delete = await client.delete(f"/api/game/avatars/{job_id}")
+    assert manager_delete.status_code == 200
+    with database.session() as session:
+        assert session.get(CustomAvatar, job_id) is None
+
+
+@pytest.mark.anyio
+async def test_manager_can_delete_avatar_created_by_another_account(
+    client: httpx.AsyncClient,
+    database: Database,
+    settings: Settings,
+    review_job: tuple[int, int, int],
+) -> None:
+    job_id, _, manager_id = review_job
+    make_ready(database, job_id, settings)
+    with database.session() as session, session.begin():
+        review_avatar(session, job_id, manager_id, "approved", settings)
+
+    login = await client.post(
+        "/api/auth/login",
+        json={"username": "review-manager", "password": "synthetic-password"},
+    )
+    assert login.status_code == 200
+    client.headers["X-CSRF-Token"] = login.json()["csrf_token"]
+    deletion = await client.delete(f"/api/game/avatars/{job_id}")
+    assert deletion.status_code == 200
+    with database.session() as session:
+        assert session.get(CustomAvatar, job_id) is None
+
+
 def synthetic_sheet() -> bytes:
     image = Image.new("RGBA", (1024, 1536))
     draw = ImageDraw.Draw(image)
