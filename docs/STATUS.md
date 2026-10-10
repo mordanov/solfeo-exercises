@@ -24,7 +24,8 @@ The worker segments cells from separator positions and removes the lines from ea
 A persisted layout marker enforces strict segmentation after worker restarts.
 Saved sheets without the marker retain the legacy equal-cell fallback.
 The prompt preserves the existing level and emotion mapping.
-All 25 avatar generation tests pass, as do documentation, type, lint, and format checks.
+Avatar moderation test fixtures now include the required separator lines.
+All 353 backend tests pass locally, and all 5 jobs pass in CI run `38065767340`.
 
 ### Avatar generation incident investigation
 
