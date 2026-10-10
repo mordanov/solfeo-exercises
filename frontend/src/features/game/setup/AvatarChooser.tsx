@@ -158,26 +158,54 @@ export default function AvatarChooser({
               }}
             >
               {saved.data.jobs.map((job) => (
-                <Button
+                <Box
                   key={job.id}
-                  aria-label={t("game.avatar.savedChoice", {
-                    number: number.format(job.id),
-                  })}
-                  disabled={busy}
-                  onClick={() => {
-                    setJobId(job.id);
-                    setCustom(true);
-                    setPreviewLevel(1);
-                  }}
+                  sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}
                 >
-                  <AvatarImage
-                    animalId="custom"
-                    customAvatarId={job.id}
-                    portrait
-                    reviewStatus={isManager ? undefined : job.review_status}
-                    size={72}
-                  />
-                </Button>
+                  <Button
+                    aria-label={t("game.avatar.savedChoice", {
+                      number: number.format(job.id),
+                    })}
+                    disabled={busy}
+                    onClick={() => {
+                      setJobId(job.id);
+                      setCustom(true);
+                      setPreviewLevel(1);
+                    }}
+                  >
+                    <AvatarImage
+                      animalId="custom"
+                      customAvatarId={job.id}
+                      portrait
+                      reviewStatus={isManager ? undefined : job.review_status}
+                      size={72}
+                    />
+                  </Button>
+                  {job.can_discard && (
+                    <Button
+                      size="small"
+                      aria-label={t("game.avatar.deleteSaved", {
+                        number: number.format(job.id),
+                      })}
+                      disabled={busy}
+                      onClick={() =>
+                        discard.mutate(
+                          { csrf, jobId: job.id },
+                          {
+                            onSuccess: () => {
+                              if (jobId === job.id) {
+                                setJobId(null);
+                                setCustom(false);
+                              }
+                            },
+                          },
+                        )
+                      }
+                    >
+                      {t("game.avatar.delete")}
+                    </Button>
+                  )}
+                </Box>
               ))}
             </Box>
             {saved.data.total > 12 && (
@@ -405,12 +433,13 @@ export default function AvatarChooser({
                         onSuccess: async () => {
                           await jobs.refetch();
                           setJobId(null);
+                          setCustom(false);
                         },
                       },
                     )
                   }
                 >
-                  {t("game.avatar.discard")}
+                  {t("game.avatar.delete")}
                 </Button>
               )}
           </Box>

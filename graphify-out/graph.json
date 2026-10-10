@@ -5175,7 +5175,7 @@
       "source_file": "frontend/src/appearance.ts",
       "source_location": "L11",
       "id": "src_appearance_defaultappearance",
-      "community": 4,
+      "community": 27,
       "norm_label": "defaultappearance"
     },
     {
@@ -5193,7 +5193,7 @@
       "source_file": "frontend/src/appearance.ts",
       "source_location": "L23",
       "id": "src_appearance_iscolorscheme",
-      "community": 4,
+      "community": 28,
       "norm_label": "iscolorscheme()"
     },
     {
@@ -5202,7 +5202,7 @@
       "source_file": "frontend/src/appearance.ts",
       "source_location": "L26",
       "id": "src_appearance_isuifont",
-      "community": 4,
+      "community": 28,
       "norm_label": "isuifont()"
     },
     {
@@ -5211,7 +5211,7 @@
       "source_file": "frontend/src/appearance.ts",
       "source_location": "L29",
       "id": "src_appearance_isuifontsize",
-      "community": 4,
+      "community": 28,
       "norm_label": "isuifontsize()"
     },
     {
@@ -5220,7 +5220,7 @@
       "source_file": "frontend/src/appearance.ts",
       "source_location": "L32",
       "id": "src_appearance_sameappearance",
-      "community": 4,
+      "community": 6,
       "norm_label": "sameappearance()"
     },
     {
@@ -5265,7 +5265,7 @@
       "source_file": "prototypes/pwa/src/App.tsx",
       "source_location": "L238",
       "id": "src_app_app",
-      "community": 70,
+      "community": 4,
       "norm_label": "app()"
     },
     {
@@ -5310,7 +5310,7 @@
       "source_file": "frontend/src/main.tsx",
       "source_location": "L1",
       "id": "frontend_src_main_tsx",
-      "community": 27,
+      "community": 4,
       "norm_label": "main.tsx"
     },
     {
@@ -5319,7 +5319,7 @@
       "source_file": "prototypes/pwa/src/main.tsx",
       "source_location": "L5",
       "id": "src_main_root",
-      "community": 70,
+      "community": 4,
       "norm_label": "root"
     },
     {
@@ -5328,7 +5328,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_app_test_tsx",
-      "community": 27,
+      "community": 4,
       "norm_label": "app.test.tsx"
     },
     {
@@ -5337,7 +5337,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L15",
       "id": "src_app_test_mockhealth",
-      "community": 27,
+      "community": 4,
       "norm_label": "mockhealth()"
     },
     {
@@ -5346,7 +5346,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L25",
       "id": "src_app_test_renderapp",
-      "community": 27,
+      "community": 4,
       "norm_label": "renderapp()"
     },
     {
@@ -5355,7 +5355,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L50",
       "id": "src_app_test_shortcut",
-      "community": 27,
+      "community": 4,
       "norm_label": "shortcut"
     },
     {
@@ -5364,7 +5364,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L79",
       "id": "src_app_test_fetch",
-      "community": 27,
+      "community": 4,
       "norm_label": "fetch"
     },
     {
@@ -5373,7 +5373,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L182",
       "id": "src_app_test_health",
-      "community": 27,
+      "community": 4,
       "norm_label": "health"
     },
     {
@@ -5760,7 +5760,7 @@
       "source_file": "frontend/src/features/settings/AppearanceForm.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_settings_appearanceform_tsx",
-      "community": 4,
+      "community": 6,
       "norm_label": "appearanceform.tsx"
     },
     {
@@ -5769,7 +5769,7 @@
       "source_file": "frontend/src/features/settings/AppearanceForm.tsx",
       "source_location": "L25",
       "id": "settings_appearanceform_appearanceform",
-      "community": 4,
+      "community": 6,
       "norm_label": "appearanceform()"
     },
     {
@@ -5877,7 +5877,7 @@
       "source_file": "frontend/src/features/omr/Review.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_omr_review_tsx",
-      "community": 63,
+      "community": 6,
       "norm_label": "review.tsx"
     },
     {
@@ -5886,7 +5886,7 @@
       "source_file": "frontend/src/features/omr/Review.tsx",
       "source_location": "L11",
       "id": "omr_review_review",
-      "community": 63,
+      "community": 6,
       "norm_label": "review()"
     },
     {
@@ -5967,7 +5967,7 @@
       "source_file": "frontend/src/features/omr/Score.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_omr_score_tsx",
-      "community": 5,
+      "community": 6,
       "norm_label": "score.tsx"
     },
     {
@@ -6003,7 +6003,7 @@
       "source_file": "frontend/src/features/listening/Listening.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_listening_listening_test_tsx",
-      "community": 4,
+      "community": 11,
       "norm_label": "listening.test.tsx"
     },
     {
@@ -6012,7 +6012,7 @@
       "source_file": "frontend/src/features/listening/Listening.test.tsx",
       "source_location": "L19",
       "id": "listening_listening_test_auth",
-      "community": 4,
+      "community": 11,
       "norm_label": "auth"
     },
     {
@@ -6021,7 +6021,7 @@
       "source_file": "frontend/src/features/listening/Listening.test.tsx",
       "source_location": "L35",
       "id": "listening_listening_test_exercise",
-      "community": 4,
+      "community": 11,
       "norm_label": "exercise"
     },
     {
@@ -6030,7 +6030,7 @@
       "source_file": "frontend/src/features/listening/Listening.test.tsx",
       "source_location": "L86",
       "id": "listening_listening_test_approvedexercise",
-      "community": 4,
+      "community": 11,
       "norm_label": "approvedexercise"
     },
     {
@@ -6039,7 +6039,7 @@
       "source_file": "frontend/src/features/listening/Listening.test.tsx",
       "source_location": "L161",
       "id": "listening_listening_test_mount",
-      "community": 4,
+      "community": 11,
       "norm_label": "mount()"
     },
     {
@@ -6048,7 +6048,7 @@
       "source_file": "frontend/src/features/listening/Listening.test.tsx",
       "source_location": "L225",
       "id": "listening_listening_test_stop",
-      "community": 4,
+      "community": 11,
       "norm_label": "stop"
     },
     {
@@ -6309,7 +6309,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_auth_autharea_test_tsx",
-      "community": 4,
+      "community": 27,
       "norm_label": "autharea.test.tsx"
     },
     {
@@ -6318,7 +6318,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.test.tsx",
       "source_location": "L11",
       "id": "auth_autharea_test_manager",
-      "community": 4,
+      "community": 27,
       "norm_label": "manager"
     },
     {
@@ -6327,7 +6327,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.test.tsx",
       "source_location": "L24",
       "id": "auth_autharea_test_student",
-      "community": 4,
+      "community": 27,
       "norm_label": "student"
     },
     {
@@ -6336,7 +6336,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.test.tsx",
       "source_location": "L25",
       "id": "auth_autharea_test_player",
-      "community": 4,
+      "community": 27,
       "norm_label": "player"
     },
     {
@@ -6345,7 +6345,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.test.tsx",
       "source_location": "L26",
       "id": "auth_autharea_test_auth",
-      "community": 4,
+      "community": 27,
       "norm_label": "auth()"
     },
     {
@@ -6354,7 +6354,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.test.tsx",
       "source_location": "L27",
       "id": "auth_autharea_test_json",
-      "community": 4,
+      "community": 27,
       "norm_label": "json()"
     },
     {
@@ -6363,7 +6363,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.test.tsx",
       "source_location": "L35",
       "id": "auth_autharea_test_mount",
-      "community": 4,
+      "community": 27,
       "norm_label": "mount()"
     },
     {
@@ -6372,7 +6372,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.test.tsx",
       "source_location": "L78",
       "id": "auth_autharea_test_fetch",
-      "community": 4,
+      "community": 27,
       "norm_label": "fetch"
     },
     {
@@ -6381,7 +6381,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.test.tsx",
       "source_location": "L152",
       "id": "auth_autharea_test_cache",
-      "community": 4,
+      "community": 27,
       "norm_label": "cache"
     },
     {
@@ -6390,7 +6390,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.test.tsx",
       "source_location": "L186",
       "id": "auth_autharea_test_call",
-      "community": 4,
+      "community": 27,
       "norm_label": "call"
     },
     {
@@ -6399,7 +6399,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.test.tsx",
       "source_location": "L322",
       "id": "auth_autharea_test_users",
-      "community": 4,
+      "community": 27,
       "norm_label": "users"
     },
     {
@@ -6435,7 +6435,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.tsx",
       "source_location": "L174",
       "id": "auth_autharea_autharea",
-      "community": 4,
+      "community": 6,
       "norm_label": "autharea()"
     },
     {
@@ -6462,7 +6462,7 @@
       "source_file": "frontend/src/features/game/index.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_game_index_tsx",
-      "community": 51,
+      "community": 37,
       "norm_label": "index.tsx"
     },
     {
@@ -6471,7 +6471,7 @@
       "source_file": "frontend/src/features/game/index.tsx",
       "source_location": "L16",
       "id": "game_index_screen",
-      "community": 51,
+      "community": 37,
       "norm_label": "screen"
     },
     {
@@ -6480,7 +6480,7 @@
       "source_file": "frontend/src/features/game/index.tsx",
       "source_location": "L34",
       "id": "game_index_props",
-      "community": 51,
+      "community": 37,
       "norm_label": "props"
     },
     {
@@ -6489,7 +6489,7 @@
       "source_file": "frontend/src/features/game/index.tsx",
       "source_location": "L38",
       "id": "game_index_screenfrompath",
-      "community": 51,
+      "community": 37,
       "norm_label": "screenfrompath()"
     },
     {
@@ -6498,7 +6498,7 @@
       "source_file": "frontend/src/features/game/index.tsx",
       "source_location": "L53",
       "id": "game_index_gamearea",
-      "community": 51,
+      "community": 37,
       "norm_label": "gamearea()"
     },
     {
@@ -6507,7 +6507,7 @@
       "source_file": "frontend/src/features/game/notes.ts",
       "source_location": "L1",
       "id": "frontend_src_features_game_notes_ts",
-      "community": 51,
+      "community": 37,
       "norm_label": "notes.ts"
     },
     {
@@ -6534,7 +6534,7 @@
       "source_file": "frontend/src/features/game/notes.ts",
       "source_location": "L9",
       "id": "game_notes_difficulties",
-      "community": 51,
+      "community": 37,
       "norm_label": "difficulties"
     },
     {
@@ -6543,7 +6543,7 @@
       "source_file": "frontend/src/features/game/notes.ts",
       "source_location": "L14",
       "id": "game_notes_gameoptions",
-      "community": 51,
+      "community": 37,
       "norm_label": "gameoptions"
     },
     {
@@ -6552,7 +6552,7 @@
       "source_file": "frontend/src/features/game/notes.ts",
       "source_location": "L18",
       "id": "game_notes_default_game_options",
-      "community": 51,
+      "community": 37,
       "norm_label": "default_game_options"
     },
     {
@@ -6642,7 +6642,7 @@
       "source_file": "frontend/src/features/game/GameTheme.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_game_gametheme_tsx",
-      "community": 51,
+      "community": 37,
       "norm_label": "gametheme.tsx"
     },
     {
@@ -6651,7 +6651,7 @@
       "source_file": "frontend/src/features/game/GameTheme.tsx",
       "source_location": "L6",
       "id": "game_gametheme_gametheme",
-      "community": 51,
+      "community": 37,
       "norm_label": "gametheme"
     },
     {
@@ -6660,7 +6660,7 @@
       "source_file": "frontend/src/features/game/result/ResultScreen.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_game_result_resultscreen_test_tsx",
-      "community": 196,
+      "community": 374,
       "norm_label": "resultscreen.test.tsx"
     },
     {
@@ -6669,7 +6669,7 @@
       "source_file": "frontend/src/features/game/result/ResultScreen.test.tsx",
       "source_location": "L7",
       "id": "result_resultscreen_test_mountresult",
-      "community": 196,
+      "community": 374,
       "norm_label": "mountresult()"
     },
     {
@@ -6678,7 +6678,7 @@
       "source_file": "frontend/src/features/game/result/ResultScreen.test.tsx",
       "source_location": "L59",
       "id": "result_resultscreen_test_shelf",
-      "community": 196,
+      "community": 374,
       "norm_label": "shelf"
     },
     {
@@ -6687,7 +6687,7 @@
       "source_file": "frontend/src/features/game/result/ResultScreen.test.tsx",
       "source_location": "L80",
       "id": "result_resultscreen_test_caption",
-      "community": 196,
+      "community": 374,
       "norm_label": "caption"
     },
     {
@@ -6696,7 +6696,7 @@
       "source_file": "frontend/src/features/game/result/ResultScreen.test.tsx",
       "source_location": "L83",
       "id": "result_resultscreen_test_announcement",
-      "community": 196,
+      "community": 374,
       "norm_label": "announcement"
     },
     {
@@ -6705,7 +6705,7 @@
       "source_file": "frontend/src/features/game/result/ResultScreen.test.tsx",
       "source_location": "L88",
       "id": "result_resultscreen_test_image",
-      "community": 196,
+      "community": 374,
       "norm_label": "image"
     },
     {
@@ -6750,7 +6750,7 @@
       "source_file": "frontend/src/features/game/setup/GameSetup.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_game_setup_gamesetup_tsx",
-      "community": 51,
+      "community": 37,
       "norm_label": "gamesetup.tsx"
     },
     {
@@ -6759,7 +6759,7 @@
       "source_file": "frontend/src/features/game/setup/GameSetup.tsx",
       "source_location": "L20",
       "id": "setup_gamesetup_note_counts",
-      "community": 51,
+      "community": 37,
       "norm_label": "note_counts"
     },
     {
@@ -6768,7 +6768,7 @@
       "source_file": "frontend/src/features/game/setup/GameSetup.tsx",
       "source_location": "L22",
       "id": "setup_gamesetup_props",
-      "community": 51,
+      "community": 37,
       "norm_label": "props"
     },
     {
@@ -6777,7 +6777,7 @@
       "source_file": "frontend/src/features/game/setup/GameSetup.tsx",
       "source_location": "L36",
       "id": "setup_gamesetup_gamesetup",
-      "community": 51,
+      "community": 128,
       "norm_label": "gamesetup()"
     },
     {
@@ -6903,7 +6903,7 @@
       "source_file": "frontend/src/features/game/setup/PlayerSelect.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_game_setup_playerselect_tsx",
-      "community": 6,
+      "community": 121,
       "norm_label": "playerselect.tsx"
     },
     {
@@ -6912,7 +6912,7 @@
       "source_file": "frontend/src/features/game/setup/PlayerSelect.tsx",
       "source_location": "L19",
       "id": "setup_playerselect_props",
-      "community": 6,
+      "community": 121,
       "norm_label": "props"
     },
     {
@@ -6921,7 +6921,7 @@
       "source_file": "frontend/src/features/game/setup/PlayerSelect.tsx",
       "source_location": "L26",
       "id": "setup_playerselect_playersummary",
-      "community": 6,
+      "community": 121,
       "norm_label": "playersummary()"
     },
     {
@@ -6930,7 +6930,7 @@
       "source_file": "frontend/src/features/game/setup/PlayerSelect.tsx",
       "source_location": "L43",
       "id": "setup_playerselect_playerselect",
-      "community": 251,
+      "community": 370,
       "norm_label": "playerselect()"
     },
     {
@@ -6975,7 +6975,7 @@
       "source_file": "frontend/src/features/game/setup/GameSetup.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_game_setup_gamesetup_test_tsx",
-      "community": 37,
+      "community": 378,
       "norm_label": "gamesetup.test.tsx"
     },
     {
@@ -6984,7 +6984,7 @@
       "source_file": "frontend/src/features/game/setup/GameSetup.test.tsx",
       "source_location": "L9",
       "id": "setup_gamesetup_test_fetchmock",
-      "community": 37,
+      "community": 378,
       "norm_label": "fetchmock"
     },
     {
@@ -6993,7 +6993,7 @@
       "source_file": "frontend/src/features/game/setup/GameSetup.test.tsx",
       "source_location": "L34",
       "id": "setup_gamesetup_test_mount",
-      "community": 37,
+      "community": 378,
       "norm_label": "mount()"
     },
     {
@@ -7002,7 +7002,7 @@
       "source_file": "frontend/src/features/game/setup/GameSetup.test.tsx",
       "source_location": "L63",
       "id": "setup_gamesetup_test_started",
-      "community": 37,
+      "community": 378,
       "norm_label": "{ started }"
     },
     {
@@ -7011,7 +7011,7 @@
       "source_file": "frontend/src/features/game/setup/GameSetup.test.tsx",
       "source_location": "L108",
       "id": "setup_gamesetup_test_ready",
-      "community": 37,
+      "community": 378,
       "norm_label": "ready()"
     },
     {
@@ -7020,7 +7020,7 @@
       "source_file": "frontend/src/features/game/setup/GameSetup.test.tsx",
       "source_location": "L151",
       "id": "setup_gamesetup_test_unmount",
-      "community": 37,
+      "community": 378,
       "norm_label": "{ unmount }"
     },
     {
@@ -7099,7 +7099,7 @@
       "label": "cache",
       "file_type": "code",
       "source_file": "frontend/src/features/game/setup/AvatarChooser.test.tsx",
-      "source_location": "L357",
+      "source_location": "L402",
       "id": "setup_avatarchooser_test_cache",
       "community": 262,
       "norm_label": "cache"
@@ -7108,7 +7108,7 @@
       "label": "Submit()",
       "file_type": "code",
       "source_file": "frontend/src/features/game/setup/AvatarChooser.test.tsx",
-      "source_location": "L411",
+      "source_location": "L457",
       "id": "setup_avatarchooser_test_submit",
       "community": 262,
       "norm_label": "submit()"
@@ -7236,7 +7236,7 @@
       "source_file": "frontend/src/features/game/admin/AdminScreen.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_game_admin_adminscreen_tsx",
-      "community": 251,
+      "community": 370,
       "norm_label": "adminscreen.tsx"
     },
     {
@@ -7245,7 +7245,7 @@
       "source_file": "frontend/src/features/game/admin/AdminScreen.tsx",
       "source_location": "L25",
       "id": "admin_adminscreen_props",
-      "community": 251,
+      "community": 370,
       "norm_label": "props"
     },
     {
@@ -7254,7 +7254,7 @@
       "source_file": "frontend/src/features/game/admin/AdminScreen.tsx",
       "source_location": "L31",
       "id": "admin_adminscreen_adminscreen",
-      "community": 251,
+      "community": 370,
       "norm_label": "adminscreen()"
     },
     {
@@ -7488,7 +7488,7 @@
       "source_file": "frontend/src/features/game/profile/StatisticsSummary.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_game_profile_statisticssummary_tsx",
-      "community": 6,
+      "community": 121,
       "norm_label": "statisticssummary.tsx"
     },
     {
@@ -7497,7 +7497,7 @@
       "source_file": "frontend/src/features/game/profile/StatisticsSummary.tsx",
       "source_location": "L5",
       "id": "profile_statisticssummary_statisticstotals",
-      "community": 6,
+      "community": 121,
       "norm_label": "statisticstotals()"
     },
     {
@@ -7506,7 +7506,7 @@
       "source_file": "frontend/src/features/game/profile/StatisticsSummary.tsx",
       "source_location": "L18",
       "id": "profile_statisticssummary_statisticssummary",
-      "community": 6,
+      "community": 121,
       "norm_label": "statisticssummary()"
     },
     {
@@ -7515,7 +7515,7 @@
       "source_file": "frontend/src/features/game/profile/ProfileScreen.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_game_profile_profilescreen_tsx",
-      "community": 6,
+      "community": 121,
       "norm_label": "profilescreen.tsx"
     },
     {
@@ -7524,7 +7524,7 @@
       "source_file": "frontend/src/features/game/profile/ProfileScreen.tsx",
       "source_location": "L31",
       "id": "profile_profilescreen_trophy_icons",
-      "community": 6,
+      "community": 121,
       "norm_label": "trophy_icons"
     },
     {
@@ -7533,7 +7533,7 @@
       "source_file": "frontend/src/features/game/profile/ProfileScreen.tsx",
       "source_location": "L37",
       "id": "profile_profilescreen_note_counts",
-      "community": 6,
+      "community": 121,
       "norm_label": "note_counts"
     },
     {
@@ -7542,7 +7542,7 @@
       "source_file": "frontend/src/features/game/profile/ProfileScreen.tsx",
       "source_location": "L39",
       "id": "profile_profilescreen_props",
-      "community": 6,
+      "community": 121,
       "norm_label": "props"
     },
     {
@@ -7551,7 +7551,7 @@
       "source_file": "frontend/src/features/game/profile/ProfileScreen.tsx",
       "source_location": "L46",
       "id": "profile_profilescreen_profilescreen",
-      "community": 6,
+      "community": 121,
       "norm_label": "profilescreen()"
     },
     {
@@ -7560,7 +7560,7 @@
       "source_file": "frontend/src/features/game/profile/PrizeShelf.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_game_profile_prizeshelf_tsx",
-      "community": 6,
+      "community": 196,
       "norm_label": "prizeshelf.tsx"
     },
     {
@@ -7569,7 +7569,7 @@
       "source_file": "frontend/src/features/game/profile/PrizeShelf.tsx",
       "source_location": "L7",
       "id": "profile_prizeshelf_prizeshelf",
-      "community": 6,
+      "community": 196,
       "norm_label": "prizeshelf()"
     },
     {
@@ -7650,7 +7650,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L7",
       "id": "api_hooks_player",
-      "community": 251,
+      "community": 370,
       "norm_label": "player"
     },
     {
@@ -7695,7 +7695,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L57",
       "id": "api_hooks_statsmatrix",
-      "community": 6,
+      "community": 121,
       "norm_label": "statsmatrix"
     },
     {
@@ -7767,7 +7767,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L139",
       "id": "api_hooks_useplayers",
-      "community": 251,
+      "community": 370,
       "norm_label": "useplayers()"
     },
     {
@@ -7785,7 +7785,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L176",
       "id": "api_hooks_usestartround",
-      "community": 51,
+      "community": 128,
       "norm_label": "usestartround()"
     },
     {
@@ -7803,7 +7803,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L217",
       "id": "api_hooks_useplayer",
-      "community": 196,
+      "community": 128,
       "norm_label": "useplayer()"
     },
     {
@@ -7812,7 +7812,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L225",
       "id": "api_hooks_useachievements",
-      "community": 6,
+      "community": 196,
       "norm_label": "useachievements()"
     },
     {
@@ -7848,7 +7848,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L284",
       "id": "api_hooks_useplayerstats",
-      "community": 6,
+      "community": 121,
       "norm_label": "useplayerstats()"
     },
     {
@@ -7938,7 +7938,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L423",
       "id": "api_hooks_useseasons",
-      "community": 6,
+      "community": 121,
       "norm_label": "useseasons()"
     },
     {
@@ -7947,7 +7947,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L430",
       "id": "api_hooks_useresetseason",
-      "community": 251,
+      "community": 370,
       "norm_label": "useresetseason()"
     },
     {
@@ -7956,7 +7956,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L454",
       "id": "api_hooks_useresetallseasons",
-      "community": 251,
+      "community": 370,
       "norm_label": "useresetallseasons()"
     },
     {
@@ -8262,7 +8262,7 @@
       "source_file": "frontend/src/features/game/play/PlayScreen.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_game_play_playscreen_tsx",
-      "community": 196,
+      "community": 128,
       "norm_label": "playscreen.tsx"
     },
     {
@@ -8271,7 +8271,7 @@
       "source_file": "frontend/src/features/game/play/PlayScreen.tsx",
       "source_location": "L24",
       "id": "play_playscreen_props",
-      "community": 196,
+      "community": 128,
       "norm_label": "props"
     },
     {
@@ -8280,7 +8280,7 @@
       "source_file": "frontend/src/features/game/play/PlayScreen.tsx",
       "source_location": "L38",
       "id": "play_playscreen_feedbackstate",
-      "community": 196,
+      "community": 128,
       "norm_label": "feedbackstate"
     },
     {
@@ -8289,7 +8289,7 @@
       "source_file": "frontend/src/features/game/play/PlayScreen.tsx",
       "source_location": "L40",
       "id": "play_playscreen_mascot",
-      "community": 196,
+      "community": 128,
       "norm_label": "mascot()"
     },
     {
@@ -8361,7 +8361,7 @@
       "source_file": "frontend/src/features/exercises/Exercises.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_exercises_exercises_test_tsx",
-      "community": 63,
+      "community": 27,
       "norm_label": "exercises.test.tsx"
     },
     {
@@ -8370,7 +8370,7 @@
       "source_file": "frontend/src/features/exercises/Exercises.test.tsx",
       "source_location": "L13",
       "id": "exercises_exercises_test_exercise",
-      "community": 63,
+      "community": 27,
       "norm_label": "exercise"
     },
     {
@@ -8379,7 +8379,7 @@
       "source_file": "frontend/src/features/exercises/Exercises.test.tsx",
       "source_location": "L39",
       "id": "exercises_exercises_test_auth",
-      "community": 63,
+      "community": 27,
       "norm_label": "auth"
     },
     {
@@ -8388,7 +8388,7 @@
       "source_file": "frontend/src/features/exercises/Exercises.test.tsx",
       "source_location": "L63",
       "id": "exercises_exercises_test_mount",
-      "community": 63,
+      "community": 27,
       "norm_label": "mount()"
     },
     {
@@ -8397,7 +8397,7 @@
       "source_file": "frontend/src/features/exercises/Exercises.test.tsx",
       "source_location": "L84",
       "id": "exercises_exercises_test_image",
-      "community": 63,
+      "community": 27,
       "norm_label": "image"
     },
     {
@@ -8406,7 +8406,7 @@
       "source_file": "frontend/src/features/exercises/Exercises.test.tsx",
       "source_location": "L86",
       "id": "exercises_exercises_test_audio",
-      "community": 63,
+      "community": 27,
       "norm_label": "audio"
     },
     {
@@ -8442,7 +8442,7 @@
       "source_file": "frontend/src/features/exercises/Exercises.tsx",
       "source_location": "L235",
       "id": "exercises_exercises_exercises",
-      "community": 63,
+      "community": 27,
       "norm_label": "exercises()"
     },
     {
@@ -9297,7 +9297,7 @@
       "source_file": "frontend/src/features/telegram/Telegram.tsx",
       "source_location": "L22",
       "id": "telegram_telegram_importrow",
-      "community": 6,
+      "community": 63,
       "norm_label": "importrow()"
     },
     {
@@ -9315,7 +9315,7 @@
       "source_file": "frontend/src/features/telegram/Telegram.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_telegram_telegram_test_tsx",
-      "community": 6,
+      "community": 63,
       "norm_label": "telegram.test.tsx"
     },
     {
@@ -9324,7 +9324,7 @@
       "source_file": "frontend/src/features/telegram/Telegram.test.tsx",
       "source_location": "L13",
       "id": "telegram_telegram_test_auth",
-      "community": 6,
+      "community": 63,
       "norm_label": "auth"
     },
     {
@@ -9333,7 +9333,7 @@
       "source_file": "frontend/src/features/users/Users.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_users_users_test_tsx",
-      "community": 28,
+      "community": 27,
       "norm_label": "users.test.tsx"
     },
     {
@@ -9342,7 +9342,7 @@
       "source_file": "frontend/src/features/users/Users.test.tsx",
       "source_location": "L19",
       "id": "users_users_test_manager",
-      "community": 28,
+      "community": 27,
       "norm_label": "manager"
     },
     {
@@ -9351,7 +9351,7 @@
       "source_file": "frontend/src/features/users/Users.test.tsx",
       "source_location": "L32",
       "id": "users_users_test_rows",
-      "community": 28,
+      "community": 27,
       "norm_label": "rows"
     },
     {
@@ -9360,7 +9360,7 @@
       "source_file": "frontend/src/features/users/Users.test.tsx",
       "source_location": "L46",
       "id": "users_users_test_mount",
-      "community": 28,
+      "community": 27,
       "norm_label": "mount()"
     },
     {
@@ -9369,7 +9369,7 @@
       "source_file": "frontend/src/features/users/Users.test.tsx",
       "source_location": "L62",
       "id": "users_users_test_viewport",
-      "community": 28,
+      "community": 27,
       "norm_label": "viewport()"
     },
     {
@@ -9378,7 +9378,7 @@
       "source_file": "frontend/src/features/users/Users.test.tsx",
       "source_location": "L82",
       "id": "users_users_test_creationrole",
-      "community": 28,
+      "community": 27,
       "norm_label": "creationrole"
     },
     {
@@ -9387,7 +9387,7 @@
       "source_file": "frontend/src/features/users/Users.test.tsx",
       "source_location": "L91",
       "id": "users_users_test_editor",
-      "community": 28,
+      "community": 27,
       "norm_label": "editor"
     },
     {
@@ -9396,7 +9396,7 @@
       "source_file": "frontend/src/features/users/Users.test.tsx",
       "source_location": "L94",
       "id": "users_users_test_editingrole",
-      "community": 28,
+      "community": 27,
       "norm_label": "editingrole"
     },
     {
@@ -9405,7 +9405,7 @@
       "source_file": "frontend/src/features/users/Users.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_users_users_tsx",
-      "community": 28,
+      "community": 6,
       "norm_label": "users.tsx"
     },
     {
@@ -9414,7 +9414,7 @@
       "source_file": "frontend/src/features/users/Users.tsx",
       "source_location": "L23",
       "id": "users_users_roleoptions",
-      "community": 28,
+      "community": 6,
       "norm_label": "roleoptions()"
     },
     {
@@ -9423,7 +9423,7 @@
       "source_file": "frontend/src/features/users/Users.tsx",
       "source_location": "L34",
       "id": "users_users_usereditor",
-      "community": 28,
+      "community": 6,
       "norm_label": "usereditor()"
     },
     {
@@ -9432,7 +9432,7 @@
       "source_file": "frontend/src/features/users/Users.tsx",
       "source_location": "L140",
       "id": "users_users_users",
-      "community": 28,
+      "community": 6,
       "norm_label": "users()"
     },
     {
@@ -9972,7 +9972,7 @@
       "source_file": "frontend/src/api/listening.test.ts",
       "source_location": "L1",
       "id": "frontend_src_api_listening_test_ts",
-      "community": 4,
+      "community": 11,
       "norm_label": "listening.test.ts"
     },
     {
@@ -9981,7 +9981,7 @@
       "source_file": "frontend/src/api/listening.test.ts",
       "source_location": "L8",
       "id": "api_listening_test_event",
-      "community": 4,
+      "community": 11,
       "norm_label": "event"
     },
     {
@@ -9990,7 +9990,7 @@
       "source_file": "frontend/src/api/listening.test.ts",
       "source_location": "L18",
       "id": "api_listening_test_sendbeacon",
-      "community": 4,
+      "community": 11,
       "norm_label": "sendbeacon"
     },
     {
@@ -9999,7 +9999,7 @@
       "source_file": "frontend/src/api/listening.test.ts",
       "source_location": "L28",
       "id": "api_listening_test_fetch",
-      "community": 4,
+      "community": 11,
       "norm_label": "fetch"
     },
     {
@@ -10008,7 +10008,7 @@
       "source_file": "frontend/src/api/exercises.test.ts",
       "source_location": "L1",
       "id": "frontend_src_api_exercises_test_ts",
-      "community": 63,
+      "community": 27,
       "norm_label": "exercises.test.ts"
     },
     {
@@ -10017,7 +10017,7 @@
       "source_file": "frontend/src/api/exercises.test.ts",
       "source_location": "L5",
       "id": "api_exercises_test_exercise",
-      "community": 63,
+      "community": 27,
       "norm_label": "exercise"
     },
     {
@@ -10026,7 +10026,7 @@
       "source_file": "frontend/src/api/exercises.test.ts",
       "source_location": "L27",
       "id": "api_exercises_test_upload",
-      "community": 63,
+      "community": 27,
       "norm_label": "upload"
     },
     {
@@ -10035,7 +10035,7 @@
       "source_file": "frontend/src/api/exercises.test.ts",
       "source_location": "L53",
       "id": "api_exercises_test_upload_constructor",
-      "community": 63,
+      "community": 27,
       "norm_label": ".constructor()"
     },
     {
@@ -10044,7 +10044,7 @@
       "source_file": "frontend/src/api/exercises.test.ts",
       "source_location": "L74",
       "id": "api_exercises_test_progress",
-      "community": 63,
+      "community": 27,
       "norm_label": "progress"
     },
     {
@@ -10053,7 +10053,7 @@
       "source_file": "frontend/src/api/exercises.test.ts",
       "source_location": "L75",
       "id": "api_exercises_test_data",
-      "community": 63,
+      "community": 27,
       "norm_label": "data"
     },
     {
@@ -10062,7 +10062,7 @@
       "source_file": "frontend/src/api/exercises.test.ts",
       "source_location": "L76",
       "id": "api_exercises_test_pending",
-      "community": 63,
+      "community": 27,
       "norm_label": "pending"
     },
     {
@@ -10071,7 +10071,7 @@
       "source_file": "frontend/src/api/exercises.test.ts",
       "source_location": "L91",
       "id": "api_exercises_test_expired",
-      "community": 63,
+      "community": 27,
       "norm_label": "expired"
     },
     {
@@ -10080,7 +10080,7 @@
       "source_file": "frontend/src/api/exercises.test.ts",
       "source_location": "L106",
       "id": "api_exercises_test_controller",
-      "community": 63,
+      "community": 27,
       "norm_label": "controller"
     },
     {
@@ -10089,7 +10089,7 @@
       "source_file": "frontend/src/api/exercises.test.ts",
       "source_location": "L116",
       "id": "api_exercises_test_failed",
-      "community": 63,
+      "community": 27,
       "norm_label": "failed"
     },
     {
@@ -10098,7 +10098,7 @@
       "source_file": "frontend/src/api/exercises.test.ts",
       "source_location": "L120",
       "id": "api_exercises_test_timedout",
-      "community": 63,
+      "community": 27,
       "norm_label": "timedout"
     },
     {
@@ -10179,7 +10179,7 @@
       "source_file": "frontend/src/api/omr.ts",
       "source_location": "L75",
       "id": "api_omr_fetchscore",
-      "community": 5,
+      "community": 63,
       "norm_label": "fetchscore()"
     },
     {
@@ -10260,7 +10260,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L1",
       "id": "frontend_src_api_telegram_ts",
-      "community": 6,
+      "community": 63,
       "norm_label": "telegram.ts"
     },
     {
@@ -10269,7 +10269,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L3",
       "id": "api_telegram_linkstatus",
-      "community": 6,
+      "community": 63,
       "norm_label": "linkstatus"
     },
     {
@@ -10278,7 +10278,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L8",
       "id": "api_telegram_code",
-      "community": 6,
+      "community": 63,
       "norm_label": "code"
     },
     {
@@ -10287,7 +10287,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L9",
       "id": "api_telegram_import",
-      "community": 6,
+      "community": 63,
       "norm_label": "import"
     },
     {
@@ -10305,7 +10305,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L24",
       "id": "api_telegram_positive",
-      "community": 6,
+      "community": 63,
       "norm_label": "positive()"
     },
     {
@@ -10314,7 +10314,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L27",
       "id": "api_telegram_date",
-      "community": 6,
+      "community": 63,
       "norm_label": "date()"
     },
     {
@@ -10323,7 +10323,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L30",
       "id": "api_telegram_importstatus",
-      "community": 6,
+      "community": 63,
       "norm_label": "importstatus()"
     },
     {
@@ -10332,7 +10332,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L39",
       "id": "api_telegram_parseimport",
-      "community": 6,
+      "community": 63,
       "norm_label": "parseimport()"
     },
     {
@@ -10341,7 +10341,7 @@
       "source_file": "backend/app/api/telegram.py",
       "source_location": "L59",
       "id": "api_telegram_status",
-      "community": 6,
+      "community": 63,
       "norm_label": "status()"
     },
     {
@@ -10350,7 +10350,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L77",
       "id": "api_telegram_createcode",
-      "community": 6,
+      "community": 63,
       "norm_label": "createcode()"
     },
     {
@@ -10368,7 +10368,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L91",
       "id": "api_telegram_listimports",
-      "community": 6,
+      "community": 63,
       "norm_label": "listimports()"
     },
     {
@@ -10458,7 +10458,7 @@
       "source_file": "frontend/src/api/telegram.test.ts",
       "source_location": "L1",
       "id": "frontend_src_api_telegram_test_ts",
-      "community": 6,
+      "community": 63,
       "norm_label": "telegram.test.ts"
     },
     {
@@ -10467,7 +10467,7 @@
       "source_file": "frontend/src/api/telegram.test.ts",
       "source_location": "L6",
       "id": "api_telegram_test_fetch",
-      "community": 6,
+      "community": 63,
       "norm_label": "fetch"
     },
     {
@@ -10611,7 +10611,7 @@
       "source_file": "frontend/src/api/auth.ts",
       "source_location": "L12",
       "id": "api_auth_user",
-      "community": 4,
+      "community": 6,
       "norm_label": "user"
     },
     {
@@ -15007,19 +15007,28 @@
       "norm_label": "game.avatar.use"
     },
     {
-      "label": "game.avatar.discard",
+      "label": "game.avatar.delete",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
       "source_location": "L461",
-      "id": "locales_ru_game_avatar_discard",
+      "id": "locales_ru_game_avatar_delete",
       "community": 2,
-      "norm_label": "game.avatar.discard"
+      "norm_label": "game.avatar.delete"
+    },
+    {
+      "label": "game.avatar.deleteSaved",
+      "file_type": "code",
+      "source_file": "frontend/src/i18n/locales/ru.json",
+      "source_location": "L462",
+      "id": "locales_ru_game_avatar_deletesaved",
+      "community": 2,
+      "norm_label": "game.avatar.deletesaved"
     },
     {
       "label": "game.avatar.quota",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L462",
+      "source_location": "L463",
       "id": "locales_ru_game_avatar_quota",
       "community": 2,
       "norm_label": "game.avatar.quota"
@@ -15028,7 +15037,7 @@
       "label": "game.avatar.quotaExhausted",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L463",
+      "source_location": "L464",
       "id": "locales_ru_game_avatar_quotaexhausted",
       "community": 2,
       "norm_label": "game.avatar.quotaexhausted"
@@ -15037,7 +15046,7 @@
       "label": "game.avatar.flagged",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L464",
+      "source_location": "L465",
       "id": "locales_ru_game_avatar_flagged",
       "community": 2,
       "norm_label": "game.avatar.flagged"
@@ -15046,7 +15055,7 @@
       "label": "game.avatar.error",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L465",
+      "source_location": "L466",
       "id": "locales_ru_game_avatar_error",
       "community": 2,
       "norm_label": "game.avatar.error"
@@ -15055,7 +15064,7 @@
       "label": "game.errors.roundNotActive",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L466",
+      "source_location": "L467",
       "id": "locales_ru_game_errors_roundnotactive",
       "community": 2,
       "norm_label": "game.errors.roundnotactive"
@@ -15064,7 +15073,7 @@
       "label": "game.errors.generic",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L467",
+      "source_location": "L468",
       "id": "locales_ru_game_errors_generic",
       "community": 2,
       "norm_label": "game.errors.generic"
@@ -15073,7 +15082,7 @@
       "label": "game.prizes.title",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L468",
+      "source_location": "L469",
       "id": "locales_ru_game_prizes_title",
       "community": 2,
       "norm_label": "game.prizes.title"
@@ -15082,7 +15091,7 @@
       "label": "game.prizes.empty",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L469",
+      "source_location": "L470",
       "id": "locales_ru_game_prizes_empty",
       "community": 2,
       "norm_label": "game.prizes.empty"
@@ -15091,7 +15100,7 @@
       "label": "game.prizes.newPrize",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L470",
+      "source_location": "L471",
       "id": "locales_ru_game_prizes_newprize",
       "community": 2,
       "norm_label": "game.prizes.newprize"
@@ -15100,7 +15109,7 @@
       "label": "game.prizes.all",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L471",
+      "source_location": "L472",
       "id": "locales_ru_game_prizes_all",
       "community": 2,
       "norm_label": "game.prizes.all"
@@ -15109,7 +15118,7 @@
       "label": "game.prizes.codes.first_round",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L472",
+      "source_location": "L473",
       "id": "locales_ru_game_prizes_codes_first_round",
       "community": 2,
       "norm_label": "game.prizes.codes.first_round"
@@ -15118,7 +15127,7 @@
       "label": "game.prizes.descriptions.first_round",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L473",
+      "source_location": "L474",
       "id": "locales_ru_game_prizes_descriptions_first_round",
       "community": 2,
       "norm_label": "game.prizes.descriptions.first_round"
@@ -15127,7 +15136,7 @@
       "label": "game.prizes.codes.first_win",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L474",
+      "source_location": "L475",
       "id": "locales_ru_game_prizes_codes_first_win",
       "community": 2,
       "norm_label": "game.prizes.codes.first_win"
@@ -15136,7 +15145,7 @@
       "label": "game.prizes.descriptions.first_win",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L475",
+      "source_location": "L476",
       "id": "locales_ru_game_prizes_descriptions_first_win",
       "community": 2,
       "norm_label": "game.prizes.descriptions.first_win"
@@ -15145,7 +15154,7 @@
       "label": "game.prizes.codes.perfect_round",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L476",
+      "source_location": "L477",
       "id": "locales_ru_game_prizes_codes_perfect_round",
       "community": 2,
       "norm_label": "game.prizes.codes.perfect_round"
@@ -15154,7 +15163,7 @@
       "label": "game.prizes.descriptions.perfect_round",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L477",
+      "source_location": "L478",
       "id": "locales_ru_game_prizes_descriptions_perfect_round",
       "community": 2,
       "norm_label": "game.prizes.descriptions.perfect_round"
@@ -15163,7 +15172,7 @@
       "label": "game.prizes.codes.correct_streak_10",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L478",
+      "source_location": "L479",
       "id": "locales_ru_game_prizes_codes_correct_streak_10",
       "community": 2,
       "norm_label": "game.prizes.codes.correct_streak_10"
@@ -15172,7 +15181,7 @@
       "label": "game.prizes.descriptions.correct_streak_10",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L479",
+      "source_location": "L480",
       "id": "locales_ru_game_prizes_descriptions_correct_streak_10",
       "community": 2,
       "norm_label": "game.prizes.descriptions.correct_streak_10"
@@ -15181,7 +15190,7 @@
       "label": "game.prizes.codes.notes_100",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L480",
+      "source_location": "L481",
       "id": "locales_ru_game_prizes_codes_notes_100",
       "community": 2,
       "norm_label": "game.prizes.codes.notes_100"
@@ -15190,7 +15199,7 @@
       "label": "game.prizes.descriptions.notes_100",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L481",
+      "source_location": "L482",
       "id": "locales_ru_game_prizes_descriptions_notes_100",
       "community": 2,
       "norm_label": "game.prizes.descriptions.notes_100"
@@ -15199,7 +15208,7 @@
       "label": "game.prizes.codes.note_rainbow",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L482",
+      "source_location": "L483",
       "id": "locales_ru_game_prizes_codes_note_rainbow",
       "community": 2,
       "norm_label": "game.prizes.codes.note_rainbow"
@@ -15208,7 +15217,7 @@
       "label": "game.prizes.descriptions.note_rainbow",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L483",
+      "source_location": "L484",
       "id": "locales_ru_game_prizes_descriptions_note_rainbow",
       "community": 2,
       "norm_label": "game.prizes.descriptions.note_rainbow"
@@ -15217,7 +15226,7 @@
       "label": "game.prizes.codes.treble_25",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L484",
+      "source_location": "L485",
       "id": "locales_ru_game_prizes_codes_treble_25",
       "community": 2,
       "norm_label": "game.prizes.codes.treble_25"
@@ -15226,7 +15235,7 @@
       "label": "game.prizes.descriptions.treble_25",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L485",
+      "source_location": "L486",
       "id": "locales_ru_game_prizes_descriptions_treble_25",
       "community": 2,
       "norm_label": "game.prizes.descriptions.treble_25"
@@ -15235,7 +15244,7 @@
       "label": "game.prizes.codes.bass_25",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L486",
+      "source_location": "L487",
       "id": "locales_ru_game_prizes_codes_bass_25",
       "community": 2,
       "norm_label": "game.prizes.codes.bass_25"
@@ -15244,7 +15253,7 @@
       "label": "game.prizes.descriptions.bass_25",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L487",
+      "source_location": "L488",
       "id": "locales_ru_game_prizes_descriptions_bass_25",
       "community": 2,
       "norm_label": "game.prizes.descriptions.bass_25"
@@ -15253,7 +15262,7 @@
       "label": "game.prizes.codes.both_clefs",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L488",
+      "source_location": "L489",
       "id": "locales_ru_game_prizes_codes_both_clefs",
       "community": 2,
       "norm_label": "game.prizes.codes.both_clefs"
@@ -15262,7 +15271,7 @@
       "label": "game.prizes.descriptions.both_clefs",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L489",
+      "source_location": "L490",
       "id": "locales_ru_game_prizes_descriptions_both_clefs",
       "community": 2,
       "norm_label": "game.prizes.descriptions.both_clefs"
@@ -15271,7 +15280,7 @@
       "label": "game.prizes.codes.duet",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L490",
+      "source_location": "L491",
       "id": "locales_ru_game_prizes_codes_duet",
       "community": 2,
       "norm_label": "game.prizes.codes.duet"
@@ -15280,7 +15289,7 @@
       "label": "game.prizes.descriptions.duet",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L491",
+      "source_location": "L492",
       "id": "locales_ru_game_prizes_descriptions_duet",
       "community": 2,
       "norm_label": "game.prizes.descriptions.duet"
@@ -15289,7 +15298,7 @@
       "label": "game.prizes.codes.trio",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L492",
+      "source_location": "L493",
       "id": "locales_ru_game_prizes_codes_trio",
       "community": 2,
       "norm_label": "game.prizes.codes.trio"
@@ -15298,7 +15307,7 @@
       "label": "game.prizes.descriptions.trio",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L493",
+      "source_location": "L494",
       "id": "locales_ru_game_prizes_descriptions_trio",
       "community": 2,
       "norm_label": "game.prizes.descriptions.trio"
@@ -15307,7 +15316,7 @@
       "label": "game.prizes.codes.quartet",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L494",
+      "source_location": "L495",
       "id": "locales_ru_game_prizes_codes_quartet",
       "community": 2,
       "norm_label": "game.prizes.codes.quartet"
@@ -15316,7 +15325,7 @@
       "label": "game.prizes.descriptions.quartet",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L495",
+      "source_location": "L496",
       "id": "locales_ru_game_prizes_descriptions_quartet",
       "community": 2,
       "norm_label": "game.prizes.descriptions.quartet"
@@ -15325,7 +15334,7 @@
       "label": "game.prizes.codes.all_difficulties",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L496",
+      "source_location": "L497",
       "id": "locales_ru_game_prizes_codes_all_difficulties",
       "community": 2,
       "norm_label": "game.prizes.codes.all_difficulties"
@@ -15334,7 +15343,7 @@
       "label": "game.prizes.descriptions.all_difficulties",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L497",
+      "source_location": "L498",
       "id": "locales_ru_game_prizes_descriptions_all_difficulties",
       "community": 2,
       "norm_label": "game.prizes.descriptions.all_difficulties"
@@ -15343,7 +15352,7 @@
       "label": "game.prizes.codes.independent_win",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L498",
+      "source_location": "L499",
       "id": "locales_ru_game_prizes_codes_independent_win",
       "community": 2,
       "norm_label": "game.prizes.codes.independent_win"
@@ -15352,7 +15361,7 @@
       "label": "game.prizes.descriptions.independent_win",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L499",
+      "source_location": "L500",
       "id": "locales_ru_game_prizes_descriptions_independent_win",
       "community": 2,
       "norm_label": "game.prizes.descriptions.independent_win"
@@ -15361,19 +15370,10 @@
       "label": "game.prizes.codes.days_streak_3",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L500",
+      "source_location": "L501",
       "id": "locales_ru_game_prizes_codes_days_streak_3",
       "community": 2,
       "norm_label": "game.prizes.codes.days_streak_3"
-    },
-    {
-      "label": "game.prizes.descriptions.days_streak_3",
-      "file_type": "code",
-      "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L501",
-      "id": "locales_ru_game_prizes_descriptions_days_streak_3",
-      "community": 2,
-      "norm_label": "game.prizes.descriptions.days_streak_3"
     },
     {
       "label": "en.json",
@@ -19516,19 +19516,28 @@
       "norm_label": "game.avatar.use"
     },
     {
-      "label": "game.avatar.discard",
+      "label": "game.avatar.delete",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
       "source_location": "L461",
-      "id": "locales_en_game_avatar_discard",
+      "id": "locales_en_game_avatar_delete",
       "community": 1,
-      "norm_label": "game.avatar.discard"
+      "norm_label": "game.avatar.delete"
+    },
+    {
+      "label": "game.avatar.deleteSaved",
+      "file_type": "code",
+      "source_file": "frontend/src/i18n/locales/en.json",
+      "source_location": "L462",
+      "id": "locales_en_game_avatar_deletesaved",
+      "community": 1,
+      "norm_label": "game.avatar.deletesaved"
     },
     {
       "label": "game.avatar.quota",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L462",
+      "source_location": "L463",
       "id": "locales_en_game_avatar_quota",
       "community": 1,
       "norm_label": "game.avatar.quota"
@@ -19537,7 +19546,7 @@
       "label": "game.avatar.quotaExhausted",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L463",
+      "source_location": "L464",
       "id": "locales_en_game_avatar_quotaexhausted",
       "community": 1,
       "norm_label": "game.avatar.quotaexhausted"
@@ -19546,7 +19555,7 @@
       "label": "game.avatar.flagged",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L464",
+      "source_location": "L465",
       "id": "locales_en_game_avatar_flagged",
       "community": 1,
       "norm_label": "game.avatar.flagged"
@@ -19555,7 +19564,7 @@
       "label": "game.avatar.error",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L465",
+      "source_location": "L466",
       "id": "locales_en_game_avatar_error",
       "community": 1,
       "norm_label": "game.avatar.error"
@@ -19564,7 +19573,7 @@
       "label": "game.errors.roundNotActive",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L466",
+      "source_location": "L467",
       "id": "locales_en_game_errors_roundnotactive",
       "community": 1,
       "norm_label": "game.errors.roundnotactive"
@@ -19573,7 +19582,7 @@
       "label": "game.errors.generic",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L467",
+      "source_location": "L468",
       "id": "locales_en_game_errors_generic",
       "community": 1,
       "norm_label": "game.errors.generic"
@@ -19582,7 +19591,7 @@
       "label": "game.prizes.title",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L468",
+      "source_location": "L469",
       "id": "locales_en_game_prizes_title",
       "community": 1,
       "norm_label": "game.prizes.title"
@@ -19591,7 +19600,7 @@
       "label": "game.prizes.empty",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L469",
+      "source_location": "L470",
       "id": "locales_en_game_prizes_empty",
       "community": 1,
       "norm_label": "game.prizes.empty"
@@ -19600,7 +19609,7 @@
       "label": "game.prizes.newPrize",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L470",
+      "source_location": "L471",
       "id": "locales_en_game_prizes_newprize",
       "community": 1,
       "norm_label": "game.prizes.newprize"
@@ -19609,7 +19618,7 @@
       "label": "game.prizes.all",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L471",
+      "source_location": "L472",
       "id": "locales_en_game_prizes_all",
       "community": 1,
       "norm_label": "game.prizes.all"
@@ -19618,7 +19627,7 @@
       "label": "game.prizes.codes.first_round",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L472",
+      "source_location": "L473",
       "id": "locales_en_game_prizes_codes_first_round",
       "community": 1,
       "norm_label": "game.prizes.codes.first_round"
@@ -19627,7 +19636,7 @@
       "label": "game.prizes.descriptions.first_round",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L473",
+      "source_location": "L474",
       "id": "locales_en_game_prizes_descriptions_first_round",
       "community": 1,
       "norm_label": "game.prizes.descriptions.first_round"
@@ -19636,7 +19645,7 @@
       "label": "game.prizes.codes.first_win",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L474",
+      "source_location": "L475",
       "id": "locales_en_game_prizes_codes_first_win",
       "community": 1,
       "norm_label": "game.prizes.codes.first_win"
@@ -19645,7 +19654,7 @@
       "label": "game.prizes.descriptions.first_win",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L475",
+      "source_location": "L476",
       "id": "locales_en_game_prizes_descriptions_first_win",
       "community": 1,
       "norm_label": "game.prizes.descriptions.first_win"
@@ -19654,7 +19663,7 @@
       "label": "game.prizes.codes.perfect_round",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L476",
+      "source_location": "L477",
       "id": "locales_en_game_prizes_codes_perfect_round",
       "community": 1,
       "norm_label": "game.prizes.codes.perfect_round"
@@ -19663,7 +19672,7 @@
       "label": "game.prizes.descriptions.perfect_round",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L477",
+      "source_location": "L478",
       "id": "locales_en_game_prizes_descriptions_perfect_round",
       "community": 1,
       "norm_label": "game.prizes.descriptions.perfect_round"
@@ -19672,7 +19681,7 @@
       "label": "game.prizes.codes.correct_streak_10",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L478",
+      "source_location": "L479",
       "id": "locales_en_game_prizes_codes_correct_streak_10",
       "community": 1,
       "norm_label": "game.prizes.codes.correct_streak_10"
@@ -19681,7 +19690,7 @@
       "label": "game.prizes.descriptions.correct_streak_10",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L479",
+      "source_location": "L480",
       "id": "locales_en_game_prizes_descriptions_correct_streak_10",
       "community": 1,
       "norm_label": "game.prizes.descriptions.correct_streak_10"
@@ -19690,7 +19699,7 @@
       "label": "game.prizes.codes.notes_100",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L480",
+      "source_location": "L481",
       "id": "locales_en_game_prizes_codes_notes_100",
       "community": 1,
       "norm_label": "game.prizes.codes.notes_100"
@@ -19699,7 +19708,7 @@
       "label": "game.prizes.descriptions.notes_100",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L481",
+      "source_location": "L482",
       "id": "locales_en_game_prizes_descriptions_notes_100",
       "community": 1,
       "norm_label": "game.prizes.descriptions.notes_100"
@@ -19708,7 +19717,7 @@
       "label": "game.prizes.codes.note_rainbow",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L482",
+      "source_location": "L483",
       "id": "locales_en_game_prizes_codes_note_rainbow",
       "community": 1,
       "norm_label": "game.prizes.codes.note_rainbow"
@@ -19717,7 +19726,7 @@
       "label": "game.prizes.descriptions.note_rainbow",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L483",
+      "source_location": "L484",
       "id": "locales_en_game_prizes_descriptions_note_rainbow",
       "community": 1,
       "norm_label": "game.prizes.descriptions.note_rainbow"
@@ -19726,7 +19735,7 @@
       "label": "game.prizes.codes.treble_25",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L484",
+      "source_location": "L485",
       "id": "locales_en_game_prizes_codes_treble_25",
       "community": 1,
       "norm_label": "game.prizes.codes.treble_25"
@@ -19735,7 +19744,7 @@
       "label": "game.prizes.descriptions.treble_25",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L485",
+      "source_location": "L486",
       "id": "locales_en_game_prizes_descriptions_treble_25",
       "community": 1,
       "norm_label": "game.prizes.descriptions.treble_25"
@@ -19744,7 +19753,7 @@
       "label": "game.prizes.codes.bass_25",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L486",
+      "source_location": "L487",
       "id": "locales_en_game_prizes_codes_bass_25",
       "community": 1,
       "norm_label": "game.prizes.codes.bass_25"
@@ -19753,7 +19762,7 @@
       "label": "game.prizes.descriptions.bass_25",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L487",
+      "source_location": "L488",
       "id": "locales_en_game_prizes_descriptions_bass_25",
       "community": 1,
       "norm_label": "game.prizes.descriptions.bass_25"
@@ -19762,7 +19771,7 @@
       "label": "game.prizes.codes.both_clefs",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L488",
+      "source_location": "L489",
       "id": "locales_en_game_prizes_codes_both_clefs",
       "community": 1,
       "norm_label": "game.prizes.codes.both_clefs"
@@ -19771,7 +19780,7 @@
       "label": "game.prizes.descriptions.both_clefs",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L489",
+      "source_location": "L490",
       "id": "locales_en_game_prizes_descriptions_both_clefs",
       "community": 1,
       "norm_label": "game.prizes.descriptions.both_clefs"
@@ -19780,7 +19789,7 @@
       "label": "game.prizes.codes.duet",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L490",
+      "source_location": "L491",
       "id": "locales_en_game_prizes_codes_duet",
       "community": 1,
       "norm_label": "game.prizes.codes.duet"
@@ -19789,7 +19798,7 @@
       "label": "game.prizes.descriptions.duet",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L491",
+      "source_location": "L492",
       "id": "locales_en_game_prizes_descriptions_duet",
       "community": 1,
       "norm_label": "game.prizes.descriptions.duet"
@@ -19798,7 +19807,7 @@
       "label": "game.prizes.codes.trio",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L492",
+      "source_location": "L493",
       "id": "locales_en_game_prizes_codes_trio",
       "community": 1,
       "norm_label": "game.prizes.codes.trio"
@@ -19807,7 +19816,7 @@
       "label": "game.prizes.descriptions.trio",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L493",
+      "source_location": "L494",
       "id": "locales_en_game_prizes_descriptions_trio",
       "community": 1,
       "norm_label": "game.prizes.descriptions.trio"
@@ -19816,7 +19825,7 @@
       "label": "game.prizes.codes.quartet",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L494",
+      "source_location": "L495",
       "id": "locales_en_game_prizes_codes_quartet",
       "community": 1,
       "norm_label": "game.prizes.codes.quartet"
@@ -19825,7 +19834,7 @@
       "label": "game.prizes.descriptions.quartet",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L495",
+      "source_location": "L496",
       "id": "locales_en_game_prizes_descriptions_quartet",
       "community": 1,
       "norm_label": "game.prizes.descriptions.quartet"
@@ -19834,7 +19843,7 @@
       "label": "game.prizes.codes.all_difficulties",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L496",
+      "source_location": "L497",
       "id": "locales_en_game_prizes_codes_all_difficulties",
       "community": 1,
       "norm_label": "game.prizes.codes.all_difficulties"
@@ -19843,7 +19852,7 @@
       "label": "game.prizes.descriptions.all_difficulties",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L497",
+      "source_location": "L498",
       "id": "locales_en_game_prizes_descriptions_all_difficulties",
       "community": 1,
       "norm_label": "game.prizes.descriptions.all_difficulties"
@@ -19852,7 +19861,7 @@
       "label": "game.prizes.codes.independent_win",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L498",
+      "source_location": "L499",
       "id": "locales_en_game_prizes_codes_independent_win",
       "community": 1,
       "norm_label": "game.prizes.codes.independent_win"
@@ -19861,7 +19870,7 @@
       "label": "game.prizes.descriptions.independent_win",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L499",
+      "source_location": "L500",
       "id": "locales_en_game_prizes_descriptions_independent_win",
       "community": 1,
       "norm_label": "game.prizes.descriptions.independent_win"
@@ -19870,19 +19879,10 @@
       "label": "game.prizes.codes.days_streak_3",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L500",
+      "source_location": "L501",
       "id": "locales_en_game_prizes_codes_days_streak_3",
       "community": 1,
       "norm_label": "game.prizes.codes.days_streak_3"
-    },
-    {
-      "label": "game.prizes.descriptions.days_streak_3",
-      "file_type": "code",
-      "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L501",
-      "id": "locales_en_game_prizes_descriptions_days_streak_3",
-      "community": 1,
-      "norm_label": "game.prizes.descriptions.days_streak_3"
     },
     {
       "label": "es.json",
@@ -24025,19 +24025,28 @@
       "norm_label": "game.avatar.use"
     },
     {
-      "label": "game.avatar.discard",
+      "label": "game.avatar.delete",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
       "source_location": "L461",
-      "id": "locales_es_game_avatar_discard",
+      "id": "locales_es_game_avatar_delete",
       "community": 0,
-      "norm_label": "game.avatar.discard"
+      "norm_label": "game.avatar.delete"
+    },
+    {
+      "label": "game.avatar.deleteSaved",
+      "file_type": "code",
+      "source_file": "frontend/src/i18n/locales/es.json",
+      "source_location": "L462",
+      "id": "locales_es_game_avatar_deletesaved",
+      "community": 0,
+      "norm_label": "game.avatar.deletesaved"
     },
     {
       "label": "game.avatar.quota",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L462",
+      "source_location": "L463",
       "id": "locales_es_game_avatar_quota",
       "community": 0,
       "norm_label": "game.avatar.quota"
@@ -24046,7 +24055,7 @@
       "label": "game.avatar.quotaExhausted",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L463",
+      "source_location": "L464",
       "id": "locales_es_game_avatar_quotaexhausted",
       "community": 0,
       "norm_label": "game.avatar.quotaexhausted"
@@ -24055,7 +24064,7 @@
       "label": "game.avatar.flagged",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L464",
+      "source_location": "L465",
       "id": "locales_es_game_avatar_flagged",
       "community": 0,
       "norm_label": "game.avatar.flagged"
@@ -24064,7 +24073,7 @@
       "label": "game.avatar.error",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L465",
+      "source_location": "L466",
       "id": "locales_es_game_avatar_error",
       "community": 0,
       "norm_label": "game.avatar.error"
@@ -24073,7 +24082,7 @@
       "label": "game.errors.roundNotActive",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L466",
+      "source_location": "L467",
       "id": "locales_es_game_errors_roundnotactive",
       "community": 0,
       "norm_label": "game.errors.roundnotactive"
@@ -24082,7 +24091,7 @@
       "label": "game.errors.generic",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L467",
+      "source_location": "L468",
       "id": "locales_es_game_errors_generic",
       "community": 0,
       "norm_label": "game.errors.generic"
@@ -24091,7 +24100,7 @@
       "label": "game.prizes.title",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L468",
+      "source_location": "L469",
       "id": "locales_es_game_prizes_title",
       "community": 0,
       "norm_label": "game.prizes.title"
@@ -24100,7 +24109,7 @@
       "label": "game.prizes.empty",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L469",
+      "source_location": "L470",
       "id": "locales_es_game_prizes_empty",
       "community": 0,
       "norm_label": "game.prizes.empty"
@@ -24109,7 +24118,7 @@
       "label": "game.prizes.newPrize",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L470",
+      "source_location": "L471",
       "id": "locales_es_game_prizes_newprize",
       "community": 0,
       "norm_label": "game.prizes.newprize"
@@ -24118,7 +24127,7 @@
       "label": "game.prizes.all",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L471",
+      "source_location": "L472",
       "id": "locales_es_game_prizes_all",
       "community": 0,
       "norm_label": "game.prizes.all"
@@ -24127,7 +24136,7 @@
       "label": "game.prizes.codes.first_round",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L472",
+      "source_location": "L473",
       "id": "locales_es_game_prizes_codes_first_round",
       "community": 0,
       "norm_label": "game.prizes.codes.first_round"
@@ -24136,7 +24145,7 @@
       "label": "game.prizes.descriptions.first_round",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L473",
+      "source_location": "L474",
       "id": "locales_es_game_prizes_descriptions_first_round",
       "community": 0,
       "norm_label": "game.prizes.descriptions.first_round"
@@ -24145,7 +24154,7 @@
       "label": "game.prizes.codes.first_win",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L474",
+      "source_location": "L475",
       "id": "locales_es_game_prizes_codes_first_win",
       "community": 0,
       "norm_label": "game.prizes.codes.first_win"
@@ -24154,7 +24163,7 @@
       "label": "game.prizes.descriptions.first_win",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L475",
+      "source_location": "L476",
       "id": "locales_es_game_prizes_descriptions_first_win",
       "community": 0,
       "norm_label": "game.prizes.descriptions.first_win"
@@ -24163,7 +24172,7 @@
       "label": "game.prizes.codes.perfect_round",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L476",
+      "source_location": "L477",
       "id": "locales_es_game_prizes_codes_perfect_round",
       "community": 0,
       "norm_label": "game.prizes.codes.perfect_round"
@@ -24172,7 +24181,7 @@
       "label": "game.prizes.descriptions.perfect_round",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L477",
+      "source_location": "L478",
       "id": "locales_es_game_prizes_descriptions_perfect_round",
       "community": 0,
       "norm_label": "game.prizes.descriptions.perfect_round"
@@ -24181,7 +24190,7 @@
       "label": "game.prizes.codes.correct_streak_10",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L478",
+      "source_location": "L479",
       "id": "locales_es_game_prizes_codes_correct_streak_10",
       "community": 0,
       "norm_label": "game.prizes.codes.correct_streak_10"
@@ -24190,7 +24199,7 @@
       "label": "game.prizes.descriptions.correct_streak_10",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L479",
+      "source_location": "L480",
       "id": "locales_es_game_prizes_descriptions_correct_streak_10",
       "community": 0,
       "norm_label": "game.prizes.descriptions.correct_streak_10"
@@ -24199,7 +24208,7 @@
       "label": "game.prizes.codes.notes_100",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L480",
+      "source_location": "L481",
       "id": "locales_es_game_prizes_codes_notes_100",
       "community": 0,
       "norm_label": "game.prizes.codes.notes_100"
@@ -24208,7 +24217,7 @@
       "label": "game.prizes.descriptions.notes_100",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L481",
+      "source_location": "L482",
       "id": "locales_es_game_prizes_descriptions_notes_100",
       "community": 0,
       "norm_label": "game.prizes.descriptions.notes_100"
@@ -24217,7 +24226,7 @@
       "label": "game.prizes.codes.note_rainbow",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L482",
+      "source_location": "L483",
       "id": "locales_es_game_prizes_codes_note_rainbow",
       "community": 0,
       "norm_label": "game.prizes.codes.note_rainbow"
@@ -24226,7 +24235,7 @@
       "label": "game.prizes.descriptions.note_rainbow",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L483",
+      "source_location": "L484",
       "id": "locales_es_game_prizes_descriptions_note_rainbow",
       "community": 0,
       "norm_label": "game.prizes.descriptions.note_rainbow"
@@ -24235,7 +24244,7 @@
       "label": "game.prizes.codes.treble_25",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L484",
+      "source_location": "L485",
       "id": "locales_es_game_prizes_codes_treble_25",
       "community": 0,
       "norm_label": "game.prizes.codes.treble_25"
@@ -24244,7 +24253,7 @@
       "label": "game.prizes.descriptions.treble_25",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L485",
+      "source_location": "L486",
       "id": "locales_es_game_prizes_descriptions_treble_25",
       "community": 0,
       "norm_label": "game.prizes.descriptions.treble_25"
@@ -24253,7 +24262,7 @@
       "label": "game.prizes.codes.bass_25",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L486",
+      "source_location": "L487",
       "id": "locales_es_game_prizes_codes_bass_25",
       "community": 0,
       "norm_label": "game.prizes.codes.bass_25"
@@ -24262,7 +24271,7 @@
       "label": "game.prizes.descriptions.bass_25",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L487",
+      "source_location": "L488",
       "id": "locales_es_game_prizes_descriptions_bass_25",
       "community": 0,
       "norm_label": "game.prizes.descriptions.bass_25"
@@ -24271,7 +24280,7 @@
       "label": "game.prizes.codes.both_clefs",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L488",
+      "source_location": "L489",
       "id": "locales_es_game_prizes_codes_both_clefs",
       "community": 0,
       "norm_label": "game.prizes.codes.both_clefs"
@@ -24280,7 +24289,7 @@
       "label": "game.prizes.descriptions.both_clefs",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L489",
+      "source_location": "L490",
       "id": "locales_es_game_prizes_descriptions_both_clefs",
       "community": 0,
       "norm_label": "game.prizes.descriptions.both_clefs"
@@ -24289,7 +24298,7 @@
       "label": "game.prizes.codes.duet",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L490",
+      "source_location": "L491",
       "id": "locales_es_game_prizes_codes_duet",
       "community": 0,
       "norm_label": "game.prizes.codes.duet"
@@ -24298,7 +24307,7 @@
       "label": "game.prizes.descriptions.duet",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L491",
+      "source_location": "L492",
       "id": "locales_es_game_prizes_descriptions_duet",
       "community": 0,
       "norm_label": "game.prizes.descriptions.duet"
@@ -24307,7 +24316,7 @@
       "label": "game.prizes.codes.trio",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L492",
+      "source_location": "L493",
       "id": "locales_es_game_prizes_codes_trio",
       "community": 0,
       "norm_label": "game.prizes.codes.trio"
@@ -24316,7 +24325,7 @@
       "label": "game.prizes.descriptions.trio",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L493",
+      "source_location": "L494",
       "id": "locales_es_game_prizes_descriptions_trio",
       "community": 0,
       "norm_label": "game.prizes.descriptions.trio"
@@ -24325,7 +24334,7 @@
       "label": "game.prizes.codes.quartet",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L494",
+      "source_location": "L495",
       "id": "locales_es_game_prizes_codes_quartet",
       "community": 0,
       "norm_label": "game.prizes.codes.quartet"
@@ -24334,7 +24343,7 @@
       "label": "game.prizes.descriptions.quartet",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L495",
+      "source_location": "L496",
       "id": "locales_es_game_prizes_descriptions_quartet",
       "community": 0,
       "norm_label": "game.prizes.descriptions.quartet"
@@ -24343,7 +24352,7 @@
       "label": "game.prizes.codes.all_difficulties",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L496",
+      "source_location": "L497",
       "id": "locales_es_game_prizes_codes_all_difficulties",
       "community": 0,
       "norm_label": "game.prizes.codes.all_difficulties"
@@ -24352,7 +24361,7 @@
       "label": "game.prizes.descriptions.all_difficulties",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L497",
+      "source_location": "L498",
       "id": "locales_es_game_prizes_descriptions_all_difficulties",
       "community": 0,
       "norm_label": "game.prizes.descriptions.all_difficulties"
@@ -24361,7 +24370,7 @@
       "label": "game.prizes.codes.independent_win",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L498",
+      "source_location": "L499",
       "id": "locales_es_game_prizes_codes_independent_win",
       "community": 0,
       "norm_label": "game.prizes.codes.independent_win"
@@ -24370,7 +24379,7 @@
       "label": "game.prizes.descriptions.independent_win",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L499",
+      "source_location": "L500",
       "id": "locales_es_game_prizes_descriptions_independent_win",
       "community": 0,
       "norm_label": "game.prizes.descriptions.independent_win"
@@ -24379,19 +24388,10 @@
       "label": "game.prizes.codes.days_streak_3",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L500",
+      "source_location": "L501",
       "id": "locales_es_game_prizes_codes_days_streak_3",
       "community": 0,
       "norm_label": "game.prizes.codes.days_streak_3"
-    },
-    {
-      "label": "game.prizes.descriptions.days_streak_3",
-      "file_type": "code",
-      "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L501",
-      "id": "locales_es_game_prizes_descriptions_days_streak_3",
-      "community": 0,
-      "norm_label": "game.prizes.descriptions.days_streak_3"
     },
     {
       "label": "release.py",
@@ -25731,7 +25731,7 @@
       "source_file": "",
       "source_location": "",
       "id": "basesettings",
-      "community": 367,
+      "community": 372,
       "norm_label": "basesettings"
     },
     {
@@ -26055,7 +26055,7 @@
       "source_file": "backend/app/game/models.py",
       "source_location": "L89",
       "id": "game_models_round",
-      "community": 10,
+      "community": 105,
       "norm_label": "round"
     },
     {
@@ -26064,7 +26064,7 @@
       "source_file": "backend/app/game/models.py",
       "source_location": "L144",
       "id": "game_models_taskattempt",
-      "community": 10,
+      "community": 105,
       "norm_label": "taskattempt"
     },
     {
@@ -26118,7 +26118,7 @@
       "source_file": "backend/app/game/api/rounds.py",
       "source_location": "L1",
       "id": "backend_app_game_api_rounds_py",
-      "community": 10,
+      "community": 105,
       "norm_label": "rounds.py"
     },
     {
@@ -26127,7 +26127,7 @@
       "source_file": "backend/app/game/api/rounds.py",
       "source_location": "L15",
       "id": "api_rounds_createroundbody",
-      "community": 10,
+      "community": 105,
       "norm_label": "createroundbody"
     },
     {
@@ -26145,7 +26145,7 @@
       "source_file": "backend/app/game/api/rounds.py",
       "source_location": "L23",
       "id": "api_rounds_noteanswer",
-      "community": 10,
+      "community": 105,
       "norm_label": "noteanswer"
     },
     {
@@ -26154,7 +26154,7 @@
       "source_file": "backend/app/game/api/rounds.py",
       "source_location": "L30",
       "id": "api_rounds_submittaskbody",
-      "community": 10,
+      "community": 105,
       "norm_label": "submittaskbody"
     },
     {
@@ -26163,7 +26163,7 @@
       "source_file": "backend/app/game/api/rounds.py",
       "source_location": "L38",
       "id": "api_rounds_require_answers",
-      "community": 10,
+      "community": 105,
       "norm_label": "require_answers()"
     },
     {
@@ -26181,7 +26181,7 @@
       "source_file": "backend/app/game/api/rounds.py",
       "source_location": "L105",
       "id": "api_rounds_submit_task",
-      "community": 10,
+      "community": 105,
       "norm_label": "submit_task()"
     },
     {
@@ -26631,7 +26631,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L1",
       "id": "backend_app_game_services_rounds_py",
-      "community": 75,
+      "community": 160,
       "norm_label": "rounds.py"
     },
     {
@@ -26640,7 +26640,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L23",
       "id": "services_rounds_time_limit_s",
-      "community": 75,
+      "community": 160,
       "norm_label": "time_limit_s()"
     },
     {
@@ -26649,7 +26649,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L29",
       "id": "services_rounds_score_task",
-      "community": 75,
+      "community": 308,
       "norm_label": "score_task()"
     },
     {
@@ -26658,7 +26658,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L47",
       "id": "services_rounds_validate_notes",
-      "community": 75,
+      "community": 160,
       "norm_label": "_validate_notes()"
     },
     {
@@ -26667,7 +26667,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L62",
       "id": "services_rounds_task_payload",
-      "community": 75,
+      "community": 160,
       "norm_label": "task_payload()"
     },
     {
@@ -26676,7 +26676,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L81",
       "id": "services_rounds_check_timeout",
-      "community": 75,
+      "community": 160,
       "norm_label": "check_timeout()"
     },
     {
@@ -26694,7 +26694,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L117",
       "id": "services_rounds_create_round",
-      "community": 10,
+      "community": 105,
       "norm_label": "create_round()"
     },
     {
@@ -26703,7 +26703,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L168",
       "id": "services_rounds_submit_task",
-      "community": 75,
+      "community": 160,
       "norm_label": "submit_task()"
     },
     {
@@ -26712,7 +26712,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L266",
       "id": "services_rounds_build_submit_response",
-      "community": 75,
+      "community": 160,
       "norm_label": "_build_submit_response()"
     },
     {
@@ -26721,7 +26721,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L305",
       "id": "services_rounds_finalize_round",
-      "community": 75,
+      "community": 160,
       "norm_label": "_finalize_round()"
     },
     {
@@ -26730,7 +26730,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L389",
       "id": "services_rounds_compute_level",
-      "community": 75,
+      "community": 319,
       "norm_label": "_compute_level()"
     },
     {
@@ -26739,7 +26739,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L397",
       "id": "services_rounds_check_trophy",
-      "community": 75,
+      "community": 160,
       "norm_label": "_check_trophy()"
     },
     {
@@ -26748,7 +26748,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L424",
       "id": "services_rounds_practice_hint",
-      "community": 75,
+      "community": 160,
       "norm_label": "_practice_hint()"
     },
     {
@@ -26892,7 +26892,7 @@
       "source_file": "backend/app/game/services/achievements.py",
       "source_location": "L1",
       "id": "backend_app_game_services_achievements_py",
-      "community": 10,
+      "community": 105,
       "norm_label": "achievements.py"
     },
     {
@@ -26901,7 +26901,7 @@
       "source_file": "backend/app/game/services/achievements.py",
       "source_location": "L34",
       "id": "services_achievements_evaluate_achievements",
-      "community": 10,
+      "community": 105,
       "norm_label": "evaluate_achievements()"
     },
     {
@@ -26946,7 +26946,7 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L58",
       "id": "services_avatars_start_avatar_job",
-      "community": 124,
+      "community": 51,
       "norm_label": "start_avatar_job()"
     },
     {
@@ -27036,7 +27036,7 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L288",
       "id": "services_avatars_review_avatar",
-      "community": 124,
+      "community": 51,
       "norm_label": "review_avatar()"
     },
     {
@@ -27549,7 +27549,7 @@
       "source_file": "backend/app/api/omr.py",
       "source_location": "L1",
       "id": "backend_app_api_omr_py",
-      "community": 105,
+      "community": 82,
       "norm_label": "omr.py"
     },
     {
@@ -27576,7 +27576,7 @@
       "source_file": "backend/app/api/omr.py",
       "source_location": "L27",
       "id": "api_omr_output",
-      "community": 105,
+      "community": 82,
       "norm_label": "output()"
     },
     {
@@ -27585,7 +27585,7 @@
       "source_file": "backend/app/api/omr.py",
       "source_location": "L38",
       "id": "api_omr_status",
-      "community": 105,
+      "community": 82,
       "norm_label": "status()"
     },
     {
@@ -27594,7 +27594,7 @@
       "source_file": "backend/app/api/omr.py",
       "source_location": "L44",
       "id": "api_omr_rerun",
-      "community": 105,
+      "community": 82,
       "norm_label": "rerun()"
     },
     {
@@ -27603,7 +27603,7 @@
       "source_file": "backend/app/api/omr.py",
       "source_location": "L50",
       "id": "api_omr_review",
-      "community": 105,
+      "community": 82,
       "norm_label": "review()"
     },
     {
@@ -27612,7 +27612,7 @@
       "source_file": "backend/app/api/omr.py",
       "source_location": "L60",
       "id": "api_omr_score",
-      "community": 105,
+      "community": 82,
       "norm_label": "score()"
     },
     {
@@ -27756,7 +27756,7 @@
       "source_file": "backend/app/api/request_log.py",
       "source_location": "L1",
       "id": "backend_app_api_request_log_py",
-      "community": 10,
+      "community": 379,
       "norm_label": "request_log.py"
     },
     {
@@ -27765,7 +27765,7 @@
       "source_file": "backend/app/api/request_log.py",
       "source_location": "L9",
       "id": "api_request_log_requestlog",
-      "community": 10,
+      "community": 379,
       "norm_label": "requestlog"
     },
     {
@@ -27774,7 +27774,7 @@
       "source_file": "backend/app/api/request_log.py",
       "source_location": "L10",
       "id": "api_request_log_requestlog_init",
-      "community": 10,
+      "community": 379,
       "norm_label": ".__init__()"
     },
     {
@@ -27783,7 +27783,7 @@
       "source_file": "backend/app/api/request_log.py",
       "source_location": "L13",
       "id": "api_request_log_requestlog_call",
-      "community": 10,
+      "community": 379,
       "norm_label": ".__call__()"
     },
     {
@@ -28269,7 +28269,7 @@
       "source_file": "backend/app/services/media.py",
       "source_location": "L1",
       "id": "backend_app_services_media_py",
-      "community": 198,
+      "community": 35,
       "norm_label": "media.py"
     },
     {
@@ -28278,7 +28278,7 @@
       "source_file": "backend/app/services/media.py",
       "source_location": "L36",
       "id": "services_media_run_media",
-      "community": 198,
+      "community": 35,
       "norm_label": "run_media()"
     },
     {
@@ -28287,7 +28287,7 @@
       "source_file": "backend/app/services/media.py",
       "source_location": "L61",
       "id": "services_media_duration",
-      "community": 198,
+      "community": 35,
       "norm_label": "duration()"
     },
     {
@@ -28296,7 +28296,7 @@
       "source_file": "backend/app/services/media.py",
       "source_location": "L93",
       "id": "services_media_prepare_media",
-      "community": 198,
+      "community": 35,
       "norm_label": "prepare_media()"
     },
     {
@@ -28647,7 +28647,7 @@
       "source_file": "backend/app/services/listening.py",
       "source_location": "L155",
       "id": "services_listening_journal",
-      "community": 38,
+      "community": 198,
       "norm_label": "journal()"
     },
     {
@@ -29817,7 +29817,7 @@
       "source_file": "backend/tests/test_exercises.py",
       "source_location": "L255",
       "id": "tests_test_exercises_test_common_audio_formats_convert",
-      "community": 198,
+      "community": 35,
       "norm_label": "test_common_audio_formats_convert()"
     },
     {
@@ -30177,7 +30177,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L1",
       "id": "backend_tests_test_listening_py",
-      "community": 35,
+      "community": 122,
       "norm_label": "test_listening.py"
     },
     {
@@ -30186,7 +30186,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L24",
       "id": "tests_test_listening_audio_exercise",
-      "community": 35,
+      "community": 122,
       "norm_label": "audio_exercise()"
     },
     {
@@ -30195,7 +30195,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L34",
       "id": "tests_test_listening_event",
-      "community": 35,
+      "community": 122,
       "norm_label": "event()"
     },
     {
@@ -30204,7 +30204,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L53",
       "id": "tests_test_listening_test_closed_tab_threshold_and_idempotent_terminal_events",
-      "community": 35,
+      "community": 122,
       "norm_label": "test_closed_tab_threshold_and_idempotent_terminal_events()"
     },
     {
@@ -30213,7 +30213,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L83",
       "id": "tests_test_listening_test_end_before_start_and_ended_override",
-      "community": 35,
+      "community": 122,
       "norm_label": "test_end_before_start_and_ended_override()"
     },
     {
@@ -30222,7 +30222,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L97",
       "id": "tests_test_listening_test_deleted_exercise_and_replaced_audio_preserve_journal",
-      "community": 35,
+      "community": 122,
       "norm_label": "test_deleted_exercise_and_replaced_audio_preserve_journal()"
     },
     {
@@ -30231,7 +30231,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L132",
       "id": "tests_test_listening_test_audio_version_rejects_replacement_without_losing_existing_session",
-      "community": 35,
+      "community": 122,
       "norm_label": "test_audio_version_rejects_replacement_without_losing_existing_session()"
     },
     {
@@ -30240,7 +30240,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L177",
       "id": "tests_test_listening_test_navigation_persistence_random_and_deleted_pointer",
-      "community": 35,
+      "community": 122,
       "norm_label": "test_navigation_persistence_random_and_deleted_pointer()"
     },
     {
@@ -30249,7 +30249,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L233",
       "id": "tests_test_listening_test_journal_permissions_csrf_filters_and_validation",
-      "community": 35,
+      "community": 122,
       "norm_label": "test_journal_permissions_csrf_filters_and_validation()"
     },
     {
@@ -30258,7 +30258,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L271",
       "id": "tests_test_listening_test_concurrent_delivery_creates_one_row_and_preserves_maximum",
-      "community": 35,
+      "community": 122,
       "norm_label": "test_concurrent_delivery_creates_one_row_and_preserves_maximum()"
     },
     {
@@ -30267,7 +30267,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L295",
       "id": "tests_test_listening_test_session_ownership_conflicts_and_image_only",
-      "community": 35,
+      "community": 122,
       "norm_label": "test_session_ownership_conflicts_and_image_only()"
     },
     {
@@ -30276,7 +30276,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L327",
       "id": "tests_test_listening_test_empty_navigation_and_completion_does_not_skip_twice",
-      "community": 35,
+      "community": 122,
       "norm_label": "test_empty_navigation_and_completion_does_not_skip_twice()"
     },
     {
@@ -30285,7 +30285,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L358",
       "id": "tests_test_listening_test_completion_recovers_deleted_saved_pointer",
-      "community": 35,
+      "community": 122,
       "norm_label": "test_completion_recovers_deleted_saved_pointer()"
     },
     {
@@ -30339,7 +30339,7 @@
       "source_file": "backend/tests/game/test_achievements.py",
       "source_location": "L1",
       "id": "backend_tests_game_test_achievements_py",
-      "community": 10,
+      "community": 105,
       "norm_label": "test_achievements.py"
     },
     {
@@ -30348,7 +30348,7 @@
       "source_file": "backend/tests/game/test_achievements.py",
       "source_location": "L16",
       "id": "game_test_achievements_test_achievement_collection_requires_authentication_and_ownership",
-      "community": 10,
+      "community": 105,
       "norm_label": "test_achievement_collection_requires_authentication_and_ownership()"
     },
     {
@@ -30357,7 +30357,7 @@
       "source_file": "backend/tests/game/test_achievements.py",
       "source_location": "L64",
       "id": "game_test_achievements_test_achievement_catalog_has_twenty_distinct_rewards",
-      "community": 10,
+      "community": 105,
       "norm_label": "test_achievement_catalog_has_twenty_distinct_rewards()"
     },
     {
@@ -30366,7 +30366,7 @@
       "source_file": "backend/tests/game/test_achievements.py",
       "source_location": "L68",
       "id": "game_test_achievements_test_rewards_count_positions_days_and_streaks_and_survive_reset",
-      "community": 10,
+      "community": 105,
       "norm_label": "test_rewards_count_positions_days_and_streaks_and_survive_reset()"
     },
     {
@@ -30375,7 +30375,7 @@
       "source_file": "backend/tests/game/test_achievements.py",
       "source_location": "L149",
       "id": "game_test_achievements_test_correct_positions_count_without_partial_task_xp_and_ignore_active_rounds",
-      "community": 10,
+      "community": 105,
       "norm_label": "test_correct_positions_count_without_partial_task_xp_and_ignore_active_rounds()"
     },
     {
@@ -30672,7 +30672,7 @@
       "source_file": "backend/tests/game/test_progression.py",
       "source_location": "L1",
       "id": "backend_tests_game_test_progression_py",
-      "community": 75,
+      "community": 319,
       "norm_label": "test_progression.py"
     },
     {
@@ -30681,7 +30681,7 @@
       "source_file": "backend/tests/game/test_progression.py",
       "source_location": "L5",
       "id": "game_test_progression_test_level_zero_at_zero_xp",
-      "community": 75,
+      "community": 319,
       "norm_label": "test_level_zero_at_zero_xp()"
     },
     {
@@ -30690,7 +30690,7 @@
       "source_file": "backend/tests/game/test_progression.py",
       "source_location": "L9",
       "id": "game_test_progression_test_level_advances_at_threshold",
-      "community": 75,
+      "community": 319,
       "norm_label": "test_level_advances_at_threshold()"
     },
     {
@@ -30699,7 +30699,7 @@
       "source_file": "backend/tests/game/test_progression.py",
       "source_location": "L14",
       "id": "game_test_progression_test_level_does_not_exceed_max",
-      "community": 75,
+      "community": 319,
       "norm_label": "test_level_does_not_exceed_max()"
     },
     {
@@ -30708,7 +30708,7 @@
       "source_file": "backend/tests/game/test_progression.py",
       "source_location": "L18",
       "id": "game_test_progression_test_level_between_thresholds",
-      "community": 75,
+      "community": 319,
       "norm_label": "test_level_between_thresholds()"
     },
     {
@@ -30717,7 +30717,7 @@
       "source_file": "backend/tests/game/test_progression.py",
       "source_location": "L23",
       "id": "game_test_progression_test_trophy_thresholds_sorted",
-      "community": 75,
+      "community": 319,
       "norm_label": "test_trophy_thresholds_sorted()"
     },
     {
@@ -30825,7 +30825,7 @@
       "source_file": "backend/tests/game/test_scoring.py",
       "source_location": "L1",
       "id": "backend_tests_game_test_scoring_py",
-      "community": 75,
+      "community": 308,
       "norm_label": "test_scoring.py"
     },
     {
@@ -30834,7 +30834,7 @@
       "source_file": "backend/tests/game/test_scoring.py",
       "source_location": "L4",
       "id": "game_test_scoring_test_all_correct",
-      "community": 75,
+      "community": 308,
       "norm_label": "test_all_correct()"
     },
     {
@@ -30843,7 +30843,7 @@
       "source_file": "backend/tests/game/test_scoring.py",
       "source_location": "L10",
       "id": "game_test_scoring_test_wrong_answer",
-      "community": 75,
+      "community": 308,
       "norm_label": "test_wrong_answer()"
     },
     {
@@ -30852,7 +30852,7 @@
       "source_file": "backend/tests/game/test_scoring.py",
       "source_location": "L16",
       "id": "game_test_scoring_test_timeout",
-      "community": 75,
+      "community": 308,
       "norm_label": "test_timeout()"
     },
     {
@@ -30861,7 +30861,7 @@
       "source_file": "backend/tests/game/test_scoring.py",
       "source_location": "L20",
       "id": "game_test_scoring_test_wrong_order",
-      "community": 75,
+      "community": 308,
       "norm_label": "test_wrong_order()"
     },
     {
@@ -30870,7 +30870,7 @@
       "source_file": "backend/tests/game/test_scoring.py",
       "source_location": "L26",
       "id": "game_test_scoring_test_note_only_rules_ignore_octaves_but_preserve_names_and_order",
-      "community": 75,
+      "community": 308,
       "norm_label": "test_note_only_rules_ignore_octaves_but_preserve_names_and_order()"
     },
     {
@@ -30879,7 +30879,7 @@
       "source_file": "backend/tests/game/test_scoring.py",
       "source_location": "L34",
       "id": "game_test_scoring_test_legacy_rules_still_require_the_written_octave",
-      "community": 75,
+      "community": 308,
       "norm_label": "test_legacy_rules_still_require_the_written_octave()"
     },
     {
@@ -31176,7 +31176,7 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L1",
       "id": "backend_tests_game_test_avatar_approval_py",
-      "community": 124,
+      "community": 51,
       "norm_label": "test_avatar_approval.py"
     },
     {
@@ -31185,7 +31185,7 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L34",
       "id": "game_test_avatar_approval_review_job",
-      "community": 124,
+      "community": 51,
       "norm_label": "review_job()"
     },
     {
@@ -31194,7 +31194,7 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L79",
       "id": "game_test_avatar_approval_make_ready",
-      "community": 124,
+      "community": 51,
       "norm_label": "make_ready()"
     },
     {
@@ -31203,7 +31203,7 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L101",
       "id": "game_test_avatar_approval_test_approved_avatar_is_shared_but_unapproved_avatar_stays_private",
-      "community": 124,
+      "community": 51,
       "norm_label": "test_approved_avatar_is_shared_but_unapproved_avatar_stays_private()"
     },
     {
@@ -31212,7 +31212,7 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L196",
       "id": "game_test_avatar_approval_synthetic_sheet",
-      "community": 124,
+      "community": 51,
       "norm_label": "synthetic_sheet()"
     },
     {
@@ -31230,7 +31230,7 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L236",
       "id": "game_test_avatar_approval_test_pending_job_hides_paths_even_after_generation",
-      "community": 124,
+      "community": 51,
       "norm_label": "test_pending_job_hides_paths_even_after_generation()"
     },
     {
@@ -31239,7 +31239,7 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L258",
       "id": "game_test_avatar_approval_test_image_moderation_sends_text_and_image",
-      "community": 124,
+      "community": 51,
       "norm_label": "test_image_moderation_sends_text_and_image()"
     },
     {
@@ -31248,7 +31248,7 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L292",
       "id": "game_test_avatar_approval_test_generation_marks_pending_selection",
-      "community": 124,
+      "community": 51,
       "norm_label": "test_generation_marks_pending_selection()"
     },
     {
@@ -31257,7 +31257,7 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L303",
       "id": "game_test_avatar_approval_test_review_is_idempotent_and_opposite_decision_conflicts",
-      "community": 124,
+      "community": 51,
       "norm_label": "test_review_is_idempotent_and_opposite_decision_conflicts()"
     },
     {
@@ -31266,7 +31266,7 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L333",
       "id": "game_test_avatar_approval_test_approval_does_not_override_later_builtin_selection",
-      "community": 124,
+      "community": 51,
       "norm_label": "test_approval_does_not_override_later_builtin_selection()"
     },
     {
@@ -31275,7 +31275,7 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L348",
       "id": "game_test_avatar_approval_test_concurrent_opposite_reviews_cannot_overwrite_each_other",
-      "community": 124,
+      "community": 51,
       "norm_label": "test_concurrent_opposite_reviews_cannot_overwrite_each_other()"
     },
     {
@@ -31284,7 +31284,7 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L375",
       "id": "game_test_avatar_approval_test_review_queue_paginates_only_ready_pending_jobs",
-      "community": 124,
+      "community": 51,
       "norm_label": "test_review_queue_paginates_only_ready_pending_jobs()"
     },
     {
@@ -31293,7 +31293,7 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L427",
       "id": "game_test_avatar_approval_test_all_worker_failures_release_quota_atomically",
-      "community": 124,
+      "community": 51,
       "norm_label": "test_all_worker_failures_release_quota_atomically()"
     },
     {
@@ -31302,7 +31302,7 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L448",
       "id": "game_test_avatar_approval_test_worker_moderates_image_before_extraction_and_waits_for_review",
-      "community": 124,
+      "community": 51,
       "norm_label": "test_worker_moderates_image_before_extraction_and_waits_for_review()"
     },
     {
@@ -31311,7 +31311,7 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L500",
       "id": "game_test_avatar_approval_test_provider_error_process_releases_quota",
-      "community": 124,
+      "community": 51,
       "norm_label": "test_provider_error_process_releases_quota()"
     },
     {
@@ -31320,7 +31320,7 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L522",
       "id": "game_test_avatar_approval_test_saved_sheet_recovery_requires_verified_image_moderation",
-      "community": 124,
+      "community": 51,
       "norm_label": "test_saved_sheet_recovery_requires_verified_image_moderation()"
     },
     {
@@ -31329,7 +31329,7 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L595",
       "id": "game_test_avatar_approval_test_incomplete_or_flagged_moderation_proof_is_not_trusted",
-      "community": 124,
+      "community": 51,
       "norm_label": "test_incomplete_or_flagged_moderation_proof_is_not_trusted()"
     },
     {
@@ -31338,7 +31338,7 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L604",
       "id": "game_test_avatar_approval_test_timezone_reset_handles_daylight_saving",
-      "community": 124,
+      "community": 51,
       "norm_label": "test_timezone_reset_handles_daylight_saving()"
     },
     {
@@ -31356,7 +31356,7 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L652",
       "id": "game_test_avatar_approval_test_manager_queue_review_and_student_file_permissions",
-      "community": 124,
+      "community": 51,
       "norm_label": "test_manager_queue_review_and_student_file_permissions()"
     },
     {
@@ -31482,7 +31482,7 @@
       "source_file": "backend/tests/game/test_avatar_generation.py",
       "source_location": "L110",
       "id": "game_test_avatar_generation_avatar_job",
-      "community": 124,
+      "community": 51,
       "norm_label": "avatar_job()"
     },
     {
@@ -31671,7 +31671,7 @@
       "source_file": "backend/tests/game/test_avatar_generation.py",
       "source_location": "L640",
       "id": "game_test_avatar_generation_test_repeated_requests_reuse_a_pending_job_without_consuming_quota",
-      "community": 124,
+      "community": 51,
       "norm_label": "test_repeated_requests_reuse_a_pending_job_without_consuming_quota()"
     },
     {
@@ -34722,7 +34722,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L35",
       "id": "telegram_bot_settings",
-      "community": 367,
+      "community": 372,
       "norm_label": "settings"
     },
     {
@@ -35037,7 +35037,7 @@
       "source_file": "prototypes/telegram/bot.py",
       "source_location": "L574",
       "id": "telegram_bot_main",
-      "community": 367,
+      "community": 372,
       "norm_label": "main()"
     },
     {
@@ -37260,7 +37260,7 @@
       "source_file": "prototypes/pwa/src/App.tsx",
       "source_location": "L1",
       "id": "prototypes_pwa_src_app_tsx",
-      "community": 70,
+      "community": 71,
       "norm_label": "app.tsx"
     },
     {
@@ -37269,7 +37269,7 @@
       "source_file": "prototypes/pwa/src/App.tsx",
       "source_location": "L16",
       "id": "src_app_receipt",
-      "community": 70,
+      "community": 71,
       "norm_label": "receipt()"
     },
     {
@@ -37278,7 +37278,7 @@
       "source_file": "prototypes/pwa/src/main.tsx",
       "source_location": "L1",
       "id": "prototypes_pwa_src_main_tsx",
-      "community": 70,
+      "community": 4,
       "norm_label": "main.tsx"
     },
     {
@@ -37332,7 +37332,7 @@
       "source_file": "prototypes/pwa/src/sw.ts",
       "source_location": "L1",
       "id": "prototypes_pwa_src_sw_ts",
-      "community": 71,
+      "community": 263,
       "norm_label": "sw.ts"
     },
     {
@@ -37494,7 +37494,7 @@
       "source_file": "prototypes/pwa/src/share.ts",
       "source_location": "L29",
       "id": "src_share_issharerequest",
-      "community": 71,
+      "community": 263,
       "norm_label": "issharerequest()"
     },
     {
@@ -37503,7 +37503,7 @@
       "source_file": "prototypes/pwa/src/share.ts",
       "source_location": "L38",
       "id": "src_share_handleshare",
-      "community": 71,
+      "community": 263,
       "norm_label": "handleshare()"
     },
     {
@@ -37530,7 +37530,7 @@
       "source_file": "prototypes/pwa/src/share.test.ts",
       "source_location": "L1",
       "id": "prototypes_pwa_src_share_test_ts",
-      "community": 71,
+      "community": 263,
       "norm_label": "share.test.ts"
     },
     {
@@ -37539,7 +37539,7 @@
       "source_file": "prototypes/pwa/src/share.test.ts",
       "source_location": "L12",
       "id": "src_share_test_request",
-      "community": 71,
+      "community": 263,
       "norm_label": "request()"
     },
     {
@@ -37548,7 +37548,7 @@
       "source_file": "prototypes/pwa/src/share.test.ts",
       "source_location": "L21",
       "id": "src_share_test_audio",
-      "community": 71,
+      "community": 263,
       "norm_label": "audio()"
     },
     {
@@ -37557,7 +37557,7 @@
       "source_file": "prototypes/pwa/src/share.test.ts",
       "source_location": "L42",
       "id": "src_share_test_body",
-      "community": 71,
+      "community": 263,
       "norm_label": "body"
     },
     {
@@ -37566,7 +37566,7 @@
       "source_file": "prototypes/pwa/src/share.test.ts",
       "source_location": "L46",
       "id": "src_share_test_store",
-      "community": 71,
+      "community": 263,
       "norm_label": "store"
     },
     {
@@ -37575,7 +37575,7 @@
       "source_file": "prototypes/pwa/src/share.test.ts",
       "source_location": "L156",
       "id": "src_share_test_response",
-      "community": 71,
+      "community": 263,
       "norm_label": "response"
     },
     {
@@ -37584,7 +37584,7 @@
       "source_file": "prototypes/pwa/src/share.test.ts",
       "source_location": "L201",
       "id": "src_share_test_malformed",
-      "community": 71,
+      "community": 263,
       "norm_label": "malformed"
     },
     {
@@ -37701,7 +37701,7 @@
       "source_file": "prototypes/pwa/src/config.ts",
       "source_location": "L22",
       "id": "src_config_maxsharebytes",
-      "community": 70,
+      "community": 71,
       "norm_label": "maxsharebytes"
     },
     {
@@ -38889,7 +38889,7 @@
       "source_file": "prototypes/files/app.py",
       "source_location": "L1",
       "id": "prototypes_files_app_py",
-      "community": 367,
+      "community": 372,
       "norm_label": "app.py"
     },
     {
@@ -38898,7 +38898,7 @@
       "source_file": "prototypes/files/app.py",
       "source_location": "L13",
       "id": "files_app_settings",
-      "community": 367,
+      "community": 372,
       "norm_label": "settings"
     },
     {
@@ -38907,7 +38907,7 @@
       "source_file": "prototypes/files/app.py",
       "source_location": "L29",
       "id": "files_app_require_generated_password",
-      "community": 367,
+      "community": 372,
       "norm_label": "require_generated_password()"
     },
     {
@@ -38916,7 +38916,7 @@
       "source_file": "prototypes/files/app.py",
       "source_location": "L35",
       "id": "files_app_create_app",
-      "community": 367,
+      "community": 372,
       "norm_label": "create_app()"
     },
     {
@@ -42966,7 +42966,7 @@
       "source_file": "worker/telegram.py",
       "source_location": "L1",
       "id": "worker_telegram_py",
-      "community": 184,
+      "community": 198,
       "norm_label": "telegram.py"
     },
     {
@@ -42975,7 +42975,7 @@
       "source_file": "worker/telegram.py",
       "source_location": "L81",
       "id": "worker_telegram_healthy",
-      "community": 184,
+      "community": 198,
       "norm_label": "healthy()"
     },
     {
@@ -42984,7 +42984,7 @@
       "source_file": "worker/telegram.py",
       "source_location": "L95",
       "id": "worker_telegram_cycle",
-      "community": 184,
+      "community": 198,
       "norm_label": "cycle()"
     },
     {
@@ -42993,7 +42993,7 @@
       "source_file": "worker/telegram.py",
       "source_location": "L150",
       "id": "worker_telegram_main",
-      "community": 184,
+      "community": 198,
       "norm_label": "main()"
     },
     {
@@ -43990,7 +43990,7 @@
       "label": "Mobile installation",
       "file_type": "document",
       "source_file": "docs/PRODUCT_BRIEF.md",
-      "source_location": "L158",
+      "source_location": "L159",
       "id": "docs_product_brief_mobile_installation",
       "community": 76,
       "norm_label": "mobile installation"
@@ -43999,7 +43999,7 @@
       "label": "Exercises",
       "file_type": "document",
       "source_file": "docs/PRODUCT_BRIEF.md",
-      "source_location": "L165",
+      "source_location": "L166",
       "id": "docs_product_brief_exercises",
       "community": 76,
       "norm_label": "exercises"
@@ -44008,7 +44008,7 @@
       "label": "Files",
       "file_type": "document",
       "source_file": "docs/PRODUCT_BRIEF.md",
-      "source_location": "L171",
+      "source_location": "L172",
       "id": "docs_product_brief_files",
       "community": 76,
       "norm_label": "files"
@@ -44017,7 +44017,7 @@
       "label": "Listening journal",
       "file_type": "document",
       "source_file": "docs/PRODUCT_BRIEF.md",
-      "source_location": "L177",
+      "source_location": "L178",
       "id": "docs_product_brief_listening_journal",
       "community": 76,
       "norm_label": "listening journal"
@@ -44026,7 +44026,7 @@
       "label": "OMR (part of MVP)",
       "file_type": "document",
       "source_file": "docs/PRODUCT_BRIEF.md",
-      "source_location": "L183",
+      "source_location": "L184",
       "id": "docs_product_brief_omr_part_of_mvp",
       "community": 76,
       "norm_label": "omr (part of mvp)"
@@ -44035,7 +44035,7 @@
       "label": "Photo quality requirements",
       "file_type": "document",
       "source_file": "docs/PRODUCT_BRIEF.md",
-      "source_location": "L194",
+      "source_location": "L195",
       "id": "docs_product_brief_photo_quality_requirements",
       "community": 76,
       "norm_label": "photo quality requirements"
@@ -44044,7 +44044,7 @@
       "label": "Spoken notes",
       "file_type": "document",
       "source_file": "docs/PRODUCT_BRIEF.md",
-      "source_location": "L204",
+      "source_location": "L205",
       "id": "docs_product_brief_spoken_notes",
       "community": 76,
       "norm_label": "spoken notes"
@@ -44053,7 +44053,7 @@
       "label": "Telegram audio import",
       "file_type": "document",
       "source_file": "docs/PRODUCT_BRIEF.md",
-      "source_location": "L213",
+      "source_location": "L214",
       "id": "docs_product_brief_telegram_audio_import",
       "community": 76,
       "norm_label": "telegram audio import"
@@ -44215,7 +44215,7 @@
       "label": "Custom avatar image quality",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L33",
+      "source_location": "L35",
       "id": "docs_status_custom_avatar_image_quality",
       "community": 12,
       "norm_label": "custom avatar image quality"
@@ -44224,7 +44224,7 @@
       "label": "Avatar generation incident investigation",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L47",
+      "source_location": "L49",
       "id": "docs_status_avatar_generation_incident_investigation",
       "community": 12,
       "norm_label": "avatar generation incident investigation"
@@ -44233,7 +44233,7 @@
       "label": "Game-only player role",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L70",
+      "source_location": "L72",
       "id": "docs_status_game_only_player_role",
       "community": 12,
       "norm_label": "game-only player role"
@@ -44242,7 +44242,7 @@
       "label": "Post-round prize collection",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L93",
+      "source_location": "L95",
       "id": "docs_status_post_round_prize_collection",
       "community": 12,
       "norm_label": "post-round prize collection"
@@ -44251,7 +44251,7 @@
       "label": "Packaged prize artwork",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L106",
+      "source_location": "L108",
       "id": "docs_status_packaged_prize_artwork",
       "community": 12,
       "norm_label": "packaged prize artwork"
@@ -44260,7 +44260,7 @@
       "label": "Prize extraction CI repair",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L125",
+      "source_location": "L127",
       "id": "docs_status_prize_extraction_ci_repair",
       "community": 12,
       "norm_label": "prize extraction ci repair"
@@ -44269,7 +44269,7 @@
       "label": "Game fixes, prizes, and avatar approval",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L134",
+      "source_location": "L136",
       "id": "docs_status_game_fixes_prizes_and_avatar_approval",
       "community": 12,
       "norm_label": "game fixes, prizes, and avatar approval"
@@ -44278,7 +44278,7 @@
       "label": "Failed release 37204983176",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L191",
+      "source_location": "L193",
       "id": "docs_status_failed_release_37204983176",
       "community": 12,
       "norm_label": "failed release 37204983176"
@@ -44287,7 +44287,7 @@
       "label": "Game statistics and season reset",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L226",
+      "source_location": "L228",
       "id": "docs_status_game_statistics_and_season_reset",
       "community": 12,
       "norm_label": "game statistics and season reset"
@@ -44296,7 +44296,7 @@
       "label": "Main integration",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L277",
+      "source_location": "L279",
       "id": "docs_status_main_integration",
       "community": 12,
       "norm_label": "main integration"
@@ -44305,7 +44305,7 @@
       "label": "Seven-note rounds and assistance bonuses",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L290",
+      "source_location": "L292",
       "id": "docs_status_seven_note_rounds_and_assistance_bonuses",
       "community": 12,
       "norm_label": "seven-note rounds and assistance bonuses"
@@ -44314,7 +44314,7 @@
       "label": "Persistent custom avatar generation",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L341",
+      "source_location": "L343",
       "id": "docs_status_persistent_custom_avatar_generation",
       "community": 12,
       "norm_label": "persistent custom avatar generation"
@@ -44323,7 +44323,7 @@
       "label": "Sampled piano and game setup",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L395",
+      "source_location": "L397",
       "id": "docs_status_sampled_piano_and_game_setup",
       "community": 12,
       "norm_label": "sampled piano and game setup"
@@ -44332,7 +44332,7 @@
       "label": "Game note playback",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L444",
+      "source_location": "L446",
       "id": "docs_status_game_note_playback",
       "community": 12,
       "norm_label": "game note playback"
@@ -44341,7 +44341,7 @@
       "label": "Standard game clefs",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L475",
+      "source_location": "L477",
       "id": "docs_status_standard_game_clefs",
       "community": 12,
       "norm_label": "standard game clefs"
@@ -44350,7 +44350,7 @@
       "label": "Circular game shortcut",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L501",
+      "source_location": "L503",
       "id": "docs_status_circular_game_shortcut",
       "community": 12,
       "norm_label": "circular game shortcut"
@@ -44359,7 +44359,7 @@
       "label": "Game first-entry repair",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L529",
+      "source_location": "L531",
       "id": "docs_status_game_first_entry_repair",
       "community": 12,
       "norm_label": "game first-entry repair"
@@ -44368,7 +44368,7 @@
       "label": "Game avatar artwork",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L562",
+      "source_location": "L564",
       "id": "docs_status_game_avatar_artwork",
       "community": 12,
       "norm_label": "game avatar artwork"
@@ -44377,7 +44377,7 @@
       "label": "Appearance settings",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L614",
+      "source_location": "L616",
       "id": "docs_status_appearance_settings",
       "community": 31,
       "norm_label": "appearance settings"
@@ -44386,7 +44386,7 @@
       "label": "CI follow-up: run 37008189410",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L656",
+      "source_location": "L658",
       "id": "docs_status_ci_follow_up_run_37008189410",
       "community": 12,
       "norm_label": "ci follow-up: run 37008189410"
@@ -44395,7 +44395,7 @@
       "label": "Student original image and score",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L677",
+      "source_location": "L679",
       "id": "docs_status_student_original_image_and_score",
       "community": 12,
       "norm_label": "student original image and score"
@@ -44404,7 +44404,7 @@
       "label": "Material Design baseline",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L696",
+      "source_location": "L698",
       "id": "docs_status_material_design_baseline",
       "community": 12,
       "norm_label": "material design baseline"
@@ -44413,7 +44413,7 @@
       "label": "Responsive layout follow-up",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L706",
+      "source_location": "L708",
       "id": "docs_status_responsive_layout_follow_up",
       "community": 12,
       "norm_label": "responsive layout follow-up"
@@ -44422,7 +44422,7 @@
       "label": "Installation and usability follow-up",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L734",
+      "source_location": "L736",
       "id": "docs_status_installation_and_usability_follow_up",
       "community": 12,
       "norm_label": "installation and usability follow-up"
@@ -44431,7 +44431,7 @@
       "label": "Password policy follow-up",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L769",
+      "source_location": "L771",
       "id": "docs_status_password_policy_follow_up",
       "community": 12,
       "norm_label": "password policy follow-up"
@@ -44440,7 +44440,7 @@
       "label": "Previous PHASE 7 completion",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L781",
+      "source_location": "L783",
       "id": "docs_status_previous_phase_7_completion",
       "community": 12,
       "norm_label": "previous phase 7 completion"
@@ -44449,7 +44449,7 @@
       "label": "PHASE 7 implementation",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L789",
+      "source_location": "L791",
       "id": "docs_status_phase_7_implementation",
       "community": 12,
       "norm_label": "phase 7 implementation"
@@ -44458,7 +44458,7 @@
       "label": "PHASE 7 validation and deployment boundary",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L807",
+      "source_location": "L809",
       "id": "docs_status_phase_7_validation_and_deployment_boundary",
       "community": 12,
       "norm_label": "phase 7 validation and deployment boundary"
@@ -44467,7 +44467,7 @@
       "label": "Previous PHASE 6 acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L849",
+      "source_location": "L851",
       "id": "docs_status_previous_phase_6_acceptance",
       "community": 12,
       "norm_label": "previous phase 6 acceptance"
@@ -44476,7 +44476,7 @@
       "label": "PHASE 6 follow-up fixes after owner acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L860",
+      "source_location": "L862",
       "id": "docs_status_phase_6_follow_up_fixes_after_owner_acceptance",
       "community": 12,
       "norm_label": "phase 6 follow-up fixes after owner acceptance"
@@ -44485,7 +44485,7 @@
       "label": "Completed PHASE 7 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L908",
+      "source_location": "L910",
       "id": "docs_status_completed_phase_7_plan",
       "community": 29,
       "norm_label": "completed phase 7 plan"
@@ -44494,7 +44494,7 @@
       "label": "Separate Material Design feature",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L921",
+      "source_location": "L923",
       "id": "docs_status_separate_material_design_feature",
       "community": 365,
       "norm_label": "separate material design feature"
@@ -44503,7 +44503,7 @@
       "label": "Completed Material Design checklist",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L961",
+      "source_location": "L963",
       "id": "docs_status_completed_material_design_checklist",
       "community": 365,
       "norm_label": "completed material design checklist"
@@ -44512,7 +44512,7 @@
       "label": "Completed PHASE 6 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L974",
+      "source_location": "L976",
       "id": "docs_status_completed_phase_6_plan",
       "community": 29,
       "norm_label": "completed phase 6 plan"
@@ -44521,7 +44521,7 @@
       "label": "Completed PHASE 5 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L986",
+      "source_location": "L988",
       "id": "docs_status_completed_phase_5_plan",
       "community": 29,
       "norm_label": "completed phase 5 plan"
@@ -44530,7 +44530,7 @@
       "label": "Completed PHASE 4 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L995",
+      "source_location": "L997",
       "id": "docs_status_completed_phase_4_plan",
       "community": 29,
       "norm_label": "completed phase 4 plan"
@@ -44539,7 +44539,7 @@
       "label": "Completed PHASE 3 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1002",
+      "source_location": "L1004",
       "id": "docs_status_completed_phase_3_plan",
       "community": 29,
       "norm_label": "completed phase 3 plan"
@@ -44548,7 +44548,7 @@
       "label": "Completed PHASE 2 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1012",
+      "source_location": "L1014",
       "id": "docs_status_completed_phase_2_plan",
       "community": 29,
       "norm_label": "completed phase 2 plan"
@@ -44557,7 +44557,7 @@
       "label": "Completed PHASE 1 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1021",
+      "source_location": "L1023",
       "id": "docs_status_completed_phase_1_plan",
       "community": 29,
       "norm_label": "completed phase 1 plan"
@@ -44566,7 +44566,7 @@
       "label": "Completed PHASE 0 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1032",
+      "source_location": "L1034",
       "id": "docs_status_completed_phase_0_plan",
       "community": 29,
       "norm_label": "completed phase 0 plan"
@@ -44575,7 +44575,7 @@
       "label": "Completed PHASE 0.5 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1045",
+      "source_location": "L1047",
       "id": "docs_status_completed_phase_0_5_plan",
       "community": 29,
       "norm_label": "completed phase 0.5 plan"
@@ -44584,7 +44584,7 @@
       "label": "Done",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1055",
+      "source_location": "L1057",
       "id": "docs_status_done",
       "community": 29,
       "norm_label": "done"
@@ -44593,7 +44593,7 @@
       "label": "PHASE 0.5 deployment record",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1336",
+      "source_location": "L1338",
       "id": "docs_status_phase_0_5_deployment_record",
       "community": 29,
       "norm_label": "phase 0.5 deployment record"
@@ -44602,7 +44602,7 @@
       "label": "Next step",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1364",
+      "source_location": "L1366",
       "id": "docs_status_next_step",
       "community": 29,
       "norm_label": "next step"
@@ -44611,7 +44611,7 @@
       "label": "PHASE 0 boundaries",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1372",
+      "source_location": "L1374",
       "id": "docs_status_phase_0_boundaries",
       "community": 29,
       "norm_label": "phase 0 boundaries"
@@ -44620,7 +44620,7 @@
       "label": "Acceptance details",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1383",
+      "source_location": "L1385",
       "id": "docs_status_acceptance_details",
       "community": 29,
       "norm_label": "acceptance details"
@@ -44629,7 +44629,7 @@
       "label": "Final PHASE 1 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1388",
+      "source_location": "L1390",
       "id": "docs_status_final_phase_1_manual_acceptance",
       "community": 29,
       "norm_label": "final phase 1 manual acceptance"
@@ -44638,7 +44638,7 @@
       "label": "Final PHASE 2 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1400",
+      "source_location": "L1402",
       "id": "docs_status_final_phase_2_manual_acceptance",
       "community": 29,
       "norm_label": "final phase 2 manual acceptance"
@@ -44647,7 +44647,7 @@
       "label": "Final PHASE 3 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1410",
+      "source_location": "L1412",
       "id": "docs_status_final_phase_3_manual_acceptance",
       "community": 29,
       "norm_label": "final phase 3 manual acceptance"
@@ -44656,7 +44656,7 @@
       "label": "Final PHASE 4 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1420",
+      "source_location": "L1422",
       "id": "docs_status_final_phase_4_manual_acceptance",
       "community": 29,
       "norm_label": "final phase 4 manual acceptance"
@@ -44665,7 +44665,7 @@
       "label": "Final PHASE 5 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1430",
+      "source_location": "L1432",
       "id": "docs_status_final_phase_5_manual_acceptance",
       "community": 29,
       "norm_label": "final phase 5 manual acceptance"
@@ -44674,7 +44674,7 @@
       "label": "Manual checks the owner must do",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1439",
+      "source_location": "L1441",
       "id": "docs_status_manual_checks_the_owner_must_do",
       "community": 29,
       "norm_label": "manual checks the owner must do"
@@ -44683,7 +44683,7 @@
       "label": "Known issues",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1462",
+      "source_location": "L1464",
       "id": "docs_status_known_issues",
       "community": 29,
       "norm_label": "known issues"
@@ -45340,7 +45340,7 @@
       "label": "Error responses",
       "file_type": "document",
       "source_file": "docs/developer/api.md",
-      "source_location": "L235",
+      "source_location": "L236",
       "id": "developer_api_error_responses",
       "community": 125,
       "norm_label": "error responses"
@@ -45349,7 +45349,7 @@
       "label": "Authentication and authorization",
       "file_type": "document",
       "source_file": "docs/developer/api.md",
-      "source_location": "L256",
+      "source_location": "L257",
       "id": "developer_api_authentication_and_authorization",
       "community": 125,
       "norm_label": "authentication and authorization"
@@ -45358,7 +45358,7 @@
       "label": "code:json ({)",
       "file_type": "document",
       "source_file": "docs/developer/api.md",
-      "source_location": "L285",
+      "source_location": "L286",
       "id": "developer_api_codeblock_1",
       "community": 125,
       "norm_label": "code:json ({)"
@@ -45367,7 +45367,7 @@
       "label": "Exercises and files",
       "file_type": "document",
       "source_file": "docs/developer/api.md",
-      "source_location": "L317",
+      "source_location": "L318",
       "id": "developer_api_exercises_and_files",
       "community": 125,
       "norm_label": "exercises and files"
@@ -45376,7 +45376,7 @@
       "label": "Student listening and manager journal",
       "file_type": "document",
       "source_file": "docs/developer/api.md",
-      "source_location": "L354",
+      "source_location": "L355",
       "id": "developer_api_student_listening_and_manager_journal",
       "community": 125,
       "norm_label": "student listening and manager journal"
@@ -45385,7 +45385,7 @@
       "label": "Manager Telegram imports",
       "file_type": "document",
       "source_file": "docs/developer/api.md",
-      "source_location": "L381",
+      "source_location": "L382",
       "id": "developer_api_manager_telegram_imports",
       "community": 125,
       "norm_label": "manager telegram imports"
@@ -46708,7 +46708,7 @@
       "label": "One-sheet generation",
       "file_type": "document",
       "source_file": "docs/developer/game-avatars.md",
-      "source_location": "L356",
+      "source_location": "L357",
       "id": "developer_game_avatars_one_sheet_generation",
       "community": 130,
       "norm_label": "one-sheet generation"
@@ -46717,7 +46717,7 @@
       "label": "Face icon (portrait)",
       "file_type": "document",
       "source_file": "docs/developer/game-avatars.md",
-      "source_location": "L385",
+      "source_location": "L386",
       "id": "developer_game_avatars_face_icon_portrait",
       "community": 130,
       "norm_label": "face icon (portrait)"
@@ -46726,7 +46726,7 @@
       "label": "Manager approval",
       "file_type": "document",
       "source_file": "docs/developer/game-avatars.md",
-      "source_location": "L400",
+      "source_location": "L401",
       "id": "developer_game_avatars_manager_approval",
       "community": 130,
       "norm_label": "manager approval"
@@ -47212,7 +47212,7 @@
       "label": "Approve custom game avatars",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L189",
+      "source_location": "L190",
       "id": "user_manager_approve_custom_game_avatars",
       "community": 33,
       "norm_label": "approve custom game avatars"
@@ -47221,7 +47221,7 @@
       "label": "Change the visual theme",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L214",
+      "source_location": "L215",
       "id": "user_manager_change_the_visual_theme",
       "community": 33,
       "norm_label": "change the visual theme"
@@ -47230,7 +47230,7 @@
       "label": "Customize appearance",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L230",
+      "source_location": "L231",
       "id": "user_manager_customize_appearance",
       "community": 33,
       "norm_label": "customize appearance"
@@ -47239,7 +47239,7 @@
       "label": "Mobile layout checklist",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L250",
+      "source_location": "L251",
       "id": "user_manager_mobile_layout_checklist",
       "community": 33,
       "norm_label": "mobile layout checklist"
@@ -47248,7 +47248,7 @@
       "label": "Material Design visual checklist",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L264",
+      "source_location": "L265",
       "id": "user_manager_material_design_visual_checklist",
       "community": 33,
       "norm_label": "material design visual checklist"
@@ -47257,7 +47257,7 @@
       "label": "Review recognized notes",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L278",
+      "source_location": "L279",
       "id": "user_manager_review_recognized_notes",
       "community": 33,
       "norm_label": "review recognized notes"
@@ -47266,7 +47266,7 @@
       "label": "Final PHASE 5 manual checklist",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L307",
+      "source_location": "L308",
       "id": "user_manager_final_phase_5_manual_checklist",
       "community": 33,
       "norm_label": "final phase 5 manual checklist"
@@ -47275,7 +47275,7 @@
       "label": "Sign in to the application",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L320",
+      "source_location": "L321",
       "id": "user_manager_sign_in_to_the_application",
       "community": 33,
       "norm_label": "sign in to the application"
@@ -47284,7 +47284,7 @@
       "label": "Create and manage users",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L338",
+      "source_location": "L339",
       "id": "user_manager_create_and_manage_users",
       "community": 33,
       "norm_label": "create and manage users"
@@ -47293,7 +47293,7 @@
       "label": "Change your settings",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L372",
+      "source_location": "L373",
       "id": "user_manager_change_your_settings",
       "community": 33,
       "norm_label": "change your settings"
@@ -47302,7 +47302,7 @@
       "label": "Final PHASE 1 manual checklist",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L390",
+      "source_location": "L391",
       "id": "user_manager_final_phase_1_manual_checklist",
       "community": 33,
       "norm_label": "final phase 1 manual checklist"
@@ -47311,7 +47311,7 @@
       "label": "Manage exercises",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L413",
+      "source_location": "L414",
       "id": "user_manager_manage_exercises",
       "community": 33,
       "norm_label": "manage exercises"
@@ -47320,7 +47320,7 @@
       "label": "Final PHASE 2 manual checklist",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L461",
+      "source_location": "L462",
       "id": "user_manager_final_phase_2_manual_checklist",
       "community": 33,
       "norm_label": "final phase 2 manual checklist"
@@ -47329,7 +47329,7 @@
       "label": "Read the listening journal",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L478",
+      "source_location": "L479",
       "id": "user_manager_read_the_listening_journal",
       "community": 33,
       "norm_label": "read the listening journal"
@@ -47338,7 +47338,7 @@
       "label": "Final PHASE 3 manager checklist",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L502",
+      "source_location": "L503",
       "id": "user_manager_final_phase_3_manager_checklist",
       "community": 33,
       "norm_label": "final phase 3 manager checklist"
@@ -47347,7 +47347,7 @@
       "label": "Import audio from Telegram",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L515",
+      "source_location": "L516",
       "id": "user_manager_import_audio_from_telegram",
       "community": 33,
       "norm_label": "import audio from telegram"
@@ -47356,7 +47356,7 @@
       "label": "Final PHASE 4 manual checklist",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L554",
+      "source_location": "L555",
       "id": "user_manager_final_phase_4_manual_checklist",
       "community": 33,
       "norm_label": "final phase 4 manual checklist"
@@ -47365,7 +47365,7 @@
       "label": "Recover from an unknown page",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L570",
+      "source_location": "L571",
       "id": "user_manager_recover_from_an_unknown_page",
       "community": 33,
       "norm_label": "recover from an unknown page"
@@ -47374,7 +47374,7 @@
       "label": "Final PHASE 7 manual checklist",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L582",
+      "source_location": "L583",
       "id": "user_manager_final_phase_7_manual_checklist",
       "community": 33,
       "norm_label": "final phase 7 manual checklist"
@@ -47383,7 +47383,7 @@
       "label": "Check spoken notes",
       "file_type": "document",
       "source_file": "docs/user/manager.md",
-      "source_location": "L590",
+      "source_location": "L591",
       "id": "user_manager_check_spoken_notes",
       "community": 33,
       "norm_label": "check spoken notes"
@@ -47482,7 +47482,7 @@
       "label": "Change the visual theme",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L176",
+      "source_location": "L180",
       "id": "user_student_change_the_visual_theme",
       "community": 45,
       "norm_label": "change the visual theme"
@@ -47491,7 +47491,7 @@
       "label": "Mobile layout checklist",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L186",
+      "source_location": "L190",
       "id": "user_student_mobile_layout_checklist",
       "community": 45,
       "norm_label": "mobile layout checklist"
@@ -47500,7 +47500,7 @@
       "label": "Material Design visual checklist",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L199",
+      "source_location": "L203",
       "id": "user_student_material_design_visual_checklist",
       "community": 45,
       "norm_label": "material design visual checklist"
@@ -47509,7 +47509,7 @@
       "label": "Sign in and change a temporary password",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L214",
+      "source_location": "L218",
       "id": "user_student_sign_in_and_change_a_temporary_password",
       "community": 45,
       "norm_label": "sign in and change a temporary password"
@@ -47518,7 +47518,7 @@
       "label": "Save your settings",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L230",
+      "source_location": "L234",
       "id": "user_student_save_your_settings",
       "community": 45,
       "norm_label": "save your settings"
@@ -47527,7 +47527,7 @@
       "label": "Customize appearance",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L246",
+      "source_location": "L250",
       "id": "user_student_customize_appearance",
       "community": 45,
       "norm_label": "customize appearance"
@@ -47536,7 +47536,7 @@
       "label": "Access and sign-out",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L274",
+      "source_location": "L278",
       "id": "user_student_access_and_sign_out",
       "community": 45,
       "norm_label": "access and sign-out"
@@ -47545,7 +47545,7 @@
       "label": "Final PHASE 1 manual check",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L301",
+      "source_location": "L305",
       "id": "user_student_final_phase_1_manual_check",
       "community": 45,
       "norm_label": "final phase 1 manual check"
@@ -47554,7 +47554,7 @@
       "label": "Listen to exercises",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L310",
+      "source_location": "L314",
       "id": "user_student_listen_to_exercises",
       "community": 45,
       "norm_label": "listen to exercises"
@@ -47563,7 +47563,7 @@
       "label": "Show note names",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L349",
+      "source_location": "L353",
       "id": "user_student_show_note_names",
       "community": 45,
       "norm_label": "show note names"
@@ -47572,7 +47572,7 @@
       "label": "Final PHASE 3 listening checklist",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L364",
+      "source_location": "L368",
       "id": "user_student_final_phase_3_listening_checklist",
       "community": 45,
       "norm_label": "final phase 3 listening checklist"
@@ -47581,7 +47581,7 @@
       "label": "Install the application on a mobile device",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L376",
+      "source_location": "L380",
       "id": "user_student_install_the_application_on_a_mobile_device",
       "community": 45,
       "norm_label": "install the application on a mobile device"
@@ -47590,7 +47590,7 @@
       "label": "Use spoken notes",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L394",
+      "source_location": "L398",
       "id": "user_student_use_spoken_notes",
       "community": 45,
       "norm_label": "use spoken notes"
@@ -47599,7 +47599,7 @@
       "label": "Final PHASE 6 manual checklist",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L428",
+      "source_location": "L432",
       "id": "user_student_final_phase_6_manual_checklist",
       "community": 45,
       "norm_label": "final phase 6 manual checklist"
@@ -47608,7 +47608,7 @@
       "label": "Recover from an unknown page",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L445",
+      "source_location": "L449",
       "id": "user_student_recover_from_an_unknown_page",
       "community": 45,
       "norm_label": "recover from an unknown page"
@@ -47617,7 +47617,7 @@
       "label": "Final PHASE 7 manual checklist",
       "file_type": "document",
       "source_file": "docs/user/student.md",
-      "source_location": "L458",
+      "source_location": "L462",
       "id": "user_student_final_phase_7_manual_checklist",
       "community": 45,
       "norm_label": "final phase 7 manual checklist"
@@ -47664,7 +47664,7 @@
       "source_file": "docs/superpowers/plans/2026-10-02-guess-the-note-frontend.md",
       "source_location": "L1",
       "id": "docs_superpowers_plans_2026_10_02_guess_the_note_frontend_md",
-      "community": 164,
+      "community": 147,
       "norm_label": "2026-10-02-guess-the-note-frontend.md"
     },
     {
@@ -47673,7 +47673,7 @@
       "source_file": "docs/superpowers/plans/2026-10-02-guess-the-note-frontend.md",
       "source_location": "L1",
       "id": "plans_2026_10_02_guess_the_note_frontend_guess_the_note_frontend_implementation_plan",
-      "community": 164,
+      "community": 147,
       "norm_label": "guess the note \u2014 frontend implementation plan"
     },
     {
@@ -47682,7 +47682,7 @@
       "source_file": "docs/superpowers/plans/2026-10-02-guess-the-note-frontend.md",
       "source_location": "L13",
       "id": "plans_2026_10_02_guess_the_note_frontend_global_constraints",
-      "community": 164,
+      "community": 147,
       "norm_label": "global constraints"
     },
     {
@@ -47691,7 +47691,7 @@
       "source_file": "docs/superpowers/plans/2026-10-02-guess-the-note-frontend.md",
       "source_location": "L26",
       "id": "plans_2026_10_02_guess_the_note_frontend_review_focus",
-      "community": 164,
+      "community": 147,
       "norm_label": "review focus"
     },
     {
@@ -47943,7 +47943,7 @@
       "source_file": "docs/superpowers/plans/2026-10-02-guess-the-note-frontend.md",
       "source_location": "L686",
       "id": "plans_2026_10_02_guess_the_note_frontend_task_5_web_audio_synthesis",
-      "community": 164,
+      "community": 147,
       "norm_label": "task 5: web audio synthesis"
     },
     {
@@ -47952,7 +47952,7 @@
       "source_file": "docs/superpowers/plans/2026-10-02-guess-the-note-frontend.md",
       "source_location": "L700",
       "id": "plans_2026_10_02_guess_the_note_frontend_codeblock_24",
-      "community": 164,
+      "community": 147,
       "norm_label": "code:ts (// frontend/src/features/game/audio/synth.ts)"
     },
     {
@@ -47961,7 +47961,7 @@
       "source_file": "docs/superpowers/plans/2026-10-02-guess-the-note-frontend.md",
       "source_location": "L756",
       "id": "plans_2026_10_02_guess_the_note_frontend_codeblock_25",
-      "community": 164,
+      "community": 147,
       "norm_label": "code:bash (cd frontend && npx tsc --noemit)"
     },
     {
@@ -47970,7 +47970,7 @@
       "source_file": "docs/superpowers/plans/2026-10-02-guess-the-note-frontend.md",
       "source_location": "L763",
       "id": "plans_2026_10_02_guess_the_note_frontend_codeblock_26",
-      "community": 164,
+      "community": 147,
       "norm_label": "code:bash (git add frontend/src/features/game/audio/)"
     },
     {
@@ -48159,7 +48159,7 @@
       "source_file": "docs/superpowers/plans/2026-10-02-guess-the-note-frontend.md",
       "source_location": "L1521",
       "id": "plans_2026_10_02_guess_the_note_frontend_task_9_result_screen",
-      "community": 147,
+      "community": 151,
       "norm_label": "task 9: result screen"
     },
     {
@@ -48168,7 +48168,7 @@
       "source_file": "docs/superpowers/plans/2026-10-02-guess-the-note-frontend.md",
       "source_location": "L1533",
       "id": "plans_2026_10_02_guess_the_note_frontend_codeblock_44",
-      "community": 147,
+      "community": 151,
       "norm_label": "code:tsx (// frontend/src/features/game/result/resultscreen.tsx)"
     },
     {
@@ -48177,7 +48177,7 @@
       "source_file": "docs/superpowers/plans/2026-10-02-guess-the-note-frontend.md",
       "source_location": "L1615",
       "id": "plans_2026_10_02_guess_the_note_frontend_codeblock_45",
-      "community": 147,
+      "community": 151,
       "norm_label": "code:tsx (import resultscreen from \"./result/resultscreen\";)"
     },
     {
@@ -48186,7 +48186,7 @@
       "source_file": "docs/superpowers/plans/2026-10-02-guess-the-note-frontend.md",
       "source_location": "L1637",
       "id": "plans_2026_10_02_guess_the_note_frontend_codeblock_46",
-      "community": 147,
+      "community": 151,
       "norm_label": "code:bash (git add frontend/src/features/game/result/ frontend/src/feat)"
     },
     {
@@ -50818,6 +50818,60 @@
       "norm_label": "14. final output"
     },
     {
+      "label": "game.avatar.discard",
+      "file_type": "code",
+      "source_file": "frontend/src/i18n/locales/ru.json",
+      "source_location": "L461",
+      "community": 2,
+      "norm_label": "game.avatar.discard",
+      "id": "locales_ru_game_avatar_discard"
+    },
+    {
+      "label": "game.prizes.descriptions.days_streak_3",
+      "file_type": "code",
+      "source_file": "frontend/src/i18n/locales/ru.json",
+      "source_location": "L501",
+      "community": 2,
+      "norm_label": "game.prizes.descriptions.days_streak_3",
+      "id": "locales_ru_game_prizes_descriptions_days_streak_3"
+    },
+    {
+      "label": "game.avatar.discard",
+      "file_type": "code",
+      "source_file": "frontend/src/i18n/locales/en.json",
+      "source_location": "L461",
+      "community": 1,
+      "norm_label": "game.avatar.discard",
+      "id": "locales_en_game_avatar_discard"
+    },
+    {
+      "label": "game.prizes.descriptions.days_streak_3",
+      "file_type": "code",
+      "source_file": "frontend/src/i18n/locales/en.json",
+      "source_location": "L501",
+      "community": 1,
+      "norm_label": "game.prizes.descriptions.days_streak_3",
+      "id": "locales_en_game_prizes_descriptions_days_streak_3"
+    },
+    {
+      "label": "game.avatar.discard",
+      "file_type": "code",
+      "source_file": "frontend/src/i18n/locales/es.json",
+      "source_location": "L461",
+      "community": 0,
+      "norm_label": "game.avatar.discard",
+      "id": "locales_es_game_avatar_discard"
+    },
+    {
+      "label": "game.prizes.descriptions.days_streak_3",
+      "file_type": "code",
+      "source_file": "frontend/src/i18n/locales/es.json",
+      "source_location": "L501",
+      "community": 0,
+      "norm_label": "game.prizes.descriptions.days_streak_3",
+      "id": "locales_es_game_prizes_descriptions_days_streak_3"
+    },
+    {
       "label": "game.prizes.codes.days_7",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
@@ -50939,7 +50993,7 @@
       "file_type": "code",
       "source_file": "frontend/src/features/game/play/PlayScreen.tsx",
       "source_location": "L20",
-      "community": 51,
+      "community": 37,
       "norm_label": "roundresult",
       "id": "play_playscreen_roundresult"
     },
@@ -50957,7 +51011,7 @@
       "file_type": "code",
       "source_file": "frontend/src/features/game/profile/ProfileScreen.tsx",
       "source_location": "L24",
-      "community": 6,
+      "community": 121,
       "norm_label": "difficulties",
       "id": "profile_profilescreen_difficulties"
     },
@@ -51029,7 +51083,7 @@
       "file_type": "code",
       "source_file": "frontend/src/features/game/index.tsx",
       "source_location": "L15",
-      "community": 51,
+      "community": 37,
       "norm_label": "time_limit_ms",
       "id": "game_index_time_limit_ms"
     },
@@ -51038,7 +51092,7 @@
       "file_type": "code",
       "source_file": "frontend/src/features/game/setup/GameSetup.tsx",
       "source_location": "L11",
-      "community": 51,
+      "community": 37,
       "norm_label": "difficulties",
       "id": "setup_gamesetup_difficulties"
     },
@@ -51101,7 +51155,7 @@
       "file_type": "code",
       "source_file": "frontend/src/features/game/play/PlayScreen.tsx",
       "source_location": "L18",
-      "community": 196,
+      "community": 128,
       "norm_label": "note",
       "id": "play_playscreen_note"
     },
@@ -51110,7 +51164,7 @@
       "file_type": "code",
       "source_file": "frontend/src/features/game/play/PlayScreen.tsx",
       "source_location": "L22",
-      "community": 196,
+      "community": 128,
       "norm_label": "task",
       "id": "play_playscreen_task"
     },
@@ -79969,9 +80023,9 @@
       "source_file": "frontend/src/i18n/locales/ru.json",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_ru_json",
-      "target": "locales_ru_game_avatar_sharedhint",
-      "confidence_score": 1.0
+      "target": "locales_ru_game_avatar_sharedhint"
     },
     {
       "relation": "contains",
@@ -80219,9 +80273,9 @@
       "source_file": "frontend/src/i18n/locales/ru.json",
       "source_location": "L31",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_ru_json",
-      "target": "locales_ru_errors_avatar_in_use",
-      "confidence_score": 1.0
+      "target": "locales_ru_errors_avatar_in_use"
     },
     {
       "relation": "contains",
@@ -84517,11 +84571,21 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/i18n/locales/ru.json",
-      "source_location": "L353",
+      "source_location": "L461",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_ru_json",
-      "target": "locales_ru_game_avatar_discard"
+      "target": "locales_ru_game_avatar_delete"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/i18n/locales/ru.json",
+      "source_location": "L462",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "frontend_src_i18n_locales_ru_json",
+      "target": "locales_ru_game_avatar_deletesaved"
     },
     {
       "relation": "contains",
@@ -84917,6 +84981,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/i18n/locales/ru.json",
+      "source_location": "L353",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "frontend_src_i18n_locales_ru_json",
+      "target": "locales_ru_game_avatar_discard"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/i18n/locales/ru.json",
       "source_location": "L498",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -85220,9 +85294,9 @@
       "source_file": "frontend/src/i18n/locales/en.json",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_en_json",
-      "target": "locales_en_game_avatar_sharedhint",
-      "confidence_score": 1.0
+      "target": "locales_en_game_avatar_sharedhint"
     },
     {
       "relation": "contains",
@@ -85470,9 +85544,9 @@
       "source_file": "frontend/src/i18n/locales/en.json",
       "source_location": "L31",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_en_json",
-      "target": "locales_en_errors_avatar_in_use",
-      "confidence_score": 1.0
+      "target": "locales_en_errors_avatar_in_use"
     },
     {
       "relation": "contains",
@@ -89768,11 +89842,21 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/i18n/locales/en.json",
-      "source_location": "L353",
+      "source_location": "L461",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_en_json",
-      "target": "locales_en_game_avatar_discard"
+      "target": "locales_en_game_avatar_delete"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/i18n/locales/en.json",
+      "source_location": "L462",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "frontend_src_i18n_locales_en_json",
+      "target": "locales_en_game_avatar_deletesaved"
     },
     {
       "relation": "contains",
@@ -90168,6 +90252,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/i18n/locales/en.json",
+      "source_location": "L353",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "frontend_src_i18n_locales_en_json",
+      "target": "locales_en_game_avatar_discard"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/i18n/locales/en.json",
       "source_location": "L498",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -90310,9 +90404,9 @@
       "source_file": "frontend/src/i18n/locales/es.json",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_es_json",
-      "target": "locales_es_game_avatar_sharedhint",
-      "confidence_score": 1.0
+      "target": "locales_es_game_avatar_sharedhint"
     },
     {
       "relation": "contains",
@@ -90560,9 +90654,9 @@
       "source_file": "frontend/src/i18n/locales/es.json",
       "source_location": "L31",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_es_json",
-      "target": "locales_es_errors_avatar_in_use",
-      "confidence_score": 1.0
+      "target": "locales_es_errors_avatar_in_use"
     },
     {
       "relation": "contains",
@@ -94858,11 +94952,21 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "frontend/src/i18n/locales/es.json",
-      "source_location": "L353",
+      "source_location": "L461",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_es_json",
-      "target": "locales_es_game_avatar_discard"
+      "target": "locales_es_game_avatar_delete"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/i18n/locales/es.json",
+      "source_location": "L462",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "frontend_src_i18n_locales_es_json",
+      "target": "locales_es_game_avatar_deletesaved"
     },
     {
       "relation": "contains",
@@ -95253,6 +95357,16 @@
       "confidence_score": 1.0,
       "source": "frontend_src_i18n_locales_es_json",
       "target": "locales_es_game_prizes_codes_days_streak_3"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "frontend/src/i18n/locales/es.json",
+      "source_location": "L353",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "frontend_src_i18n_locales_es_json",
+      "target": "locales_es_game_avatar_discard"
     },
     {
       "relation": "contains",
@@ -99871,9 +99985,9 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L10",
       "weight": 0.8,
+      "confidence_score": 0.5,
       "source": "api_avatars_useavatarbody",
-      "target": "game_models_customavatar",
-      "confidence_score": 0.5
+      "target": "game_models_customavatar"
     },
     {
       "relation": "uses",
@@ -100463,9 +100577,9 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L67",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "api_avatars_useavatarbody",
-      "target": "basemodel",
-      "confidence_score": 1.0
+      "target": "basemodel"
     },
     {
       "relation": "inherits",
@@ -101541,9 +101655,9 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L67",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_app_game_api_avatars_py",
-      "target": "api_avatars_useavatarbody",
-      "confidence_score": 1.0
+      "target": "api_avatars_useavatarbody"
     },
     {
       "relation": "contains",
@@ -103063,9 +103177,9 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L141",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_app_game_services_avatars_py",
-      "target": "services_avatars_can_discard_avatar",
-      "confidence_score": 1.0
+      "target": "services_avatars_can_discard_avatar"
     },
     {
       "relation": "contains",
@@ -103371,9 +103485,9 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L391",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "services_avatars_discard_avatar",
-      "target": "services_avatars_can_discard_avatar",
-      "confidence_score": 1.0
+      "target": "services_avatars_can_discard_avatar"
     },
     {
       "relation": "calls",
@@ -112350,9 +112464,9 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L101",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_tests_game_test_avatar_approval_py",
-      "target": "game_test_avatar_approval_test_approved_avatar_is_shared_but_unapproved_avatar_stays_private",
-      "confidence_score": 1.0
+      "target": "game_test_avatar_approval_test_approved_avatar_is_shared_but_unapproved_avatar_stays_private"
     },
     {
       "relation": "contains",
@@ -112531,9 +112645,9 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L108",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_test_avatar_approval_test_approved_avatar_is_shared_but_unapproved_avatar_stays_private",
-      "target": "game_test_avatar_approval_make_ready",
-      "confidence_score": 1.0
+      "target": "game_test_avatar_approval_make_ready"
     },
     {
       "relation": "calls",
@@ -112844,9 +112958,9 @@
       "source_file": "backend/tests/game/test_avatar_generation.py",
       "source_location": "L176",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_tests_game_test_avatar_generation_py",
-      "target": "game_test_avatar_generation_test_sheet_prompt_matches_all_growth_stages_and_mood_rows",
-      "confidence_score": 1.0
+      "target": "game_test_avatar_generation_test_sheet_prompt_matches_all_growth_stages_and_mood_rows"
     },
     {
       "relation": "contains",
@@ -113097,9 +113211,9 @@
       "source_file": "backend/tests/game/test_avatar_generation.py",
       "source_location": "L180",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_test_avatar_generation_test_sheet_prompt_matches_all_growth_stages_and_mood_rows",
-      "target": "game_test_avatar_generation_sheet_bytes",
-      "confidence_score": 1.0
+      "target": "game_test_avatar_generation_sheet_bytes"
     },
     {
       "relation": "calls",
@@ -130532,9 +130646,9 @@
       "source_file": "docs/STATUS.md",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_status_current_phase",
-      "target": "docs_status_shared_custom_avatars",
-      "confidence_score": 1.0
+      "target": "docs_status_shared_custom_avatars"
     },
     {
       "relation": "contains",
@@ -139918,5 +140032,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "3749d14b71c6c772ef139adb0ed0a39290d4606a"
+  "built_at_commit": "3756b89a3288398be7c7c6a224f5e25aa32f3b2c"
 }

@@ -314,7 +314,7 @@ Docker includes only the public copies, not the original sheets.
 ## Custom creation
 
 The chooser starts generation only after an explicit button click.
-It shows availability, quota, phase, saved-image count, approximate remaining time, previews, acceptance, discard, and explicit errors.
+It shows availability, quota, phase, saved-image count, approximate remaining time, previews, acceptance, deletion, and explicit errors.
 Reopening the chooser retrieves recent jobs without starting another generation.
 Selecting an approved ready job persists its identifier on the player.
 Selecting a built-in character clears that identifier.
@@ -322,11 +322,12 @@ The saved gallery includes approved ready jobs from every player profile.
 It also includes the requested profile's own ready jobs, including pending review results.
 Pending and rejected jobs from other profiles remain private.
 Any player can preview and select an approved avatar without another provider request.
-The chooser hides the discard action for avatars owned by another account.
+The chooser shows deletion only for saved custom avatars the account can manage.
+Built-in avatars do not use the custom-avatar deletion endpoint.
 The preview supports levels 1–10 and all 3 emotions.
-Discard removes the database record and the creator's selection.
-The system rejects discard while another profile selects that avatar.
-Discard does not remove files or perform another generation.
+Deletion removes the database record and the creator's selection.
+The system rejects deletion while another profile selects that avatar.
+Deletion does not remove files or perform another generation.
 
 `avatars` runs the existing `worker.generate_avatar` process in development and production Compose.
 It uses the shared backend image, private database, and media volume.

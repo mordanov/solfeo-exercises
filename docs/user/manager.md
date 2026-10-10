@@ -169,7 +169,7 @@ A playback failure shows an error and permits another attempt.
 4. Inspect the player cards and game results.
    Cards show the saved appearance; results show the emotion associated with the correct-answer count.
 5. Use the question mark only when you want to generate an original character.
-   The student guide explains generation, approval, selection, and discard.
+   The student guide explains generation, approval, selection, and deletion.
 6. Inspect the saved-image count and approximate remaining time.
    The count stays at 0 while the service draws one sheet with 30 variants.
    Local extraction then saves 10 levels with neutral, happy, and sad emotions.
@@ -178,6 +178,7 @@ A playback failure shows an error and permits another attempt.
    Switching to a built-in character does not remove saved avatars.
    Approved avatars from every profile appear in this gallery.
    Deletion fails while another profile uses the avatar.
+   You can delete saved custom avatars, but built-in characters have no delete action.
 
 Managers bypass the daily generation quota.
 The private deployment configuration still needs `OPENAI_API_KEY`.

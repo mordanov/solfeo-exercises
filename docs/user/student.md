@@ -147,7 +147,8 @@ To create an original character:
    Rejection shows the question mark; you can choose a built-in character instead.
 7. Reopen the chooser if you close it during generation.
    The existing job appears without another generation request.
-8. Click **Discard** to remove an unwanted result.
+8. Click **Delete avatar** to remove an unwanted custom result.
+   The saved avatar disappears from the gallery.
 
 To reuse a generated character:
 1. Open **Choose avatar**.
@@ -158,7 +159,10 @@ To reuse a generated character:
 
 Every player can choose any approved custom avatar.
 Selecting an avatar changes only the chosen player profile.
-The creator cannot discard an avatar while another player uses it.
+The creator cannot delete an avatar while another player uses it.
+You can delete a saved custom avatar that belongs to your account.
+Built-in characters do not have a delete action.
+Another profile must choose a different avatar before you can delete the shared avatar.
 Custom levels grow from a baby form to a heroic adult form.
 Each level keeps its outfit across neutral, happy, and sad expressions.
 Selecting a built-in character does not remove saved avatars.

@@ -19,16 +19,18 @@ Every player profile can preview and select ready approved avatars from the shar
 Pending and rejected avatars remain private to their creator and managers.
 Selection identifies the target profile and leaves the creator's selection unchanged.
 Protected frame access remains authenticated and approval-gated.
-The application hides discard for avatars owned by another account.
+The chooser offers deletion for saved custom avatars the current account can manage.
+Built-in avatars have no delete action.
 Deletion returns `AVATAR_IN_USE` while another profile selects the avatar.
 The full backend suite passes: 354 tests, with emergency-manager variables blank.
-Ruff, formatting, and mypy pass. The frontend suite passes 367 tests on Node 22, and lint, formatting, type checking, and build pass.
+Ruff, formatting, and mypy pass. The frontend suite passes 369 tests on Node 22, and lint, formatting, type checking, and build pass.
 
 Remaining manual checks:
 1. Approve one generated avatar and sign in as a different player account.
 2. Preview the shared avatar, select it, and confirm the original player keeps the same avatar.
 3. Confirm the second player cannot see or retrieve another profile's pending avatar.
-4. Confirm deletion fails while another profile uses the approved avatar.
+4. Delete a saved custom avatar and confirm built-in avatars have no delete action.
+5. Confirm deletion fails while another profile uses the approved avatar.
 
 ### Custom avatar image quality
 

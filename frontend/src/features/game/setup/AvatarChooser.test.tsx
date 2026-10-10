@@ -238,7 +238,7 @@ it("reuses a saved avatar and previews any level without a generation request", 
     ),
   );
 });
-it("does not offer discard for an approved avatar owned by another account", async () => {
+it("does not offer deletion for an approved avatar owned by another account", async () => {
   savedJob = true;
   canDiscard = false;
   mount(
@@ -249,11 +249,56 @@ it("does not offer discard for an approved avatar owned by another account", asy
   );
   expect(await screen.findByRole("button", { name: "Use it" })).toBeEnabled();
   expect(
-    screen.queryByRole("button", { name: "Discard" }),
+    screen.queryByRole("button", { name: "Delete avatar" }),
+  ).not.toBeInTheDocument();
+  expect(
+    screen.queryByRole("button", { name: "Delete avatar" }),
+  ).not.toBeInTheDocument();
+  expect(
+    screen.queryByRole("button", { name: "Delete saved avatar 10" }),
   ).not.toBeInTheDocument();
   expect(
     screen.getByText("Approved avatars are available to every player."),
   ).toBeInTheDocument();
+});
+it("deletes an owned saved avatar directly from the gallery", async () => {
+  savedJob = true;
+  mount(
+    <AvatarChooser playerId={1} csrf="synthetic-token" onClose={() => {}} />,
+  );
+  fireEvent.click(
+    await screen.findByRole("button", { name: "Saved avatar 10" }),
+  );
+  expect(await screen.findByRole("button", { name: "Use it" })).toBeEnabled();
+  fireEvent.click(
+    screen.getByRole("button", { name: "Delete saved avatar 10" }),
+  );
+  await waitFor(() =>
+    expect(
+      screen.queryByRole("button", { name: "Saved avatar 10" }),
+    ).not.toBeInTheDocument(),
+  );
+  expect(
+    screen.queryByRole("button", { name: "Use it" }),
+  ).not.toBeInTheDocument();
+  expect(fetchMock).toHaveBeenCalledWith(
+    "/api/game/avatars/10",
+    expect.objectContaining({ method: "DELETE" }),
+  );
+});
+it("does not offer deletion for built-in avatars", async () => {
+  mount(
+    <AvatarChooser playerId={1} csrf="synthetic-token" onClose={() => {}} />,
+  );
+  expect(
+    await screen.findByRole("button", { name: "Lion" }),
+  ).toBeInTheDocument();
+  expect(
+    screen.queryByRole("button", { name: /delete/i }),
+  ).not.toBeInTheDocument();
+  expect(
+    fetchMock.mock.calls.some(([, options]) => options?.method === "DELETE"),
+  ).toBe(false);
 });
 it("keeps a ready avatar private until the manager approves it", async () => {
   resumeJob = true;
@@ -274,7 +319,7 @@ it("keeps a ready avatar private until the manager approves it", async () => {
         image.getAttribute("src")?.startsWith("/api/game/avatars/9/"),
       ),
   ).toBe(false);
-  expect(screen.getByRole("button", { name: "Discard" })).toBeEnabled();
+  expect(screen.getByRole("button", { name: "Delete avatar" })).toBeEnabled();
 });
 
 it("lets a manager preview a pending avatar but not activate it before review", async () => {
@@ -352,7 +397,7 @@ it("reports generation unavailability without closing the chooser", async () => 
   expect(await screen.findByRole("alert")).toHaveTextContent("unavailable");
   expect(close).not.toHaveBeenCalled();
 });
-it("removes a discarded saved avatar from the gallery and refreshes the player", async () => {
+it("removes a deleted saved avatar from the gallery and refreshes the player", async () => {
   savedJob = true;
   const cache = mount(
     <AvatarChooser playerId={1} csrf="synthetic-token" onClose={() => {}} />,
@@ -364,12 +409,13 @@ it("removes a discarded saved avatar from the gallery and refreshes the player",
   fireEvent.click(
     await screen.findByRole("button", { name: "Saved avatar 10" }),
   );
-  fireEvent.click(await screen.findByRole("button", { name: "Discard" }));
+  fireEvent.click(await screen.findByRole("button", { name: "Delete avatar" }));
   await waitFor(() =>
     expect(
       screen.queryByRole("button", { name: "Saved avatar 10" }),
     ).not.toBeInTheDocument(),
   );
+  expect(screen.queryByRole("textbox")).not.toBeInTheDocument();
   expect(cache.getQueryState(["game", "player", 1])?.isInvalidated).toBe(true);
 });
 it("resumes a finished generation when the chooser reopens", async () => {
