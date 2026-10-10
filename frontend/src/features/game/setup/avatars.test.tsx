@@ -41,6 +41,20 @@ it("uses authorized URLs for generated avatars", () => {
   );
 });
 
+it("shows the face circle of a generated avatar and falls back to its first frame", () => {
+  render(<AvatarImage animalId="custom" customAvatarId={42} portrait />);
+  const image = screen.getByRole("img");
+  expect(image).toHaveAttribute("src", "/api/game/avatars/42/files/portrait");
+  fireEvent.error(image);
+  expect(screen.getByRole("img")).toHaveAttribute(
+    "src",
+    "/api/game/avatars/42/files/neutral?level=1",
+  );
+  expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+  fireEvent.error(screen.getByRole("img"));
+  expect(screen.getByRole("alert")).toBeInTheDocument();
+});
+
 it("never renders a pending custom avatar", () => {
   render(
     <AvatarImage

@@ -189,7 +189,7 @@ Managers can choose avatars for any player without changing the existing player-
 | GET | `/api/game/avatars/{id}/status` | Job creator, player owner, or manager; status and durable progress |
 | POST | `/api/game/avatars/{id}/use` | Job creator, player owner, or manager, with CSRF; selects a complete approved job |
 | DELETE | `/api/game/avatars/{id}` | Job creator, player owner, or manager, with CSRF; discards a nonpending job |
-| GET, HEAD | `/api/game/avatars/{id}/files/{state}` | Job creator, player owner, or manager; private PNG through nginx |
+| GET, HEAD | `/api/game/avatars/{id}/files/{state}` | Job creator, player owner, or manager; private PNG through nginx. `state` is `neutral`, `happy`, `sad` (with `?level=1..10`) or `portrait` (256×256 circular face icon, level ignored; 404 if it was not generated) |
 | GET | `/api/game/avatars/review?offset=0` | Manager; `jobs` and `total`, 12 ready pending results per page |
 | POST | `/api/game/avatars/{id}/review` | Manager and CSRF; `{"decision":"approved"}` or `{"decision":"rejected"}` |
 | GET, HEAD | `/api/game/avatars/{id}/review-sheet` | Manager; protected original generated sheet |

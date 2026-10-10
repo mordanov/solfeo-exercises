@@ -21,7 +21,15 @@ class JsonFormatter(logging.Formatter):
             "logger": record.name,
             "event": event,
         }
-        for name in ("method", "route", "status", "duration_ms", "job_id"):
+        for name in (
+            "method",
+            "route",
+            "status",
+            "duration_ms",
+            "job_id",
+            "error_code",
+            "cell",
+        ):
             if name in record.__dict__:
                 data[name] = record.__dict__[name]
         if record.exc_info and record.exc_info[0]:

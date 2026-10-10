@@ -13,7 +13,7 @@ import time
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
-from typing import Literal
+from typing import IO, Literal
 from uuid import uuid4
 
 import httpx
@@ -32,6 +32,17 @@ from app.settings import Settings
 
 logger = logging.getLogger("worker.generate_avatar")
 STATES = ("neutral", "happy", "sad")
+PORTRAIT_SIZE = 256
+SHEET_ATTEMPTS = 2
+PORTRAIT_SYSTEM = (
+    "Create ONE close-up face portrait icon of an original child-friendly magical "
+    "creature: only the head and face, centered, filling a perfect circle with a "
+    "soft pastel circular background and a thin outline. No text, labels, real "
+    "people, brands or existing franchise characters. Bright pastel cartoon with "
+    "clear outlines, friendly neutral expression, the young (level 1) form."
+)
+MIN_VISIBLE_ALPHA = 32
+MIN_FIGURE_AREA = 0.02
 IMAGE_SYSTEM = (
     "Create ONE sprite sheet of an original child-friendly magical creature: "
     "exactly 30 complete, separate figures in a STRICT 5-column, 6-row grid. "
@@ -47,8 +58,9 @@ IMAGE_SYSTEM = (
 
 
 class AvatarError(Exception):
-    def __init__(self, code: str) -> None:
+    def __init__(self, code: str, cell: str = "") -> None:
         self.code = code
+        self.cell = cell
         super().__init__(code)
 
 
@@ -129,20 +141,18 @@ def _moderate_image(settings: Settings, description: str, image: bytes) -> bool:
     return _moderate(settings, description, image)
 
 
-def _generate_sheet(settings: Settings, description: str) -> bytes:
+def _generate_image(settings: Settings, prompt: str, size: str) -> bytes:
     legacy = settings.avatar_image_model.startswith("dall-e-")
     payload: dict[str, object] = {
         "model": settings.avatar_image_model,
-        "prompt": IMAGE_SYSTEM
+        "prompt": prompt
         + (
             " Use a solid pure-white background."
             if legacy
             else " Use a transparent background."
-        )
-        + "\nCreature: "
-        + description,
+        ),
         "n": 1,
-        "size": "1024x1024" if legacy else "1024x1536",
+        "size": "1024x1024" if legacy else size,
     }
     if legacy:
         payload["response_format"] = "b64_json"
@@ -171,6 +181,50 @@ def _generate_sheet(settings: Settings, description: str) -> bytes:
     if len(data) > settings.avatar_gen_max_image_bytes:
         raise AvatarError("AVATAR_IMAGE_TOO_LARGE")
     return data
+
+
+def _generate_sheet(settings: Settings, description: str) -> bytes:
+    return _generate_image(
+        settings, IMAGE_SYSTEM + "\nCreature: " + description, "1024x1536"
+    )
+
+
+def _generate_portrait(settings: Settings, description: str) -> bytes:
+    return _generate_image(
+        settings, PORTRAIT_SYSTEM + "\nCreature: " + description, "1024x1024"
+    )
+
+
+def _circular_portrait(data: bytes) -> bytes:
+    with Image.open(io.BytesIO(data)) as source:
+        if source.format != "PNG" or source.width != source.height:
+            raise AvatarError("AVATAR_PORTRAIT_INVALID")
+        image = source.convert("RGBA").resize(
+            (PORTRAIT_SIZE, PORTRAIT_SIZE), Image.Resampling.LANCZOS
+        )
+    oversized = PORTRAIT_SIZE * 4
+    mask = Image.new("L", (oversized, oversized), 0)
+    ImageDraw.Draw(mask).ellipse((0, 0, oversized - 1, oversized - 1), fill=255)
+    mask = mask.resize((PORTRAIT_SIZE, PORTRAIT_SIZE), Image.Resampling.LANCZOS)
+    image.putalpha(ImageChops.multiply(image.getchannel("A"), mask))
+    encoded = io.BytesIO()
+    image.save(encoded, format="PNG")
+    return encoded.getvalue()
+
+
+def _ensure_portrait(settings: Settings, description: str, path: Path) -> None:
+    # The face icon is optional: any failure leaves the 30 frames usable and the
+    # interface falls back to the neutral level-1 frame.
+    if path.is_file():
+        return
+    try:
+        data = _generate_portrait(settings, description)
+        if _moderate_image(settings, description, data):
+            logger.warning("AVATAR_PORTRAIT_FLAGGED")
+            return
+        _atomic_write(path, _circular_portrait(data))
+    except Exception:
+        logger.exception("AVATAR_PORTRAIT_FAILED")
 
 
 def _atomic_write(path: Path, data: bytes) -> None:
@@ -292,13 +346,14 @@ def _update(
             job.sad_path = prefix + "sad.png"
 
 
-def _load_sheet(path: Path, settings: Settings) -> Image.Image:
-    if path.stat().st_size > settings.avatar_gen_max_image_bytes:
-        raise AvatarError("AVATAR_IMAGE_TOO_LARGE")
-    with Image.open(path) as source:
-        if source.format != "PNG" or source.size not in ((1024, 1536), (1024, 1024)):
+def _decode_sheet(source: Path | IO[bytes], settings: Settings) -> Image.Image:
+    with Image.open(source) as source_image:
+        if source_image.format != "PNG" or source_image.size not in (
+            (1024, 1536),
+            (1024, 1024),
+        ):
             raise AvatarError("AVATAR_SHEET_INVALID")
-        image = source.convert("RGBA")
+        image = source_image.convert("RGBA")
     if image.getchannel("A").getextrema()[0] == 255:
         # Legacy DALL-E has no native transparency. Remove only edge-connected white.
         red, green, blue = image.convert("RGB").split()
@@ -322,8 +377,30 @@ def _load_sheet(path: Path, settings: Settings) -> Image.Image:
     return image
 
 
-def _frames(image: Image.Image) -> list[tuple[int, str, bytes]]:
-    frames: list[tuple[int, str, bytes]] = []
+def _load_sheet(path: Path, settings: Settings) -> Image.Image:
+    if path.stat().st_size > settings.avatar_gen_max_image_bytes:
+        raise AvatarError("AVATAR_IMAGE_TOO_LARGE")
+    return _decode_sheet(path, settings)
+
+
+def _generate_usable_sheet(settings: Settings, description: str) -> bytes:
+    # The provider sometimes ignores the grid. One extra request is worth it;
+    # a second invalid sheet is returned so the saved original explains the failure.
+    for attempt in range(SHEET_ATTEMPTS):
+        data = _generate_sheet(settings, description)
+        try:
+            _figures(_decode_sheet(io.BytesIO(data), settings))
+        except AvatarError as error:
+            if error.code != "AVATAR_SHEET_INVALID" or attempt == SHEET_ATTEMPTS - 1:
+                return data
+            logger.warning("AVATAR_SHEET_REGENERATED", extra={"cell": error.cell})
+        else:
+            return data
+    raise AssertionError("unreachable")
+
+
+def _figures(image: Image.Image) -> list[tuple[int, str, Image.Image]]:
+    figures: list[tuple[int, str, Image.Image]] = []
     for level in range(1, 11):
         column = (level - 1) % 5
         for state_index, state in enumerate(STATES):
@@ -336,23 +413,34 @@ def _frames(image: Image.Image) -> list[tuple[int, str, bytes]]:
                     (row + 1) * image.height // 6,
                 )
             )
-            bounds = cell.getchannel("A").getbbox()
+            bounds = (
+                cell.getchannel("A")
+                .point(lambda value: 255 if value >= MIN_VISIBLE_ALPHA else 0)
+                .getbbox()
+            )
             if (
                 bounds is None
-                or min(bounds[:2]) < 2
-                or bounds[2] > cell.width - 2
-                or bounds[3] > cell.height - 2
+                or (bounds[2] - bounds[0]) * (bounds[3] - bounds[1])
+                < cell.width * cell.height * MIN_FIGURE_AREA
             ):
-                raise AvatarError("AVATAR_SHEET_INVALID")
-            cropped = cell.crop(bounds)
-            resized = ImageOps.contain(cropped, (360, 360), Image.Resampling.LANCZOS)
-            frame = Image.new("RGBA", (384, 384))
-            frame.alpha_composite(
-                resized, ((384 - resized.width) // 2, (384 - resized.height) // 2)
-            )
-            encoded = io.BytesIO()
-            frame.save(encoded, format="PNG")
-            frames.append((level, state, encoded.getvalue()))
+                raise AvatarError(
+                    "AVATAR_SHEET_INVALID", f"level={level} state={state}"
+                )
+            figures.append((level, state, cell.crop(bounds)))
+    return figures
+
+
+def _frames(image: Image.Image) -> list[tuple[int, str, bytes]]:
+    frames: list[tuple[int, str, bytes]] = []
+    for level, state, cropped in _figures(image):
+        resized = ImageOps.contain(cropped, (360, 360), Image.Resampling.LANCZOS)
+        frame = Image.new("RGBA", (384, 384))
+        frame.alpha_composite(
+            resized, ((384 - resized.width) // 2, (384 - resized.height) // 2)
+        )
+        encoded = io.BytesIO()
+        frame.save(encoded, format="PNG")
+        frames.append((level, state, encoded.getvalue()))
     return frames
 
 
@@ -374,7 +462,7 @@ def process_one(database: Database, settings: Settings) -> bool:
             if _moderate(settings, lease.description):
                 raise AvatarError("MODERATION_FLAGGED")
             _update(database, lease, "generating")
-            data = _generate_sheet(settings, lease.description)
+            data = _generate_usable_sheet(settings, lease.description)
             _save_sheet(database, lease, sheet, data)
         if sheet.stat().st_size > settings.avatar_gen_max_image_bytes:
             raise AvatarError("AVATAR_IMAGE_TOO_LARGE")
@@ -423,6 +511,8 @@ def process_one(database: Database, settings: Settings) -> bool:
         _atomic_write(
             root / "manifest.json", (json.dumps(manifest, indent=2) + "\n").encode()
         )
+        _update(database, lease, "splitting", completed=30)
+        _ensure_portrait(settings, lease.description, root / "portrait.png")
         _update(database, lease, "review", completed=30)
         logger.info("AVATAR_JOB_READY", extra={"job_id": lease.job_id})
     except Exception as error:
@@ -438,7 +528,14 @@ def process_one(database: Database, settings: Settings) -> bool:
             code = "AVATAR_PROVIDER_TIMEOUT"
         else:
             code = "AVATAR_GENERATION_FAILED"
-        logger.exception("AVATAR_JOB_FAILED", extra={"job_id": lease.job_id})
+        logger.exception(
+            "AVATAR_JOB_FAILED",
+            extra={
+                "job_id": lease.job_id,
+                "error_code": code,
+                "cell": error.cell if isinstance(error, AvatarError) else "",
+            },
+        )
         if code != "AVATAR_LEASE_LOST":
             try:
                 _update(database, lease, "failed", error=code)

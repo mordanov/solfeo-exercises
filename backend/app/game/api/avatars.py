@@ -266,7 +266,7 @@ def use_avatar(
 @router.api_route("/{job_id}/files/{state}", methods=["GET", "HEAD"])
 def avatar_file(
     job_id: int,
-    state: Literal["neutral", "happy", "sad"],
+    state: Literal["neutral", "happy", "sad", "portrait"],
     identity: Member,
     session: Db,
     settings: Configuration,
