@@ -6930,7 +6930,7 @@
       "source_file": "frontend/src/features/game/setup/PlayerSelect.tsx",
       "source_location": "L43",
       "id": "setup_playerselect_playerselect",
-      "community": 370,
+      "community": 251,
       "norm_label": "playerselect()"
     },
     {
@@ -7236,7 +7236,7 @@
       "source_file": "frontend/src/features/game/admin/AdminScreen.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_game_admin_adminscreen_tsx",
-      "community": 370,
+      "community": 251,
       "norm_label": "adminscreen.tsx"
     },
     {
@@ -7245,7 +7245,7 @@
       "source_file": "frontend/src/features/game/admin/AdminScreen.tsx",
       "source_location": "L25",
       "id": "admin_adminscreen_props",
-      "community": 370,
+      "community": 251,
       "norm_label": "props"
     },
     {
@@ -7254,7 +7254,7 @@
       "source_file": "frontend/src/features/game/admin/AdminScreen.tsx",
       "source_location": "L31",
       "id": "admin_adminscreen_adminscreen",
-      "community": 370,
+      "community": 251,
       "norm_label": "adminscreen()"
     },
     {
@@ -7650,7 +7650,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L7",
       "id": "api_hooks_player",
-      "community": 370,
+      "community": 251,
       "norm_label": "player"
     },
     {
@@ -7767,7 +7767,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L138",
       "id": "api_hooks_useplayers",
-      "community": 370,
+      "community": 251,
       "norm_label": "useplayers()"
     },
     {
@@ -7947,7 +7947,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L429",
       "id": "api_hooks_useresetseason",
-      "community": 370,
+      "community": 251,
       "norm_label": "useresetseason()"
     },
     {
@@ -7956,7 +7956,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L453",
       "id": "api_hooks_useresetallseasons",
-      "community": 370,
+      "community": 251,
       "norm_label": "useresetallseasons()"
     },
     {
@@ -25830,7 +25830,7 @@
       "source_file": "backend/app/main.py",
       "source_location": "L43",
       "id": "app_main_service_error",
-      "community": 38,
+      "community": 198,
       "norm_label": "service_error()"
     },
     {
@@ -26433,7 +26433,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L58",
       "id": "api_avatars_generationout",
-      "community": 151,
+      "community": 124,
       "norm_label": "generationout"
     },
     {
@@ -26451,7 +26451,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L67",
       "id": "api_avatars_generate_avatar",
-      "community": 151,
+      "community": 124,
       "norm_label": "generate_avatar()"
     },
     {
@@ -26505,7 +26505,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L118",
       "id": "api_avatars_avatarquotaout",
-      "community": 151,
+      "community": 124,
       "norm_label": "avatarquotaout"
     },
     {
@@ -26613,7 +26613,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L308",
       "id": "api_avatars_quota",
-      "community": 151,
+      "community": 124,
       "norm_label": "quota()"
     },
     {
@@ -26901,7 +26901,7 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L1",
       "id": "backend_app_game_services_avatars_py",
-      "community": 151,
+      "community": 124,
       "norm_label": "avatars.py"
     },
     {
@@ -26910,7 +26910,7 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L17",
       "id": "services_avatars_quota_day",
-      "community": 151,
+      "community": 124,
       "norm_label": "_quota_day()"
     },
     {
@@ -26919,7 +26919,7 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L27",
       "id": "services_avatars_check_daily_quota",
-      "community": 151,
+      "community": 124,
       "norm_label": "check_daily_quota()"
     },
     {
@@ -26928,7 +26928,7 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L47",
       "id": "services_avatars_quota_usage",
-      "community": 151,
+      "community": 124,
       "norm_label": "quota_usage()"
     },
     {
@@ -26937,7 +26937,7 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L58",
       "id": "services_avatars_start_avatar_job",
-      "community": 151,
+      "community": 124,
       "norm_label": "start_avatar_job()"
     },
     {
@@ -26973,7 +26973,7 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L171",
       "id": "services_avatars_validate_avatar_assets",
-      "community": 151,
+      "community": 124,
       "norm_label": "validate_avatar_assets()"
     },
     {
@@ -27009,7 +27009,7 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L245",
       "id": "services_avatars_lock_job_and_player",
-      "community": 151,
+      "community": 124,
       "norm_label": "_lock_job_and_player()"
     },
     {
@@ -27036,7 +27036,7 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L325",
       "id": "services_avatars_use_avatar",
-      "community": 151,
+      "community": 124,
       "norm_label": "use_avatar()"
     },
     {
@@ -27045,7 +27045,7 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L339",
       "id": "services_avatars_discard_avatar",
-      "community": 151,
+      "community": 124,
       "norm_label": "discard_avatar()"
     },
     {
@@ -27954,7 +27954,7 @@
       "source_file": "backend/app/services/auth.py",
       "source_location": "L20",
       "id": "services_auth_serviceerror",
-      "community": 38,
+      "community": 198,
       "norm_label": "serviceerror"
     },
     {
@@ -27972,7 +27972,7 @@
       "source_file": "backend/app/services/auth.py",
       "source_location": "L21",
       "id": "services_auth_serviceerror_init",
-      "community": 38,
+      "community": 198,
       "norm_label": ".__init__()"
     },
     {
@@ -28206,7 +28206,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L37",
       "id": "services_telegram_api_telegramapi_call",
-      "community": 38,
+      "community": 198,
       "norm_label": ".call()"
     },
     {
@@ -28215,7 +28215,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L60",
       "id": "services_telegram_api_telegramapi_verify",
-      "community": 38,
+      "community": 198,
       "norm_label": ".verify()"
     },
     {
@@ -28224,7 +28224,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L72",
       "id": "services_telegram_api_telegramapi_updates",
-      "community": 38,
+      "community": 198,
       "norm_label": ".updates()"
     },
     {
@@ -28233,7 +28233,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L86",
       "id": "services_telegram_api_telegramapi_reply",
-      "community": 38,
+      "community": 198,
       "norm_label": ".reply()"
     },
     {
@@ -28242,7 +28242,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L89",
       "id": "services_telegram_api_telegramapi_download",
-      "community": 38,
+      "community": 198,
       "norm_label": ".download()"
     },
     {
@@ -28467,7 +28467,7 @@
       "source_file": "backend/app/services/omr.py",
       "source_location": "L1",
       "id": "backend_app_services_omr_py",
-      "community": 38,
+      "community": 198,
       "norm_label": "omr.py"
     },
     {
@@ -28476,7 +28476,7 @@
       "source_file": "backend/app/services/omr.py",
       "source_location": "L20",
       "id": "services_omr_claim",
-      "community": 38,
+      "community": 198,
       "norm_label": "claim"
     },
     {
@@ -28485,7 +28485,7 @@
       "source_file": "backend/app/services/omr.py",
       "source_location": "L28",
       "id": "services_omr_active_exercise",
-      "community": 38,
+      "community": 198,
       "norm_label": "active_exercise()"
     },
     {
@@ -28494,7 +28494,7 @@
       "source_file": "backend/app/services/omr.py",
       "source_location": "L40",
       "id": "services_omr_current",
-      "community": 38,
+      "community": 198,
       "norm_label": "current()"
     },
     {
@@ -28512,7 +28512,7 @@
       "source_file": "backend/app/services/omr.py",
       "source_location": "L73",
       "id": "services_omr_rerun",
-      "community": 38,
+      "community": 198,
       "norm_label": "rerun()"
     },
     {
@@ -28521,7 +28521,7 @@
       "source_file": "backend/app/services/omr.py",
       "source_location": "L139",
       "id": "services_omr_validate_musicxml",
-      "community": 38,
+      "community": 198,
       "norm_label": "validate_musicxml()"
     },
     {
@@ -28530,7 +28530,7 @@
       "source_file": "backend/app/services/omr.py",
       "source_location": "L171",
       "id": "services_omr_owned_claim",
-      "community": 38,
+      "community": 198,
       "norm_label": "owned_claim()"
     },
     {
@@ -28539,7 +28539,7 @@
       "source_file": "backend/app/services/omr.py",
       "source_location": "L199",
       "id": "services_omr_complete",
-      "community": 38,
+      "community": 198,
       "norm_label": "complete()"
     },
     {
@@ -28548,7 +28548,7 @@
       "source_file": "backend/app/services/omr.py",
       "source_location": "L217",
       "id": "services_omr_fail",
-      "community": 38,
+      "community": 198,
       "norm_label": "fail()"
     },
     {
@@ -28557,7 +28557,7 @@
       "source_file": "backend/app/services/omr.py",
       "source_location": "L237",
       "id": "services_omr_review",
-      "community": 38,
+      "community": 198,
       "norm_label": "review()"
     },
     {
@@ -28566,7 +28566,7 @@
       "source_file": "backend/app/services/omr.py",
       "source_location": "L256",
       "id": "services_omr_score_file",
-      "community": 38,
+      "community": 198,
       "norm_label": "score_file()"
     },
     {
@@ -31167,7 +31167,7 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L34",
       "id": "game_test_avatar_approval_review_job",
-      "community": 151,
+      "community": 124,
       "norm_label": "review_job()"
     },
     {
@@ -31192,7 +31192,7 @@
       "label": "test_portrait_file_follows_the_same_approval_rule_and_ignores_level()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L112",
+      "source_location": "L118",
       "id": "game_test_avatar_approval_test_portrait_file_follows_the_same_approval_rule_and_ignores_level",
       "community": 151,
       "norm_label": "test_portrait_file_follows_the_same_approval_rule_and_ignores_level()"
@@ -31201,7 +31201,7 @@
       "label": "test_pending_job_hides_paths_even_after_generation()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L134",
+      "source_location": "L140",
       "id": "game_test_avatar_approval_test_pending_job_hides_paths_even_after_generation",
       "community": 124,
       "norm_label": "test_pending_job_hides_paths_even_after_generation()"
@@ -31210,7 +31210,7 @@
       "label": "test_image_moderation_sends_text_and_image()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L156",
+      "source_location": "L162",
       "id": "game_test_avatar_approval_test_image_moderation_sends_text_and_image",
       "community": 151,
       "norm_label": "test_image_moderation_sends_text_and_image()"
@@ -31219,7 +31219,7 @@
       "label": "test_generation_marks_pending_selection()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L190",
+      "source_location": "L196",
       "id": "game_test_avatar_approval_test_generation_marks_pending_selection",
       "community": 151,
       "norm_label": "test_generation_marks_pending_selection()"
@@ -31228,7 +31228,7 @@
       "label": "test_review_is_idempotent_and_opposite_decision_conflicts()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L201",
+      "source_location": "L207",
       "id": "game_test_avatar_approval_test_review_is_idempotent_and_opposite_decision_conflicts",
       "community": 151,
       "norm_label": "test_review_is_idempotent_and_opposite_decision_conflicts()"
@@ -31237,7 +31237,7 @@
       "label": "test_approval_does_not_override_later_builtin_selection()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L231",
+      "source_location": "L237",
       "id": "game_test_avatar_approval_test_approval_does_not_override_later_builtin_selection",
       "community": 151,
       "norm_label": "test_approval_does_not_override_later_builtin_selection()"
@@ -31246,7 +31246,7 @@
       "label": "test_concurrent_opposite_reviews_cannot_overwrite_each_other()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L246",
+      "source_location": "L252",
       "id": "game_test_avatar_approval_test_concurrent_opposite_reviews_cannot_overwrite_each_other",
       "community": 151,
       "norm_label": "test_concurrent_opposite_reviews_cannot_overwrite_each_other()"
@@ -31255,7 +31255,7 @@
       "label": "test_review_queue_paginates_only_ready_pending_jobs()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L273",
+      "source_location": "L279",
       "id": "game_test_avatar_approval_test_review_queue_paginates_only_ready_pending_jobs",
       "community": 151,
       "norm_label": "test_review_queue_paginates_only_ready_pending_jobs()"
@@ -31264,7 +31264,7 @@
       "label": "test_all_worker_failures_release_quota_atomically()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L325",
+      "source_location": "L331",
       "id": "game_test_avatar_approval_test_all_worker_failures_release_quota_atomically",
       "community": 151,
       "norm_label": "test_all_worker_failures_release_quota_atomically()"
@@ -31273,7 +31273,7 @@
       "label": "test_worker_moderates_image_before_extraction_and_waits_for_review()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L346",
+      "source_location": "L352",
       "id": "game_test_avatar_approval_test_worker_moderates_image_before_extraction_and_waits_for_review",
       "community": 151,
       "norm_label": "test_worker_moderates_image_before_extraction_and_waits_for_review()"
@@ -31282,7 +31282,7 @@
       "label": "test_provider_error_process_releases_quota()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L396",
+      "source_location": "L404",
       "id": "game_test_avatar_approval_test_provider_error_process_releases_quota",
       "community": 151,
       "norm_label": "test_provider_error_process_releases_quota()"
@@ -31291,7 +31291,7 @@
       "label": "test_saved_sheet_recovery_requires_verified_image_moderation()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L418",
+      "source_location": "L426",
       "id": "game_test_avatar_approval_test_saved_sheet_recovery_requires_verified_image_moderation",
       "community": 151,
       "norm_label": "test_saved_sheet_recovery_requires_verified_image_moderation()"
@@ -31300,7 +31300,7 @@
       "label": "test_incomplete_or_flagged_moderation_proof_is_not_trusted()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L491",
+      "source_location": "L499",
       "id": "game_test_avatar_approval_test_incomplete_or_flagged_moderation_proof_is_not_trusted",
       "community": 91,
       "norm_label": "test_incomplete_or_flagged_moderation_proof_is_not_trusted()"
@@ -31309,7 +31309,7 @@
       "label": "test_timezone_reset_handles_daylight_saving()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L500",
+      "source_location": "L508",
       "id": "game_test_avatar_approval_test_timezone_reset_handles_daylight_saving",
       "community": 151,
       "norm_label": "test_timezone_reset_handles_daylight_saving()"
@@ -31318,7 +31318,7 @@
       "label": "test_daily_quota_uses_local_calendar_day()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L516",
+      "source_location": "L524",
       "id": "game_test_avatar_approval_test_daily_quota_uses_local_calendar_day",
       "community": 151,
       "norm_label": "test_daily_quota_uses_local_calendar_day()"
@@ -31327,7 +31327,7 @@
       "label": "test_manager_queue_review_and_student_file_permissions()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L548",
+      "source_location": "L556",
       "id": "game_test_avatar_approval_test_manager_queue_review_and_student_file_permissions",
       "community": 151,
       "norm_label": "test_manager_queue_review_and_student_file_permissions()"
@@ -31455,7 +31455,7 @@
       "source_file": "backend/tests/game/test_avatar_generation.py",
       "source_location": "L110",
       "id": "game_test_avatar_generation_avatar_job",
-      "community": 151,
+      "community": 124,
       "norm_label": "avatar_job()"
     },
     {
@@ -31644,7 +31644,7 @@
       "source_file": "backend/tests/game/test_avatar_generation.py",
       "source_location": "L616",
       "id": "game_test_avatar_generation_test_repeated_requests_reuse_a_pending_job_without_consuming_quota",
-      "community": 151,
+      "community": 124,
       "norm_label": "test_repeated_requests_reuse_a_pending_job_without_consuming_quota()"
     },
     {
@@ -31689,7 +31689,7 @@
       "source_file": "backend/tests/game/test_avatars.py",
       "source_location": "L1",
       "id": "backend_tests_game_test_avatars_py",
-      "community": 151,
+      "community": 124,
       "norm_label": "test_avatars.py"
     },
     {
@@ -31698,7 +31698,7 @@
       "source_file": "backend/tests/game/test_avatars.py",
       "source_location": "L10",
       "id": "game_test_avatars_test_check_daily_quota_empty",
-      "community": 151,
+      "community": 124,
       "norm_label": "test_check_daily_quota_empty()"
     },
     {
@@ -31707,7 +31707,7 @@
       "source_file": "backend/tests/game/test_avatars.py",
       "source_location": "L29",
       "id": "game_test_avatars_test_check_daily_quota_decrements",
-      "community": 151,
+      "community": 124,
       "norm_label": "test_check_daily_quota_decrements()"
     },
     {
@@ -31716,7 +31716,7 @@
       "source_file": "backend/tests/game/test_avatars.py",
       "source_location": "L51",
       "id": "game_test_avatars_test_non_billable_does_not_count",
-      "community": 151,
+      "community": 124,
       "norm_label": "test_non_billable_does_not_count()"
     },
     {
@@ -42939,7 +42939,7 @@
       "source_file": "worker/telegram.py",
       "source_location": "L1",
       "id": "worker_telegram_py",
-      "community": 134,
+      "community": 198,
       "norm_label": "telegram.py"
     },
     {
@@ -42948,7 +42948,7 @@
       "source_file": "worker/telegram.py",
       "source_location": "L81",
       "id": "worker_telegram_healthy",
-      "community": 134,
+      "community": 198,
       "norm_label": "healthy()"
     },
     {
@@ -42957,7 +42957,7 @@
       "source_file": "worker/telegram.py",
       "source_location": "L95",
       "id": "worker_telegram_cycle",
-      "community": 134,
+      "community": 198,
       "norm_label": "cycle()"
     },
     {
@@ -42966,7 +42966,7 @@
       "source_file": "worker/telegram.py",
       "source_location": "L150",
       "id": "worker_telegram_main",
-      "community": 134,
+      "community": 198,
       "norm_label": "main()"
     },
     {
@@ -44188,7 +44188,7 @@
       "label": "Avatar generation incident investigation",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L28",
+      "source_location": "L29",
       "id": "docs_status_avatar_generation_incident_investigation",
       "community": 12,
       "norm_label": "avatar generation incident investigation"
@@ -44197,7 +44197,7 @@
       "label": "Game-only player role",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L51",
+      "source_location": "L52",
       "id": "docs_status_game_only_player_role",
       "community": 12,
       "norm_label": "game-only player role"
@@ -44206,7 +44206,7 @@
       "label": "Post-round prize collection",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L74",
+      "source_location": "L75",
       "id": "docs_status_post_round_prize_collection",
       "community": 12,
       "norm_label": "post-round prize collection"
@@ -44215,7 +44215,7 @@
       "label": "Packaged prize artwork",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L87",
+      "source_location": "L88",
       "id": "docs_status_packaged_prize_artwork",
       "community": 12,
       "norm_label": "packaged prize artwork"
@@ -44224,7 +44224,7 @@
       "label": "Prize extraction CI repair",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L106",
+      "source_location": "L107",
       "id": "docs_status_prize_extraction_ci_repair",
       "community": 12,
       "norm_label": "prize extraction ci repair"
@@ -44233,7 +44233,7 @@
       "label": "Game fixes, prizes, and avatar approval",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L115",
+      "source_location": "L116",
       "id": "docs_status_game_fixes_prizes_and_avatar_approval",
       "community": 12,
       "norm_label": "game fixes, prizes, and avatar approval"
@@ -44242,7 +44242,7 @@
       "label": "Failed release 37204983176",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L172",
+      "source_location": "L173",
       "id": "docs_status_failed_release_37204983176",
       "community": 12,
       "norm_label": "failed release 37204983176"
@@ -44251,7 +44251,7 @@
       "label": "Game statistics and season reset",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L207",
+      "source_location": "L208",
       "id": "docs_status_game_statistics_and_season_reset",
       "community": 12,
       "norm_label": "game statistics and season reset"
@@ -44260,7 +44260,7 @@
       "label": "Main integration",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L258",
+      "source_location": "L259",
       "id": "docs_status_main_integration",
       "community": 12,
       "norm_label": "main integration"
@@ -44269,7 +44269,7 @@
       "label": "Seven-note rounds and assistance bonuses",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L271",
+      "source_location": "L272",
       "id": "docs_status_seven_note_rounds_and_assistance_bonuses",
       "community": 12,
       "norm_label": "seven-note rounds and assistance bonuses"
@@ -44278,7 +44278,7 @@
       "label": "Persistent custom avatar generation",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L322",
+      "source_location": "L323",
       "id": "docs_status_persistent_custom_avatar_generation",
       "community": 12,
       "norm_label": "persistent custom avatar generation"
@@ -44287,7 +44287,7 @@
       "label": "Sampled piano and game setup",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L376",
+      "source_location": "L377",
       "id": "docs_status_sampled_piano_and_game_setup",
       "community": 12,
       "norm_label": "sampled piano and game setup"
@@ -44296,7 +44296,7 @@
       "label": "Game note playback",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L425",
+      "source_location": "L426",
       "id": "docs_status_game_note_playback",
       "community": 12,
       "norm_label": "game note playback"
@@ -44305,7 +44305,7 @@
       "label": "Standard game clefs",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L456",
+      "source_location": "L457",
       "id": "docs_status_standard_game_clefs",
       "community": 12,
       "norm_label": "standard game clefs"
@@ -44314,7 +44314,7 @@
       "label": "Circular game shortcut",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L482",
+      "source_location": "L483",
       "id": "docs_status_circular_game_shortcut",
       "community": 12,
       "norm_label": "circular game shortcut"
@@ -44323,7 +44323,7 @@
       "label": "Game first-entry repair",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L510",
+      "source_location": "L511",
       "id": "docs_status_game_first_entry_repair",
       "community": 12,
       "norm_label": "game first-entry repair"
@@ -44332,7 +44332,7 @@
       "label": "Game avatar artwork",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L543",
+      "source_location": "L544",
       "id": "docs_status_game_avatar_artwork",
       "community": 12,
       "norm_label": "game avatar artwork"
@@ -44341,7 +44341,7 @@
       "label": "Appearance settings",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L595",
+      "source_location": "L596",
       "id": "docs_status_appearance_settings",
       "community": 31,
       "norm_label": "appearance settings"
@@ -44350,7 +44350,7 @@
       "label": "CI follow-up: run 37008189410",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L637",
+      "source_location": "L638",
       "id": "docs_status_ci_follow_up_run_37008189410",
       "community": 12,
       "norm_label": "ci follow-up: run 37008189410"
@@ -44359,7 +44359,7 @@
       "label": "Student original image and score",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L658",
+      "source_location": "L659",
       "id": "docs_status_student_original_image_and_score",
       "community": 12,
       "norm_label": "student original image and score"
@@ -44368,7 +44368,7 @@
       "label": "Material Design baseline",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L677",
+      "source_location": "L678",
       "id": "docs_status_material_design_baseline",
       "community": 12,
       "norm_label": "material design baseline"
@@ -44377,7 +44377,7 @@
       "label": "Responsive layout follow-up",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L687",
+      "source_location": "L688",
       "id": "docs_status_responsive_layout_follow_up",
       "community": 12,
       "norm_label": "responsive layout follow-up"
@@ -44386,7 +44386,7 @@
       "label": "Installation and usability follow-up",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L715",
+      "source_location": "L716",
       "id": "docs_status_installation_and_usability_follow_up",
       "community": 12,
       "norm_label": "installation and usability follow-up"
@@ -44395,7 +44395,7 @@
       "label": "Password policy follow-up",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L750",
+      "source_location": "L751",
       "id": "docs_status_password_policy_follow_up",
       "community": 12,
       "norm_label": "password policy follow-up"
@@ -44404,7 +44404,7 @@
       "label": "Previous PHASE 7 completion",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L762",
+      "source_location": "L763",
       "id": "docs_status_previous_phase_7_completion",
       "community": 12,
       "norm_label": "previous phase 7 completion"
@@ -44413,7 +44413,7 @@
       "label": "PHASE 7 implementation",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L770",
+      "source_location": "L771",
       "id": "docs_status_phase_7_implementation",
       "community": 12,
       "norm_label": "phase 7 implementation"
@@ -44422,7 +44422,7 @@
       "label": "PHASE 7 validation and deployment boundary",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L788",
+      "source_location": "L789",
       "id": "docs_status_phase_7_validation_and_deployment_boundary",
       "community": 12,
       "norm_label": "phase 7 validation and deployment boundary"
@@ -44431,7 +44431,7 @@
       "label": "Previous PHASE 6 acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L830",
+      "source_location": "L831",
       "id": "docs_status_previous_phase_6_acceptance",
       "community": 12,
       "norm_label": "previous phase 6 acceptance"
@@ -44440,7 +44440,7 @@
       "label": "PHASE 6 follow-up fixes after owner acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L841",
+      "source_location": "L842",
       "id": "docs_status_phase_6_follow_up_fixes_after_owner_acceptance",
       "community": 12,
       "norm_label": "phase 6 follow-up fixes after owner acceptance"
@@ -44449,7 +44449,7 @@
       "label": "Completed PHASE 7 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L889",
+      "source_location": "L890",
       "id": "docs_status_completed_phase_7_plan",
       "community": 29,
       "norm_label": "completed phase 7 plan"
@@ -44458,7 +44458,7 @@
       "label": "Separate Material Design feature",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L902",
+      "source_location": "L903",
       "id": "docs_status_separate_material_design_feature",
       "community": 365,
       "norm_label": "separate material design feature"
@@ -44467,7 +44467,7 @@
       "label": "Completed Material Design checklist",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L942",
+      "source_location": "L943",
       "id": "docs_status_completed_material_design_checklist",
       "community": 365,
       "norm_label": "completed material design checklist"
@@ -44476,7 +44476,7 @@
       "label": "Completed PHASE 6 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L955",
+      "source_location": "L956",
       "id": "docs_status_completed_phase_6_plan",
       "community": 29,
       "norm_label": "completed phase 6 plan"
@@ -44485,7 +44485,7 @@
       "label": "Completed PHASE 5 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L967",
+      "source_location": "L968",
       "id": "docs_status_completed_phase_5_plan",
       "community": 29,
       "norm_label": "completed phase 5 plan"
@@ -44494,7 +44494,7 @@
       "label": "Completed PHASE 4 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L976",
+      "source_location": "L977",
       "id": "docs_status_completed_phase_4_plan",
       "community": 29,
       "norm_label": "completed phase 4 plan"
@@ -44503,7 +44503,7 @@
       "label": "Completed PHASE 3 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L983",
+      "source_location": "L984",
       "id": "docs_status_completed_phase_3_plan",
       "community": 29,
       "norm_label": "completed phase 3 plan"
@@ -44512,7 +44512,7 @@
       "label": "Completed PHASE 2 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L993",
+      "source_location": "L994",
       "id": "docs_status_completed_phase_2_plan",
       "community": 29,
       "norm_label": "completed phase 2 plan"
@@ -44521,7 +44521,7 @@
       "label": "Completed PHASE 1 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1002",
+      "source_location": "L1003",
       "id": "docs_status_completed_phase_1_plan",
       "community": 29,
       "norm_label": "completed phase 1 plan"
@@ -44530,7 +44530,7 @@
       "label": "Completed PHASE 0 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1013",
+      "source_location": "L1014",
       "id": "docs_status_completed_phase_0_plan",
       "community": 29,
       "norm_label": "completed phase 0 plan"
@@ -44539,7 +44539,7 @@
       "label": "Completed PHASE 0.5 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1026",
+      "source_location": "L1027",
       "id": "docs_status_completed_phase_0_5_plan",
       "community": 29,
       "norm_label": "completed phase 0.5 plan"
@@ -44548,7 +44548,7 @@
       "label": "Done",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1036",
+      "source_location": "L1037",
       "id": "docs_status_done",
       "community": 29,
       "norm_label": "done"
@@ -44557,7 +44557,7 @@
       "label": "PHASE 0.5 deployment record",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1317",
+      "source_location": "L1318",
       "id": "docs_status_phase_0_5_deployment_record",
       "community": 29,
       "norm_label": "phase 0.5 deployment record"
@@ -44566,7 +44566,7 @@
       "label": "Next step",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1345",
+      "source_location": "L1346",
       "id": "docs_status_next_step",
       "community": 29,
       "norm_label": "next step"
@@ -44575,7 +44575,7 @@
       "label": "PHASE 0 boundaries",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1353",
+      "source_location": "L1354",
       "id": "docs_status_phase_0_boundaries",
       "community": 29,
       "norm_label": "phase 0 boundaries"
@@ -44584,7 +44584,7 @@
       "label": "Acceptance details",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1364",
+      "source_location": "L1365",
       "id": "docs_status_acceptance_details",
       "community": 29,
       "norm_label": "acceptance details"
@@ -44593,7 +44593,7 @@
       "label": "Final PHASE 1 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1369",
+      "source_location": "L1370",
       "id": "docs_status_final_phase_1_manual_acceptance",
       "community": 29,
       "norm_label": "final phase 1 manual acceptance"
@@ -44602,7 +44602,7 @@
       "label": "Final PHASE 2 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1381",
+      "source_location": "L1382",
       "id": "docs_status_final_phase_2_manual_acceptance",
       "community": 29,
       "norm_label": "final phase 2 manual acceptance"
@@ -44611,7 +44611,7 @@
       "label": "Final PHASE 3 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1391",
+      "source_location": "L1392",
       "id": "docs_status_final_phase_3_manual_acceptance",
       "community": 29,
       "norm_label": "final phase 3 manual acceptance"
@@ -44620,7 +44620,7 @@
       "label": "Final PHASE 4 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1401",
+      "source_location": "L1402",
       "id": "docs_status_final_phase_4_manual_acceptance",
       "community": 29,
       "norm_label": "final phase 4 manual acceptance"
@@ -44629,7 +44629,7 @@
       "label": "Final PHASE 5 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1411",
+      "source_location": "L1412",
       "id": "docs_status_final_phase_5_manual_acceptance",
       "community": 29,
       "norm_label": "final phase 5 manual acceptance"
@@ -44638,7 +44638,7 @@
       "label": "Manual checks the owner must do",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1420",
+      "source_location": "L1421",
       "id": "docs_status_manual_checks_the_owner_must_do",
       "community": 29,
       "norm_label": "manual checks the owner must do"
@@ -44647,7 +44647,7 @@
       "label": "Known issues",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1443",
+      "source_location": "L1444",
       "id": "docs_status_known_issues",
       "community": 29,
       "norm_label": "known issues"
@@ -49473,7 +49473,7 @@
       "source_file": ".github/copilot-instructions.md",
       "source_location": "L3",
       "id": "github_copilot_instructions_product",
-      "community": 183,
+      "community": 14,
       "norm_label": "product"
     },
     {
@@ -51059,7 +51059,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 183,
+      "community": 14,
       "norm_label": "start.md: copilot kit setup guide",
       "id": "root_start_copilot_kit"
     },
@@ -51072,7 +51072,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 198,
+      "community": 14,
       "norm_label": "material_design.md: material design migration plan",
       "id": "root_material_design_migration"
     },
@@ -51124,7 +51124,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 183,
+      "community": 14,
       "norm_label": "docs instructions: asd-ste100 rules",
       "id": "instructions_docs_instructions_rules"
     },
@@ -51137,7 +51137,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 183,
+      "community": 14,
       "norm_label": "frontend instructions: development rules",
       "id": "instructions_frontend_instructions_rules"
     },
@@ -51202,7 +51202,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 183,
+      "community": 14,
       "norm_label": "publish telegram prototype workflow",
       "id": "workflows_publish_telegram_prototype_publish"
     },
@@ -51280,7 +51280,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 183,
+      "community": 14,
       "norm_label": "phases.md: phase plan (0.5 to 7)",
       "id": "docs_phases_plan"
     },
@@ -51293,7 +51293,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 183,
+      "community": 14,
       "norm_label": "product_brief.md: full requirements",
       "id": "docs_product_brief_requirements"
     },
@@ -51321,7 +51321,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Manager manages exercises (add/edit/delete/reorder), manages users (create, reset password, deactivate), reads listening journal; product-facing term is 'manager', not 'admin' or 'teacher'",
-      "community": 183,
+      "community": 14,
       "norm_label": "manager role",
       "id": "concept_manager_role"
     },
@@ -51335,7 +51335,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Student can only listen to exercises (sequential or random) and change own settings; cannot access manager pages; product-facing term is 'student', not 'pupil' or 'child'",
-      "community": 183,
+      "community": 14,
       "norm_label": "student role",
       "id": "concept_student_role"
     },
@@ -51349,7 +51349,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Exercise = id, title, description, category (optional), position, image (optional), audio (optional), score (optional from OMR), deleted_at (soft delete); at least one of image or audio required; soft delete only so journal survives deletion",
-      "community": 183,
+      "community": 14,
       "norm_label": "exercise model",
       "id": "concept_exercise_model"
     },
@@ -51377,7 +51377,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Notes are spoken (not sung); pre-generated syllable clips via OpenAI TTS committed to frontend/public/solfege/<lang>/<naming>/; Web Audio API playback; preferred tempo 72 BPM; auto-reduce tempo when short notes require more speech time; available only when score approved",
-      "community": 183,
+      "community": 14,
       "norm_label": "spoken notes feature",
       "id": "concept_spoken_notes"
     },
@@ -51391,7 +51391,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Owner replaced PWA audio sharing with Telegram bot on 2026-09-29 after Android PWA share delivered empty form; real Telegram receipt and playback of 199163078.m4a confirmed; manager-only import; reuses PHASE 2 file pipeline",
-      "community": 183,
+      "community": 14,
       "norm_label": "telegram audio import",
       "id": "concept_telegram_import"
     },
@@ -51405,7 +51405,7 @@
       "author": null,
       "contributor": null,
       "rationale": "On every backend start: if EMERGENCY_MANAGER_* env vars set, create/update user (role=manager, active, password reset); if not set, deactivate user with is_emergency=true; first-user mechanism AND disaster-recovery mechanism; emergency sync completes before backend startup succeeds",
-      "community": 183,
+      "community": 14,
       "norm_label": "emergency manager",
       "id": "concept_emergency_manager"
     },
@@ -51419,7 +51419,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Separate feature after PHASE 7 acceptance; Material UI v9, Emotion, self-hosted Roboto, Community DataGrid v9; no Date Pickers (requires unapproved dependency); native dates, audio, tempo, score rendering unchanged; owner authorizes all remaining steps together on 2026-10-01",
-      "community": 198,
+      "community": 14,
       "norm_label": "material design migration (mui v9)",
       "id": "concept_material_design"
     },
@@ -51433,7 +51433,7 @@
       "author": null,
       "contributor": null,
       "rationale": "scrypt with N=32768, r=8, p=3; 256-bit random session tokens; PostgreSQL stores only SHA-256 hashes; httpOnly, Secure, SameSite=Lax cookies; 90-day sliding lifetime; login rate limit per username+IP; CSRF via session-bound tokens in X-CSRF-Token header (except sendBeacon which uses JSON body)",
-      "community": 183,
+      "community": 14,
       "norm_label": "authentication and session management",
       "id": "concept_auth_session"
     },
@@ -51489,7 +51489,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Separate branch feat/appearance-settings from c4ee4f1; independent light/dark schemes per account (classic, forest, warm, plum); fonts (Roboto, system, serif); base sizes (16, 18, 20px); live example panel before save; browser-local light/dark mode; migration 0007_appearance preserves existing accounts",
-      "community": 198,
+      "community": 14,
       "norm_label": "appearance settings feature",
       "id": "concept_appearance_settings"
     },
@@ -51515,7 +51515,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 31,
       "norm_label": "adding a language guide",
       "id": "developer_adding_a_language"
     },
@@ -51606,7 +51606,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 31,
       "norm_label": "environment variables",
       "id": "developer_env_variables"
     },
@@ -51619,7 +51619,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 31,
       "norm_label": "developer glossary",
       "id": "developer_glossary"
     },
@@ -51632,7 +51632,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 183,
+      "community": 47,
       "norm_label": "listening and journal",
       "id": "developer_listening"
     },
@@ -51645,7 +51645,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 31,
       "norm_label": "omr pipeline and recognition reports",
       "id": "developer_omr_pipeline"
     },
@@ -51684,7 +51684,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 31,
       "norm_label": "developer setup",
       "id": "developer_setup"
     },
@@ -51697,7 +51697,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 31,
       "norm_label": "production smoke check",
       "id": "developer_smoke_check"
     },
@@ -51710,7 +51710,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 31,
       "norm_label": "spoken notes",
       "id": "developer_spoken_notes"
     },
@@ -51762,7 +51762,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 31,
       "norm_label": "troubleshooting guide",
       "id": "developer_troubleshooting"
     },
@@ -51775,7 +51775,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 31,
       "norm_label": "guess the note design spec",
       "id": "specs_guess_the_note_design"
     },
@@ -51828,7 +51828,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Chosen after PHASE 7 hardening; provides shared blue-gray theme with light and dark schemes; requires Chrome 117+ and Safari 17+; native date controls retained because Date Pickers requires an additional unapproved date library",
-      "community": 198,
+      "community": 47,
       "norm_label": "material ui v9",
       "id": "developer_architecture_material_ui"
     },
@@ -51854,7 +51854,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 31,
       "norm_label": "opensheetmusicdisplay",
       "id": "developer_architecture_osmd"
     },
@@ -51895,7 +51895,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Listening events carry CSRF token in JSON body rather than header because sendBeacon cannot set custom headers; all other mutations use header-based X-CSRF-Token",
-      "community": 183,
+      "community": 47,
       "norm_label": "csrf protection",
       "id": "developer_auth_csrf"
     },
@@ -51979,7 +51979,7 @@
       "author": null,
       "contributor": null,
       "rationale": "FK to users.id; level computed from xp using threshold array in config.py \u2014 not stored; maps to student role; supports multiple player profiles per parent account",
-      "community": 47,
+      "community": 31,
       "norm_label": "game player model",
       "id": "specs_game_player_model"
     },
@@ -51993,7 +51993,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Server generates all 7 tasks upfront; timing validated server-side (issued_at + time_limit + grace_ms); double-tap guard returns already-stored result idempotently for same task_index; tasks one at a time prevents pre-solving",
-      "community": 47,
+      "community": 31,
       "norm_label": "game round anti-cheat lifecycle",
       "id": "specs_game_round_lifecycle"
     },
@@ -52007,7 +52007,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Custom SVG per owner decision (not OpenSheetMusicDisplay); diatonic pitch-to-staff-position mapping; ledger lines only when needed (position < 0 or > 8); responsive via viewBox",
-      "community": 47,
+      "community": 31,
       "norm_label": "game staff svg renderer",
       "id": "specs_game_staff_svg_renderer"
     },
@@ -52035,7 +52035,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Child MUI theme wrapping only /game/* routes; does not affect the rest of the app; coral primary, sunflower secondary, mint success palette; Fredoka font (Cyrillic-capable) via @fontsource/fredoka; 24px border radius; pill-shaped buttons with 3D pressed effect",
-      "community": 198,
+      "community": 47,
       "norm_label": "gametheme child mui theme",
       "id": "specs_game_gametheme"
     },
@@ -52049,7 +52049,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Kid-facing: one friendly hint per round based on top confusion; admin-facing: 7x7 heatmap expected x entered, top-3 confusions with counts, filterable by clef; aggregated in SQL with indexes on (season_id, player_id)",
-      "community": 47,
+      "community": 31,
       "norm_label": "confusion analytics",
       "id": "specs_game_confusion_analytics"
     },
@@ -52063,7 +52063,7 @@
       "author": null,
       "contributor": null,
       "rationale": "No sample files; triangle oscillator with frequency 440*2^((midi-69)/12); 0.3s decay envelope; AudioContext unlocked on first user gesture; fire-and-forget, errors silently swallowed \u2014 never blocks input",
-      "community": 47,
+      "community": 31,
       "norm_label": "game web audio synthesis",
       "id": "specs_game_web_audio_synthesis"
     },
@@ -112559,9 +112559,9 @@
       "source_file": "backend/tests/game/test_avatar_generation.py",
       "source_location": "L162",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "backend_tests_game_test_avatar_generation_py",
-      "target": "game_test_avatar_generation_test_incomplete_separator_grid_is_rejected",
-      "confidence_score": 1.0
+      "target": "game_test_avatar_generation_test_incomplete_separator_grid_is_rejected"
     },
     {
       "relation": "contains",
@@ -112801,9 +112801,9 @@
       "source_file": "backend/tests/game/test_avatar_generation.py",
       "source_location": "L163",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_test_avatar_generation_test_incomplete_separator_grid_is_rejected",
-      "target": "game_test_avatar_generation_sheet_bytes",
-      "confidence_score": 1.0
+      "target": "game_test_avatar_generation_sheet_bytes"
     },
     {
       "relation": "calls",
@@ -139612,5 +139612,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "a8442e984f1e67c505c78a16466d20cdf7f3e984"
+  "built_at_commit": "2875e3ca75f102141f183194c2628f31df080aac"
 }

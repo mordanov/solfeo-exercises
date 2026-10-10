@@ -1,16 +1,16 @@
 # Graph Report - solfeo-exercises  (2026-10-10)
 
 ## Corpus Check
-- 456 files · ~5,647,572 words
+- 456 files · ~5,647,644 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 5816 nodes · 8438 edges · 373 communities (329 shown, 44 thin omitted)
+- 5816 nodes · 8438 edges · 374 communities (330 shown, 44 thin omitted)
 - Extraction: 92% EXTRACTED · 8% INFERRED · 0% AMBIGUOUS · INFERRED: 662 edges (avg confidence: 0.74)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a8442e98`
+- Built from commit: `2875e3ca`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -263,6 +263,7 @@
 - [[_COMMUNITY_Community 248|Community 248]]
 - [[_COMMUNITY_Community 249|Community 249]]
 - [[_COMMUNITY_Community 250|Community 250]]
+- [[_COMMUNITY_Community 251|Community 251]]
 - [[_COMMUNITY_Community 252|Community 252]]
 - [[_COMMUNITY_Community 253|Community 253]]
 - [[_COMMUNITY_Community 254|Community 254]]
@@ -375,7 +376,7 @@
 - `main()` --calls--> `configure_logging()`  [INFERRED]
   worker/telegram.py → backend/app/logging.py
 
-## Communities (373 total, 44 thin omitted)
+## Communities (374 total, 44 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.00
@@ -434,8 +435,8 @@ Cohesion: 0.07
 Nodes (39): en/letters/C.m4a, en/solfege/double-flat.m4a, en/solfege/sharp.m4a, es/letters/A.m4a, es/letters/B.m4a, es/letters/double-sharp.m4a, es/letters/sharp.m4a, es/solfege/A.m4a (+31 more)
 
 ### Community 14 - "Community 14"
-Cohesion: 0.17
-Nodes (19): Postgres Job Queue (SKIP LOCKED), OMR Pipeline (Audiveris), Pre-commit Hooks, Protected File Serving (X-Accel-Redirect), Solfège Trainer Application, Docker Compose: Development Stack, Docker Compose: Production Stack, Docker Compose: Proxy Network Overlay (+11 more)
+Cohesion: 0.14
+Nodes (36): Appearance Settings Feature, Authentication and Session Management, Emergency Manager, Exercise Model, Postgres Job Queue (SKIP LOCKED), Manager Role, Material Design Migration (MUI v9), OMR Pipeline (Audiveris) (+28 more)
 
 ### Community 15 - "Community 15"
 Cohesion: 0.13
@@ -502,8 +503,8 @@ Cohesion: 0.26
 Nodes (12): new_round(), submit(), test_assistance_bonus_is_applied_before_floor_and_hint_is_structured(), test_average_score_excludes_current_and_other_round_options(), test_concurrent_rounds_preserve_xp(), test_deadlines_and_replay(), test_first_task_is_issued(), test_floor_and_final_replay() (+4 more)
 
 ### Community 31 - "Community 31"
-Cohesion: 0.31
-Nodes (9): CI and Deployment Scope, Release Bundle Artifact, Database and Migrations, Alembic Migration Versions, Production Deployment, VPS Rollout Script, Project Status, Appearance settings (+1 more)
+Cohesion: 0.13
+Nodes (24): Adding a Language Guide, OpenSheetMusicDisplay, CI and Deployment Scope, Release Bundle Artifact, Database and Migrations, Alembic Migration Versions, Production Deployment, VPS Rollout Script (+16 more)
 
 ### Community 32 - "Community 32"
 Cohesion: 0.08
@@ -530,8 +531,8 @@ Cohesion: 0.10
 Nodes (27): Note, getCtx(), isMuted(), playNote(), playNotes(), preparePiano(), unlockAudio(), gameTheme (+19 more)
 
 ### Community 38 - "Community 38"
-Cohesion: 0.13
-Nodes (28): deleteExercise(), saveExercise(), service_error(), ServiceError, delete_exercise(), get_exercise(), get_media(), lock() (+20 more)
+Cohesion: 0.21
+Nodes (16): deleteExercise(), saveExercise(), delete_exercise(), get_exercise(), get_media(), lock(), new_exercise(), reorder() (+8 more)
 
 ### Community 39 - "Community 39"
 Cohesion: 0.19
@@ -566,8 +567,8 @@ Cohesion: 0.33
 Nodes (3): fetchMock, { started }, { unmount }
 
 ### Community 47 - "Community 47"
-Cohesion: 0.12
-Nodes (31): Adding a Language Guide, API Reference, System Architecture, FastAPI Backend Application, nginx Reverse Proxy, OpenSheetMusicDisplay, React Frontend Application, TanStack Query Server State (+23 more)
+Cohesion: 0.15
+Nodes (20): API Reference, System Architecture, FastAPI Backend Application, Material UI v9, nginx Reverse Proxy, React Frontend Application, TanStack Query Server State, Authentication and Recovery (+12 more)
 
 ### Community 48 - "Community 48"
 Cohesion: 0.10
@@ -862,8 +863,8 @@ Cohesion: 0.15
 Nodes (14): controller, data, exercise, expired, failed, pending, progress, timedOut (+6 more)
 
 ### Community 124 - "Community 124"
-Cohesion: 0.16
-Nodes (22): avatar_file(), AvatarJobOut, decide_review(), discard_avatar(), _job_out(), job_status(), MutationOut, _protected_image() (+14 more)
+Cohesion: 0.09
+Nodes (40): avatar_file(), AvatarJobOut, AvatarQuotaOut, decide_review(), discard_avatar(), generate_avatar(), GenerationOut, _job_out() (+32 more)
 
 ### Community 125 - "Community 125"
 Cohesion: 0.13
@@ -898,8 +899,8 @@ Cohesion: 0.33
 Nodes (9): command, elapsed_seconds, exit_code, exports, outcome, sample, sha256, started_at (+1 more)
 
 ### Community 134 - "Community 134"
-Cohesion: 0.18
-Nodes (18): DeclarativeBase, Base, Exercise, ListeningSession, LoginLimit, LoginSession, MediaFile, OmrJob (+10 more)
+Cohesion: 0.23
+Nodes (15): DeclarativeBase, Base, Exercise, ListeningSession, LoginLimit, LoginSession, MediaFile, OmrJob (+7 more)
 
 ### Community 135 - "Community 135"
 Cohesion: 0.24
@@ -966,8 +967,8 @@ Cohesion: 0.56
 Nodes (9): _create_player(), _login(), _make_manager(), _make_student(), test_list_seasons(), test_reset_creates_new_season(), test_student_cannot_reset_season(), test_wrong_confirmation_rejected() (+1 more)
 
 ### Community 151 - "Community 151"
-Cohesion: 0.08
-Nodes (32): AvatarQuotaOut, generate_avatar(), GenerationOut, quota(), make_ready(), review_job(), synthetic_sheet(), test_approval_does_not_override_later_builtin_selection() (+24 more)
+Cohesion: 0.14
+Nodes (14): make_ready(), synthetic_sheet(), test_approval_does_not_override_later_builtin_selection(), test_concurrent_opposite_reviews_cannot_overwrite_each_other(), test_daily_quota_uses_local_calendar_day(), test_manager_queue_review_and_student_file_permissions(), test_portrait_file_follows_the_same_approval_rule_and_ignores_level(), test_review_is_idempotent_and_opposite_decision_conflicts() (+6 more)
 
 ### Community 152 - "Community 152"
 Cohesion: 0.20
@@ -1090,8 +1091,8 @@ Cohesion: 0.60
 Nodes (4): components(), extract(), main(), Extract the owner's 5-by-4 sheet without clipping unevenly placed badges.
 
 ### Community 183 - "Community 183"
-Cohesion: 0.17
-Nodes (22): Authentication and Session Management, Emergency Manager, Exercise Model, Manager Role, Spoken Notes Feature, Student Role, Telegram Audio Import, CSRF Protection (+14 more)
+Cohesion: 0.29
+Nodes (6): Engineering rules, Fixed stack (do not change), Hard rules, Read first, Session protocol, Solfège Trainer: Copilot instructions
 
 ### Community 184 - "Community 184"
 Cohesion: 0.20
@@ -1150,8 +1151,8 @@ Cohesion: 0.16
 Nodes (13): player_confusion(), player_stats(), player_achievements(), create_round(), list_seasons(), reset_all_seasons(), reset_season(), _season_out() (+5 more)
 
 ### Community 198 - "Community 198"
-Cohesion: 0.40
-Nodes (5): Appearance Settings Feature, Material Design Migration (MUI v9), Material UI v9, material_design.md: Material Design Migration Plan, GameTheme Child MUI Theme
+Cohesion: 0.21
+Nodes (15): service_error(), ServiceError, active_exercise(), Claim, complete(), current(), fail(), owned_claim() (+7 more)
 
 ### Community 199 - "Community 199"
 Cohesion: 0.33
@@ -1292,6 +1293,10 @@ Nodes (5): code:python (from __future__ import annotations), code:python (import
 ### Community 250 - "Community 250"
 Cohesion: 0.40
 Nodes (5): code:python ("""guess the note game tables), code:bash (cd backend && DATABASE_NAME=solfeo_test alembic upgrade head), code:bash (cd backend && DATABASE_NAME=solfeo_test alembic downgrade 00), code:bash (git add backend/migrations/versions/0008_game_guess_the_note), Task 3: Alembic migration 0008
+
+### Community 251 - "Community 251"
+Cohesion: 0.36
+Nodes (7): AdminScreen(), Props, Player, usePlayers(), useResetAllSeasons(), useResetSeason(), PlayerSelect()
 
 ### Community 259 - "Community 259"
 Cohesion: 0.40
@@ -1526,8 +1531,8 @@ Cohesion: 0.50
 Nodes (4): service_worker, caches, controller, scope
 
 ### Community 370 - "Community 370"
-Cohesion: 0.15
-Nodes (13): AdminScreen(), Props, AvatarReviewQueue(), fetchMock, reject, AvatarReviewJob, Player, useAvatarReviews() (+5 more)
+Cohesion: 0.28
+Nodes (6): AvatarReviewQueue(), fetchMock, reject, AvatarReviewJob, useAvatarReviews(), useReviewAvatar()
 
 ### Community 371 - "Community 371"
 Cohesion: 0.50
@@ -1549,9 +1554,9 @@ Nodes (3): ru/letters/E.m4a, fingerprint, sha256
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `path` connect `Community 91` to `Community 35`, `Community 39`, `Community 104`, `Community 73`, `Community 74`, `Community 41`, `Community 268`, `Community 77`, `Community 78`, `Community 52`, `Community 53`, `Community 151`, `Community 185`, `Community 123`?**
+- **Why does `path` connect `Community 91` to `Community 35`, `Community 39`, `Community 104`, `Community 73`, `Community 74`, `Community 41`, `Community 268`, `Community 77`, `Community 78`, `Community 52`, `Community 53`, `Community 185`, `Community 123`, `Community 124`?**
   _High betweenness centrality (0.031) - this node is a cross-community bridge._
-- **Why does `range` connect `Community 185` to `Community 160`, `Community 35`, `Community 163`, `Community 101`, `Community 5`, `Community 39`, `Community 73`, `Community 10`, `Community 75`, `Community 107`, `Community 176`, `Community 17`, `Community 53`, `Community 151`, `Community 157`, `Community 30`, `Community 127`?**
+- **Why does `range` connect `Community 185` to `Community 160`, `Community 35`, `Community 163`, `Community 101`, `Community 5`, `Community 39`, `Community 73`, `Community 10`, `Community 75`, `Community 107`, `Community 176`, `Community 17`, `Community 53`, `Community 151`, `Community 124`, `Community 157`, `Community 30`, `Community 127`?**
   _High betweenness centrality (0.030) - this node is a cross-community bridge._
 - **Why does `listening.mode` connect `Community 11` to `Community 2`, `Community 4`, `Community 133`, `Community 6`, `Community 367`, `Community 18`, `Community 82`, `Community 28`, `Community 63`?**
   _High betweenness centrality (0.027) - this node is a cross-community bridge._

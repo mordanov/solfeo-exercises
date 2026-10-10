@@ -104,6 +104,12 @@ def synthetic_sheet() -> bytes:
         for column in range(5):
             x, y = column * 1024 // 5, row * 256
             draw.rectangle((x + 32, y + 32, x + 160, y + 224), fill="purple")
+    for column in range(1, 5):
+        x = column * image.width // 5
+        draw.rectangle((x - 2, 0, x + 1, image.height - 1), fill=(0, 255, 255))
+    for row in range(1, 6):
+        y = row * image.height // 6
+        draw.rectangle((0, y - 2, image.width - 1, y + 1), fill=(0, 255, 255))
     output = io.BytesIO()
     image.save(output, format="PNG")
     return output.getvalue()
@@ -365,9 +371,11 @@ def test_worker_moderates_image_before_extraction_and_waits_for_review(
 
     original_frames = generate_avatar._frames
 
-    def frames(image: Image.Image) -> list[tuple[int, str, bytes]]:
+    def frames(
+        image: Image.Image, *, require_separator_lines: bool = False
+    ) -> list[tuple[int, str, bytes]]:
         assert calls == ["text", "image"]
-        return original_frames(image)
+        return original_frames(image, require_separator_lines=require_separator_lines)
 
     monkeypatch.setattr(generate_avatar, "_openai_post", post)
     monkeypatch.setattr(
