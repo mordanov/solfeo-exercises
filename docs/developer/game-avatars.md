@@ -322,8 +322,9 @@ The saved gallery includes approved ready jobs from every player profile.
 It also includes the requested profile's own ready jobs, including pending review results.
 Pending and rejected jobs from other profiles remain private.
 Any player can preview and select an approved avatar without another provider request.
-The chooser shows deletion only for saved custom avatars the account can manage.
+The chooser shows deletion only to the avatar creator and managers.
 Built-in avatars do not use the custom-avatar deletion endpoint.
+Player-profile ownership alone does not grant deletion permission.
 The preview supports levels 1–10 and all 3 emotions.
 Deletion removes the database record and the creator's selection.
 The system rejects deletion while another profile selects that avatar.

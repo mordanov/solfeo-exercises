@@ -231,10 +231,8 @@ def saved_avatars(
                 _job_out(
                     job,
                     estimate,
-                    can_discard=(
-                        identity.user.role == "manager"
-                        or job.account_id == identity.user.id
-                        or job.player_id == player_id
+                    can_discard=can_discard_avatar(
+                        job, identity.user.id, identity.user.role == "manager"
                     ),
                 )
                 for job in jobs
@@ -259,10 +257,8 @@ def recent_jobs(
             _job_out(
                 job,
                 estimate,
-                can_discard=(
-                    identity.user.role == "manager"
-                    or job.account_id == identity.user.id
-                    or job.player_id == player_id
+                can_discard=can_discard_avatar(
+                    job, identity.user.id, identity.user.role == "manager"
                 ),
             )
             for job in jobs
@@ -281,7 +277,7 @@ def job_status(
             job,
             generation_estimate(session, settings),
             can_discard=can_discard_avatar(
-                session, job, identity.user.id, identity.user.role == "manager"
+                job, identity.user.id, identity.user.role == "manager"
             ),
         )
 

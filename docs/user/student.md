@@ -160,7 +160,7 @@ To reuse a generated character:
 Every player can choose any approved custom avatar.
 Selecting an avatar changes only the chosen player profile.
 The creator cannot delete an avatar while another player uses it.
-You can delete a saved custom avatar that belongs to your account.
+You can delete a saved custom avatar that your account created.
 Built-in characters do not have a delete action.
 Another profile must choose a different avatar before you can delete the shared avatar.
 Custom levels grow from a baby form to a heroic adult form.

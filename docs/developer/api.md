@@ -188,7 +188,7 @@ Managers can choose avatars for any player without changing the existing player-
 | POST | `/api/game/avatars/generate` | Owner or manager, with CSRF; description and player ID; configured service required |
 | GET | `/api/game/avatars/{id}/status` | Creator, profile owner, manager, or any authenticated member for a ready approved avatar |
 | POST | `/api/game/avatars/{id}/use` | Authenticated member with CSRF; body contains `player_id`; selects an approved avatar for an owned profile |
-| DELETE | `/api/game/avatars/{id}` | Creator, profile owner, or manager with CSRF; deletes a nonpending custom avatar unless another profile uses it |
+| DELETE | `/api/game/avatars/{id}` | Creator or manager with CSRF; deletes a nonpending custom avatar unless another profile uses it |
 | GET, HEAD | `/api/game/avatars/{id}/files/{state}` | Creator, profile owner, manager, or any authenticated member for a ready approved avatar; private PNG through nginx. `state` is `neutral`, `happy`, `sad` (with `?level=1..10`) or `portrait` (256×256 circular face icon, level ignored; 404 if it was not generated) |
 | GET | `/api/game/avatars/review?offset=0` | Manager; `jobs` and `total`, 12 ready pending results per page |
 | POST | `/api/game/avatars/{id}/review` | Manager and CSRF; `{"decision":"approved"}` or `{"decision":"rejected"}` |
@@ -216,7 +216,8 @@ The saved gallery includes approved jobs from every owner and ready jobs for the
 Pending and rejected jobs from other profiles remain unavailable.
 An approved avatar can be selected for any profile that the member owns.
 Managers can select an approved avatar for any profile.
-The response includes `can_discard` so the interface hides delete controls for shared avatars the account cannot manage.
+The response includes `can_discard` so the interface hides delete controls from non-creators.
+Profile ownership alone does not grant deletion permission.
 Built-in avatars do not use this custom-avatar deletion endpoint.
 Deletion returns `409 AVATAR_IN_USE` while any other profile selects the avatar.
 Managers can inspect all 10 levels and 3 emotions through the protected frame endpoints.
