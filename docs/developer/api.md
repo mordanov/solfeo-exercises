@@ -183,13 +183,13 @@ Managers can choose avatars for any player without changing the existing player-
 | GET | `/api/game/avatars/catalog` | Authenticated member; all 11 built-in identifiers |
 | POST | `/api/game/players/{id}/avatar` | Owner or manager, with CSRF; body contains `avatar_animal`; clears custom selection |
 | GET | `/api/game/avatars?player_id={id}` | Owner or manager; up to 5 recent generation jobs, excluding the selected job |
-| GET | `/api/game/avatars/saved?player_id={id}&offset=0` | Owner or manager; `jobs` and `total`, 12 ready avatars per page |
+| GET | `/api/game/avatars/saved?player_id={id}&offset=0` | Profile owner or manager; `jobs` and `total`, with approved avatars from all owners and this profile's ready jobs |
 | GET | `/api/game/avatars/quota` | Authenticated member; quota, generation availability, reason, and image count |
 | POST | `/api/game/avatars/generate` | Owner or manager, with CSRF; description and player ID; configured service required |
-| GET | `/api/game/avatars/{id}/status` | Job creator, player owner, or manager; status and durable progress |
-| POST | `/api/game/avatars/{id}/use` | Job creator, player owner, or manager, with CSRF; selects a complete approved job |
-| DELETE | `/api/game/avatars/{id}` | Job creator, player owner, or manager, with CSRF; discards a nonpending job |
-| GET, HEAD | `/api/game/avatars/{id}/files/{state}` | Job creator, player owner, or manager; private PNG through nginx. `state` is `neutral`, `happy`, `sad` (with `?level=1..10`) or `portrait` (256×256 circular face icon, level ignored; 404 if it was not generated) |
+| GET | `/api/game/avatars/{id}/status` | Creator, profile owner, manager, or any authenticated member for a ready approved avatar |
+| POST | `/api/game/avatars/{id}/use` | Authenticated member with CSRF; body contains `player_id`; selects an approved avatar for an owned profile |
+| DELETE | `/api/game/avatars/{id}` | Creator, profile owner, or manager with CSRF; discards a nonpending job unless another profile uses it |
+| GET, HEAD | `/api/game/avatars/{id}/files/{state}` | Creator, profile owner, manager, or any authenticated member for a ready approved avatar; private PNG through nginx. `state` is `neutral`, `happy`, `sad` (with `?level=1..10`) or `portrait` (256×256 circular face icon, level ignored; 404 if it was not generated) |
 | GET | `/api/game/avatars/review?offset=0` | Manager; `jobs` and `total`, 12 ready pending results per page |
 | POST | `/api/game/avatars/{id}/review` | Manager and CSRF; `{"decision":"approved"}` or `{"decision":"rejected"}` |
 | GET, HEAD | `/api/game/avatars/{id}/review-sheet` | Manager; protected original generated sheet |
@@ -212,6 +212,12 @@ Unconfigured creation returns status `503` with `AVATAR_GENERATION_UNAVAILABLE`.
 Saved-avatar access does not require a configured provider.
 Student and player image requests before approval return `403 AVATAR_NOT_APPROVED`.
 Unapproved status responses omit private image paths.
+The saved gallery includes approved jobs from every owner and ready jobs for the requested profile.
+Pending and rejected jobs from other profiles remain unavailable.
+An approved avatar can be selected for any profile that the member owns.
+Managers can select an approved avatar for any profile.
+The response includes `can_discard` so the interface hides discard controls for shared avatars owned by another account.
+Deletion returns `409 AVATAR_IN_USE` while any other profile selects the avatar.
 Managers can inspect all 10 levels and 3 emotions through the protected frame endpoints.
 The queue also includes `player_id`, `player_name`, `account_id`, `description`, and `created_at`.
 The queue lists the oldest jobs first.

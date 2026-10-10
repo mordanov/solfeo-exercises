@@ -545,8 +545,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/setup/AvatarChooser.tsx": {
-    "mtime": 1791623815.2530954,
-    "ast_hash": "e01617928976d11df53604a97492b0e6",
+    "mtime": 1791656559.5259984,
+    "ast_hash": "77851e3de5fc7532f5b9ebdec3b06c35",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/setup/PlayerSelect.tsx": {
@@ -560,8 +560,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/setup/AvatarChooser.test.tsx": {
-    "mtime": 1791187276.3391182,
-    "ast_hash": "75261916c046f8f8c629cc3ee422d6cf",
+    "mtime": 1791656781.8187754,
+    "ast_hash": "7d46f9fc90968f29c2e2024e8565009e",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/admin/AdminScreen.tsx": {
@@ -590,8 +590,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/api/hooks.ts": {
-    "mtime": 1791179325.587075,
-    "ast_hash": "3cf24623a46ada3d2c403b385fd94d9c",
+    "mtime": 1791656341.3604956,
+    "ast_hash": "611a1b6885a7a221e44da32d5def0497",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/features/game/staff/clefPaths.ts": {
@@ -825,18 +825,18 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/i18n/locales/ru.json": {
-    "mtime": 1791621380.8025951,
-    "ast_hash": "fecf997edda551162368890e28d108f8",
+    "mtime": 1791656350.323707,
+    "ast_hash": "dd4501d6b438472f29cd07cb59db79ad",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/i18n/locales/en.json": {
-    "mtime": 1791621380.8017728,
-    "ast_hash": "d6e5a61216fc89f95565cfe45e8b5869",
+    "mtime": 1791656348.1009328,
+    "ast_hash": "4edc75f608f5528f765991142f9ba298",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/src/i18n/locales/es.json": {
-    "mtime": 1791621380.8021479,
-    "ast_hash": "70c0f9cbe11a30e13d09061df71573e0",
+    "mtime": 1791656352.8672595,
+    "ast_hash": "f9d96f77cb3f6170e8d29bcfb33bc9ee",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/deploy/release.py": {
@@ -1015,8 +1015,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/backend/app/game/api/avatars.py": {
-    "mtime": 1791623815.2513924,
-    "ast_hash": "406cffda3331504028c35e27d7bb8e2d",
+    "mtime": 1791656781.2427404,
+    "ast_hash": "840acc48b992fb78be881725d143e9a0",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/backend/app/game/services/rounds.py": {
@@ -1035,8 +1035,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/backend/app/game/services/players.py": {
-    "mtime": 1791179325.5656722,
-    "ast_hash": "a6593f7c3cb668e61f62a6f4b04771d9",
+    "mtime": 1791656622.758284,
+    "ast_hash": "742f00e62cfa236edd356108e0f86b98",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/backend/app/game/services/stats.py": {
@@ -1045,8 +1045,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/backend/app/game/services/avatars.py": {
-    "mtime": 1791623815.2518346,
-    "ast_hash": "35598e26e44ad7586cd90109559529f8",
+    "mtime": 1791656688.47494,
+    "ast_hash": "f73c4cb7b1b7face07185bd43f52b918",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/backend/app/api/auth.py": {
@@ -1245,8 +1245,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/backend/tests/game/test_avatar_art.py": {
-    "mtime": 1791179325.5668938,
-    "ast_hash": "e5709f5154cdde9f1a0400469e9286b6",
+    "mtime": 1791656622.759718,
+    "ast_hash": "fe64d55653bf2c7240cb8ac7f3a5193e",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/backend/tests/game/test_integration.py": {
@@ -1775,8 +1775,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/worker/generate_avatar.py": {
-    "mtime": 1791646417.6234608,
-    "ast_hash": "88820cd4e5ec56ba222d9cc239d80cb2",
+    "mtime": 1791657363.3952801,
+    "ast_hash": "9ccd4184423483a9d7c33cbb1f0e8088",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/worker/generate_spoken.py": {
@@ -1860,8 +1860,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/PRODUCT_BRIEF.md": {
-    "mtime": 1791621380.795709,
-    "ast_hash": "77ef686f5eee10f0cc6fe584aa52a292",
+    "mtime": 1791656927.6404774,
+    "ast_hash": "a84028bacfedca6a16e74489f2b25c8f",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/PHASES.md": {
@@ -1870,13 +1870,13 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/STATUS.md": {
-    "mtime": 1791646461.6140087,
-    "ast_hash": "a4aab9c38d13173c184e8ecb440605a4",
+    "mtime": 1791657393.501006,
+    "ast_hash": "d5d28a45b14b75ca4d6700aa4061fbe2",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/DECISIONS.md": {
-    "mtime": 1791621380.7952871,
-    "ast_hash": "8ec94c1a51fb62ff38671429a4ea2d59",
+    "mtime": 1791656932.900576,
+    "ast_hash": "b4a7bcb931b72c443c664a037ee6eeca",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/developer/storage.md": {
@@ -1905,8 +1905,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/developer/api.md": {
-    "mtime": 1791623902.959866,
-    "ast_hash": "6ec2aca9628be3f9261ff580ed696cda",
+    "mtime": 1791656405.8399043,
+    "ast_hash": "296b2e399e7eeafbbe8c6a1cdee910f4",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/developer/protected-audio.md": {
@@ -1955,13 +1955,13 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/developer/game-avatars.md": {
-    "mtime": 1791646425.690303,
-    "ast_hash": "29f7c841ede49900a65ed6548839ad1f",
+    "mtime": 1791656925.165045,
+    "ast_hash": "2c249f253497609868be34a7387c3a63",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/developer/data-model.md": {
-    "mtime": 1791621380.7975883,
-    "ast_hash": "4ada2ffb776c5b19a363f9efb4f01840",
+    "mtime": 1791656426.7054226,
+    "ast_hash": "688b8cdd2885abf5abedc930fdbc86be",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/developer/listening.md": {
@@ -1985,8 +1985,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/user/manager.md": {
-    "mtime": 1791621380.798713,
-    "ast_hash": "c0f8deac49005747a601fc76b54d2046",
+    "mtime": 1791656423.191135,
+    "ast_hash": "d786d1a7ac8f1fc763e7097157fdcd94",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/user/telegram-prototype.md": {
@@ -1995,8 +1995,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/user/student.md": {
-    "mtime": 1791621380.799081,
-    "ast_hash": "c96490e876739b9a3206c002a71d89d1",
+    "mtime": 1791656930.008147,
+    "ast_hash": "cb428f928b86a9df6bd92a09bfb49b07",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/docs/user/pwa-prototype.md": {
@@ -7475,8 +7475,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/backend/tests/game/test_avatar_generation.py": {
-    "mtime": 1791646422.3333209,
-    "ast_hash": "9d5312e5cf8e00ba56fc9ffaa5566ae3",
+    "mtime": 1791657010.546612,
+    "ast_hash": "c52b2432e9f55ecd1d7eab94a8e9cc91",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/frontend/public/assets/piano/salamander-c2-b5.json": {
@@ -7550,8 +7550,8 @@
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/backend/tests/game/test_avatar_approval.py": {
-    "mtime": 1791647564.5996518,
-    "ast_hash": "02616d7bbb00bdbd350709b7f313bd5c",
+    "mtime": 1791656701.770387,
+    "ast_hash": "35328dbb606a68cf68ca757a4f37adf1",
     "semantic_hash": ""
   },
   "/Users/aleksandr/Local/solfeo-exercises/scripts/build_moderation_icon.py": {

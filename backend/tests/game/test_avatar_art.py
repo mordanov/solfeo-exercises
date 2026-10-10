@@ -140,7 +140,9 @@ async def test_ready_custom_avatar_can_be_used_and_served_privately(
         path = tmp_path / f"avatars/custom/{job_id}/{state}.png"
         path.parent.mkdir(parents=True, exist_ok=True)
         Image.new("RGBA", (32, 32), "red").save(path)
-    response = await client.post(f"/api/game/avatars/{job_id}/use")
+    response = await client.post(
+        f"/api/game/avatars/{job_id}/use", json={"player_id": player_id}
+    )
     assert response.status_code == 200, response.text
     player = (await client.get(f"/api/game/players/{player_id}")).json()
     assert player["custom_avatar_id"] == job_id
@@ -208,7 +210,9 @@ async def test_student_can_change_only_an_owned_avatar(
     assert (
         await client.patch(f"/api/game/players/{own_id}", json={"name": "Changed"})
     ).status_code == 403
-    assert (await client.post(f"/api/game/avatars/{job_id}/use")).status_code == 404
+    assert (
+        await client.post(f"/api/game/avatars/{job_id}/use", json={"player_id": own_id})
+    ).status_code == 404
     assert (
         await client.get(f"/api/game/avatars/{job_id}/files/neutral")
     ).status_code == 404

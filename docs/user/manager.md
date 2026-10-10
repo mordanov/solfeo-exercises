@@ -174,8 +174,10 @@ A playback failure shows an error and permits another attempt.
    The count stays at 0 while the service draws one sheet with 30 variants.
    Local extraction then saves 10 levels with neutral, happy, and sad emotions.
 7. Select **Preview level** after approval to inspect all levels.
-8. Select a picture under **Saved avatars** to reuse a previous result.
+8. Select a picture under **Shared and saved avatars** to reuse a previous result.
    Switching to a built-in character does not remove saved avatars.
+   Approved avatars from every profile appear in this gallery.
+   Deletion fails while another profile uses the avatar.
 
 Managers bypass the daily generation quota.
 The private deployment configuration still needs `OPENAI_API_KEY`.

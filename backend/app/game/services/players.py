@@ -119,13 +119,12 @@ def update_player(
         if custom_avatar_id is not None:
             from app.game.services.avatars import validate_avatar_assets
 
-            job = session.get(CustomAvatar, custom_avatar_id)
-            if (
-                job is None
-                or job.player_id != player_id
-                or job.status != "ready"
-                or job.review_status != "approved"
-            ):
+            job = session.scalar(
+                select(CustomAvatar)
+                .where(CustomAvatar.id == custom_avatar_id)
+                .with_for_update()
+            )
+            if job is None or job.status != "ready" or job.review_status != "approved":
                 raise ServiceError("INVALID_CUSTOM_AVATAR", 422)
             validate_avatar_assets(job, settings)
             player.custom_avatar_id = custom_avatar_id

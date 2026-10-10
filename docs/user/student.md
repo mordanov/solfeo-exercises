@@ -151,11 +151,16 @@ To create an original character:
 
 To reuse a generated character:
 1. Open **Choose avatar**.
-2. Select an approved picture under **Saved avatars**.
+2. Select an approved picture under **Shared and saved avatars**.
 3. Inspect its levels and emotions.
 4. Click **Use it**.
    The character returns without another generation request or quota charge.
 
+Every player can choose any approved custom avatar.
+Selecting an avatar changes only the chosen player profile.
+The creator cannot discard an avatar while another player uses it.
+Custom levels grow from a baby form to a heroic adult form.
+Each level keeps its outfit across neutral, happy, and sad expressions.
 Selecting a built-in character does not remove saved avatars.
 Older generated avatars show a notice because they share 3 emotion images across all levels.
 Existing ready avatars remain approved without another generation request.

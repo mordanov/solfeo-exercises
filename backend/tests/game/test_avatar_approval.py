@@ -97,6 +97,102 @@ def make_ready(database: Database, job_id: int, settings: Settings) -> None:
         job.sad_path = prefix + "sad.png"
 
 
+@pytest.mark.anyio
+async def test_approved_avatar_is_shared_but_unapproved_avatar_stays_private(
+    client: httpx.AsyncClient,
+    database: Database,
+    settings: Settings,
+    review_job: tuple[int, int, int],
+) -> None:
+    job_id, owner_player_id, manager_id = review_job
+    make_ready(database, job_id, settings)
+    with database.session() as session, session.begin():
+        approved = review_avatar(session, job_id, manager_id, "approved", settings)
+        assert approved.review_status == "approved"
+        owner = session.get(Player, owner_player_id)
+        assert owner is not None and owner.custom_avatar_id == job_id
+        owner_account_id = owner.account_id
+    with database.session() as session:
+        recipient = create_user(
+            session,
+            settings,
+            username="avatar-recipient",
+            password="synthetic-avatar-password",
+            first_name="Avatar",
+            last_name="Recipient",
+            role="student",
+            must_change_password=False,
+        )
+        with session.begin():
+            target = Player(
+                account_id=recipient.id, name="Recipient", avatar_animal="panda"
+            )
+            session.add(target)
+            session.flush()
+            target_player_id = target.id
+            hidden_owner = Player(
+                account_id=owner_account_id, name="Hidden", avatar_animal="lion"
+            )
+            session.add(hidden_owner)
+            session.flush()
+            hidden = start_avatar_job(
+                session,
+                owner_account_id,
+                hidden_owner.id,
+                "Pending creature",
+                settings,
+            )
+            hidden_job_id = hidden.id
+
+    recipient_login = await client.post(
+        "/api/auth/login",
+        json={
+            "username": "avatar-recipient",
+            "password": "synthetic-avatar-password",
+        },
+    )
+    assert recipient_login.status_code == 200
+    client.headers["X-CSRF-Token"] = recipient_login.json()["csrf_token"]
+    saved = await client.get(f"/api/game/avatars/saved?player_id={target_player_id}")
+    assert saved.status_code == 200
+    assert [job["id"] for job in saved.json()["jobs"]] == [job_id]
+    assert saved.json()["jobs"][0]["can_discard"] is False
+    assert (
+        await client.get(f"/api/game/avatars/{hidden_job_id}/files/neutral?level=1")
+    ).status_code == 404
+    assert (await client.delete(f"/api/game/avatars/{job_id}")).status_code == 404
+    image = await client.get(f"/api/game/avatars/{job_id}/files/neutral?level=1")
+    assert image.status_code == 200
+    assert image.headers["x-accel-redirect"].endswith("avatar_01_neutral.png")
+    foreign_selection = await client.post(
+        f"/api/game/avatars/{job_id}/use",
+        json={"player_id": owner_player_id},
+    )
+    assert foreign_selection.status_code == 404
+    use = await client.post(
+        f"/api/game/avatars/{job_id}/use", json={"player_id": target_player_id}
+    )
+    assert use.status_code == 200, use.text
+    with database.session() as session:
+        stored_owner = session.get(Player, owner_player_id)
+        stored_target = session.get(Player, target_player_id)
+        assert stored_owner is not None and stored_owner.custom_avatar_id == job_id
+        assert stored_target is not None and stored_target.custom_avatar_id == job_id
+
+    client.cookies.clear()
+    owner_login = await client.post(
+        "/api/auth/login",
+        json={"username": "review-owner", "password": "synthetic-password"},
+    )
+    assert owner_login.status_code == 200
+    client.headers["X-CSRF-Token"] = owner_login.json()["csrf_token"]
+    discard = await client.delete(f"/api/game/avatars/{job_id}")
+    assert discard.status_code == 409
+    assert discard.json()["error"] == "AVATAR_IN_USE"
+    with database.session() as session:
+        assert session.get(CustomAvatar, job_id) is not None
+
+
 def synthetic_sheet() -> bytes:
     image = Image.new("RGBA", (1024, 1536))
     draw = ImageDraw.Draw(image)
@@ -587,7 +683,10 @@ async def test_manager_queue_review_and_student_file_permissions(
                 await client.get(f"/api/game/avatars/{job_id}/review-sheet")
             ).status_code == 403
             assert (
-                await client.post(f"/api/game/avatars/{job_id}/use")
+                await client.post(
+                    f"/api/game/avatars/{job_id}/use",
+                    json={"player_id": review_job[1]},
+                )
             ).status_code == 403
             status = (await client.get(f"/api/game/avatars/{job_id}/status")).json()
             assert status["review_status"] == "pending"
@@ -615,4 +714,9 @@ async def test_manager_queue_review_and_student_file_permissions(
     assert (
         await client.get(f"/api/game/avatars/{job_id}/files/neutral")
     ).status_code == 200
-    assert (await client.post(f"/api/game/avatars/{job_id}/use")).status_code == 200
+    assert (
+        await client.post(
+            f"/api/game/avatars/{job_id}/use",
+            json={"player_id": review_job[1]},
+        )
+    ).status_code == 200

@@ -149,6 +149,7 @@ export default function AvatarChooser({
         {saved.data && saved.data.total > 0 && (
           <Box sx={{ mt: 2 }}>
             <Typography variant="h6">{t("game.avatar.savedTitle")}</Typography>
+            <Typography>{t("game.avatar.sharedHint")}</Typography>
             <Box
               sx={{
                 display: "grid",
@@ -392,24 +393,26 @@ export default function AvatarChooser({
                   </Button>
                 </>
               )}
-            {jobId && status.data && status.data.status !== "pending" && (
-              <Button
-                disabled={busy}
-                onClick={() =>
-                  discard.mutate(
-                    { csrf, jobId },
-                    {
-                      onSuccess: async () => {
-                        await jobs.refetch();
-                        setJobId(null);
+            {jobId &&
+              status.data?.can_discard &&
+              status.data.status !== "pending" && (
+                <Button
+                  disabled={busy}
+                  onClick={() =>
+                    discard.mutate(
+                      { csrf, jobId },
+                      {
+                        onSuccess: async () => {
+                          await jobs.refetch();
+                          setJobId(null);
+                        },
                       },
-                    },
-                  )
-                }
-              >
-                {t("game.avatar.discard")}
-              </Button>
-            )}
+                    )
+                  }
+                >
+                  {t("game.avatar.discard")}
+                </Button>
+              )}
           </Box>
         )}
         {[choose, generate, accept, discard].map((mutation, index) =>

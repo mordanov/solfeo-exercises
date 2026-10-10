@@ -27,6 +27,7 @@ let savedJob = false;
 let generationAvailable = true;
 let completedImages = 0;
 let reviewStatus: AvatarReviewStatus | undefined;
+let canDiscard = true;
 const job = (id: number) => ({
   id,
   status: jobStatus,
@@ -37,6 +38,7 @@ const job = (id: number) => ({
   estimated_seconds_remaining: 90,
   error_code: null,
   review_status: reviewStatus,
+  can_discard: canDiscard,
 });
 const fetchMock = vi.fn(async (url: string, options?: RequestInit) => {
   if (url.endsWith("/achievements"))
@@ -103,6 +105,7 @@ beforeEach(async () => {
   generationAvailable = true;
   completedImages = 0;
   reviewStatus = undefined;
+  canDiscard = true;
   vi.stubGlobal("fetch", fetchMock);
 });
 afterEach(() => {
@@ -224,6 +227,33 @@ it("reuses a saved avatar and previews any level without a generation request", 
   expect(fetchMock.mock.calls.some(([url]) => url.endsWith("/generate"))).toBe(
     false,
   );
+  fireEvent.click(await screen.findByRole("button", { name: "Use it" }));
+  await waitFor(() =>
+    expect(fetchMock).toHaveBeenCalledWith(
+      "/api/game/avatars/10/use",
+      expect.objectContaining({
+        method: "POST",
+        body: JSON.stringify({ player_id: 1 }),
+      }),
+    ),
+  );
+});
+it("does not offer discard for an approved avatar owned by another account", async () => {
+  savedJob = true;
+  canDiscard = false;
+  mount(
+    <AvatarChooser playerId={1} csrf="synthetic-token" onClose={() => {}} />,
+  );
+  fireEvent.click(
+    await screen.findByRole("button", { name: "Saved avatar 10" }),
+  );
+  expect(await screen.findByRole("button", { name: "Use it" })).toBeEnabled();
+  expect(
+    screen.queryByRole("button", { name: "Discard" }),
+  ).not.toBeInTheDocument();
+  expect(
+    screen.getByText("Approved avatars are available to every player."),
+  ).toBeInTheDocument();
 });
 it("keeps a ready avatar private until the manager approves it", async () => {
   resumeJob = true;
