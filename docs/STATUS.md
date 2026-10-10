@@ -5,7 +5,7 @@ This document records progress and remaining checks for the current phase.
 Prerequisites:
 - Read `docs/PHASES.md` and `docs/DECISIONS.md`.
 
-Last updated: 2026-10-05 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a0523`.
+Last updated: 2026-10-10 by Copilot, session `296626a2-8b63-40eb-9331-72dd123a0523`.
 
 ## Current phase
 Game fixes, lifetime prizes, and manager approval for custom avatars follow the merged game features.
@@ -14,6 +14,29 @@ The merged game improvements remain on `main`.
 The current branch is `feat/game-only-player-role`.
 Accepted PHASE 7 remains closed.
 Earlier game, appearance, and listening entries below remain historical session records.
+
+### Avatar generation incident investigation
+
+VPS logs record `AVATAR_JOB_FAILED` for job 1 at `2026-10-10T08:35:31Z`.
+The running avatar worker reaches `_frames` and raises `AvatarError` at line 346.
+That branch rejects an empty cell or visible alpha pixels within the required cell margin.
+The resulting code is `AVATAR_SHEET_INVALID`, not a provider authentication failure.
+The log omits the cell coordinates and error code.
+The available MCP diagnostics do not permit source-image inspection.
+The precise image defect remains unverified.
+
+A local synthetic sheet produces 30 frames successfully.
+Adding one edge pixel with alpha 1 makes the same sheet fail.
+This demonstrates sensitivity to nearly transparent noise, not the actual production image defect.
+Inspect the saved `avatars/custom/1/sheet.png` under `MEDIA_ROOT` before selecting a segmentation correction.
+Retain image validation and add safe error codes and cell geometry to diagnostics.
+Reprocess the saved sheet after correction instead of automatically requesting another paid generation.
+
+Custom generation writes only 30 full-body frames.
+Built-in selection portraits exist, but custom avatars have no separate face portrait.
+The saved-custom selector currently shows the level-1 neutral frame.
+A complete correction must add a circular face portrait, protected retrieval, selector wiring, and moderation for that image.
+This session changes no runtime code, production configuration, or job state.
 
 ### Game-only player role
 
