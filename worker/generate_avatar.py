@@ -32,7 +32,15 @@ from app.settings import Settings
 
 logger = logging.getLogger("worker.generate_avatar")
 STATES = ("neutral", "happy", "sad")
+PORTRAIT_SIZE = 256
 SHEET_ATTEMPTS = 2
+PORTRAIT_SYSTEM = (
+    "Create ONE close-up face portrait icon of an original child-friendly magical "
+    "creature: only the head and face, centered, filling a perfect circle with a "
+    "soft pastel circular background and a thin outline. No text, labels, real "
+    "people, brands or existing franchise characters. Bright pastel cartoon with "
+    "clear outlines, friendly neutral expression, the young (level 1) form."
+)
 MIN_VISIBLE_ALPHA = 32
 MIN_FIGURE_AREA = 0.02
 IMAGE_SYSTEM = (
@@ -133,20 +141,18 @@ def _moderate_image(settings: Settings, description: str, image: bytes) -> bool:
     return _moderate(settings, description, image)
 
 
-def _generate_sheet(settings: Settings, description: str) -> bytes:
+def _generate_image(settings: Settings, prompt: str, size: str) -> bytes:
     legacy = settings.avatar_image_model.startswith("dall-e-")
     payload: dict[str, object] = {
         "model": settings.avatar_image_model,
-        "prompt": IMAGE_SYSTEM
+        "prompt": prompt
         + (
             " Use a solid pure-white background."
             if legacy
             else " Use a transparent background."
-        )
-        + "\nCreature: "
-        + description,
+        ),
         "n": 1,
-        "size": "1024x1024" if legacy else "1024x1536",
+        "size": "1024x1024" if legacy else size,
     }
     if legacy:
         payload["response_format"] = "b64_json"
@@ -175,6 +181,50 @@ def _generate_sheet(settings: Settings, description: str) -> bytes:
     if len(data) > settings.avatar_gen_max_image_bytes:
         raise AvatarError("AVATAR_IMAGE_TOO_LARGE")
     return data
+
+
+def _generate_sheet(settings: Settings, description: str) -> bytes:
+    return _generate_image(
+        settings, IMAGE_SYSTEM + "\nCreature: " + description, "1024x1536"
+    )
+
+
+def _generate_portrait(settings: Settings, description: str) -> bytes:
+    return _generate_image(
+        settings, PORTRAIT_SYSTEM + "\nCreature: " + description, "1024x1024"
+    )
+
+
+def _circular_portrait(data: bytes) -> bytes:
+    with Image.open(io.BytesIO(data)) as source:
+        if source.format != "PNG" or source.width != source.height:
+            raise AvatarError("AVATAR_PORTRAIT_INVALID")
+        image = source.convert("RGBA").resize(
+            (PORTRAIT_SIZE, PORTRAIT_SIZE), Image.Resampling.LANCZOS
+        )
+    oversized = PORTRAIT_SIZE * 4
+    mask = Image.new("L", (oversized, oversized), 0)
+    ImageDraw.Draw(mask).ellipse((0, 0, oversized - 1, oversized - 1), fill=255)
+    mask = mask.resize((PORTRAIT_SIZE, PORTRAIT_SIZE), Image.Resampling.LANCZOS)
+    image.putalpha(ImageChops.multiply(image.getchannel("A"), mask))
+    encoded = io.BytesIO()
+    image.save(encoded, format="PNG")
+    return encoded.getvalue()
+
+
+def _ensure_portrait(settings: Settings, description: str, path: Path) -> None:
+    # The face icon is optional: any failure leaves the 30 frames usable and the
+    # interface falls back to the neutral level-1 frame.
+    if path.is_file():
+        return
+    try:
+        data = _generate_portrait(settings, description)
+        if _moderate_image(settings, description, data):
+            logger.warning("AVATAR_PORTRAIT_FLAGGED")
+            return
+        _atomic_write(path, _circular_portrait(data))
+    except Exception:
+        logger.exception("AVATAR_PORTRAIT_FAILED")
 
 
 def _atomic_write(path: Path, data: bytes) -> None:
@@ -461,6 +511,8 @@ def process_one(database: Database, settings: Settings) -> bool:
         _atomic_write(
             root / "manifest.json", (json.dumps(manifest, indent=2) + "\n").encode()
         )
+        _update(database, lease, "splitting", completed=30)
+        _ensure_portrait(settings, lease.description, root / "portrait.png")
         _update(database, lease, "review", completed=30)
         logger.info("AVATAR_JOB_READY", extra={"job_id": lease.job_id})
     except Exception as error:

@@ -17,6 +17,10 @@ export function roundMood(correct: number): AvatarMood {
   return correct >= 5 ? "happy" : correct >= 3 ? "neutral" : "sad";
 }
 
+export function avatarPortraitSource(customId: number): string {
+  return `/api/game/avatars/${customId}/files/portrait`;
+}
+
 export function avatarSource(
   animal: string,
   level: number,

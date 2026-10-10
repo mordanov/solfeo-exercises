@@ -229,6 +229,105 @@ def test_a_sheet_that_stays_invalid_is_requested_only_twice(
         assert job.error_code == "AVATAR_SHEET_INVALID"
 
 
+def portrait_bytes() -> bytes:
+    image = Image.new("RGBA", (1024, 1024), (255, 0, 255, 255))
+    output = io.BytesIO()
+    image.save(output, format="PNG")
+    return output.getvalue()
+
+
+def test_portrait_is_a_separate_request_saved_as_a_circular_face_icon(
+    database: Database,
+    settings: Settings,
+    avatar_job: int,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    portraits: list[str] = []
+
+    def portrait(_settings: Settings, description: str) -> bytes:
+        portraits.append(description)
+        return portrait_bytes()
+
+    monkeypatch.setattr(generate_avatar, "_moderate", lambda *_: False)
+    monkeypatch.setattr(generate_avatar, "_generate_sheet", lambda *_: sheet_bytes())
+    monkeypatch.setattr(generate_avatar, "_generate_portrait", portrait)
+    assert generate_avatar.process_one(database, settings)
+    assert portraits == ["Original rainbow creature"]
+    with database.session() as session:
+        job = session.get(CustomAvatar, avatar_job)
+        assert job is not None and job.status == "ready"
+        assert job.completed_images == 30
+    path = settings.media_root / "avatars" / "custom" / str(avatar_job) / "portrait.png"
+    with Image.open(path) as image:
+        assert image.mode == "RGBA"
+        assert image.size == (256, 256)
+        assert image.getchannel("A").getpixel((0, 0)) == 0
+        assert image.getpixel((128, 128)) == (255, 0, 255, 255)
+
+
+@pytest.mark.parametrize("failure", ["provider", "flagged"])
+def test_a_missing_portrait_never_fails_the_thirty_frame_job(
+    database: Database,
+    settings: Settings,
+    avatar_job: int,
+    monkeypatch: pytest.MonkeyPatch,
+    failure: str,
+) -> None:
+    def portrait(_settings: Settings, _description: str) -> bytes:
+        if failure == "provider":
+            raise httpx.TimeoutException("slow")
+        return portrait_bytes()
+
+    moderated: list[bytes] = []
+
+    def moderate_image(_settings: Settings, _description: str, image: bytes) -> bool:
+        moderated.append(image)
+        return len(moderated) > 1
+
+    monkeypatch.setattr(generate_avatar, "_moderate", lambda *_: False)
+    monkeypatch.setattr(generate_avatar, "_moderate_image", moderate_image)
+    monkeypatch.setattr(generate_avatar, "_generate_sheet", lambda *_: sheet_bytes())
+    monkeypatch.setattr(generate_avatar, "_generate_portrait", portrait)
+    assert generate_avatar.process_one(database, settings)
+    with database.session() as session:
+        job = session.get(CustomAvatar, avatar_job)
+        assert job is not None and job.status == "ready"
+        assert job.completed_images == 30
+    root = settings.media_root / "avatars" / "custom" / str(avatar_job)
+    assert (root / "levels/avatar_01_neutral.png").is_file()
+    assert not (root / "portrait.png").exists()
+
+
+def test_saved_portrait_is_not_requested_again_after_a_restart(
+    database: Database,
+    settings: Settings,
+    avatar_job: int,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = settings.media_root / "avatars" / "custom" / str(avatar_job)
+    root.mkdir(parents=True)
+    (root / "sheet.png").write_bytes(sheet_bytes())
+    (root / "portrait.png").write_bytes(portrait_bytes())
+    with database.session() as session, session.begin():
+        job = session.get(CustomAvatar, avatar_job)
+        assert job is not None
+        job.phase = "splitting"
+        job.locked_at = datetime.now(UTC) - timedelta(hours=1)
+        job.started_at = job.locked_at
+        job.lease_token = "interrupted-worker"
+
+    def forbidden(*_args: object) -> bytes:
+        pytest.fail("A saved portrait must not trigger another image request")
+
+    monkeypatch.setattr(generate_avatar, "_moderate", lambda *_: False)
+    monkeypatch.setattr(generate_avatar, "_generate_portrait", forbidden)
+    settings.openai_api_key = SecretStr("")
+    assert generate_avatar.process_one(database, settings)
+    with database.session() as session:
+        job = session.get(CustomAvatar, avatar_job)
+        assert job is not None and job.status == "ready"
+
+
 def test_active_claim_is_not_processed_twice(
     database: Database, settings: Settings, avatar_job: int
 ) -> None:

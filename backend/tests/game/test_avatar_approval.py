@@ -19,6 +19,7 @@ from app.database import Database
 from app.game.api.avatars import _job_out
 from app.game.models import AvatarGenerationLog, CustomAvatar, Player
 from app.game.services.avatars import (
+    avatar_path,
     check_daily_quota,
     list_review_jobs,
     review_avatar,
@@ -106,6 +107,28 @@ def synthetic_sheet() -> bytes:
     output = io.BytesIO()
     image.save(output, format="PNG")
     return output.getvalue()
+
+
+def test_portrait_file_follows_the_same_approval_rule_and_ignores_level(
+    settings: Settings, tmp_path: Path
+) -> None:
+    settings.media_root = tmp_path
+    job = CustomAvatar(
+        id=7, status="ready", review_status="pending", asset_version=2, phase="review"
+    )
+    portrait = tmp_path / "avatars/custom/7/portrait.png"
+    portrait.parent.mkdir(parents=True)
+    Image.new("RGBA", (8, 8)).save(portrait)
+    with pytest.raises(ServiceError) as hidden:
+        avatar_path(job, "portrait", 1, settings)
+    assert hidden.value.code == "AVATAR_NOT_APPROVED"
+    assert avatar_path(job, "portrait", 5, settings, manager=True) == portrait.resolve()
+    job.review_status = "approved"
+    assert avatar_path(job, "portrait", 1, settings) == portrait.resolve()
+    portrait.unlink()
+    with pytest.raises(ServiceError) as missing:
+        avatar_path(job, "portrait", 1, settings)
+    assert missing.value.code == "FILE_NOT_FOUND"
 
 
 def test_pending_job_hides_paths_even_after_generation() -> None:

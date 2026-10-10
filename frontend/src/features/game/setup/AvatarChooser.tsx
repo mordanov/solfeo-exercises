@@ -172,6 +172,7 @@ export default function AvatarChooser({
                   <AvatarImage
                     animalId="custom"
                     customAvatarId={job.id}
+                    portrait
                     reviewStatus={isManager ? undefined : job.review_status}
                     size={72}
                   />

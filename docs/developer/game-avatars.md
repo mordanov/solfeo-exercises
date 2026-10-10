@@ -361,6 +361,16 @@ Pixels with alpha below 32 are ignored as antialiasing residue.
 An invalid sheet is regenerated once automatically; this second request happens in the same job and does not consume extra quota.
 If the second sheet is also invalid, the job fails with `AVATAR_SHEET_INVALID` and keeps `sheet.png`.
 The failure log carries `error_code` and the failing `cell` (`level=N state=...`).
+
+## Face icon (portrait)
+
+After the 30 frames are saved, the worker makes one more, separate image request for a close-up face of the same described creature.
+The result goes through the same image moderation as the sheet, is cropped to a circle, resized to 256×256 and stored as `avatars/custom/{id}/portrait.png`.
+`GET /api/game/avatars/{id}/files/portrait` serves it with the same approval rule as the frames.
+The portrait is best effort: a provider error, a moderation flag or an invalid image only logs `AVATAR_PORTRAIT_FAILED` or `AVATAR_PORTRAIT_FLAGGED`; the job still becomes `ready` with all 30 frames.
+A restart reuses a saved `portrait.png` without another paid request.
+The saved-avatar gallery in the chooser shows the circle and falls back to the neutral level-1 frame when it is missing.
+This second request is paid but does not consume extra daily quota, and a separate request cannot guarantee an identical face to the sheet.
 It fits each complete figure inside a transparent 384 × 384 px canvas.
 Geometry checks cannot prove correct character identity, expression, or artistic progression.
 Inspect all 30 images before approving visual quality.

@@ -1301,7 +1301,8 @@ Do not include this migration in PHASE 7 or change existing business logic.
 - The existing web application scope, authentication, and student restrictions remain unchanged.
 - The PWA report remains historical evidence of a failed approach, not an open product acceptance requirement.
 - A targeted VPS restart preserves the saved audio hash, bot identity, and update checkpoint.
-- The bot returns to healthy status; all 43 unrelated containers remain unchanged.
+- The avatar worker accepts figures that touch a cell edge, regenerates an invalid sheet once, and logs `error_code` and the failing cell.
+- Generated avatars get a 31st face-circle image (`portrait.png`, best effort); the chooser gallery shows it.
 
 ## PHASE 0.5 deployment record
 - The files protocol checks and owner manual step are complete.
@@ -1427,6 +1428,7 @@ The superseded Android PWA checklist is no longer required.
 The new local health-page procedure appears in `docs/user/manager.md` and `docs/user/student.md`.
 The owner confirms final PHASE 0 browser acceptance at the public HTTPS address.
 The final PHASE 5 procedure is in `docs/user/manager.md`.
+After deploying the avatar fix, generate a new avatar: it must reach review, and its saved-gallery tile must show a round face (job 1 failed and must be recreated).
 
 ## Known issues
 - PHASE 5 and PHASE 6 have owner acceptance; automated Safari evidence remains unavailable.

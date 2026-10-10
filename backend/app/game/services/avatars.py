@@ -197,13 +197,17 @@ def avatar_path(
         raise ServiceError("JOB_NOT_READY", 400)
     if not manager and job.review_status != "approved":
         raise ServiceError("AVATAR_NOT_APPROVED", 403)
-    filename = {
-        "neutral": job.base_path,
-        "happy": job.happy_path,
-        "sad": job.sad_path,
-    }[state]
-    if job.asset_version == 2:
-        filename = f"avatars/custom/{job.id}/levels/avatar_{level:02}_{state}.png"
+    filename: str | None
+    if state == "portrait":
+        filename = f"avatars/custom/{job.id}/portrait.png"
+    else:
+        filename = {
+            "neutral": job.base_path,
+            "happy": job.happy_path,
+            "sad": job.sad_path,
+        }[state]
+        if job.asset_version == 2:
+            filename = f"avatars/custom/{job.id}/levels/avatar_{level:02}_{state}.png"
     if not filename:
         raise ServiceError("FILE_NOT_FOUND", 404)
     root = settings.media_root.resolve()
