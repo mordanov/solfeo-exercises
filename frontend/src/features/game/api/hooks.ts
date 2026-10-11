@@ -96,6 +96,8 @@ export interface AvatarJob {
     | "queued"
     | "moderating"
     | "generating"
+    | "mood_happy"
+    | "mood_sad"
     | "splitting"
     | "review"
     | "complete"
