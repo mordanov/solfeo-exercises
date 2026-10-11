@@ -4,6 +4,7 @@ import io
 import json
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
+from typing import Literal
 
 import httpx
 import pytest
@@ -18,6 +19,8 @@ from app.services.auth import create_user
 from app.settings import Settings
 from worker import generate_avatar
 
+ORIGINAL_EDIT_MOOD_SHEET = generate_avatar._edit_mood_sheet
+
 
 @pytest.fixture(autouse=True)
 def no_external_requests(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -25,6 +28,14 @@ def no_external_requests(monkeypatch: pytest.MonkeyPatch) -> None:
         raise AssertionError("Tests must not contact the image provider")
 
     monkeypatch.setattr(generate_avatar, "_openai_post", forbidden)
+    monkeypatch.setattr(
+        generate_avatar,
+        "_edit_mood_sheet",
+        lambda _settings, sheet, _state: sheet,
+    )
+    monkeypatch.setattr(
+        generate_avatar, "_generate_portrait", lambda *_: portrait_bytes()
+    )
     monkeypatch.setattr(generate_avatar, "_moderate_image", lambda *_: False)
 
 
@@ -203,32 +214,157 @@ def test_sheet_prompt_matches_all_growth_stages_and_mood_rows(
     assert "cyan divider lines" in prompt
     for level in range(1, 11):
         assert f"level {level} is" in prompt
-    assert "rows 1 and 4: neutral" in prompt
-    assert "rows 2 and 5: happy" in prompt
-    assert "rows 3 and 6: sad" in prompt
-    assert "neutral: calm, friendly default face" in prompt
-    assert "happy: big joyful expression" in prompt
-    assert "sad: gentle disappointed expression" in prompt
-    assert "one small cartoon tear at most" in prompt
-    assert "change only the face and slight posture" in prompt
+    assert "render all 30 faces with the same calm neutral expression" in prompt
+    assert "rows 1 and 4 are neutral" in prompt
+    assert "rows 2 and 5 will receive happy face edits" in prompt
+    assert "rows 3 and 6 will receive sad face edits" in prompt
 
 
-def test_one_request_creates_and_persists_all_thirty_frames(
+@pytest.mark.parametrize(
+    ("state", "target_state", "other_state"),
+    [("happy", 1, 2), ("sad", 2, 1)],
+)
+def test_mood_edit_mask_targets_only_the_matching_ten_faces(
+    state: Literal["happy", "sad"], target_state: int, other_state: int
+) -> None:
+    image = irregular_separator_sheet()
+
+    mask_data, editable = generate_avatar._make_mood_mask(image, state)
+    with Image.open(io.BytesIO(mask_data)) as mask:
+        assert mask.size == image.size
+        alpha = mask.getchannel("A")
+
+    for level in range(1, 11):
+        column = (level - 1) % 5
+        neutral_row = (level - 1) // 5 * 3
+        target_row = neutral_row + target_state
+        other_mood_row = neutral_row + other_state
+        x_bands = ((148, 152), (368, 372), (558, 562), (788, 792))
+        y_bands = ((228, 232), (478, 482), (758, 762), (998, 1002), (1268, 1272))
+        left = 0 if column == 0 else x_bands[column - 1][1] + 1
+        right = image.width if column == 4 else x_bands[column][0]
+
+        def row_center(row: int, bands: tuple[tuple[int, int], ...]) -> int:
+            top = 0 if row == 0 else bands[row - 1][1] + 1
+            bottom = image.height if row == 5 else bands[row][0]
+            return top + int((bottom - top) * 0.30)
+
+        center_x = (left + right) // 2
+        assert alpha.getpixel((center_x, row_center(target_row, y_bands))) == 0
+        assert alpha.getpixel((center_x, row_center(neutral_row, y_bands))) == 255
+        assert alpha.getpixel((center_x, row_center(other_mood_row, y_bands))) == 255
+    assert editable.getpixel((0, 0)) == 0
+
+
+def test_composed_sheet_changes_only_the_two_mood_face_regions(
+    settings: Settings,
+) -> None:
+    source = irregular_separator_sheet()
+    happy = Image.new("RGBA", source.size, (255, 0, 0, 255))
+    sad = Image.new("RGBA", source.size, (0, 0, 255, 255))
+    result_data = generate_avatar._compose_mood_sheet(
+        settings,
+        generate_avatar._png_bytes(source),
+        generate_avatar._png_bytes(happy),
+        generate_avatar._png_bytes(sad),
+    )
+    result = Image.open(io.BytesIO(result_data)).convert("RGBA")
+    x_bands = ((148, 152), (368, 372), (558, 562), (788, 792))
+    y_bands = ((228, 232), (478, 482), (758, 762), (998, 1002), (1268, 1272))
+
+    def cell_center(level: int, state_index: int) -> tuple[int, int]:
+        column = (level - 1) % 5
+        cell_row = (level - 1) // 5 * 3 + state_index
+        left = 0 if column == 0 else x_bands[column - 1][1] + 1
+        right = source.width if column == 4 else x_bands[column][0]
+        top = 0 if cell_row == 0 else y_bands[cell_row - 1][1] + 1
+        bottom = source.height if cell_row == 5 else y_bands[cell_row][0]
+        return (left + right) // 2, top + int((bottom - top) * 0.30)
+
+    happy_point = cell_center(1, 1)
+    sad_point = cell_center(6, 2)
+    neutral_point = cell_center(1, 0)
+    assert result.getpixel(happy_point) == (255, 0, 0, 255)
+    assert result.getpixel(sad_point) == (0, 0, 255, 255)
+    assert result.getpixel(neutral_point) == source.getpixel(neutral_point)
+    assert result.getpixel((150, 100)) == source.getpixel((150, 100))
+
+
+def test_mood_edits_use_the_masked_image_edit_endpoint(
+    settings: Settings, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    payloads: list[dict[str, object]] = []
+    source = sheet_bytes()
+
+    def post(
+        _settings: Settings,
+        path: str,
+        payload: dict[str, object],
+        _timeout: float,
+    ) -> dict[str, object]:
+        assert path == "/images/edits"
+        payloads.append(payload)
+        return {"data": [{"b64_json": base64.b64encode(source).decode("ascii")}]}
+
+    monkeypatch.setattr(generate_avatar, "_edit_mood_sheet", ORIGINAL_EDIT_MOOD_SHEET)
+    monkeypatch.setattr(generate_avatar, "_openai_post", post)
+    assert generate_avatar._edit_mood_sheet(settings, source, "happy") == source
+
+    payload = payloads[0]
+    assert payload["model"] == settings.avatar_image_edit_model
+    assert payload["size"] == "1024x1536"
+    assert payload["quality"] == settings.avatar_image_quality
+    assert payload["n"] == 1
+    images = payload["images"]
+    assert isinstance(images, list)
+    assert isinstance(images[0], dict)
+    image_url = images[0].get("image_url")
+    assert isinstance(image_url, str) and image_url.startswith("data:image/png;base64,")
+    mask = payload["mask"]
+    assert isinstance(mask, dict)
+    mask_url = mask.get("image_url")
+    assert isinstance(mask_url, str) and mask_url.startswith("data:image/png;base64,")
+    mask_image = base64.b64decode(mask_url.split(",", 1)[1])
+    with Image.open(io.BytesIO(mask_image)) as decoded_mask:
+        assert decoded_mask.size == (1024, 1536)
+        assert decoded_mask.getchannel("A").getextrema() == (0, 255)
+    assert "raised brows" in str(payload["prompt"])
+    assert "broad clearly upturned open smile" in str(payload["prompt"])
+
+
+def test_happy_and_sad_prompts_define_visibly_opposite_expressions() -> None:
+    happy_prompt = generate_avatar._mood_edit_prompt("happy")
+    sad_prompt = generate_avatar._mood_edit_prompt("sad")
+
+    assert "broad clearly upturned open smile" in happy_prompt
+    assert "downturned closed mouth" in sad_prompt
+    assert "raised brows" in happy_prompt
+    assert "inner brows raised and outer brows lowered" in sad_prompt
+
+
+def test_one_sheet_and_two_mood_edits_create_and_persist_all_thirty_frames(
     database: Database,
     settings: Settings,
     avatar_job: int,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     requests: list[str] = []
+    edits: list[str] = []
 
     def generate(_settings: Settings, description: str) -> bytes:
         requests.append(description)
         return sheet_bytes()
 
+    def edit(_settings: Settings, image: bytes, state: str) -> bytes:
+        edits.append(state)
+        return image
+
     monkeypatch.setattr(generate_avatar, "_moderate", lambda *_: False)
     monkeypatch.setattr(generate_avatar, "_generate_sheet", generate)
+    monkeypatch.setattr(generate_avatar, "_edit_mood_sheet", edit)
     assert generate_avatar.process_one(database, settings)
     assert len(requests) == 1
+    assert edits == ["happy", "sad"]
     with database.session() as session:
         job = session.get(CustomAvatar, avatar_job)
         assert job is not None
@@ -239,6 +375,8 @@ def test_one_request_creates_and_persists_all_thirty_frames(
     root = settings.media_root / "avatars" / "custom" / str(avatar_job)
     assert (root / "sheet.png").is_file()
     assert (root / "sheet-layout.txt").read_text() == "separator-grid-v1\n"
+    assert (root / "sheet-mood-edits.txt").read_text() == "masked-moods-v1\n"
+    assert (root / "sheet-composed.png").is_file()
     manifest = json.loads((root / "manifest.json").read_text())
     assert len(manifest["frames"]) == 30
     for frame in manifest["frames"]:
@@ -524,6 +662,73 @@ def test_interrupted_unsaved_generation_never_repeats_a_billable_request(
         assert job.error_code == "AVATAR_GENERATION_INTERRUPTED"
 
 
+def test_interrupted_mood_edit_is_not_requested_again(
+    database: Database,
+    settings: Settings,
+    avatar_job: int,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = settings.media_root / "avatars" / "custom" / str(avatar_job)
+    root.mkdir(parents=True)
+    (root / "sheet.png").write_bytes(sheet_bytes())
+    (root / "sheet-layout.txt").write_text(generate_avatar.SHEET_LAYOUT_MARKER)
+    (root / "sheet-mood-edits.txt").write_text(generate_avatar.SHEET_MOOD_EDITS_MARKER)
+    calls: list[str] = []
+
+    def edit(_settings: Settings, image: bytes, state: str) -> bytes:
+        calls.append(state)
+        return image
+
+    monkeypatch.setattr(generate_avatar, "_edit_mood_sheet", edit)
+    with database.session() as session, session.begin():
+        job = session.get(CustomAvatar, avatar_job)
+        assert job is not None
+        job.phase = "mood_happy"
+        job.locked_at = datetime.now(UTC) - timedelta(hours=1)
+
+    assert generate_avatar.process_one(database, settings)
+    with database.session() as session:
+        job = session.get(CustomAvatar, avatar_job)
+        assert job is not None and job.status == "failed"
+        assert job.error_code == "AVATAR_GENERATION_INTERRUPTED"
+    assert calls == []
+
+
+def test_mood_recovery_reuses_the_saved_happy_edit(
+    database: Database,
+    settings: Settings,
+    avatar_job: int,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = settings.media_root / "avatars" / "custom" / str(avatar_job)
+    root.mkdir(parents=True)
+    source = sheet_bytes()
+    (root / "sheet.png").write_bytes(source)
+    (root / "sheet-layout.txt").write_text(generate_avatar.SHEET_LAYOUT_MARKER)
+    (root / "sheet-mood-edits.txt").write_text(generate_avatar.SHEET_MOOD_EDITS_MARKER)
+    (root / "mood-happy.png").write_bytes(source)
+    calls: list[str] = []
+
+    def edit(_settings: Settings, image: bytes, state: str) -> bytes:
+        calls.append(state)
+        return image
+
+    monkeypatch.setattr(generate_avatar, "_edit_mood_sheet", edit)
+    monkeypatch.setattr(generate_avatar, "_moderate", lambda *_: False)
+    settings.openai_api_key = SecretStr("")
+    with database.session() as session, session.begin():
+        job = session.get(CustomAvatar, avatar_job)
+        assert job is not None
+        job.phase = "mood_happy"
+        job.locked_at = datetime.now(UTC) - timedelta(hours=1)
+
+    assert generate_avatar.process_one(database, settings)
+    with database.session() as session:
+        job = session.get(CustomAvatar, avatar_job)
+        assert job is not None and job.status == "ready"
+    assert calls == ["sad"]
+
+
 @pytest.mark.anyio
 async def test_progress_saved_gallery_and_all_thirty_private_frames_survive_reuse(
     client: httpx.AsyncClient,
@@ -539,6 +744,7 @@ async def test_progress_saved_gallery_and_all_thirty_private_frames_survive_reus
             "password": "synthetic-avatar-password",
         },
     )
+    assert login.status_code == 200, login.text
     client.headers["X-CSRF-Token"] = login.json()["csrf_token"]
     pending = (await client.get(f"/api/game/avatars/{avatar_job}/status")).json()
     assert pending["completed_images"] == 0 and pending["total_images"] == 30
@@ -683,6 +889,7 @@ async def test_missing_frame_prevents_selecting_an_incomplete_avatar(
         "/api/auth/login",
         json={"username": "sheet-owner", "password": "synthetic-avatar-password"},
     )
+    assert login.status_code == 200, login.text
     client.headers["X-CSRF-Token"] = login.json()["csrf_token"]
     response = await client.post(
         f"/api/game/avatars/{avatar_job}/use", json={"player_id": player_id}

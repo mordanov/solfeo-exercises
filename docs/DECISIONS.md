@@ -7,6 +7,11 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-08-18: The owner selects 3 image requests to separate custom avatar emotions.
+  Generate one neutral base sheet, then edit all happy faces and all sad faces in separate masked requests.
+  Copy edited pixels only inside the matching face masks; preserve neutral faces and all character artwork.
+  This approach separates expressions without one request per level and emotion.
+
 - 2026-10-10: The owner requests shared access to created and approved custom avatars.
   Show ready approved avatars in every player's gallery and permit preview and explicit selection.
   Keep pending and rejected avatars private to their creator and managers.

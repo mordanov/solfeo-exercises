@@ -22,8 +22,8 @@ def anyio_backend() -> str:
 
 @pytest.fixture
 def settings() -> Settings:
-    result = Settings(
-        auth_allowed_origins=[ORIGIN], session_cookie_secure=True, game_feedback_ms=0
+    result = Settings(session_cookie_secure=True, game_feedback_ms=0).model_copy(
+        update={"auth_allowed_origins": [ORIGIN]}
     )
     if result.database_name != "solfeo_test":
         raise pytest.UsageError("Set DATABASE_NAME=solfeo_test")

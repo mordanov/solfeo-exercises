@@ -568,6 +568,10 @@ def test_worker_moderates_image_before_extraction_and_waits_for_review(
     monkeypatch.setattr(
         generate_avatar, "_generate_sheet", lambda *_: synthetic_sheet()
     )
+    monkeypatch.setattr(
+        generate_avatar, "_edit_mood_sheet", lambda _settings, sheet, _state: sheet
+    )
+    monkeypatch.setattr(generate_avatar, "_ensure_portrait", lambda *_: None)
     monkeypatch.setattr(generate_avatar, "_frames", frames)
     assert generate_avatar.process_one(database, settings)
     assert calls == ["text", "image"]

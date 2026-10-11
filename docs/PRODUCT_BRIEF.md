@@ -132,7 +132,8 @@ A child looks at the notes and listens to the audio.
 - Permit repeated source appearances where sheets contain fewer than 10 groups.
 - Show happy for 5–7 correct answers, neutral for 3–4, and sad for 0–2.
 - Use the question-mark choice for explicit custom generation with quota, manager review, approved preview, selection, and discard.
-- Generate custom artwork through 1 image request for a sheet with 10 levels and 3 emotions.
+- Generate custom artwork with 1 neutral base-sheet request and 2 masked mood edits.
+- Keep the separately generated optional face portrait.
 - Show 10 distinct growth stages while keeping cell size and camera framing consistent.
 - Apply neutral, happy, and sad expressions to every level without changing its outfit.
 - Save the original sheet, all 30 frames, and a hash manifest in persistent private storage.

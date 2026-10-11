@@ -252,6 +252,9 @@ class Settings(BaseSettings):
     avatar_image_model: str = Field(
         default="gpt-image-1-mini", validation_alias="AVATAR_IMAGE_MODEL"
     )
+    avatar_image_edit_model: str = Field(
+        default="gpt-image-1-mini", validation_alias="AVATAR_IMAGE_EDIT_MODEL"
+    )
     avatar_image_quality: Literal["low", "medium", "high"] = Field(
         default="low", validation_alias="AVATAR_IMAGE_QUALITY"
     )
@@ -259,7 +262,7 @@ class Settings(BaseSettings):
         default=180, ge=30, le=600, validation_alias="AVATAR_GEN_TIMEOUT_SECONDS"
     )
     avatar_gen_estimated_seconds: int = Field(
-        default=120, ge=1, validation_alias="AVATAR_GEN_ESTIMATED_SECONDS"
+        default=300, ge=1, validation_alias="AVATAR_GEN_ESTIMATED_SECONDS"
     )
     avatar_gen_max_image_bytes: int = Field(
         default=16777216, ge=1024, validation_alias="AVATAR_GEN_MAX_IMAGE_BYTES"
