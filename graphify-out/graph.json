@@ -1404,7 +1404,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L1",
       "id": "frontend_public_solfege_manifest_json",
-      "community": 376,
+      "community": 24,
       "norm_label": "manifest.json"
     },
     {
@@ -1413,7 +1413,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L2",
       "id": "solfege_manifest_version",
-      "community": 376,
+      "community": 24,
       "norm_label": "version"
     },
     {
@@ -1422,7 +1422,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L3",
       "id": "solfege_manifest_model",
-      "community": 376,
+      "community": 24,
       "norm_label": "model"
     },
     {
@@ -1431,7 +1431,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L4",
       "id": "solfege_manifest_voice",
-      "community": 376,
+      "community": 24,
       "norm_label": "voice"
     },
     {
@@ -1476,7 +1476,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L10",
       "id": "solfege_manifest_clips_en_letters_d_m4a",
-      "community": 24,
+      "community": 374,
       "norm_label": "en/letters/d.m4a"
     },
     {
@@ -1485,7 +1485,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L11",
       "id": "solfege_manifest_en_letters_d_m4a_fingerprint",
-      "community": 24,
+      "community": 374,
       "norm_label": "fingerprint"
     },
     {
@@ -1494,7 +1494,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L12",
       "id": "solfege_manifest_en_letters_d_m4a_sha256",
-      "community": 24,
+      "community": 374,
       "norm_label": "sha256"
     },
     {
@@ -1638,7 +1638,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L34",
       "id": "solfege_manifest_clips_en_letters_sharp_m4a",
-      "community": 378,
+      "community": 13,
       "norm_label": "en/letters/sharp.m4a"
     },
     {
@@ -1647,7 +1647,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L35",
       "id": "solfege_manifest_en_letters_sharp_m4a_fingerprint",
-      "community": 378,
+      "community": 13,
       "norm_label": "fingerprint"
     },
     {
@@ -1656,7 +1656,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L36",
       "id": "solfege_manifest_en_letters_sharp_m4a_sha256",
-      "community": 378,
+      "community": 13,
       "norm_label": "sha256"
     },
     {
@@ -2097,7 +2097,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L102",
       "id": "solfege_manifest_clips_ru_letters_e_m4a",
-      "community": 379,
+      "community": 24,
       "norm_label": "ru/letters/e.m4a"
     },
     {
@@ -2106,7 +2106,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L103",
       "id": "solfege_manifest_ru_letters_e_m4a_fingerprint",
-      "community": 379,
+      "community": 24,
       "norm_label": "fingerprint"
     },
     {
@@ -2115,7 +2115,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L104",
       "id": "solfege_manifest_ru_letters_e_m4a_sha256",
-      "community": 379,
+      "community": 24,
       "norm_label": "sha256"
     },
     {
@@ -2529,7 +2529,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L166",
       "id": "solfege_manifest_clips_ru_solfege_sharp_m4a",
-      "community": 13,
+      "community": 377,
       "norm_label": "ru/solfege/sharp.m4a"
     },
     {
@@ -2538,7 +2538,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L167",
       "id": "solfege_manifest_ru_solfege_sharp_m4a_fingerprint",
-      "community": 13,
+      "community": 377,
       "norm_label": "fingerprint"
     },
     {
@@ -2547,7 +2547,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L168",
       "id": "solfege_manifest_ru_solfege_sharp_m4a_sha256",
-      "community": 13,
+      "community": 377,
       "norm_label": "sha256"
     },
     {
@@ -3096,7 +3096,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L250",
       "id": "solfege_manifest_clips_es_solfege_b_m4a",
-      "community": 24,
+      "community": 376,
       "norm_label": "es/solfege/b.m4a"
     },
     {
@@ -3105,7 +3105,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L251",
       "id": "solfege_manifest_es_solfege_b_m4a_fingerprint",
-      "community": 24,
+      "community": 376,
       "norm_label": "fingerprint"
     },
     {
@@ -3114,7 +3114,7 @@
       "source_file": "frontend/public/solfege/manifest.json",
       "source_location": "L252",
       "id": "solfege_manifest_es_solfege_b_m4a_sha256",
-      "community": 24,
+      "community": 376,
       "norm_label": "sha256"
     },
     {
@@ -5193,7 +5193,7 @@
       "source_file": "frontend/src/appearance.ts",
       "source_location": "L23",
       "id": "src_appearance_iscolorscheme",
-      "community": 4,
+      "community": 28,
       "norm_label": "iscolorscheme()"
     },
     {
@@ -5202,7 +5202,7 @@
       "source_file": "frontend/src/appearance.ts",
       "source_location": "L26",
       "id": "src_appearance_isuifont",
-      "community": 4,
+      "community": 28,
       "norm_label": "isuifont()"
     },
     {
@@ -5211,7 +5211,7 @@
       "source_file": "frontend/src/appearance.ts",
       "source_location": "L29",
       "id": "src_appearance_isuifontsize",
-      "community": 4,
+      "community": 28,
       "norm_label": "isuifontsize()"
     },
     {
@@ -5247,7 +5247,7 @@
       "source_file": "frontend/src/App.tsx",
       "source_location": "L1",
       "id": "frontend_src_app_tsx",
-      "community": 6,
+      "community": 18,
       "norm_label": "app.tsx"
     },
     {
@@ -5256,7 +5256,7 @@
       "source_file": "frontend/src/App.tsx",
       "source_location": "L18",
       "id": "src_app_notfound",
-      "community": 6,
+      "community": 18,
       "norm_label": "notfound()"
     },
     {
@@ -5265,7 +5265,7 @@
       "source_file": "prototypes/pwa/src/App.tsx",
       "source_location": "L238",
       "id": "src_app_app",
-      "community": 371,
+      "community": 70,
       "norm_label": "app()"
     },
     {
@@ -5319,7 +5319,7 @@
       "source_file": "prototypes/pwa/src/main.tsx",
       "source_location": "L5",
       "id": "src_main_root",
-      "community": 371,
+      "community": 70,
       "norm_label": "root"
     },
     {
@@ -5328,7 +5328,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_app_test_tsx",
-      "community": 371,
+      "community": 18,
       "norm_label": "app.test.tsx"
     },
     {
@@ -5337,7 +5337,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L15",
       "id": "src_app_test_mockhealth",
-      "community": 371,
+      "community": 18,
       "norm_label": "mockhealth()"
     },
     {
@@ -5346,7 +5346,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L25",
       "id": "src_app_test_renderapp",
-      "community": 371,
+      "community": 18,
       "norm_label": "renderapp()"
     },
     {
@@ -5355,7 +5355,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L50",
       "id": "src_app_test_shortcut",
-      "community": 371,
+      "community": 18,
       "norm_label": "shortcut"
     },
     {
@@ -5364,7 +5364,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L79",
       "id": "src_app_test_fetch",
-      "community": 371,
+      "community": 18,
       "norm_label": "fetch"
     },
     {
@@ -5373,7 +5373,7 @@
       "source_file": "frontend/src/App.test.tsx",
       "source_location": "L182",
       "id": "src_app_test_health",
-      "community": 371,
+      "community": 18,
       "norm_label": "health"
     },
     {
@@ -5535,7 +5535,7 @@
       "source_file": "frontend/src/configuration.ts",
       "source_location": "L1",
       "id": "src_configuration_language",
-      "community": 5,
+      "community": 263,
       "norm_label": "language"
     },
     {
@@ -5688,7 +5688,7 @@
       "source_file": "frontend/src/features/settings/SettingsForm.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_settings_settingsform_tsx",
-      "community": 4,
+      "community": 63,
       "norm_label": "settingsform.tsx"
     },
     {
@@ -5697,7 +5697,7 @@
       "source_file": "frontend/src/features/settings/SettingsForm.tsx",
       "source_location": "L16",
       "id": "settings_settingsform_settingsform",
-      "community": 28,
+      "community": 63,
       "norm_label": "settingsform()"
     },
     {
@@ -5940,7 +5940,7 @@
       "source_file": "frontend/src/features/omr/notes.ts",
       "source_location": "L1",
       "id": "frontend_src_features_omr_notes_ts",
-      "community": 5,
+      "community": 263,
       "norm_label": "notes.ts"
     },
     {
@@ -5949,7 +5949,7 @@
       "source_file": "frontend/src/features/omr/notes.ts",
       "source_location": "L4",
       "id": "omr_notes_accidentals",
-      "community": 5,
+      "community": 263,
       "norm_label": "accidentals"
     },
     {
@@ -5958,7 +5958,7 @@
       "source_file": "frontend/src/features/omr/notes.ts",
       "source_location": "L12",
       "id": "omr_notes_injectnotenames",
-      "community": 5,
+      "community": 263,
       "norm_label": "injectnotenames()"
     },
     {
@@ -5967,7 +5967,7 @@
       "source_file": "frontend/src/features/omr/Score.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_omr_score_tsx",
-      "community": 5,
+      "community": 63,
       "norm_label": "score.tsx"
     },
     {
@@ -5985,7 +5985,7 @@
       "source_file": "frontend/src/features/omr/notes.test.ts",
       "source_location": "L1",
       "id": "frontend_src_features_omr_notes_test_ts",
-      "community": 5,
+      "community": 263,
       "norm_label": "notes.test.ts"
     },
     {
@@ -5994,7 +5994,7 @@
       "source_file": "frontend/src/features/omr/notes.test.ts",
       "source_location": "L16",
       "id": "omr_notes_test_xml",
-      "community": 5,
+      "community": 263,
       "norm_label": "xml"
     },
     {
@@ -6408,7 +6408,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_auth_autharea_tsx",
-      "community": 28,
+      "community": 63,
       "norm_label": "autharea.tsx"
     },
     {
@@ -6417,7 +6417,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.tsx",
       "source_location": "L29",
       "id": "auth_autharea_loginform",
-      "community": 28,
+      "community": 63,
       "norm_label": "loginform()"
     },
     {
@@ -6426,7 +6426,7 @@
       "source_file": "frontend/src/features/auth/AuthArea.tsx",
       "source_location": "L89",
       "id": "auth_autharea_passwordform",
-      "community": 28,
+      "community": 63,
       "norm_label": "passwordform()"
     },
     {
@@ -6516,7 +6516,7 @@
       "source_file": "frontend/src/features/game/notes.ts",
       "source_location": "L5",
       "id": "game_notes_note_names",
-      "community": 121,
+      "community": 370,
       "norm_label": "note_names"
     },
     {
@@ -6525,7 +6525,7 @@
       "source_file": "frontend/src/features/game/notes.ts",
       "source_location": "L6",
       "id": "game_notes_piano_notes",
-      "community": 37,
+      "community": 121,
       "norm_label": "piano_notes"
     },
     {
@@ -6777,7 +6777,7 @@
       "source_file": "frontend/src/features/game/setup/GameSetup.tsx",
       "source_location": "L36",
       "id": "setup_gamesetup_gamesetup",
-      "community": 128,
+      "community": 121,
       "norm_label": "gamesetup()"
     },
     {
@@ -6813,7 +6813,7 @@
       "source_file": "frontend/src/features/game/setup/CreatePlayerDialog.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_game_setup_createplayerdialog_tsx",
-      "community": 121,
+      "community": 63,
       "norm_label": "createplayerdialog.tsx"
     },
     {
@@ -6822,7 +6822,7 @@
       "source_file": "frontend/src/features/game/setup/CreatePlayerDialog.tsx",
       "source_location": "L16",
       "id": "setup_createplayerdialog_createplayerdialog",
-      "community": 36,
+      "community": 63,
       "norm_label": "createplayerdialog()"
     },
     {
@@ -6885,7 +6885,7 @@
       "source_file": "frontend/src/features/game/setup/AvatarChooser.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_game_setup_avatarchooser_tsx",
-      "community": 319,
+      "community": 36,
       "norm_label": "avatarchooser.tsx"
     },
     {
@@ -6894,7 +6894,7 @@
       "source_file": "frontend/src/features/game/setup/AvatarChooser.tsx",
       "source_location": "L30",
       "id": "setup_avatarchooser_avatarchooser",
-      "community": 319,
+      "community": 36,
       "norm_label": "avatarchooser()"
     },
     {
@@ -6903,7 +6903,7 @@
       "source_file": "frontend/src/features/game/setup/PlayerSelect.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_game_setup_playerselect_tsx",
-      "community": 121,
+      "community": 63,
       "norm_label": "playerselect.tsx"
     },
     {
@@ -6912,7 +6912,7 @@
       "source_file": "frontend/src/features/game/setup/PlayerSelect.tsx",
       "source_location": "L19",
       "id": "setup_playerselect_props",
-      "community": 121,
+      "community": 63,
       "norm_label": "props"
     },
     {
@@ -6921,7 +6921,7 @@
       "source_file": "frontend/src/features/game/setup/PlayerSelect.tsx",
       "source_location": "L26",
       "id": "setup_playerselect_playersummary",
-      "community": 121,
+      "community": 164,
       "norm_label": "playersummary()"
     },
     {
@@ -7200,7 +7200,7 @@
       "source_file": "frontend/src/features/game/admin/AvatarReviewQueue.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_game_admin_avatarreviewqueue_test_tsx",
-      "community": 36,
+      "community": 371,
       "norm_label": "avatarreviewqueue.test.tsx"
     },
     {
@@ -7209,7 +7209,7 @@
       "source_file": "frontend/src/features/game/admin/AvatarReviewQueue.test.tsx",
       "source_location": "L18",
       "id": "admin_avatarreviewqueue_test_complete",
-      "community": 36,
+      "community": 371,
       "norm_label": "complete()"
     },
     {
@@ -7218,7 +7218,7 @@
       "source_file": "frontend/src/features/game/admin/AvatarReviewQueue.test.tsx",
       "source_location": "L19",
       "id": "admin_avatarreviewqueue_test_fetchmock",
-      "community": 36,
+      "community": 371,
       "norm_label": "fetchmock"
     },
     {
@@ -7227,7 +7227,7 @@
       "source_file": "frontend/src/features/game/admin/AvatarReviewQueue.test.tsx",
       "source_location": "L53",
       "id": "admin_avatarreviewqueue_test_reject",
-      "community": 36,
+      "community": 371,
       "norm_label": "reject"
     },
     {
@@ -7263,7 +7263,7 @@
       "source_file": "frontend/src/features/game/admin/AdminPlayerDetail.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_game_admin_adminplayerdetail_tsx",
-      "community": 121,
+      "community": 370,
       "norm_label": "adminplayerdetail.tsx"
     },
     {
@@ -7272,7 +7272,7 @@
       "source_file": "frontend/src/features/game/admin/AdminPlayerDetail.tsx",
       "source_location": "L21",
       "id": "admin_adminplayerdetail_props",
-      "community": 121,
+      "community": 370,
       "norm_label": "props"
     },
     {
@@ -7281,7 +7281,7 @@
       "source_file": "frontend/src/features/game/admin/AdminPlayerDetail.tsx",
       "source_location": "L27",
       "id": "admin_adminplayerdetail_adminplayerdetail",
-      "community": 121,
+      "community": 370,
       "norm_label": "adminplayerdetail()"
     },
     {
@@ -7488,7 +7488,7 @@
       "source_file": "frontend/src/features/game/profile/StatisticsSummary.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_game_profile_statisticssummary_tsx",
-      "community": 121,
+      "community": 164,
       "norm_label": "statisticssummary.tsx"
     },
     {
@@ -7497,7 +7497,7 @@
       "source_file": "frontend/src/features/game/profile/StatisticsSummary.tsx",
       "source_location": "L5",
       "id": "profile_statisticssummary_statisticstotals",
-      "community": 121,
+      "community": 164,
       "norm_label": "statisticstotals()"
     },
     {
@@ -7506,7 +7506,7 @@
       "source_file": "frontend/src/features/game/profile/StatisticsSummary.tsx",
       "source_location": "L18",
       "id": "profile_statisticssummary_statisticssummary",
-      "community": 121,
+      "community": 164,
       "norm_label": "statisticssummary()"
     },
     {
@@ -7515,7 +7515,7 @@
       "source_file": "frontend/src/features/game/profile/ProfileScreen.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_game_profile_profilescreen_tsx",
-      "community": 121,
+      "community": 164,
       "norm_label": "profilescreen.tsx"
     },
     {
@@ -7524,7 +7524,7 @@
       "source_file": "frontend/src/features/game/profile/ProfileScreen.tsx",
       "source_location": "L31",
       "id": "profile_profilescreen_trophy_icons",
-      "community": 121,
+      "community": 164,
       "norm_label": "trophy_icons"
     },
     {
@@ -7533,7 +7533,7 @@
       "source_file": "frontend/src/features/game/profile/ProfileScreen.tsx",
       "source_location": "L37",
       "id": "profile_profilescreen_note_counts",
-      "community": 121,
+      "community": 164,
       "norm_label": "note_counts"
     },
     {
@@ -7542,7 +7542,7 @@
       "source_file": "frontend/src/features/game/profile/ProfileScreen.tsx",
       "source_location": "L39",
       "id": "profile_profilescreen_props",
-      "community": 121,
+      "community": 164,
       "norm_label": "props"
     },
     {
@@ -7551,7 +7551,7 @@
       "source_file": "frontend/src/features/game/profile/ProfileScreen.tsx",
       "source_location": "L46",
       "id": "profile_profilescreen_profilescreen",
-      "community": 121,
+      "community": 164,
       "norm_label": "profilescreen()"
     },
     {
@@ -7560,7 +7560,7 @@
       "source_file": "frontend/src/features/game/profile/PrizeShelf.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_game_profile_prizeshelf_tsx",
-      "community": 121,
+      "community": 196,
       "norm_label": "prizeshelf.tsx"
     },
     {
@@ -7569,7 +7569,7 @@
       "source_file": "frontend/src/features/game/profile/PrizeShelf.tsx",
       "source_location": "L7",
       "id": "profile_prizeshelf_prizeshelf",
-      "community": 121,
+      "community": 196,
       "norm_label": "prizeshelf()"
     },
     {
@@ -7668,7 +7668,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L25",
       "id": "api_hooks_task",
-      "community": 121,
+      "community": 128,
       "norm_label": "task"
     },
     {
@@ -7686,7 +7686,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L44",
       "id": "api_hooks_roundresult",
-      "community": 196,
+      "community": 128,
       "norm_label": "roundresult"
     },
     {
@@ -7695,7 +7695,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L57",
       "id": "api_hooks_statsmatrix",
-      "community": 121,
+      "community": 164,
       "norm_label": "statsmatrix"
     },
     {
@@ -7758,7 +7758,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L131",
       "id": "api_hooks_useeligibleaccounts",
-      "community": 36,
+      "community": 63,
       "norm_label": "useeligibleaccounts()"
     },
     {
@@ -7776,7 +7776,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L153",
       "id": "api_hooks_usecreateplayer",
-      "community": 36,
+      "community": 63,
       "norm_label": "usecreateplayer()"
     },
     {
@@ -7785,7 +7785,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L178",
       "id": "api_hooks_usestartround",
-      "community": 128,
+      "community": 121,
       "norm_label": "usestartround()"
     },
     {
@@ -7803,7 +7803,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L219",
       "id": "api_hooks_useplayer",
-      "community": 128,
+      "community": 121,
       "norm_label": "useplayer()"
     },
     {
@@ -7812,7 +7812,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L227",
       "id": "api_hooks_useachievements",
-      "community": 121,
+      "community": 196,
       "norm_label": "useachievements()"
     },
     {
@@ -7821,7 +7821,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L237",
       "id": "api_hooks_usechooseavatar",
-      "community": 319,
+      "community": 36,
       "norm_label": "usechooseavatar()"
     },
     {
@@ -7830,7 +7830,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L254",
       "id": "api_hooks_useacceptavatar",
-      "community": 319,
+      "community": 36,
       "norm_label": "useacceptavatar()"
     },
     {
@@ -7839,7 +7839,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L269",
       "id": "api_hooks_usediscardavatar",
-      "community": 319,
+      "community": 36,
       "norm_label": "usediscardavatar()"
     },
     {
@@ -7848,7 +7848,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L286",
       "id": "api_hooks_useplayerstats",
-      "community": 121,
+      "community": 164,
       "norm_label": "useplayerstats()"
     },
     {
@@ -7857,7 +7857,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L296",
       "id": "api_hooks_useplayerconfusion",
-      "community": 121,
+      "community": 370,
       "norm_label": "useplayerconfusion()"
     },
     {
@@ -7866,7 +7866,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L322",
       "id": "api_hooks_useavatarquota",
-      "community": 319,
+      "community": 36,
       "norm_label": "useavatarquota()"
     },
     {
@@ -7875,7 +7875,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L328",
       "id": "api_hooks_usegenerateavatar",
-      "community": 319,
+      "community": 36,
       "norm_label": "usegenerateavatar()"
     },
     {
@@ -7884,7 +7884,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L349",
       "id": "api_hooks_useavatarstatus",
-      "community": 319,
+      "community": 36,
       "norm_label": "useavatarstatus()"
     },
     {
@@ -7893,7 +7893,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L361",
       "id": "api_hooks_useavatarjobs",
-      "community": 319,
+      "community": 36,
       "norm_label": "useavatarjobs()"
     },
     {
@@ -7929,7 +7929,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L413",
       "id": "api_hooks_usesavedavatars",
-      "community": 319,
+      "community": 36,
       "norm_label": "usesavedavatars()"
     },
     {
@@ -7938,7 +7938,7 @@
       "source_file": "frontend/src/features/game/api/hooks.ts",
       "source_location": "L425",
       "id": "api_hooks_useseasons",
-      "community": 121,
+      "community": 164,
       "norm_label": "useseasons()"
     },
     {
@@ -7974,7 +7974,7 @@
       "source_file": "frontend/src/features/game/staff/staffPos.test.ts",
       "source_location": "L1",
       "id": "frontend_src_features_game_staff_staffpos_test_ts",
-      "community": 164,
+      "community": 66,
       "norm_label": "staffpos.test.ts"
     },
     {
@@ -8082,7 +8082,7 @@
       "source_file": "frontend/src/features/game/staff/staffPos.ts",
       "source_location": "L1",
       "id": "frontend_src_features_game_staff_staffpos_ts",
-      "community": 164,
+      "community": 66,
       "norm_label": "staffpos.ts"
     },
     {
@@ -8091,7 +8091,7 @@
       "source_file": "frontend/src/features/game/staff/staffPos.ts",
       "source_location": "L1",
       "id": "staff_staffpos_diatonic",
-      "community": 164,
+      "community": 66,
       "norm_label": "diatonic"
     },
     {
@@ -8100,7 +8100,7 @@
       "source_file": "frontend/src/features/game/staff/staffPos.ts",
       "source_location": "L10",
       "id": "staff_staffpos_abs",
-      "community": 164,
+      "community": 66,
       "norm_label": "abs()"
     },
     {
@@ -8109,7 +8109,7 @@
       "source_file": "frontend/src/features/game/staff/staffPos.ts",
       "source_location": "L11",
       "id": "staff_staffpos_clef_ref",
-      "community": 164,
+      "community": 66,
       "norm_label": "clef_ref"
     },
     {
@@ -8118,7 +8118,7 @@
       "source_file": "frontend/src/features/game/staff/staffPos.ts",
       "source_location": "L13",
       "id": "staff_staffpos_staffpos",
-      "community": 164,
+      "community": 66,
       "norm_label": "staffpos()"
     },
     {
@@ -8361,7 +8361,7 @@
       "source_file": "frontend/src/features/exercises/Exercises.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_exercises_exercises_test_tsx",
-      "community": 371,
+      "community": 122,
       "norm_label": "exercises.test.tsx"
     },
     {
@@ -8370,7 +8370,7 @@
       "source_file": "frontend/src/features/exercises/Exercises.test.tsx",
       "source_location": "L13",
       "id": "exercises_exercises_test_exercise",
-      "community": 371,
+      "community": 122,
       "norm_label": "exercise"
     },
     {
@@ -8379,7 +8379,7 @@
       "source_file": "frontend/src/features/exercises/Exercises.test.tsx",
       "source_location": "L39",
       "id": "exercises_exercises_test_auth",
-      "community": 371,
+      "community": 122,
       "norm_label": "auth"
     },
     {
@@ -8388,7 +8388,7 @@
       "source_file": "frontend/src/features/exercises/Exercises.test.tsx",
       "source_location": "L63",
       "id": "exercises_exercises_test_mount",
-      "community": 371,
+      "community": 122,
       "norm_label": "mount()"
     },
     {
@@ -8397,7 +8397,7 @@
       "source_file": "frontend/src/features/exercises/Exercises.test.tsx",
       "source_location": "L84",
       "id": "exercises_exercises_test_image",
-      "community": 371,
+      "community": 122,
       "norm_label": "image"
     },
     {
@@ -8406,7 +8406,7 @@
       "source_file": "frontend/src/features/exercises/Exercises.test.tsx",
       "source_location": "L86",
       "id": "exercises_exercises_test_audio",
-      "community": 371,
+      "community": 122,
       "norm_label": "audio"
     },
     {
@@ -8442,7 +8442,7 @@
       "source_file": "frontend/src/features/exercises/Exercises.tsx",
       "source_location": "L235",
       "id": "exercises_exercises_exercises",
-      "community": 371,
+      "community": 63,
       "norm_label": "exercises()"
     },
     {
@@ -8451,7 +8451,7 @@
       "source_file": "frontend/src/features/spoken/Spoken.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_spoken_spoken_tsx",
-      "community": 5,
+      "community": 63,
       "norm_label": "spoken.tsx"
     },
     {
@@ -8460,7 +8460,7 @@
       "source_file": "frontend/src/features/spoken/Spoken.tsx",
       "source_location": "L20",
       "id": "spoken_spoken_spoken",
-      "community": 5,
+      "community": 63,
       "norm_label": "spoken()"
     },
     {
@@ -8469,7 +8469,7 @@
       "source_file": "frontend/src/features/spoken/sequence.test.ts",
       "source_location": "L1",
       "id": "frontend_src_features_spoken_sequence_test_ts",
-      "community": 5,
+      "community": 319,
       "norm_label": "sequence.test.ts"
     },
     {
@@ -8478,7 +8478,7 @@
       "source_file": "frontend/src/features/spoken/sequence.test.ts",
       "source_location": "L8",
       "id": "spoken_sequence_test_result",
-      "community": 5,
+      "community": 319,
       "norm_label": "result"
     },
     {
@@ -8487,7 +8487,7 @@
       "source_file": "frontend/src/features/spoken/sequence.test.ts",
       "source_location": "L29",
       "id": "spoken_sequence_test_events",
-      "community": 5,
+      "community": 319,
       "norm_label": "events"
     },
     {
@@ -8496,7 +8496,7 @@
       "source_file": "frontend/src/features/spoken/vocabulary.ts",
       "source_location": "L1",
       "id": "frontend_src_features_spoken_vocabulary_ts",
-      "community": 5,
+      "community": 263,
       "norm_label": "vocabulary.ts"
     },
     {
@@ -8505,7 +8505,7 @@
       "source_file": "frontend/src/features/spoken/vocabulary.ts",
       "source_location": "L5",
       "id": "spoken_vocabulary_step",
-      "community": 5,
+      "community": 263,
       "norm_label": "step"
     },
     {
@@ -8514,7 +8514,7 @@
       "source_file": "frontend/src/features/spoken/vocabulary.ts",
       "source_location": "L6",
       "id": "spoken_vocabulary_isstep",
-      "community": 5,
+      "community": 263,
       "norm_label": "isstep()"
     },
     {
@@ -8523,7 +8523,7 @@
       "source_file": "frontend/src/features/spoken/vocabulary.ts",
       "source_location": "L9",
       "id": "spoken_vocabulary_notename",
-      "community": 5,
+      "community": 263,
       "norm_label": "notename()"
     },
     {
@@ -9009,7 +9009,7 @@
       "source_file": "frontend/src/features/spoken/sequence.ts",
       "source_location": "L1",
       "id": "frontend_src_features_spoken_sequence_ts",
-      "community": 5,
+      "community": 319,
       "norm_label": "sequence.ts"
     },
     {
@@ -9018,7 +9018,7 @@
       "source_file": "frontend/src/features/spoken/sequence.ts",
       "source_location": "L4",
       "id": "spoken_sequence_pitch",
-      "community": 5,
+      "community": 319,
       "norm_label": "pitch"
     },
     {
@@ -9027,7 +9027,7 @@
       "source_file": "frontend/src/features/spoken/sequence.ts",
       "source_location": "L5",
       "id": "spoken_sequence_noteevent",
-      "community": 5,
+      "community": 151,
       "norm_label": "noteevent"
     },
     {
@@ -9036,7 +9036,7 @@
       "source_file": "frontend/src/features/spoken/sequence.ts",
       "source_location": "L11",
       "id": "spoken_sequence_invalid",
-      "community": 5,
+      "community": 319,
       "norm_label": "invalid()"
     },
     {
@@ -9045,7 +9045,7 @@
       "source_file": "frontend/src/features/spoken/sequence.ts",
       "source_location": "L14",
       "id": "spoken_sequence_positive",
-      "community": 5,
+      "community": 319,
       "norm_label": "positive()"
     },
     {
@@ -9054,7 +9054,7 @@
       "source_file": "frontend/src/features/spoken/sequence.ts",
       "source_location": "L21",
       "id": "spoken_sequence_parsesequence",
-      "community": 5,
+      "community": 319,
       "norm_label": "parsesequence()"
     },
     {
@@ -9117,7 +9117,7 @@
       "source_file": "frontend/src/features/spoken/player.test.ts",
       "source_location": "L66",
       "id": "spoken_player_test_range",
-      "community": 163,
+      "community": 185,
       "norm_label": "range"
     },
     {
@@ -9162,7 +9162,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L1",
       "id": "frontend_src_features_spoken_lifecycle_test_ts",
-      "community": 5,
+      "community": 151,
       "norm_label": "lifecycle.test.ts"
     },
     {
@@ -9171,7 +9171,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L5",
       "id": "spoken_lifecycle_test_note",
-      "community": 5,
+      "community": 151,
       "norm_label": "note"
     },
     {
@@ -9180,7 +9180,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L10",
       "id": "spoken_lifecycle_test_context",
-      "community": 5,
+      "community": 151,
       "norm_label": "context"
     },
     {
@@ -9189,7 +9189,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L20",
       "id": "spoken_lifecycle_test_context_constructor",
-      "community": 5,
+      "community": 151,
       "norm_label": ".constructor()"
     },
     {
@@ -9198,7 +9198,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L23",
       "id": "spoken_lifecycle_test_context_createbuffersource",
-      "community": 5,
+      "community": 151,
       "norm_label": ".createbuffersource()"
     },
     {
@@ -9207,7 +9207,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L55",
       "id": "spoken_lifecycle_test_position",
-      "community": 5,
+      "community": 151,
       "norm_label": "position"
     },
     {
@@ -9216,7 +9216,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L56",
       "id": "spoken_lifecycle_test_failed",
-      "community": 5,
+      "community": 151,
       "norm_label": "failed"
     },
     {
@@ -9225,7 +9225,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L57",
       "id": "spoken_lifecycle_test_ready",
-      "community": 5,
+      "community": 151,
       "norm_label": "ready"
     },
     {
@@ -9234,7 +9234,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L58",
       "id": "spoken_lifecycle_test_player",
-      "community": 5,
+      "community": 151,
       "norm_label": "player"
     },
     {
@@ -9243,7 +9243,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L59",
       "id": "spoken_lifecycle_test_pending",
-      "community": 5,
+      "community": 151,
       "norm_label": "pending"
     },
     {
@@ -9252,7 +9252,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L88",
       "id": "spoken_lifecycle_test_finish",
-      "community": 5,
+      "community": 151,
       "norm_label": "finish()"
     },
     {
@@ -9270,7 +9270,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L117",
       "id": "spoken_lifecycle_test_ended",
-      "community": 5,
+      "community": 151,
       "norm_label": "ended"
     },
     {
@@ -9279,7 +9279,7 @@
       "source_file": "frontend/src/features/spoken/lifecycle.test.ts",
       "source_location": "L131",
       "id": "spoken_lifecycle_test_decode",
-      "community": 5,
+      "community": 151,
       "norm_label": "decode"
     },
     {
@@ -9333,7 +9333,7 @@
       "source_file": "frontend/src/features/users/Users.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_users_users_test_tsx",
-      "community": 28,
+      "community": 371,
       "norm_label": "users.test.tsx"
     },
     {
@@ -9342,7 +9342,7 @@
       "source_file": "frontend/src/features/users/Users.test.tsx",
       "source_location": "L19",
       "id": "users_users_test_manager",
-      "community": 28,
+      "community": 371,
       "norm_label": "manager"
     },
     {
@@ -9351,7 +9351,7 @@
       "source_file": "frontend/src/features/users/Users.test.tsx",
       "source_location": "L32",
       "id": "users_users_test_rows",
-      "community": 28,
+      "community": 371,
       "norm_label": "rows"
     },
     {
@@ -9360,7 +9360,7 @@
       "source_file": "frontend/src/features/users/Users.test.tsx",
       "source_location": "L46",
       "id": "users_users_test_mount",
-      "community": 28,
+      "community": 371,
       "norm_label": "mount()"
     },
     {
@@ -9369,7 +9369,7 @@
       "source_file": "frontend/src/features/users/Users.test.tsx",
       "source_location": "L62",
       "id": "users_users_test_viewport",
-      "community": 28,
+      "community": 371,
       "norm_label": "viewport()"
     },
     {
@@ -9378,7 +9378,7 @@
       "source_file": "frontend/src/features/users/Users.test.tsx",
       "source_location": "L82",
       "id": "users_users_test_creationrole",
-      "community": 28,
+      "community": 371,
       "norm_label": "creationrole"
     },
     {
@@ -9387,7 +9387,7 @@
       "source_file": "frontend/src/features/users/Users.test.tsx",
       "source_location": "L91",
       "id": "users_users_test_editor",
-      "community": 28,
+      "community": 371,
       "norm_label": "editor"
     },
     {
@@ -9396,7 +9396,7 @@
       "source_file": "frontend/src/features/users/Users.test.tsx",
       "source_location": "L94",
       "id": "users_users_test_editingrole",
-      "community": 28,
+      "community": 371,
       "norm_label": "editingrole"
     },
     {
@@ -9405,7 +9405,7 @@
       "source_file": "frontend/src/features/users/Users.tsx",
       "source_location": "L1",
       "id": "frontend_src_features_users_users_tsx",
-      "community": 28,
+      "community": 371,
       "norm_label": "users.tsx"
     },
     {
@@ -9414,7 +9414,7 @@
       "source_file": "frontend/src/features/users/Users.tsx",
       "source_location": "L23",
       "id": "users_users_roleoptions",
-      "community": 28,
+      "community": 371,
       "norm_label": "roleoptions()"
     },
     {
@@ -9423,7 +9423,7 @@
       "source_file": "frontend/src/features/users/Users.tsx",
       "source_location": "L34",
       "id": "users_users_usereditor",
-      "community": 28,
+      "community": 371,
       "norm_label": "usereditor()"
     },
     {
@@ -9432,7 +9432,7 @@
       "source_file": "frontend/src/features/users/Users.tsx",
       "source_location": "L140",
       "id": "users_users_users",
-      "community": 28,
+      "community": 371,
       "norm_label": "users()"
     },
     {
@@ -9441,7 +9441,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.tsx",
       "source_location": "L1",
       "id": "frontend_src_components_readonlygrid_tsx",
-      "community": 16,
+      "community": 371,
       "norm_label": "readonlygrid.tsx"
     },
     {
@@ -9450,7 +9450,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.tsx",
       "source_location": "L13",
       "id": "components_readonlygrid_readonlycolumn",
-      "community": 16,
+      "community": 371,
       "norm_label": "readonlycolumn"
     },
     {
@@ -9459,7 +9459,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.tsx",
       "source_location": "L21",
       "id": "components_readonlygrid_emptyoverlay",
-      "community": 16,
+      "community": 371,
       "norm_label": "emptyoverlay()"
     },
     {
@@ -9468,7 +9468,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.tsx",
       "source_location": "L25",
       "id": "components_readonlygrid_readonlygrid",
-      "community": 16,
+      "community": 371,
       "norm_label": "readonlygrid()"
     },
     {
@@ -9477,7 +9477,7 @@
       "source_file": "frontend/src/components/AccountUi.tsx",
       "source_location": "L1",
       "id": "frontend_src_components_accountui_tsx",
-      "community": 121,
+      "community": 63,
       "norm_label": "accountui.tsx"
     },
     {
@@ -9486,7 +9486,7 @@
       "source_file": "frontend/src/components/AccountUi.tsx",
       "source_location": "L5",
       "id": "components_accountui_errormessage",
-      "community": 121,
+      "community": 63,
       "norm_label": "errormessage()"
     },
     {
@@ -9495,7 +9495,7 @@
       "source_file": "frontend/src/components/AccountUi.tsx",
       "source_location": "L16",
       "id": "components_accountui_languageoptions",
-      "community": 28,
+      "community": 63,
       "norm_label": "languageoptions()"
     },
     {
@@ -9504,7 +9504,7 @@
       "source_file": "frontend/src/components/InstallApp.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_components_installapp_test_tsx",
-      "community": 371,
+      "community": 18,
       "norm_label": "installapp.test.tsx"
     },
     {
@@ -9513,7 +9513,7 @@
       "source_file": "frontend/src/components/InstallApp.test.tsx",
       "source_location": "L6",
       "id": "components_installapp_test_device",
-      "community": 371,
+      "community": 18,
       "norm_label": "device()"
     },
     {
@@ -9522,7 +9522,7 @@
       "source_file": "frontend/src/components/InstallApp.test.tsx",
       "source_location": "L53",
       "id": "components_installapp_test_event",
-      "community": 371,
+      "community": 18,
       "norm_label": "event"
     },
     {
@@ -9531,7 +9531,7 @@
       "source_file": "frontend/src/components/InstallApp.test.tsx",
       "source_location": "L78",
       "id": "components_installapp_test_logging",
-      "community": 371,
+      "community": 18,
       "norm_label": "logging"
     },
     {
@@ -9540,7 +9540,7 @@
       "source_file": "frontend/src/components/InstallApp.test.tsx",
       "source_location": "L87",
       "id": "components_installapp_test_view",
-      "community": 371,
+      "community": 18,
       "norm_label": "view"
     },
     {
@@ -9549,7 +9549,7 @@
       "source_file": "frontend/src/components/InstallApp.test.tsx",
       "source_location": "L103",
       "id": "components_installapp_test_later",
-      "community": 371,
+      "community": 18,
       "norm_label": "later"
     },
     {
@@ -9639,7 +9639,7 @@
       "source_file": "frontend/src/components/InstallApp.tsx",
       "source_location": "L1",
       "id": "frontend_src_components_installapp_tsx",
-      "community": 6,
+      "community": 18,
       "norm_label": "installapp.tsx"
     },
     {
@@ -9648,7 +9648,7 @@
       "source_file": "frontend/src/components/InstallApp.tsx",
       "source_location": "L8",
       "id": "components_installapp_installprompt",
-      "community": 6,
+      "community": 18,
       "norm_label": "installprompt"
     },
     {
@@ -9657,7 +9657,7 @@
       "source_file": "frontend/src/components/InstallApp.tsx",
       "source_location": "L13",
       "id": "components_installapp_isinstallprompt",
-      "community": 6,
+      "community": 18,
       "norm_label": "isinstallprompt()"
     },
     {
@@ -9666,7 +9666,7 @@
       "source_file": "frontend/src/components/InstallApp.tsx",
       "source_location": "L22",
       "id": "components_installapp_installapp",
-      "community": 6,
+      "community": 18,
       "norm_label": "installapp()"
     },
     {
@@ -9675,7 +9675,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.test.tsx",
       "source_location": "L1",
       "id": "frontend_src_components_readonlygrid_test_tsx",
-      "community": 16,
+      "community": 371,
       "norm_label": "readonlygrid.test.tsx"
     },
     {
@@ -9684,7 +9684,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.test.tsx",
       "source_location": "L11",
       "id": "components_readonlygrid_test_listeners",
-      "community": 16,
+      "community": 371,
       "norm_label": "listeners"
     },
     {
@@ -9693,7 +9693,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.test.tsx",
       "source_location": "L13",
       "id": "components_readonlygrid_test_matches",
-      "community": 16,
+      "community": 371,
       "norm_label": "matches()"
     },
     {
@@ -9702,7 +9702,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.test.tsx",
       "source_location": "L22",
       "id": "components_readonlygrid_test_action",
-      "community": 16,
+      "community": 371,
       "norm_label": "action"
     },
     {
@@ -9711,7 +9711,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.test.tsx",
       "source_location": "L23",
       "id": "components_readonlygrid_test_rows",
-      "community": 16,
+      "community": 371,
       "norm_label": "rows"
     },
     {
@@ -9720,7 +9720,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.test.tsx",
       "source_location": "L27",
       "id": "components_readonlygrid_test_columns",
-      "community": 16,
+      "community": 371,
       "norm_label": "columns"
     },
     {
@@ -9729,7 +9729,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.test.tsx",
       "source_location": "L49",
       "id": "components_readonlygrid_test_cards",
-      "community": 16,
+      "community": 371,
       "norm_label": "cards"
     },
     {
@@ -9738,7 +9738,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.test.tsx",
       "source_location": "L51",
       "id": "components_readonlygrid_test_records",
-      "community": 16,
+      "community": 371,
       "norm_label": "records"
     },
     {
@@ -9747,7 +9747,7 @@
       "source_file": "frontend/src/components/ReadOnlyGrid.test.tsx",
       "source_location": "L65",
       "id": "components_readonlygrid_test_grid",
-      "community": 16,
+      "community": 371,
       "norm_label": "grid"
     },
     {
@@ -9756,7 +9756,7 @@
       "source_file": "frontend/src/components/Ui.tsx",
       "source_location": "L1",
       "id": "frontend_src_components_ui_tsx",
-      "community": 6,
+      "community": 63,
       "norm_label": "ui.tsx"
     },
     {
@@ -9765,7 +9765,7 @@
       "source_file": "frontend/src/components/Ui.tsx",
       "source_location": "L20",
       "id": "components_ui_button",
-      "community": 6,
+      "community": 63,
       "norm_label": "button()"
     },
     {
@@ -9774,7 +9774,7 @@
       "source_file": "frontend/src/components/Ui.tsx",
       "source_location": "L27",
       "id": "components_ui_panel",
-      "community": 6,
+      "community": 63,
       "norm_label": "panel()"
     },
     {
@@ -9783,7 +9783,7 @@
       "source_file": "frontend/src/components/Ui.tsx",
       "source_location": "L38",
       "id": "components_ui_form",
-      "community": 4,
+      "community": 63,
       "norm_label": "form()"
     },
     {
@@ -9792,7 +9792,7 @@
       "source_file": "frontend/src/components/Ui.tsx",
       "source_location": "L55",
       "id": "components_ui_field",
-      "community": 11,
+      "community": 63,
       "norm_label": "field()"
     },
     {
@@ -9810,7 +9810,7 @@
       "source_file": "frontend/src/components/Ui.tsx",
       "source_location": "L119",
       "id": "components_ui_select",
-      "community": 4,
+      "community": 63,
       "norm_label": "select()"
     },
     {
@@ -9846,7 +9846,7 @@
       "source_file": "frontend/src/api/exercises.ts",
       "source_location": "L11",
       "id": "api_exercises_exercise",
-      "community": 63,
+      "community": 11,
       "norm_label": "exercise"
     },
     {
@@ -10008,7 +10008,7 @@
       "source_file": "frontend/src/api/exercises.test.ts",
       "source_location": "L1",
       "id": "frontend_src_api_exercises_test_ts",
-      "community": 371,
+      "community": 122,
       "norm_label": "exercises.test.ts"
     },
     {
@@ -10017,7 +10017,7 @@
       "source_file": "frontend/src/api/exercises.test.ts",
       "source_location": "L5",
       "id": "api_exercises_test_exercise",
-      "community": 371,
+      "community": 122,
       "norm_label": "exercise"
     },
     {
@@ -10026,7 +10026,7 @@
       "source_file": "frontend/src/api/exercises.test.ts",
       "source_location": "L27",
       "id": "api_exercises_test_upload",
-      "community": 371,
+      "community": 122,
       "norm_label": "upload"
     },
     {
@@ -10035,7 +10035,7 @@
       "source_file": "frontend/src/api/exercises.test.ts",
       "source_location": "L53",
       "id": "api_exercises_test_upload_constructor",
-      "community": 371,
+      "community": 122,
       "norm_label": ".constructor()"
     },
     {
@@ -10044,7 +10044,7 @@
       "source_file": "frontend/src/api/exercises.test.ts",
       "source_location": "L74",
       "id": "api_exercises_test_progress",
-      "community": 371,
+      "community": 122,
       "norm_label": "progress"
     },
     {
@@ -10053,7 +10053,7 @@
       "source_file": "frontend/src/api/exercises.test.ts",
       "source_location": "L75",
       "id": "api_exercises_test_data",
-      "community": 371,
+      "community": 122,
       "norm_label": "data"
     },
     {
@@ -10062,7 +10062,7 @@
       "source_file": "frontend/src/api/exercises.test.ts",
       "source_location": "L76",
       "id": "api_exercises_test_pending",
-      "community": 371,
+      "community": 122,
       "norm_label": "pending"
     },
     {
@@ -10071,7 +10071,7 @@
       "source_file": "frontend/src/api/exercises.test.ts",
       "source_location": "L91",
       "id": "api_exercises_test_expired",
-      "community": 371,
+      "community": 122,
       "norm_label": "expired"
     },
     {
@@ -10080,7 +10080,7 @@
       "source_file": "frontend/src/api/exercises.test.ts",
       "source_location": "L106",
       "id": "api_exercises_test_controller",
-      "community": 371,
+      "community": 122,
       "norm_label": "controller"
     },
     {
@@ -10089,7 +10089,7 @@
       "source_file": "frontend/src/api/exercises.test.ts",
       "source_location": "L116",
       "id": "api_exercises_test_failed",
-      "community": 371,
+      "community": 122,
       "norm_label": "failed"
     },
     {
@@ -10098,7 +10098,7 @@
       "source_file": "frontend/src/api/exercises.test.ts",
       "source_location": "L120",
       "id": "api_exercises_test_timedout",
-      "community": 371,
+      "community": 122,
       "norm_label": "timedout"
     },
     {
@@ -10179,7 +10179,7 @@
       "source_file": "frontend/src/api/omr.ts",
       "source_location": "L75",
       "id": "api_omr_fetchscore",
-      "community": 5,
+      "community": 63,
       "norm_label": "fetchscore()"
     },
     {
@@ -10305,7 +10305,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L24",
       "id": "api_telegram_positive",
-      "community": 63,
+      "community": 16,
       "norm_label": "positive()"
     },
     {
@@ -10314,7 +10314,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L27",
       "id": "api_telegram_date",
-      "community": 63,
+      "community": 16,
       "norm_label": "date()"
     },
     {
@@ -10323,7 +10323,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L30",
       "id": "api_telegram_importstatus",
-      "community": 63,
+      "community": 16,
       "norm_label": "importstatus()"
     },
     {
@@ -10332,7 +10332,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L39",
       "id": "api_telegram_parseimport",
-      "community": 63,
+      "community": 16,
       "norm_label": "parseimport()"
     },
     {
@@ -10341,7 +10341,7 @@
       "source_file": "backend/app/api/telegram.py",
       "source_location": "L59",
       "id": "api_telegram_status",
-      "community": 63,
+      "community": 16,
       "norm_label": "status()"
     },
     {
@@ -10350,7 +10350,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L77",
       "id": "api_telegram_createcode",
-      "community": 63,
+      "community": 16,
       "norm_label": "createcode()"
     },
     {
@@ -10368,7 +10368,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L91",
       "id": "api_telegram_listimports",
-      "community": 63,
+      "community": 16,
       "norm_label": "listimports()"
     },
     {
@@ -10377,7 +10377,7 @@
       "source_file": "frontend/src/api/telegram.ts",
       "source_location": "L112",
       "id": "api_telegram_applyimport",
-      "community": 184,
+      "community": 16,
       "norm_label": "applyimport()"
     },
     {
@@ -10458,7 +10458,7 @@
       "source_file": "frontend/src/api/telegram.test.ts",
       "source_location": "L1",
       "id": "frontend_src_api_telegram_test_ts",
-      "community": 63,
+      "community": 16,
       "norm_label": "telegram.test.ts"
     },
     {
@@ -10467,7 +10467,7 @@
       "source_file": "frontend/src/api/telegram.test.ts",
       "source_location": "L6",
       "id": "api_telegram_test_fetch",
-      "community": 63,
+      "community": 16,
       "norm_label": "fetch"
     },
     {
@@ -10593,7 +10593,7 @@
       "source_file": "frontend/src/api/auth.ts",
       "source_location": "L10",
       "id": "api_auth_role",
-      "community": 28,
+      "community": 371,
       "norm_label": "role"
     },
     {
@@ -10602,7 +10602,7 @@
       "source_file": "frontend/src/api/auth.ts",
       "source_location": "L11",
       "id": "api_auth_notenaming",
-      "community": 5,
+      "community": 263,
       "norm_label": "notenaming"
     },
     {
@@ -10665,7 +10665,7 @@
       "source_file": "frontend/src/api/auth.ts",
       "source_location": "L43",
       "id": "api_auth_record",
-      "community": 63,
+      "community": 16,
       "norm_label": "record()"
     },
     {
@@ -24930,7 +24930,7 @@
       "source_file": "deploy/tests/test_rollout.py",
       "source_location": "L75",
       "id": "tests_test_rollout_fakerollout_compose",
-      "community": 26,
+      "community": 53,
       "norm_label": ".compose()"
     },
     {
@@ -25047,7 +25047,7 @@
       "source_file": "deploy/tests/test_rollout.py",
       "source_location": "L281",
       "id": "tests_test_rollout_test_invalid_disk_configuration_fails_closed",
-      "community": 26,
+      "community": 319,
       "norm_label": "test_invalid_disk_configuration_fails_closed()"
     },
     {
@@ -25722,7 +25722,7 @@
       "source_file": "backend/app/settings.py",
       "source_location": "L15",
       "id": "app_settings_settings",
-      "community": 23,
+      "community": 308,
       "norm_label": "settings"
     },
     {
@@ -25747,7 +25747,7 @@
       "label": "validate_game_timezone()",
       "file_type": "code",
       "source_file": "backend/app/settings.py",
-      "source_location": "L289",
+      "source_location": "L286",
       "id": "app_settings_validate_game_timezone",
       "community": 161,
       "norm_label": "validate_game_timezone()"
@@ -25756,7 +25756,7 @@
       "label": "validate_origins()",
       "file_type": "code",
       "source_file": "backend/app/settings.py",
-      "source_location": "L298",
+      "source_location": "L295",
       "id": "app_settings_validate_origins",
       "community": 161,
       "norm_label": "validate_origins()"
@@ -25765,7 +25765,7 @@
       "label": "validate_auth_transport()",
       "file_type": "code",
       "source_file": "backend/app/settings.py",
-      "source_location": "L320",
+      "source_location": "L317",
       "id": "app_settings_validate_auth_transport",
       "community": 161,
       "norm_label": "validate_auth_transport()"
@@ -25774,7 +25774,7 @@
       "label": "validate_emergency()",
       "file_type": "code",
       "source_file": "backend/app/settings.py",
-      "source_location": "L336",
+      "source_location": "L333",
       "id": "app_settings_validate_emergency",
       "community": 161,
       "norm_label": "validate_emergency()"
@@ -25783,7 +25783,7 @@
       "label": "validate_omr_timeouts()",
       "file_type": "code",
       "source_file": "backend/app/settings.py",
-      "source_location": "L349",
+      "source_location": "L346",
       "id": "app_settings_validate_omr_timeouts",
       "community": 161,
       "norm_label": "validate_omr_timeouts()"
@@ -25792,7 +25792,7 @@
       "label": "require_database_password()",
       "file_type": "code",
       "source_file": "backend/app/settings.py",
-      "source_location": "L360",
+      "source_location": "L357",
       "id": "app_settings_require_database_password",
       "community": 161,
       "norm_label": "require_database_password()"
@@ -25801,7 +25801,7 @@
       "label": "database_url()",
       "file_type": "code",
       "source_file": "backend/app/settings.py",
-      "source_location": "L366",
+      "source_location": "L363",
       "id": "app_settings_database_url",
       "community": 161,
       "norm_label": "database_url()"
@@ -25830,7 +25830,7 @@
       "source_file": "backend/app/main.py",
       "source_location": "L43",
       "id": "app_main_service_error",
-      "community": 77,
+      "community": 184,
       "norm_label": "service_error()"
     },
     {
@@ -26046,7 +26046,7 @@
       "source_file": "backend/app/game/models.py",
       "source_location": "L64",
       "id": "game_models_season",
-      "community": 10,
+      "community": 51,
       "norm_label": "season"
     },
     {
@@ -26055,7 +26055,7 @@
       "source_file": "backend/app/game/models.py",
       "source_location": "L89",
       "id": "game_models_round",
-      "community": 10,
+      "community": 51,
       "norm_label": "round"
     },
     {
@@ -26064,7 +26064,7 @@
       "source_file": "backend/app/game/models.py",
       "source_location": "L144",
       "id": "game_models_taskattempt",
-      "community": 10,
+      "community": 51,
       "norm_label": "taskattempt"
     },
     {
@@ -26118,7 +26118,7 @@
       "source_file": "backend/app/game/api/rounds.py",
       "source_location": "L1",
       "id": "backend_app_game_api_rounds_py",
-      "community": 10,
+      "community": 51,
       "norm_label": "rounds.py"
     },
     {
@@ -26127,7 +26127,7 @@
       "source_file": "backend/app/game/api/rounds.py",
       "source_location": "L15",
       "id": "api_rounds_createroundbody",
-      "community": 10,
+      "community": 51,
       "norm_label": "createroundbody"
     },
     {
@@ -26145,7 +26145,7 @@
       "source_file": "backend/app/game/api/rounds.py",
       "source_location": "L23",
       "id": "api_rounds_noteanswer",
-      "community": 10,
+      "community": 51,
       "norm_label": "noteanswer"
     },
     {
@@ -26154,7 +26154,7 @@
       "source_file": "backend/app/game/api/rounds.py",
       "source_location": "L30",
       "id": "api_rounds_submittaskbody",
-      "community": 10,
+      "community": 51,
       "norm_label": "submittaskbody"
     },
     {
@@ -26163,7 +26163,7 @@
       "source_file": "backend/app/game/api/rounds.py",
       "source_location": "L38",
       "id": "api_rounds_require_answers",
-      "community": 10,
+      "community": 51,
       "norm_label": "require_answers()"
     },
     {
@@ -26181,7 +26181,7 @@
       "source_file": "backend/app/game/api/rounds.py",
       "source_location": "L105",
       "id": "api_rounds_submit_task",
-      "community": 10,
+      "community": 51,
       "norm_label": "submit_task()"
     },
     {
@@ -26190,7 +26190,7 @@
       "source_file": "backend/app/game/api/seasons.py",
       "source_location": "L1",
       "id": "backend_app_game_api_seasons_py",
-      "community": 370,
+      "community": 197,
       "norm_label": "seasons.py"
     },
     {
@@ -26199,7 +26199,7 @@
       "source_file": "backend/app/game/api/seasons.py",
       "source_location": "L13",
       "id": "api_seasons_resetbody",
-      "community": 370,
+      "community": 51,
       "norm_label": "resetbody"
     },
     {
@@ -26208,7 +26208,7 @@
       "source_file": "backend/app/game/api/seasons.py",
       "source_location": "L17",
       "id": "api_seasons_season_out",
-      "community": 370,
+      "community": 197,
       "norm_label": "_season_out()"
     },
     {
@@ -26217,7 +26217,7 @@
       "source_file": "backend/app/game/api/seasons.py",
       "source_location": "L28",
       "id": "api_seasons_list_seasons",
-      "community": 370,
+      "community": 197,
       "norm_label": "list_seasons()"
     },
     {
@@ -26226,7 +26226,7 @@
       "source_file": "backend/app/game/api/seasons.py",
       "source_location": "L48",
       "id": "api_seasons_reset_season",
-      "community": 370,
+      "community": 197,
       "norm_label": "reset_season()"
     },
     {
@@ -26235,7 +26235,7 @@
       "source_file": "backend/app/game/api/seasons.py",
       "source_location": "L67",
       "id": "api_seasons_reset_all_seasons",
-      "community": 370,
+      "community": 197,
       "norm_label": "reset_all_seasons()"
     },
     {
@@ -26379,7 +26379,7 @@
       "source_file": "backend/app/game/api/players.py",
       "source_location": "L141",
       "id": "api_players_get_player",
-      "community": 51,
+      "community": 197,
       "norm_label": "get_player()"
     },
     {
@@ -26388,7 +26388,7 @@
       "source_file": "backend/app/game/api/players.py",
       "source_location": "L176",
       "id": "api_players_player_achievements",
-      "community": 197,
+      "community": 51,
       "norm_label": "player_achievements()"
     },
     {
@@ -26397,7 +26397,7 @@
       "source_file": "backend/app/game/api/players.py",
       "source_location": "L202",
       "id": "api_players_patch_player",
-      "community": 51,
+      "community": 83,
       "norm_label": "patch_player()"
     },
     {
@@ -26433,7 +26433,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L59",
       "id": "api_avatars_generationout",
-      "community": 122,
+      "community": 367,
       "norm_label": "generationout"
     },
     {
@@ -26460,7 +26460,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L72",
       "id": "api_avatars_generate_avatar",
-      "community": 122,
+      "community": 367,
       "norm_label": "generate_avatar()"
     },
     {
@@ -26514,7 +26514,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L124",
       "id": "api_avatars_avatarquotaout",
-      "community": 122,
+      "community": 367,
       "norm_label": "avatarquotaout"
     },
     {
@@ -26622,7 +26622,7 @@
       "source_file": "backend/app/game/api/avatars.py",
       "source_location": "L347",
       "id": "api_avatars_quota",
-      "community": 122,
+      "community": 367,
       "norm_label": "quota()"
     },
     {
@@ -26694,7 +26694,7 @@
       "source_file": "backend/app/game/services/rounds.py",
       "source_location": "L117",
       "id": "services_rounds_create_round",
-      "community": 10,
+      "community": 51,
       "norm_label": "create_round()"
     },
     {
@@ -26892,7 +26892,7 @@
       "source_file": "backend/app/game/services/achievements.py",
       "source_location": "L1",
       "id": "backend_app_game_services_achievements_py",
-      "community": 10,
+      "community": 51,
       "norm_label": "achievements.py"
     },
     {
@@ -26901,7 +26901,7 @@
       "source_file": "backend/app/game/services/achievements.py",
       "source_location": "L34",
       "id": "services_achievements_evaluate_achievements",
-      "community": 10,
+      "community": 51,
       "norm_label": "evaluate_achievements()"
     },
     {
@@ -26919,7 +26919,7 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L17",
       "id": "services_avatars_quota_day",
-      "community": 122,
+      "community": 367,
       "norm_label": "_quota_day()"
     },
     {
@@ -26928,7 +26928,7 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L27",
       "id": "services_avatars_check_daily_quota",
-      "community": 122,
+      "community": 308,
       "norm_label": "check_daily_quota()"
     },
     {
@@ -26937,7 +26937,7 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L47",
       "id": "services_avatars_quota_usage",
-      "community": 122,
+      "community": 367,
       "norm_label": "quota_usage()"
     },
     {
@@ -26991,7 +26991,7 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L182",
       "id": "services_avatars_validate_avatar_assets",
-      "community": 367,
+      "community": 83,
       "norm_label": "validate_avatar_assets()"
     },
     {
@@ -27036,7 +27036,7 @@
       "source_file": "backend/app/game/services/avatars.py",
       "source_location": "L277",
       "id": "services_avatars_review_avatar",
-      "community": 367,
+      "community": 124,
       "norm_label": "review_avatar()"
     },
     {
@@ -27081,7 +27081,7 @@
       "source_file": "backend/app/api/auth.py",
       "source_location": "L26",
       "id": "api_auth_input",
-      "community": 23,
+      "community": 251,
       "norm_label": "input"
     },
     {
@@ -27522,7 +27522,7 @@
       "source_file": "backend/app/api/telegram.py",
       "source_location": "L124",
       "id": "api_telegram_audio",
-      "community": 77,
+      "community": 160,
       "norm_label": "audio()"
     },
     {
@@ -27630,7 +27630,7 @@
       "source_file": "backend/app/api/listening.py",
       "source_location": "L26",
       "id": "api_listening_require_student",
-      "community": 77,
+      "community": 251,
       "norm_label": "require_student()"
     },
     {
@@ -27927,7 +27927,7 @@
       "source_file": "backend/app/api/exercises.py",
       "source_location": "L164",
       "id": "api_exercises_delete",
-      "community": 184,
+      "community": 134,
       "norm_label": "delete()"
     },
     {
@@ -27936,7 +27936,7 @@
       "source_file": "backend/app/api/exercises.py",
       "source_location": "L170",
       "id": "api_exercises_protected_file",
-      "community": 77,
+      "community": 82,
       "norm_label": "protected_file()"
     },
     {
@@ -27972,7 +27972,7 @@
       "source_file": "backend/app/services/auth.py",
       "source_location": "L20",
       "id": "services_auth_serviceerror",
-      "community": 77,
+      "community": 184,
       "norm_label": "serviceerror"
     },
     {
@@ -27990,7 +27990,7 @@
       "source_file": "backend/app/services/auth.py",
       "source_location": "L21",
       "id": "services_auth_serviceerror_init",
-      "community": 77,
+      "community": 184,
       "norm_label": ".__init__()"
     },
     {
@@ -28098,7 +28098,7 @@
       "source_file": "backend/app/services/auth.py",
       "source_location": "L218",
       "id": "services_auth_logout",
-      "community": 77,
+      "community": 134,
       "norm_label": "logout()"
     },
     {
@@ -28224,7 +28224,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L37",
       "id": "services_telegram_api_telegramapi_call",
-      "community": 77,
+      "community": 135,
       "norm_label": ".call()"
     },
     {
@@ -28233,7 +28233,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L60",
       "id": "services_telegram_api_telegramapi_verify",
-      "community": 77,
+      "community": 135,
       "norm_label": ".verify()"
     },
     {
@@ -28242,7 +28242,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L72",
       "id": "services_telegram_api_telegramapi_updates",
-      "community": 77,
+      "community": 135,
       "norm_label": ".updates()"
     },
     {
@@ -28260,7 +28260,7 @@
       "source_file": "backend/app/services/telegram_api.py",
       "source_location": "L89",
       "id": "services_telegram_api_telegramapi_download",
-      "community": 77,
+      "community": 135,
       "norm_label": ".download()"
     },
     {
@@ -28269,7 +28269,7 @@
       "source_file": "backend/app/services/media.py",
       "source_location": "L1",
       "id": "backend_app_services_media_py",
-      "community": 35,
+      "community": 184,
       "norm_label": "media.py"
     },
     {
@@ -28278,7 +28278,7 @@
       "source_file": "backend/app/services/media.py",
       "source_location": "L36",
       "id": "services_media_run_media",
-      "community": 35,
+      "community": 184,
       "norm_label": "run_media()"
     },
     {
@@ -28287,7 +28287,7 @@
       "source_file": "backend/app/services/media.py",
       "source_location": "L61",
       "id": "services_media_duration",
-      "community": 35,
+      "community": 184,
       "norm_label": "duration()"
     },
     {
@@ -28296,7 +28296,7 @@
       "source_file": "backend/app/services/media.py",
       "source_location": "L93",
       "id": "services_media_prepare_media",
-      "community": 35,
+      "community": 184,
       "norm_label": "prepare_media()"
     },
     {
@@ -28305,7 +28305,7 @@
       "source_file": "backend/app/services/telegram.py",
       "source_location": "L1",
       "id": "backend_app_services_telegram_py",
-      "community": 184,
+      "community": 134,
       "norm_label": "telegram.py"
     },
     {
@@ -28314,7 +28314,7 @@
       "source_file": "backend/app/services/telegram.py",
       "source_location": "L29",
       "id": "services_telegram_sender",
-      "community": 105,
+      "community": 134,
       "norm_label": "sender"
     },
     {
@@ -28323,7 +28323,7 @@
       "source_file": "backend/app/services/telegram.py",
       "source_location": "L34",
       "id": "services_telegram_chat",
-      "community": 105,
+      "community": 134,
       "norm_label": "chat"
     },
     {
@@ -28332,7 +28332,7 @@
       "source_file": "backend/app/services/telegram.py",
       "source_location": "L39",
       "id": "services_telegram_attachment",
-      "community": 105,
+      "community": 134,
       "norm_label": "attachment"
     },
     {
@@ -28341,7 +28341,7 @@
       "source_file": "backend/app/services/telegram.py",
       "source_location": "L46",
       "id": "services_telegram_message",
-      "community": 105,
+      "community": 134,
       "norm_label": "message"
     },
     {
@@ -28350,7 +28350,7 @@
       "source_file": "backend/app/services/telegram.py",
       "source_location": "L57",
       "id": "services_telegram_update",
-      "community": 105,
+      "community": 134,
       "norm_label": "update"
     },
     {
@@ -28368,7 +28368,7 @@
       "source_file": "backend/app/services/telegram.py",
       "source_location": "L79",
       "id": "services_telegram_linking_lock",
-      "community": 184,
+      "community": 134,
       "norm_label": "linking_lock()"
     },
     {
@@ -28377,7 +28377,7 @@
       "source_file": "backend/app/services/telegram.py",
       "source_location": "L83",
       "id": "services_telegram_create_code",
-      "community": 184,
+      "community": 134,
       "norm_label": "create_code()"
     },
     {
@@ -28386,7 +28386,7 @@
       "source_file": "backend/app/services/telegram.py",
       "source_location": "L102",
       "id": "services_telegram_unlink",
-      "community": 184,
+      "community": 134,
       "norm_label": "unlink()"
     },
     {
@@ -28395,7 +28395,7 @@
       "source_file": "backend/app/services/telegram.py",
       "source_location": "L109",
       "id": "services_telegram_revoke_link",
-      "community": 184,
+      "community": 134,
       "norm_label": "revoke_link()"
     },
     {
@@ -28404,7 +28404,7 @@
       "source_file": "backend/app/services/telegram.py",
       "source_location": "L114",
       "id": "services_telegram_receive",
-      "community": 184,
+      "community": 134,
       "norm_label": "receive()"
     },
     {
@@ -28431,7 +28431,7 @@
       "source_file": "backend/app/services/telegram.py",
       "source_location": "L312",
       "id": "services_telegram_list_imports",
-      "community": 184,
+      "community": 134,
       "norm_label": "list_imports()"
     },
     {
@@ -28647,7 +28647,7 @@
       "source_file": "backend/app/services/listening.py",
       "source_location": "L155",
       "id": "services_listening_journal",
-      "community": 77,
+      "community": 184,
       "norm_label": "journal()"
     },
     {
@@ -28953,7 +28953,7 @@
       "source_file": "backend/tests/test_omr_engine.py",
       "source_location": "L56",
       "id": "tests_test_omr_engine_test_authored_score_fixtures_are_supported",
-      "community": 52,
+      "community": 198,
       "norm_label": "test_authored_score_fixtures_are_supported()"
     },
     {
@@ -29007,7 +29007,7 @@
       "source_file": "backend/tests/test_database.py",
       "source_location": "L42",
       "id": "tests_test_database_probebase",
-      "community": 51,
+      "community": 308,
       "norm_label": "probebase"
     },
     {
@@ -29412,7 +29412,7 @@
       "source_file": "backend/tests/test_auth.py",
       "source_location": "L57",
       "id": "tests_test_auth_database",
-      "community": 91,
+      "community": 134,
       "norm_label": "database()"
     },
     {
@@ -29835,7 +29835,7 @@
       "source_file": "backend/tests/test_exercises.py",
       "source_location": "L294",
       "id": "tests_test_exercises_test_duration_and_pixel_limits",
-      "community": 35,
+      "community": 184,
       "norm_label": "test_duration_and_pixel_limits()"
     },
     {
@@ -29952,7 +29952,7 @@
       "source_file": "backend/tests/test_prize_art.py",
       "source_location": "L1",
       "id": "backend_tests_test_prize_art_py",
-      "community": 372,
+      "community": 66,
       "norm_label": "test_prize_art.py"
     },
     {
@@ -29961,7 +29961,7 @@
       "source_file": "backend/tests/test_prize_art.py",
       "source_location": "L16",
       "id": "tests_test_prize_art_assert_same_pixels",
-      "community": 372,
+      "community": 66,
       "norm_label": "assert_same_pixels()"
     },
     {
@@ -29970,7 +29970,7 @@
       "source_file": "backend/tests/test_prize_art.py",
       "source_location": "L25",
       "id": "tests_test_prize_art_test_same_pixels_allow_different_png_compression",
-      "community": 372,
+      "community": 66,
       "norm_label": "test_same_pixels_allow_different_png_compression()"
     },
     {
@@ -29979,7 +29979,7 @@
       "source_file": "backend/tests/test_prize_art.py",
       "source_location": "L34",
       "id": "tests_test_prize_art_test_different_pixels_are_rejected",
-      "community": 372,
+      "community": 66,
       "norm_label": "test_different_pixels_are_rejected()"
     },
     {
@@ -29988,7 +29988,7 @@
       "source_file": "backend/tests/test_prize_art.py",
       "source_location": "L44",
       "id": "tests_test_prize_art_test_all_twenty_prizes_have_distinct_transparent_artwork",
-      "community": 164,
+      "community": 66,
       "norm_label": "test_all_twenty_prizes_have_distinct_transparent_artwork()"
     },
     {
@@ -29997,7 +29997,7 @@
       "source_file": "backend/tests/test_prize_art.py",
       "source_location": "L70",
       "id": "tests_test_prize_art_test_prize_extraction_reproduces_assets_without_changing_the_source",
-      "community": 372,
+      "community": 66,
       "norm_label": "test_prize_extraction_reproduces_assets_without_changing_the_source()"
     },
     {
@@ -30006,7 +30006,7 @@
       "source_file": "backend/tests/test_prize_art.py",
       "source_location": "L91",
       "id": "tests_test_prize_art_test_invalid_sheet_does_not_write_partial_assets",
-      "community": 372,
+      "community": 66,
       "norm_label": "test_invalid_sheet_does_not_write_partial_assets()"
     },
     {
@@ -30087,7 +30087,7 @@
       "source_file": "backend/tests/test_health.py",
       "source_location": "L82",
       "id": "tests_test_health_test_default_dotenv_path_is_the_repository_root",
-      "community": 91,
+      "community": 78,
       "norm_label": "test_default_dotenv_path_is_the_repository_root()"
     },
     {
@@ -30177,7 +30177,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L1",
       "id": "backend_tests_test_listening_py",
-      "community": 18,
+      "community": 35,
       "norm_label": "test_listening.py"
     },
     {
@@ -30186,7 +30186,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L24",
       "id": "tests_test_listening_audio_exercise",
-      "community": 18,
+      "community": 35,
       "norm_label": "audio_exercise()"
     },
     {
@@ -30195,7 +30195,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L34",
       "id": "tests_test_listening_event",
-      "community": 18,
+      "community": 35,
       "norm_label": "event()"
     },
     {
@@ -30204,7 +30204,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L53",
       "id": "tests_test_listening_test_closed_tab_threshold_and_idempotent_terminal_events",
-      "community": 18,
+      "community": 35,
       "norm_label": "test_closed_tab_threshold_and_idempotent_terminal_events()"
     },
     {
@@ -30213,7 +30213,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L83",
       "id": "tests_test_listening_test_end_before_start_and_ended_override",
-      "community": 18,
+      "community": 35,
       "norm_label": "test_end_before_start_and_ended_override()"
     },
     {
@@ -30222,7 +30222,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L97",
       "id": "tests_test_listening_test_deleted_exercise_and_replaced_audio_preserve_journal",
-      "community": 18,
+      "community": 35,
       "norm_label": "test_deleted_exercise_and_replaced_audio_preserve_journal()"
     },
     {
@@ -30231,7 +30231,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L132",
       "id": "tests_test_listening_test_audio_version_rejects_replacement_without_losing_existing_session",
-      "community": 18,
+      "community": 35,
       "norm_label": "test_audio_version_rejects_replacement_without_losing_existing_session()"
     },
     {
@@ -30240,7 +30240,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L177",
       "id": "tests_test_listening_test_navigation_persistence_random_and_deleted_pointer",
-      "community": 18,
+      "community": 35,
       "norm_label": "test_navigation_persistence_random_and_deleted_pointer()"
     },
     {
@@ -30249,7 +30249,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L233",
       "id": "tests_test_listening_test_journal_permissions_csrf_filters_and_validation",
-      "community": 18,
+      "community": 35,
       "norm_label": "test_journal_permissions_csrf_filters_and_validation()"
     },
     {
@@ -30258,7 +30258,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L271",
       "id": "tests_test_listening_test_concurrent_delivery_creates_one_row_and_preserves_maximum",
-      "community": 18,
+      "community": 35,
       "norm_label": "test_concurrent_delivery_creates_one_row_and_preserves_maximum()"
     },
     {
@@ -30267,7 +30267,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L295",
       "id": "tests_test_listening_test_session_ownership_conflicts_and_image_only",
-      "community": 18,
+      "community": 35,
       "norm_label": "test_session_ownership_conflicts_and_image_only()"
     },
     {
@@ -30276,7 +30276,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L327",
       "id": "tests_test_listening_test_empty_navigation_and_completion_does_not_skip_twice",
-      "community": 18,
+      "community": 35,
       "norm_label": "test_empty_navigation_and_completion_does_not_skip_twice()"
     },
     {
@@ -30285,7 +30285,7 @@
       "source_file": "backend/tests/test_listening.py",
       "source_location": "L358",
       "id": "tests_test_listening_test_completion_recovers_deleted_saved_pointer",
-      "community": 18,
+      "community": 35,
       "norm_label": "test_completion_recovers_deleted_saved_pointer()"
     },
     {
@@ -30339,7 +30339,7 @@
       "source_file": "backend/tests/game/test_achievements.py",
       "source_location": "L1",
       "id": "backend_tests_game_test_achievements_py",
-      "community": 10,
+      "community": 51,
       "norm_label": "test_achievements.py"
     },
     {
@@ -30348,7 +30348,7 @@
       "source_file": "backend/tests/game/test_achievements.py",
       "source_location": "L16",
       "id": "game_test_achievements_test_achievement_collection_requires_authentication_and_ownership",
-      "community": 10,
+      "community": 51,
       "norm_label": "test_achievement_collection_requires_authentication_and_ownership()"
     },
     {
@@ -30357,7 +30357,7 @@
       "source_file": "backend/tests/game/test_achievements.py",
       "source_location": "L64",
       "id": "game_test_achievements_test_achievement_catalog_has_twenty_distinct_rewards",
-      "community": 10,
+      "community": 51,
       "norm_label": "test_achievement_catalog_has_twenty_distinct_rewards()"
     },
     {
@@ -30366,7 +30366,7 @@
       "source_file": "backend/tests/game/test_achievements.py",
       "source_location": "L68",
       "id": "game_test_achievements_test_rewards_count_positions_days_and_streaks_and_survive_reset",
-      "community": 10,
+      "community": 51,
       "norm_label": "test_rewards_count_positions_days_and_streaks_and_survive_reset()"
     },
     {
@@ -30375,7 +30375,7 @@
       "source_file": "backend/tests/game/test_achievements.py",
       "source_location": "L149",
       "id": "game_test_achievements_test_correct_positions_count_without_partial_task_xp_and_ignore_active_rounds",
-      "community": 10,
+      "community": 51,
       "norm_label": "test_correct_positions_count_without_partial_task_xp_and_ignore_active_rounds()"
     },
     {
@@ -31248,7 +31248,7 @@
       "source_file": "backend/tests/game/test_avatar_approval.py",
       "source_location": "L327",
       "id": "game_test_avatar_approval_test_pending_job_hides_paths_even_after_generation",
-      "community": 124,
+      "community": 367,
       "norm_label": "test_pending_job_hides_paths_even_after_generation()"
     },
     {
@@ -31327,7 +31327,7 @@
       "label": "test_provider_error_process_releases_quota()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L595",
+      "source_location": "L592",
       "id": "game_test_avatar_approval_test_provider_error_process_releases_quota",
       "community": 124,
       "norm_label": "test_provider_error_process_releases_quota()"
@@ -31336,7 +31336,7 @@
       "label": "test_saved_sheet_recovery_requires_verified_image_moderation()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L617",
+      "source_location": "L614",
       "id": "game_test_avatar_approval_test_saved_sheet_recovery_requires_verified_image_moderation",
       "community": 124,
       "norm_label": "test_saved_sheet_recovery_requires_verified_image_moderation()"
@@ -31345,7 +31345,7 @@
       "label": "test_incomplete_or_flagged_moderation_proof_is_not_trusted()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L690",
+      "source_location": "L687",
       "id": "game_test_avatar_approval_test_incomplete_or_flagged_moderation_proof_is_not_trusted",
       "community": 124,
       "norm_label": "test_incomplete_or_flagged_moderation_proof_is_not_trusted()"
@@ -31354,7 +31354,7 @@
       "label": "test_timezone_reset_handles_daylight_saving()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L699",
+      "source_location": "L696",
       "id": "game_test_avatar_approval_test_timezone_reset_handles_daylight_saving",
       "community": 124,
       "norm_label": "test_timezone_reset_handles_daylight_saving()"
@@ -31363,16 +31363,16 @@
       "label": "test_daily_quota_uses_local_calendar_day()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L715",
+      "source_location": "L712",
       "id": "game_test_avatar_approval_test_daily_quota_uses_local_calendar_day",
-      "community": 122,
+      "community": 308,
       "norm_label": "test_daily_quota_uses_local_calendar_day()"
     },
     {
       "label": "test_manager_queue_review_and_student_file_permissions()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_approval.py",
-      "source_location": "L747",
+      "source_location": "L744",
       "id": "game_test_avatar_approval_test_manager_queue_review_and_student_file_permissions",
       "community": 124,
       "norm_label": "test_manager_queue_review_and_student_file_permissions()"
@@ -31471,7 +31471,7 @@
       "label": "no_external_requests()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L26",
+      "source_location": "L23",
       "id": "game_test_avatar_generation_no_external_requests",
       "community": 163,
       "norm_label": "no_external_requests()"
@@ -31480,7 +31480,7 @@
       "label": "sheet_bytes()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L42",
+      "source_location": "L34",
       "id": "game_test_avatar_generation_sheet_bytes",
       "community": 163,
       "norm_label": "sheet_bytes()"
@@ -31489,7 +31489,7 @@
       "label": "irregular_separator_sheet()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L74",
+      "source_location": "L66",
       "id": "game_test_avatar_generation_irregular_separator_sheet",
       "community": 163,
       "norm_label": "irregular_separator_sheet()"
@@ -31498,7 +31498,7 @@
       "label": "avatar_job()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L121",
+      "source_location": "L113",
       "id": "game_test_avatar_generation_avatar_job",
       "community": 124,
       "norm_label": "avatar_job()"
@@ -31507,7 +31507,7 @@
       "label": "test_irregular_separator_lines_define_cells_and_are_removed_from_frames()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L145",
+      "source_location": "L137",
       "id": "game_test_avatar_generation_test_irregular_separator_lines_define_cells_and_are_removed_from_frames",
       "community": 163,
       "norm_label": "test_irregular_separator_lines_define_cells_and_are_removed_from_frames()"
@@ -31516,7 +31516,7 @@
       "label": "test_new_sheet_validation_requires_all_separator_lines()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L164",
+      "source_location": "L156",
       "id": "game_test_avatar_generation_test_new_sheet_validation_requires_all_separator_lines",
       "community": 163,
       "norm_label": "test_new_sheet_validation_requires_all_separator_lines()"
@@ -31525,7 +31525,7 @@
       "label": "test_incomplete_separator_grid_is_rejected()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L173",
+      "source_location": "L165",
       "id": "game_test_avatar_generation_test_incomplete_separator_grid_is_rejected",
       "community": 163,
       "norm_label": "test_incomplete_separator_grid_is_rejected()"
@@ -31534,70 +31534,25 @@
       "label": "test_sheet_prompt_matches_all_growth_stages_and_mood_rows()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L187",
+      "source_location": "L179",
       "id": "game_test_avatar_generation_test_sheet_prompt_matches_all_growth_stages_and_mood_rows",
       "community": 163,
       "norm_label": "test_sheet_prompt_matches_all_growth_stages_and_mood_rows()"
     },
     {
-      "label": "test_mood_edit_mask_targets_only_the_matching_ten_faces()",
+      "label": "test_one_sheet_request_creates_and_persists_all_thirty_frames()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L227",
-      "id": "game_test_avatar_generation_test_mood_edit_mask_targets_only_the_matching_ten_faces",
+      "source_location": "L215",
+      "id": "game_test_avatar_generation_test_one_sheet_request_creates_and_persists_all_thirty_frames",
       "community": 163,
-      "norm_label": "test_mood_edit_mask_targets_only_the_matching_ten_faces()"
-    },
-    {
-      "label": "test_composed_sheet_changes_only_the_two_mood_face_regions()",
-      "file_type": "code",
-      "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L259",
-      "id": "game_test_avatar_generation_test_composed_sheet_changes_only_the_two_mood_face_regions",
-      "community": 163,
-      "norm_label": "test_composed_sheet_changes_only_the_two_mood_face_regions()"
-    },
-    {
-      "label": "test_composed_mood_edits_do_not_add_pixels_outside_the_original_artwork()",
-      "file_type": "code",
-      "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L293",
-      "id": "game_test_avatar_generation_test_composed_mood_edits_do_not_add_pixels_outside_the_original_artwork",
-      "community": 163,
-      "norm_label": "test_composed_mood_edits_do_not_add_pixels_outside_the_original_artwork()"
-    },
-    {
-      "label": "test_mood_edits_use_the_masked_image_edit_endpoint()",
-      "file_type": "code",
-      "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L323",
-      "id": "game_test_avatar_generation_test_mood_edits_use_the_masked_image_edit_endpoint",
-      "community": 163,
-      "norm_label": "test_mood_edits_use_the_masked_image_edit_endpoint()"
-    },
-    {
-      "label": "test_happy_and_sad_prompts_define_visibly_opposite_expressions()",
-      "file_type": "code",
-      "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L365",
-      "id": "game_test_avatar_generation_test_happy_and_sad_prompts_define_visibly_opposite_expressions",
-      "community": 163,
-      "norm_label": "test_happy_and_sad_prompts_define_visibly_opposite_expressions()"
-    },
-    {
-      "label": "test_one_sheet_and_two_mood_edits_create_and_persist_all_thirty_frames()",
-      "file_type": "code",
-      "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L375",
-      "id": "game_test_avatar_generation_test_one_sheet_and_two_mood_edits_create_and_persist_all_thirty_frames",
-      "community": 163,
-      "norm_label": "test_one_sheet_and_two_mood_edits_create_and_persist_all_thirty_frames()"
+      "norm_label": "test_one_sheet_request_creates_and_persists_all_thirty_frames()"
     },
     {
       "label": "test_restart_reuses_the_saved_sheet_without_another_paid_request()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L428",
+      "source_location": "L261",
       "id": "game_test_avatar_generation_test_restart_reuses_the_saved_sheet_without_another_paid_request",
       "community": 163,
       "norm_label": "test_restart_reuses_the_saved_sheet_without_another_paid_request()"
@@ -31606,7 +31561,7 @@
       "label": "test_restart_enforces_separator_lines_for_marked_new_sheets()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L459",
+      "source_location": "L292",
       "id": "game_test_avatar_generation_test_restart_enforces_separator_lines_for_marked_new_sheets",
       "community": 163,
       "norm_label": "test_restart_enforces_separator_lines_for_marked_new_sheets()"
@@ -31615,7 +31570,7 @@
       "label": "test_incomplete_sheet_fails_explicitly_and_keeps_the_original()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L487",
+      "source_location": "L320",
       "id": "game_test_avatar_generation_test_incomplete_sheet_fails_explicitly_and_keeps_the_original",
       "community": 163,
       "norm_label": "test_incomplete_sheet_fails_explicitly_and_keeps_the_original()"
@@ -31624,7 +31579,7 @@
       "label": "test_figure_touching_its_cell_edge_does_not_reject_the_whole_sheet()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L507",
+      "source_location": "L340",
       "id": "game_test_avatar_generation_test_figure_touching_its_cell_edge_does_not_reject_the_whole_sheet",
       "community": 163,
       "norm_label": "test_figure_touching_its_cell_edge_does_not_reject_the_whole_sheet()"
@@ -31633,7 +31588,7 @@
       "label": "test_invalid_sheet_is_regenerated_once_and_then_accepted()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L524",
+      "source_location": "L357",
       "id": "game_test_avatar_generation_test_invalid_sheet_is_regenerated_once_and_then_accepted",
       "community": 163,
       "norm_label": "test_invalid_sheet_is_regenerated_once_and_then_accepted()"
@@ -31642,7 +31597,7 @@
       "label": "test_a_sheet_that_stays_invalid_is_requested_only_twice()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L547",
+      "source_location": "L380",
       "id": "game_test_avatar_generation_test_a_sheet_that_stays_invalid_is_requested_only_twice",
       "community": 163,
       "norm_label": "test_a_sheet_that_stays_invalid_is_requested_only_twice()"
@@ -31651,7 +31606,7 @@
       "label": "portrait_bytes()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L569",
+      "source_location": "L402",
       "id": "game_test_avatar_generation_portrait_bytes",
       "community": 163,
       "norm_label": "portrait_bytes()"
@@ -31660,7 +31615,7 @@
       "label": "test_portrait_is_a_separate_request_saved_as_a_circular_face_icon()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L576",
+      "source_location": "L409",
       "id": "game_test_avatar_generation_test_portrait_is_a_separate_request_saved_as_a_circular_face_icon",
       "community": 163,
       "norm_label": "test_portrait_is_a_separate_request_saved_as_a_circular_face_icon()"
@@ -31669,7 +31624,7 @@
       "label": "test_a_missing_portrait_never_fails_the_thirty_frame_job()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L606",
+      "source_location": "L439",
       "id": "game_test_avatar_generation_test_a_missing_portrait_never_fails_the_thirty_frame_job",
       "community": 163,
       "norm_label": "test_a_missing_portrait_never_fails_the_thirty_frame_job()"
@@ -31678,7 +31633,7 @@
       "label": "test_saved_portrait_is_not_requested_again_after_a_restart()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L638",
+      "source_location": "L471",
       "id": "game_test_avatar_generation_test_saved_portrait_is_not_requested_again_after_a_restart",
       "community": 163,
       "norm_label": "test_saved_portrait_is_not_requested_again_after_a_restart()"
@@ -31687,7 +31642,7 @@
       "label": "test_active_claim_is_not_processed_twice()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L668",
+      "source_location": "L501",
       "id": "game_test_avatar_generation_test_active_claim_is_not_processed_twice",
       "community": 163,
       "norm_label": "test_active_claim_is_not_processed_twice()"
@@ -31696,34 +31651,25 @@
       "label": "test_interrupted_unsaved_generation_never_repeats_a_billable_request()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L680",
+      "source_location": "L513",
       "id": "game_test_avatar_generation_test_interrupted_unsaved_generation_never_repeats_a_billable_request",
       "community": 163,
       "norm_label": "test_interrupted_unsaved_generation_never_repeats_a_billable_request()"
     },
     {
-      "label": "test_interrupted_mood_edit_is_not_requested_again()",
+      "label": "test_legacy_masked_mood_job_fails_without_repeating_a_paid_request()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L695",
-      "id": "game_test_avatar_generation_test_interrupted_mood_edit_is_not_requested_again",
+      "source_location": "L528",
+      "id": "game_test_avatar_generation_test_legacy_masked_mood_job_fails_without_repeating_a_paid_request",
       "community": 163,
-      "norm_label": "test_interrupted_mood_edit_is_not_requested_again()"
-    },
-    {
-      "label": "test_mood_recovery_reuses_the_saved_happy_edit()",
-      "file_type": "code",
-      "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L727",
-      "id": "game_test_avatar_generation_test_mood_recovery_reuses_the_saved_happy_edit",
-      "community": 163,
-      "norm_label": "test_mood_recovery_reuses_the_saved_happy_edit()"
+      "norm_label": "test_legacy_masked_mood_job_fails_without_repeating_a_paid_request()"
     },
     {
       "label": "test_progress_saved_gallery_and_all_thirty_private_frames_survive_reuse()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L763",
+      "source_location": "L559",
       "id": "game_test_avatar_generation_test_progress_saved_gallery_and_all_thirty_private_frames_survive_reuse",
       "community": 163,
       "norm_label": "test_progress_saved_gallery_and_all_thirty_private_frames_survive_reuse()"
@@ -31732,7 +31678,7 @@
       "label": "test_generation_payload_uses_one_image_not_thirty_requests()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L837",
+      "source_location": "L633",
       "id": "game_test_avatar_generation_test_generation_payload_uses_one_image_not_thirty_requests",
       "community": 163,
       "norm_label": "test_generation_payload_uses_one_image_not_thirty_requests()"
@@ -31741,7 +31687,7 @@
       "label": "test_without_a_key_the_worker_leaves_queued_generation_untouched()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L865",
+      "source_location": "L661",
       "id": "game_test_avatar_generation_test_without_a_key_the_worker_leaves_queued_generation_untouched",
       "community": 163,
       "norm_label": "test_without_a_key_the_worker_leaves_queued_generation_untouched()"
@@ -31750,7 +31696,7 @@
       "label": "test_repeated_requests_reuse_a_pending_job_without_consuming_quota()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L876",
+      "source_location": "L672",
       "id": "game_test_avatar_generation_test_repeated_requests_reuse_a_pending_job_without_consuming_quota",
       "community": 124,
       "norm_label": "test_repeated_requests_reuse_a_pending_job_without_consuming_quota()"
@@ -31759,7 +31705,7 @@
       "label": "test_missing_frame_prevents_selecting_an_incomplete_avatar()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L898",
+      "source_location": "L694",
       "id": "game_test_avatar_generation_test_missing_frame_prevents_selecting_an_incomplete_avatar",
       "community": 163,
       "norm_label": "test_missing_frame_prevents_selecting_an_incomplete_avatar()"
@@ -31768,7 +31714,7 @@
       "label": "test_a_late_provider_reply_cannot_replace_the_new_workers_saved_sheet()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L938",
+      "source_location": "L734",
       "id": "game_test_avatar_generation_test_a_late_provider_reply_cannot_replace_the_new_workers_saved_sheet",
       "community": 163,
       "norm_label": "test_a_late_provider_reply_cannot_replace_the_new_workers_saved_sheet()"
@@ -31777,7 +31723,7 @@
       "label": "test_partial_recovery_reports_existing_files_without_rewriting_them()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L966",
+      "source_location": "L762",
       "id": "game_test_avatar_generation_test_partial_recovery_reports_existing_files_without_rewriting_them",
       "community": 163,
       "norm_label": "test_partial_recovery_reports_existing_files_without_rewriting_them()"
@@ -31786,7 +31732,7 @@
       "label": "test_legacy_white_background_removal_preserves_magenta_and_enclosed_white()",
       "file_type": "code",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L1007",
+      "source_location": "L803",
       "id": "game_test_avatar_generation_test_legacy_white_background_removal_preserves_magenta_and_enclosed_white",
       "community": 163,
       "norm_label": "test_legacy_white_background_removal_preserves_magenta_and_enclosed_white()"
@@ -31797,7 +31743,7 @@
       "source_file": "backend/tests/game/test_avatars.py",
       "source_location": "L1",
       "id": "backend_tests_game_test_avatars_py",
-      "community": 122,
+      "community": 308,
       "norm_label": "test_avatars.py"
     },
     {
@@ -31806,7 +31752,7 @@
       "source_file": "backend/tests/game/test_avatars.py",
       "source_location": "L10",
       "id": "game_test_avatars_test_check_daily_quota_empty",
-      "community": 122,
+      "community": 308,
       "norm_label": "test_check_daily_quota_empty()"
     },
     {
@@ -31815,7 +31761,7 @@
       "source_file": "backend/tests/game/test_avatars.py",
       "source_location": "L29",
       "id": "game_test_avatars_test_check_daily_quota_decrements",
-      "community": 122,
+      "community": 308,
       "norm_label": "test_check_daily_quota_decrements()"
     },
     {
@@ -31824,7 +31770,7 @@
       "source_file": "backend/tests/game/test_avatars.py",
       "source_location": "L51",
       "id": "game_test_avatars_test_non_billable_does_not_count",
-      "community": 122,
+      "community": 308,
       "norm_label": "test_non_billable_does_not_count()"
     },
     {
@@ -37341,7 +37287,7 @@
       "source_file": "prototypes/pwa/src/App.tsx",
       "source_location": "L1",
       "id": "prototypes_pwa_src_app_tsx",
-      "community": 71,
+      "community": 70,
       "norm_label": "app.tsx"
     },
     {
@@ -37350,7 +37296,7 @@
       "source_file": "prototypes/pwa/src/App.tsx",
       "source_location": "L16",
       "id": "src_app_receipt",
-      "community": 71,
+      "community": 70,
       "norm_label": "receipt()"
     },
     {
@@ -37359,7 +37305,7 @@
       "source_file": "prototypes/pwa/src/main.tsx",
       "source_location": "L1",
       "id": "prototypes_pwa_src_main_tsx",
-      "community": 371,
+      "community": 70,
       "norm_label": "main.tsx"
     },
     {
@@ -37413,7 +37359,7 @@
       "source_file": "prototypes/pwa/src/sw.ts",
       "source_location": "L1",
       "id": "prototypes_pwa_src_sw_ts",
-      "community": 263,
+      "community": 71,
       "norm_label": "sw.ts"
     },
     {
@@ -37548,7 +37494,7 @@
       "source_file": "prototypes/pwa/src/share.ts",
       "source_location": "L9",
       "id": "src_share_errorcodes",
-      "community": 71,
+      "community": 174,
       "norm_label": "errorcodes"
     },
     {
@@ -37575,7 +37521,7 @@
       "source_file": "prototypes/pwa/src/share.ts",
       "source_location": "L29",
       "id": "src_share_issharerequest",
-      "community": 263,
+      "community": 71,
       "norm_label": "issharerequest()"
     },
     {
@@ -37584,7 +37530,7 @@
       "source_file": "prototypes/pwa/src/share.ts",
       "source_location": "L38",
       "id": "src_share_handleshare",
-      "community": 263,
+      "community": 71,
       "norm_label": "handleshare()"
     },
     {
@@ -37611,7 +37557,7 @@
       "source_file": "prototypes/pwa/src/share.test.ts",
       "source_location": "L1",
       "id": "prototypes_pwa_src_share_test_ts",
-      "community": 263,
+      "community": 71,
       "norm_label": "share.test.ts"
     },
     {
@@ -37620,7 +37566,7 @@
       "source_file": "prototypes/pwa/src/share.test.ts",
       "source_location": "L12",
       "id": "src_share_test_request",
-      "community": 263,
+      "community": 71,
       "norm_label": "request()"
     },
     {
@@ -37629,7 +37575,7 @@
       "source_file": "prototypes/pwa/src/share.test.ts",
       "source_location": "L21",
       "id": "src_share_test_audio",
-      "community": 263,
+      "community": 71,
       "norm_label": "audio()"
     },
     {
@@ -37638,7 +37584,7 @@
       "source_file": "prototypes/pwa/src/share.test.ts",
       "source_location": "L42",
       "id": "src_share_test_body",
-      "community": 263,
+      "community": 71,
       "norm_label": "body"
     },
     {
@@ -37647,7 +37593,7 @@
       "source_file": "prototypes/pwa/src/share.test.ts",
       "source_location": "L46",
       "id": "src_share_test_store",
-      "community": 263,
+      "community": 71,
       "norm_label": "store"
     },
     {
@@ -37656,7 +37602,7 @@
       "source_file": "prototypes/pwa/src/share.test.ts",
       "source_location": "L156",
       "id": "src_share_test_response",
-      "community": 263,
+      "community": 71,
       "norm_label": "response"
     },
     {
@@ -37665,7 +37611,7 @@
       "source_file": "prototypes/pwa/src/share.test.ts",
       "source_location": "L201",
       "id": "src_share_test_malformed",
-      "community": 263,
+      "community": 71,
       "norm_label": "malformed"
     },
     {
@@ -42640,7 +42586,7 @@
       "label": "AvatarError",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L99",
+      "source_location": "L101",
       "id": "worker_generate_avatar_avatarerror",
       "community": 185,
       "norm_label": "avatarerror"
@@ -42649,7 +42595,7 @@
       "label": ".__init__()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L100",
+      "source_location": "L102",
       "id": "worker_generate_avatar_avatarerror_init",
       "community": 185,
       "norm_label": ".__init__()"
@@ -42658,7 +42604,7 @@
       "label": "ImageEntry",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L106",
+      "source_location": "L108",
       "id": "worker_generate_avatar_imageentry",
       "community": 308,
       "norm_label": "imageentry"
@@ -42667,7 +42613,7 @@
       "label": "ImageReply",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L110",
+      "source_location": "L112",
       "id": "worker_generate_avatar_imagereply",
       "community": 308,
       "norm_label": "imagereply"
@@ -42676,7 +42622,7 @@
       "label": "ModerationEntry",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L114",
+      "source_location": "L116",
       "id": "worker_generate_avatar_moderationentry",
       "community": 308,
       "norm_label": "moderationentry"
@@ -42685,7 +42631,7 @@
       "label": "ModerationReply",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L118",
+      "source_location": "L120",
       "id": "worker_generate_avatar_moderationreply",
       "community": 308,
       "norm_label": "moderationreply"
@@ -42694,25 +42640,25 @@
       "label": "ImageModerationProof",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L122",
+      "source_location": "L124",
       "id": "worker_generate_avatar_imagemoderationproof",
-      "community": 185,
+      "community": 308,
       "norm_label": "imagemoderationproof"
     },
     {
       "label": "Lease",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L129",
+      "source_location": "L131",
       "id": "worker_generate_avatar_lease",
-      "community": 185,
+      "community": 308,
       "norm_label": "lease"
     },
     {
       "label": "_openai_post()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L135",
+      "source_location": "L137",
       "id": "worker_generate_avatar_openai_post",
       "community": 185,
       "norm_label": "_openai_post()"
@@ -42721,7 +42667,7 @@
       "label": "_moderate()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L154",
+      "source_location": "L156",
       "id": "worker_generate_avatar_moderate",
       "community": 185,
       "norm_label": "_moderate()"
@@ -42730,7 +42676,7 @@
       "label": "_moderate_image()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L179",
+      "source_location": "L181",
       "id": "worker_generate_avatar_moderate_image",
       "community": 185,
       "norm_label": "_moderate_image()"
@@ -42739,7 +42685,7 @@
       "label": "_generate_image()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L183",
+      "source_location": "L185",
       "id": "worker_generate_avatar_generate_image",
       "community": 185,
       "norm_label": "_generate_image()"
@@ -42748,61 +42694,16 @@
       "label": "_decode_image_reply()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L215",
+      "source_location": "L217",
       "id": "worker_generate_avatar_decode_image_reply",
       "community": 185,
       "norm_label": "_decode_image_reply()"
     },
     {
-      "label": "_mood_edit_prompt()",
-      "file_type": "code",
-      "source_file": "worker/generate_avatar.py",
-      "source_location": "L228",
-      "id": "worker_generate_avatar_mood_edit_prompt",
-      "community": 185,
-      "norm_label": "_mood_edit_prompt()"
-    },
-    {
-      "label": "_png_bytes()",
-      "file_type": "code",
-      "source_file": "worker/generate_avatar.py",
-      "source_location": "L255",
-      "id": "worker_generate_avatar_png_bytes",
-      "community": 185,
-      "norm_label": "_png_bytes()"
-    },
-    {
-      "label": "_make_mood_mask()",
-      "file_type": "code",
-      "source_file": "worker/generate_avatar.py",
-      "source_location": "L261",
-      "id": "worker_generate_avatar_make_mood_mask",
-      "community": 185,
-      "norm_label": "_make_mood_mask()"
-    },
-    {
-      "label": "_edit_mood_sheet()",
-      "file_type": "code",
-      "source_file": "worker/generate_avatar.py",
-      "source_location": "L291",
-      "id": "worker_generate_avatar_edit_mood_sheet",
-      "community": 185,
-      "norm_label": "_edit_mood_sheet()"
-    },
-    {
-      "label": "_compose_mood_sheet()",
-      "file_type": "code",
-      "source_file": "worker/generate_avatar.py",
-      "source_location": "L331",
-      "id": "worker_generate_avatar_compose_mood_sheet",
-      "community": 185,
-      "norm_label": "_compose_mood_sheet()"
-    },
-    {
       "label": "_generate_sheet()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L351",
+      "source_location": "L230",
       "id": "worker_generate_avatar_generate_sheet",
       "community": 185,
       "norm_label": "_generate_sheet()"
@@ -42811,7 +42712,7 @@
       "label": "_generate_portrait()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L357",
+      "source_location": "L236",
       "id": "worker_generate_avatar_generate_portrait",
       "community": 185,
       "norm_label": "_generate_portrait()"
@@ -42820,7 +42721,7 @@
       "label": "_circular_portrait()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L363",
+      "source_location": "L242",
       "id": "worker_generate_avatar_circular_portrait",
       "community": 185,
       "norm_label": "_circular_portrait()"
@@ -42829,7 +42730,7 @@
       "label": "_ensure_portrait()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L380",
+      "source_location": "L259",
       "id": "worker_generate_avatar_ensure_portrait",
       "community": 185,
       "norm_label": "_ensure_portrait()"
@@ -42838,7 +42739,7 @@
       "label": "_atomic_write()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L395",
+      "source_location": "L274",
       "id": "worker_generate_avatar_atomic_write",
       "community": 185,
       "norm_label": "_atomic_write()"
@@ -42847,7 +42748,7 @@
       "label": "_claim()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L413",
+      "source_location": "L292",
       "id": "worker_generate_avatar_claim",
       "community": 185,
       "norm_label": "_claim()"
@@ -42856,7 +42757,7 @@
       "label": "_leased_job()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L441",
+      "source_location": "L320",
       "id": "worker_generate_avatar_leased_job",
       "community": 185,
       "norm_label": "_leased_job()"
@@ -42865,7 +42766,7 @@
       "label": "_save_sheet()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L452",
+      "source_location": "L331",
       "id": "worker_generate_avatar_save_sheet",
       "community": 185,
       "norm_label": "_save_sheet()"
@@ -42874,7 +42775,7 @@
       "label": "_has_image_moderation()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L465",
+      "source_location": "L340",
       "id": "worker_generate_avatar_has_image_moderation",
       "community": 185,
       "norm_label": "_has_image_moderation()"
@@ -42883,7 +42784,7 @@
       "label": "_save_image_moderation()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L473",
+      "source_location": "L348",
       "id": "worker_generate_avatar_save_image_moderation",
       "community": 185,
       "norm_label": "_save_image_moderation()"
@@ -42892,25 +42793,16 @@
       "label": "_update()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L486",
+      "source_location": "L361",
       "id": "worker_generate_avatar_update",
       "community": 185,
       "norm_label": "_update()"
     },
     {
-      "label": "_ensure_mood_edited_sheet()",
-      "file_type": "code",
-      "source_file": "worker/generate_avatar.py",
-      "source_location": "L519",
-      "id": "worker_generate_avatar_ensure_mood_edited_sheet",
-      "community": 185,
-      "norm_label": "_ensure_mood_edited_sheet()"
-    },
-    {
       "label": "_decode_sheet()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L574",
+      "source_location": "L394",
       "id": "worker_generate_avatar_decode_sheet",
       "community": 185,
       "norm_label": "_decode_sheet()"
@@ -42919,7 +42811,7 @@
       "label": "_load_sheet()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L605",
+      "source_location": "L425",
       "id": "worker_generate_avatar_load_sheet",
       "community": 185,
       "norm_label": "_load_sheet()"
@@ -42928,7 +42820,7 @@
       "label": "_generate_usable_sheet()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L611",
+      "source_location": "L431",
       "id": "worker_generate_avatar_generate_usable_sheet",
       "community": 185,
       "norm_label": "_generate_usable_sheet()"
@@ -42937,7 +42829,7 @@
       "label": "_separator_bands()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L630",
+      "source_location": "L450",
       "id": "worker_generate_avatar_separator_bands",
       "community": 185,
       "norm_label": "_separator_bands()"
@@ -42946,7 +42838,7 @@
       "label": "_grid_bounds()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L659",
+      "source_location": "L479",
       "id": "worker_generate_avatar_grid_bounds",
       "community": 185,
       "norm_label": "_grid_bounds()"
@@ -42955,7 +42847,7 @@
       "label": "_figures()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L680",
+      "source_location": "L500",
       "id": "worker_generate_avatar_figures",
       "community": 185,
       "norm_label": "_figures()"
@@ -42964,7 +42856,7 @@
       "label": "_frames()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L727",
+      "source_location": "L547",
       "id": "worker_generate_avatar_frames",
       "community": 185,
       "norm_label": "_frames()"
@@ -42973,7 +42865,7 @@
       "label": "process_one()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L745",
+      "source_location": "L565",
       "id": "worker_generate_avatar_process_one",
       "community": 185,
       "norm_label": "process_one()"
@@ -42982,7 +42874,7 @@
       "label": "main()",
       "file_type": "code",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L864",
+      "source_location": "L675",
       "id": "worker_generate_avatar_main",
       "community": 185,
       "norm_label": "main()"
@@ -43038,7 +42930,7 @@
       "source_file": "worker/generate_spoken.py",
       "source_location": "L55",
       "id": "worker_generate_spoken_vocabulary",
-      "community": 5,
+      "community": 263,
       "norm_label": "vocabulary()"
     },
     {
@@ -43110,7 +43002,7 @@
       "source_file": "worker/telegram.py",
       "source_location": "L1",
       "id": "worker_telegram_py",
-      "community": 377,
+      "community": 184,
       "norm_label": "telegram.py"
     },
     {
@@ -43119,7 +43011,7 @@
       "source_file": "worker/telegram.py",
       "source_location": "L81",
       "id": "worker_telegram_healthy",
-      "community": 377,
+      "community": 184,
       "norm_label": "healthy()"
     },
     {
@@ -43128,7 +43020,7 @@
       "source_file": "worker/telegram.py",
       "source_location": "L95",
       "id": "worker_telegram_cycle",
-      "community": 377,
+      "community": 184,
       "norm_label": "cycle()"
     },
     {
@@ -43137,7 +43029,7 @@
       "source_file": "worker/telegram.py",
       "source_location": "L150",
       "id": "worker_telegram_main",
-      "community": 377,
+      "community": 184,
       "norm_label": "main()"
     },
     {
@@ -43200,7 +43092,7 @@
       "source_file": "worker/build_game_piano.py",
       "source_location": "L1",
       "id": "worker_build_game_piano_py",
-      "community": 164,
+      "community": 66,
       "norm_label": "build_game_piano.py"
     },
     {
@@ -43209,7 +43101,7 @@
       "source_file": "worker/build_game_piano.py",
       "source_location": "L65",
       "id": "worker_build_game_piano_download",
-      "community": 164,
+      "community": 66,
       "norm_label": "download()"
     },
     {
@@ -43218,7 +43110,7 @@
       "source_file": "worker/build_game_piano.py",
       "source_location": "L73",
       "id": "worker_build_game_piano_build",
-      "community": 164,
+      "community": 66,
       "norm_label": "build()"
     },
     {
@@ -43227,7 +43119,7 @@
       "source_file": "worker/build_game_piano.py",
       "source_location": "L154",
       "id": "worker_build_game_piano_main",
-      "community": 164,
+      "community": 66,
       "norm_label": "main()"
     },
     {
@@ -43236,7 +43128,7 @@
       "source_file": "worker/build_game_piano.py",
       "source_location": "L1",
       "id": "worker_build_game_piano_rationale_1",
-      "community": 164,
+      "community": 66,
       "norm_label": "build the licensed, reduced salamander piano for guess the note."
     },
     {
@@ -44359,7 +44251,7 @@
       "label": "Shared custom avatars",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L39",
+      "source_location": "L33",
       "id": "docs_status_shared_custom_avatars",
       "community": 12,
       "norm_label": "shared custom avatars"
@@ -44368,7 +44260,7 @@
       "label": "Custom avatar image quality",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L60",
+      "source_location": "L54",
       "id": "docs_status_custom_avatar_image_quality",
       "community": 12,
       "norm_label": "custom avatar image quality"
@@ -44377,7 +44269,7 @@
       "label": "Avatar generation incident investigation",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L74",
+      "source_location": "L68",
       "id": "docs_status_avatar_generation_incident_investigation",
       "community": 12,
       "norm_label": "avatar generation incident investigation"
@@ -44386,7 +44278,7 @@
       "label": "Game-only player role",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L97",
+      "source_location": "L91",
       "id": "docs_status_game_only_player_role",
       "community": 12,
       "norm_label": "game-only player role"
@@ -44395,7 +44287,7 @@
       "label": "Post-round prize collection",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L120",
+      "source_location": "L114",
       "id": "docs_status_post_round_prize_collection",
       "community": 12,
       "norm_label": "post-round prize collection"
@@ -44404,7 +44296,7 @@
       "label": "Packaged prize artwork",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L133",
+      "source_location": "L127",
       "id": "docs_status_packaged_prize_artwork",
       "community": 12,
       "norm_label": "packaged prize artwork"
@@ -44413,7 +44305,7 @@
       "label": "Prize extraction CI repair",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L152",
+      "source_location": "L146",
       "id": "docs_status_prize_extraction_ci_repair",
       "community": 12,
       "norm_label": "prize extraction ci repair"
@@ -44422,7 +44314,7 @@
       "label": "Game fixes, prizes, and avatar approval",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L161",
+      "source_location": "L155",
       "id": "docs_status_game_fixes_prizes_and_avatar_approval",
       "community": 12,
       "norm_label": "game fixes, prizes, and avatar approval"
@@ -44431,7 +44323,7 @@
       "label": "Failed release 37204983176",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L218",
+      "source_location": "L212",
       "id": "docs_status_failed_release_37204983176",
       "community": 12,
       "norm_label": "failed release 37204983176"
@@ -44440,7 +44332,7 @@
       "label": "Game statistics and season reset",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L253",
+      "source_location": "L247",
       "id": "docs_status_game_statistics_and_season_reset",
       "community": 12,
       "norm_label": "game statistics and season reset"
@@ -44449,7 +44341,7 @@
       "label": "Main integration",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L304",
+      "source_location": "L298",
       "id": "docs_status_main_integration",
       "community": 12,
       "norm_label": "main integration"
@@ -44458,7 +44350,7 @@
       "label": "Seven-note rounds and assistance bonuses",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L317",
+      "source_location": "L311",
       "id": "docs_status_seven_note_rounds_and_assistance_bonuses",
       "community": 12,
       "norm_label": "seven-note rounds and assistance bonuses"
@@ -44467,7 +44359,7 @@
       "label": "Persistent custom avatar generation",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L368",
+      "source_location": "L362",
       "id": "docs_status_persistent_custom_avatar_generation",
       "community": 12,
       "norm_label": "persistent custom avatar generation"
@@ -44476,7 +44368,7 @@
       "label": "Sampled piano and game setup",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L422",
+      "source_location": "L416",
       "id": "docs_status_sampled_piano_and_game_setup",
       "community": 12,
       "norm_label": "sampled piano and game setup"
@@ -44485,7 +44377,7 @@
       "label": "Game note playback",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L471",
+      "source_location": "L465",
       "id": "docs_status_game_note_playback",
       "community": 12,
       "norm_label": "game note playback"
@@ -44494,7 +44386,7 @@
       "label": "Standard game clefs",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L502",
+      "source_location": "L496",
       "id": "docs_status_standard_game_clefs",
       "community": 12,
       "norm_label": "standard game clefs"
@@ -44503,7 +44395,7 @@
       "label": "Circular game shortcut",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L528",
+      "source_location": "L522",
       "id": "docs_status_circular_game_shortcut",
       "community": 12,
       "norm_label": "circular game shortcut"
@@ -44512,7 +44404,7 @@
       "label": "Game first-entry repair",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L556",
+      "source_location": "L550",
       "id": "docs_status_game_first_entry_repair",
       "community": 12,
       "norm_label": "game first-entry repair"
@@ -44521,7 +44413,7 @@
       "label": "Game avatar artwork",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L589",
+      "source_location": "L583",
       "id": "docs_status_game_avatar_artwork",
       "community": 12,
       "norm_label": "game avatar artwork"
@@ -44530,7 +44422,7 @@
       "label": "Appearance settings",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L641",
+      "source_location": "L635",
       "id": "docs_status_appearance_settings",
       "community": 31,
       "norm_label": "appearance settings"
@@ -44539,7 +44431,7 @@
       "label": "CI follow-up: run 37008189410",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L683",
+      "source_location": "L677",
       "id": "docs_status_ci_follow_up_run_37008189410",
       "community": 12,
       "norm_label": "ci follow-up: run 37008189410"
@@ -44548,7 +44440,7 @@
       "label": "Student original image and score",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L704",
+      "source_location": "L698",
       "id": "docs_status_student_original_image_and_score",
       "community": 12,
       "norm_label": "student original image and score"
@@ -44557,7 +44449,7 @@
       "label": "Material Design baseline",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L723",
+      "source_location": "L717",
       "id": "docs_status_material_design_baseline",
       "community": 12,
       "norm_label": "material design baseline"
@@ -44566,7 +44458,7 @@
       "label": "Responsive layout follow-up",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L733",
+      "source_location": "L727",
       "id": "docs_status_responsive_layout_follow_up",
       "community": 12,
       "norm_label": "responsive layout follow-up"
@@ -44575,7 +44467,7 @@
       "label": "Installation and usability follow-up",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L761",
+      "source_location": "L755",
       "id": "docs_status_installation_and_usability_follow_up",
       "community": 12,
       "norm_label": "installation and usability follow-up"
@@ -44584,7 +44476,7 @@
       "label": "Password policy follow-up",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L796",
+      "source_location": "L790",
       "id": "docs_status_password_policy_follow_up",
       "community": 12,
       "norm_label": "password policy follow-up"
@@ -44593,7 +44485,7 @@
       "label": "Previous PHASE 7 completion",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L808",
+      "source_location": "L802",
       "id": "docs_status_previous_phase_7_completion",
       "community": 12,
       "norm_label": "previous phase 7 completion"
@@ -44602,7 +44494,7 @@
       "label": "PHASE 7 implementation",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L816",
+      "source_location": "L810",
       "id": "docs_status_phase_7_implementation",
       "community": 12,
       "norm_label": "phase 7 implementation"
@@ -44611,7 +44503,7 @@
       "label": "PHASE 7 validation and deployment boundary",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L834",
+      "source_location": "L828",
       "id": "docs_status_phase_7_validation_and_deployment_boundary",
       "community": 12,
       "norm_label": "phase 7 validation and deployment boundary"
@@ -44620,7 +44512,7 @@
       "label": "Previous PHASE 6 acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L876",
+      "source_location": "L870",
       "id": "docs_status_previous_phase_6_acceptance",
       "community": 12,
       "norm_label": "previous phase 6 acceptance"
@@ -44629,7 +44521,7 @@
       "label": "PHASE 6 follow-up fixes after owner acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L887",
+      "source_location": "L881",
       "id": "docs_status_phase_6_follow_up_fixes_after_owner_acceptance",
       "community": 12,
       "norm_label": "phase 6 follow-up fixes after owner acceptance"
@@ -44638,7 +44530,7 @@
       "label": "Completed PHASE 7 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L935",
+      "source_location": "L929",
       "id": "docs_status_completed_phase_7_plan",
       "community": 29,
       "norm_label": "completed phase 7 plan"
@@ -44647,7 +44539,7 @@
       "label": "Separate Material Design feature",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L948",
+      "source_location": "L942",
       "id": "docs_status_separate_material_design_feature",
       "community": 365,
       "norm_label": "separate material design feature"
@@ -44656,7 +44548,7 @@
       "label": "Completed Material Design checklist",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L988",
+      "source_location": "L982",
       "id": "docs_status_completed_material_design_checklist",
       "community": 365,
       "norm_label": "completed material design checklist"
@@ -44665,7 +44557,7 @@
       "label": "Completed PHASE 6 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1001",
+      "source_location": "L995",
       "id": "docs_status_completed_phase_6_plan",
       "community": 29,
       "norm_label": "completed phase 6 plan"
@@ -44674,7 +44566,7 @@
       "label": "Completed PHASE 5 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1013",
+      "source_location": "L1007",
       "id": "docs_status_completed_phase_5_plan",
       "community": 29,
       "norm_label": "completed phase 5 plan"
@@ -44683,7 +44575,7 @@
       "label": "Completed PHASE 4 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1022",
+      "source_location": "L1016",
       "id": "docs_status_completed_phase_4_plan",
       "community": 29,
       "norm_label": "completed phase 4 plan"
@@ -44692,7 +44584,7 @@
       "label": "Completed PHASE 3 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1029",
+      "source_location": "L1023",
       "id": "docs_status_completed_phase_3_plan",
       "community": 29,
       "norm_label": "completed phase 3 plan"
@@ -44701,7 +44593,7 @@
       "label": "Completed PHASE 2 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1039",
+      "source_location": "L1033",
       "id": "docs_status_completed_phase_2_plan",
       "community": 29,
       "norm_label": "completed phase 2 plan"
@@ -44710,7 +44602,7 @@
       "label": "Completed PHASE 1 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1048",
+      "source_location": "L1042",
       "id": "docs_status_completed_phase_1_plan",
       "community": 29,
       "norm_label": "completed phase 1 plan"
@@ -44719,7 +44611,7 @@
       "label": "Completed PHASE 0 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1059",
+      "source_location": "L1053",
       "id": "docs_status_completed_phase_0_plan",
       "community": 29,
       "norm_label": "completed phase 0 plan"
@@ -44728,7 +44620,7 @@
       "label": "Completed PHASE 0.5 plan",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1072",
+      "source_location": "L1066",
       "id": "docs_status_completed_phase_0_5_plan",
       "community": 29,
       "norm_label": "completed phase 0.5 plan"
@@ -44737,7 +44629,7 @@
       "label": "Done",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1082",
+      "source_location": "L1076",
       "id": "docs_status_done",
       "community": 29,
       "norm_label": "done"
@@ -44746,7 +44638,7 @@
       "label": "PHASE 0.5 deployment record",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1363",
+      "source_location": "L1357",
       "id": "docs_status_phase_0_5_deployment_record",
       "community": 29,
       "norm_label": "phase 0.5 deployment record"
@@ -44755,7 +44647,7 @@
       "label": "Next step",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1391",
+      "source_location": "L1385",
       "id": "docs_status_next_step",
       "community": 29,
       "norm_label": "next step"
@@ -44764,7 +44656,7 @@
       "label": "PHASE 0 boundaries",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1399",
+      "source_location": "L1393",
       "id": "docs_status_phase_0_boundaries",
       "community": 29,
       "norm_label": "phase 0 boundaries"
@@ -44773,7 +44665,7 @@
       "label": "Acceptance details",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1410",
+      "source_location": "L1404",
       "id": "docs_status_acceptance_details",
       "community": 29,
       "norm_label": "acceptance details"
@@ -44782,7 +44674,7 @@
       "label": "Final PHASE 1 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1415",
+      "source_location": "L1409",
       "id": "docs_status_final_phase_1_manual_acceptance",
       "community": 29,
       "norm_label": "final phase 1 manual acceptance"
@@ -44791,7 +44683,7 @@
       "label": "Final PHASE 2 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1427",
+      "source_location": "L1421",
       "id": "docs_status_final_phase_2_manual_acceptance",
       "community": 29,
       "norm_label": "final phase 2 manual acceptance"
@@ -44800,7 +44692,7 @@
       "label": "Final PHASE 3 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1437",
+      "source_location": "L1431",
       "id": "docs_status_final_phase_3_manual_acceptance",
       "community": 29,
       "norm_label": "final phase 3 manual acceptance"
@@ -44809,7 +44701,7 @@
       "label": "Final PHASE 4 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1447",
+      "source_location": "L1441",
       "id": "docs_status_final_phase_4_manual_acceptance",
       "community": 29,
       "norm_label": "final phase 4 manual acceptance"
@@ -44818,7 +44710,7 @@
       "label": "Final PHASE 5 manual acceptance",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1457",
+      "source_location": "L1451",
       "id": "docs_status_final_phase_5_manual_acceptance",
       "community": 29,
       "norm_label": "final phase 5 manual acceptance"
@@ -44827,7 +44719,7 @@
       "label": "Manual checks the owner must do",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1466",
+      "source_location": "L1460",
       "id": "docs_status_manual_checks_the_owner_must_do",
       "community": 29,
       "norm_label": "manual checks the owner must do"
@@ -44836,7 +44728,7 @@
       "label": "Known issues",
       "file_type": "document",
       "source_file": "docs/STATUS.md",
-      "source_location": "L1489",
+      "source_location": "L1483",
       "id": "docs_status_known_issues",
       "community": 29,
       "norm_label": "known issues"
@@ -46858,19 +46750,19 @@
       "norm_label": "custom creation"
     },
     {
-      "label": "Base-sheet generation and mood edits",
+      "label": "Single-sheet generation",
       "file_type": "document",
       "source_file": "docs/developer/game-avatars.md",
       "source_location": "L358",
-      "id": "developer_game_avatars_base_sheet_generation_and_mood_edits",
+      "id": "developer_game_avatars_single_sheet_generation",
       "community": 130,
-      "norm_label": "base-sheet generation and mood edits"
+      "norm_label": "single-sheet generation"
     },
     {
       "label": "Face icon (portrait)",
       "file_type": "document",
       "source_file": "docs/developer/game-avatars.md",
-      "source_location": "L394",
+      "source_location": "L390",
       "id": "developer_game_avatars_face_icon_portrait",
       "community": 130,
       "norm_label": "face icon (portrait)"
@@ -46879,7 +46771,7 @@
       "label": "Manager approval",
       "file_type": "document",
       "source_file": "docs/developer/game-avatars.md",
-      "source_location": "L409",
+      "source_location": "L405",
       "id": "developer_game_avatars_manager_approval",
       "community": 130,
       "norm_label": "manager approval"
@@ -47158,7 +47050,7 @@
       "label": "Container deployment settings",
       "file_type": "document",
       "source_file": "docs/developer/env-variables.md",
-      "source_location": "L186",
+      "source_location": "L185",
       "id": "developer_env_variables_container_deployment_settings",
       "community": 186,
       "norm_label": "container deployment settings"
@@ -48096,7 +47988,7 @@
       "source_file": "docs/superpowers/plans/2026-10-02-guess-the-note-frontend.md",
       "source_location": "L686",
       "id": "plans_2026_10_02_guess_the_note_frontend_task_5_web_audio_synthesis",
-      "community": 147,
+      "community": 372,
       "norm_label": "task 5: web audio synthesis"
     },
     {
@@ -48105,7 +47997,7 @@
       "source_file": "docs/superpowers/plans/2026-10-02-guess-the-note-frontend.md",
       "source_location": "L700",
       "id": "plans_2026_10_02_guess_the_note_frontend_codeblock_24",
-      "community": 147,
+      "community": 372,
       "norm_label": "code:ts (// frontend/src/features/game/audio/synth.ts)"
     },
     {
@@ -48114,7 +48006,7 @@
       "source_file": "docs/superpowers/plans/2026-10-02-guess-the-note-frontend.md",
       "source_location": "L756",
       "id": "plans_2026_10_02_guess_the_note_frontend_codeblock_25",
-      "community": 147,
+      "community": 372,
       "norm_label": "code:bash (cd frontend && npx tsc --noemit)"
     },
     {
@@ -48123,7 +48015,7 @@
       "source_file": "docs/superpowers/plans/2026-10-02-guess-the-note-frontend.md",
       "source_location": "L763",
       "id": "plans_2026_10_02_guess_the_note_frontend_codeblock_26",
-      "community": 147,
+      "community": 372,
       "norm_label": "code:bash (git add frontend/src/features/game/audio/)"
     },
     {
@@ -48312,7 +48204,7 @@
       "source_file": "docs/superpowers/plans/2026-10-02-guess-the-note-frontend.md",
       "source_location": "L1521",
       "id": "plans_2026_10_02_guess_the_note_frontend_task_9_result_screen",
-      "community": 151,
+      "community": 147,
       "norm_label": "task 9: result screen"
     },
     {
@@ -48321,7 +48213,7 @@
       "source_file": "docs/superpowers/plans/2026-10-02-guess-the-note-frontend.md",
       "source_location": "L1533",
       "id": "plans_2026_10_02_guess_the_note_frontend_codeblock_44",
-      "community": 151,
+      "community": 147,
       "norm_label": "code:tsx (// frontend/src/features/game/result/resultscreen.tsx)"
     },
     {
@@ -48330,7 +48222,7 @@
       "source_file": "docs/superpowers/plans/2026-10-02-guess-the-note-frontend.md",
       "source_location": "L1615",
       "id": "plans_2026_10_02_guess_the_note_frontend_codeblock_45",
-      "community": 151,
+      "community": 147,
       "norm_label": "code:tsx (import resultscreen from \"./result/resultscreen\";)"
     },
     {
@@ -48339,7 +48231,7 @@
       "source_file": "docs/superpowers/plans/2026-10-02-guess-the-note-frontend.md",
       "source_location": "L1637",
       "id": "plans_2026_10_02_guess_the_note_frontend_codeblock_46",
-      "community": 151,
+      "community": 147,
       "norm_label": "code:bash (git add frontend/src/features/game/result/ frontend/src/feat)"
     },
     {
@@ -49662,7 +49554,7 @@
       "source_file": ".github/copilot-instructions.md",
       "source_location": "L3",
       "id": "github_copilot_instructions_product",
-      "community": 183,
+      "community": 14,
       "norm_label": "product"
     },
     {
@@ -50971,6 +50863,141 @@
       "norm_label": "14. final output"
     },
     {
+      "label": "test_mood_edit_mask_targets_only_the_matching_ten_faces()",
+      "file_type": "code",
+      "source_file": "backend/tests/game/test_avatar_generation.py",
+      "source_location": "L227",
+      "community": 163,
+      "norm_label": "test_mood_edit_mask_targets_only_the_matching_ten_faces()",
+      "id": "game_test_avatar_generation_test_mood_edit_mask_targets_only_the_matching_ten_faces"
+    },
+    {
+      "label": "test_composed_sheet_changes_only_the_two_mood_face_regions()",
+      "file_type": "code",
+      "source_file": "backend/tests/game/test_avatar_generation.py",
+      "source_location": "L259",
+      "community": 163,
+      "norm_label": "test_composed_sheet_changes_only_the_two_mood_face_regions()",
+      "id": "game_test_avatar_generation_test_composed_sheet_changes_only_the_two_mood_face_regions"
+    },
+    {
+      "label": "test_composed_mood_edits_do_not_add_pixels_outside_the_original_artwork()",
+      "file_type": "code",
+      "source_file": "backend/tests/game/test_avatar_generation.py",
+      "source_location": "L293",
+      "community": 163,
+      "norm_label": "test_composed_mood_edits_do_not_add_pixels_outside_the_original_artwork()",
+      "id": "game_test_avatar_generation_test_composed_mood_edits_do_not_add_pixels_outside_the_original_artwork"
+    },
+    {
+      "label": "test_mood_edits_use_the_masked_image_edit_endpoint()",
+      "file_type": "code",
+      "source_file": "backend/tests/game/test_avatar_generation.py",
+      "source_location": "L323",
+      "community": 163,
+      "norm_label": "test_mood_edits_use_the_masked_image_edit_endpoint()",
+      "id": "game_test_avatar_generation_test_mood_edits_use_the_masked_image_edit_endpoint"
+    },
+    {
+      "label": "test_happy_and_sad_prompts_define_visibly_opposite_expressions()",
+      "file_type": "code",
+      "source_file": "backend/tests/game/test_avatar_generation.py",
+      "source_location": "L365",
+      "community": 163,
+      "norm_label": "test_happy_and_sad_prompts_define_visibly_opposite_expressions()",
+      "id": "game_test_avatar_generation_test_happy_and_sad_prompts_define_visibly_opposite_expressions"
+    },
+    {
+      "label": "test_one_sheet_and_two_mood_edits_create_and_persist_all_thirty_frames()",
+      "file_type": "code",
+      "source_file": "backend/tests/game/test_avatar_generation.py",
+      "source_location": "L375",
+      "community": 163,
+      "norm_label": "test_one_sheet_and_two_mood_edits_create_and_persist_all_thirty_frames()",
+      "id": "game_test_avatar_generation_test_one_sheet_and_two_mood_edits_create_and_persist_all_thirty_frames"
+    },
+    {
+      "label": "test_interrupted_mood_edit_is_not_requested_again()",
+      "file_type": "code",
+      "source_file": "backend/tests/game/test_avatar_generation.py",
+      "source_location": "L695",
+      "community": 163,
+      "norm_label": "test_interrupted_mood_edit_is_not_requested_again()",
+      "id": "game_test_avatar_generation_test_interrupted_mood_edit_is_not_requested_again"
+    },
+    {
+      "label": "test_mood_recovery_reuses_the_saved_happy_edit()",
+      "file_type": "code",
+      "source_file": "backend/tests/game/test_avatar_generation.py",
+      "source_location": "L727",
+      "community": 163,
+      "norm_label": "test_mood_recovery_reuses_the_saved_happy_edit()",
+      "id": "game_test_avatar_generation_test_mood_recovery_reuses_the_saved_happy_edit"
+    },
+    {
+      "label": "_mood_edit_prompt()",
+      "file_type": "code",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L228",
+      "community": 185,
+      "norm_label": "_mood_edit_prompt()",
+      "id": "worker_generate_avatar_mood_edit_prompt"
+    },
+    {
+      "label": "_png_bytes()",
+      "file_type": "code",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L255",
+      "community": 185,
+      "norm_label": "_png_bytes()",
+      "id": "worker_generate_avatar_png_bytes"
+    },
+    {
+      "label": "_make_mood_mask()",
+      "file_type": "code",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L261",
+      "community": 185,
+      "norm_label": "_make_mood_mask()",
+      "id": "worker_generate_avatar_make_mood_mask"
+    },
+    {
+      "label": "_edit_mood_sheet()",
+      "file_type": "code",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L291",
+      "community": 185,
+      "norm_label": "_edit_mood_sheet()",
+      "id": "worker_generate_avatar_edit_mood_sheet"
+    },
+    {
+      "label": "_compose_mood_sheet()",
+      "file_type": "code",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L331",
+      "community": 185,
+      "norm_label": "_compose_mood_sheet()",
+      "id": "worker_generate_avatar_compose_mood_sheet"
+    },
+    {
+      "label": "_ensure_mood_edited_sheet()",
+      "file_type": "code",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L519",
+      "community": 185,
+      "norm_label": "_ensure_mood_edited_sheet()",
+      "id": "worker_generate_avatar_ensure_mood_edited_sheet"
+    },
+    {
+      "label": "Base-sheet generation and mood edits",
+      "file_type": "document",
+      "source_file": "docs/developer/game-avatars.md",
+      "source_location": "L358",
+      "community": 130,
+      "norm_label": "base-sheet generation and mood edits",
+      "id": "developer_game_avatars_base_sheet_generation_and_mood_edits"
+    },
+    {
       "label": "game.prizes.descriptions.independent_win",
       "file_type": "code",
       "source_file": "frontend/src/i18n/locales/ru.json",
@@ -51218,7 +51245,7 @@
       "file_type": "code",
       "source_file": "frontend/src/features/game/play/PlayScreen.tsx",
       "source_location": "L20",
-      "community": 128,
+      "community": 121,
       "norm_label": "roundresult",
       "id": "play_playscreen_roundresult"
     },
@@ -51227,7 +51254,7 @@
       "file_type": "code",
       "source_file": "frontend/src/features/game/admin/AdminPlayerDetail.tsx",
       "source_location": "L14",
-      "community": 121,
+      "community": 370,
       "norm_label": "note_names",
       "id": "admin_adminplayerdetail_note_names"
     },
@@ -51236,7 +51263,7 @@
       "file_type": "code",
       "source_file": "frontend/src/features/game/profile/ProfileScreen.tsx",
       "source_location": "L24",
-      "community": 121,
+      "community": 164,
       "norm_label": "difficulties",
       "id": "profile_profilescreen_difficulties"
     },
@@ -51437,7 +51464,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 183,
+      "community": 14,
       "norm_label": "start.md: copilot kit setup guide",
       "id": "root_start_copilot_kit"
     },
@@ -51450,7 +51477,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 374,
+      "community": 14,
       "norm_label": "material_design.md: material design migration plan",
       "id": "root_material_design_migration"
     },
@@ -51502,7 +51529,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 183,
+      "community": 14,
       "norm_label": "docs instructions: asd-ste100 rules",
       "id": "instructions_docs_instructions_rules"
     },
@@ -51515,7 +51542,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 183,
+      "community": 14,
       "norm_label": "frontend instructions: development rules",
       "id": "instructions_frontend_instructions_rules"
     },
@@ -51580,7 +51607,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 183,
+      "community": 14,
       "norm_label": "publish telegram prototype workflow",
       "id": "workflows_publish_telegram_prototype_publish"
     },
@@ -51658,7 +51685,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 183,
+      "community": 14,
       "norm_label": "phases.md: phase plan (0.5 to 7)",
       "id": "docs_phases_plan"
     },
@@ -51671,7 +51698,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 183,
+      "community": 14,
       "norm_label": "product_brief.md: full requirements",
       "id": "docs_product_brief_requirements"
     },
@@ -51699,7 +51726,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Manager manages exercises (add/edit/delete/reorder), manages users (create, reset password, deactivate), reads listening journal; product-facing term is 'manager', not 'admin' or 'teacher'",
-      "community": 183,
+      "community": 14,
       "norm_label": "manager role",
       "id": "concept_manager_role"
     },
@@ -51713,7 +51740,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Student can only listen to exercises (sequential or random) and change own settings; cannot access manager pages; product-facing term is 'student', not 'pupil' or 'child'",
-      "community": 183,
+      "community": 14,
       "norm_label": "student role",
       "id": "concept_student_role"
     },
@@ -51727,7 +51754,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Exercise = id, title, description, category (optional), position, image (optional), audio (optional), score (optional from OMR), deleted_at (soft delete); at least one of image or audio required; soft delete only so journal survives deletion",
-      "community": 183,
+      "community": 14,
       "norm_label": "exercise model",
       "id": "concept_exercise_model"
     },
@@ -51755,7 +51782,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Notes are spoken (not sung); pre-generated syllable clips via OpenAI TTS committed to frontend/public/solfege/<lang>/<naming>/; Web Audio API playback; preferred tempo 72 BPM; auto-reduce tempo when short notes require more speech time; available only when score approved",
-      "community": 183,
+      "community": 14,
       "norm_label": "spoken notes feature",
       "id": "concept_spoken_notes"
     },
@@ -51769,7 +51796,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Owner replaced PWA audio sharing with Telegram bot on 2026-09-29 after Android PWA share delivered empty form; real Telegram receipt and playback of 199163078.m4a confirmed; manager-only import; reuses PHASE 2 file pipeline",
-      "community": 183,
+      "community": 14,
       "norm_label": "telegram audio import",
       "id": "concept_telegram_import"
     },
@@ -51783,7 +51810,7 @@
       "author": null,
       "contributor": null,
       "rationale": "On every backend start: if EMERGENCY_MANAGER_* env vars set, create/update user (role=manager, active, password reset); if not set, deactivate user with is_emergency=true; first-user mechanism AND disaster-recovery mechanism; emergency sync completes before backend startup succeeds",
-      "community": 183,
+      "community": 14,
       "norm_label": "emergency manager",
       "id": "concept_emergency_manager"
     },
@@ -51797,7 +51824,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Separate feature after PHASE 7 acceptance; Material UI v9, Emotion, self-hosted Roboto, Community DataGrid v9; no Date Pickers (requires unapproved dependency); native dates, audio, tempo, score rendering unchanged; owner authorizes all remaining steps together on 2026-10-01",
-      "community": 374,
+      "community": 14,
       "norm_label": "material design migration (mui v9)",
       "id": "concept_material_design"
     },
@@ -51811,7 +51838,7 @@
       "author": null,
       "contributor": null,
       "rationale": "scrypt with N=32768, r=8, p=3; 256-bit random session tokens; PostgreSQL stores only SHA-256 hashes; httpOnly, Secure, SameSite=Lax cookies; 90-day sliding lifetime; login rate limit per username+IP; CSRF via session-bound tokens in X-CSRF-Token header (except sendBeacon which uses JSON body)",
-      "community": 183,
+      "community": 14,
       "norm_label": "authentication and session management",
       "id": "concept_auth_session"
     },
@@ -51867,7 +51894,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Separate branch feat/appearance-settings from c4ee4f1; independent light/dark schemes per account (classic, forest, warm, plum); fonts (Roboto, system, serif); base sizes (16, 18, 20px); live example panel before save; browser-local light/dark mode; migration 0007_appearance preserves existing accounts",
-      "community": 374,
+      "community": 14,
       "norm_label": "appearance settings feature",
       "id": "concept_appearance_settings"
     },
@@ -51893,7 +51920,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 31,
       "norm_label": "adding a language guide",
       "id": "developer_adding_a_language"
     },
@@ -51984,7 +52011,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 31,
       "norm_label": "environment variables",
       "id": "developer_env_variables"
     },
@@ -51997,7 +52024,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 31,
       "norm_label": "developer glossary",
       "id": "developer_glossary"
     },
@@ -52010,7 +52037,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 183,
+      "community": 47,
       "norm_label": "listening and journal",
       "id": "developer_listening"
     },
@@ -52023,7 +52050,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 31,
       "norm_label": "omr pipeline and recognition reports",
       "id": "developer_omr_pipeline"
     },
@@ -52062,7 +52089,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 31,
       "norm_label": "developer setup",
       "id": "developer_setup"
     },
@@ -52075,7 +52102,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 31,
       "norm_label": "production smoke check",
       "id": "developer_smoke_check"
     },
@@ -52088,7 +52115,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 31,
       "norm_label": "spoken notes",
       "id": "developer_spoken_notes"
     },
@@ -52140,7 +52167,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 31,
       "norm_label": "troubleshooting guide",
       "id": "developer_troubleshooting"
     },
@@ -52153,7 +52180,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 31,
       "norm_label": "guess the note design spec",
       "id": "specs_guess_the_note_design"
     },
@@ -52206,7 +52233,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Chosen after PHASE 7 hardening; provides shared blue-gray theme with light and dark schemes; requires Chrome 117+ and Safari 17+; native date controls retained because Date Pickers requires an additional unapproved date library",
-      "community": 374,
+      "community": 47,
       "norm_label": "material ui v9",
       "id": "developer_architecture_material_ui"
     },
@@ -52232,7 +52259,7 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 31,
       "norm_label": "opensheetmusicdisplay",
       "id": "developer_architecture_osmd"
     },
@@ -52273,7 +52300,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Listening events carry CSRF token in JSON body rather than header because sendBeacon cannot set custom headers; all other mutations use header-based X-CSRF-Token",
-      "community": 183,
+      "community": 47,
       "norm_label": "csrf protection",
       "id": "developer_auth_csrf"
     },
@@ -52357,7 +52384,7 @@
       "author": null,
       "contributor": null,
       "rationale": "FK to users.id; level computed from xp using threshold array in config.py \u2014 not stored; maps to student role; supports multiple player profiles per parent account",
-      "community": 47,
+      "community": 31,
       "norm_label": "game player model",
       "id": "specs_game_player_model"
     },
@@ -52371,7 +52398,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Server generates all 7 tasks upfront; timing validated server-side (issued_at + time_limit + grace_ms); double-tap guard returns already-stored result idempotently for same task_index; tasks one at a time prevents pre-solving",
-      "community": 47,
+      "community": 31,
       "norm_label": "game round anti-cheat lifecycle",
       "id": "specs_game_round_lifecycle"
     },
@@ -52385,7 +52412,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Custom SVG per owner decision (not OpenSheetMusicDisplay); diatonic pitch-to-staff-position mapping; ledger lines only when needed (position < 0 or > 8); responsive via viewBox",
-      "community": 47,
+      "community": 31,
       "norm_label": "game staff svg renderer",
       "id": "specs_game_staff_svg_renderer"
     },
@@ -52413,7 +52440,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Child MUI theme wrapping only /game/* routes; does not affect the rest of the app; coral primary, sunflower secondary, mint success palette; Fredoka font (Cyrillic-capable) via @fontsource/fredoka; 24px border radius; pill-shaped buttons with 3D pressed effect",
-      "community": 374,
+      "community": 47,
       "norm_label": "gametheme child mui theme",
       "id": "specs_game_gametheme"
     },
@@ -52427,7 +52454,7 @@
       "author": null,
       "contributor": null,
       "rationale": "Kid-facing: one friendly hint per round based on top confusion; admin-facing: 7x7 heatmap expected x entered, top-3 confusions with counts, filterable by clef; aggregated in SQL with indexes on (season_id, player_id)",
-      "community": 47,
+      "community": 31,
       "norm_label": "confusion analytics",
       "id": "specs_game_confusion_analytics"
     },
@@ -52441,7 +52468,7 @@
       "author": null,
       "contributor": null,
       "rationale": "No sample files; triangle oscillator with frequency 440*2^((midi-69)/12); 0.3s decay envelope; AudioContext unlocked on first user gesture; fire-and-forget, errors silently swallowed \u2014 never blocks input",
-      "community": 47,
+      "community": 31,
       "norm_label": "game web audio synthesis",
       "id": "specs_game_web_audio_synthesis"
     },
@@ -74611,28 +74638,6 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L237",
-      "weight": 1.0,
-      "source": "game_test_avatar_generation_test_mood_edit_mask_targets_only_the_matching_ten_faces",
-      "target": "spoken_player_test_range"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L301",
-      "weight": 1.0,
-      "source": "game_test_avatar_generation_test_composed_mood_edits_do_not_add_pixels_outside_the_original_artwork",
-      "target": "spoken_player_test_range"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "backend/tests/game/test_avatar_generation.py",
       "source_location": "L229",
       "weight": 1.0,
       "source": "game_test_avatar_generation_test_progress_saved_gallery_and_all_thirty_private_frames_survive_reuse",
@@ -74680,17 +74685,6 @@
       "source_location": "L191",
       "weight": 1.0,
       "source": "tests_test_omr_test_main_records_runtime_version",
-      "target": "spoken_player_test_range"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "worker/generate_avatar.py",
-      "source_location": "L269",
-      "weight": 1.0,
-      "source": "worker_generate_avatar_make_mood_mask",
       "target": "spoken_player_test_range"
     },
     {
@@ -74768,6 +74762,39 @@
       "source_location": "L208",
       "weight": 1.0,
       "source": "worker_extract_avatar_art_seam",
+      "target": "spoken_player_test_range"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/tests/game/test_avatar_generation.py",
+      "source_location": "L237",
+      "weight": 1.0,
+      "source": "game_test_avatar_generation_test_mood_edit_mask_targets_only_the_matching_ten_faces",
+      "target": "spoken_player_test_range"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "backend/tests/game/test_avatar_generation.py",
+      "source_location": "L301",
+      "weight": 1.0,
+      "source": "game_test_avatar_generation_test_composed_mood_edits_do_not_add_pixels_outside_the_original_artwork",
+      "target": "spoken_player_test_range"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L269",
+      "weight": 1.0,
+      "source": "worker_generate_avatar_make_mood_mask",
       "target": "spoken_player_test_range"
     },
     {
@@ -113381,61 +113408,11 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L227",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "backend_tests_game_test_avatar_generation_py",
-      "target": "game_test_avatar_generation_test_mood_edit_mask_targets_only_the_matching_ten_faces"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L259",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "backend_tests_game_test_avatar_generation_py",
-      "target": "game_test_avatar_generation_test_composed_sheet_changes_only_the_two_mood_face_regions"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L293",
+      "source_location": "L215",
       "weight": 1.0,
       "source": "backend_tests_game_test_avatar_generation_py",
-      "target": "game_test_avatar_generation_test_composed_mood_edits_do_not_add_pixels_outside_the_original_artwork",
+      "target": "game_test_avatar_generation_test_one_sheet_request_creates_and_persists_all_thirty_frames",
       "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L293",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "backend_tests_game_test_avatar_generation_py",
-      "target": "game_test_avatar_generation_test_mood_edits_use_the_masked_image_edit_endpoint"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L335",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "backend_tests_game_test_avatar_generation_py",
-      "target": "game_test_avatar_generation_test_happy_and_sad_prompts_define_visibly_opposite_expressions"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L345",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "backend_tests_game_test_avatar_generation_py",
-      "target": "game_test_avatar_generation_test_one_sheet_and_two_mood_edits_create_and_persist_all_thirty_frames"
     },
     {
       "relation": "contains",
@@ -113561,21 +113538,11 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L665",
+      "source_location": "L528",
       "weight": 1.0,
-      "confidence_score": 1.0,
       "source": "backend_tests_game_test_avatar_generation_py",
-      "target": "game_test_avatar_generation_test_interrupted_mood_edit_is_not_requested_again"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L697",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "backend_tests_game_test_avatar_generation_py",
-      "target": "game_test_avatar_generation_test_mood_recovery_reuses_the_saved_happy_edit"
+      "target": "game_test_avatar_generation_test_legacy_masked_mood_job_fails_without_repeating_a_paid_request",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -113661,6 +113628,86 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/game/test_avatar_generation.py",
+      "source_location": "L227",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "backend_tests_game_test_avatar_generation_py",
+      "target": "game_test_avatar_generation_test_mood_edit_mask_targets_only_the_matching_ten_faces"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/game/test_avatar_generation.py",
+      "source_location": "L259",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "backend_tests_game_test_avatar_generation_py",
+      "target": "game_test_avatar_generation_test_composed_sheet_changes_only_the_two_mood_face_regions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/game/test_avatar_generation.py",
+      "source_location": "L293",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "backend_tests_game_test_avatar_generation_py",
+      "target": "game_test_avatar_generation_test_composed_mood_edits_do_not_add_pixels_outside_the_original_artwork"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/game/test_avatar_generation.py",
+      "source_location": "L293",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "backend_tests_game_test_avatar_generation_py",
+      "target": "game_test_avatar_generation_test_mood_edits_use_the_masked_image_edit_endpoint"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/game/test_avatar_generation.py",
+      "source_location": "L335",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "backend_tests_game_test_avatar_generation_py",
+      "target": "game_test_avatar_generation_test_happy_and_sad_prompts_define_visibly_opposite_expressions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/game/test_avatar_generation.py",
+      "source_location": "L345",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "backend_tests_game_test_avatar_generation_py",
+      "target": "game_test_avatar_generation_test_one_sheet_and_two_mood_edits_create_and_persist_all_thirty_frames"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/game/test_avatar_generation.py",
+      "source_location": "L665",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "backend_tests_game_test_avatar_generation_py",
+      "target": "game_test_avatar_generation_test_interrupted_mood_edit_is_not_requested_again"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/game/test_avatar_generation.py",
+      "source_location": "L697",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "backend_tests_game_test_avatar_generation_py",
+      "target": "game_test_avatar_generation_test_mood_recovery_reuses_the_saved_happy_edit"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/game/test_avatar_generation.py",
       "source_location": "L71",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -113719,17 +113766,6 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "game_test_avatar_generation_test_sheet_prompt_matches_all_growth_stages_and_mood_rows",
-      "target": "game_test_avatar_generation_sheet_bytes"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L297",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "game_test_avatar_generation_test_mood_edits_use_the_masked_image_edit_endpoint",
       "target": "game_test_avatar_generation_sheet_bytes"
     },
     {
@@ -113825,22 +113861,11 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L673",
+      "source_location": "L536",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "game_test_avatar_generation_test_interrupted_mood_edit_is_not_requested_again",
-      "target": "game_test_avatar_generation_sheet_bytes"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "backend/tests/game/test_avatar_generation.py",
-      "source_location": "L705",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "game_test_avatar_generation_test_mood_recovery_reuses_the_saved_happy_edit",
-      "target": "game_test_avatar_generation_sheet_bytes"
+      "source": "game_test_avatar_generation_test_legacy_masked_mood_job_fails_without_repeating_a_paid_request",
+      "target": "game_test_avatar_generation_sheet_bytes",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -113902,6 +113927,39 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "backend/tests/game/test_avatar_generation.py",
+      "source_location": "L297",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "game_test_avatar_generation_test_mood_edits_use_the_masked_image_edit_endpoint",
+      "target": "game_test_avatar_generation_sheet_bytes"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/game/test_avatar_generation.py",
+      "source_location": "L673",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "game_test_avatar_generation_test_interrupted_mood_edit_is_not_requested_again",
+      "target": "game_test_avatar_generation_sheet_bytes"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/game/test_avatar_generation.py",
+      "source_location": "L705",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "game_test_avatar_generation_test_mood_recovery_reuses_the_saved_happy_edit",
+      "target": "game_test_avatar_generation_sheet_bytes"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "backend/tests/game/test_avatar_generation.py",
       "source_location": "L166",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -113948,9 +114006,9 @@
       "source_file": "backend/tests/game/test_avatar_generation.py",
       "source_location": "L296",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "game_test_avatar_generation_test_composed_mood_edits_do_not_add_pixels_outside_the_original_artwork",
-      "target": "game_test_avatar_generation_irregular_separator_sheet",
-      "confidence_score": 1.0
+      "target": "game_test_avatar_generation_irregular_separator_sheet"
     },
     {
       "relation": "calls",
@@ -128526,56 +128584,6 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L228",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "worker_generate_avatar_py",
-      "target": "worker_generate_avatar_mood_edit_prompt"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "worker/generate_avatar.py",
-      "source_location": "L255",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "worker_generate_avatar_py",
-      "target": "worker_generate_avatar_png_bytes"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "worker/generate_avatar.py",
-      "source_location": "L261",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "worker_generate_avatar_py",
-      "target": "worker_generate_avatar_make_mood_mask"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "worker/generate_avatar.py",
-      "source_location": "L290",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "worker_generate_avatar_py",
-      "target": "worker_generate_avatar_edit_mood_sheet"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "worker/generate_avatar.py",
-      "source_location": "L330",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "worker_generate_avatar_py",
-      "target": "worker_generate_avatar_compose_mood_sheet"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "worker/generate_avatar.py",
       "source_location": "L109",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -128686,16 +128694,6 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L516",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "worker_generate_avatar_py",
-      "target": "worker_generate_avatar_ensure_mood_edited_sheet"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "worker/generate_avatar.py",
       "source_location": "L355",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -128796,6 +128794,66 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "worker/generate_avatar.py",
+      "source_location": "L228",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "worker_generate_avatar_py",
+      "target": "worker_generate_avatar_mood_edit_prompt"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L255",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "worker_generate_avatar_py",
+      "target": "worker_generate_avatar_png_bytes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L261",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "worker_generate_avatar_py",
+      "target": "worker_generate_avatar_make_mood_mask"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L290",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "worker_generate_avatar_py",
+      "target": "worker_generate_avatar_edit_mood_sheet"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L330",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "worker_generate_avatar_py",
+      "target": "worker_generate_avatar_compose_mood_sheet"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L516",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "worker_generate_avatar_py",
+      "target": "worker_generate_avatar_ensure_mood_edited_sheet"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/generate_avatar.py",
       "source_location": "L74",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -128850,28 +128908,6 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L326",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "worker_generate_avatar_edit_mood_sheet",
-      "target": "worker_generate_avatar_avatarerror"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "worker/generate_avatar.py",
-      "source_location": "L342",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "worker_generate_avatar_compose_mood_sheet",
-      "target": "worker_generate_avatar_avatarerror"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "worker/generate_avatar.py",
       "source_location": "L206",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -128887,17 +128923,6 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "worker_generate_avatar_leased_job",
-      "target": "worker_generate_avatar_avatarerror"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "worker/generate_avatar.py",
-      "source_location": "L529",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "worker_generate_avatar_ensure_mood_edited_sheet",
       "target": "worker_generate_avatar_avatarerror"
     },
     {
@@ -128953,6 +128978,39 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "worker_generate_avatar_process_one",
+      "target": "worker_generate_avatar_avatarerror"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L326",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "worker_generate_avatar_edit_mood_sheet",
+      "target": "worker_generate_avatar_avatarerror"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L342",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "worker_generate_avatar_compose_mood_sheet",
+      "target": "worker_generate_avatar_avatarerror"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L529",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "worker_generate_avatar_ensure_mood_edited_sheet",
       "target": "worker_generate_avatar_avatarerror"
     },
     {
@@ -129158,138 +129216,6 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L308",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "worker_generate_avatar_edit_mood_sheet",
-      "target": "worker_generate_avatar_mood_edit_prompt"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "worker/generate_avatar.py",
-      "source_location": "L287",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "worker_generate_avatar_make_mood_mask",
-      "target": "worker_generate_avatar_png_bytes"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "worker/generate_avatar.py",
-      "source_location": "L327",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "worker_generate_avatar_edit_mood_sheet",
-      "target": "worker_generate_avatar_png_bytes"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "worker/generate_avatar.py",
-      "source_location": "L345",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "worker_generate_avatar_compose_mood_sheet",
-      "target": "worker_generate_avatar_png_bytes"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "worker/generate_avatar.py",
-      "source_location": "L264",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "worker_generate_avatar_make_mood_mask",
-      "target": "worker_generate_avatar_grid_bounds"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "worker/generate_avatar.py",
-      "source_location": "L264",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "worker_generate_avatar_make_mood_mask",
-      "target": "worker_generate_avatar_separator_bands"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "worker/generate_avatar.py",
-      "source_location": "L294",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "worker_generate_avatar_edit_mood_sheet",
-      "target": "worker_generate_avatar_make_mood_mask"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "worker/generate_avatar.py",
-      "source_location": "L343",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "worker_generate_avatar_compose_mood_sheet",
-      "target": "worker_generate_avatar_make_mood_mask"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "worker/generate_avatar.py",
-      "source_location": "L293",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "worker_generate_avatar_edit_mood_sheet",
-      "target": "worker_generate_avatar_decode_sheet"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "worker/generate_avatar.py",
-      "source_location": "L561",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "worker_generate_avatar_ensure_mood_edited_sheet",
-      "target": "worker_generate_avatar_edit_mood_sheet"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "worker/generate_avatar.py",
-      "source_location": "L333",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "worker_generate_avatar_compose_mood_sheet",
-      "target": "worker_generate_avatar_decode_sheet"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "worker/generate_avatar.py",
-      "source_location": "L565",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "worker_generate_avatar_ensure_mood_edited_sheet",
-      "target": "worker_generate_avatar_compose_mood_sheet"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "worker/generate_avatar.py",
       "source_location": "L396",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -129378,10 +129304,10 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L562",
+      "source_location": "L351",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "worker_generate_avatar_ensure_mood_edited_sheet",
+      "source": "worker_generate_avatar_process_one",
       "target": "worker_generate_avatar_atomic_write"
     },
     {
@@ -129389,10 +129315,10 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L351",
+      "source_location": "L562",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "worker_generate_avatar_process_one",
+      "source": "worker_generate_avatar_ensure_mood_edited_sheet",
       "target": "worker_generate_avatar_atomic_write"
     },
     {
@@ -129477,17 +129403,6 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L560",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "worker_generate_avatar_ensure_mood_edited_sheet",
-      "target": "worker_generate_avatar_update"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "worker/generate_avatar.py",
       "source_location": "L328",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -129499,11 +129414,11 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "worker/generate_avatar.py",
-      "source_location": "L764",
+      "source_location": "L560",
       "weight": 1.0,
       "confidence_score": 1.0,
-      "source": "worker_generate_avatar_process_one",
-      "target": "worker_generate_avatar_ensure_mood_edited_sheet"
+      "source": "worker_generate_avatar_ensure_mood_edited_sheet",
+      "target": "worker_generate_avatar_update"
     },
     {
       "relation": "calls",
@@ -129525,6 +129440,28 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "worker_generate_avatar_generate_usable_sheet",
+      "target": "worker_generate_avatar_decode_sheet"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L293",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "worker_generate_avatar_edit_mood_sheet",
+      "target": "worker_generate_avatar_decode_sheet"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L333",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "worker_generate_avatar_compose_mood_sheet",
       "target": "worker_generate_avatar_decode_sheet"
     },
     {
@@ -129576,10 +129513,32 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "worker/generate_avatar.py",
+      "source_location": "L264",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "worker_generate_avatar_make_mood_mask",
+      "target": "worker_generate_avatar_separator_bands"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/generate_avatar.py",
       "source_location": "L475",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "worker_generate_avatar_figures",
+      "target": "worker_generate_avatar_grid_bounds"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L264",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "worker_generate_avatar_make_mood_mask",
       "target": "worker_generate_avatar_grid_bounds"
     },
     {
@@ -129614,6 +129573,17 @@
       "confidence_score": 1.0,
       "source": "worker_generate_avatar_main",
       "target": "worker_generate_avatar_process_one"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L764",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "worker_generate_avatar_process_one",
+      "target": "worker_generate_avatar_ensure_mood_edited_sheet"
     },
     {
       "relation": "calls",
@@ -133980,6 +133950,16 @@
       "source_file": "docs/developer/game-avatars.md",
       "source_location": "L358",
       "weight": 1.0,
+      "source": "developer_game_avatars_custom_creation",
+      "target": "developer_game_avatars_single_sheet_generation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/developer/game-avatars.md",
+      "source_location": "L358",
+      "weight": 1.0,
       "confidence_score": 1.0,
       "source": "developer_game_avatars_custom_creation",
       "target": "developer_game_avatars_base_sheet_generation_and_mood_edits"
@@ -138305,6 +138285,94 @@
       "target": "guess_the_note_prompts_01_main_claude_code_prompt_14_final_output"
     },
     {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L308",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "worker_generate_avatar_edit_mood_sheet",
+      "target": "worker_generate_avatar_mood_edit_prompt"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L287",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "worker_generate_avatar_make_mood_mask",
+      "target": "worker_generate_avatar_png_bytes"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L327",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "worker_generate_avatar_edit_mood_sheet",
+      "target": "worker_generate_avatar_png_bytes"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L345",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "worker_generate_avatar_compose_mood_sheet",
+      "target": "worker_generate_avatar_png_bytes"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L294",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "worker_generate_avatar_edit_mood_sheet",
+      "target": "worker_generate_avatar_make_mood_mask"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L343",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "worker_generate_avatar_compose_mood_sheet",
+      "target": "worker_generate_avatar_make_mood_mask"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L561",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "worker_generate_avatar_ensure_mood_edited_sheet",
+      "target": "worker_generate_avatar_edit_mood_sheet"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "worker/generate_avatar.py",
+      "source_location": "L565",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "worker_generate_avatar_ensure_mood_edited_sheet",
+      "target": "worker_generate_avatar_compose_mood_sheet"
+    },
+    {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -140936,5 +141004,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "fea1db19d1fa86cea9924aa4ca4fd7be4604f108"
+  "built_at_commit": "033c3bfe96e4f93ad2065eba9254e262f5e6d9f4"
 }

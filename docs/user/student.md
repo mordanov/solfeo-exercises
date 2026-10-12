@@ -136,7 +136,7 @@ To create an original character:
    The window shows the remaining quota and generation progress.
 4. Wait for generation and manager approval.
    The window shows the phase, saved images out of 30, and an approximate remaining time.
-   The counter stays at 0 while the service creates the base and edits both emotions.
+   The counter stays at 0 while the service creates one sheet with all 3 emotions.
    It increases when the application cuts and saves the images.
    A longer wait shows an unknown estimate instead of false completion.
 5. Check the pending selection.

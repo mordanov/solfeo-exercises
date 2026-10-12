@@ -355,19 +355,14 @@ Any authenticated member can retrieve frames only for ready approved avatars.
 Pending and rejected images remain private to the creator and managers.
 Never include these files in a public avatar directory or browser cache.
 
-### Base-sheet generation and mood edits
+### Single-sheet generation
 
-The default generation and edit models are `gpt-image-1-mini` with low quality.
-One image-generation request creates a transparent `1024x1536` base sheet.
-The base prompt gives all 30 faces the same calm, neutral expression.
-Two masked image-edit requests add happy and sad expressions to 10 faces each.
-Each mask covers only the face pixels in the matching emotion rows and excludes transparent source pixels.
-The worker copies edited pixels only inside these clipped masks and preserves the base sheet elsewhere.
-Composition preserves the base alpha channel, so edits cannot add pixels outside the original character artwork.
-The successful sheet flow uses 3 image requests instead of 30 separate variant requests.
+The default image model is `gpt-image-1-mini` with low quality.
+One image-generation request creates a transparent `1024x1536` sheet with all 30 frames.
+The sheet contains all 10 levels and all 3 moods.
 Portrait generation remains a separate best-effort request.
 An automatic moderation request checks the description first.
-Automatic image moderation checks the composed sheet before local extraction and manager review.
+Automatic image moderation checks the generated sheet before local extraction and manager review.
 The prompt requires 5 columns, 6 rows, consistent identity, and empty gutters.
 It requests 4 vertical and 5 horizontal cyan divider lines between the cells.
 The worker detects these bands and excludes them from each frame crop.
@@ -378,12 +373,13 @@ The prompt keeps equal cell dimensions, camera distance, and full-body framing.
 Body proportions grow through 10 distinct stages, from a baby near 2 heads tall to a titan near 6–7 heads tall.
 Each stage adds age-specific clothing, features, and accessories while preserving the same individual and species.
 Rows 1 and 4 contain neutral levels 1–5 and 6–10.
-Rows 2 and 5 receive happy face edits.
-Rows 3 and 6 receive sad face edits.
-Happy edits require a clearly upturned open smile, lifted cheeks, bright eyes, and raised brows.
-Sad edits require a clearly downturned closed mouth, inner raised brows, and softened drooping eyelids.
-The edits add no tears, sparkles, props, or distress.
-The worker preserves every unmasked face, character, outfit, body, pose, separator, and background.
+Rows 2 and 5 contain happy levels 1–5 and 6–10.
+Rows 3 and 6 contain sad levels 1–5 and 6–10.
+Each level keeps the same body, outfit, proportions, and framing across all 3 moods.
+The prompt changes only the face and slight posture between moods.
+Happy expressions use an open smile, bright eyes, and a few small sparkles.
+Sad expressions use drooping eyes, a lowered head or ears, and at most 1 small cartoon tear.
+All expressions remain sympathetic and child-friendly.
 The worker rejects cells with visible pixels under 2% of their area.
 It accepts figures that touch cell edges and crops them to visible bounds.
 Pixels with alpha below 32 are ignored as antialiasing residue.
@@ -433,10 +429,12 @@ All controls, statuses, accessible labels, and errors follow the selected langua
 Migration `0011_game_rewards_review` marks existing ready avatars approved without another provider request.
 This includes legacy avatars, preserving earlier approved-looking selections and progress.
 
-During provider generation and mood edits, the saved-image count stays at 0.
-The interface explains that one base sheet receives separate happy and sad edits.
-Local extraction advances the count only after each file reaches storage.
-The estimate uses up to 5 recent, uninterrupted successful jobs or the configured initial duration.
+During sheet generation, the saved-frame count stays at 0.
+Local extraction advances the count only after each frame reaches storage.
+Portrait generation does not change the saved-frame count.
+The interface explains that one request creates all 30 levels and moods.
+The estimate includes sheet generation, frame extraction, and portrait generation.
+It uses up to 5 recent, uninterrupted successful jobs or the configured initial duration.
 An overdue estimate becomes unknown instead of reporting false completion.
 The player can close the window and return to the same job.
 
@@ -447,6 +445,7 @@ The worker claims jobs with `FOR UPDATE SKIP LOCKED` and a durable lease token.
 An active claim prevents another worker from repeating the request.
 An expired claim reuses a saved sheet without another image request.
 An interrupted generation without a saved sheet fails explicitly; no automatic paid retry occurs.
+Legacy masked-edit jobs fail explicitly; the worker does not repeat their paid edits.
 Lease checks prevent a late provider reply from replacing another worker's saved sheet.
 Moderation refunds only the linked quota record.
 Manager rejection does not repeat a paid request.

@@ -321,7 +321,7 @@ Follows the OMR worker pattern:
 
 1. `POST /api/game/avatars/generate` writes `custom_avatars` row (`status='pending'`), writes log row, returns `{job_id}`.
 2. `worker/generate_avatar.py` polls: `SELECT … FOR UPDATE SKIP LOCKED`.
-3. Worker: run description through OpenAI moderation → if flagged, `status='failed'`, `billable=false`. Else: generate base image (DALL-E, `settings.avatar_image_model`), generate happy + sad variants via image edit with base as reference. Save to `media_root/avatars/custom/{job_id}/`. Set `status='ready'`.
+3. Worker: run description through OpenAI moderation → if flagged, `status='failed'`, `billable=false`. Else: generate one sheet with all 30 level and mood frames in one image request. Save it to `media_root/avatars/custom/{job_id}/`, split the frames, and request a separate optional face portrait. Set `status='ready'`.
 4. Client polls `GET /api/game/avatars/{job_id}/status` every 2 s.
 5. Preview shown on `ready` → "Use this" / "Discard".
 

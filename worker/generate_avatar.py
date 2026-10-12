@@ -35,7 +35,6 @@ STATES = ("neutral", "happy", "sad")
 PORTRAIT_SIZE = 256
 SHEET_ATTEMPTS = 2
 SHEET_LAYOUT_MARKER = "separator-grid-v1\n"
-SHEET_MOOD_EDITS_MARKER = "masked-moods-v1\n"
 PORTRAIT_SYSTEM = (
     "Create ONE close-up face portrait icon of an original child-friendly magical "
     "creature: only the head and face, centered, filling a perfect circle with a "
@@ -85,14 +84,17 @@ IMAGE_SYSTEM = (
     "Baby phoenixes are fluffy chicks; later feathers grow larger with soft cartoon "
     "flames. Keep recognizable species anatomy while allowing heroic posture at high "
     "levels. Use no weapons or tridents. "
-    "Rows 1-3 show levels 1-5; rows 4-6 show levels 6-10. Rows 1 and 4 are "
-    "neutral; rows 2 and 5 will receive happy face edits; rows 3 and 6 will "
-    "receive sad face edits later. Render all 30 faces with the same calm neutral "
-    "expression in this base sheet. Every neutral face has relaxed level brows, "
-    "open attentive eyes, and a small closed mouth with no upward smile. "
-    "Do not draw open-mouth smiles, joyful sparkles, tears, downturned mouths, or "
-    "sad expressions in any base-sheet cell. Keep each level's body size, "
-    "proportions, outfit, and framing identical across its three rows."
+    "Rows 1-3 show levels 1-5; rows 4-6 show levels 6-10. "
+    "Rows 1 and 4: neutral; rows 2 and 5: happy; rows 3 and 6: sad. "
+    "For each level, keep the body size, proportions, outfit, and framing identical "
+    "across its three moods. Change only the face and slight posture. "
+    "Neutral: calm, friendly default face; strong forms look serious and focused. "
+    "Happy: big joyful expression, wide open smile, sparkling eyes, and a few small "
+    "sparkles; strong forms use a proud confident grin, not a silly one. "
+    "Sad: gentle disappointed expression, drooping eyes, one small cartoon tear at "
+    "most, and a slightly lowered head or ears. Strong forms look stoic and slightly "
+    "crestfallen, never distressed. Keep every expression sympathetic and "
+    "child-friendly."
 )
 
 
@@ -225,129 +227,6 @@ def _decode_image_reply(settings: Settings, response: dict[str, object]) -> byte
     return data
 
 
-def _mood_edit_prompt(state: Literal["happy", "sad"]) -> str:
-    shared = (
-        "Edit only the transparent oval masks on the supplied exact reference sheet. "
-        "Each oval contains one character face. Apply the requested expression to "
-        "all 10 masked faces and make the expression unmistakable at small size. "
-        "Do not change anything outside the masks: preserve every cell, separator, "
-        "character identity, age, head size, hair, species features, outfit, body, "
-        "pose, palette, framing, background, and transparency. Never add text, "
-        "sparkles, props, or decoration. Do not make unmasked faces happy or sad."
-    )
-    if state == "happy":
-        return (
-            shared
-            + " HAPPY expression: broad clearly upturned open smile, visible curved "
-            "smile corners, lifted cheeks, bright wide eyes, and slightly raised "
-            "brows. Every edited face must look joyful. Do not use a closed neutral "
-            "mouth or a downturned mouth."
-        )
-    return (
-        shared
-        + " SAD expression: clearly downturned closed mouth, inner brows raised and "
-        "outer brows lowered, softened drooping eyelids, and a slightly lowered "
-        "expression. Every edited face must look disappointed but gentle. No smile, "
-        "open joyful mouth, sparkling eyes, tears, or distress."
-    )
-
-
-def _png_bytes(image: Image.Image) -> bytes:
-    output = io.BytesIO()
-    image.save(output, format="PNG")
-    return output.getvalue()
-
-
-def _make_mood_mask(
-    image: Image.Image, state: Literal["happy", "sad"]
-) -> tuple[bytes, Image.Image]:
-    columns = _grid_bounds(image.width, 5, _separator_bands(image, vertical=True))
-    rows = _grid_bounds(image.height, 6, _separator_bands(image, vertical=False))
-    editable = Image.new("L", image.size, 0)
-    draw = ImageDraw.Draw(editable)
-    state_index = STATES.index(state)
-    for level in range(1, 11):
-        column = (level - 1) % 5
-        row = (level - 1) // 5 * 3 + state_index
-        left, right = columns[column]
-        top, bottom = rows[row]
-        width = right - left
-        height = bottom - top
-        draw.ellipse(
-            (
-                left + int(width * 0.24),
-                top + int(height * 0.08),
-                left + int(width * 0.76),
-                top + int(height * 0.52),
-            ),
-            fill=255,
-        )
-    editable = ImageChops.multiply(editable, image.getchannel("A"))
-    provider_mask = Image.new("RGBA", image.size, (0, 0, 0, 255))
-    provider_mask.putalpha(ImageChops.invert(editable))
-    return _png_bytes(provider_mask), editable
-
-
-def _edit_mood_sheet(
-    settings: Settings, source: bytes, state: Literal["happy", "sad"]
-) -> bytes:
-    image = _decode_sheet(io.BytesIO(source), settings)
-    mask, _ = _make_mood_mask(image, state)
-    size = f"{image.width}x{image.height}"
-    payload: dict[str, object] = {
-        "model": settings.avatar_image_edit_model,
-        "images": [
-            {
-                "image_url": "data:image/png;base64,"
-                + base64.b64encode(source).decode("ascii")
-            }
-        ],
-        "mask": {
-            "image_url": "data:image/png;base64,"
-            + base64.b64encode(mask).decode("ascii")
-        },
-        "prompt": _mood_edit_prompt(state),
-        "n": 1,
-        "size": size,
-        "quality": settings.avatar_image_quality,
-        "background": "transparent",
-        "output_format": "png",
-    }
-    edited = _decode_image_reply(
-        settings,
-        _openai_post(
-            settings,
-            "/images/edits",
-            payload,
-            settings.avatar_gen_timeout_seconds,
-        ),
-    )
-    result = _decode_sheet(io.BytesIO(edited), settings)
-    if result.size != image.size:
-        raise AvatarError("AVATAR_SHEET_INVALID", f"mood={state}")
-    return _png_bytes(result)
-
-
-def _compose_mood_sheet(
-    settings: Settings, source: bytes, happy: bytes, sad: bytes
-) -> bytes:
-    base = _decode_sheet(io.BytesIO(source), settings)
-    base_alpha = base.getchannel("A")
-    composed = base.copy()
-    edits: tuple[tuple[Literal["happy", "sad"], bytes], ...] = (
-        ("happy", happy),
-        ("sad", sad),
-    )
-    for state, edit_data in edits:
-        edited = _decode_sheet(io.BytesIO(edit_data), settings)
-        if edited.size != base.size:
-            raise AvatarError("AVATAR_SHEET_INVALID", f"mood={state}")
-        _, editable = _make_mood_mask(base, state)
-        composed = Image.composite(edited, composed, editable)
-        composed.putalpha(base_alpha)
-    return _png_bytes(composed)
-
-
 def _generate_sheet(settings: Settings, description: str) -> bytes:
     return _generate_image(
         settings, IMAGE_SYSTEM + "\nCreature: " + description, "1024x1536"
@@ -453,12 +332,8 @@ def _save_sheet(database: Database, lease: Lease, path: Path, data: bytes) -> No
     with database.session() as session, session.begin():
         job = _leased_job(session, lease)
         _atomic_write(path.parent / "sheet-layout.txt", SHEET_LAYOUT_MARKER.encode())
-        _atomic_write(
-            path.parent / "sheet-mood-edits.txt",
-            SHEET_MOOD_EDITS_MARKER.encode(),
-        )
         _atomic_write(path, data)
-        job.phase = "mood_happy"
+        job.phase = "image_moderating"
         job.locked_at = datetime.now(UTC)
 
 
@@ -514,61 +389,6 @@ def _update(
             job.base_path = prefix + "neutral.png"
             job.happy_path = prefix + "happy.png"
             job.sad_path = prefix + "sad.png"
-
-
-def _ensure_mood_edited_sheet(
-    database: Database,
-    lease: Lease,
-    settings: Settings,
-    root: Path,
-    source_path: Path,
-    previous_phase: str,
-    generated_now: bool,
-) -> Path:
-    marker = root / "sheet-mood-edits.txt"
-    if not marker.is_file():
-        return source_path
-    if marker.read_text() != SHEET_MOOD_EDITS_MARKER:
-        raise AvatarError("AVATAR_SHEET_INVALID", "mood=metadata")
-
-    composed_path = root / "sheet-composed.png"
-    if composed_path.is_file():
-        return composed_path
-    if not generated_now and previous_phase not in {
-        "generating",
-        "mood_happy",
-        "mood_sad",
-    }:
-        raise AvatarError("AVATAR_GENERATION_INTERRUPTED")
-
-    source = source_path.read_bytes()
-    edit_paths = {
-        "happy": root / "mood-happy.png",
-        "sad": root / "mood-sad.png",
-    }
-    phases: tuple[tuple[Literal["happy", "sad"], str], ...] = (
-        ("happy", "mood_happy"),
-        ("sad", "mood_sad"),
-    )
-    edits: dict[str, bytes] = {}
-    for state, phase in phases:
-        path = edit_paths[state]
-        if path.is_file():
-            edits[state] = path.read_bytes()
-            continue
-        if not generated_now and previous_phase == phase:
-            raise AvatarError("AVATAR_GENERATION_INTERRUPTED")
-        if not generated_now and previous_phase == "mood_sad" and state == "happy":
-            raise AvatarError("AVATAR_GENERATION_INTERRUPTED")
-        _update(database, lease, phase)
-        edited = _edit_mood_sheet(settings, source, state)
-        _atomic_write(path, edited)
-        edits[state] = edited
-
-    composed = _compose_mood_sheet(settings, source, edits["happy"], edits["sad"])
-    _atomic_write(composed_path, composed)
-    _update(database, lease, "image_moderating")
-    return composed_path
 
 
 def _decode_sheet(source: Path | IO[bytes], settings: Settings) -> Image.Image:
@@ -749,11 +569,12 @@ def process_one(database: Database, settings: Settings) -> bool:
     root = settings.media_root / "avatars" / "custom" / str(lease.job_id)
     sheet = root / "sheet.png"
     try:
-        generated_now = False
         with database.session() as session:
             job = session.get(CustomAvatar, lease.job_id)
             assert job is not None
             previous_phase = job.phase
+        if (root / "sheet-mood-edits.txt").is_file():
+            raise AvatarError("AVATAR_GENERATION_INTERRUPTED")
         if not sheet.is_file():
             if previous_phase != "queued":
                 raise AvatarError("AVATAR_GENERATION_INTERRUPTED")
@@ -763,19 +584,9 @@ def process_one(database: Database, settings: Settings) -> bool:
             _update(database, lease, "generating")
             data = _generate_usable_sheet(settings, lease.description)
             _save_sheet(database, lease, sheet, data)
-            generated_now = True
-        final_sheet = _ensure_mood_edited_sheet(
-            database,
-            lease,
-            settings,
-            root,
-            sheet,
-            previous_phase,
-            generated_now,
-        )
-        if final_sheet.stat().st_size > settings.avatar_gen_max_image_bytes:
+        if sheet.stat().st_size > settings.avatar_gen_max_image_bytes:
             raise AvatarError("AVATAR_IMAGE_TOO_LARGE")
-        sheet_data = final_sheet.read_bytes()
+        sheet_data = sheet.read_bytes()
         digest = hashlib.sha256(sheet_data).hexdigest()
         proof_path = root / "moderation.json"
         # Old workers persisted sheets without moderation; phase alone is not proof.
@@ -785,7 +596,7 @@ def process_one(database: Database, settings: Settings) -> bool:
                 raise AvatarError("MODERATION_FLAGGED")
             _save_image_moderation(database, lease, proof_path, digest)
         _update(database, lease, "splitting")
-        image = _load_sheet(final_sheet, settings)
+        image = _load_sheet(sheet, settings)
         layout_marker = root / "sheet-layout.txt"
         requires_separator_lines = False
         if layout_marker.is_file():
