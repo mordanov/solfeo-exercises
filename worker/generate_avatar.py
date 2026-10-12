@@ -282,6 +282,7 @@ def _make_mood_mask(
             ),
             fill=255,
         )
+    editable = ImageChops.multiply(editable, image.getchannel("A"))
     provider_mask = Image.new("RGBA", image.size, (0, 0, 0, 255))
     provider_mask.putalpha(ImageChops.invert(editable))
     return _png_bytes(provider_mask), editable
@@ -331,6 +332,7 @@ def _compose_mood_sheet(
     settings: Settings, source: bytes, happy: bytes, sad: bytes
 ) -> bytes:
     base = _decode_sheet(io.BytesIO(source), settings)
+    base_alpha = base.getchannel("A")
     composed = base.copy()
     edits: tuple[tuple[Literal["happy", "sad"], bytes], ...] = (
         ("happy", happy),
@@ -342,6 +344,7 @@ def _compose_mood_sheet(
             raise AvatarError("AVATAR_SHEET_INVALID", f"mood={state}")
         _, editable = _make_mood_mask(base, state)
         composed = Image.composite(edited, composed, editable)
+        composed.putalpha(base_alpha)
     return _png_bytes(composed)
 
 

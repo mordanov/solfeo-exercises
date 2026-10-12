@@ -5,11 +5,11 @@ This document records progress and remaining checks for the current phase.
 Prerequisites:
 - Read `docs/PHASES.md` and `docs/DECISIONS.md`.
 
-Last updated: 2026-08-18 by Copilot, session `61fe8212-2c67-4bc5-a715-02be5593ee0e`.
+Last updated: 2026-10-12 by Copilot, session `61fe8212-2c67-4bc5-a715-02be5593ee0e`.
 
 ## Current phase
 Custom avatar emotion generation separates happy and sad faces from the neutral base sheet.
-The current branch is `main`.
+The current branch is `fix/avatar-mood-expressions`.
 Accepted PHASE 7 remains closed.
 Earlier game, appearance, and listening entries below remain historical session records.
 
@@ -17,12 +17,17 @@ Earlier game, appearance, and listening entries below remain historical session 
 
 The worker generates a neutral base sheet, then makes separate masked edits for happy and sad faces.
 Each edit targets 10 faces and leaves neutral faces, bodies, outfits, separators, and backgrounds unchanged.
+Mood masks now exclude transparent pixels from the source sheet, and composition restores its original alpha channel.
+This prevents the edit model from adding detached fragments outside the original artwork.
 The worker saves the original sheet, both edit results, and the composed sheet for recovery.
 The successful sheet flow uses 3 image requests; the separate face portrait remains best effort.
 Recovery reuses saved edits and never repeats an edit after an uncertain interruption.
-No provider request or production deployment occurred during this change.
-All 164 game backend tests pass, and all 38 focused avatar and locale frontend tests pass.
-Backend quality checks, frontend lint, formatting, type checking, and production build pass.
+The regression test reproduces added pixels in a transparent face-mask area and confirms that the worker rejects them.
+All 33 avatar generation tests pass. No provider request or production deployment occurred during this change.
+The earlier mood change passed 164 game backend tests and 38 focused avatar and locale frontend tests.
+Ruff and formatting pass for the changed Python files.
+Mypy reports the existing untyped Pillow `getextrema` call in the worker.
+Earlier frontend lint, formatting, type checking, and production build pass.
 The full frontend suite fails locally: Node 18 is below Vite's minimum (26 failures); Node 26 reports 46 failures.
 CI uses Node 22.23.3, which is not available in this environment.
 
@@ -30,7 +35,8 @@ Remaining manual checks:
 1. Generate one avatar through the configured provider.
 2. Inspect neutral, happy, and sad expressions at all 10 levels.
 3. Confirm the body, outfit, size, identity, and framing remain consistent across moods.
-4. Interrupt an edit and confirm the worker does not issue that paid request again.
+4. Confirm mood edits add no fragments outside the original character artwork.
+5. Interrupt an edit and confirm the worker does not issue that paid request again.
 
 ### Shared custom avatars
 

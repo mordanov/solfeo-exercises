@@ -361,8 +361,9 @@ The default generation and edit models are `gpt-image-1-mini` with low quality.
 One image-generation request creates a transparent `1024x1536` base sheet.
 The base prompt gives all 30 faces the same calm, neutral expression.
 Two masked image-edit requests add happy and sad expressions to 10 faces each.
-Each mask covers only the face area in the matching emotion rows.
-The worker copies edited pixels only inside each mask and preserves the base sheet elsewhere.
+Each mask covers only the face pixels in the matching emotion rows and excludes transparent source pixels.
+The worker copies edited pixels only inside these clipped masks and preserves the base sheet elsewhere.
+Composition preserves the base alpha channel, so edits cannot add pixels outside the original character artwork.
 The successful sheet flow uses 3 image requests instead of 30 separate variant requests.
 Portrait generation remains a separate best-effort request.
 An automatic moderation request checks the description first.
