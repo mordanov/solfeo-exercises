@@ -290,6 +290,41 @@ def test_composed_sheet_changes_only_the_two_mood_face_regions(
     assert result.getpixel((150, 100)) == source.getpixel((150, 100))
 
 
+def test_composed_mood_edits_do_not_add_pixels_outside_the_original_artwork(
+    settings: Settings,
+) -> None:
+    source = irregular_separator_sheet()
+    _, editable = generate_avatar._make_mood_mask(source, "happy")
+    source_alpha = source.getchannel("A")
+    editable_pixels = editable.tobytes()
+    source_alpha_pixels = source_alpha.tobytes()
+    point = next(
+        (x, y)
+        for y in range(source.height)
+        for x in range(source.width)
+        if editable_pixels[y * source.width + x] > 0
+        and source_alpha_pixels[y * source.width + x] > 0
+    )
+    source.putpixel(point, (0, 0, 0, 0))
+    mask_data, clipped_editable = generate_avatar._make_mood_mask(source, "happy")
+    with Image.open(io.BytesIO(mask_data)) as mask:
+        mask_alpha = mask.getchannel("A").tobytes()
+        assert mask_alpha[point[1] * source.width + point[0]] == 255
+    clipped_editable_pixels = clipped_editable.tobytes()
+    assert clipped_editable_pixels[point[1] * source.width + point[0]] == 0
+    edit = Image.new("RGBA", source.size, (255, 0, 0, 255))
+
+    result_data = generate_avatar._compose_mood_sheet(
+        settings,
+        generate_avatar._png_bytes(source),
+        generate_avatar._png_bytes(edit),
+        generate_avatar._png_bytes(edit),
+    )
+    result = Image.open(io.BytesIO(result_data)).convert("RGBA")
+
+    assert result.getpixel(point) == source.getpixel(point)
+
+
 def test_mood_edits_use_the_masked_image_edit_endpoint(
     settings: Settings, monkeypatch: pytest.MonkeyPatch
 ) -> None:
