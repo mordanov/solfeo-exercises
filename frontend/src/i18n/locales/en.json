@@ -24,7 +24,7 @@
   "errors.MODERATION_FLAGGED": "The description or generated image did not pass the safety check. Try another original, child-friendly creature.",
   "errors.AVATAR_JOB_BUSY": "This player already has a generation in progress.",
   "errors.AVATAR_SHEET_INVALID": "The image service did not produce a complete, separated 30-character sheet. The original is retained; no automatic paid retry occurs.",
-  "errors.AVATAR_GENERATION_INTERRUPTED": "Generation was interrupted before its image was saved. No automatic paid retry occurs.",
+  "errors.AVATAR_GENERATION_INTERRUPTED": "Generation was interrupted and cannot resume safely. No automatic paid retry occurs.",
   "errors.AVATAR_PROVIDER_AUTH_ERROR": "The image service rejected its credentials or model access. Ask the manager to check configuration.",
   "errors.AVATAR_PROVIDER_REQUEST_FAILED": "The image service rejected the request. Ask the manager to check model access and billing.",
   "errors.AVATAR_PROVIDER_TIMEOUT": "The image service did not respond in time. No automatic paid retry occurs.",

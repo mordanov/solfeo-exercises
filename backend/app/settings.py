@@ -252,9 +252,6 @@ class Settings(BaseSettings):
     avatar_image_model: str = Field(
         default="gpt-image-1-mini", validation_alias="AVATAR_IMAGE_MODEL"
     )
-    avatar_image_edit_model: str = Field(
-        default="gpt-image-1-mini", validation_alias="AVATAR_IMAGE_EDIT_MODEL"
-    )
     avatar_image_quality: Literal["low", "medium", "high"] = Field(
         default="low", validation_alias="AVATAR_IMAGE_QUALITY"
     )

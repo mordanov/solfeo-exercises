@@ -159,10 +159,9 @@ Only the OMR container needs executable temporary memory for JavaCPP native libr
 | `GAME_TIMEZONE` | `UTC` | IANA time zone for game calendar-day prizes and daily generation quotas |
 | `GAME_FEEDBACK_MS` | `900` | Server-controlled answer-feedback duration in milliseconds |
 | `AVATAR_IMAGE_MODEL` | `gpt-image-1-mini` | Economical model for one sheet with 30 avatar variants |
-| `AVATAR_IMAGE_EDIT_MODEL` | `gpt-image-1-mini` | Model for masked happy and sad avatar face edits |
 | `AVATAR_IMAGE_QUALITY` | `low` | GPT Image quality: low, medium, or high |
 | `AVATAR_GEN_TIMEOUT_SECONDS` | `180` | Image request timeout; expired claims add a 60 s margin |
-| `AVATAR_GEN_ESTIMATED_SECONDS` | `300` | Initial approximate duration for sheet generation, mood edits, and frame extraction |
+| `AVATAR_GEN_ESTIMATED_SECONDS` | `300` | Initial approximate duration for sheet generation, frame extraction, and portrait generation |
 | `AVATAR_GEN_MAX_IMAGE_BYTES` | `16777216` | Maximum decoded PNG bytes; encoded replies have a bounded size |
 | `AVATAR_GEN_POLL_SECONDS` | `2` | Delay between avatar worker cycles |
 | `AVATAR_GEN_DAILY_LIMIT` | `3` | Maximum billable avatar generations per student per day |

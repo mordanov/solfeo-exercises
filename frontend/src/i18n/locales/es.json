@@ -24,7 +24,7 @@
   "errors.MODERATION_FLAGGED": "La descripción o imagen generada no superó la comprobación de seguridad. Prueba otra criatura original adecuada para niños.",
   "errors.AVATAR_JOB_BUSY": "Ya se está creando un avatar para este jugador.",
   "errors.AVATAR_SHEET_INVALID": "El servicio no produjo una imagen completa con 30 personajes separados. Se conserva el original; no hay otro intento de pago automático.",
-  "errors.AVATAR_GENERATION_INTERRUPTED": "La generación se interrumpió antes de guardar su imagen. No hay otro intento de pago automático.",
+  "errors.AVATAR_GENERATION_INTERRUPTED": "La generación se interrumpió y no se puede reanudar de forma segura. No habrá otro intento de pago automático.",
   "errors.AVATAR_PROVIDER_AUTH_ERROR": "El servicio rechazó las credenciales o el acceso al modelo. Pide al gestor que revise la configuración.",
   "errors.AVATAR_PROVIDER_REQUEST_FAILED": "El servicio rechazó la solicitud. Pide al gestor que revise el acceso al modelo y la facturación.",
   "errors.AVATAR_PROVIDER_TIMEOUT": "El servicio no respondió a tiempo. No hay otro intento de pago automático.",

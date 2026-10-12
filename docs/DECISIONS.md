@@ -7,6 +7,11 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-10-12: The owner approves one image request for all custom avatar moods.
+  Generate the 30 frames together, with neutral, happy, and sad rows in one sheet.
+  Do not use masked image edits to add expressions.
+  Fail legacy masked-edit jobs safely instead of repeating paid requests.
+
 - 2026-08-18: The owner selects 3 image requests to separate custom avatar emotions.
   Generate one neutral base sheet, then edit all happy faces and all sad faces in separate masked requests.
   Copy edited pixels only inside the matching face masks; preserve neutral faces and all character artwork.
