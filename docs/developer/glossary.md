@@ -7,6 +7,8 @@ Prerequisites:
 
 | Term | Meaning |
 |---|---|
+| Chapter | A numbered group of exercises that a manager creates. Each exercise belongs to exactly one chapter, and students can select one or more chapters for a listening run. |
+| listening run | One active selection of chapters and up to 10 exercises, sampled and shuffled once, that a student can resume across devices or cancel. |
 | OMR | Optical music recognition, which converts an original image into machine-readable notation. |
 | MusicXML | The notation format that Audiveris exports. |
 | event | One written note or rest in the original image or MusicXML. |
