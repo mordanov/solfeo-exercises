@@ -1518,3 +1518,12 @@ After deploying the avatar fix, generate a new avatar: it must reach review, and
 - The current CLI credential cannot manage repository Actions secrets: the public-key API returns HTTP 403.
 - The deployment job confirms valid SSH configuration and removes its temporary registry credentials.
 - Development still uses the bootstrap database role; the separate production configuration does not.
+
+## Chapter-based exercise selection
+
+- The owner approves the design on 2026-10-19; implementation has not started.
+- Managers create numbered chapters and assign every exercise to exactly one chapter.
+- Students select chapters for a saved, randomized run of up to 10 exercises.
+- The run resumes across devices and supports cancellation.
+- The design adds a Chapter filter to the manager journal.
+- See `docs/superpowers/specs/2026-10-19-exercise-chapters-design.md`.
