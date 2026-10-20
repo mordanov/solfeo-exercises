@@ -7,8 +7,8 @@ Prerequisites:
 
 | Term | Meaning |
 |---|---|
-| Chapter | A numbered group of exercises that a manager creates. Each exercise belongs to exactly one chapter, and students can select one or more chapters for a listening run. |
-| listening run | One active selection of chapters and up to 10 exercises, sampled and shuffled once, that a student can resume across devices or cancel. |
+| Chapter | A numbered group of exercises that a manager creates. Each exercise belongs to one chapter, and students can select one or more chapters for a listening run. |
+| listening run | A saved student queue of up to 10 distinct exercises from selected chapters, with a randomized order and resumable position. A student can cancel the active run. |
 | OMR | Optical music recognition, which converts an original image into machine-readable notation. |
 | MusicXML | The notation format that Audiveris exports. |
 | event | One written note or rest in the original image or MusicXML. |
@@ -51,7 +51,7 @@ Prerequisites:
 | listening event | A start, heartbeat, end, or ended request for one listening session. |
 | heartbeat | A periodic playback update that preserves the current session's maximum position. |
 | beacon | A browser request queued during page exit without custom headers. |
-| sequential pointer | The saved next exercise for one student in ordered mode. |
+| sequential pointer | A saved next-exercise reference from the former selection modes. The current student interface uses listening runs instead. |
 | snapshot | Values retained when the first listening event creates a journal row. |
 | linking code | A single-use secret that associates a Telegram sender with an authenticated manager. |
 | staged import | Converted audio owned by a manager before application to an exercise. |

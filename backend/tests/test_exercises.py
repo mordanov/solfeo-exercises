@@ -5,6 +5,8 @@ from pathlib import Path
 import httpx
 import pytest
 from PIL import Image
+from sqlalchemy import delete, select
+from sqlalchemy.orm import Session
 from test_auth import (  # Reuse the disposable database and authenticated API fixtures.
     anyio_backend,
     client,
@@ -16,7 +18,9 @@ from test_auth import (
     settings as auth_settings,
 )
 
-from app.models import Exercise
+from app.database import Database
+from app.models import Chapter, Exercise
+from app.services import exercises as exercise_service
 from app.services.auth import ServiceError
 from app.services.media import prepare_media
 from app.settings import Settings
@@ -79,6 +83,8 @@ async def test_crud_original_and_soft_delete(
 ) -> None:
     await login(client)
     identifier = await create_exercise(client, png)
+    defaulted = (await client.get(f"/api/exercises/{identifier}")).json()
+    assert (defaulted["chapter_id"], defaulted["chapter_number"]) == (1, 1)
     response = await client.get(f"/api/exercises/{identifier}")
     assert response.json()["image"]["mime_type"] == "image/png"
     file_response = await client.get(f"/api/exercises/{identifier}/files/image")
@@ -112,6 +118,222 @@ async def test_crud_original_and_soft_delete(
         row = session.get(Exercise, identifier)
         assert row is not None and row.deleted_at is not None
     assert (settings.media_root / target).read_bytes() == png
+
+
+async def test_exercise_output_includes_chapter_fields(
+    client: httpx.AsyncClient,
+    database: Database,
+    png: bytes,
+) -> None:
+    await login(client)
+    identifier = await create_exercise(client, png)
+
+    with database.session() as session:
+        session.execute(delete(Chapter).where(Chapter.number == 2))
+        chapter = Chapter(number=2)
+        session.add(chapter)
+        session.flush()
+        exercise = session.get(Exercise, identifier)
+        assert exercise is not None
+        exercise.chapter_id = chapter.id
+        chapter_id = chapter.id
+        session.commit()
+
+    detail = (await client.get(f"/api/exercises/{identifier}")).json()
+    assert (detail["chapter_id"], detail["chapter_number"]) == (chapter_id, 2)
+
+    listing = (await client.get("/api/exercises")).json()
+    exercise = listing["exercises"][0]
+    assert (exercise["chapter_id"], exercise["chapter_number"]) == (chapter_id, 2)
+
+    with database.session() as session:
+        exercise_row = session.get(Exercise, identifier)
+        chapter_row = session.get(Chapter, chapter_id)
+        chapter_one_id = session.scalar(select(Chapter.id).where(Chapter.number == 1))
+        assert exercise_row is not None and chapter_row is not None
+        assert chapter_one_id is not None
+        exercise_row.chapter_id = chapter_one_id
+        session.delete(chapter_row)
+        session.commit()
+
+
+async def test_exercise_chapter_assignment_validation_and_preservation(
+    client: httpx.AsyncClient,
+    database: Database,
+    png: bytes,
+) -> None:
+    await login(client)
+    invalid = await client.post(
+        "/api/exercises",
+        data={"title": "Invalid chapter", "chapter_id": "987654321"},
+        files={"image": ("broken.png", b"not an image", "image/png")},
+    )
+    assert invalid.status_code == 404
+    assert invalid.json() == {"error": "CHAPTER_NOT_FOUND"}
+
+    created_chapter = await client.post("/api/chapters")
+    assert created_chapter.status_code == 201, created_chapter.text
+    chapter_id = created_chapter.json()["id"]
+    created = await client.post(
+        "/api/exercises",
+        data={"title": "Assigned", "chapter_id": str(chapter_id)},
+        files={"image": ("score.png", png, "image/png")},
+    )
+    assert created.status_code == 201, created.text
+    exercise_id = created.json()["id"]
+    assert created.json()["chapter_id"] == chapter_id
+    assert created.json()["chapter_number"] == created_chapter.json()["number"]
+
+    updated = await client.put(
+        f"/api/exercises/{exercise_id}",
+        data={"title": "Preserved"},
+    )
+    assert updated.status_code == 200, updated.text
+    assert updated.json()["chapter_id"] == chapter_id
+
+    invalid_update = await client.put(
+        f"/api/exercises/{exercise_id}",
+        data={"title": "Invalid update", "chapter_id": "987654321"},
+        files={"image": ("broken.png", b"not an image", "image/png")},
+    )
+    assert invalid_update.status_code == 404
+    assert invalid_update.json() == {"error": "CHAPTER_NOT_FOUND"}
+    preserved = await client.get(f"/api/exercises/{exercise_id}")
+    assert preserved.json()["title"] == "Preserved"
+
+    manager_chapters = (await client.get("/api/chapters")).json()["chapters"]
+    assigned = next(row for row in manager_chapters if row["id"] == chapter_id)
+    assert (assigned["active_exercise_count"], assigned["assigned_exercise_count"]) == (
+        1,
+        1,
+    )
+    await create_user(client, "chapter-reader")
+    client.cookies.clear()
+    await login(client, "chapter-reader")
+    student_chapters = (await client.get("/api/chapters")).json()["chapters"]
+    assert any(row["id"] == chapter_id for row in student_chapters)
+
+    client.cookies.clear()
+    await login(client)
+    nonempty_delete = await client.delete(f"/api/chapters/{chapter_id}")
+    assert nonempty_delete.status_code == 409
+    assert nonempty_delete.json() == {"error": "CHAPTER_NOT_EMPTY"}
+
+    assert (await client.delete(f"/api/exercises/{exercise_id}")).status_code == 200
+    assigned_chapter = next(
+        row
+        for row in (await client.get("/api/chapters")).json()["chapters"]
+        if row["id"] == chapter_id
+    )
+    assert (
+        assigned_chapter["active_exercise_count"],
+        assigned_chapter["assigned_exercise_count"],
+    ) == (0, 1)
+
+    client.cookies.clear()
+    await login(client, "chapter-reader")
+    student_chapters = (await client.get("/api/chapters")).json()["chapters"]
+    assert all(row["id"] != chapter_id for row in student_chapters)
+
+    client.cookies.clear()
+    await login(client)
+    deleted_exercise_delete = await client.delete(f"/api/chapters/{chapter_id}")
+    assert deleted_exercise_delete.status_code == 409
+    assert deleted_exercise_delete.json() == {"error": "CHAPTER_NOT_EMPTY"}
+
+    with database.session() as session:
+        chapter_one_id = session.scalar(select(Chapter.id).where(Chapter.number == 1))
+        assert chapter_one_id is not None
+        exercise = session.get(Exercise, exercise_id)
+        assert exercise is not None
+        exercise.chapter_id = chapter_one_id
+        session.commit()
+    assert (await client.delete(f"/api/chapters/{chapter_id}")).status_code == 200
+
+
+async def test_update_returns_not_found_if_chapter_is_deleted_after_validation(
+    client: httpx.AsyncClient,
+    database: Database,
+    png: bytes,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    await login(client)
+    exercise_id = await create_exercise(client, png)
+    chapter_response = await client.post("/api/chapters")
+    assert chapter_response.status_code == 201, chapter_response.text
+    chapter_id = chapter_response.json()["id"]
+    original_lock = exercise_service.lock
+
+    def delete_chapter_before_assignment(session: Session) -> None:
+        with database.session() as concurrent_session:
+            chapter = concurrent_session.get(Chapter, chapter_id)
+            assert chapter is not None
+            concurrent_session.delete(chapter)
+            concurrent_session.commit()
+        original_lock(session)
+
+    monkeypatch.setattr(exercise_service, "lock", delete_chapter_before_assignment)
+    response = await client.put(
+        f"/api/exercises/{exercise_id}",
+        data={"title": "Race", "chapter_id": str(chapter_id)},
+    )
+
+    assert response.status_code == 404
+    assert response.json() == {"error": "CHAPTER_NOT_FOUND"}
+
+
+async def test_legacy_create_uses_lowest_available_chapter(
+    client: httpx.AsyncClient,
+    database: Database,
+    png: bytes,
+) -> None:
+    await login(client)
+    chapter_one = next(
+        row
+        for row in (await client.get("/api/chapters")).json()["chapters"]
+        if row["number"] == 1
+    )
+    deleted = await client.delete(f"/api/chapters/{chapter_one['id']}")
+    assert deleted.status_code == 200
+    replacement_id: int | None = None
+    try:
+        no_chapter = await client.post(
+            "/api/exercises",
+            data={"title": "No available chapter"},
+            files={"image": ("score.png", png, "image/png")},
+        )
+        assert no_chapter.status_code == 404
+        assert no_chapter.json() == {"error": "CHAPTER_NOT_FOUND"}
+
+        replacement = await client.post("/api/chapters")
+        assert replacement.status_code == 201, replacement.text
+        replacement_id = replacement.json()["id"]
+        created = await client.post(
+            "/api/exercises",
+            data={"title": "Legacy chapter default"},
+            files={"image": ("score.png", png, "image/png")},
+        )
+        assert created.status_code == 201, created.text
+        assert created.json()["chapter_id"] == replacement_id
+    finally:
+        with database.session() as session:
+            chapter_one_row = session.get(Chapter, chapter_one["id"])
+            if chapter_one_row is None:
+                session.add(Chapter(id=chapter_one["id"], number=1))
+                session.flush()
+            for exercise in session.scalars(
+                select(Exercise).where(
+                    Exercise.title.in_(
+                        ["No available chapter", "Legacy chapter default"]
+                    )
+                )
+            ):
+                exercise.chapter_id = chapter_one["id"]
+            if replacement_id is not None:
+                replacement_row = session.get(Chapter, replacement_id)
+                if replacement_row is not None:
+                    session.delete(replacement_row)
+            session.commit()
 
 
 async def test_opus_conversion_and_atomic_validation(

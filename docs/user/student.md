@@ -314,36 +314,30 @@ The service-status panel confirms backend liveness only.
 ## Listen to exercises
 
 1. Open **Student area**.
-   The saved sequential exercise appears with its description and available original image.
-   The original image remains visible when an approved score also appears.
-2. Press the audio play control.
-   Playback starts, and the application records a listening session.
-3. Pause and resume when necessary.
-   Both actions belong to the same listening session.
-4. Use the audio position control to seek.
-   The journal records the maximum position reached, not total listening time.
-5. Click **Next** or **Previous**.
-   The application ends the current session and shows another exercise without automatic playback.
+   When no run is active, the page shows chapters that contain active exercises.
+2. Select one or more chapters and click **Start run**.
+   The application saves a randomized queue with up to 10 distinct exercises.
+3. Press the audio play control when you are ready.
+   Playback starts only after your action and records a listening session.
+4. Pause, resume, or seek during playback.
+   The journal keeps the session's maximum playback position.
+5. Click **Previous** or **Next** to move through the saved queue.
+   The application ends the current session and does not start playback automatically.
 
-Reaching 90 % of the duration or receiving the natural ended event marks the session complete.
-Completion saves the next sequential exercise but leaves the current exercise visible.
-Replay after natural completion creates a new listening session.
-The ordered sequence wraps after the last exercise and before the first.
-Reload or a new sign-in restores the saved sequential pointer.
-An image-only exercise has no audio control and creates no journal row.
-An approved exercise without recorded audio shows the spoken notes controls instead of an audio control.
-Speech still does not create a journal row.
+The saved queue includes each sampled exercise once.
+Image-only exercises remain in the queue but do not create a listening session.
+An approved exercise without recorded audio shows the spoken notes controls.
+Speech does not create a listening journal row.
 
-1. Select **Random** in Listening mode.
-   The application selects a different exercise when more than one exists.
-2. Click **Next** for another random selection.
-3. Click **Previous** to revisit the previous random selection from this page.
-4. Select **In order** to restore the saved sequential position.
+When an active run exists, the page shows its saved queue and current position.
+Click **Resume** to return to the saved exercise.
+Reloading the page or signing in on another device does not change the queue or position.
+Click **Cancel run** to stop playback and return to chapter selection.
+A new run creates a fresh sample and randomized order.
 
-Reload starts in sequential mode and clears the page's random history.
-Changing modes ends the current listening session without automatic playback.
+Reaching 90 % of the audio duration or receiving the natural ended event marks a session complete.
 Settings navigation and tab closure also attempt to send an end event.
-The last accepted heartbeat keeps a valid journal row even if the browser cannot send that event.
+The last accepted heartbeat keeps a valid journal row if the browser cannot send that event.
 
 A delivery error pauses playback and shows an error.
 Check your connection before pressing play again.
@@ -368,13 +362,13 @@ The checkbox is local to the current score, not a saved account setting.
 ## Final PHASE 3 listening checklist
 
 1. Sign in as a student in Chrome and Safari.
-2. Play an exercise, pause, and resume.
-3. Complete the first exercise.
-4. Click **Next** and play the second exercise for at least 5 seconds.
-5. Close the tab before reaching 90 %.
-6. Ask the manager to check one completed session and one incomplete session.
-7. Reopen the application and confirm the saved sequential position.
-8. Check Random, Previous, and return to In order.
+2. Select one or more chapters and start a run.
+3. Confirm that the saved queue contains no more than 10 exercises.
+4. Play an exercise, pause, and resume.
+5. Use **Previous** and **Next** without starting playback automatically.
+6. Reload the page and resume the same queue and position.
+7. Cancel a run during playback and confirm that playback stops.
+8. Ask the manager to check the journal entry and filter by its chapter.
 9. Confirm that `/manager/journal` refuses student access.
 
 ## Install the application on a mobile device
@@ -426,7 +420,7 @@ Very short notes can require a tempo below the usual 40 BPM minimum.
 
 Speech pauses the audio recording, and the recording stops speech.
 Leaving the page, hiding the tab, or signing out also stops speech.
-Speech does not complete the audio recording's listening session or advance the saved sequential pointer.
+Speech does not complete the audio recording's listening session or advance the saved run position.
 Image-only speech creates no journal row.
 
 ## Final PHASE 6 manual checklist

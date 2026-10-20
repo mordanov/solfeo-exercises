@@ -7,11 +7,29 @@ import { beforeEach, expect, it, vi } from "vitest";
 import { i18n } from "../../i18n";
 import type { Auth } from "../../api/auth";
 import * as api from "../../api/exercises";
+import * as chaptersApi from "../../api/chapters";
 import { Exercises } from "./Exercises";
 
 vi.mock("../../api/exercises");
+vi.mock("../../api/chapters");
+const chapters = [
+  {
+    id: 1,
+    number: 1,
+    active_exercise_count: 1,
+    assigned_exercise_count: 1,
+  },
+  {
+    id: 2,
+    number: 2,
+    active_exercise_count: 0,
+    assigned_exercise_count: 0,
+  },
+];
 const exercise = {
   id: 1,
+  chapter_id: 1,
+  chapter_number: 1,
   title: "Scale",
   description: "Practice",
   category: null,
@@ -55,6 +73,7 @@ const auth: Auth = {
 beforeEach(async () => {
   vi.resetAllMocks();
   await i18n.changeLanguage("en");
+  vi.mocked(chaptersApi.listChapters).mockResolvedValue(chapters);
   vi.mocked(api.listExercises).mockResolvedValue({
     exercises: [exercise],
     total: 1,
@@ -98,6 +117,13 @@ it("requires a file and submits multipart data with progress", async () => {
   await userEvent.click(
     await screen.findByRole("button", { name: "Create exercise" }),
   );
+  const chapterSelect = await screen.findByRole("combobox", {
+    name: "Chapter",
+  });
+  expect(chapterSelect).toHaveValue("");
+  expect(screen.getByRole("button", { name: "Save exercise" })).toBeDisabled();
+  await userEvent.selectOptions(chapterSelect, "2");
+  expect(screen.getByRole("button", { name: "Save exercise" })).toBeEnabled();
   await userEvent.type(screen.getByLabelText("Title"), "New exercise");
   await userEvent.click(screen.getByRole("button", { name: "Save exercise" }));
   expect(await screen.findByRole("alert")).toHaveTextContent("image or audio");
@@ -112,6 +138,7 @@ it("requires a file and submits multipart data with progress", async () => {
   expect(csrf).toBe("csrf");
   expect(id).toBeNull();
   expect(data.get("title")).toBe("New exercise");
+  expect(data.get("chapter_id")).toBe("2");
   expect(data.get("image")).toBeInstanceOf(File);
 });
 it("edits metadata without losing existing files", async () => {
@@ -121,12 +148,20 @@ it("edits metadata without losing existing files", async () => {
     await screen.findByRole("button", { name: "Edit Scale" }),
   );
   expect(screen.getByLabelText("Title")).toHaveValue("Scale");
+  const chapterSelect = await screen.findByRole("combobox", {
+    name: "Chapter",
+  });
+  expect(chapterSelect).toHaveValue("1");
+  await userEvent.selectOptions(chapterSelect, "2");
   await userEvent.type(screen.getByLabelText("Category / level"), "Level 1");
   await userEvent.click(screen.getByRole("button", { name: "Save exercise" }));
   await waitFor(() => expect(api.saveExercise).toHaveBeenCalled());
   expect(vi.mocked(api.saveExercise).mock.calls[0][1]).toBe(1);
   expect(vi.mocked(api.saveExercise).mock.calls[0][2].get("category")).toBe(
     "Level 1",
+  );
+  expect(vi.mocked(api.saveExercise).mock.calls[0][2].get("chapter_id")).toBe(
+    "2",
   );
 });
 it("confirms deletion and refreshes only after success", async () => {

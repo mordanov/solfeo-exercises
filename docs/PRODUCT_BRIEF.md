@@ -167,10 +167,15 @@ A child looks at the notes and listens to the audio.
 - Show service status only on the Settings page.
 
 ## Exercises
-- Fields: id, title, description (text), category/level (optional string), position (integer, manager can reorder), image (optional), audio (optional), score (optional, see OMR), deleted_at (soft delete).
+- Fields: id, title, description (text), category/level (optional string), chapter (required), position (integer, manager can reorder), image (optional), audio (optional), score (optional, see OMR), deleted_at (soft delete).
 - Validation: at least one of image or audio is required.
 - Soft delete only. The journal must keep working for deleted exercises.
-- Student progress: per-student "next exercise" pointer for sequential mode. Random mode never repeats the immediately previous exercise (if more than one exists).
+- Managers create numbered chapters and assign every exercise to exactly one chapter.
+- Chapter numbers increase and are never reused. A chapter with any assigned exercise cannot be deleted.
+- Students select one or more non-empty chapters to start a saved listening run.
+- The backend saves a randomized order of up to 10 exercises per run, without duplicates.
+- A student can resume or cancel the active run. Navigation does not start playback.
+- Image-only exercises remain eligible and do not create a listening journal row without audio playback.
 
 ## Files
 - Stored on a Docker volume. Never served directly. nginx internal location + X-Accel-Redirect after backend auth check. Range requests must work (audio seeking in Safari).
@@ -180,9 +185,11 @@ A child looks at the notes and listens to the audio.
 
 ## Listening journal
 - One row per listening session: id, user_id, exercise_id, session_id (uuid from client), started_at, last_heartbeat_at, ended_at (nullable), max_position_sec, audio_duration_sec, completed (bool).
+- Each listening session stores the chapter number that applied when playback started.
 - Client sends: start, heartbeat every 5 s while playing, end. Also navigator.sendBeacon on pagehide.
 - completed = max_position_sec >= 90% of duration OR the "ended" event. A closed tab must still leave a valid row.
-- Only managers can read the journal (filter by student, exercise, date; pagination).
+- Only managers can read the journal (filter by student, exercise, chapter, date; pagination).
+- Journal filters use the saved chapter number, including historical records for deleted chapters.
 
 ## OMR (part of MVP)
 - On image upload, enqueue an OMR job. Worker runs Audiveris in batch mode -> MusicXML. Engine sits behind a Python interface (OmrEngine) so it can be replaced (for example by oemer).

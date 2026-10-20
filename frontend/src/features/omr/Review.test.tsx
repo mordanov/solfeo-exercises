@@ -23,6 +23,8 @@ const job: api.Omr = {
 };
 const exercise: Exercise = {
   id: 1,
+  chapter_id: 1,
+  chapter_number: 1,
   title: "Exercise",
   description: "",
   category: null,

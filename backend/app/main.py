@@ -10,9 +10,11 @@ from starlette.exceptions import HTTPException
 from starlette.middleware.base import RequestResponseEndpoint
 
 from app.api.auth import router as auth_router
+from app.api.chapters import router as chapters_router
 from app.api.exercises import router as exercises_router
 from app.api.health import router as health_router
 from app.api.listening import router as listening_router
+from app.api.listening_runs import router as listening_runs_router
 from app.api.omr import router as omr_router
 from app.api.request_log import RequestLog
 from app.api.telegram import router as telegram_router
@@ -80,8 +82,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.add_exception_handler(RequestValidationError, validation_error)
     app.include_router(health_router)
     app.include_router(auth_router)
+    app.include_router(chapters_router)
     app.include_router(exercises_router)
     app.include_router(listening_router)
+    app.include_router(listening_runs_router)
     app.include_router(omr_router)
     app.include_router(telegram_router)
     app.include_router(game_players_router)

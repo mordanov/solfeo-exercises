@@ -27,6 +27,7 @@ const row = {
   exercise_id: 3,
   exercise_title: "Deleted scale",
   exercise_deleted: true,
+  chapter_number: 1,
   started_at: "2026-09-29T10:00:00Z",
   last_heartbeat_at: "2026-09-29T10:00:05Z",
   ended_at: null,
@@ -41,6 +42,7 @@ beforeEach(async () => {
   vi.mocked(api.journalOptions).mockResolvedValue({
     students: [{ id: 2, label: "Student two", deleted: false }],
     exercises: [{ id: 3, label: "Scale", deleted: true }],
+    chapters: [{ chapter_number: 1 }, { chapter_number: 2 }],
   });
 });
 function mount() {
@@ -141,6 +143,23 @@ it("filters on student and exercise and paginates", async () => {
     expect(api.listJournal).toHaveBeenCalledWith(
       expect.any(Object),
       50,
+      expect.any(AbortSignal),
+    ),
+  );
+});
+
+it("filters by the stored chapter snapshot and shows chapter labels", async () => {
+  mount();
+  const grid = await screen.findByRole("grid", { name: "Listening journal" });
+
+  expect(within(grid).getByText("Chapter 1")).toBeInTheDocument();
+  await userEvent.selectOptions(screen.getByLabelText("Chapter"), "2");
+  await userEvent.click(screen.getByRole("button", { name: "Apply filters" }));
+
+  await waitFor(() =>
+    expect(api.listJournal).toHaveBeenCalledWith(
+      expect.objectContaining({ chapter_number: "2" }),
+      0,
       expect.any(AbortSignal),
     ),
   );

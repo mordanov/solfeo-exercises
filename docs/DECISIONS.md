@@ -7,6 +7,12 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-10-19: The owner approves numbered chapters and saved listening runs.
+  Existing exercises and listening records belong to Chapter 1 after migration.
+  Students select one or more chapters for a saved, randomized run of at most 10 exercises.
+  Students can resume or cancel a run; chapter snapshots preserve journal history after exercise moves.
+  Chapter numbers never change or return to use after deletion.
+
 - 2026-10-12: The owner approves one image request for all custom avatar moods.
   Generate the 30 frames together, with neutral, happy, and sad rows in one sheet.
   Do not use masked image edits to add expressions.

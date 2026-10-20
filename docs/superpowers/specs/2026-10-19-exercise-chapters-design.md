@@ -7,7 +7,7 @@ Prerequisites:
 - Read `docs/developer/data-model.md` and `docs/developer/listening.md`.
 
 Date: 2026-10-19  
-Status: approved for specification review; not implemented
+Status: approved; implementation is complete on `feat/exercise-chapters`; owner manual acceptance remains
 
 ## 1. Goal
 

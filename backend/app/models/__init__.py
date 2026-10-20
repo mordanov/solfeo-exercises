@@ -9,8 +9,10 @@ from sqlalchemy import (
     ForeignKey,
     Index,
     MetaData,
+    Sequence,
     String,
     Text,
+    UniqueConstraint,
     func,
     text,
 )
@@ -125,6 +127,19 @@ class MediaFile(Base):
     )
 
 
+class Chapter(Base):
+    __tablename__ = "chapters"
+    __table_args__ = (
+        CheckConstraint("number > 0", name="number_positive"),
+        UniqueConstraint("number", name="uq_chapters_number"),
+    )
+    id: Mapped[int] = mapped_column(primary_key=True)
+    number: Mapped[int] = mapped_column(
+        Sequence("chapter_number_seq", start=2),
+        server_default=text("nextval('chapter_number_seq')"),
+    )
+
+
 class Exercise(Base):
     __tablename__ = "exercises"
     __table_args__ = (
@@ -134,6 +149,12 @@ class Exercise(Base):
         CheckConstraint("position >= 0", name="position"),
     )
     id: Mapped[int] = mapped_column(primary_key=True)
+    chapter_id: Mapped[int] = mapped_column(
+        ForeignKey("chapters.id", name="fk_exercises_chapter_id_chapters"),
+        default=1,
+        server_default=text("1"),
+        index=True,
+    )
     title: Mapped[str] = mapped_column(String(200))
     description: Mapped[str] = mapped_column(Text, default="", server_default="")
     category: Mapped[str | None] = mapped_column(String(100))
@@ -176,6 +197,72 @@ class ListeningSession(Base):
     max_position_sec: Mapped[float] = mapped_column(Float, default=0)
     audio_duration_sec: Mapped[float] = mapped_column(Float)
     completed: Mapped[bool] = mapped_column(Boolean, default=False)
+    chapter_number: Mapped[int] = mapped_column(
+        default=1, server_default=text("1"), index=True
+    )
+
+
+class ListeningRun(Base):
+    __tablename__ = "listening_runs"
+    __table_args__ = (
+        CheckConstraint(
+            "status IN ('active', 'completed', 'cancelled')", name="status"
+        ),
+        CheckConstraint("current_index >= 0", name="current_index_nonnegative"),
+        Index(
+            "uq_listening_runs_one_active_per_user",
+            "user_id",
+            unique=True,
+            postgresql_where=text("status = 'active'"),
+        ),
+    )
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey("users.id", name="fk_listening_runs_user_id_users"), index=True
+    )
+    status: Mapped[str] = mapped_column(String(10))
+    current_index: Mapped[int] = mapped_column(default=0, server_default=text("0"))
+
+
+class ListeningRunChapter(Base):
+    __tablename__ = "listening_run_chapters"
+    __table_args__ = (
+        UniqueConstraint(
+            "run_id", "chapter_number", name="uq_listening_run_chapters_run_chapter"
+        ),
+        Index("ix_listening_run_chapters_chapter_number", "chapter_number"),
+    )
+    id: Mapped[int] = mapped_column(primary_key=True)
+    run_id: Mapped[int] = mapped_column(
+        ForeignKey(
+            "listening_runs.id",
+            name="fk_listening_run_chapters_run_id_listening_runs",
+        )
+    )
+    chapter_number: Mapped[int]
+
+
+class ListeningRunItem(Base):
+    __tablename__ = "listening_run_items"
+    __table_args__ = (
+        UniqueConstraint(
+            "run_id", "position", name="uq_listening_run_items_run_position"
+        ),
+        UniqueConstraint(
+            "run_id", "exercise_id", name="uq_listening_run_items_run_exercise"
+        ),
+    )
+    id: Mapped[int] = mapped_column(primary_key=True)
+    run_id: Mapped[int] = mapped_column(
+        ForeignKey(
+            "listening_runs.id", name="fk_listening_run_items_run_id_listening_runs"
+        )
+    )
+    position: Mapped[int]
+    exercise_id: Mapped[int] = mapped_column(
+        ForeignKey("exercises.id", name="fk_listening_run_items_exercise_id_exercises")
+    )
+    chapter_number: Mapped[int]
 
 
 class TelegramLink(Base):

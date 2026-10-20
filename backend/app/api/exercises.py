@@ -3,6 +3,7 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, Form, Query, Response, UploadFile
 from pydantic import BaseModel, Field, field_validator
+from sqlalchemy import select
 
 from app.api.auth import (
     Configuration,
@@ -15,7 +16,7 @@ from app.api.auth import (
 )
 from app.api.omr import OmrOutput
 from app.api.omr import output as omr_output
-from app.models import Exercise, MediaFile
+from app.models import Chapter, Exercise, MediaFile
 from app.services import exercises, omr
 from app.services.auth import ServiceError
 
@@ -26,6 +27,7 @@ class ExerciseInput(Input):
     title: str = Field(min_length=1, max_length=200)
     description: str = Field(default="", max_length=10000)
     category: str | None = Field(default=None, max_length=100)
+    chapter_id: int | None = None
     remove_image: bool = False
     remove_audio: bool = False
     image: UploadFile | None = None
@@ -53,6 +55,8 @@ class MediaOutput(BaseModel):
 
 class ExerciseOutput(BaseModel):
     id: int
+    chapter_id: int
+    chapter_number: int
     title: str
     description: str
     category: str | None
@@ -71,7 +75,9 @@ class OrderInput(Input):
     ids: list[int] = Field(max_length=10000)
 
 
-def output(row: Exercise, session: Db) -> ExerciseOutput:
+def output(
+    row: Exercise, session: Db, chapter_number: int | None = None
+) -> ExerciseOutput:
     def media(identifier: str | None) -> MediaOutput | None:
         value = session.get(MediaFile, identifier) if identifier else None
         return (
@@ -85,8 +91,16 @@ def output(row: Exercise, session: Db) -> ExerciseOutput:
             else None
         )
 
+    if chapter_number is None:
+        chapter_number = session.scalar(
+            select(Chapter.number).where(Chapter.id == row.chapter_id)
+        )
+        assert chapter_number is not None
+
     return ExerciseOutput(
         id=row.id,
+        chapter_id=row.chapter_id,
+        chapter_number=chapter_number,
         title=row.title,
         description=row.description,
         category=row.category,
@@ -105,8 +119,17 @@ def listing(
     limit: Annotated[int, Query(ge=1, le=10000)] = 10000,
 ) -> ExerciseListOutput:
     rows, total = exercises.list_exercises(session, offset, limit)
+    chapter_numbers = {
+        chapter.id: chapter.number
+        for chapter in session.scalars(
+            select(Chapter).where(Chapter.id.in_({row.chapter_id for row in rows}))
+        )
+    }
     return ExerciseListOutput(
-        exercises=[output(row, session) for row in rows], total=total
+        exercises=[
+            output(row, session, chapter_numbers[row.chapter_id]) for row in rows
+        ],
+        total=total,
     )
 
 
@@ -126,6 +149,7 @@ def save(
         title=data.title,
         description=data.description,
         category=data.category,
+        chapter_id=data.chapter_id,
         image=data.image.file if data.image else None,
         audio=data.audio.file if data.audio else None,
         remove_image=data.remove_image,

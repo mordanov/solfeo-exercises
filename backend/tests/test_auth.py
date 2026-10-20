@@ -7,11 +7,11 @@ import pytest
 from alembic import command
 from alembic.config import Config
 from pydantic import SecretStr, ValidationError
-from sqlalchemy import delete, select
+from sqlalchemy import delete, select, text
 
 from app.database import Database
 from app.main import create_app
-from app.models import Base, LoginSession, User
+from app.models import Base, Chapter, LoginSession, User
 from app.services.auth import (
     ServiceError,
     hash_password,
@@ -61,13 +61,18 @@ def database(settings: Settings) -> Iterator[Database]:
         config.attributes["connection"] = connection
         command.upgrade(config, "head")
         for table in reversed(Base.metadata.sorted_tables):
-            connection.execute(delete(table))
+            if table.name != "chapters":
+                connection.execute(delete(table))
+        connection.execute(delete(Chapter).where(Chapter.number != 1))
+        connection.execute(text("ALTER SEQUENCE chapter_number_seq RESTART WITH 2"))
     try:
         yield database
     finally:
         with database.engine.begin() as connection:
             for table in reversed(Base.metadata.sorted_tables):
-                connection.execute(delete(table))
+                if table.name != "chapters":
+                    connection.execute(delete(table))
+            connection.execute(delete(Chapter).where(Chapter.number != 1))
         database.close()
 
 
@@ -223,7 +228,8 @@ async def test_player_role_game_access_and_exercise_boundaries(
         "/api/exercises/999/files/audio",
         "/api/exercises/999/omr",
         "/api/exercises/999/score?version=00000000-0000-0000-0000-000000000001",
-        "/api/listening/current",
+        "/api/listening/chapters",
+        "/api/listening/run",
         "/api/journal",
         "/api/journal/options",
         "/api/users",
@@ -250,15 +256,14 @@ async def test_player_role_game_access_and_exercise_boundaries(
     ).status_code == 403
     assert (
         await client.post(
-            "/api/listening/select",
-            json={
-                "mode": "sequential",
-            },
+            "/api/listening/run",
+            json={"chapter_ids": [1]},
         )
     ).status_code == 403
     denied_event = await client.post(
         "/api/listening/events",
         json={
+            "run_id": 1,
             "session_id": "00000000-0000-0000-0000-000000000002",
             "exercise_id": 999,
             "event": "end",

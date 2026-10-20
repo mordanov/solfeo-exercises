@@ -7,9 +7,9 @@ import {
 import { dateBoundary, parseJournal } from "./journal";
 const event: ListeningEvent = {
   session_id: "id",
+  run_id: 1,
   exercise_id: 1,
   audio_id: "audio",
-  mode: "sequential",
   csrf_token: "csrf",
   event: "end",
   position_seconds: 2,

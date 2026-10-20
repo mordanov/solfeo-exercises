@@ -1521,9 +1521,28 @@ After deploying the avatar fix, generate a new avatar: it must reach review, and
 
 ## Chapter-based exercise selection
 
-- The owner approves the design on 2026-10-19; implementation has not started.
-- Managers create numbered chapters and assign every exercise to exactly one chapter.
-- Students select chapters for a saved, randomized run of up to 10 exercises.
-- The run resumes across devices and supports cancellation.
-- The design adds a Chapter filter to the manager journal.
+- The owner approves the design on 2026-10-19.
+- The feature is implemented on `feat/exercise-chapters`; it has not been merged or deployed.
+- Migration `0013_exercise_chapters` assigns existing exercises and listening records to Chapter 1.
+- Managers create stable numbered chapters, assign exercises, and filter the journal by chapter snapshot.
+- Students select chapters for a saved randomized queue of up to 10 distinct exercises.
+- Students can resume, navigate, complete, or cancel a run across reloads and devices.
+- The deletion error is translated in English, Russian, and Spanish.
+- The full backend suite passes 377 tests; the full frontend suite passes 409 tests.
+- Documentation tests pass 4 checks.
+- CI run `39442788881` fails because the journal container test uses the previous listening API.
+- The repaired test creates a saved run and verifies navigation, restart persistence, and chapter snapshots.
+- All 61 deployment and container tests pass locally after the repair.
+- Ruff, formatting, strict mypy, ESLint, TypeScript, Prettier, and the production build pass.
+- The production build retains the existing large-chunk warning.
+- Graphify re-extracts all 386 code files and rebuilds 6474 nodes and 11532 edges.
+- Graphify skips HTML because the graph exceeds the 5000-node limit.
+- Owner manual acceptance remains before merge or deployment.
+- Do not merge or deploy without authorization.
+- Manual checks:
+  1. Create a chapter, assign exercises, and confirm that active or soft-deleted assignments prevent deletion.
+  2. Start a run with multiple chapters and verify its 10-item limit, saved order, resume, navigation, and cancellation.
+  3. Filter the manager journal by chapter and confirm that earlier rows retain their saved chapter.
+  4. Check the complete flow in Chrome and Safari, in all 3 languages.
 - See `docs/superpowers/specs/2026-10-19-exercise-chapters-design.md`.
+- Root project context records the chapter vocabulary, observed state lifecycles, and current data flows.

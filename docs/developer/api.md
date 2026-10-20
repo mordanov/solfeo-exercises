@@ -329,7 +329,7 @@ See `auth.md` for session storage, proxy trust, and recovery.
 | `GET /api/exercises/{id}/files/{kind}` | Member | Internal nginx redirect for `image` or `audio`; supports Range |
 | `HEAD /api/exercises/{id}/files/{kind}` | Member | Same authorization and headers without file bytes |
 
-Multipart fields are `title`, `description`, `category`, `image`, `audio`, `remove_image`, and `remove_audio`.
+Multipart fields are `title`, `description`, `category`, required `chapter_id`, `image`, `audio`, `remove_image`, and `remove_audio`.
 Title requires 1–200 nonblank characters.
 Description permits 10000 characters; category permits 100 and normalizes an empty value to null.
 Description defaults to empty; both removal flags default to false.
@@ -337,7 +337,7 @@ Omitted file fields preserve existing attachments during updates.
 A removal flag and replacement file for the same kind conflict.
 Every saved exercise requires at least one image or audio attachment.
 
-Responses contain `id`, `title`, `description`, `category`, `position`, `image`, and `audio`.
+Responses contain `id`, `chapter_id`, `chapter_number`, `title`, `description`, `category`, `position`, `image`, and `audio`.
 Each non-null attachment contains its UUID, `mime_type`, `size_bytes`, and nullable `duration_seconds`.
 Responses never contain storage paths or client filenames.
 The list defaults to 10000 rows and permits at most 10000 per request.
@@ -353,32 +353,49 @@ Invalid files, excessive duration, and processor timeouts return specific 422 co
 Unavailable processors and storage failures return specific 503 codes.
 See `storage.md` for conversion and retention details.
 
+## Chapters
+
+| Method and path | Permission | Input and result |
+|---|---|---|
+| `GET /api/chapters` | Student or manager | Returns `chapters`; students receive only chapters with active exercises |
+| `POST /api/chapters` | Manager, CSRF | Creates the next numbered chapter |
+| `DELETE /api/chapters/{id}` | Manager, CSRF | Deletes an empty chapter; assigned exercises return `409 CHAPTER_NOT_EMPTY` |
+
+Chapter responses contain `id`, stable `number`, `active_exercise_count`, and `assigned_exercise_count`.
+The assigned count includes soft-deleted exercises.
+The student listening interface uses `GET /api/listening/chapters` for its non-empty chapter list.
+
 ## Student listening and manager journal
 
 | Method and path | Permission | Input and result |
 |---|---|---|
-| `GET /api/listening/current` | Student | Returns `{"exercise": ...}` or a null exercise |
-| `POST /api/listening/select` | Student, header CSRF | `mode`, `direction`, optional `current_id` and `previous_id`; returns selected exercise |
-| `POST /api/listening/events` | Student, body CSRF | Records start, heartbeat, end, or ended; returns UUID, completion, and terminal time |
+| `GET /api/listening/chapters` | Student | Returns chapters that contain active exercises |
+| `GET /api/listening/run` | Student | Returns the active saved run, or `null` |
+| `POST /api/listening/run` | Student, CSRF | JSON `{"chapter_ids":[...]}`; starts a saved run or returns the current active run |
+| `POST /api/listening/run/{id}/navigate` | Student, CSRF | JSON `{"direction":"next"}` or `{"direction":"previous"}`; updates the saved position |
+| `POST /api/listening/run/{id}/cancel` | Student, CSRF | Cancels the active run |
+| `POST /api/listening/events` | Student, body CSRF | Records start, heartbeat, end, or ended for a run item |
 | `GET /api/journal` | Manager | Filtered `sessions` and `total` |
-| `GET /api/journal/options` | Manager | Recorded `students` and `exercises` with IDs, labels, and deletion flags |
+| `GET /api/journal/options` | Manager | Recorded `students`, `exercises`, and chapter numbers |
 
-Selection mode is `sequential` or `random`; direction is `current`, `next`, or `previous`.
-The optional `previous_id` supports random history navigation.
-Random and sequential choices do not start audio.
+The backend samples at most 10 distinct active exercises across the selected chapters.
+It saves the randomized order, selected chapter numbers, and current position.
+An active run contains ordered items with saved positions and chapter numbers.
+Navigation does not start audio.
 
-Events require `session_id` as UUID, positive `exercise_id`, event type, nonnegative finite `position_seconds`, and `csrf_token`.
-The player also sends `audio_id` as UUID and the mode.
+Events require `run_id`, `session_id` as UUID, positive `exercise_id`, event type, nonnegative finite `position_seconds`, and `csrf_token`.
+The player also sends `audio_id` as UUID.
 An audio mismatch returns 409 `AUDIO_CHANGED`.
 A UUID with another exercise returns 409 `LISTENING_SESSION_CONFLICT`; another student's UUID returns 403.
 Image-only exercises return 422 `EXERCISE_HAS_NO_AUDIO`.
 The optional `version` UUID on protected file routes rejects stale media versions with 404.
 
-Journal filters are `student_id`, `exercise_id`, `started_from`, and `started_to`.
+Journal filters are `student_id`, `exercise_id`, `chapter_number`, `started_from`, and `started_to`.
 Date boundaries require time zones; an invalid range returns 422.
 `offset` defaults to 0; `limit` defaults to 50 and permits at most 100.
-Each row includes student identity, exercise snapshot and deletion flag, timestamps, maximum position, duration, and completion.
-See `listening.md` for idempotency, beacon delivery, and pointer behavior.
+Each row includes student identity, exercise and chapter snapshots, deletion flag, timestamps, maximum position, duration, and completion.
+Chapter options include current and historical snapshot numbers.
+See `listening.md` for run persistence, event delivery, and journal behavior.
 
 ## Manager Telegram imports
 

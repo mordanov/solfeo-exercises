@@ -2,9 +2,10 @@ from datetime import UTC, datetime
 from typing import BinaryIO
 
 from sqlalchemy import func, select, text
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
-from app.models import Exercise, MediaFile
+from app.models import Chapter, Exercise, MediaFile
 from app.services.auth import ServiceError
 from app.services.media import Kind, prepare_media
 from app.services.omr import enqueue
@@ -57,6 +58,7 @@ def save_exercise(
     title: str,
     description: str,
     category: str | None,
+    chapter_id: int | None,
     image: BinaryIO | None,
     audio: BinaryIO | None,
     remove_image: bool,
@@ -66,6 +68,15 @@ def save_exercise(
         raise ServiceError("VALIDATION_ERROR", 422)
     if identifier is not None:
         get_exercise(session, identifier)
+    if chapter_id is not None:
+        if session.get(Chapter, chapter_id) is None:
+            raise ServiceError("CHAPTER_NOT_FOUND", 404)
+    elif identifier is None:
+        chapter_id = session.scalar(
+            select(Chapter.id).order_by(Chapter.number).limit(1)
+        )
+        if chapter_id is None:
+            raise ServiceError("CHAPTER_NOT_FOUND", 404)
     prepared: dict[Kind, MediaFile] = {}
     try:
         for kind, source in (("image", image), ("audio", audio)):
@@ -81,6 +92,8 @@ def save_exercise(
             else new_exercise(session)
         )
         row.title, row.description, row.category = title, description, category
+        if chapter_id is not None:
+            row.chapter_id = chapter_id
         if remove_image:
             row.image_id = None
         if remove_audio:
@@ -97,10 +110,16 @@ def save_exercise(
             enqueue(session, row)
         session.commit()
         return row
-    except BaseException:
+    except BaseException as error:
         session.rollback()
         for media in prepared.values():
             (settings.media_root / media.filename).unlink(missing_ok=True)
+        if isinstance(error, IntegrityError):
+            constraint = getattr(
+                getattr(error.orig, "diag", None), "constraint_name", None
+            )
+            if constraint == "fk_exercises_chapter_id_chapters":
+                raise ServiceError("CHAPTER_NOT_FOUND", 404) from error
         raise
 
 

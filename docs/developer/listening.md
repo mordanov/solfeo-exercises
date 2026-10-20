@@ -1,32 +1,29 @@
 # Listening and journal
 
-This document explains selection, playback events, persistence, and the PHASE 3 permission boundaries.
+This document explains saved Chapter runs, playback events, persistence, and journal queries.
 
 Prerequisites:
 - Read `auth.md`, `api.md`, and `storage.md`.
-- Apply migration `0004_listening`.
+- Apply migration `0013_exercise_chapters`.
 - Use Chrome or Safari through the nginx stand.
 
-## Selection
+## Chapter selection and saved runs
 
-`student_progress` stores a sequential next-exercise pointer and the last random selection per student.
-The current endpoint reads the saved pointer or falls back to the first active exercise.
-An empty catalog returns a null exercise.
-Selection mutations serialize through a per-student advisory lock.
-Both sequence directions wrap.
-Deleted pointers fall back safely.
+Managers assign each exercise to one numbered chapter.
+The migration assigns existing exercises and listening sessions to Chapter 1.
+Chapter numbers use a sequence and are not reused after deletion.
 
-Completion advances the saved pointer only once and only when it still identifies that exercise or an unavailable exercise.
-The player remains on its current exercise until explicit navigation.
-Next includes the displayed exercise ID, preventing a second advance after completion.
-Random selection excludes the displayed exercise when alternatives exist.
-It does not change the sequential pointer.
-Random Previous uses validated IDs from the current page's history.
+Students select one or more chapters that contain active exercises.
+The backend samples up to 10 distinct exercises without replacement and saves a randomized order.
+One active run per student stores chapter numbers, ordered items, status, and current position.
+PostgreSQL enforces the active-run limit with a partial unique index.
 
-The browser starts each page in sequential mode.
-Image-only exercises remain selectable but produce no listening session.
-Manager previews remain outside student journaling.
-Only students can use selection and event endpoints.
+The same run remains available after reload or sign-in on another device.
+The player requires an explicit Resume action for an existing run.
+Previous and Next update the saved position without starting playback.
+The final Next action completes the run; Cancel ends it and allows a new sample.
+Image-only exercises remain eligible and create no listening session without audio playback.
+The old `student_progress` pointers remain in the schema but do not drive student selection.
 
 ## Event lifecycle
 
@@ -37,14 +34,14 @@ Resume continues that session.
 Crossing 90 % sends an immediate heartbeat.
 Native `ended` sends a terminal event; replay uses a new UUID.
 
-Next, Previous, mode changes, and logout finish the current session before their normal operation.
+Next, Previous, cancellation, and logout finish the current session before their normal operation.
 The player never starts audio automatically.
 On `pagehide`, it pauses playback and submits a complete terminal event through `sendBeacon`.
 A rejected beacon queue uses a keepalive request.
 Delivery failures appear explicitly and pause active playback.
 Exit delivery remains best-effort; no client can guarantee delivery after a crash or network loss.
 
-Each event includes the UUID, exercise ID, audio ID, mode, event type, maximum position, and CSRF token.
+Each event includes the run ID, session UUID, exercise ID, audio ID, event type, maximum position, and CSRF token.
 Only this endpoint accepts the session-bound CSRF token in the JSON body.
 Cookie authentication, active student permissions, and the exact Origin allowlist remain mandatory.
 The body token is necessary because `sendBeacon` cannot set a custom header.
@@ -60,7 +57,7 @@ Later events cannot change its student, exercise, or audio identity.
 Duplicate start cannot reopen a terminal session.
 Lower positions never reduce the maximum.
 
-The first event snapshots the exercise title, audio reference, and server-known duration.
+The first event snapshots the exercise title, chapter number, audio reference, and server-known duration.
 Positions clamp to that duration.
 Completion is monotonic: maximum position at least 90 % of duration, or an `ended` event.
 The server records receipt timestamps; clients cannot supply arbitrary timestamps or durations.
@@ -76,13 +73,14 @@ No journal deletion API exists.
 ## Manager queries
 
 Only managers can read journal rows and filter options.
-Filters accept student ID, exercise ID, and timezone-aware start boundaries.
+Filters accept student ID, exercise ID, chapter number, and timezone-aware start boundaries.
 The lower time boundary is inclusive; the upper boundary is exclusive.
 The UI converts inclusive local calendar dates into these UTC boundaries.
 Pagination defaults to 50 rows and permits at most 100.
 Rows sort by descending start time and ID.
 
 Filter options include recorded students and exercises, including inactive accounts and deleted exercises.
-Rows retain the original exercise title and duration while showing current student names.
+Chapter options combine current chapter numbers with historical session snapshots.
+Rows retain the original exercise title, duration, and chapter number while showing current student names.
 No end event is a valid state, not proof of ongoing playback.
 The UI does not invent a completion result for a lost tab.
