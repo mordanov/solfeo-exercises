@@ -1531,3 +1531,4 @@ After deploying the avatar fix, generate a new avatar: it must reach review, and
 - The run resumes across devices and supports cancellation.
 - The design adds a Chapter filter to the manager journal.
 - See `docs/superpowers/specs/2026-10-19-exercise-chapters-design.md`.
+- Root project context records the chapter vocabulary, observed state lifecycles, and current data flows.
