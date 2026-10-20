@@ -137,6 +137,7 @@ def test_migration_upgrade_repeat_downgrade_and_upgrade(database: Database) -> N
     assert set(tables) <= {"alembic_version", *Base.metadata.tables}
     if tables:
         with database.engine.begin() as connection:
+            connection.execute(text("ALTER SEQUENCE chapter_number_seq RESTART WITH 2"))
             command.downgrade(migration_config(connection), "base")
             connection.execute(text("DROP TABLE alembic_version"))
     assert inspect(database.engine).get_table_names() == []
@@ -148,7 +149,9 @@ def test_migration_upgrade_repeat_downgrade_and_upgrade(database: Database) -> N
             1,
             1,
         )
-        assert connection.scalar(text("SELECT nextval('chapter_number_seq')")) == 2
+        assert connection.execute(
+            text("SELECT last_value, is_called FROM chapter_number_seq")
+        ).one() == (2, False)
         assert (
             connection.scalar(text("SELECT version_num FROM alembic_version"))
             == "0013_exercise_chapters"
@@ -350,6 +353,38 @@ def test_chapter_migration_refuses_unsafe_downgrade(
             connection.execute(
                 text("DELETE FROM users WHERE username = 'chapter-run-downgrade'")
             )
+
+
+def test_chapter_migration_refuses_downgrade_after_sequence_consumption(
+    database: Database,
+) -> None:
+    with database.engine.begin() as connection:
+        config = migration_config(connection)
+        connection.execute(text("ALTER SEQUENCE chapter_number_seq RESTART WITH 2"))
+        command.downgrade(config, "0012_player_role")
+        command.upgrade(config, "head")
+        chapter_id = connection.scalar(
+            text("INSERT INTO chapters DEFAULT VALUES RETURNING id")
+        )
+        assert (
+            connection.scalar(
+                text("SELECT number FROM chapters WHERE id = :id"), {"id": chapter_id}
+            )
+            == 2
+        )
+        connection.execute(
+            text("DELETE FROM chapters WHERE id = :id"), {"id": chapter_id}
+        )
+
+        with pytest.raises(RuntimeError, match="CHAPTER_DATA_PREVENTS_DOWNGRADE"):
+            command.downgrade(config, "0012_player_role")
+
+        assert connection.scalar(text("SELECT count(*) FROM chapters")) == 1
+        assert connection.scalar(text("SELECT count(*) FROM listening_runs")) == 0
+        assert connection.scalar(text("SELECT version_num FROM alembic_version")) == (
+            "0013_exercise_chapters"
+        )
+        connection.execute(text("ALTER SEQUENCE chapter_number_seq RESTART WITH 2"))
 
 
 @pytest.mark.parametrize("previous_revision", ["0008_game", "0009_avatar_sheets"])

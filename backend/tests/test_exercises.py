@@ -5,6 +5,7 @@ from pathlib import Path
 import httpx
 import pytest
 from PIL import Image
+from sqlalchemy import delete, select
 from test_auth import (  # Reuse the disposable database and authenticated API fixtures.
     anyio_backend,
     client,
@@ -16,7 +17,8 @@ from test_auth import (
     settings as auth_settings,
 )
 
-from app.models import Exercise
+from app.database import Database
+from app.models import Chapter, Exercise
 from app.services.auth import ServiceError
 from app.services.media import prepare_media
 from app.settings import Settings
@@ -112,6 +114,43 @@ async def test_crud_original_and_soft_delete(
         row = session.get(Exercise, identifier)
         assert row is not None and row.deleted_at is not None
     assert (settings.media_root / target).read_bytes() == png
+
+
+async def test_exercise_output_includes_chapter_fields(
+    client: httpx.AsyncClient,
+    database: Database,
+    png: bytes,
+) -> None:
+    await login(client)
+    identifier = await create_exercise(client, png)
+
+    with database.session() as session:
+        session.execute(delete(Chapter).where(Chapter.number == 2))
+        chapter = Chapter(number=2)
+        session.add(chapter)
+        session.flush()
+        exercise = session.get(Exercise, identifier)
+        assert exercise is not None
+        exercise.chapter_id = chapter.id
+        chapter_id = chapter.id
+        session.commit()
+
+    detail = (await client.get(f"/api/exercises/{identifier}")).json()
+    assert (detail["chapter_id"], detail["chapter_number"]) == (chapter_id, 2)
+
+    listing = (await client.get("/api/exercises")).json()
+    exercise = listing["exercises"][0]
+    assert (exercise["chapter_id"], exercise["chapter_number"]) == (chapter_id, 2)
+
+    with database.session() as session:
+        exercise_row = session.get(Exercise, identifier)
+        chapter_row = session.get(Chapter, chapter_id)
+        chapter_one_id = session.scalar(select(Chapter.id).where(Chapter.number == 1))
+        assert exercise_row is not None and chapter_row is not None
+        assert chapter_one_id is not None
+        exercise_row.chapter_id = chapter_one_id
+        session.delete(chapter_row)
+        session.commit()
 
 
 async def test_opus_conversion_and_atomic_validation(

@@ -144,7 +144,8 @@ def upgrade() -> None:
 def downgrade() -> None:
     unsafe_data = op.get_bind().scalar(
         sa.text(
-            "SELECT EXISTS (SELECT 1 FROM chapters WHERE number <> 1) "
+            "SELECT (SELECT is_called FROM chapter_number_seq) "
+            "OR EXISTS (SELECT 1 FROM chapters WHERE number <> 1) "
             "OR EXISTS (SELECT 1 FROM exercises WHERE chapter_id <> "
             "(SELECT id FROM chapters WHERE number = 1)) "
             "OR EXISTS (SELECT 1 FROM listening_sessions WHERE chapter_number <> 1) "

@@ -1,13 +1,7 @@
 import type { Exercise } from "./exercises";
+export type { Chapter } from "./chapters";
 
 export type RunStatus = "active" | "completed" | "cancelled";
-
-export type Chapter = {
-  id: number;
-  number: number;
-  active_exercise_count: number;
-  assigned_exercise_count: number;
-};
 
 export type RunStartRequest = { chapter_ids: number[] };
 export type ChapterExercise = Exercise & {
