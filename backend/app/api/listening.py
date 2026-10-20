@@ -1,21 +1,18 @@
 import hmac
 from datetime import datetime
 from typing import Annotated
-from uuid import UUID
 
 from fastapi import APIRouter, Depends, Query, Request
-from pydantic import AwareDatetime, BaseModel, Field
+from pydantic import AwareDatetime, BaseModel
 
 from app.api.auth import (
     Configuration,
     Db,
-    Input,
     Manager,
     Member,
-    require_csrf,
     require_origin,
 )
-from app.api.exercises import ExerciseOutput, output
+from app.api.listening_runs import RunEventInput
 from app.models import ListeningSession
 from app.services import listening
 from app.services.auth import Identity, ServiceError
@@ -30,27 +27,6 @@ def require_student(member: Member) -> Identity:
 
 
 Student = Annotated[Identity, Depends(require_student)]
-
-
-class SelectionInput(Input):
-    mode: listening.Mode = "sequential"
-    direction: listening.Direction = "current"
-    current_id: int | None = Field(default=None, gt=0)
-    previous_id: int | None = Field(default=None, gt=0)
-
-
-class SelectionOutput(BaseModel):
-    exercise: ExerciseOutput | None
-
-
-class EventInput(Input):
-    session_id: UUID
-    exercise_id: int = Field(gt=0)
-    audio_id: UUID | None = None
-    event: listening.Event
-    position_seconds: float = Field(ge=0, allow_inf_nan=False)
-    mode: listening.Mode = "sequential"
-    csrf_token: str = Field(min_length=1, max_length=128, repr=False)
 
 
 class EventOutput(BaseModel):
@@ -93,28 +69,9 @@ class OptionsOutput(BaseModel):
     exercises: list[OptionOutput]
 
 
-@router.get("/listening/current")
-def current(student: Student, session: Db) -> SelectionOutput:
-    row = listening.current(session, student.user.id)
-    return SelectionOutput(exercise=output(row, session) if row else None)
-
-
-@router.post("/listening/select", dependencies=[Depends(require_csrf)])
-def select(data: SelectionInput, student: Student, session: Db) -> SelectionOutput:
-    row = listening.choose(
-        session,
-        student.user.id,
-        data.mode,
-        data.direction,
-        data.current_id,
-        data.previous_id,
-    )
-    return SelectionOutput(exercise=output(row, session) if row else None)
-
-
 @router.post("/listening/events")
 def event(
-    data: EventInput,
+    data: RunEventInput,
     student: Student,
     session: Db,
     request: Request,
@@ -128,11 +85,11 @@ def event(
     row = listening.record_event(
         session,
         student.user.id,
+        data.run_id,
         data.exercise_id,
         data.session_id,
         data.event,
         data.position_seconds,
-        data.mode,
         data.audio_id,
     )
     return EventOutput(

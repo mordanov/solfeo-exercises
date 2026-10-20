@@ -1,4 +1,3 @@
-import secrets
 from datetime import UTC, datetime
 from typing import Literal
 from uuid import UUID
@@ -6,98 +5,52 @@ from uuid import UUID
 from sqlalchemy import func, select, text
 from sqlalchemy.orm import Session
 
-from app.models import Exercise, ListeningSession, MediaFile, StudentProgress, User
+from app.models import (
+    Exercise,
+    ListeningRun,
+    ListeningRunItem,
+    ListeningSession,
+    MediaFile,
+    User,
+)
 from app.services.auth import ServiceError
 from app.services.exercises import get_exercise
 
-Mode = Literal["sequential", "random"]
-Direction = Literal["current", "next", "previous"]
 Event = Literal["start", "heartbeat", "end", "ended"]
-
-
-def progress_lock(session: Session, user_id: int) -> StudentProgress:
-    session.execute(
-        text("SELECT pg_advisory_xact_lock(710024003, :user_id)"), {"user_id": user_id}
-    )
-    progress = session.get(StudentProgress, user_id)
-    if progress is None:
-        progress = StudentProgress(user_id=user_id)
-        session.add(progress)
-    return progress
-
-
-def active_ids(session: Session) -> list[int]:
-    return list(
-        session.scalars(
-            select(Exercise.id)
-            .where(Exercise.deleted_at.is_(None))
-            .order_by(Exercise.position, Exercise.id)
-        )
-    )
-
-
-def current(session: Session, user_id: int) -> Exercise | None:
-    ids = active_ids(session)
-    if not ids:
-        return None
-    progress = session.get(StudentProgress, user_id)
-    identifier = progress.next_exercise_id if progress else None
-    return get_exercise(session, identifier if identifier in ids else ids[0])
-
-
-def choose(
-    session: Session,
-    user_id: int,
-    mode: Mode,
-    direction: Direction,
-    current_id: int | None,
-    previous_id: int | None,
-) -> Exercise | None:
-    progress = progress_lock(session, user_id)
-    ids = active_ids(session)
-    if not ids:
-        progress.next_exercise_id = None
-        progress.last_random_id = None
-        session.commit()
-        return None
-    if mode == "random":
-        if direction == "previous":
-            if previous_id not in ids:
-                raise ServiceError("EXERCISE_NOT_FOUND", 404)
-            selected = previous_id
-        else:
-            last = current_id if current_id is not None else progress.last_random_id
-            candidates = [identifier for identifier in ids if identifier != last]
-            selected = secrets.choice(candidates or ids)
-        progress.last_random_id = selected
-    else:
-        anchor = current_id if current_id in ids else progress.next_exercise_id
-        if anchor in ids:
-            index = ids.index(anchor)
-            if direction != "current":
-                index = (index + (1 if direction == "next" else -1)) % len(ids)
-        else:
-            index = 0
-        selected = ids[index]
-        progress.next_exercise_id = selected
-    session.commit()
-    return get_exercise(session, selected)
 
 
 def record_event(
     session: Session,
     user_id: int,
+    run_id: int,
     exercise_id: int,
     session_id: UUID,
     event: Event,
     position: float,
-    mode: Mode,
     audio_id: UUID | None,
 ) -> ListeningSession:
     session.execute(
         text("SELECT pg_advisory_xact_lock(:key)"),
         {"key": session_id.int & ((1 << 63) - 1)},
     )
+    run = session.scalar(
+        select(ListeningRun).where(ListeningRun.id == run_id).with_for_update()
+    )
+    if run is None:
+        raise ServiceError("LISTENING_RUN_NOT_FOUND", 404)
+    if run.user_id != user_id:
+        raise ServiceError("FORBIDDEN", 403)
+    if run.status != "active":
+        raise ServiceError("LISTENING_RUN_NOT_ACTIVE", 409)
+    item = session.scalar(
+        select(ListeningRunItem).where(
+            ListeningRunItem.run_id == run.id,
+            ListeningRunItem.position == run.current_index,
+        )
+    )
+    if item is None or item.exercise_id != exercise_id:
+        raise ServiceError("RUN_ITEM_NOT_CURRENT", 409)
+
     row = session.scalar(
         select(ListeningSession).where(ListeningSession.session_id == str(session_id))
     )
@@ -120,6 +73,7 @@ def record_event(
             max_position_sec=0,
             audio_duration_sec=media.duration_seconds,
             completed=False,
+            chapter_number=item.chapter_number,
         )
         session.add(row)
     elif row.user_id != user_id:
@@ -128,7 +82,6 @@ def record_event(
         audio_id is not None and row.audio_id != str(audio_id)
     ):
         raise ServiceError("LISTENING_SESSION_CONFLICT", 409)
-    was_completed = row.completed
     row.max_position_sec = max(
         row.max_position_sec, min(position, row.audio_duration_sec)
     )
@@ -140,14 +93,6 @@ def record_event(
     )
     if event in ("end", "ended") and row.ended_at is None:
         row.ended_at = now
-    if row.completed and not was_completed and mode == "sequential":
-        progress = progress_lock(session, user_id)
-        ids = active_ids(session)
-        if exercise_id in ids and (
-            progress.next_exercise_id not in ids
-            or progress.next_exercise_id == exercise_id
-        ):
-            progress.next_exercise_id = ids[(ids.index(exercise_id) + 1) % len(ids)]
     session.commit()
     return row
 
