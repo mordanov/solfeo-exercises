@@ -1521,7 +1521,11 @@ After deploying the avatar fix, generate a new avatar: it must reach review, and
 
 ## Chapter-based exercise selection
 
-- The owner approves the design on 2026-10-19; implementation has not started.
+- The owner approves the design on 2026-10-19.
+- The first implementation slice adds the database schema, migration, and API contracts.
+- The migration seeds Chapter 1 and backfills every exercise and listening record.
+- Service modules contain typed stubs only; no endpoints or listening behavior changed.
+- Chapter management, saved-run behavior, journal filtering, and user interfaces remain unimplemented.
 - Managers create numbered chapters and assign every exercise to exactly one chapter.
 - Students select chapters for a saved, randomized run of up to 10 exercises.
 - The run resumes across devices and supports cancellation.

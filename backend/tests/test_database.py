@@ -144,9 +144,14 @@ def test_migration_upgrade_repeat_downgrade_and_upgrade(database: Database) -> N
     with database.engine.connect() as connection:
         config = migration_config(connection)
         command.upgrade(config, "head")
+        assert connection.execute(text("SELECT id, number FROM chapters")).one() == (
+            1,
+            1,
+        )
+        assert connection.scalar(text("SELECT nextval('chapter_number_seq')")) == 2
         assert (
             connection.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0012_player_role"
+            == "0013_exercise_chapters"
         )
         assert set(inspect(connection).get_table_names()) == {
             "alembic_version",
@@ -159,8 +164,192 @@ def test_migration_upgrade_repeat_downgrade_and_upgrade(database: Database) -> N
         command.upgrade(config, "head")
         assert (
             connection.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0012_player_role"
+            == "0013_exercise_chapters"
         )
+
+
+def test_chapter_migration_backfills_exercises_and_listening_rows(
+    database: Database,
+) -> None:
+    with database.engine.begin() as connection:
+        config = migration_config(connection)
+        command.downgrade(config, "0012_player_role")
+        user_id = connection.scalar(
+            text(
+                "INSERT INTO users (username, password_hash, first_name, "
+                "last_name, role) VALUES ('chapter-backfill', 'synthetic-hash', "
+                "'Migration', 'Test', 'student') RETURNING id"
+            )
+        )
+        media_id = "00000000-0000-4000-8000-000000000013"
+        connection.execute(
+            text(
+                "INSERT INTO media_files (id, filename, mime_type, size_bytes) "
+                "VALUES (:id, 'chapter-backfill.m4a', 'audio/mp4', 1)"
+            ),
+            {"id": media_id},
+        )
+        exercise_ids = [
+            connection.scalar(
+                text(
+                    "INSERT INTO exercises "
+                    "(title, position, audio_id, deleted_at) "
+                    "VALUES (:title, :position, :audio_id, :deleted_at) "
+                    "RETURNING id"
+                ),
+                {
+                    "title": f"Chapter migration {position}",
+                    "position": position,
+                    "audio_id": media_id,
+                    "deleted_at": (
+                        "2026-01-01T00:00:00+00:00" if position == 1 else None
+                    ),
+                },
+            )
+            for position in (0, 1)
+        ]
+        connection.execute(
+            text(
+                "INSERT INTO listening_sessions "
+                "(user_id, exercise_id, audio_id, exercise_title, session_id, "
+                "started_at, last_heartbeat_at, max_position_sec, "
+                "audio_duration_sec, completed) "
+                "VALUES (:user_id, :exercise_id, :audio_id, :title, :session_id, "
+                "now(), now(), 0, 1, false)"
+            ),
+            {
+                "user_id": user_id,
+                "exercise_id": exercise_ids[0],
+                "audio_id": media_id,
+                "title": "Chapter migration 0",
+                "session_id": "00000000-0000-4000-8000-000000000014",
+            },
+        )
+
+        command.upgrade(config, "head")
+        chapter_id = connection.scalar(text("SELECT id FROM chapters WHERE number = 1"))
+        assert list(
+            connection.scalars(
+                text(
+                    "SELECT chapter_id FROM exercises WHERE id = ANY(:ids) "
+                    "ORDER BY position"
+                ),
+                {"ids": exercise_ids},
+            )
+        ) == [chapter_id, chapter_id]
+        assert (
+            connection.scalar(
+                text(
+                    "SELECT chapter_number FROM listening_sessions WHERE user_id = :id"
+                ),
+                {"id": user_id},
+            )
+            == 1
+        )
+        legacy_exercise_id = connection.scalar(
+            text(
+                "INSERT INTO exercises (title, position, audio_id) "
+                "VALUES ('Legacy chapter default', 2, :audio_id) RETURNING id"
+            ),
+            {"audio_id": media_id},
+        )
+        assert (
+            connection.scalar(
+                text("SELECT chapter_id FROM exercises WHERE id = :id"),
+                {"id": legacy_exercise_id},
+            )
+            == chapter_id
+        )
+        legacy_session_id = "00000000-0000-4000-8000-000000000015"
+        connection.execute(
+            text(
+                "INSERT INTO listening_sessions "
+                "(user_id, exercise_id, audio_id, exercise_title, session_id, "
+                "started_at, last_heartbeat_at, max_position_sec, "
+                "audio_duration_sec, completed) "
+                "VALUES (:user_id, :exercise_id, :audio_id, :title, :session_id, "
+                "now(), now(), 0, 1, false)"
+            ),
+            {
+                "user_id": user_id,
+                "exercise_id": legacy_exercise_id,
+                "audio_id": media_id,
+                "title": "Legacy chapter default",
+                "session_id": legacy_session_id,
+            },
+        )
+        assert (
+            connection.scalar(
+                text(
+                    "SELECT chapter_number FROM listening_sessions "
+                    "WHERE session_id = :session_id"
+                ),
+                {"session_id": legacy_session_id},
+            )
+            == 1
+        )
+        assert (
+            connection.scalar(
+                text(
+                    "SELECT is_nullable FROM information_schema.columns "
+                    "WHERE table_name = 'exercises' AND column_name = 'chapter_id'"
+                )
+            )
+            == "NO"
+        )
+        connection.execute(
+            text("DELETE FROM listening_sessions WHERE user_id = :user_id"),
+            {"user_id": user_id},
+        )
+        connection.execute(
+            text("DELETE FROM exercises WHERE audio_id = :audio_id"),
+            {"audio_id": media_id},
+        )
+        connection.execute(
+            text("DELETE FROM media_files WHERE id = :id"), {"id": media_id}
+        )
+        connection.execute(text("DELETE FROM users WHERE id = :id"), {"id": user_id})
+
+
+@pytest.mark.parametrize("guarded_data", ["additional_chapter", "run_record"])
+def test_chapter_migration_refuses_unsafe_downgrade(
+    database: Database, guarded_data: str
+) -> None:
+    with database.engine.begin() as connection:
+        config = migration_config(connection)
+        command.upgrade(config, "head")
+        if guarded_data == "additional_chapter":
+            connection.execute(text("INSERT INTO chapters (number) VALUES (2)"))
+        else:
+            user_id = connection.scalar(
+                text(
+                    "INSERT INTO users (username, password_hash, first_name, "
+                    "last_name, role) VALUES ('chapter-run-downgrade', "
+                    "'synthetic-hash', 'Migration', 'Test', 'student') "
+                    "RETURNING id"
+                )
+            )
+            connection.execute(
+                text(
+                    "INSERT INTO listening_runs (user_id, status, current_index) "
+                    "VALUES (:user_id, 'active', 0)"
+                ),
+                {"user_id": user_id},
+            )
+
+        with pytest.raises(RuntimeError, match="CHAPTER_DATA_PREVENTS_DOWNGRADE"):
+            command.downgrade(config, "0012_player_role")
+
+        assert connection.scalar(text("SELECT version_num FROM alembic_version")) == (
+            "0013_exercise_chapters"
+        )
+        if guarded_data == "additional_chapter":
+            connection.execute(text("DELETE FROM chapters WHERE number = 2"))
+        else:
+            connection.execute(text("DELETE FROM listening_runs"))
+            connection.execute(
+                text("DELETE FROM users WHERE username = 'chapter-run-downgrade'")
+            )
 
 
 @pytest.mark.parametrize("previous_revision", ["0008_game", "0009_avatar_sheets"])
@@ -287,9 +476,12 @@ def test_round_rules_migration_preserves_previous_release_rows(
         )
 
 
-def test_player_role_is_the_single_head_after_game_rewards() -> None:
+def test_chapter_migration_is_the_single_head_after_player_role() -> None:
     scripts = ScriptDirectory.from_config(Config(str(ROOT / "backend/alembic.ini")))
-    assert scripts.get_heads() == ["0012_player_role"]
+    assert scripts.get_heads() == ["0013_exercise_chapters"]
+    chapter_revision = scripts.get_revision("0013_exercise_chapters")
+    assert chapter_revision is not None
+    assert chapter_revision.down_revision == "0012_player_role"
     player_role = scripts.get_revision("0012_player_role")
     assert player_role is not None
     assert player_role.down_revision == "0011_game_rewards_review"

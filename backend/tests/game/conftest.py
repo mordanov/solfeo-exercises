@@ -41,7 +41,8 @@ def database(settings: Settings) -> Iterator[Database]:
             update(Player).values(custom_avatar_id=None, avatar_review_job_id=None)
         )
         for table in reversed(Base.metadata.sorted_tables):
-            conn.execute(delete(table))
+            if table.name != "chapters":
+                conn.execute(delete(table))
     try:
         yield db
     finally:
@@ -50,7 +51,8 @@ def database(settings: Settings) -> Iterator[Database]:
                 update(Player).values(custom_avatar_id=None, avatar_review_job_id=None)
             )
             for table in reversed(Base.metadata.sorted_tables):
-                conn.execute(delete(table))
+                if table.name != "chapters":
+                    conn.execute(delete(table))
         db.close()
 
 

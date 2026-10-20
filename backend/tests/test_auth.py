@@ -61,13 +61,15 @@ def database(settings: Settings) -> Iterator[Database]:
         config.attributes["connection"] = connection
         command.upgrade(config, "head")
         for table in reversed(Base.metadata.sorted_tables):
-            connection.execute(delete(table))
+            if table.name != "chapters":
+                connection.execute(delete(table))
     try:
         yield database
     finally:
         with database.engine.begin() as connection:
             for table in reversed(Base.metadata.sorted_tables):
-                connection.execute(delete(table))
+                if table.name != "chapters":
+                    connection.execute(delete(table))
         database.close()
 
 
