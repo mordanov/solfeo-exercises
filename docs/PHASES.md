@@ -65,6 +65,14 @@ Done when: a student listens to two exercises, closes the tab during the second,
 Implementation status: deployed on 2026-09-29 with successful CI/CD and local/public HTTPS Chrome scenarios.
 Status: complete on 2026-09-29 after the owner confirms all PHASE 3 checks.
 
+### Chapter-based exercise selection
+
+The student selects one or more chapters instead of choosing sequential or random mode.
+The backend saves a randomized run of up to 10 distinct exercises.
+The student can resume, navigate, or cancel the saved run.
+The manager journal filters by the chapter snapshot recorded at playback start.
+See `docs/superpowers/specs/2026-10-19-exercise-chapters-design.md`.
+
 ## PHASE 4: Telegram audio import
 The owner authorizes the entire phase without intermediate confirmations on 2026-09-29.
 - Plan secure linking between Telegram sender IDs and active manager accounts before implementation.

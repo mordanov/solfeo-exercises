@@ -42,15 +42,25 @@ Downgrade returns `PLAYER_ACCOUNTS_PREVENT_DOWNGRADE` while any player account e
 Reassign these roles explicitly before returning to an older release.
 Changing a player account to student grants exercise access.
 
+Revision `0013_exercise_chapters` adds numbered chapters and saved listening runs.
+It creates Chapter 1 and assigns every existing exercise and listening session to it.
+The `chapter_number_seq` sequence assigns numbers that the application never reuses.
+Downgrade refuses to remove later chapters, changed chapter assignments, or saved runs.
+The migration chain ends at `0013_exercise_chapters`, with one head.
+
 | Table | Contents and constraints |
 |---|---|
 | `users` | Unique lowercase username, names, role, password hash, active/emergency flags, obligatory password change, language, note naming, appearance |
 | `login_sessions` | Hashed token primary key, user foreign key, CSRF token, creation time, expiry |
 | `login_limits` | Hashed username/IP budget key, attempt count, expiry |
 | `media_files` | UUID, generated filename, MIME type, positive byte count, optional positive duration, creation time |
-| `exercises` | Title, description, optional category, nonnegative position, image/audio foreign keys, deletion time, creation time |
-| `student_progress` | User primary key, sequential next-exercise reference, last random exercise reference |
-| `listening_sessions` | Unique client UUID, user/exercise/audio references, title snapshot, receipt timestamps, duration, maximum position, completion |
+| `chapters` | Unique stable number and creation time |
+| `exercises` | Title, description, optional category, required chapter, nonnegative position, image/audio foreign keys, deletion time, creation time |
+| `student_progress` | User primary key and previous sequential/random pointers; saved listening runs now drive student selection |
+| `listening_sessions` | Unique client UUID, user/exercise/audio references, title and chapter-number snapshots, receipt timestamps, duration, maximum position, completion |
+| `listening_runs` | Student, active/completed/cancelled status, selected position; a partial unique index permits one active run per student |
+| `listening_run_chapters` | Selected chapter-number snapshots, unique within each run |
+| `listening_run_items` | Ordered exercise and chapter-number snapshots, unique exercise and position within each run |
 | `telegram_links` | User primary key and unique numeric Telegram sender |
 | `telegram_link_codes` | User primary key, unique token hash, expiry |
 | `telegram_updates` | Telegram update primary key, owner, file reference, status, attempts, errors, converted media, applied exercise |
@@ -189,7 +199,7 @@ Do not remove the data volume.
    ```
 
 3. Repeat the revision command.
-   Alembic reports `0011_game_rewards_review (head)`.
+   Alembic reports `0013_exercise_chapters` as the single head.
 4. Open the local health page.
    Its existing behavior remains unchanged.
 

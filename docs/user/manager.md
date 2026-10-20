@@ -411,6 +411,18 @@ Complete this checklist after the full implementation and automated deployment.
 The service-status panel checks backend liveness, not exercises or the Telegram bot.
 The historical `/prototype-share/` route remains available independently.
 
+## Manage exercise chapters
+
+1. Open **Exercises**.
+   The page shows the exercise chapters above the exercise list.
+2. Click **Create chapter**.
+   The page shows a chapter with the next unused number.
+3. Create or edit an exercise and select its chapter.
+   The form shows the selected numbered chapter.
+
+The application does not reuse chapter numbers after deletion.
+It disables deletion while any active or soft-deleted exercise uses a chapter.
+
 ## Manage exercises
 
 1. Open **Exercises**.
@@ -418,9 +430,11 @@ The historical `/prototype-share/` route remains available independently.
 2. Click **Create exercise**.
    The exercise form opens.
 3. Enter a title and description.
-4. Enter an optional category or level.
-5. Attach a PNG, JPEG, or WebP image, an audio file, or both.
-6. Click **Save exercise**.
+4. Select a chapter.
+   The form shows the chapter number and translated label.
+5. Enter an optional category or level.
+6. Attach a PNG, JPEG, or WebP image, an audio file, or both.
+7. Click **Save exercise**.
    The page shows upload progress, then processing.
 7. Wait until the form closes and the exercise appears.
    The server confirms persistence before the interface refreshes the list.
@@ -439,9 +453,10 @@ After a network failure, refresh the list before retrying.
 
 1. Click **Edit exercise** beside an exercise.
 2. Change its metadata or select replacement files.
-3. Leave file fields empty to keep the current files.
-4. Select a removal checkbox only when another attachment remains.
-5. Click **Save exercise**.
+3. Select a different chapter when needed.
+4. Leave file fields empty to keep the current files.
+5. Select a removal checkbox only when another attachment remains.
+6. Click **Save exercise**.
    The list shows the updated exercise and previews.
 
 1. Drag an exercise to another position.
@@ -480,7 +495,7 @@ The product bot supplies imports; only the website applies them to exercises.
 
 1. Open **Listening journal**.
    The page shows the newest listening sessions first.
-2. Select a student or exercise when needed.
+2. Select a student, exercise, or chapter when needed.
 3. Set From date and To date to filter session start times.
 4. Click **Apply filters**.
    The table and total show matching sessions.
@@ -489,9 +504,11 @@ The product bot supplies imports; only the website applies them to exercises.
 
 Dates use the browser's displayed time zone.
 Both selected calendar dates are inclusive.
-Each row shows the student, original exercise title, start, last activity, end, maximum position, duration, and completion.
+Each row shows the student, original exercise title, chapter, start, last activity, end, maximum position, duration, and completion.
 The completion rule is 90 % of duration or a natural ended event.
 Seeking can satisfy the maximum-position rule; it does not measure uninterrupted listening.
+The chapter filter uses the value saved when playback started.
+It includes chapter numbers from deleted chapters and earlier exercise assignments.
 
 **No end event received** does not mean the student is still listening.
 A browser crash or lost connection can prevent the final event.
