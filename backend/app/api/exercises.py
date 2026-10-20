@@ -27,6 +27,7 @@ class ExerciseInput(Input):
     title: str = Field(min_length=1, max_length=200)
     description: str = Field(default="", max_length=10000)
     category: str | None = Field(default=None, max_length=100)
+    chapter_id: int | None = None
     remove_image: bool = False
     remove_audio: bool = False
     image: UploadFile | None = None
@@ -148,6 +149,7 @@ def save(
         title=data.title,
         description=data.description,
         category=data.category,
+        chapter_id=data.chapter_id,
         image=data.image.file if data.image else None,
         audio=data.audio.file if data.audio else None,
         remove_image=data.remove_image,

@@ -4,7 +4,7 @@ from typing import BinaryIO
 from sqlalchemy import func, select, text
 from sqlalchemy.orm import Session
 
-from app.models import Exercise, MediaFile
+from app.models import Chapter, Exercise, MediaFile
 from app.services.auth import ServiceError
 from app.services.media import Kind, prepare_media
 from app.services.omr import enqueue
@@ -57,6 +57,7 @@ def save_exercise(
     title: str,
     description: str,
     category: str | None,
+    chapter_id: int | None,
     image: BinaryIO | None,
     audio: BinaryIO | None,
     remove_image: bool,
@@ -66,6 +67,9 @@ def save_exercise(
         raise ServiceError("VALIDATION_ERROR", 422)
     if identifier is not None:
         get_exercise(session, identifier)
+    if chapter_id is not None:
+        if session.get(Chapter, chapter_id) is None:
+            raise ServiceError("CHAPTER_NOT_FOUND", 404)
     prepared: dict[Kind, MediaFile] = {}
     try:
         for kind, source in (("image", image), ("audio", audio)):
@@ -81,6 +85,10 @@ def save_exercise(
             else new_exercise(session)
         )
         row.title, row.description, row.category = title, description, category
+        if chapter_id is not None:
+            row.chapter_id = chapter_id
+        elif identifier is None:
+            row.chapter_id = 1
         if remove_image:
             row.image_id = None
         if remove_audio:
