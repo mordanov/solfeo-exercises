@@ -690,11 +690,14 @@ def test_listening_journal_through_nginx_and_restart(stand: Stand) -> None:
             return str(response.json()["csrf_token"])
 
         csrf = login_as("release-check")
+        chapter_response = client.post("/api/chapters", headers={"X-CSRF-Token": csrf})
+        assert chapter_response.status_code == 201
+        chapter = chapter_response.json()
         exercises = []
-        for title in ("Complete audio", "Interrupted audio"):
+        for title in ("Journal audio 1", "Journal audio 2"):
             response = client.post(
                 "/api/exercises",
-                data={"title": title},
+                data={"title": title, "chapter_id": str(chapter["id"])},
                 files={"audio": ("tone.wav", audio.getvalue(), "audio/wav")},
                 headers={"X-CSRF-Token": csrf},
             )
@@ -716,8 +719,20 @@ def test_listening_journal_through_nginx_and_restart(stand: Stand) -> None:
         student_id = created.json()["id"]
         csrf = login_as("journal-student")
         assert client.get("/api/journal").status_code == 403
+        response = client.post(
+            "/api/listening/run",
+            json={"chapter_ids": [chapter["id"]]},
+            headers={"X-CSRF-Token": csrf},
+        )
+        assert response.status_code == 200
+        run = response.json()
+        assert {item["exercise"]["id"] for item in run["items"]} == {
+            exercise["id"] for exercise in exercises
+        }
+        exercises = [item["exercise"] for item in run["items"]]
         for index, exercise in enumerate(exercises):
             payload = {
+                "run_id": run["id"],
                 "session_id": str(uuid.uuid4()),
                 "exercise_id": exercise["id"],
                 "audio_id": exercise["audio"]["id"],
@@ -738,13 +753,23 @@ def test_listening_journal_through_nginx_and_restart(stand: Stand) -> None:
                     client.post("/api/listening/events", json=payload).status_code
                     == 200
                 )
+                response = client.post(
+                    f"/api/listening/run/{run['id']}/navigate",
+                    json={"direction": "next"},
+                    headers={"X-CSRF-Token": csrf},
+                )
+                assert response.status_code == 200
+                assert response.json()["current_index"] == 1
         stand.run("restart", "backend")
         stand.run("up", "-d", "--no-deps", "--wait", "backend")
         assert client.get("/api/auth/me").status_code == 200
-        assert (
-            client.get("/api/listening/current").json()["exercise"]["id"]
-            == exercises[1]["id"]
-        )
+        response = client.get("/api/listening/run")
+        assert response.status_code == 200
+        restored_run = response.json()
+        assert restored_run["id"] == run["id"]
+        assert restored_run["status"] == "active"
+        assert restored_run["current_index"] == 1
+        assert restored_run["items"] == run["items"]
         csrf = login_as("release-check")
         assert (
             client.delete(
@@ -767,6 +792,8 @@ def test_listening_journal_through_nginx_and_restart(stand: Stand) -> None:
         assert complete["completed"] and complete["ended_at"]
         assert not interrupted["completed"] and interrupted["ended_at"] is None
         assert interrupted["exercise_deleted"]
+        assert complete["chapter_number"] == chapter["number"]
+        assert interrupted["chapter_number"] == chapter["number"]
         assert (
             client.get(f"/api/journal?student_id={student_id}&offset=1&limit=1").json()[
                 "total"

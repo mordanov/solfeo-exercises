@@ -1530,6 +1530,9 @@ After deploying the avatar fix, generate a new avatar: it must reach review, and
 - The deletion error is translated in English, Russian, and Spanish.
 - The full backend suite passes 377 tests; the full frontend suite passes 409 tests.
 - Documentation tests pass 4 checks.
+- CI run `39442788881` fails because the journal container test uses the previous listening API.
+- The repaired test creates a saved run and verifies navigation, restart persistence, and chapter snapshots.
+- All 61 deployment and container tests pass locally after the repair.
 - Ruff, formatting, strict mypy, ESLint, TypeScript, Prettier, and the production build pass.
 - The production build retains the existing large-chunk warning.
 - Graphify re-extracts all 386 code files and rebuilds 6474 nodes and 11532 edges.
