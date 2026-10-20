@@ -27,6 +27,7 @@ examples/
 /.env.*
 !/.env.example
 node_modules/
+.worktrees/
 frontend/dist/
 coverage/
 .pytest_cache/
