@@ -77,6 +77,7 @@ async def test_chapter_read_access_and_manager_csrf_permissions(
 
     csrf_token = client.headers.pop("X-CSRF-Token")
     assert (await client.post("/api/chapters")).status_code == 403
+    assert (await client.delete(f"/api/chapters/{chapter_id}")).status_code == 403
     client.headers["X-CSRF-Token"] = csrf_token
 
     await create_user(client)

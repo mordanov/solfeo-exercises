@@ -6,6 +6,7 @@ import httpx
 import pytest
 from PIL import Image
 from sqlalchemy import delete, select
+from sqlalchemy.orm import Session
 from test_auth import (  # Reuse the disposable database and authenticated API fixtures.
     anyio_backend,
     client,
@@ -19,6 +20,7 @@ from test_auth import (
 
 from app.database import Database
 from app.models import Chapter, Exercise
+from app.services import exercises as exercise_service
 from app.services.auth import ServiceError
 from app.services.media import prepare_media
 from app.settings import Settings
@@ -247,6 +249,91 @@ async def test_exercise_chapter_assignment_validation_and_preservation(
         exercise.chapter_id = chapter_one_id
         session.commit()
     assert (await client.delete(f"/api/chapters/{chapter_id}")).status_code == 200
+
+
+async def test_update_returns_not_found_if_chapter_is_deleted_after_validation(
+    client: httpx.AsyncClient,
+    database: Database,
+    png: bytes,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    await login(client)
+    exercise_id = await create_exercise(client, png)
+    chapter_response = await client.post("/api/chapters")
+    assert chapter_response.status_code == 201, chapter_response.text
+    chapter_id = chapter_response.json()["id"]
+    original_lock = exercise_service.lock
+
+    def delete_chapter_before_assignment(session: Session) -> None:
+        with database.session() as concurrent_session:
+            chapter = concurrent_session.get(Chapter, chapter_id)
+            assert chapter is not None
+            concurrent_session.delete(chapter)
+            concurrent_session.commit()
+        original_lock(session)
+
+    monkeypatch.setattr(exercise_service, "lock", delete_chapter_before_assignment)
+    response = await client.put(
+        f"/api/exercises/{exercise_id}",
+        data={"title": "Race", "chapter_id": str(chapter_id)},
+    )
+
+    assert response.status_code == 404
+    assert response.json() == {"error": "CHAPTER_NOT_FOUND"}
+
+
+async def test_legacy_create_uses_lowest_available_chapter(
+    client: httpx.AsyncClient,
+    database: Database,
+    png: bytes,
+) -> None:
+    await login(client)
+    chapter_one = next(
+        row
+        for row in (await client.get("/api/chapters")).json()["chapters"]
+        if row["number"] == 1
+    )
+    deleted = await client.delete(f"/api/chapters/{chapter_one['id']}")
+    assert deleted.status_code == 200
+    replacement_id: int | None = None
+    try:
+        no_chapter = await client.post(
+            "/api/exercises",
+            data={"title": "No available chapter"},
+            files={"image": ("score.png", png, "image/png")},
+        )
+        assert no_chapter.status_code == 404
+        assert no_chapter.json() == {"error": "CHAPTER_NOT_FOUND"}
+
+        replacement = await client.post("/api/chapters")
+        assert replacement.status_code == 201, replacement.text
+        replacement_id = replacement.json()["id"]
+        created = await client.post(
+            "/api/exercises",
+            data={"title": "Legacy chapter default"},
+            files={"image": ("score.png", png, "image/png")},
+        )
+        assert created.status_code == 201, created.text
+        assert created.json()["chapter_id"] == replacement_id
+    finally:
+        with database.session() as session:
+            chapter_one_row = session.get(Chapter, chapter_one["id"])
+            if chapter_one_row is None:
+                session.add(Chapter(id=chapter_one["id"], number=1))
+                session.flush()
+            for exercise in session.scalars(
+                select(Exercise).where(
+                    Exercise.title.in_(
+                        ["No available chapter", "Legacy chapter default"]
+                    )
+                )
+            ):
+                exercise.chapter_id = chapter_one["id"]
+            if replacement_id is not None:
+                replacement_row = session.get(Chapter, replacement_id)
+                if replacement_row is not None:
+                    session.delete(replacement_row)
+            session.commit()
 
 
 async def test_opus_conversion_and_atomic_validation(
