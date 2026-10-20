@@ -27,10 +27,15 @@
 ## Listening run
 
 **States:** active, completed, cancelled
-**Initial:** Not defined in this schema slice.
-**Transitions:** No mutation paths exist in this slice.
-**Notes:** The database constrains the status values and allows one active run per user.
-**Source:** `backend/migrations/versions/0013_exercise_chapters_and_listening_runs.py:1-170`.
+**Initial:** active, after a student starts a run with one or more available chapters.
+**Transitions:**
+- — → active when the service samples and saves up to 10 exercises in a randomized order.
+- active → active when Previous or Next moves to another available saved item; a run fetched after reload remains resumable.
+- active → completed when Next is requested after the final available item, or when deleted exercises leave no items.
+- active → cancelled when the student cancels the run.
+**Guards:** Only the owning student can navigate or cancel an active run. Run mutations lock the saved run; chapter selection must contain unique, available chapters.
+**Notes:** A student can have at most one active run. Resuming only exposes the saved queue and does not start audio automatically.
+**Source:** `backend/app/services/listening_runs.py:75-230`; `backend/app/api/listening_runs.py:101-150`; `frontend/src/features/listening/Listening.tsx:156-310`.
 
 ## OMR job
 

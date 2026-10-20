@@ -7,7 +7,7 @@ import { listeningHeartbeatMs } from "../../config";
 
 type Context = Pick<
   ListeningEvent,
-  "exercise_id" | "audio_id" | "mode" | "csrf_token"
+  "run_id" | "exercise_id" | "audio_id" | "csrf_token"
 >;
 
 export class ListeningTracker {

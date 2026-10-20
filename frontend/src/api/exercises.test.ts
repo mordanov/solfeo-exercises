@@ -4,6 +4,8 @@ import { readUploadTimeout } from "../configuration";
 
 const exercise = {
   id: 1,
+  chapter_id: 1,
+  chapter_number: 1,
   title: "Scale",
   description: "",
   category: null,
@@ -63,6 +65,8 @@ it("validates exercise and media responses", () => {
   for (const invalid of [
     null,
     { ...exercise, id: -1 },
+    { ...exercise, chapter_id: 0 },
+    { ...exercise, chapter_number: 1.5 },
     { ...exercise, image: null },
     { ...exercise, image: { ...exercise.image, size_bytes: -1 } },
   ])

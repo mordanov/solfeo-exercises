@@ -19,6 +19,7 @@ export function Journal() {
   const { t, i18n } = useTranslation();
   const [student, setStudent] = useState("");
   const [exercise, setExercise] = useState("");
+  const [chapter, setChapter] = useState("");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [filters, setFilters] = useState<JournalFilters>({});
@@ -65,6 +66,12 @@ export function Journal() {
           {row.exercise_deleted && <p>{t("journal.deleted")}</p>}
         </div>
       ),
+    },
+    {
+      field: "chapter",
+      headerName: t("journal.chapter"),
+      minWidth: 140,
+      render: (row) => t("chapters.numbered", { number: row.chapter_number }),
     },
     {
       field: "started",
@@ -118,6 +125,7 @@ export function Journal() {
           setFilters({
             student_id: student,
             exercise_id: exercise,
+            chapter_number: chapter,
             started_from: dateBoundary(from),
             started_to: dateBoundary(to, true),
           });
@@ -133,6 +141,20 @@ export function Journal() {
             {options.data?.students.map((value) => (
               <option key={value.id} value={value.id}>
                 {value.label}
+              </option>
+            ))}
+          </Select>
+        </Field>
+        <Field>
+          {t("journal.chapter")}
+          <Select
+            value={chapter}
+            onChange={(event) => setChapter(event.target.value)}
+          >
+            <option value="">{t("journal.all")}</option>
+            {options.data?.chapters.map((value) => (
+              <option key={value.chapter_number} value={value.chapter_number}>
+                {t("chapters.numbered", { number: value.chapter_number })}
               </option>
             ))}
           </Select>

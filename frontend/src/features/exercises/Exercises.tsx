@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { ApiError, type Auth } from "../../api/auth";
+import { listChapters } from "../../api/chapters";
 import {
   deleteExercise,
   listExercises,
@@ -17,12 +18,14 @@ import {
   Form,
   Input,
   Panel,
+  Select,
   Textarea,
 } from "../../components/Ui";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 import Alert from "@mui/material/Alert";
 import Chip from "@mui/material/Chip";
+import { ChapterManager } from "./ChapterManager";
 
 function ExerciseForm({
   auth,
@@ -38,6 +41,9 @@ function ExerciseForm({
   const [title, setTitle] = useState(exercise?.title ?? "");
   const [description, setDescription] = useState(exercise?.description ?? "");
   const [category, setCategory] = useState(exercise?.category ?? "");
+  const [chapterId, setChapterId] = useState(
+    String(exercise?.chapter_id ?? ""),
+  );
   const [image, setImage] = useState<File>();
   const [audio, setAudio] = useState<File>();
   const [removeImage, setRemoveImage] = useState(false);
@@ -46,12 +52,18 @@ function ExerciseForm({
   const [validation, setValidation] = useState(false);
   const controller = useRef<AbortController | null>(null);
   useEffect(() => () => controller.current?.abort(), []);
+  const chapters = useQuery({
+    queryKey: ["chapters"],
+    queryFn: ({ signal }) => listChapters(signal),
+    retry: false,
+  });
   const mutation = useMutation({
     mutationFn: () => {
       const data = new FormData();
       data.set("title", title);
       data.set("description", description);
       data.set("category", category);
+      data.set("chapter_id", chapterId);
       data.set("remove_image", String(removeImage));
       data.set("remove_audio", String(removeAudio));
       if (image) data.set("image", image);
@@ -80,6 +92,7 @@ function ExerciseForm({
           audio ||
           (!removeAudio && exercise?.audio)
         );
+        if (!chapterId) return;
         setValidation(missing);
         if (!missing) {
           setProgress(0);
@@ -118,6 +131,30 @@ function ExerciseForm({
             onChange={(e) => setCategory(e.target.value)}
           />
         </Field>
+        <Field>
+          {t("exercises.chapter")}
+          <Select
+            required
+            value={chapterId}
+            disabled={mutation.isPending || chapters.isPending}
+            onChange={(event) => setChapterId(event.target.value)}
+          >
+            <option value="">{t("exercises.selectChapter")}</option>
+            {chapters.data?.map((chapter) => (
+              <option key={chapter.id} value={chapter.id}>
+                {t("chapters.numbered", { number: chapter.number })}
+              </option>
+            ))}
+          </Select>
+        </Field>
+        {chapters.isError && (
+          <>
+            <ErrorMessage error={chapters.error} />
+            <Button type="button" onClick={() => void chapters.refetch()}>
+              {t("common.retry")}
+            </Button>
+          </>
+        )}
         <Field>
           {t("exercises.image")}
           <Input
@@ -158,7 +195,9 @@ function ExerciseForm({
           </Field>
         )}
         <p>{t("exercises.fileHint")}</p>
-        <Button>{t("exercises.save")}</Button>{" "}
+        <Button disabled={!chapterId || mutation.isPending}>
+          {t("exercises.save")}
+        </Button>{" "}
         <Button type="button" onClick={close}>
           {t("common.close")}
         </Button>
@@ -271,6 +310,7 @@ export function Exercises({ auth }: { auth: Auth }) {
     <Panel>
       <h2>{t("exercises.title")}</h2>
       <p>{t("exercises.reorderHint")}</p>
+      <ChapterManager csrf={auth.csrf_token} />
       <Button disabled={busy} onClick={() => setEditing(null)}>
         {t("exercises.create")}
       </Button>

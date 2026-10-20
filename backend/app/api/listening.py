@@ -45,6 +45,7 @@ class JournalOutput(BaseModel):
     exercise_id: int
     exercise_title: str
     exercise_deleted: bool
+    chapter_number: int
     started_at: datetime
     last_heartbeat_at: datetime
     ended_at: datetime | None
@@ -64,9 +65,14 @@ class OptionOutput(BaseModel):
     deleted: bool = False
 
 
+class JournalChapterOption(BaseModel):
+    chapter_number: int
+
+
 class OptionsOutput(BaseModel):
     students: list[OptionOutput]
     exercises: list[OptionOutput]
+    chapters: list[JournalChapterOption]
 
 
 @router.post("/listening/events")
@@ -103,13 +109,21 @@ def journal(
     session: Db,
     student_id: Annotated[int | None, Query(gt=0)] = None,
     exercise_id: Annotated[int | None, Query(gt=0)] = None,
+    chapter_number: Annotated[int | None, Query(gt=0)] = None,
     started_from: AwareDatetime | None = None,
     started_to: AwareDatetime | None = None,
     offset: Annotated[int, Query(ge=0)] = 0,
     limit: Annotated[int, Query(ge=1, le=100)] = 50,
 ) -> JournalListOutput:
     rows, total = listening.journal(
-        session, student_id, exercise_id, started_from, started_to, offset, limit
+        session,
+        student_id,
+        exercise_id,
+        chapter_number,
+        started_from,
+        started_to,
+        offset,
+        limit,
     )
     entries = []
     for row, user, exercise in rows:
@@ -134,7 +148,7 @@ def journal(
 
 @router.get("/journal/options")
 def options(_manager: Manager, session: Db) -> OptionsOutput:
-    users, exercises = listening.journal_options(session)
+    users, exercises, chapter_numbers = listening.journal_options(session)
     return OptionsOutput(
         students=[
             OptionOutput(
@@ -146,5 +160,8 @@ def options(_manager: Manager, session: Db) -> OptionsOutput:
         exercises=[
             OptionOutput(id=row.id, label=row.title, deleted=row.deleted_at is not None)
             for row in exercises
+        ],
+        chapters=[
+            JournalChapterOption(chapter_number=number) for number in chapter_numbers
         ],
     )

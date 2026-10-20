@@ -219,6 +219,72 @@ async def test_deleted_exercise_and_replaced_audio_preserve_journal(
     assert options["exercises"][0]["id"] == exercise
 
 
+async def test_journal_chapter_filter_uses_snapshot_and_keeps_historical_options(
+    client: httpx.AsyncClient,
+    opus: bytes,
+) -> None:
+    await login(client)
+    historical_chapter = (await client.post("/api/chapters")).json()
+    exercise = await audio_exercise(client, opus, chapter_id=historical_chapter["id"])
+    await create_user(client)
+    await login(client, "student")
+    first_run = await start_run(client, historical_chapter["id"])
+    first_session = str(uuid4())
+    assert (
+        await event(client, first_run["id"], exercise, first_session)
+    ).status_code == 200
+    assert (
+        await event(client, first_run["id"], exercise, first_session, "end")
+    ).status_code == 200
+    cancelled = await client.post(f"/api/listening/run/{first_run['id']}/cancel")
+    assert cancelled.status_code == 200
+
+    await login(client)
+    current_chapter = (await client.post("/api/chapters")).json()
+    moved = await client.put(
+        f"/api/exercises/{exercise}",
+        data={"title": "Moved exercise", "chapter_id": str(current_chapter["id"])},
+    )
+    assert moved.status_code == 200, moved.text
+    deleted_chapter = await client.delete(f"/api/chapters/{historical_chapter['id']}")
+    assert deleted_chapter.status_code == 200, deleted_chapter.text
+
+    await login(client, "student")
+    second_run = await start_run(client, current_chapter["id"])
+    second_session = str(uuid4())
+    assert (
+        await event(client, second_run["id"], exercise, second_session)
+    ).status_code == 200
+    assert (
+        await event(client, second_run["id"], exercise, second_session, "end")
+    ).status_code == 200
+
+    await login(client)
+    options = (await client.get("/api/journal/options")).json()
+    assert [value["chapter_number"] for value in options["chapters"]] == [
+        1,
+        historical_chapter["number"],
+        current_chapter["number"],
+    ]
+
+    first = (
+        await client.get(
+            "/api/journal", params={"chapter_number": historical_chapter["number"]}
+        )
+    ).json()
+    second = (
+        await client.get(
+            "/api/journal", params={"chapter_number": current_chapter["number"]}
+        )
+    ).json()
+    assert first["total"] == 1
+    assert first["sessions"][0]["session_id"] == first_session
+    assert first["sessions"][0]["chapter_number"] == historical_chapter["number"]
+    assert second["total"] == 1
+    assert second["sessions"][0]["session_id"] == second_session
+    assert second["sessions"][0]["chapter_number"] == current_chapter["number"]
+
+
 async def test_audio_version_rejects_replacement_without_losing_existing_session(
     client: httpx.AsyncClient, opus: bytes
 ) -> None:

@@ -8,9 +8,9 @@ afterEach(() => {
   vi.resetAllMocks();
 });
 const fixture = {
+  run_id: 42,
   exercise_id: 1,
   audio_id: "audio",
-  mode: "sequential" as const,
   csrf_token: "csrf",
 };
 it("stops speech synchronously before awaiting recorded playback cleanup", async () => {
@@ -52,6 +52,8 @@ it("starts once, heartbeats only while playing and retains the session across pa
     .mock.calls.map(([value]) => value);
   expect(events.filter((value) => value.event === "start")).toHaveLength(1);
   expect(events.every((value) => value.session_id === identifier)).toBe(true);
+  expect(events.every((value) => value.run_id === fixture.run_id)).toBe(true);
+  expect(events.every((value) => !("mode" in value))).toBe(true);
   expect(events.at(-1)?.event).toBe("end");
 });
 

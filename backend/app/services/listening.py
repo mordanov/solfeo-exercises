@@ -6,6 +6,7 @@ from sqlalchemy import func, select, text
 from sqlalchemy.orm import Session
 
 from app.models import (
+    Chapter,
     Exercise,
     ListeningRun,
     ListeningRunItem,
@@ -101,6 +102,7 @@ def journal(
     session: Session,
     student_id: int | None,
     exercise_id: int | None,
+    chapter_number: int | None,
     started_from: datetime | None,
     started_to: datetime | None,
     offset: int,
@@ -117,6 +119,8 @@ def journal(
         query = query.where(ListeningSession.user_id == student_id)
     if exercise_id is not None:
         query = query.where(ListeningSession.exercise_id == exercise_id)
+    if chapter_number is not None:
+        query = query.where(ListeningSession.chapter_number == chapter_number)
     if started_from:
         query = query.where(ListeningSession.started_at >= started_from)
     if started_to:
@@ -130,7 +134,9 @@ def journal(
     return [(row, user, exercise) for row, user, exercise in rows], total
 
 
-def journal_options(session: Session) -> tuple[list[User], list[Exercise]]:
+def journal_options(
+    session: Session,
+) -> tuple[list[User], list[Exercise], list[int]]:
     users = list(
         session.scalars(
             select(User)
@@ -147,4 +153,12 @@ def journal_options(session: Session) -> tuple[list[User], list[Exercise]]:
             .order_by(Exercise.title)
         )
     )
-    return users, exercises
+    chapters = set(session.scalars(select(Chapter.number).order_by(Chapter.number)))
+    historical_chapters = set(
+        session.scalars(
+            select(ListeningSession.chapter_number)
+            .distinct()
+            .order_by(ListeningSession.chapter_number)
+        )
+    )
+    return users, exercises, sorted(chapters | historical_chapters)

@@ -10,6 +10,7 @@ export type JournalEntry = {
   exercise_id: number;
   exercise_title: string;
   exercise_deleted: boolean;
+  chapter_number: number;
   started_at: string;
   last_heartbeat_at: string;
   ended_at: string | null;
@@ -20,16 +21,23 @@ export type JournalEntry = {
 export type JournalFilters = {
   student_id?: string;
   exercise_id?: string;
+  chapter_number?: string;
   started_from?: string;
   started_to?: string;
 };
 export type JournalOption = { id: number; label: string; deleted: boolean };
+export type JournalChapterOption = { chapter_number: number };
 function text(value: unknown): string {
   if (typeof value !== "string") throw new ApiError("INVALID_RESPONSE");
   return value;
 }
 function number(value: unknown): number {
   if (typeof value !== "number" || !Number.isFinite(value) || value < 0)
+    throw new ApiError("INVALID_RESPONSE");
+  return value;
+}
+function positiveInteger(value: unknown): number {
+  if (typeof value !== "number" || !Number.isSafeInteger(value) || value <= 0)
     throw new ApiError("INVALID_RESPONSE");
   return value;
 }
@@ -46,15 +54,16 @@ function date(value: unknown): string {
 export function parseJournal(value: unknown): JournalEntry {
   if (!record(value)) throw new ApiError("INVALID_RESPONSE");
   return {
-    id: number(value.id),
+    id: positiveInteger(value.id),
     session_id: text(value.session_id),
-    user_id: number(value.user_id),
+    user_id: positiveInteger(value.user_id),
     username: text(value.username),
     first_name: text(value.first_name),
     last_name: text(value.last_name),
-    exercise_id: number(value.exercise_id),
+    exercise_id: positiveInteger(value.exercise_id),
     exercise_title: text(value.exercise_title),
     exercise_deleted: boolean(value.exercise_deleted),
+    chapter_number: positiveInteger(value.chapter_number),
     started_at: date(value.started_at),
     last_heartbeat_at: date(value.last_heartbeat_at),
     ended_at: value.ended_at === null ? null : date(value.ended_at),
@@ -86,9 +95,11 @@ export async function listJournal(
     total: number(result.total),
   };
 }
-export async function journalOptions(
-  signal?: AbortSignal,
-): Promise<{ students: JournalOption[]; exercises: JournalOption[] }> {
+export async function journalOptions(signal?: AbortSignal): Promise<{
+  students: JournalOption[];
+  exercises: JournalOption[];
+  chapters: JournalChapterOption[];
+}> {
   const result = await request(
     "/journal/options",
     "GET",
@@ -99,20 +110,26 @@ export async function journalOptions(
   if (
     !record(result) ||
     !Array.isArray(result.students) ||
-    !Array.isArray(result.exercises)
+    !Array.isArray(result.exercises) ||
+    !Array.isArray(result.chapters)
   )
     throw new ApiError("INVALID_RESPONSE");
   function option(value: unknown): JournalOption {
     if (!record(value)) throw new ApiError("INVALID_RESPONSE");
     return {
-      id: number(value.id),
+      id: positiveInteger(value.id),
       label: text(value.label),
       deleted: boolean(value.deleted),
     };
   }
+  function chapterOption(value: unknown): JournalChapterOption {
+    if (!record(value)) throw new ApiError("INVALID_RESPONSE");
+    return { chapter_number: positiveInteger(value.chapter_number) };
+  }
   return {
     students: result.students.map(option),
     exercises: result.exercises.map(option),
+    chapters: result.chapters.map(chapterOption),
   };
 }
 

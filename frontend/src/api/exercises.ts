@@ -10,6 +10,8 @@ export type Media = {
 };
 export type Exercise = {
   id: number;
+  chapter_id: number;
+  chapter_number: number;
   title: string;
   description: string;
   category: string | null;
@@ -48,6 +50,12 @@ export function parseExercise(value: unknown): Exercise {
     typeof value.id !== "number" ||
     !Number.isSafeInteger(value.id) ||
     value.id <= 0 ||
+    typeof value.chapter_id !== "number" ||
+    !Number.isSafeInteger(value.chapter_id) ||
+    value.chapter_id <= 0 ||
+    typeof value.chapter_number !== "number" ||
+    !Number.isSafeInteger(value.chapter_number) ||
+    value.chapter_number <= 0 ||
     typeof value.title !== "string" ||
     typeof value.description !== "string" ||
     (value.category !== null && typeof value.category !== "string") ||
@@ -61,6 +69,8 @@ export function parseExercise(value: unknown): Exercise {
   if (!image && !audio) throw new ApiError("INVALID_RESPONSE");
   return {
     id: value.id,
+    chapter_id: value.chapter_id,
+    chapter_number: value.chapter_number,
     title: value.title,
     description: value.description,
     category: value.category,
