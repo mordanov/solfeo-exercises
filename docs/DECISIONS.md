@@ -7,6 +7,13 @@ Prerequisites:
 
 Format: date, decision, reason. Do not reverse a decision without asking the owner.
 
+- 2026-10-21: The owner approves a clef mode before each Guess the Note round.
+  Default to both clefs; also offer treble only and bass only.
+  Mixed rounds use a randomized 3-and-4 split to guarantee practice in both clefs.
+  Retain the choice between rounds until the player leaves the game area.
+  Preserve pitch ranges, scoring, XP, timing, statistics grouping, and prize rules.
+  Store generated clefs in existing attempts without another database field.
+
 - 2026-10-19: The owner approves numbered chapters and saved listening runs.
   Existing exercises and listening records belong to Chapter 1 after migration.
   Students select one or more chapters for a saved, randomized run of at most 10 exercises.

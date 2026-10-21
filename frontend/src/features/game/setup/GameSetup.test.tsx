@@ -4,6 +4,7 @@ import { beforeEach, expect, it, vi } from "vitest";
 import { i18n } from "../../../i18n";
 import { preparePiano } from "../audio/synth";
 import GameSetup from "./GameSetup";
+import { DEFAULT_GAME_OPTIONS, type GameOptions } from "../notes";
 
 vi.mock("../audio/synth", () => ({ preparePiano: vi.fn() }));
 const fetchMock = vi.fn(async (url: string, options?: RequestInit) => {
@@ -31,7 +32,7 @@ beforeEach(async () => {
   vi.stubGlobal("fetch", fetchMock);
   vi.mocked(preparePiano).mockReset().mockResolvedValue();
 });
-function mount() {
+function mount(initialOptions?: GameOptions) {
   const started = vi.fn();
   const result = render(
     <QueryClientProvider
@@ -44,11 +45,44 @@ function mount() {
         })
       }
     >
-      <GameSetup playerId={1} csrf="synthetic-token" onRoundStarted={started} />
+      <GameSetup
+        playerId={1}
+        csrf="synthetic-token"
+        initialOptions={initialOptions}
+        onRoundStarted={started}
+      />
     </QueryClientProvider>,
   );
   return { ...result, started };
 }
+it.each([
+  ["Treble clef only", "treble"],
+  ["Bass clef only", "bass"],
+  ["Both clefs", "both"],
+])("starts a round with the selected mode: %s", async (label, mode) => {
+  const { started } = mount();
+  await screen.findByText("Piano player");
+  expect(screen.getByRole("radio", { name: "Both clefs" })).toBeChecked();
+  fireEvent.click(screen.getByRole("radio", { name: label }));
+  expect(screen.getAllByRole("radio", { checked: true })).toHaveLength(1);
+  fireEvent.click(screen.getByRole("button", { name: "Let's go!" }));
+  await waitFor(() => expect(started).toHaveBeenCalledOnce());
+  expect(started.mock.calls[0][4]).toMatchObject({ clefMode: mode });
+  const request = fetchMock.mock.calls.find(
+    ([url]) => url === "/api/game/rounds",
+  );
+  expect(JSON.parse(String(request?.[1]?.body))).toMatchObject({
+    clef_mode: mode,
+    show_sound_hint: true,
+    show_correct_answer: false,
+  });
+});
+it("restores the clef selection passed back from the previous round", async () => {
+  mount({ ...DEFAULT_GAME_OPTIONS, clefMode: "bass" });
+  expect(
+    await screen.findByRole("radio", { name: "Bass clef only" }),
+  ).toBeChecked();
+});
 it("keeps prizes and their request out of round preparation", async () => {
   mount();
   await screen.findByText("Piano player");
@@ -70,6 +104,7 @@ it("explains difficulty and passes both independent options into the round", asy
   fireEvent.click(screen.getByRole("button", { name: "Let's go!" }));
   await waitFor(() => expect(started).toHaveBeenCalledOnce());
   expect(started.mock.calls[0][4]).toEqual({
+    clefMode: "both",
     showSoundHint: false,
     showCorrectAnswer: true,
   });
@@ -122,6 +157,8 @@ it("does not start the scored round while piano loading is pending", async () =>
   expect(screen.getByRole("button", { name: "4" })).toBeDisabled();
   expect(screen.getByLabelText(/Show the sound hint/)).toBeDisabled();
   expect(screen.getByLabelText(/Show the correct answer/)).toBeDisabled();
+  for (const radio of screen.getAllByRole("radio"))
+    expect(radio).toBeDisabled();
   expect(
     fetchMock.mock.calls.some(([, options]) => options?.method === "POST"),
   ).toBe(false);

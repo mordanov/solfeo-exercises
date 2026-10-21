@@ -11,11 +11,14 @@ export const DIFFICULTIES = [
   { name: "medium", timeMs: 10000 },
   { name: "hard", timeMs: 7000 },
 ] as const;
+export type ClefMode = "treble" | "bass" | "both";
 export interface GameOptions {
+  clefMode: ClefMode;
   showSoundHint: boolean;
   showCorrectAnswer: boolean;
 }
 export const DEFAULT_GAME_OPTIONS: GameOptions = {
+  clefMode: "both",
   showSoundHint: true,
   showCorrectAnswer: false,
 };

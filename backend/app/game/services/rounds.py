@@ -88,12 +88,20 @@ def check_timeout(
 
 
 def generate_tasks(
-    difficulty: str, note_count: int, note_naming: str
+    difficulty: str, note_count: int, note_naming: str, *, clef_mode: str = "both"
 ) -> list[dict[str, object]]:
+    if clef_mode not in ("treble", "bass", "both"):
+        raise ServiceError("INVALID_CLEF_MODE", 422)
+    if clef_mode == "both":
+        clefs = ["treble", "bass"] * (TASKS_PER_ROUND // 2)
+        if TASKS_PER_ROUND % 2:
+            clefs.append(random.choice(["treble", "bass"]))
+        random.shuffle(clefs)
+    else:
+        clefs = [clef_mode] * TASKS_PER_ROUND
     tasks: list[dict[str, object]] = []
     last: tuple[str, tuple[tuple[str, int], ...]] | None = None
-    for _ in range(TASKS_PER_ROUND):
-        clef = random.choice(["treble", "bass"])
+    for clef in clefs:
         pool = NOTE_RANGE[clef]
         notes: list[tuple[str, int]] = random.sample(pool, note_count)
         for _ in range(49):
@@ -123,6 +131,7 @@ def create_round(
     note_naming: str,
     settings: Settings,
     *,
+    clef_mode: str = "both",
     show_sound_hint: bool = True,
     show_correct_answer: bool = False,
 ) -> tuple[Round, list[dict[str, object]]]:
@@ -131,7 +140,7 @@ def create_round(
     if type(note_count) is not int or note_count not in (1, 2, 3, 4):
         raise ServiceError("INVALID_NOTE_COUNT", 422)
     now = datetime.now(UTC)
-    tasks = generate_tasks(difficulty, note_count, note_naming)
+    tasks = generate_tasks(difficulty, note_count, note_naming, clef_mode=clef_mode)
     rnd = Round(
         player_id=player_id,
         season_id=season_id,

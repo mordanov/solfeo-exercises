@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { gameFetch } from "./client";
 import type { User } from "../../../api/auth";
+import type { ClefMode } from "../notes";
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -185,6 +186,7 @@ export const useStartRound = () =>
       player_id: number;
       difficulty: string;
       note_count: number;
+      clef_mode: ClefMode;
       show_sound_hint: boolean;
       show_correct_answer: boolean;
     }) =>
