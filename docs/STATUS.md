@@ -15,6 +15,11 @@ Earlier game, appearance, and listening entries below remain historical session 
 
 ### Dependency audit repair
 
+Follow-up CI run `39641064710` identifies 4 advisories in the development dependency virtualenv.
+The lock now uses virtualenv `21.14.12`, through pre-commit.
+A fresh audit cache reproduces the old failure and confirms the updated lock has no known vulnerabilities.
+The runtime dependency export remains unchanged.
+
 Product CI run `39639345128` fails during the Python dependency audit, before deployment.
 The runtime lock now uses certifi `2026.10.19` and Pillow `13.0.0`.
 The frontend lock now uses Vite `7.3.7`.
