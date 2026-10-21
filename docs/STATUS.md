@@ -13,6 +13,19 @@ The current branch is `feat/game-clef-selection`.
 Accepted PHASE 7 remains closed.
 Earlier game, appearance, and listening entries below remain historical session records.
 
+### Dependency audit repair
+
+Product CI run `39639345128` fails during the Python dependency audit, before deployment.
+The runtime lock now uses certifi `2026.10.19` and Pillow `13.0.0`.
+The frontend lock now uses Vite `7.3.7`.
+The Pillow constraint permits version 13; exported runtime requirements match the Python lock.
+Python and JavaScript audits report no known vulnerabilities.
+
+The frontend passes 413 tests and the production build on Node 22.
+The backend passes 394 local tests and strict type checks.
+The Ogg conversion test passes with Pillow 13 in the development container.
+No VPS services change during this repair.
+
 ### Guess the Note clef selection
 
 Setup offers treble only, bass only, and both clefs in English, Russian, and Spanish.
