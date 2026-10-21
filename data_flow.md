@@ -2,6 +2,16 @@
 
 > Where data enters the system, how it changes, and where it ends up.
 
+## Guess the Note round creation
+
+**Source:** Setup sends `clef_mode`, difficulty, note count, and assistance flags to `POST /api/game/rounds`.
+**Sink:** A round and 7 saved task attempts; the response contains the first task.
+**Transformations:** The API validates the mode. The service generates only the selected clef or shuffles a balanced 3-and-4 split.
+**Shape at each step:** UI `GameOptions.clefMode` becomes request `clef_mode`, defaulting to `both` on omission.
+Each saved attempt contains its generated `clef` and notes. Later submissions issue these saved tasks without another clef selection.
+**Notes:** Setup retains the selection between rounds in local state. Scoring and XP do not consume this setting.
+**Source:** `frontend/src/features/game/setup/GameSetup.tsx`; `frontend/src/features/game/api/hooks.ts`; `backend/app/game/api/rounds.py`; `backend/app/game/services/rounds.py:90-178`.
+
 ## Exercise creation and update
 
 **Source:** Manager multipart request to `POST /api/exercises` or `PUT /api/exercises/{id}`.

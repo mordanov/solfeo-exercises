@@ -5,13 +5,55 @@ This document records progress and remaining checks for the current phase.
 Prerequisites:
 - Read `docs/PHASES.md` and `docs/DECISIONS.md`.
 
-Last updated: 2026-10-12 by Copilot, session `61fe8212-2c67-4bc5-a715-02be5593ee0e`.
+Last updated: 2026-10-21 by Copilot, session `66fb9a8c-3a51-4774-936a-794fb4ae5b9d`.
 
 ## Current phase
-Custom avatar emotion generation now returns to one sheet containing all three moods.
-The current branch is `fix/avatar-single-sheet-moods`.
+Guess the Note now offers a clef mode before each round.
+The current branch is `feat/game-clef-selection`.
 Accepted PHASE 7 remains closed.
 Earlier game, appearance, and listening entries below remain historical session records.
+
+### Dependency audit repair
+
+Follow-up CI run `39641064710` identifies 4 advisories in the development dependency virtualenv.
+The lock now uses virtualenv `21.14.12`, through pre-commit.
+A fresh audit cache reproduces the old failure and confirms the updated lock has no known vulnerabilities.
+The runtime dependency export remains unchanged.
+
+Product CI run `39639345128` fails during the Python dependency audit, before deployment.
+The runtime lock now uses certifi `2026.10.19` and Pillow `13.0.0`.
+The frontend lock now uses Vite `7.3.7`.
+The Pillow constraint permits version 13; exported runtime requirements match the Python lock.
+Python and JavaScript audits report no known vulnerabilities.
+
+The frontend passes 413 tests and the production build on Node 22.
+The backend passes 394 local tests and strict type checks.
+The Ogg conversion test passes with Pillow 13 in the development container.
+No VPS services change during this repair.
+
+### Guess the Note clef selection
+
+Setup offers treble only, bass only, and both clefs in English, Russian, and Spanish.
+Both clefs is the default and uses a randomized 3-and-4 split across 7 questions.
+The selection stays between rounds until the player leaves the game area.
+Points, XP, timing, statistics grouping, prize rules, and pitch ranges remain unchanged.
+The API rejects unknown modes with `INVALID_CLEF_MODE`.
+Saved attempts retain generated clefs without a schema migration.
+
+The frontend suite passes all 413 tests.
+The backend passes 394 tests locally; the remaining Ogg test passes in the development container.
+Local ffmpeg lacks `libvorbis`; the container includes this encoder.
+Configured lint, formatting, strict type checks, production build, and 4 documentation tests pass.
+No push or production deployment occurs during this change.
+
+Remaining manual checks:
+1. Start rounds with each clef mode in Chrome and Safari.
+2. Confirm single-clef rounds show only the selected clef.
+3. Confirm mixed rounds contain 3 and 4 questions across the clefs.
+4. Complete a round and confirm the next setup retains your choice.
+5. Reload the page and confirm both clefs becomes the default.
+6. Check labels and keyboard selection in English, Russian, and Spanish.
+7. Confirm unchanged points and XP with the same answers and assistance options.
 
 ### Custom avatar emotion generation
 

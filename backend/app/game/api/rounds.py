@@ -16,6 +16,7 @@ class CreateRoundBody(BaseModel):
     player_id: int
     difficulty: str
     note_count: int
+    clef_mode: str = "both"
     show_sound_hint: bool = True
     show_correct_answer: bool = False
 
@@ -56,6 +57,8 @@ def create_round(
         raise ServiceError("INVALID_DIFFICULTY", 422)
     if body.note_count not in (1, 2, 3, 4):
         raise ServiceError("INVALID_NOTE_COUNT", 422)
+    if body.clef_mode not in ("treble", "bass", "both"):
+        raise ServiceError("INVALID_CLEF_MODE", 422)
 
     with session.begin():
         if identity.user.role == "manager":
@@ -82,6 +85,7 @@ def create_round(
             body.note_count,
             note_naming,
             settings,
+            clef_mode=body.clef_mode,
             show_sound_hint=body.show_sound_hint,
             show_correct_answer=body.show_correct_answer,
         )

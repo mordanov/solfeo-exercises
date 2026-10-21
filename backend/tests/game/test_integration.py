@@ -114,6 +114,69 @@ async def test_full_round(
     assert result["xp_gained"] == 10  # 5 correct × 1 + 5 win bonus
 
 
+@pytest.mark.parametrize("clef_mode", ["treble", "bass", "both"])
+async def test_round_clef_selection_changes_tasks_not_scoring(
+    client: httpx.AsyncClient,
+    settings: Settings,
+    database: Database,
+    clef_mode: str,
+) -> None:
+    username, password = await _make_manager(settings, database)
+    auth = await _login(client, username, password)
+    client.headers["X-CSRF-Token"] = str(auth["csrf_token"])
+    player = (await client.post("/api/game/players", json={"name": "Clefs"})).json()
+    created = await client.post(
+        "/api/game/rounds",
+        json={
+            "player_id": player["id"],
+            "difficulty": "easy",
+            "note_count": 2,
+            "clef_mode": clef_mode,
+        },
+    )
+    assert created.status_code == 200
+    round_id = created.json()["round_id"]
+    task = created.json()["task"]
+    clefs = []
+    for index in range(7):
+        clefs.append(task["clef"])
+        response = await client.post(
+            f"/api/game/rounds/{round_id}/submit",
+            json={"task_index": index, "answers": task["notes"]},
+        )
+        assert response.status_code == 200
+        assert response.json()["score_delta"] == 1
+        task = response.json()["next_task"]
+    if clef_mode == "both":
+        assert sorted([clefs.count("treble"), clefs.count("bass")]) == [3, 4]
+    else:
+        assert set(clefs) == {clef_mode}
+    result = response.json()["result"]
+    assert result["score"] == 8
+    assert result["score_bonus"] == 1
+    assert result["xp_gained"] == 12
+    assert result["is_win"] is True
+
+
+async def test_round_rejects_unknown_clef_mode(
+    client: httpx.AsyncClient, settings: Settings, database: Database
+) -> None:
+    username, password = await _make_manager(settings, database)
+    auth = await _login(client, username, password)
+    response = await client.post(
+        "/api/game/rounds",
+        headers={"X-CSRF-Token": str(auth["csrf_token"])},
+        json={
+            "player_id": 1,
+            "difficulty": "easy",
+            "note_count": 1,
+            "clef_mode": "alto",
+        },
+    )
+    assert response.status_code == 422
+    assert response.json() == {"error": "INVALID_CLEF_MODE"}
+
+
 async def test_idempotent_submit(
     client: httpx.AsyncClient, settings: Settings, database: Database
 ) -> None:

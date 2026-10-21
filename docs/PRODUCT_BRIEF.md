@@ -53,6 +53,10 @@ A child looks at the notes and listens to the audio.
 
 ## Guess the Note
 
+- Offer treble only, bass only, or both clefs before a round; default to both.
+- Keep the clef mode between rounds until the player leaves the game area.
+- Mix 3 questions in one clef and 4 in the other when both are selected.
+- Randomize their order and the clef with 4 questions; preserve points, XP, timing, and statistics grouping.
 - Use natural pitches C4–A5 in the treble clef and E2–C4 in the bass clef.
 - Show 7 answer buttons for C through B, without octave labels or octave grading.
 - Follow the account's letters or solfege setting and interface language for buttons and revealed answers.

@@ -58,6 +58,7 @@
 **Initial:** active
 **Transitions:**
 - — → active when the service creates a round with valid settings.
+- Creation requires a clef mode of `treble`, `bass`, or `both`; omission selects `both`.
 - active → active when a valid next task is submitted.
 - active → completed after the final configured task is submitted.
 **Notes:** The model admits `expired`, but no observed mutation writes that status.

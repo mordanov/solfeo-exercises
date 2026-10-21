@@ -29,11 +29,18 @@ The listening procedures apply only to student accounts.
 5. Set **Show the sound hint** and **Show the correct answer**.
    The hint starts enabled; the correct answer starts hidden.
    Each disabled switch shows **+1 point**; each enabled switch shows **0 points**.
-6. Click **Let's go!**.
+6. Select **Treble clef only**, **Bass clef only**, or **Both clefs**.
+   The default is **Both clefs**.
+7. Click **Let's go!**.
    The piano loads before the first round starts.
 
 The difficulty changes the time limit, not the available notes or scoring.
 The switches retain their choices between rounds until you leave the game area.
+The clef mode also retains its choice until you leave the game area.
+Single-clef rounds use only the selected clef.
+Mixed rounds contain 3 questions in one clef and 4 in the other, in random order.
+The clef with 4 questions also changes randomly.
+The clef mode does not change points, XP, time limits, or statistics grouping.
 An unavailable piano shows an error without consuming a round; click **Let's go!** to retry.
 Treble questions use natural notes C4–A5; bass questions use E2–C4.
 The 7 buttons answer C through B without selecting an octave.

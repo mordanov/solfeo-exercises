@@ -2,8 +2,12 @@ import {
   Alert,
   Box,
   Button,
+  FormControl,
   FormControlLabel,
+  FormLabel,
   Link,
+  Radio,
+  RadioGroup,
   Switch,
   Typography,
 } from "@mui/material";
@@ -79,6 +83,7 @@ export default function GameSetup({
         player_id: playerId,
         difficulty,
         note_count: noteCount,
+        clef_mode: options.clefMode,
         show_sound_hint: options.showSoundHint,
         show_correct_answer: options.showCorrectAnswer,
       },
@@ -147,6 +152,31 @@ export default function GameSetup({
               13000) / 1000,
         })}
       </Typography>
+      <FormControl
+        component="fieldset"
+        disabled={audioBusy || startRound.isPending}
+        sx={{ mb: 2 }}
+      >
+        <FormLabel component="legend" id="game-clef-label">
+          {t("game.selectClef")}
+        </FormLabel>
+        <RadioGroup value={options.clefMode} aria-labelledby="game-clef-label">
+          {(["treble", "bass", "both"] as const).map((clefMode) => (
+            <FormControlLabel
+              key={clefMode}
+              value={clefMode}
+              control={
+                <Radio
+                  onChange={() =>
+                    setOptions((value) => ({ ...value, clefMode }))
+                  }
+                />
+              }
+              label={t(`game.options.clef.${clefMode}`)}
+            />
+          ))}
+        </RadioGroup>
+      </FormControl>
       <FormControlLabel
         control={
           <Switch

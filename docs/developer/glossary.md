@@ -76,6 +76,7 @@ Prerequisites:
 | avatar | The character image associated with a game player. |
 | player profile | A named game character owned by an account, with saved progress and an avatar. |
 | round | A group of 7 questions in Guess the Note. |
+| clef mode | The selection of treble only, bass only, or both clefs for a round, without changes to scoring. |
 | season | A numbered group of game rounds associated with one player profile. |
 | statistics reset | Closing the active season and opening a new season without removing history or all-time progress. |
 | win rate | The percentage of completed rounds with at least 5 correct answers. |

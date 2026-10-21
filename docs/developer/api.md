@@ -85,6 +85,14 @@ The query excludes inactive accounts, the emergency manager, and accounts with a
 The frontend refreshes this query after creation, including rejected attempts caused by concurrent changes.
 
 Treble questions use natural pitches C4–A5; bass questions use E2–C4.
+`POST /api/game/rounds` accepts optional `clef_mode`: `treble`, `bass`, or `both`.
+Omission selects `both`; unknown values return `INVALID_CLEF_MODE` with HTTP `422`.
+Mixed rounds contain 3 questions in one clef and 4 in the other.
+The generator randomizes the extra clef and question order before saving all attempts.
+Single-clef rounds use only the selected clef.
+The attempts store their generated clefs; the round requires no additional database field.
+Clef mode does not affect scoring, XP, timing, statistics grouping, or prize rules.
+Setup retains the choice in local component state between rounds, not in account settings.
 Round creation accepts `show_sound_hint` and `show_correct_answer`, defaulting to `true` and `false`.
 The backend stores these immutable options with rules version 2.
 Each disabled option adds 1 point once at completion, including losing rounds.
