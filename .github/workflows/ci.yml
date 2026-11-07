@@ -59,6 +59,7 @@ jobs:
           cache: npm
       - run: uv sync --locked --python 3.12
       - run: npm install --global npm@12.1.0
+      - run: npm install --package-lock-only
       - run: npm ci
       - name: Audit all locked Python dependencies
         run: uv run --locked pip-audit --strict --progress-spinner off
