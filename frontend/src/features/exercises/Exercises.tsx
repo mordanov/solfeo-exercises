@@ -45,6 +45,7 @@ function ExerciseForm({
     String(exercise?.chapter_id ?? ""),
   );
   const [image, setImage] = useState<File>();
+  const [pastedImageName, setPastedImageName] = useState<string>();
   const [audio, setAudio] = useState<File>();
   const [removeImage, setRemoveImage] = useState(false);
   const [removeAudio, setRemoveAudio] = useState(false);
@@ -84,6 +85,18 @@ function ExerciseForm({
   });
   return (
     <Form
+      onPaste={(e) => {
+        const item = Array.from(e.clipboardData.items).find((i) =>
+          i.type.startsWith("image/"),
+        );
+        if (!item) return;
+        const file = item.getAsFile();
+        if (file) {
+          setImage(file);
+          setRemoveImage(false);
+          setPastedImageName(file.name);
+        }
+      }}
       onSubmit={(event) => {
         event.preventDefault();
         const missing = !(
@@ -161,9 +174,15 @@ function ExerciseForm({
             type="file"
             accept="image/png,image/jpeg,image/webp"
             disabled={removeImage}
-            onChange={(e) => setImage(e.target.files?.[0])}
+            onChange={(e) => {
+              setImage(e.target.files?.[0]);
+              setPastedImageName(undefined);
+            }}
           />
         </Field>
+        {pastedImageName && (
+          <p>{t("exercises.pasteSelected", { name: pastedImageName })}</p>
+        )}
         {exercise?.image && (
           <Field>
             <Input

@@ -161,7 +161,7 @@
   "exercises.audio": "Audio",
   "exercises.removeImage": "Remove current image",
   "exercises.removeAudio": "Remove current audio",
-  "exercises.fileHint": "Attach an image (PNG, JPEG, WebP) or audio, or both. Audio is converted to AAC. Leave file fields empty to keep existing files.",
+  "exercises.fileHint": "Attach an image (PNG, JPEG, WebP) or audio, or both. You can also paste an image from the clipboard. Audio is converted to AAC. Leave file fields empty to keep existing files.",
   "exercises.uploading": "Uploading",
   "exercises.processing": "Upload received. Checking and converting files; wait for confirmation.",
   "exercises.imageFor": "Score image: {{title}}",
@@ -554,5 +554,6 @@
   "game.avatar.phase.rejected": "Manager did not approve this avatar",
   "errors.AVATAR_NOT_APPROVED": "This avatar is not approved yet. Choose a built-in or approved avatar.",
   "errors.AVATAR_REVIEW_INVALID": "Choose Approve or Reject.",
-  "errors.AVATAR_REVIEW_CONFLICT": "Another decision already exists for this avatar. Refresh the approval queue."
+  "errors.AVATAR_REVIEW_CONFLICT": "Another decision already exists for this avatar. Refresh the approval queue.",
+  "exercises.pasteSelected": "Pasted: {{name}}"
 }
