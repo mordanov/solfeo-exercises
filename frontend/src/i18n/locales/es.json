@@ -161,7 +161,7 @@
   "exercises.audio": "Audio",
   "exercises.removeImage": "Quitar la imagen actual",
   "exercises.removeAudio": "Quitar el audio actual",
-  "exercises.fileHint": "Adjunta una imagen (PNG, JPEG, WebP), audio o ambos. El audio se convierte a AAC. Deja los campos de archivo vacíos para conservar los archivos actuales.",
+  "exercises.fileHint": "Adjunta una imagen (PNG, JPEG, WebP), audio o ambos. También puedes pegar una imagen del portapapeles. El audio se convierte a AAC. Deja los campos de archivo vacíos para conservar los archivos actuales.",
   "exercises.uploading": "Subiendo",
   "exercises.processing": "Archivos recibidos. Comprobando y convirtiendo; espera la confirmación.",
   "exercises.imageFor": "Imagen de la partitura: {{title}}",
@@ -554,5 +554,6 @@
   "game.avatar.phase.rejected": "El gestor no aprobó este avatar",
   "errors.AVATAR_NOT_APPROVED": "Este avatar aún no está aprobado. Elige un avatar incluido o aprobado.",
   "errors.AVATAR_REVIEW_INVALID": "Elige Aprobar o Rechazar.",
-  "errors.AVATAR_REVIEW_CONFLICT": "Este avatar ya tiene otra decisión. Actualiza la cola de aprobación."
+  "errors.AVATAR_REVIEW_CONFLICT": "Este avatar ya tiene otra decisión. Actualiza la cola de aprobación.",
+  "exercises.pasteSelected": "Pegado: {{name}}"
 }
