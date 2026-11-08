@@ -555,5 +555,11 @@
   "errors.AVATAR_NOT_APPROVED": "This avatar is not approved yet. Choose a built-in or approved avatar.",
   "errors.AVATAR_REVIEW_INVALID": "Choose Approve or Reject.",
   "errors.AVATAR_REVIEW_CONFLICT": "Another decision already exists for this avatar. Refresh the approval queue.",
+  "exercises.pasteImage": "Paste from clipboard",
+  "exercises.omrStatus": "Recognition",
+  "exercises.actions": "Actions",
+  "exercises.filterAll": "All",
+  "exercises.filterHas": "Has",
+  "exercises.filterWithout": "Without",
   "exercises.pasteSelected": "Pasted: {{name}}"
 }

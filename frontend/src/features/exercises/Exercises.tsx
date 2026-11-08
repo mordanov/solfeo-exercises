@@ -21,10 +21,15 @@ import {
   Select,
   Textarea,
 } from "../../components/Ui";
+import {
+  ReadOnlyGrid,
+  type ReadOnlyColumn,
+} from "../../components/ReadOnlyGrid";
 import Box from "@mui/material/Box";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
 import LinearProgress from "@mui/material/LinearProgress";
 import Alert from "@mui/material/Alert";
-import Chip from "@mui/material/Chip";
 import { ChapterManager } from "./ChapterManager";
 
 function ExerciseForm({
@@ -51,6 +56,7 @@ function ExerciseForm({
   const [removeAudio, setRemoveAudio] = useState(false);
   const [progress, setProgress] = useState(0);
   const [validation, setValidation] = useState(false);
+  const [showReview, setShowReview] = useState(false);
   const controller = useRef<AbortController | null>(null);
   useEffect(() => () => controller.current?.abort(), []);
   const chapters = useQuery({
@@ -180,6 +186,35 @@ function ExerciseForm({
             }}
           />
         </Field>
+        <Button
+          type="button"
+          disabled={removeImage || mutation.isPending}
+          onClick={async () => {
+            try {
+              const items = await navigator.clipboard.read();
+              for (const item of items) {
+                const imageType = item.types.find((t) =>
+                  t.startsWith("image/"),
+                );
+                if (imageType) {
+                  const blob = await item.getType(imageType);
+                  const ext = imageType.split("/")[1] ?? "png";
+                  const file = new File([blob], `pasted.${ext}`, {
+                    type: imageType,
+                  });
+                  setImage(file);
+                  setRemoveImage(false);
+                  setPastedImageName(file.name);
+                  return;
+                }
+              }
+            } catch {
+              /* API недоступна или нет разрешения */
+            }
+          }}
+        >
+          {t("exercises.pasteImage")}
+        </Button>
         {pastedImageName && (
           <p>{t("exercises.pasteSelected", { name: pastedImageName })}</p>
         )}
@@ -240,53 +275,21 @@ function ExerciseForm({
         <ErrorMessage error={new ApiError("EXERCISE_MEDIA_REQUIRED")} />
       )}
       {mutation.isError && <ErrorMessage error={mutation.error} />}
+      {exercise?.image && (
+        <Box sx={{ mt: 2 }}>
+          <Button type="button" onClick={() => setShowReview((v) => !v)}>
+            {t("omr.review")}
+          </Button>
+          {showReview && (
+            <Review
+              exercise={exercise}
+              auth={auth}
+              close={() => setShowReview(false)}
+            />
+          )}
+        </Box>
+      )}
     </Form>
-  );
-}
-
-function Preview({ exercise }: { exercise: Exercise }) {
-  const { t, i18n } = useTranslation();
-  const [failed, setFailed] = useState(false);
-  return (
-    <>
-      {exercise.image && (
-        <Box
-          component="img"
-          sx={{
-            display: "block",
-            maxWidth: "100%",
-            maxHeight: 400,
-            objectFit: "contain",
-            my: 2,
-            bgcolor: "#fff",
-            borderRadius: 2,
-          }}
-          loading="lazy"
-          alt={t("exercises.imageFor", { title: exercise.title })}
-          src={`/api/exercises/${exercise.id}/files/image`}
-          onError={() => setFailed(true)}
-        />
-      )}
-      {exercise.audio && (
-        <>
-          <audio
-            controls
-            preload="none"
-            aria-label={t("exercises.audioFor", { title: exercise.title })}
-            src={`/api/exercises/${exercise.id}/files/audio`}
-            onError={() => setFailed(true)}
-          />
-          <p>
-            {t("exercises.duration", {
-              seconds: new Intl.NumberFormat(i18n.language, {
-                maximumFractionDigits: 1,
-              }).format(exercise.audio.duration_seconds ?? 0),
-            })}
-          </p>
-        </>
-      )}
-      {failed && <ErrorMessage error={new ApiError("MEDIA_PLAYBACK_ERROR")} />}
-    </>
   );
 }
 
@@ -294,30 +297,41 @@ export function Exercises({ auth }: { auth: Auth }) {
   const { t, i18n } = useTranslation();
   const cache = useQueryClient();
   const [editing, setEditing] = useState<Exercise | null | undefined>();
-  const [deleting, setDeleting] = useState<number | null>(null);
-  const [reviewing, setReviewing] = useState<number | null>(null);
+  const [deleting, setDeleting] = useState<Exercise | null>(null);
+  const [filterChapter, setFilterChapter] = useState("");
+  const [filterImage, setFilterImage] = useState("");
+  const [filterAudio, setFilterAudio] = useState("");
+
+  const chapters = useQuery({
+    queryKey: ["chapters"],
+    queryFn: ({ signal }) => listChapters(signal),
+    retry: false,
+  });
   const query = useQuery({
     queryKey: ["exercises"],
     queryFn: ({ signal }) => listExercises(signal),
     retry: false,
   });
-  const refreshed = async () => {
-    setDeleting(null);
-    await cache.invalidateQueries({ queryKey: ["exercises"] });
-  };
   const deletion = useMutation({
     mutationFn: (id: number) => deleteExercise(auth.csrf_token, id),
-    onSuccess: refreshed,
+    onSuccess: async () => {
+      setDeleting(null);
+      await cache.invalidateQueries({ queryKey: ["exercises"] });
+    },
   });
   const order = useMutation({
     mutationFn: (ids: number[]) => reorderExercises(auth.csrf_token, ids),
-    onSuccess: refreshed,
+    onSuccess: async () => {
+      await cache.invalidateQueries({ queryKey: ["exercises"] });
+    },
     onError: () => {
       void cache.invalidateQueries({ queryKey: ["exercises"] });
     },
   });
+
   const rows = query.data?.exercises ?? [];
   const busy = deletion.isPending || order.isPending || editing !== undefined;
+
   function move(from: number, to: number) {
     if (busy || from === to || from < 0 || to < 0 || to >= rows.length) return;
     const ids = rows.map((row) => row.id);
@@ -325,6 +339,97 @@ export function Exercises({ auth }: { auth: Auth }) {
     ids.splice(to, 0, id);
     order.mutate(ids);
   }
+
+  const filteredRows = rows.filter((row) => {
+    if (filterChapter && row.chapter_id !== Number(filterChapter)) return false;
+    if (filterImage === "yes" && !row.image) return false;
+    if (filterImage === "no" && row.image) return false;
+    if (filterAudio === "yes" && !row.audio) return false;
+    if (filterAudio === "no" && row.audio) return false;
+    return true;
+  });
+
+  const columns: ReadOnlyColumn<Exercise>[] = [
+    {
+      field: "title",
+      headerName: t("exercises.name"),
+      flex: 2,
+      minWidth: 120,
+      render: (row) => row.title,
+    },
+    {
+      field: "chapter_id",
+      headerName: t("exercises.chapter"),
+      flex: 1,
+      minWidth: 80,
+      render: (row) => {
+        const chapter = chapters.data?.find((c) => c.id === row.chapter_id);
+        return chapter
+          ? t("chapters.numbered", { number: chapter.number })
+          : String(row.chapter_id);
+      },
+    },
+    {
+      field: "image",
+      headerName: t("exercises.image"),
+      minWidth: 80,
+      render: (row) => (row.image ? "✓" : ""),
+    },
+    {
+      field: "audio",
+      headerName: t("exercises.audio"),
+      minWidth: 80,
+      render: (row) => (row.audio ? "✓" : ""),
+    },
+    {
+      field: "omr",
+      headerName: t("exercises.omrStatus"),
+      flex: 1,
+      minWidth: 120,
+      render: (row) => (row.image ? t(`omr.status.${row.omr.status}`) : ""),
+    },
+    {
+      field: "actions",
+      headerName: t("exercises.actions"),
+      minWidth: 260,
+      render: (row) => {
+        const index = rows.findIndex((r) => r.id === row.id);
+        return (
+          <Box sx={{ display: "flex", gap: 0.5, flexWrap: "wrap" }}>
+            <Button
+              disabled={busy}
+              aria-label={t("exercises.editNamed", { title: row.title })}
+              onClick={() => setEditing(row)}
+            >
+              {t("exercises.edit")}
+            </Button>
+            <Button
+              disabled={busy}
+              aria-label={t("exercises.deleteNamed", { title: row.title })}
+              onClick={() => setDeleting(row)}
+            >
+              {t("exercises.delete")}
+            </Button>
+            <Button
+              disabled={busy || index === 0}
+              aria-label={t("exercises.moveUp", { title: row.title })}
+              onClick={() => move(index, index - 1)}
+            >
+              {t("exercises.up")}
+            </Button>
+            <Button
+              disabled={busy || index === rows.length - 1}
+              aria-label={t("exercises.moveDown", { title: row.title })}
+              onClick={() => move(index, index + 1)}
+            >
+              {t("exercises.down")}
+            </Button>
+          </Box>
+        );
+      },
+    },
+  ];
+
   return (
     <Panel>
       <h2>{t("exercises.title")}</h2>
@@ -333,14 +438,91 @@ export function Exercises({ auth }: { auth: Auth }) {
       <Button disabled={busy} onClick={() => setEditing(null)}>
         {t("exercises.create")}
       </Button>
-      {editing !== undefined && (
-        <ExerciseForm
-          key={editing?.id ?? "new"}
-          auth={auth}
-          exercise={editing}
-          close={() => setEditing(undefined)}
-        />
-      )}
+
+      <Dialog
+        open={editing !== undefined}
+        onClose={() => setEditing(undefined)}
+        fullWidth
+        maxWidth="sm"
+      >
+        <DialogContent>
+          {editing !== undefined && (
+            <ExerciseForm
+              key={editing?.id ?? "new"}
+              auth={auth}
+              exercise={editing}
+              close={() => setEditing(undefined)}
+            />
+          )}
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={deleting !== null} onClose={() => setDeleting(null)}>
+        <DialogContent>
+          {deleting && (
+            <Box>
+              <Alert severity="warning" role="status">
+                {t("exercises.deleteWarning", { title: deleting.title })}
+              </Alert>
+              <Box sx={{ mt: 2 }}>
+                <Button
+                  disabled={deletion.isPending}
+                  onClick={() => deletion.mutate(deleting.id)}
+                >
+                  {t("exercises.confirmDelete")}
+                </Button>{" "}
+                <Button
+                  disabled={deletion.isPending}
+                  onClick={() => setDeleting(null)}
+                >
+                  {t("common.close")}
+                </Button>
+              </Box>
+              {deletion.isError && <ErrorMessage error={deletion.error} />}
+            </Box>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap", mt: 2 }}>
+        <Field>
+          {t("exercises.chapter")}
+          <Select
+            value={filterChapter}
+            onChange={(e) => setFilterChapter(e.target.value)}
+          >
+            <option value="">{t("exercises.filterAll")}</option>
+            {chapters.data?.map((chapter) => (
+              <option key={chapter.id} value={chapter.id}>
+                {t("chapters.numbered", { number: chapter.number })}
+              </option>
+            ))}
+          </Select>
+        </Field>
+        <Field>
+          {t("exercises.image")}
+          <Select
+            value={filterImage}
+            onChange={(e) => setFilterImage(e.target.value)}
+          >
+            <option value="">{t("exercises.filterAll")}</option>
+            <option value="yes">{t("exercises.filterHas")}</option>
+            <option value="no">{t("exercises.filterWithout")}</option>
+          </Select>
+        </Field>
+        <Field>
+          {t("exercises.audio")}
+          <Select
+            value={filterAudio}
+            onChange={(e) => setFilterAudio(e.target.value)}
+          >
+            <option value="">{t("exercises.filterAll")}</option>
+            <option value="yes">{t("exercises.filterHas")}</option>
+            <option value="no">{t("exercises.filterWithout")}</option>
+          </Select>
+        </Field>
+      </Box>
+
       {query.isPending && <p>{t("common.loading")}</p>}
       {query.isError && (
         <>
@@ -350,7 +532,6 @@ export function Exercises({ auth }: { auth: Auth }) {
           </Button>
         </>
       )}
-      {deletion.isError && <ErrorMessage error={deletion.error} />}
       {order.isError && <ErrorMessage error={order.error} />}
       {query.data && (
         <p>
@@ -364,135 +545,11 @@ export function Exercises({ auth }: { auth: Auth }) {
       {query.data && query.data.total !== rows.length && (
         <ErrorMessage error={new ApiError("EXERCISE_ORDER_CONFLICT")} />
       )}
-      <Box component="ol" sx={{ pl: 3 }}>
-        {rows.map((exercise, index) => (
-          <Panel
-            component="li"
-            key={exercise.id}
-            aria-label={exercise.title}
-            draggable={!busy}
-            onDragStart={(event) => {
-              event.dataTransfer.setData("text/plain", String(exercise.id));
-              event.dataTransfer.effectAllowed = "move";
-            }}
-            onDragOver={(event) => event.preventDefault()}
-            onDrop={(event) => {
-              event.preventDefault();
-              move(
-                rows.findIndex(
-                  (row) =>
-                    row.id === Number(event.dataTransfer.getData("text/plain")),
-                ),
-                index,
-              );
-            }}
-          >
-            <h3>{exercise.title}</h3>
-            {exercise.category && (
-              <Chip
-                label={exercise.category}
-                variant="outlined"
-                sx={{
-                  mb: 1,
-                  maxWidth: "100%",
-                  height: "auto",
-                  "& .MuiChip-label": { whiteSpace: "normal", py: 0.5 },
-                }}
-              />
-            )}
-            <Box
-              component="p"
-              sx={{ whiteSpace: "pre-wrap", overflowWrap: "anywhere" }}
-            >
-              {exercise.description}
-            </Box>
-            <Preview
-              key={`${exercise.id}-${exercise.image?.id}-${exercise.audio?.id}`}
-              exercise={exercise}
-            />
-            {reviewing === exercise.id && exercise.image && (
-              <Review
-                exercise={exercise}
-                auth={auth}
-                close={() => setReviewing(null)}
-              />
-            )}
-            <Box
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                alignItems: "center",
-                gap: 1,
-              }}
-            >
-              {exercise.image && (
-                <>
-                  <Chip
-                    label={t(`omr.status.${exercise.omr.status}`)}
-                    sx={{
-                      maxWidth: "100%",
-                      height: "auto",
-                      "& .MuiChip-label": { whiteSpace: "normal", py: 0.5 },
-                    }}
-                  />
-                  <Button
-                    disabled={busy}
-                    onClick={() => setReviewing(exercise.id)}
-                  >
-                    {t("omr.review")}
-                  </Button>
-                </>
-              )}
-              <Button
-                disabled={busy}
-                aria-label={t("exercises.editNamed", { title: exercise.title })}
-                onClick={() => setEditing(exercise)}
-              >
-                {t("exercises.edit")}
-              </Button>
-              <Button
-                disabled={busy}
-                aria-label={t("exercises.deleteNamed", {
-                  title: exercise.title,
-                })}
-                onClick={() => setDeleting(exercise.id)}
-              >
-                {t("exercises.delete")}
-              </Button>
-              <Button
-                disabled={busy || index === 0}
-                aria-label={t("exercises.moveUp", { title: exercise.title })}
-                onClick={() => move(index, index - 1)}
-              >
-                {t("exercises.up")}
-              </Button>
-              <Button
-                disabled={busy || index === rows.length - 1}
-                aria-label={t("exercises.moveDown", { title: exercise.title })}
-                onClick={() => move(index, index + 1)}
-              >
-                {t("exercises.down")}
-              </Button>
-            </Box>
-            {deleting === exercise.id && (
-              <Box sx={{ mt: 2 }}>
-                <Alert severity="warning" role="status">
-                  {t("exercises.deleteWarning", { title: exercise.title })}
-                </Alert>
-                <Button
-                  disabled={busy}
-                  onClick={() => deletion.mutate(exercise.id)}
-                >
-                  {t("exercises.confirmDelete")}
-                </Button>{" "}
-                <Button disabled={busy} onClick={() => setDeleting(null)}>
-                  {t("common.close")}
-                </Button>
-              </Box>
-            )}
-          </Panel>
-        ))}
-      </Box>
+      <ReadOnlyGrid
+        rows={filteredRows}
+        columns={columns}
+        label={t("exercises.title")}
+      />
     </Panel>
   );
 }

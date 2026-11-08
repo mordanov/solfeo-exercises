@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { defaultAppearance } from "../../appearance";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { I18nextProvider } from "react-i18next";
 import { beforeEach, expect, it, vi } from "vitest";
@@ -13,18 +13,8 @@ import { Exercises } from "./Exercises";
 vi.mock("../../api/exercises");
 vi.mock("../../api/chapters");
 const chapters = [
-  {
-    id: 1,
-    number: 1,
-    active_exercise_count: 1,
-    assigned_exercise_count: 1,
-  },
-  {
-    id: 2,
-    number: 2,
-    active_exercise_count: 0,
-    assigned_exercise_count: 0,
-  },
+  { id: 1, number: 1, active_exercise_count: 1, assigned_exercise_count: 1 },
+  { id: 2, number: 2, active_exercise_count: 0, assigned_exercise_count: 0 },
 ];
 const exercise = {
   id: 1,
@@ -97,14 +87,54 @@ function mount() {
     </I18nextProvider>,
   );
 }
-it("shows protected media without autoplay", async () => {
+it("renders exercise table with image, audio checkmarks and OMR status", async () => {
   mount();
   expect(await screen.findByText("Scale")).toBeInTheDocument();
-  const image = screen.getByRole("img");
-  expect(image).toHaveAttribute("src", "/api/exercises/1/files/image");
-  const audio = screen.getByLabelText("Audio: Scale");
-  expect(audio).toHaveAttribute("src", "/api/exercises/1/files/audio");
-  expect(audio).not.toHaveAttribute("autoplay");
+  // "Chapter 1" appears in both ChapterManager list and table cell
+  expect(screen.getAllByText("Chapter 1").length).toBeGreaterThanOrEqual(1);
+  // image and audio shown as ✓ in table cells
+  const checks = screen.getAllByText("✓");
+  expect(checks).toHaveLength(2);
+  expect(screen.getByText("No recognition")).toBeInTheDocument();
+});
+it("filters by chapter", async () => {
+  vi.mocked(api.listExercises).mockResolvedValue({
+    exercises: [
+      exercise,
+      { ...exercise, id: 2, title: "Chord", chapter_id: 2, chapter_number: 2 },
+    ],
+    total: 2,
+  });
+  mount();
+  await screen.findByText("Scale");
+  expect(screen.getByText("Chord")).toBeInTheDocument();
+  const chapterFilters = screen.getAllByRole("combobox", { name: "Chapter" });
+  // first combobox is the filter, second is inside ChapterManager (if any)
+  await userEvent.selectOptions(chapterFilters[0], "1");
+  expect(screen.getByText("Scale")).toBeInTheDocument();
+  expect(screen.queryByText("Chord")).not.toBeInTheDocument();
+});
+it("filters by image presence", async () => {
+  const noImage = {
+    ...exercise,
+    id: 2,
+    title: "Chord",
+    image: null,
+    omr: { ...exercise.omr },
+  };
+  vi.mocked(api.listExercises).mockResolvedValue({
+    exercises: [exercise, noImage],
+    total: 2,
+  });
+  mount();
+  await screen.findByText("Scale");
+  const imageFilter = screen.getByRole("combobox", { name: "Image" });
+  await userEvent.selectOptions(imageFilter, "yes");
+  expect(screen.getByText("Scale")).toBeInTheDocument();
+  expect(screen.queryByText("Chord")).not.toBeInTheDocument();
+  await userEvent.selectOptions(imageFilter, "no");
+  expect(screen.queryByText("Scale")).not.toBeInTheDocument();
+  expect(screen.getByText("Chord")).toBeInTheDocument();
 });
 it("requires a file and submits multipart data with progress", async () => {
   vi.mocked(api.saveExercise).mockImplementation(
@@ -129,7 +159,7 @@ it("requires a file and submits multipart data with progress", async () => {
   expect(await screen.findByRole("alert")).toHaveTextContent("image or audio");
   expect(api.saveExercise).not.toHaveBeenCalled();
   await userEvent.upload(
-    screen.getByLabelText("Image"),
+    within(screen.getByRole("dialog")).getByLabelText("Image"),
     new File(["png"], "notes.png", { type: "image/png" }),
   );
   await userEvent.click(screen.getByRole("button", { name: "Save exercise" }));
@@ -178,7 +208,7 @@ it("confirms deletion and refreshes only after success", async () => {
     expect(api.deleteExercise).toHaveBeenCalledWith("csrf", 1),
   );
 });
-it("reorders with accessible controls and drag-and-drop", async () => {
+it("reorders with accessible move buttons", async () => {
   vi.mocked(api.listExercises).mockResolvedValue({
     exercises: [exercise, { ...exercise, id: 2, title: "Second", position: 1 }],
     total: 2,
@@ -196,11 +226,4 @@ it("reorders with accessible controls and drag-and-drop", async () => {
       screen.getByRole("button", { name: "Move Scale down" }),
     ).toBeEnabled(),
   );
-  fireEvent.dragStart(screen.getByRole("listitem", { name: "Scale" }), {
-    dataTransfer: { setData: vi.fn(), effectAllowed: "" },
-  });
-  fireEvent.drop(screen.getByRole("listitem", { name: "Second" }), {
-    dataTransfer: { getData: () => "1" },
-  });
-  await waitFor(() => expect(api.reorderExercises).toHaveBeenCalledTimes(2));
 });
