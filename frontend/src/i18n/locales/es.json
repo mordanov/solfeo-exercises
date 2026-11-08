@@ -555,5 +555,11 @@
   "errors.AVATAR_NOT_APPROVED": "Este avatar aún no está aprobado. Elige un avatar incluido o aprobado.",
   "errors.AVATAR_REVIEW_INVALID": "Elige Aprobar o Rechazar.",
   "errors.AVATAR_REVIEW_CONFLICT": "Este avatar ya tiene otra decisión. Actualiza la cola de aprobación.",
+  "exercises.pasteImage": "Pegar desde portapapeles",
+  "exercises.omrStatus": "Reconocimiento",
+  "exercises.actions": "Acciones",
+  "exercises.filterAll": "Todos",
+  "exercises.filterHas": "Tiene",
+  "exercises.filterWithout": "Sin",
   "exercises.pasteSelected": "Pegado: {{name}}"
 }

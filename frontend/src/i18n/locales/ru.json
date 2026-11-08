@@ -555,5 +555,11 @@
   "errors.AVATAR_NOT_APPROVED": "Этот аватар ещё не одобрен. Выбери готовый или уже одобренный аватар.",
   "errors.AVATAR_REVIEW_INVALID": "Выберите «Одобрить» или «Отклонить».",
   "errors.AVATAR_REVIEW_CONFLICT": "Для этого аватара уже принято другое решение. Обновите очередь одобрения.",
+  "exercises.pasteImage": "Вставить из буфера обмена",
+  "exercises.omrStatus": "Распознавание",
+  "exercises.actions": "Действия",
+  "exercises.filterAll": "Все",
+  "exercises.filterHas": "Есть",
+  "exercises.filterWithout": "Нет",
   "exercises.pasteSelected": "Вставлено: {{name}}"
 }
