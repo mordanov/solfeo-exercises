@@ -166,7 +166,9 @@ def _auto_apply(
     session.add(exercise)
     session.flush()
     target.exercise_id = exercise.id
+    target.chapter_id = chapter_id
     target.status = "applied"
+    target.notified = True
 
 
 def _handle_chapter_reply(

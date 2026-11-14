@@ -383,6 +383,29 @@ async def test_process_one_sets_chapter_list_and_conv_step(
         assert lnk.conv_chapter_id is None
 
 
+async def test_new_audio_while_in_conv_overwrites_state(
+    client: httpx.AsyncClient, database: Database, settings: Settings, opus: bytes
+) -> None:
+    await login(client)
+    await link(client, database)
+    with database.session() as session:
+        telegram.receive(session, message(2, 12345, voice={"file_id": "voice1"}))
+    with database.session() as session:
+        telegram.process_one(session, settings, lambda _: BytesIO(opus))
+    with database.session() as session:
+        telegram.receive(session, message(3, 12345, voice={"file_id": "voice2"}))
+    with database.session() as session:
+        telegram.process_one(session, settings, lambda _: BytesIO(opus))
+    with database.session() as session:
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        lnk = session.get(TelegramLink, user.id)
+        assert lnk is not None
+        assert lnk.conv_step == "awaiting_chapter"
+        assert lnk.conv_update_id == 3
+        assert lnk.conv_chapter_id is None
+
+
 async def test_receive_awaiting_chapter_digit_selects_chapter(
     client: httpx.AsyncClient, database: Database
 ) -> None:
@@ -504,6 +527,8 @@ async def test_receive_awaiting_exercise_new_auto_applies(
         assert ready is not None
         assert ready.status == "applied"
         assert ready.exercise_id is not None
+        assert ready.chapter_id == chapter_id
+        assert ready.notified is True
 
 
 async def test_receive_awaiting_exercise_digit_applies_to_existing(
