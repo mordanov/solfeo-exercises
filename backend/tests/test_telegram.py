@@ -232,7 +232,7 @@ async def test_worker_restart_duplicate_update_and_real_api_transport(
         assert session.scalar(select(func.count()).select_from(MediaFile)) == 1
         row = session.get(TelegramUpdate, 2)
         assert row and row.status == "ready" and row.notified
-    assert len(replies) == 2  # Link confirmation and one ready notification.
+    assert len(replies) == 2  # Link confirmation and one chapter list.
 
 
 @pytest.mark.parametrize(
