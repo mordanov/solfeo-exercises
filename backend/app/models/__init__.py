@@ -269,6 +269,9 @@ class TelegramLink(Base):
     __tablename__ = "telegram_links"
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), primary_key=True)
     sender_id: Mapped[int] = mapped_column(BigInteger, unique=True)
+    conv_step: Mapped[str | None] = mapped_column(String(20))
+    conv_chapter_id: Mapped[int | None] = mapped_column(ForeignKey("chapters.id"))
+    conv_update_id: Mapped[int | None] = mapped_column(BigInteger)
 
 
 class TelegramLinkCode(Base):
@@ -303,6 +306,8 @@ class TelegramUpdate(Base):
     applied_request: Mapped[str | None] = mapped_column(String(64))
     reply_code: Mapped[str] = mapped_column(String(32), default="received")
     notified: Mapped[bool] = mapped_column(Boolean, default=False)
+    chapter_id: Mapped[int | None] = mapped_column(ForeignKey("chapters.id"))
+    reply_text: Mapped[str | None] = mapped_column(Text)
     received_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )
