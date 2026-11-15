@@ -15,6 +15,8 @@ Prerequisites:
 | recognition percentage | The percentage calculated from event errors against the original image. |
 | structural error | An incorrect clef, key signature, time signature, or measure structure. |
 | risk prototype | Disposable code that tests a technical requirement before product implementation. |
+| implicit state machine | State logic that status columns, flag combinations, or condition chains encode, without an explicit state type and transition table. |
+| dead state | A state value that the database accepts but no code writes. |
 | MXL | A ZIP container for MusicXML, with the `.mxl` extension. |
 | image ID | The SHA-256 identifier of a locally built Docker image. |
 | substitution | One expected event with an incorrect pitch or duration in the recognized output. |
