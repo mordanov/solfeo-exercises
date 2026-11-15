@@ -153,8 +153,7 @@ def test_migration_upgrade_repeat_downgrade_and_upgrade(database: Database) -> N
             text("SELECT last_value, is_called FROM chapter_number_seq")
         ).one() == (2, False)
         assert (
-            connection.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0013_exercise_chapters"
+            connection.scalar(text("SELECT version_num FROM alembic_version")) == "0014"
         )
         assert set(inspect(connection).get_table_names()) == {
             "alembic_version",
@@ -166,8 +165,7 @@ def test_migration_upgrade_repeat_downgrade_and_upgrade(database: Database) -> N
         assert connection.scalar(text("SELECT count(*) FROM alembic_version")) == 0
         command.upgrade(config, "head")
         assert (
-            connection.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0013_exercise_chapters"
+            connection.scalar(text("SELECT version_num FROM alembic_version")) == "0014"
         )
 
 
@@ -513,7 +511,7 @@ def test_round_rules_migration_preserves_previous_release_rows(
 
 def test_chapter_migration_is_the_single_head_after_player_role() -> None:
     scripts = ScriptDirectory.from_config(Config(str(ROOT / "backend/alembic.ini")))
-    assert scripts.get_heads() == ["0013_exercise_chapters"]
+    assert scripts.get_heads() == ["0014"]
     chapter_revision = scripts.get_revision("0013_exercise_chapters")
     assert chapter_revision is not None
     assert chapter_revision.down_revision == "0012_player_role"
