@@ -218,6 +218,14 @@ function ExerciseForm({
         {pastedImageName && (
           <p>{t("exercises.pasteSelected", { name: pastedImageName })}</p>
         )}
+        {exercise?.image && !removeImage && (
+          <Box
+            component="img"
+            src={`/api/exercises/${exercise.id}/files/image?v=${exercise.image.id}`}
+            alt={exercise.title}
+            sx={{ maxWidth: "100%", maxHeight: 300, borderRadius: 1 }}
+          />
+        )}
         {exercise?.image && (
           <Field>
             <Input
@@ -237,6 +245,13 @@ function ExerciseForm({
             onChange={(e) => setAudio(e.target.files?.[0])}
           />
         </Field>
+        {exercise?.audio && !removeAudio && (
+          <audio
+            controls
+            src={`/api/exercises/${exercise.id}/files/audio?v=${exercise.audio.id}`}
+            style={{ width: "100%" }}
+          />
+        )}
         {exercise?.audio && (
           <Field>
             <Input
@@ -298,9 +313,48 @@ export function Exercises({ auth }: { auth: Auth }) {
   const cache = useQueryClient();
   const [editing, setEditing] = useState<Exercise | null | undefined>();
   const [deleting, setDeleting] = useState<Exercise | null>(null);
-  const [filterChapter, setFilterChapter] = useState("");
-  const [filterImage, setFilterImage] = useState("");
-  const [filterAudio, setFilterAudio] = useState("");
+  const [filterChapter, setFilterChapter] = useState(() => {
+    try {
+      return localStorage.getItem("exercises.filter.chapter") ?? "";
+    } catch {
+      return "";
+    }
+  });
+  const [filterImage, setFilterImage] = useState(() => {
+    try {
+      return localStorage.getItem("exercises.filter.image") ?? "";
+    } catch {
+      return "";
+    }
+  });
+  const [filterAudio, setFilterAudio] = useState(() => {
+    try {
+      return localStorage.getItem("exercises.filter.audio") ?? "";
+    } catch {
+      return "";
+    }
+  });
+  useEffect(() => {
+    try {
+      localStorage.setItem("exercises.filter.chapter", filterChapter);
+    } catch {
+      /* storage blocked */
+    }
+  }, [filterChapter]);
+  useEffect(() => {
+    try {
+      localStorage.setItem("exercises.filter.image", filterImage);
+    } catch {
+      /* storage blocked */
+    }
+  }, [filterImage]);
+  useEffect(() => {
+    try {
+      localStorage.setItem("exercises.filter.audio", filterAudio);
+    } catch {
+      /* storage blocked */
+    }
+  }, [filterAudio]);
 
   const chapters = useQuery({
     queryKey: ["chapters"],

@@ -61,6 +61,7 @@ const auth: Auth = {
   },
 };
 beforeEach(async () => {
+  localStorage.clear();
   vi.resetAllMocks();
   await i18n.changeLanguage("en");
   vi.mocked(chaptersApi.listChapters).mockResolvedValue(chapters);
