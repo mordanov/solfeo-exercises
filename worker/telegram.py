@@ -28,8 +28,12 @@ TEXTS = {
         "invalid_link": "Invalid or expired code. Create a new code on the website.",
         "help": "Send an audio attachment, not a link. Maximum: 20 MB.",
         "received": "Audio queued. Open Telegram imports on the website.",
-        "ready": "Audio saved. Open Telegram imports to create or update an exercise.",
+        "ready": "Audio saved. Choose a chapter:",
         "error": "Import failed. Open Telegram imports for the error and retry.",
+        "applied_bot": "Done! Exercise saved.",
+        "stale_conversation": (
+            "Session expired. Send the audio file again to start over."
+        ),
     },
     "ru": {
         "link_required": (
@@ -43,13 +47,14 @@ TEXTS = {
         "invalid_link": "Код неверен или истёк. Создайте новый код на сайте.",
         "help": "Отправьте аудиовложение, а не ссылку. Максимум: 20 МБ.",
         "received": "Аудио в очереди. Откройте импорт Telegram на сайте.",
-        "ready": (
-            "Аудио сохранено. Откройте импорт Telegram "
-            "для создания или изменения упражнения."
-        ),
+        "ready": "Аудио сохранено. Выберите главу:",
         "error": (
             "Импорт не выполнен. Откройте импорт Telegram "
             "для просмотра ошибки и повтора."
+        ),
+        "applied_bot": "Готово! Упражнение сохранено.",
+        "stale_conversation": (
+            "Сессия истекла. Отправьте аудиофайл снова, чтобы начать заново."
         ),
     },
     "es": {
@@ -66,13 +71,14 @@ TEXTS = {
         "received": (
             "Audio en cola. Abre las importaciones de Telegram en el sitio web."
         ),
-        "ready": (
-            "Audio guardado. Abre las importaciones "
-            "para crear o actualizar un ejercicio."
-        ),
+        "ready": "Audio guardado. Elige un capítulo:",
         "error": (
             "La importación falló. Abre las importaciones "
             "para ver el error y reintentar."
+        ),
+        "applied_bot": "¡Listo! Ejercicio guardado.",
+        "stale_conversation": (
+            "Sesión caducada. Envía el archivo de audio otra vez para empezar."
         ),
     },
 }
@@ -133,7 +139,10 @@ def cycle(database: Database, settings: Settings, api: TelegramApi) -> None:
             .limit(20)
         ):
             try:
-                api.reply(row.chat_id, TEXTS[row.language][row.reply_code])
+                api.reply(
+                    row.chat_id,
+                    row.reply_text or TEXTS[row.language][row.reply_code],
+                )
             except ServiceError as error:
                 if error.status >= 500:
                     raise

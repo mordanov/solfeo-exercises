@@ -10,6 +10,7 @@ from test_exercises import auth_settings, opus, png, settings
 
 from app.database import Database
 from app.models import (
+    Chapter,
     Exercise,
     MediaFile,
     TelegramLink,
@@ -231,7 +232,7 @@ async def test_worker_restart_duplicate_update_and_real_api_transport(
         assert session.scalar(select(func.count()).select_from(MediaFile)) == 1
         row = session.get(TelegramUpdate, 2)
         assert row and row.status == "ready" and row.notified
-    assert len(replies) == 2  # Link confirmation and one ready notification.
+    assert len(replies) == 2  # Link confirmation and one chapter list.
 
 
 @pytest.mark.parametrize(
@@ -354,3 +355,337 @@ async def test_import_owner_revocation_and_failed_media(
             )
             == 1
         )
+
+
+async def test_process_one_sets_chapter_list_and_conv_step(
+    client: httpx.AsyncClient, database: Database, settings: Settings, opus: bytes
+) -> None:
+    await login(client)
+    await link(client, database)
+    with database.session() as session:
+        telegram.receive(session, message(2, 12345, voice={"file_id": "voice"}))
+    with database.session() as session:
+        telegram.process_one(session, settings, lambda _: BytesIO(opus))
+    with database.session() as session:
+        row = session.get(TelegramUpdate, 2)
+        assert row is not None
+        assert row.status == "ready"
+        assert row.reply_text is not None
+        assert "new" in row.reply_text.lower()
+        assert row.notified is False
+    with database.session() as session:
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        lnk = session.get(TelegramLink, user.id)
+        assert lnk is not None
+        assert lnk.conv_step == "awaiting_chapter"
+        assert lnk.conv_update_id == 2
+        assert lnk.conv_chapter_id is None
+
+
+async def test_new_audio_while_in_conv_overwrites_state(
+    client: httpx.AsyncClient, database: Database, settings: Settings, opus: bytes
+) -> None:
+    await login(client)
+    await link(client, database)
+    with database.session() as session:
+        telegram.receive(session, message(2, 12345, voice={"file_id": "voice1"}))
+    with database.session() as session:
+        telegram.process_one(session, settings, lambda _: BytesIO(opus))
+    with database.session() as session:
+        telegram.receive(session, message(3, 12345, voice={"file_id": "voice2"}))
+    with database.session() as session:
+        telegram.process_one(session, settings, lambda _: BytesIO(opus))
+    with database.session() as session:
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        lnk = session.get(TelegramLink, user.id)
+        assert lnk is not None
+        assert lnk.conv_step == "awaiting_chapter"
+        assert lnk.conv_update_id == 3
+        assert lnk.conv_chapter_id is None
+
+
+async def test_receive_awaiting_chapter_digit_selects_chapter(
+    client: httpx.AsyncClient, database: Database
+) -> None:
+    await login(client)
+    await link(client, database)
+    with database.session() as session:
+        chapter = Chapter()
+        session.add(chapter)
+        session.flush()
+        chapter_id = chapter.id
+        chapter_number = chapter.number
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        lnk = session.get(TelegramLink, user.id)
+        assert lnk is not None
+        lnk.conv_step = "awaiting_chapter"
+        session.commit()
+    with database.session() as session:
+        telegram.receive(session, message(2, 12345, text=str(chapter_number)))
+    with database.session() as session:
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        lnk = session.get(TelegramLink, user.id)
+        assert lnk is not None
+        assert lnk.conv_step == "awaiting_exercise"
+        assert lnk.conv_chapter_id == chapter_id
+        row = session.get(TelegramUpdate, 2)
+        assert row is not None
+        assert row.reply_text is not None
+
+
+async def test_receive_awaiting_chapter_new_creates_chapter(
+    client: httpx.AsyncClient, database: Database
+) -> None:
+    await login(client)
+    await link(client, database)
+    with database.session() as session:
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        lnk = session.get(TelegramLink, user.id)
+        assert lnk is not None
+        lnk.conv_step = "awaiting_chapter"
+        before = session.scalar(select(func.count()).select_from(Chapter)) or 0
+        session.commit()
+    with database.session() as session:
+        telegram.receive(session, message(2, 12345, text="new"))
+    with database.session() as session:
+        after = session.scalar(select(func.count()).select_from(Chapter)) or 0
+        assert after == before + 1
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        lnk = session.get(TelegramLink, user.id)
+        assert lnk is not None
+        assert lnk.conv_step == "awaiting_exercise"
+        assert lnk.conv_chapter_id is not None
+
+
+async def test_receive_awaiting_chapter_invalid_input_replies_help(
+    client: httpx.AsyncClient, database: Database
+) -> None:
+    await login(client)
+    await link(client, database)
+    with database.session() as session:
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        lnk = session.get(TelegramLink, user.id)
+        assert lnk is not None
+        lnk.conv_step = "awaiting_chapter"
+        session.commit()
+    with database.session() as session:
+        telegram.receive(session, message(2, 12345, text="banana"))
+    with database.session() as session:
+        row = session.get(TelegramUpdate, 2)
+        assert row is not None
+        assert row.reply_code == "help"
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        lnk = session.get(TelegramLink, user.id)
+        assert lnk is not None
+        assert lnk.conv_step == "awaiting_chapter"
+
+
+async def test_receive_awaiting_exercise_new_auto_applies(
+    client: httpx.AsyncClient, database: Database, settings: Settings, opus: bytes
+) -> None:
+    await login(client)
+    await link(client, database)
+    with database.session() as session:
+        telegram.receive(session, message(2, 12345, voice={"file_id": "voice"}))
+    with database.session() as session:
+        telegram.process_one(session, settings, lambda _: BytesIO(opus))
+    with database.session() as session:
+        chapter = Chapter()
+        session.add(chapter)
+        session.flush()
+        chapter_id = chapter.id
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        lnk = session.get(TelegramLink, user.id)
+        assert lnk is not None
+        lnk.conv_step = "awaiting_exercise"
+        lnk.conv_chapter_id = chapter_id
+        # conv_update_id=2 already set by process_one
+        session.commit()
+    with database.session() as session:
+        telegram.receive(session, message(3, 12345, text="new"))
+    with database.session() as session:
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        lnk = session.get(TelegramLink, user.id)
+        assert lnk is not None
+        assert lnk.conv_step is None
+        assert lnk.conv_chapter_id is None
+        assert lnk.conv_update_id is None
+        row = session.get(TelegramUpdate, 3)
+        assert row is not None
+        assert row.reply_code == "applied_bot"
+        ready = session.get(TelegramUpdate, 2)
+        assert ready is not None
+        assert ready.status == "applied"
+        assert ready.exercise_id is not None
+        assert ready.chapter_id == chapter_id
+        assert ready.notified is True
+
+
+async def test_receive_awaiting_exercise_digit_applies_to_existing(
+    client: httpx.AsyncClient, database: Database, settings: Settings, opus: bytes
+) -> None:
+    await login(client)
+    await link(client, database)
+    with database.session() as session:
+        telegram.receive(session, message(2, 12345, voice={"file_id": "voice"}))
+    with database.session() as session:
+        telegram.process_one(session, settings, lambda _: BytesIO(opus))
+    with database.session() as session:
+        chapter = Chapter()
+        session.add(chapter)
+        session.flush()
+        chapter_id = chapter.id
+        media = MediaFile(
+            id=str(uuid5(NAMESPACE_URL, "test:media:existing-exercise")),
+            filename="existing-exercise.m4a",
+            mime_type="audio/m4a",
+            size_bytes=100,
+        )
+        session.add(media)
+        session.flush()
+        exercise = Exercise(
+            chapter_id=chapter_id,
+            title="Existing Exercise",
+            audio_id=media.id,
+            position=0,
+        )
+        session.add(exercise)
+        session.flush()
+        exercise_id = exercise.id
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        lnk = session.get(TelegramLink, user.id)
+        assert lnk is not None
+        lnk.conv_step = "awaiting_exercise"
+        lnk.conv_chapter_id = chapter_id
+        session.commit()
+    with database.session() as session:
+        telegram.receive(session, message(3, 12345, text="1"))
+    with database.session() as session:
+        ready = session.get(TelegramUpdate, 2)
+        assert ready is not None
+        assert ready.status == "applied"
+        assert ready.exercise_id == exercise_id
+
+
+async def test_receive_awaiting_exercise_digit_out_of_range(
+    client: httpx.AsyncClient, database: Database, settings: Settings, opus: bytes
+) -> None:
+    await login(client)
+    await link(client, database)
+    with database.session() as session:
+        telegram.receive(session, message(2, 12345, voice={"file_id": "voice"}))
+    with database.session() as session:
+        telegram.process_one(session, settings, lambda _: BytesIO(opus))
+    with database.session() as session:
+        chapter = Chapter()
+        session.add(chapter)
+        session.flush()
+        chapter_id = chapter.id
+        media = MediaFile(
+            id=str(uuid5(NAMESPACE_URL, "test:media:only-exercise")),
+            filename="only-exercise.m4a",
+            mime_type="audio/m4a",
+            size_bytes=100,
+        )
+        session.add(media)
+        session.flush()
+        session.add(
+            Exercise(
+                chapter_id=chapter_id,
+                title="Only Exercise",
+                audio_id=media.id,
+                position=0,
+            )
+        )
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        lnk = session.get(TelegramLink, user.id)
+        assert lnk is not None
+        lnk.conv_step = "awaiting_exercise"
+        lnk.conv_chapter_id = chapter_id
+        session.commit()
+    with database.session() as session:
+        telegram.receive(session, message(3, 12345, text="9"))
+    with database.session() as session:
+        row = session.get(TelegramUpdate, 3)
+        assert row is not None
+        assert row.reply_code == "help"
+        ready = session.get(TelegramUpdate, 2)
+        assert ready is not None
+        assert ready.status == "ready"
+
+
+async def test_receive_stale_conv_clears_state(
+    client: httpx.AsyncClient, database: Database
+) -> None:
+    await login(client)
+    await link(client, database)
+    # update_id=1 is the link /start message, status="message" (not "ready") — stale
+    with database.session() as session:
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        lnk = session.get(TelegramLink, user.id)
+        assert lnk is not None
+        lnk.conv_step = "awaiting_exercise"
+        lnk.conv_chapter_id = None
+        lnk.conv_update_id = 1
+        session.commit()
+    with database.session() as session:
+        telegram.receive(session, message(2, 12345, text="new"))
+    with database.session() as session:
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        lnk = session.get(TelegramLink, user.id)
+        assert lnk is not None
+        assert lnk.conv_step is None
+        row = session.get(TelegramUpdate, 2)
+        assert row is not None
+        assert row.reply_code == "stale_conversation"
+
+
+async def test_apply_import_via_web_clears_conv_state(
+    client: httpx.AsyncClient, database: Database, opus: bytes, settings: Settings
+) -> None:
+    await login(client)
+    await link(client, database)
+    with database.session() as session:
+        telegram.receive(session, message(2, 12345, voice={"file_id": "voice"}))
+    with database.session() as session:
+        telegram.process_one(session, settings, lambda _: BytesIO(opus))
+    # Simulate conv state set by process_one
+    with database.session() as session:
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        lnk = session.get(TelegramLink, user.id)
+        assert lnk is not None
+        lnk.conv_step = "awaiting_chapter"
+        lnk.conv_update_id = 2
+        session.commit()
+    # Apply import via web (not via bot)
+    with database.session() as session:
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        chapter = Chapter()
+        session.add(chapter)
+        session.flush()
+        telegram.apply_import(session, user.id, 2, None, "Title", "")
+    # Conv state must be cleared
+    with database.session() as session:
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        lnk = session.get(TelegramLink, user.id)
+        assert lnk is not None
+        assert lnk.conv_step is None
+        assert lnk.conv_update_id is None
+        assert lnk.conv_chapter_id is None
