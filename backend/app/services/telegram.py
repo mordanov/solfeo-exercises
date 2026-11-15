@@ -160,7 +160,8 @@ def _auto_apply(
         else exercises.new_exercise(session)
     )
     exercise.chapter_id = chapter_id
-    exercise.title = target.title
+    if exercise_id is None:
+        exercise.title = target.title
     exercise.description = target.description
     exercise.audio_id = target.media_id
     session.add(exercise)
@@ -172,7 +173,11 @@ def _auto_apply(
 
 
 def _handle_chapter_reply(
-    session: Session, text_input: str, binding: TelegramLink, row: TelegramUpdate
+    session: Session,
+    text_input: str,
+    binding: TelegramLink,
+    row: TelegramUpdate,
+    user: User,
 ) -> None:
     if text_input == "new":
         number = session.execute(
@@ -193,6 +198,31 @@ def _handle_chapter_reply(
         row.reply_code = "help"
         return
     binding.conv_chapter_id = chapter.id
+    target = session.scalar(
+        select(TelegramUpdate)
+        .where(
+            TelegramUpdate.id == binding.conv_update_id,
+            TelegramUpdate.status == "ready",
+            TelegramUpdate.user_id == user.id,
+        )
+        .with_for_update()
+        .execution_options(populate_existing=True)
+    )
+    if target is not None and target.description.strip():
+        found = session.scalar(
+            select(Exercise).where(
+                Exercise.chapter_id == chapter.id,
+                Exercise.title == target.title,
+                Exercise.deleted_at.is_(None),
+            )
+        )
+        exercise_id: int | None = found.id if found is not None else None
+        _auto_apply(session, target, chapter.id, exercise_id)
+        binding.conv_step = None
+        binding.conv_chapter_id = None
+        binding.conv_update_id = None
+        row.reply_code = "applied_bot"
+        return
     chapter_exercises = list(
         session.scalars(
             select(Exercise)
@@ -246,8 +276,18 @@ def _handle_exercise_reply(
             return
         exercise_id = exs[idx].id
     else:
-        row.reply_code = "help"
-        return
+        found = session.scalar(
+            select(Exercise).where(
+                Exercise.chapter_id == chapter_id,
+                Exercise.title == text_input,
+                Exercise.deleted_at.is_(None),
+            )
+        )
+        if found is not None:
+            exercise_id = found.id
+        else:
+            target.title = text_input
+            exercise_id = None
     _auto_apply(session, target, chapter_id, exercise_id)
     binding.conv_step = None
     binding.conv_chapter_id = None
@@ -337,7 +377,7 @@ def receive(session: Session, payload: object) -> TelegramUpdate | None:
         ):
             text_input = message.text.strip()
             if binding.conv_step == "awaiting_chapter":
-                _handle_chapter_reply(session, text_input, binding, row)
+                _handle_chapter_reply(session, text_input, binding, row, user)
             else:
                 _handle_exercise_reply(session, text_input, binding, row, user)
             session.add(row)

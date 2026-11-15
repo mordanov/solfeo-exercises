@@ -654,6 +654,190 @@ async def test_receive_stale_conv_clears_state(
         assert row.reply_code == "stale_conversation"
 
 
+async def test_auto_apply_does_not_overwrite_existing_exercise_title(
+    client: httpx.AsyncClient, database: Database, settings: Settings, opus: bytes
+) -> None:
+    await login(client)
+    await link(client, database)
+    with database.session() as session:
+        telegram.receive(session, message(2, 12345, voice={"file_id": "voice"}))
+    with database.session() as session:
+        telegram.process_one(session, settings, lambda _: BytesIO(opus))
+    with database.session() as session:
+        chapter = Chapter()
+        session.add(chapter)
+        session.flush()
+        chapter_id = chapter.id
+        media = MediaFile(
+            id=str(uuid5(NAMESPACE_URL, "test:media:title-preserve")),
+            filename="title-preserve.m4a",
+            mime_type="audio/m4a",
+            size_bytes=100,
+        )
+        session.add(media)
+        session.flush()
+        exercise = Exercise(
+            chapter_id=chapter_id,
+            title="Original Title",
+            audio_id=media.id,
+            position=0,
+        )
+        session.add(exercise)
+        session.flush()
+        exercise_id = exercise.id
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        lnk = session.get(TelegramLink, user.id)
+        assert lnk is not None
+        lnk.conv_step = "awaiting_exercise"
+        lnk.conv_chapter_id = chapter_id
+        session.commit()
+    with database.session() as session:
+        telegram.receive(session, message(3, 12345, text="1"))
+    with database.session() as session:
+        ex = session.get(Exercise, exercise_id)
+        assert ex is not None
+        assert ex.title == "Original Title"
+
+
+async def test_receive_awaiting_chapter_with_caption_auto_applies(
+    client: httpx.AsyncClient, database: Database, settings: Settings, opus: bytes
+) -> None:
+    await login(client)
+    await link(client, database)
+    with database.session() as session:
+        telegram.receive(
+            session,
+            message(2, 12345, voice={"file_id": "voice"}, caption="Ejercicio 02-15"),
+        )
+    with database.session() as session:
+        telegram.process_one(session, settings, lambda _: BytesIO(opus))
+    with database.session() as session:
+        chapter = Chapter()
+        session.add(chapter)
+        session.flush()
+        chapter_id = chapter.id
+        chapter_number = chapter.number
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        lnk = session.get(TelegramLink, user.id)
+        assert lnk is not None
+        lnk.conv_step = "awaiting_chapter"
+        lnk.conv_update_id = 2
+        lnk.conv_chapter_id = None
+        session.commit()
+    with database.session() as session:
+        telegram.receive(session, message(3, 12345, text=str(chapter_number)))
+    # Must skip awaiting_exercise and apply directly
+    with database.session() as session:
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        lnk = session.get(TelegramLink, user.id)
+        assert lnk is not None
+        assert lnk.conv_step is None
+        assert lnk.conv_chapter_id is None
+        ready = session.get(TelegramUpdate, 2)
+        assert ready is not None
+        assert ready.status == "applied"
+        assert ready.chapter_id == chapter_id
+        ex = session.get(Exercise, ready.exercise_id)
+        assert ex is not None
+        assert ex.title == "Ejercicio 02-15"
+        row = session.get(TelegramUpdate, 3)
+        assert row is not None
+        assert row.reply_code == "applied_bot"
+
+
+async def test_receive_awaiting_exercise_name_creates_new_exercise(
+    client: httpx.AsyncClient, database: Database, settings: Settings, opus: bytes
+) -> None:
+    await login(client)
+    await link(client, database)
+    with database.session() as session:
+        telegram.receive(session, message(2, 12345, voice={"file_id": "voice"}))
+    with database.session() as session:
+        telegram.process_one(session, settings, lambda _: BytesIO(opus))
+    with database.session() as session:
+        chapter = Chapter()
+        session.add(chapter)
+        session.flush()
+        chapter_id = chapter.id
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        lnk = session.get(TelegramLink, user.id)
+        assert lnk is not None
+        lnk.conv_step = "awaiting_exercise"
+        lnk.conv_chapter_id = chapter_id
+        session.commit()
+    with database.session() as session:
+        telegram.receive(session, message(3, 12345, text="Ejercicio 02-16"))
+    with database.session() as session:
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        lnk = session.get(TelegramLink, user.id)
+        assert lnk is not None
+        assert lnk.conv_step is None
+        ready = session.get(TelegramUpdate, 2)
+        assert ready is not None
+        assert ready.status == "applied"
+        ex = session.get(Exercise, ready.exercise_id)
+        assert ex is not None
+        assert ex.title == "Ejercicio 02-16"
+        row = session.get(TelegramUpdate, 3)
+        assert row is not None
+        assert row.reply_code == "applied_bot"
+
+
+async def test_receive_awaiting_exercise_name_finds_existing_exercise(
+    client: httpx.AsyncClient, database: Database, settings: Settings, opus: bytes
+) -> None:
+    await login(client)
+    await link(client, database)
+    with database.session() as session:
+        telegram.receive(session, message(2, 12345, voice={"file_id": "voice"}))
+    with database.session() as session:
+        telegram.process_one(session, settings, lambda _: BytesIO(opus))
+    with database.session() as session:
+        chapter = Chapter()
+        session.add(chapter)
+        session.flush()
+        chapter_id = chapter.id
+        media = MediaFile(
+            id=str(uuid5(NAMESPACE_URL, "test:media:name-search")),
+            filename="name-search.m4a",
+            mime_type="audio/m4a",
+            size_bytes=100,
+        )
+        session.add(media)
+        session.flush()
+        exercise = Exercise(
+            chapter_id=chapter_id,
+            title="Ejercicio 02-17",
+            audio_id=media.id,
+            position=0,
+        )
+        session.add(exercise)
+        session.flush()
+        exercise_id = exercise.id
+        user = session.scalar(select(User).where(User.is_emergency))
+        assert user is not None
+        lnk = session.get(TelegramLink, user.id)
+        assert lnk is not None
+        lnk.conv_step = "awaiting_exercise"
+        lnk.conv_chapter_id = chapter_id
+        session.commit()
+    with database.session() as session:
+        telegram.receive(session, message(3, 12345, text="Ejercicio 02-17"))
+    with database.session() as session:
+        ready = session.get(TelegramUpdate, 2)
+        assert ready is not None
+        assert ready.status == "applied"
+        assert ready.exercise_id == exercise_id
+        ex = session.get(Exercise, exercise_id)
+        assert ex is not None
+        assert ex.title == "Ejercicio 02-17"
+
+
 async def test_apply_import_via_web_clears_conv_state(
     client: httpx.AsyncClient, database: Database, opus: bytes, settings: Settings
 ) -> None:
